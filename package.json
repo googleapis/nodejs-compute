@@ -45,6 +45,7 @@
     "Tim Swast <swast@google.com>"
   ],
   "scripts": {
+    "docs": "repo-tools exec -- jsdoc -c .jsdoc.js",
     "samples-test": "cd samples/ && npm link ../ && npm test && cd ../",
     "generate-scaffolding": "repo-tools generate all && repo-tools generate lib_samples_readme -l samples/ --config ../.cloud-repo-tools.json",
     "system-test": "mocha system-test/*.js --no-timeouts --bail",
