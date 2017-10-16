@@ -1,100 +1,97 @@
-# @google-cloud/compute ([Alpha][versioning])
-> Google Compute Engine Client Library for Node.js
+<img src="https://avatars2.githubusercontent.com/u/2810941?v=3&s=96" alt="Google Cloud Platform logo" title="Google Cloud Platform" align="right" height="96" width="96"/>
 
-*Looking for more Google APIs than just Compute Engine? You might want to check out [`google-cloud`][google-cloud].*
+# Google Compute Engine: Node.js Client
 
-- [API Documentation][gcloud-compute-docs]
-- [Official Documentation][cloud-compute-docs]
+[![release level](https://img.shields.io/badge/release%20level-alpha-yellow.svg?style&#x3D;flat)](https://cloud.google.com/terms/launch-stages)
+[![CircleCI](https://img.shields.io/circleci/project/github/googleapis/nodejs-compute.svg?style=flat)](https://circleci.com/gh/googleapis/nodejs-compute)
+[![AppVeyor](https://ci.appveyor.com/api/projects/status/github/googleapis/nodejs-compute?branch=master&svg=true)](https://ci.appveyor.com/project/googleapis/nodejs-compute)
+[![codecov](https://img.shields.io/codecov/c/github/googleapis/nodejs-compute/master.svg?style=flat)](https://codecov.io/gh/googleapis/nodejs-compute)
 
+> Node.js idiomatic client for [Compute Engine][product-docs].
 
-```sh
-$ npm install --save @google-cloud/compute
-```
-```js
-var gce = require('@google-cloud/compute')({
-  projectId: 'grape-spaceship-123',
-  keyFilename: '/path/to/keyfile.json'
-});
+[Compute Engine](https://cloud.google.com/compute/docs/) lets you create and run virtual machines on Google infrastructure. Compute Engine offers scale, performance, and value that allows you to easily launch large compute clusters on Google&#x27;s infrastructure. There are no upfront investments and you can run thousands of virtual CPUs on a system that has been designed to be fast, and to offer strong consistency of performance.
 
-// Create a new VM using the latest OS image of your choice.
-var zone = gce.zone('us-central1-a');
-var name = 'ubuntu-http';
+* [Compute Engine Node.js Client API Reference][client-docs]
+* [Compute Engine Documentation][product-docs]
 
-zone.createVM(name, { os: 'ubuntu' }, function(err, vm, operation) {
-  // `operation` lets you check the status of long-running tasks.
+Read more about the client libraries for Cloud APIs, including the older
+Google APIs Client Libraries, in [Client Libraries Explained][explained].
 
-  operation
-    .on('error', function(err) {})
-    .on('running', function(metadata) {})
-    .on('complete', function() {
-      // Virtual machine created!
-    });
-});
+[explained]: https://cloud.google.com/apis/docs/client-libraries-explained
 
-// Promises are also supported by omitting callbacks.
-zone.createVM(name)
-  .then(function(data) {
-    var vm = data[0];
-    var operation = data[1];
+**Table of contents:**
 
-    return operation.promise();
-  })
-  .then(function() {
-    // Virtual machine created!
-  });
+* [Quickstart](#quickstart)
+  * [Before you begin](#before-you-begin)
+  * [Installing the client library](#installing-the-client-library)
+  * [Using the client library](#using-the-client-library)
+* [Samples](#samples)
+* [Versioning](#versioning)
+* [Contributing](#contributing)
+* [License](#license)
 
-// It's also possible to integrate with third-party Promise libraries.
-var gce = require('@google-cloud/compute')({
-  promise: require('bluebird')
-});
-```
+## Quickstart
 
+### Before you begin
 
-## Authentication
+1.  Select or create a Cloud Platform project.
 
-It's incredibly easy to get authenticated and start using Google's APIs. You can set your credentials on a global basis as well as on a per-API basis. See each individual API section below to see how you can auth on a per-API-basis. This is useful if you want to use different accounts for different Cloud services.
+    [Go to the projects page][projects]
 
-### On Google Cloud Platform
+1.  Enable billing for your project.
 
-If you are running this client on Google Cloud Platform, we handle authentication for you with no configuration. You just need to make sure that when you [set up the GCE instance][gce-how-to], you add the correct scopes for the APIs you want to access.
+    [Enable billing][billing]
 
-``` js
-var gce = require('@google-cloud/compute')();
-// ...you're good to go!
-```
+1.  Enable the Google Compute Engine API.
 
-### Elsewhere
+    [Enable the API][enable_api]
 
-If you are not running this client on Google Cloud Platform, you need a Google Developers service account. To create a service account:
+1.  [Set up authentication with a service account][auth] so you can access the
+    API from your local workstation.
 
-1. Visit the [Google Developers Console][dev-console].
-2. Create a new project or click on an existing project.
-3. Navigate to  **APIs & auth** > **APIs section** and turn on the following APIs (you may need to enable billing in order to use these services):
-  * Google Compute Engine API
-4. Navigate to **APIs & auth** >  **Credentials** and then:
-  * If you want to use a new service account key, click on **Create credentials** and select **Service account key**. After the account key is created, you will be prompted to download the JSON key file that the library uses to authenticate your requests.
-  * If you want to generate a new service account key for an existing service account, click on **Generate new JSON key** and download the JSON key file.
+[projects]: https://console.cloud.google.com/project
+[billing]: https://support.google.com/cloud/answer/6293499#enable-billing
+[enable_api]: https://console.cloud.google.com/flows/enableapi?apiid=compute.googleapis.com
+[auth]: https://cloud.google.com/docs/authentication/getting-started
 
-``` js
-var projectId = process.env.GCLOUD_PROJECT; // E.g. 'grape-spaceship-123'
+### Installing the client library
 
-var gce = require('@google-cloud/compute')({
-  projectId: projectId,
-
-  // The path to your key file:
-  keyFilename: '/path/to/keyfile.json'
-
-  // Or the contents of the key file:
-  credentials: require('./path/to/keyfile.json')
-});
-
-// ...you're good to go!
-```
+    npm install --save @google-cloud/compute
 
 
-[versioning]: https://github.com/GoogleCloudPlatform/google-cloud-node#versioning
-[google-cloud]: https://github.com/GoogleCloudPlatform/google-cloud-node
-[gce-how-to]: https://cloud.google.com/compute/docs/authentication#using
-[dev-console]: https://console.developers.google.com/project
-[gcloud-compute-docs]: https://googlecloudplatform.github.io/google-cloud-node/#/docs/compute
-[cloud-compute-docs]: https://cloud.google.com/compute/docs
+## Samples
+
+Samples are in the [`samples/`](https://github.com/blob/master/samples) directory. The samples' `README.md`
+has instructions for running the samples.
+
+| Sample                      | Source Code                       |
+| --------------------------- | --------------------------------- |
+| Virtual Machines | [source code](https://github.com/googleapis/nodejs-compute/blob/master/samples/vms.js) |
+
+The [Compute Engine Node.js Client API Reference][client-docs] documentation
+also contains samples.
+
+## Versioning
+
+This library follows [Semantic Versioning](http://semver.org/).
+
+This library is considered to be in **alpha**. This means it is still a
+work-in-progress and under active development. Any release is subject to
+backwards-incompatible changes at any time.
+
+More Information: [Google Cloud Platform Launch Stages][launch_stages]
+
+[launch_stages]: https://cloud.google.com/terms/launch-stages
+
+## Contributing
+
+Contributions welcome! See the [Contributing Guide](.github/CONTRIBUTING.md).
+
+## License
+
+Apache Version 2.0
+
+See [LICENSE](LICENSE)
+
+[client-docs]: https://cloud.google.com/nodejs/docs/reference/compute/latest/
+[product-docs]: https://cloud.google.com/compute/docs/
