@@ -155,14 +155,14 @@ function Operation(scope, name) {
      *   var apiResponse = data[1];
      * });
      */
-    get: true
+    get: true,
   };
 
   common.Operation.call(this, {
     parent: scope,
     baseUrl: isCompute ? '/global/operations' : '/operations',
     id: name,
-    methods: methods
+    methods: methods,
   });
 
   this.name = name;

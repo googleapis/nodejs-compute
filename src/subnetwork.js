@@ -148,7 +148,7 @@ function Subnetwork(region, name) {
      *   var apiResponse = data[1];
      * });
      */
-    getMetadata: true
+    getMetadata: true,
   };
 
   common.ServiceObject.call(this, {
@@ -156,7 +156,7 @@ function Subnetwork(region, name) {
     baseUrl: '/subnetworks',
     id: this.name,
     createMethod: region.createSubnetwork.bind(region),
-    methods: methods
+    methods: methods,
   });
 }
 
@@ -192,20 +192,23 @@ Subnetwork.prototype.delete = function(callback) {
 
   var region = this.region;
 
-  this.request({
-    method: 'DELETE',
-    uri: ''
-  }, function(err, resp) {
-    if (err) {
-      callback(err, null, resp);
-      return;
+  this.request(
+    {
+      method: 'DELETE',
+      uri: '',
+    },
+    function(err, resp) {
+      if (err) {
+        callback(err, null, resp);
+        return;
+      }
+
+      var operation = region.operation(resp.name);
+      operation.metadata = resp;
+
+      callback(null, operation, resp);
     }
-
-    var operation = region.operation(resp.name);
-    operation.metadata = resp;
-
-    callback(null, operation, resp);
-  });
+  );
 };
 
 /*! Developer Documentation

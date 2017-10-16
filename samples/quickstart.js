@@ -11,6 +11,10 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+/* eslint-disable no-unused-vars */
+
+'use strict';
+
 // [START compute_engine_quickstart]
 const gce = require('@google-cloud/compute')();
 
@@ -18,12 +22,14 @@ const gce = require('@google-cloud/compute')();
 var zone = gce.zone('us-central1-a');
 var name = 'ubuntu-http';
 
-zone.createVM(name, { os: 'ubuntu' }, data => {
-  // `operation` lets you check the status of long-running tasks.
-  let vm = data[0];
-  let operation = data[1];
-  return operation.promise();
-}).then(() => {
-  // Virtual machine created!
-});
+zone
+  .createVM(name, {os: 'ubuntu'}, data => {
+    // `operation` lets you check the status of long-running tasks.
+    let vm = data[0];
+    let operation = data[1];
+    return operation.promise();
+  })
+  .then(() => {
+    // Virtual machine created!
+  });
 // [END compute_engine_quickstart]

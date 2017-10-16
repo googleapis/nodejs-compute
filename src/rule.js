@@ -162,7 +162,7 @@ function Rule(scope, name) {
      *   var apiResponse = data[1];
      * });
      */
-    getMetadata: true
+    getMetadata: true,
   };
 
   common.ServiceObject.call(this, {
@@ -170,7 +170,7 @@ function Rule(scope, name) {
     baseUrl: (isGlobalRule ? '/global' : '') + '/forwardingRules',
     id: name,
     createMethod: scope.createRule.bind(scope),
-    methods: methods
+    methods: methods,
   });
 
   this.scope = scope;
@@ -256,23 +256,26 @@ Rule.prototype.setTarget = function(target, callback) {
 
   var scope = this.scope;
 
-  this.request({
-    method: 'POST',
-    uri: '/setTarget',
-    json: {
-      target: target
-    }
-  }, function(err, resp) {
-    if (err) {
-      callback(err, null, resp);
-      return;
-    }
+  this.request(
+    {
+      method: 'POST',
+      uri: '/setTarget',
+      json: {
+        target: target,
+      },
+    },
+    function(err, resp) {
+      if (err) {
+        callback(err, null, resp);
+        return;
+      }
 
-    var operation = scope.operation(resp.name);
-    operation.metadata = resp;
+      var operation = scope.operation(resp.name);
+      operation.metadata = resp;
 
-    callback(null, operation, resp);
-  });
+      callback(null, operation, resp);
+    }
+  );
 };
 
 /*! Developer Documentation

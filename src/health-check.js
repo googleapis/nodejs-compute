@@ -148,7 +148,7 @@ function HealthCheck(compute, name, options) {
      *   var apiResponse = data[1];
      * });
      */
-    getMetadata: true
+    getMetadata: true,
   };
 
   options = options || {};
@@ -166,11 +166,11 @@ function HealthCheck(compute, name, options) {
         options = {};
       }
 
-      options = extend({}, options, { https: https });
+      options = extend({}, options, {https: https});
 
       compute.createHealthCheck(name, options, callback);
     },
-    methods: methods
+    methods: methods,
   });
 }
 

@@ -66,7 +66,7 @@ var VALID_STATUSES = [
   'STOPPING',
   'SUSPENDING',
   'SUSPENDED',
-  'TERMINATED'
+  'TERMINATED',
 ];
 
 /**
@@ -107,7 +107,7 @@ function VM(zone, name) {
     base: 'https://www.googleapis.com/compute/v1/projects',
     project: zone.compute.projectId,
     zone: zone.name,
-    name: this.name
+    name: this.name,
   });
 
   var methods = {
@@ -209,7 +209,7 @@ function VM(zone, name) {
      *   var apiResponse = data[1];
      * });
      */
-    getMetadata: true
+    getMetadata: true,
   };
 
   common.ServiceObject.call(this, {
@@ -217,7 +217,7 @@ function VM(zone, name) {
     baseUrl: '/instances',
     id: this.name,
     createMethod: zone.createVM.bind(zone),
-    methods: methods
+    methods: methods,
   });
 }
 
@@ -282,23 +282,30 @@ VM.prototype.attachDisk = function(disk, options, callback) {
     options = {};
   }
 
-  var body = extend({
-    // Default the deviceName to the name of the disk, like the Console does.
-    deviceName: disk.name
-  }, options, {
-    source: disk.formattedName
-  });
+  var body = extend(
+    {
+      // Default the deviceName to the name of the disk, like the Console does.
+      deviceName: disk.name,
+    },
+    options,
+    {
+      source: disk.formattedName,
+    }
+  );
 
   if (body.readOnly) {
     body.mode = 'READ_ONLY';
     delete body.readOnly;
   }
 
-  this.request({
-    method: 'POST',
-    uri: '/attachDisk',
-    json: body
-  }, callback);
+  this.request(
+    {
+      method: 'POST',
+      uri: '/attachDisk',
+      json: body,
+    },
+    callback
+  );
 };
 
 /**
@@ -327,10 +334,13 @@ VM.prototype.attachDisk = function(disk, options, callback) {
  * });
  */
 VM.prototype.delete = function(callback) {
-  this.request({
-    method: 'DELETE',
-    uri: ''
-  }, callback || common.util.noop);
+  this.request(
+    {
+      method: 'DELETE',
+      uri: '',
+    },
+    callback || common.util.noop
+  );
 };
 
 /**
@@ -401,13 +411,16 @@ VM.prototype.detachDisk = function(disk, callback) {
       return;
     }
 
-    self.request({
-      method: 'POST',
-      uri: '/detachDisk',
-      qs: {
-        deviceName: deviceName
-      }
-    }, callback || common.util.noop);
+    self.request(
+      {
+        method: 'POST',
+        uri: '/detachDisk',
+        qs: {
+          deviceName: deviceName,
+        },
+      },
+      callback || common.util.noop
+    );
   });
 };
 
@@ -443,8 +456,8 @@ VM.prototype.getSerialPortOutput = function(port, callback) {
   var reqOpts = {
     uri: '/serialPort',
     qs: {
-      port: port
-    }
+      port: port,
+    },
   };
 
   var request = common.ServiceObject.prototype.request;
@@ -520,10 +533,13 @@ VM.prototype.getTags = function(callback) {
  * });
  */
 VM.prototype.reset = function(callback) {
-  this.request({
-    method: 'POST',
-    uri: '/reset'
-  }, callback || common.util.noop);
+  this.request(
+    {
+      method: 'POST',
+      uri: '/reset',
+    },
+    callback || common.util.noop
+  );
 };
 
 /**
@@ -596,42 +612,47 @@ VM.prototype.resize = function(machineType, options, callback) {
   if (isPartialMachineType) {
     machineType = format('zones/{zoneName}/machineTypes/{machineType}', {
       zoneName: this.zone.name,
-      machineType: machineType
+      machineType: machineType,
     });
   }
 
-  this.request({
-    method: 'POST',
-    uri: '/setMachineType',
-    json: {
-      machineType: machineType
-    }
-  }, compute.execAfterOperation_(function(err, apiResponse) {
-    if (err) {
-      if (err.message === 'Instance is starting or running.') {
-        // The instance must be stopped before its machine type can be set.
-        self.stop(compute.execAfterOperation_(function(err, apiResponse) {
-          if (err) {
-            callback(err, apiResponse);
-            return;
-          }
+  this.request(
+    {
+      method: 'POST',
+      uri: '/setMachineType',
+      json: {
+        machineType: machineType,
+      },
+    },
+    compute.execAfterOperation_(function(err, apiResponse) {
+      if (err) {
+        if (err.message === 'Instance is starting or running.') {
+          // The instance must be stopped before its machine type can be set.
+          self.stop(
+            compute.execAfterOperation_(function(err, apiResponse) {
+              if (err) {
+                callback(err, apiResponse);
+                return;
+              }
 
-          // Try again now that the instance is stopped.
-          self.resize(machineType, callback);
-        }));
-      } else {
-        callback(err, apiResponse);
+              // Try again now that the instance is stopped.
+              self.resize(machineType, callback);
+            })
+          );
+        } else {
+          callback(err, apiResponse);
+        }
+        return;
       }
-      return;
-    }
 
-    // The machine type was changed successfully.
-    if (options.start === false) {
-      callback(null, apiResponse);
-    } else {
-      self.start(compute.execAfterOperation_(callback));
-    }
-  }));
+      // The machine type was changed successfully.
+      if (options.start === false) {
+        callback(null, apiResponse);
+      } else {
+        self.start(compute.execAfterOperation_(callback));
+      }
+    })
+  );
 };
 
 /**
@@ -677,23 +698,26 @@ VM.prototype.setMetadata = function(metadata, callback) {
 
     var newMetadata = {
       fingerprint: currentMetadata.metadata.fingerprint,
-      items: []
+      items: [],
     };
 
     for (var prop in metadata) {
       if (metadata.hasOwnProperty(prop)) {
         newMetadata.items.push({
           key: prop,
-          value: metadata[prop]
+          value: metadata[prop],
         });
       }
     }
 
-    self.request({
-      method: 'POST',
-      uri: '/setMetadata',
-      json: newMetadata
-    }, callback);
+    self.request(
+      {
+        method: 'POST',
+        uri: '/setMetadata',
+        json: newMetadata,
+      },
+      callback
+    );
   });
 };
 
@@ -739,14 +763,17 @@ VM.prototype.setMetadata = function(metadata, callback) {
 VM.prototype.setTags = function(tags, fingerprint, callback) {
   var body = {
     items: tags,
-    fingerprint: fingerprint
+    fingerprint: fingerprint,
   };
 
-  this.request({
-    method: 'POST',
-    uri: '/setTags',
-    json: body
-  }, callback || common.util.noop);
+  this.request(
+    {
+      method: 'POST',
+      uri: '/setTags',
+      json: body,
+    },
+    callback || common.util.noop
+  );
 };
 
 /**
@@ -775,10 +802,13 @@ VM.prototype.setTags = function(tags, fingerprint, callback) {
  * });
  */
 VM.prototype.start = function(callback) {
-  this.request({
-    method: 'POST',
-    uri: '/start'
-  }, callback || common.util.noop);
+  this.request(
+    {
+      method: 'POST',
+      uri: '/start',
+    },
+    callback || common.util.noop
+  );
 };
 
 /**
@@ -807,10 +837,13 @@ VM.prototype.start = function(callback) {
  * });
  */
 VM.prototype.stop = function(callback) {
-  this.request({
-    method: 'POST',
-    uri: '/stop'
-  }, callback || common.util.noop);
+  this.request(
+    {
+      method: 'POST',
+      uri: '/stop',
+    },
+    callback || common.util.noop
+  );
 };
 
 /**
@@ -890,7 +923,7 @@ VM.prototype.waitFor = function(status, options, callback) {
     status: status,
     timeout: timeout,
     startTime: new Date() / 1000,
-    callback: callback
+    callback: callback,
   });
 
   if (!this.hasActiveWaiters) {
@@ -930,10 +963,12 @@ VM.prototype.startPolling_ = function() {
       }
 
       if (now - waiter.startTime >= waiter.timeout) {
-        var waitForTimeoutError = new WaitForTimeoutError([
-          'waitFor timed out waiting for VM ' + self.name,
-          'to be in status: ' + waiter.status
-        ].join(' '));
+        var waitForTimeoutError = new WaitForTimeoutError(
+          [
+            'waitFor timed out waiting for VM ' + self.name,
+            'to be in status: ' + waiter.status,
+          ].join(' ')
+        );
         waiter.callback(waitForTimeoutError);
         return true;
       }
@@ -950,7 +985,6 @@ VM.prototype.startPolling_ = function() {
     }
   });
 };
-
 
 /**
  * Make a new request object from the provided arguments and wrap the callback

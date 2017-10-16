@@ -135,14 +135,14 @@ function Region(compute, name) {
      *   var apiResponse = data[1];
      * });
      */
-    getMetadata: true
+    getMetadata: true,
   };
 
   common.ServiceObject.call(this, {
     parent: compute,
     baseUrl: '/regions',
     id: name,
-    methods: methods
+    methods: methods,
   });
 
   this.name = name;
@@ -153,7 +153,7 @@ function Region(compute, name) {
         reqOpts.uri = reqOpts.uri.replace('/global', '');
       }
       return reqOpts;
-    }
+    },
   });
 }
 
@@ -219,25 +219,28 @@ Region.prototype.createAddress = function(name, options, callback) {
     options = {};
   }
 
-  this.request({
-    method: 'POST',
-    uri: '/addresses',
-    json: extend({}, options, {
-      name: name
-    })
-  }, function(err, resp) {
-    if (err) {
-      callback(err, null, null, resp);
-      return;
+  this.request(
+    {
+      method: 'POST',
+      uri: '/addresses',
+      json: extend({}, options, {
+        name: name,
+      }),
+    },
+    function(err, resp) {
+      if (err) {
+        callback(err, null, null, resp);
+        return;
+      }
+
+      var address = self.address(name);
+
+      var operation = self.operation(resp.name);
+      operation.metadata = resp;
+
+      callback(null, address, operation, resp);
     }
-
-    var address = self.address(name);
-
-    var operation = self.operation(resp.name);
-    operation.metadata = resp;
-
-    callback(null, address, operation, resp);
-  });
+  );
 };
 
 /**
@@ -292,7 +295,7 @@ Region.prototype.createSubnetwork = function(name, config, callback) {
   var self = this;
 
   var body = extend({}, config, {
-    name: name
+    name: name,
   });
 
   if (body.network instanceof Network) {
@@ -304,23 +307,26 @@ Region.prototype.createSubnetwork = function(name, config, callback) {
     delete body.range;
   }
 
-  this.request({
-    method: 'POST',
-    uri: '/subnetworks',
-    json: body
-  }, function(err, resp) {
-    if (err) {
-      callback(err, null, null, resp);
-      return;
+  this.request(
+    {
+      method: 'POST',
+      uri: '/subnetworks',
+      json: body,
+    },
+    function(err, resp) {
+      if (err) {
+        callback(err, null, null, resp);
+        return;
+      }
+
+      var subnetwork = self.subnetwork(name);
+
+      var operation = self.operation(resp.name);
+      operation.metadata = resp;
+
+      callback(null, subnetwork, operation, resp);
     }
-
-    var subnetwork = self.subnetwork(name);
-
-    var operation = self.operation(resp.name);
-    operation.metadata = resp;
-
-    callback(null, subnetwork, operation, resp);
-  });
+  );
 };
 
 /**
@@ -447,31 +453,34 @@ Region.prototype.getAddresses = function(options, callback) {
 
   options = options || {};
 
-  this.request({
-    uri: '/addresses',
-    qs: options
-  }, function(err, resp) {
-    if (err) {
-      callback(err, null, null, resp);
-      return;
-    }
+  this.request(
+    {
+      uri: '/addresses',
+      qs: options,
+    },
+    function(err, resp) {
+      if (err) {
+        callback(err, null, null, resp);
+        return;
+      }
 
-    var nextQuery = null;
+      var nextQuery = null;
 
-    if (resp.nextPageToken) {
-      nextQuery = extend({}, options, {
-        pageToken: resp.nextPageToken
+      if (resp.nextPageToken) {
+        nextQuery = extend({}, options, {
+          pageToken: resp.nextPageToken,
+        });
+      }
+
+      var addresses = (resp.items || []).map(function(address) {
+        var addressInstance = self.address(address.name);
+        addressInstance.metadata = address;
+        return addressInstance;
       });
+
+      callback(null, addresses, nextQuery, resp);
     }
-
-    var addresses = (resp.items || []).map(function(address) {
-      var addressInstance = self.address(address.name);
-      addressInstance.metadata = address;
-      return addressInstance;
-    });
-
-    callback(null, addresses, nextQuery, resp);
-  });
+  );
 };
 
 /**
@@ -501,8 +510,9 @@ Region.prototype.getAddresses = function(options, callback) {
  *     this.end();
  *   });
  */
-Region.prototype.getAddressesStream =
-  common.paginator.streamify('getAddresses');
+Region.prototype.getAddressesStream = common.paginator.streamify(
+  'getAddresses'
+);
 
 /**
  * Get a list of operations for this region.
@@ -567,31 +577,34 @@ Region.prototype.getOperations = function(options, callback) {
 
   options = options || {};
 
-  this.request({
-    uri: '/operations',
-    qs: options
-  }, function(err, resp) {
-    if (err) {
-      callback(err, null, null, resp);
-      return;
-    }
+  this.request(
+    {
+      uri: '/operations',
+      qs: options,
+    },
+    function(err, resp) {
+      if (err) {
+        callback(err, null, null, resp);
+        return;
+      }
 
-    var nextQuery = null;
+      var nextQuery = null;
 
-    if (resp.nextPageToken) {
-      nextQuery = extend({}, options, {
-        pageToken: resp.nextPageToken
+      if (resp.nextPageToken) {
+        nextQuery = extend({}, options, {
+          pageToken: resp.nextPageToken,
+        });
+      }
+
+      var operations = (resp.items || []).map(function(operation) {
+        var operationInstance = self.operation(operation.name);
+        operationInstance.metadata = operation;
+        return operationInstance;
       });
+
+      callback(null, operations, nextQuery, resp);
     }
-
-    var operations = (resp.items || []).map(function(operation) {
-      var operationInstance = self.operation(operation.name);
-      operationInstance.metadata = operation;
-      return operationInstance;
-    });
-
-    callback(null, operations, nextQuery, resp);
-  });
+  );
 };
 
 /**
@@ -621,8 +634,9 @@ Region.prototype.getOperations = function(options, callback) {
  *     this.end();
  *   });
  */
-Region.prototype.getOperationsStream =
-  common.paginator.streamify('getOperations');
+Region.prototype.getOperationsStream = common.paginator.streamify(
+  'getOperations'
+);
 
 /**
  * Get a list of forwading rules in this region.
@@ -686,31 +700,34 @@ Region.prototype.getRules = function(options, callback) {
 
   options = options || {};
 
-  this.request({
-    uri: '/forwardingRules',
-    qs: options
-  }, function(err, resp) {
-    if (err) {
-      callback(err, null, null, resp);
-      return;
-    }
+  this.request(
+    {
+      uri: '/forwardingRules',
+      qs: options,
+    },
+    function(err, resp) {
+      if (err) {
+        callback(err, null, null, resp);
+        return;
+      }
 
-    var nextQuery = null;
+      var nextQuery = null;
 
-    if (resp.nextPageToken) {
-      nextQuery = extend({}, options, {
-        pageToken: resp.nextPageToken
+      if (resp.nextPageToken) {
+        nextQuery = extend({}, options, {
+          pageToken: resp.nextPageToken,
+        });
+      }
+
+      var rules = (resp.items || []).map(function(rule) {
+        var ruleInstance = self.rule(rule.name);
+        ruleInstance.metadata = rule;
+        return ruleInstance;
       });
+
+      callback(null, rules, nextQuery, resp);
     }
-
-    var rules = (resp.items || []).map(function(rule) {
-      var ruleInstance = self.rule(rule.name);
-      ruleInstance.metadata = rule;
-      return ruleInstance;
-    });
-
-    callback(null, rules, nextQuery, resp);
-  });
+  );
 };
 
 /**
@@ -805,31 +822,34 @@ Region.prototype.getSubnetworks = function(options, callback) {
 
   options = options || {};
 
-  this.request({
-    uri: '/subnetworks',
-    qs: options
-  }, function(err, resp) {
-    if (err) {
-      callback(err, null, null, resp);
-      return;
-    }
+  this.request(
+    {
+      uri: '/subnetworks',
+      qs: options,
+    },
+    function(err, resp) {
+      if (err) {
+        callback(err, null, null, resp);
+        return;
+      }
 
-    var nextQuery = null;
+      var nextQuery = null;
 
-    if (resp.nextPageToken) {
-      nextQuery = extend({}, options, {
-        pageToken: resp.nextPageToken
+      if (resp.nextPageToken) {
+        nextQuery = extend({}, options, {
+          pageToken: resp.nextPageToken,
+        });
+      }
+
+      var subnetworks = (resp.items || []).map(function(subnetwork) {
+        var subnetworkInstance = self.subnetwork(subnetwork.name);
+        subnetworkInstance.metadata = subnetwork;
+        return subnetworkInstance;
       });
+
+      callback(null, subnetworks, nextQuery, resp);
     }
-
-    var subnetworks = (resp.items || []).map(function(subnetwork) {
-      var subnetworkInstance = self.subnetwork(subnetwork.name);
-      subnetworkInstance.metadata = subnetwork;
-      return subnetworkInstance;
-    });
-
-    callback(null, subnetworks, nextQuery, resp);
-  });
+  );
 };
 
 /**
@@ -859,8 +879,9 @@ Region.prototype.getSubnetworks = function(options, callback) {
  *     this.end();
  *   });
  */
-Region.prototype.getSubnetworksStream =
-  common.paginator.streamify('getSubnetworks');
+Region.prototype.getSubnetworksStream = common.paginator.streamify(
+  'getSubnetworks'
+);
 
 /**
  * Get a reference to a Google Compute Engine region operation.
@@ -913,7 +934,7 @@ common.paginator.extend(Region, [
   'getAddresses',
   'getOperations',
   'getRules',
-  'getSubnetworks'
+  'getSubnetworks',
 ]);
 
 /*! Developer Documentation
@@ -922,12 +943,7 @@ common.paginator.extend(Region, [
  * that a callback is omitted.
  */
 common.util.promisifyAll(Region, {
-  exclude: [
-    'address',
-    'operation',
-    'rule',
-    'subnetwork'
-  ]
+  exclude: ['address', 'operation', 'rule', 'subnetwork'],
 });
 
 module.exports = Region;

@@ -33,12 +33,12 @@ var compute = Compute();
 /**
  * @param {Function} callback Callback function.
  */
-function getVmsExample (callback) {
+function getVmsExample(callback) {
   // In this example we only want one VM per page
   var options = {
-    maxResults: 1
+    maxResults: 1,
   };
-  compute.getVMs(options, function (err, vms) {
+  compute.getVMs(options, function(err, vms) {
     if (err) {
       return callback(err);
     }
@@ -51,7 +51,7 @@ function getVmsExample (callback) {
 // [END complete]
 
 // Run the examples
-exports.main = function (cb) {
+exports.main = function(cb) {
   getVmsExample(cb);
 };
 

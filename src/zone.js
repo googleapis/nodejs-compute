@@ -145,21 +145,21 @@ function Zone(compute, name) {
      *   var apiResponse = data[1];
      * });
      */
-    getMetadata: true
+    getMetadata: true,
   };
 
   common.ServiceObject.call(this, {
     parent: compute,
     baseUrl: '/zones',
     id: name,
-    methods: methods
+    methods: methods,
   });
 
   this.compute = compute;
   this.name = name;
 
   this.gceImages = gceImages({
-    authClient: compute.authClient
+    authClient: compute.authClient,
   });
 }
 
@@ -252,7 +252,7 @@ Zone.prototype.createAutoscaler = function(name, config, callback) {
 
   var json = extend(true, {}, config, {
     name: name,
-    autoscalingPolicy: {}
+    autoscalingPolicy: {},
   });
 
   if (!/^https*:/.test(json.target)) {
@@ -262,7 +262,7 @@ Zone.prototype.createAutoscaler = function(name, config, callback) {
       '/zones/',
       this.name,
       '/instanceGroupManagers/',
-      json.target
+      json.target,
     ].join('');
   }
 
@@ -273,14 +273,14 @@ Zone.prototype.createAutoscaler = function(name, config, callback) {
 
   if (is.defined(json.cpu)) {
     json.autoscalingPolicy.cpuUtilization = {
-      utilizationTarget: json.cpu / 100
+      utilizationTarget: json.cpu / 100,
     };
     delete json.cpu;
   }
 
   if (is.defined(json.loadBalance)) {
     json.autoscalingPolicy.loadBalancingUtilization = {
-      utilizationTarget: json.loadBalance / 100
+      utilizationTarget: json.loadBalance / 100,
     };
     delete json.loadBalance;
   }
@@ -295,23 +295,26 @@ Zone.prototype.createAutoscaler = function(name, config, callback) {
     delete json.minReplicas;
   }
 
-  this.request({
-    method: 'POST',
-    uri: '/autoscalers',
-    json: json
-  }, function(err, resp) {
-    if (err) {
-      callback(err, null, null, resp);
-      return;
+  this.request(
+    {
+      method: 'POST',
+      uri: '/autoscalers',
+      json: json,
+    },
+    function(err, resp) {
+      if (err) {
+        callback(err, null, null, resp);
+        return;
+      }
+
+      var autoscaler = self.autoscaler(name);
+
+      var operation = self.operation(resp.name);
+      operation.metadata = resp;
+
+      callback(null, autoscaler, operation, resp);
     }
-
-    var autoscaler = self.autoscaler(name);
-
-    var operation = self.operation(resp.name);
-    operation.metadata = resp;
-
-    callback(null, autoscaler, operation, resp);
-  });
+  );
 };
 
 /**
@@ -373,7 +376,7 @@ Zone.prototype.createDisk = function(name, config, callback) {
 
   var query = {};
   var body = extend({}, config, {
-    name: name
+    name: name,
   });
 
   if (body.image) {
@@ -396,24 +399,27 @@ Zone.prototype.createDisk = function(name, config, callback) {
     return;
   }
 
-  this.request({
-    method: 'POST',
-    uri: '/disks',
-    qs: query,
-    json: body
-  }, function(err, resp) {
-    if (err) {
-      callback(err, null, null, resp);
-      return;
+  this.request(
+    {
+      method: 'POST',
+      uri: '/disks',
+      qs: query,
+      json: body,
+    },
+    function(err, resp) {
+      if (err) {
+        callback(err, null, null, resp);
+        return;
+      }
+
+      var disk = self.disk(name);
+
+      var operation = self.operation(resp.name);
+      operation.metadata = resp;
+
+      callback(null, disk, operation, resp);
     }
-
-    var disk = self.disk(name);
-
-    var operation = self.operation(resp.name);
-    operation.metadata = resp;
-
-    callback(null, disk, operation, resp);
-  });
+  );
 };
 
 /**
@@ -463,7 +469,7 @@ Zone.prototype.createInstanceGroup = function(name, options, callback) {
   }
 
   var body = extend({}, options, {
-    name: name
+    name: name,
   });
 
   if (body.ports) {
@@ -471,23 +477,26 @@ Zone.prototype.createInstanceGroup = function(name, options, callback) {
     delete body.ports;
   }
 
-  this.request({
-    method: 'POST',
-    uri: '/instanceGroups',
-    json: body
-  }, function(err, resp) {
-    if (err) {
-      callback(err, null, null, resp);
-      return;
+  this.request(
+    {
+      method: 'POST',
+      uri: '/instanceGroups',
+      json: body,
+    },
+    function(err, resp) {
+      if (err) {
+        callback(err, null, null, resp);
+        return;
+      }
+
+      var instanceGroup = self.instanceGroup(name);
+
+      var operation = self.operation(resp.name);
+      operation.metadata = resp;
+
+      callback(null, instanceGroup, operation, resp);
     }
-
-    var instanceGroup = self.instanceGroup(name);
-
-    var operation = self.operation(resp.name);
-    operation.metadata = resp;
-
-    callback(null, instanceGroup, operation, resp);
-  });
+  );
 };
 
 /**
@@ -595,27 +604,30 @@ Zone.prototype.createInstanceGroup = function(name, options, callback) {
 Zone.prototype.createVM = function(name, config, callback) {
   var self = this;
 
-  var body = extend({
-    name: name,
-    machineType: 'n1-standard-1',
-    networkInterfaces: [
-      {
-        network: 'global/networks/default'
-      }
-    ]
-  }, config);
+  var body = extend(
+    {
+      name: name,
+      machineType: 'n1-standard-1',
+      networkInterfaces: [
+        {
+          network: 'global/networks/default',
+        },
+      ],
+    },
+    config
+  );
 
   if (body.machineType.indexOf('/') === -1) {
     // The specified machineType is only a partial name, e.g. 'n1-standard-1'.
     body.machineType = format('zones/{zoneName}/machineTypes/{machineType}', {
       zoneName: this.name,
-      machineType: body.machineType
+      machineType: body.machineType,
     });
   }
 
   if (is.array(body.tags)) {
     body.tags = {
-      items: body.tags
+      items: body.tags,
     };
   }
 
@@ -627,8 +639,8 @@ Zone.prototype.createVM = function(name, config, callback) {
 
     body.networkInterfaces[0].accessConfigs = [
       {
-        type: 'ONE_TO_ONE_NAT'
-      }
+        type: 'ONE_TO_ONE_NAT',
+      },
     ];
 
     body.tags = body.tags || {};
@@ -680,8 +692,8 @@ Zone.prototype.createVM = function(name, config, callback) {
         autoDelete: true,
         boot: true,
         initializeParams: {
-          sourceImage: image.selfLink
-        }
+          sourceImage: image.selfLink,
+        },
       });
 
       self.createVM(name, body, callback);
@@ -690,23 +702,26 @@ Zone.prototype.createVM = function(name, config, callback) {
     return;
   }
 
-  this.request({
-    method: 'POST',
-    uri: '/instances',
-    json: body
-  }, function(err, resp) {
-    if (err) {
-      callback(err, null, null, resp);
-      return;
+  this.request(
+    {
+      method: 'POST',
+      uri: '/instances',
+      json: body,
+    },
+    function(err, resp) {
+      if (err) {
+        callback(err, null, null, resp);
+        return;
+      }
+
+      var vm = self.vm(name);
+
+      var operation = self.operation(resp.name);
+      operation.metadata = resp;
+
+      callback(null, vm, operation, resp);
     }
-
-    var vm = self.vm(name);
-
-    var operation = self.operation(resp.name);
-    operation.metadata = resp;
-
-    callback(null, vm, operation, resp);
-  });
+  );
 };
 
 /**
@@ -788,32 +803,35 @@ Zone.prototype.getAutoscalers = function(options, callback) {
 
   options = options || {};
 
-  this.request({
-    uri: '/autoscalers',
-    qs: options
-  }, function(err, resp) {
-    if (err) {
-      callback(err, null, null, resp);
-      return;
-    }
+  this.request(
+    {
+      uri: '/autoscalers',
+      qs: options,
+    },
+    function(err, resp) {
+      if (err) {
+        callback(err, null, null, resp);
+        return;
+      }
 
-    var nextQuery = null;
+      var nextQuery = null;
 
-    if (resp.nextPageToken) {
-      nextQuery = extend({}, options, {
-        pageToken: resp.nextPageToken
+      if (resp.nextPageToken) {
+        nextQuery = extend({}, options, {
+          pageToken: resp.nextPageToken,
+        });
+      }
+
+      var autoscalers = arrify(resp.items).map(function(autoscaler) {
+        var autoscalerInstance = self.autoscaler(autoscaler.name);
+        autoscalerInstance.metadata = autoscaler;
+
+        return autoscalerInstance;
       });
+
+      callback(null, autoscalers, nextQuery, resp);
     }
-
-    var autoscalers = arrify(resp.items).map(function(autoscaler) {
-      var autoscalerInstance = self.autoscaler(autoscaler.name);
-      autoscalerInstance.metadata = autoscaler;
-
-      return autoscalerInstance;
-    });
-
-    callback(null, autoscalers, nextQuery, resp);
-  });
+  );
 };
 
 /**
@@ -843,8 +861,9 @@ Zone.prototype.getAutoscalers = function(options, callback) {
  *     this.end();
  *   });
  */
-Zone.prototype.getAutoscalersStream =
-  common.paginator.streamify('getAutoscalers');
+Zone.prototype.getAutoscalersStream = common.paginator.streamify(
+  'getAutoscalers'
+);
 
 /**
  *  Get a list of disks in this zone.
@@ -908,31 +927,34 @@ Zone.prototype.getDisks = function(options, callback) {
 
   options = options || {};
 
-  this.request({
-    uri: '/disks',
-    qs: options
-  }, function(err, resp) {
-    if (err) {
-      callback(err, null, null, resp);
-      return;
-    }
+  this.request(
+    {
+      uri: '/disks',
+      qs: options,
+    },
+    function(err, resp) {
+      if (err) {
+        callback(err, null, null, resp);
+        return;
+      }
 
-    var nextQuery = null;
+      var nextQuery = null;
 
-    if (resp.nextPageToken) {
-      nextQuery = extend({}, options, {
-        pageToken: resp.nextPageToken
+      if (resp.nextPageToken) {
+        nextQuery = extend({}, options, {
+          pageToken: resp.nextPageToken,
+        });
+      }
+
+      var disks = (resp.items || []).map(function(disk) {
+        var diskInstance = self.disk(disk.name);
+        diskInstance.metadata = disk;
+        return diskInstance;
       });
+
+      callback(null, disks, nextQuery, resp);
     }
-
-    var disks = (resp.items || []).map(function(disk) {
-      var diskInstance = self.disk(disk.name);
-      diskInstance.metadata = disk;
-      return diskInstance;
-    });
-
-    callback(null, disks, nextQuery, resp);
-  });
+  );
 };
 
 /**
@@ -1028,31 +1050,34 @@ Zone.prototype.getInstanceGroups = function(options, callback) {
 
   options = options || {};
 
-  this.request({
-    uri: '/instanceGroups',
-    qs: options
-  }, function(err, resp) {
-    if (err) {
-      callback(err, null, null, resp);
-      return;
-    }
+  this.request(
+    {
+      uri: '/instanceGroups',
+      qs: options,
+    },
+    function(err, resp) {
+      if (err) {
+        callback(err, null, null, resp);
+        return;
+      }
 
-    var nextQuery = null;
+      var nextQuery = null;
 
-    if (resp.nextPageToken) {
-      nextQuery = extend({}, options, {
-        pageToken: resp.nextPageToken
+      if (resp.nextPageToken) {
+        nextQuery = extend({}, options, {
+          pageToken: resp.nextPageToken,
+        });
+      }
+
+      var instanceGroups = (resp.items || []).map(function(instanceGroup) {
+        var instanceGroupInstance = self.instanceGroup(instanceGroup.name);
+        instanceGroupInstance.metadata = instanceGroup;
+        return instanceGroupInstance;
       });
+
+      callback(null, instanceGroups, nextQuery, resp);
     }
-
-    var instanceGroups = (resp.items || []).map(function(instanceGroup) {
-      var instanceGroupInstance = self.instanceGroup(instanceGroup.name);
-      instanceGroupInstance.metadata = instanceGroup;
-      return instanceGroupInstance;
-    });
-
-    callback(null, instanceGroups, nextQuery, resp);
-  });
+  );
 };
 
 /**
@@ -1082,8 +1107,9 @@ Zone.prototype.getInstanceGroups = function(options, callback) {
  *     this.end();
  *   });
  */
-Zone.prototype.getInstanceGroupsStream =
-  common.paginator.streamify('getInstanceGroups');
+Zone.prototype.getInstanceGroupsStream = common.paginator.streamify(
+  'getInstanceGroups'
+);
 
 /**
  * Get a list of machine types for this zone.
@@ -1140,7 +1166,7 @@ Zone.prototype.getMachineTypes = function(options, callback) {
   }
 
   options = extend({}, options, {
-    filter: 'zone eq .*' + this.name
+    filter: 'zone eq .*' + this.name,
   });
 
   return this.compute.getMachineTypes(options, callback);
@@ -1173,8 +1199,9 @@ Zone.prototype.getMachineTypes = function(options, callback) {
  *     this.end();
  *   });
  */
-Zone.prototype.getMachineTypesStream =
-  common.paginator.streamify('getMachineTypes');
+Zone.prototype.getMachineTypesStream = common.paginator.streamify(
+  'getMachineTypes'
+);
 
 /**
  * Get a list of operations for this zone.
@@ -1239,31 +1266,34 @@ Zone.prototype.getOperations = function(options, callback) {
 
   options = options || {};
 
-  this.request({
-    uri: '/operations',
-    qs: options
-  }, function(err, resp) {
-    if (err) {
-      callback(err, null, null, resp);
-      return;
-    }
+  this.request(
+    {
+      uri: '/operations',
+      qs: options,
+    },
+    function(err, resp) {
+      if (err) {
+        callback(err, null, null, resp);
+        return;
+      }
 
-    var nextQuery = null;
+      var nextQuery = null;
 
-    if (resp.nextPageToken) {
-      nextQuery = extend({}, options, {
-        pageToken: resp.nextPageToken
+      if (resp.nextPageToken) {
+        nextQuery = extend({}, options, {
+          pageToken: resp.nextPageToken,
+        });
+      }
+
+      var operations = (resp.items || []).map(function(operation) {
+        var operationInstance = self.operation(operation.name);
+        operationInstance.metadata = operation;
+        return operationInstance;
       });
+
+      callback(null, operations, nextQuery, resp);
     }
-
-    var operations = (resp.items || []).map(function(operation) {
-      var operationInstance = self.operation(operation.name);
-      operationInstance.metadata = operation;
-      return operationInstance;
-    });
-
-    callback(null, operations, nextQuery, resp);
-  });
+  );
 };
 
 /**
@@ -1293,8 +1323,9 @@ Zone.prototype.getOperations = function(options, callback) {
  *     this.end();
  *   });
  */
-Zone.prototype.getOperationsStream =
-  common.paginator.streamify('getOperations');
+Zone.prototype.getOperationsStream = common.paginator.streamify(
+  'getOperations'
+);
 
 /**
  * Get a list of VM instances in this zone.
@@ -1328,7 +1359,7 @@ Zone.prototype.getOperationsStream =
  * // To control how many API requests are made and page through the results
  * // manually, set `autoPaginate` to `false`.
  * //-
- * function callback(err, vms, nextQuery, apiResponse) {
+ * function callback(err, vms, nextQuery, apiResponse) {
  *   if (nextQuery) {
  *     // More results exist.
  *     zone.getVMs(nextQuery, callback);
@@ -1356,31 +1387,34 @@ Zone.prototype.getVMs = function(options, callback) {
 
   options = options || {};
 
-  this.request({
-    uri: '/instances',
-    qs: options
-  }, function(err, resp) {
-    if (err) {
-      callback(err, null, null, resp);
-      return;
-    }
+  this.request(
+    {
+      uri: '/instances',
+      qs: options,
+    },
+    function(err, resp) {
+      if (err) {
+        callback(err, null, null, resp);
+        return;
+      }
 
-    var nextQuery = null;
+      var nextQuery = null;
 
-    if (resp.nextPageToken) {
-      nextQuery = extend({}, options, {
-        pageToken: resp.nextPageToken
+      if (resp.nextPageToken) {
+        nextQuery = extend({}, options, {
+          pageToken: resp.nextPageToken,
+        });
+      }
+
+      var vms = (resp.items || []).map(function(instance) {
+        var vmInstance = self.vm(instance.name);
+        vmInstance.metadata = instance;
+        return vmInstance;
       });
+
+      callback(null, vms, nextQuery, resp);
     }
-
-    var vms = (resp.items || []).map(function(instance) {
-      var vmInstance = self.vm(instance.name);
-      vmInstance.metadata = instance;
-      return vmInstance;
-    });
-
-    callback(null, vms, nextQuery, resp);
-  });
+  );
 };
 
 /**
@@ -1483,16 +1517,20 @@ Zone.prototype.vm = function(name) {
  *     didn't already exist.
  */
 Zone.prototype.createHttpServerFirewall_ = function(callback) {
-  this.compute.createFirewall('default-allow-http', {
-    protocols: {
-      tcp: [80]
+  this.compute.createFirewall(
+    'default-allow-http',
+    {
+      protocols: {
+        tcp: [80],
+      },
+      ranges: ['0.0.0.0/0'],
+      tags: ['http-server'],
     },
-    ranges: ['0.0.0.0/0'],
-    tags: ['http-server']
-  }, function(err) {
-    // If it already exists, we're all good.
-    callback(err && err.code !== 409 ? err : null);
-  });
+    function(err) {
+      // If it already exists, we're all good.
+      callback(err && err.code !== 409 ? err : null);
+    }
+  );
 };
 
 /**
@@ -1505,16 +1543,20 @@ Zone.prototype.createHttpServerFirewall_ = function(callback) {
  *     didn't already exist.
  */
 Zone.prototype.createHttpsServerFirewall_ = function(callback) {
-  this.compute.createFirewall('default-allow-https', {
-    protocols: {
-      tcp: [443]
+  this.compute.createFirewall(
+    'default-allow-https',
+    {
+      protocols: {
+        tcp: [443],
+      },
+      ranges: ['0.0.0.0/0'],
+      tags: ['https-server'],
     },
-    ranges: ['0.0.0.0/0'],
-    tags: ['https-server']
-  }, function(err) {
-    // If it already exists, we're all good.
-    callback(err && err.code !== 409 ? err : null);
-  });
+    function(err) {
+      // If it already exists, we're all good.
+      callback(err && err.code !== 409 ? err : null);
+    }
+  );
 };
 
 /*! Developer Documentation
@@ -1527,7 +1569,7 @@ common.paginator.extend(Zone, [
   'getInstanceGroups',
   'getMachineTypes',
   'getOperations',
-  'getVMs'
+  'getVMs',
 ]);
 
 /*! Developer Documentation
@@ -1542,8 +1584,8 @@ common.util.promisifyAll(Zone, {
     'instanceGroup',
     'machineType',
     'operation',
-    'vm'
-  ]
+    'vm',
+  ],
 });
 
 module.exports = Zone;
