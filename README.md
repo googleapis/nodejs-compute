@@ -58,6 +58,24 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 
     npm install --save @google-cloud/compute
 
+### Using the client library
+
+```javascript
+const gce = require('@google-cloud/compute')();
+
+// Create a new VM using the latest OS image of your choice.
+var zone = gce.zone('us-central1-a');
+var name = 'ubuntu-http';
+
+zone.createVM(name, { os: 'ubuntu' }, data => {
+  // `operation` lets you check the status of long-running tasks.
+  let vm = data[0];
+  let operation = data[1];
+  return operation.promise();
+}).then(() => {
+  // Virtual machine created!
+});
+```
 
 ## Samples
 

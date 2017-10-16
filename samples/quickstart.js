@@ -11,6 +11,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+// [START compute_engine_quickstart]
 const gce = require('@google-cloud/compute')();
 
 // Create a new VM using the latest OS image of your choice.
@@ -25,3 +26,4 @@ zone.createVM(name, { os: 'ubuntu' }, data => {
 }).then(() => {
   // Virtual machine created!
 });
+// [END compute_engine_quickstart]
