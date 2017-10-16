@@ -23,7 +23,6 @@ var is = require('is');
 var prop = require('propprop');
 var uuid = require('uuid');
 
-var env = require('../../../system-test/env.js');
 var Compute = require('../');
 
 describe('Compute', function() {
@@ -45,7 +44,7 @@ describe('Compute', function() {
   var REGION_NAME = 'us-central1';
   var ZONE_NAME = 'us-central1-a';
 
-  var compute = new Compute(env);
+  var compute = new Compute();
   var region = compute.region(REGION_NAME);
   var zone = compute.zone(ZONE_NAME);
 
