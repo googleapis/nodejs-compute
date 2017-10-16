@@ -58,14 +58,12 @@ var fakeUtil = extend({}, util, {
   },
 });
 
-var extended = false;
 var fakePaginator = {
   extend: function(Class, methods) {
     if (Class.name !== 'Compute') {
       return;
     }
 
-    extended = true;
     methods = arrify(methods);
     assert.deepEqual(methods, [
       'getAddresses',

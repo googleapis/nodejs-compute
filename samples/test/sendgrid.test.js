@@ -30,7 +30,7 @@ test.cb(`should send an email`, t => {
       t.is(key, `foo`);
       return {
         emptyRequest: x => x,
-        API: (request, cb) => {
+        API: request => {
           t.deepEqual(request, {
             method: `POST`,
             path: `/v3/mail/send`,

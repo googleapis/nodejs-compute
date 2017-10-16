@@ -33,11 +33,6 @@ var fakeUtil = extend({}, util, {
 
 function FakeServiceObject() {
   this.calledWith_ = arguments;
-  ServiceObject.apply(this, arguments);
-}
-
-function FakeServiceObject() {
-  this.calledWith_ = arguments;
 }
 
 describe('Rule', function() {

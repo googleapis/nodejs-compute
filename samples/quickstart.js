@@ -11,6 +11,10 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+/* eslint-disable no-unused-vars */
+
+'use strict';
+
 // [START compute_engine_quickstart]
 const gce = require('@google-cloud/compute')();
 

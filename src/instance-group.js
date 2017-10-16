@@ -320,7 +320,7 @@ InstanceGroup.prototype.delete = function(callback) {
  * // To control how many API requests are made and page through the results
  * // manually, set `autoPaginate` to `false`.
  * //-
- * function callback(err, vms, nextQuery, apiResponse) {
+ * function callback(err, vms, nextQuery, apiResponse) {
  *   if (nextQuery) {
  *     // More results exist.
  *     instanceGroup.getVMs(nextQuery, callback);

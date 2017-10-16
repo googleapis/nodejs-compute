@@ -47,6 +47,7 @@ describe('Network', function() {
   var Network;
   var network;
 
+  /* eslint-disable no-unused-vars */
   var REGION;
   var Region;
 
