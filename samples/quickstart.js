@@ -18,12 +18,14 @@ const gce = require('@google-cloud/compute')();
 var zone = gce.zone('us-central1-a');
 var name = 'ubuntu-http';
 
-zone.createVM(name, { os: 'ubuntu' }, data => {
-  // `operation` lets you check the status of long-running tasks.
-  let vm = data[0];
-  let operation = data[1];
-  return operation.promise();
-}).then(() => {
-  // Virtual machine created!
-});
+zone
+  .createVM(name, {os: 'ubuntu'}, data => {
+    // `operation` lets you check the status of long-running tasks.
+    let vm = data[0];
+    let operation = data[1];
+    return operation.promise();
+  })
+  .then(() => {
+    // Virtual machine created!
+  });
 // [END compute_engine_quickstart]

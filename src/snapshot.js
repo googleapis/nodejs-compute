@@ -115,14 +115,14 @@ function Snapshot(scope, name) {
      *   var apiResponse = data[1];
      * });
      */
-    getMetadata: true
+    getMetadata: true,
   };
 
   var config = {
     parent: scope,
     baseUrl: '/global/snapshots',
     id: name,
-    methods: methods
+    methods: methods,
   };
 
   if (isDisk) {

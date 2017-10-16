@@ -157,7 +157,7 @@ function Service(compute, name) {
      *   var apiResponse = data[1];
      * });
      */
-    getMetadata: true
+    getMetadata: true,
   };
 
   common.ServiceObject.call(this, {
@@ -165,7 +165,7 @@ function Service(compute, name) {
     baseUrl: '/global/backendServices',
     id: name,
     createMethod: compute.createService.bind(compute),
-    methods: methods
+    methods: methods,
   });
 
   this.compute = compute;
@@ -266,24 +266,27 @@ Service.prototype.getHealth = function(group, callback) {
       baseUrl: 'https://www.googleapis.com/compute/v1',
       p: this.parent.projectId,
       z: group.zone.name || group.zone,
-      n: group.name
+      n: group.name,
     });
   }
 
-  this.request({
-    method: 'POST',
-    uri: '/getHealth',
-    json: {
-      group: group
-    }
-  }, function(err, resp) {
-    if (err) {
-      callback(err, null, resp);
-      return;
-    }
+  this.request(
+    {
+      method: 'POST',
+      uri: '/getHealth',
+      json: {
+        group: group,
+      },
+    },
+    function(err, resp) {
+      if (err) {
+        callback(err, null, resp);
+        return;
+      }
 
-    callback(null, arrify(resp.healthStatus), resp);
-  });
+      callback(null, arrify(resp.healthStatus), resp);
+    }
+  );
 };
 
 /**
@@ -322,21 +325,24 @@ Service.prototype.setMetadata = function(metadata, callback) {
 
   callback = callback || common.util.noop;
 
-  this.request({
-    method: 'PATCH',
-    uri: '',
-    json: metadata
-  }, function(err, resp) {
-    if (err) {
-      callback(err, null, resp);
-      return;
+  this.request(
+    {
+      method: 'PATCH',
+      uri: '',
+      json: metadata,
+    },
+    function(err, resp) {
+      if (err) {
+        callback(err, null, resp);
+        return;
+      }
+
+      var operation = compute.operation(resp.name);
+      operation.metadata = resp;
+
+      callback(null, operation, resp);
     }
-
-    var operation = compute.operation(resp.name);
-    operation.metadata = resp;
-
-    callback(null, operation, resp);
-  });
+  );
 };
 
 /*! Developer Documentation

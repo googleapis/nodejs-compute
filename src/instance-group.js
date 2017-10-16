@@ -146,7 +146,7 @@ function InstanceGroup(zone, name) {
      *   var apiResponse = data[1];
      * });
      */
-    getMetadata: true
+    getMetadata: true,
   };
 
   common.ServiceObject.call(this, {
@@ -154,7 +154,7 @@ function InstanceGroup(zone, name) {
     baseUrl: '/instanceGroups',
     id: name,
     createMethod: zone.createInstanceGroup.bind(zone),
-    methods: methods
+    methods: methods,
   });
 
   this.zone = zone;
@@ -176,7 +176,7 @@ InstanceGroup.formatPorts_ = function(ports) {
   return Object.keys(ports).map(function(port) {
     return {
       name: port,
-      port: ports[port]
+      port: ports[port],
     };
   });
 };
@@ -216,27 +216,30 @@ InstanceGroup.formatPorts_ = function(ports) {
 InstanceGroup.prototype.add = function(vms, callback) {
   var self = this;
 
-  this.request({
-    method: 'POST',
-    uri: '/addInstances',
-    json: {
-      instances: arrify(vms).map(function(vm) {
-        return {
-          instance: vm.url
-        };
-      })
-    }
-  }, function(err, resp) {
-    if (err) {
-      callback(err, null, resp);
-      return;
-    }
+  this.request(
+    {
+      method: 'POST',
+      uri: '/addInstances',
+      json: {
+        instances: arrify(vms).map(function(vm) {
+          return {
+            instance: vm.url,
+          };
+        }),
+      },
+    },
+    function(err, resp) {
+      if (err) {
+        callback(err, null, resp);
+        return;
+      }
 
-    var operation = self.zone.operation(resp.name);
-    operation.metadata = resp;
+      var operation = self.zone.operation(resp.name);
+      operation.metadata = resp;
 
-    callback(null, operation, resp);
-  });
+      callback(null, operation, resp);
+    }
+  );
 };
 
 /**
@@ -349,37 +352,40 @@ InstanceGroup.prototype.getVMs = function(options, callback) {
 
   if (options.running) {
     body = {
-      instanceState: 'RUNNING'
+      instanceState: 'RUNNING',
     };
   }
 
-  this.request({
-    method: 'POST',
-    uri: '/listInstances',
-    qs: options,
-    json: body
-  }, function(err, resp) {
-    if (err) {
-      callback(err, null, null, resp);
-      return;
-    }
+  this.request(
+    {
+      method: 'POST',
+      uri: '/listInstances',
+      qs: options,
+      json: body,
+    },
+    function(err, resp) {
+      if (err) {
+        callback(err, null, null, resp);
+        return;
+      }
 
-    var nextQuery = null;
+      var nextQuery = null;
 
-    if (resp.nextPageToken) {
-      nextQuery = extend({}, options, {
-        pageToken: resp.nextPageToken
+      if (resp.nextPageToken) {
+        nextQuery = extend({}, options, {
+          pageToken: resp.nextPageToken,
+        });
+      }
+
+      var vms = arrify(resp.items).map(function(vm) {
+        var vmInstance = self.zone.vm(vm.instance);
+        vmInstance.metadata = vm;
+        return vmInstance;
       });
+
+      callback(null, vms, nextQuery, resp);
     }
-
-    var vms = arrify(resp.items).map(function(vm) {
-      var vmInstance = self.zone.vm(vm.instance);
-      vmInstance.metadata = vm;
-      return vmInstance;
-    });
-
-    callback(null, vms, nextQuery, resp);
-  });
+  );
 };
 
 /**
@@ -446,27 +452,30 @@ InstanceGroup.prototype.getVMsStream = common.paginator.streamify('getVMs');
 InstanceGroup.prototype.remove = function(vms, callback) {
   var self = this;
 
-  this.request({
-    method: 'POST',
-    uri: '/removeInstances',
-    json: {
-      instances: arrify(vms).map(function(vm) {
-        return {
-          instance: vm.url
-        };
-      })
-    }
-  }, function(err, resp) {
-    if (err) {
-      callback(err, null, resp);
-      return;
-    }
+  this.request(
+    {
+      method: 'POST',
+      uri: '/removeInstances',
+      json: {
+        instances: arrify(vms).map(function(vm) {
+          return {
+            instance: vm.url,
+          };
+        }),
+      },
+    },
+    function(err, resp) {
+      if (err) {
+        callback(err, null, resp);
+        return;
+      }
 
-    var operation = self.zone.operation(resp.name);
-    operation.metadata = resp;
+      var operation = self.zone.operation(resp.name);
+      operation.metadata = resp;
 
-    callback(err, operation, resp);
-  });
+      callback(err, operation, resp);
+    }
+  );
 };
 
 /**
@@ -506,23 +515,26 @@ InstanceGroup.prototype.setPorts = function(ports, callback) {
 
   callback = callback || common.util.noop;
 
-  this.request({
-    method: 'POST',
-    uri: '/setNamedPorts',
-    json: {
-      namedPorts: InstanceGroup.formatPorts_(ports)
-    }
-  }, function(err, resp) {
-    if (err) {
-      callback(err, null, resp);
-      return;
-    }
+  this.request(
+    {
+      method: 'POST',
+      uri: '/setNamedPorts',
+      json: {
+        namedPorts: InstanceGroup.formatPorts_(ports),
+      },
+    },
+    function(err, resp) {
+      if (err) {
+        callback(err, null, resp);
+        return;
+      }
 
-    var operation = self.zone.operation(resp.name);
-    operation.metadata = resp;
+      var operation = self.zone.operation(resp.name);
+      operation.metadata = resp;
 
-    callback(null, operation, resp);
-  });
+      callback(null, operation, resp);
+    }
+  );
 };
 
 /*! Developer Documentation

@@ -149,7 +149,7 @@ function Autoscaler(zone, name) {
      *   var apiResponse = data[1];
      * });
      */
-    getMetadata: true
+    getMetadata: true,
   };
 
   common.ServiceObject.call(this, {
@@ -157,7 +157,7 @@ function Autoscaler(zone, name) {
     baseUrl: '/autoscalers',
     id: name,
     createMethod: zone.createAutoscaler.bind(zone),
-    methods: methods
+    methods: methods,
   });
 
   this.name = name;
@@ -249,24 +249,27 @@ Autoscaler.prototype.setMetadata = function(metadata, callback) {
   metadata.name = this.name;
   metadata.zone = this.zone.name;
 
-  zone.request({
-    method: 'PATCH',
-    uri: '/autoscalers',
-    qs: {
-      autoscaler: this.name
+  zone.request(
+    {
+      method: 'PATCH',
+      uri: '/autoscalers',
+      qs: {
+        autoscaler: this.name,
+      },
+      json: metadata,
     },
-    json: metadata
-  }, function(err, resp) {
-    if (err) {
-      callback(err, null, resp);
-      return;
+    function(err, resp) {
+      if (err) {
+        callback(err, null, resp);
+        return;
+      }
+
+      var operation = zone.operation(resp.name);
+      operation.metadata = resp;
+
+      callback(null, operation, resp);
     }
-
-    var operation = zone.operation(resp.name);
-    operation.metadata = resp;
-
-    callback(null, operation, resp);
-  });
+  );
 };
 
 /*! Developer Documentation

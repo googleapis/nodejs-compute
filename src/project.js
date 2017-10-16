@@ -85,14 +85,14 @@ function Project(compute) {
      *   var apiResponse = data[1];
      * });
      */
-    getMetadata: true
+    getMetadata: true,
   };
 
   common.ServiceObject.call(this, {
     parent: compute,
     baseUrl: '',
     id: '',
-    methods: methods
+    methods: methods,
   });
 }
 

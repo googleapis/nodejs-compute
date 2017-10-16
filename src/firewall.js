@@ -141,7 +141,7 @@ function Firewall(compute, name) {
      *   var apiResponse = data[1];
      * });
      */
-    getMetadata: true
+    getMetadata: true,
   };
 
   common.ServiceObject.call(this, {
@@ -149,7 +149,7 @@ function Firewall(compute, name) {
     baseUrl: '/global/firewalls',
     id: name,
     createMethod: compute.createFirewall.bind(compute),
-    methods: methods
+    methods: methods,
   });
 
   this.compute = compute;
@@ -242,21 +242,24 @@ Firewall.prototype.setMetadata = function(metadata, callback) {
   metadata.name = this.name;
   metadata.network = this.metadata.network;
 
-  this.request({
-    method: 'PATCH',
-    uri: '',
-    json: metadata
-  }, function(err, resp) {
-    if (err) {
-      callback(err, null, resp);
-      return;
+  this.request(
+    {
+      method: 'PATCH',
+      uri: '',
+      json: metadata,
+    },
+    function(err, resp) {
+      if (err) {
+        callback(err, null, resp);
+        return;
+      }
+
+      var operation = compute.operation(resp.name);
+      operation.metadata = resp;
+
+      callback(null, operation, resp);
     }
-
-    var operation = compute.operation(resp.name);
-    operation.metadata = resp;
-
-    callback(null, operation, resp);
-  });
+  );
 };
 
 /*! Developer Documentation

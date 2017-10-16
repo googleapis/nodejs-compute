@@ -107,14 +107,14 @@ function MachineType(zone, name) {
      *   var apiResponse = data[1];
      * });
      */
-    getMetadata: true
+    getMetadata: true,
   };
 
   common.ServiceObject.call(this, {
     parent: zone,
     baseUrl: '/machineTypes',
     id: name,
-    methods: methods
+    methods: methods,
   });
 
   this.zone = zone;

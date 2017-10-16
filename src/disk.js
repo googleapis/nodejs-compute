@@ -151,7 +151,7 @@ function Disk(zone, name) {
      *   var apiResponse = data[1];
      * });
      */
-    getMetadata: true
+    getMetadata: true,
   };
 
   common.ServiceObject.call(this, {
@@ -159,7 +159,7 @@ function Disk(zone, name) {
     baseUrl: '/disks',
     id: name,
     createMethod: zone.createDisk.bind(zone),
-    methods: methods
+    methods: methods,
   });
 
   this.name = name;
@@ -183,7 +183,7 @@ Disk.formatName_ = function(zone, name) {
   return format('projects/{pId}/zones/{zoneName}/disks/{diskName}', {
     pId: zone.compute.projectId,
     zoneName: zone.name,
-    diskName: name
+    diskName: name,
   });
 };
 
@@ -233,25 +233,28 @@ Disk.prototype.createSnapshot = function(name, options, callback) {
     options = {};
   }
 
-  this.request({
-    method: 'POST',
-    uri: '/createSnapshot',
-    json: extend({}, options, {
-      name: name
-    })
-  }, function(err, resp) {
-    if (err) {
-      callback(err, null, null, resp);
-      return;
+  this.request(
+    {
+      method: 'POST',
+      uri: '/createSnapshot',
+      json: extend({}, options, {
+        name: name,
+      }),
+    },
+    function(err, resp) {
+      if (err) {
+        callback(err, null, null, resp);
+        return;
+      }
+
+      var snapshot = self.snapshot(name);
+
+      var operation = zone.operation(resp.name);
+      operation.metadata = resp;
+
+      callback(null, snapshot, operation, resp);
     }
-
-    var snapshot = self.snapshot(name);
-
-    var operation = zone.operation(resp.name);
-    operation.metadata = resp;
-
-    callback(null, snapshot, operation, resp);
-  });
+  );
 };
 
 /**
@@ -318,7 +321,7 @@ Disk.prototype.snapshot = function(name) {
  * that a callback is omitted.
  */
 common.util.promisifyAll(Disk, {
-  exclude: ['snapshot']
+  exclude: ['snapshot'],
 });
 
 module.exports = Disk;

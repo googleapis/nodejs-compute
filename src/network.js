@@ -144,7 +144,7 @@ function Network(compute, name) {
      *   var apiResponse = data[1];
      * });
      */
-    getMetadata: true
+    getMetadata: true,
   };
 
   common.ServiceObject.call(this, {
@@ -174,7 +174,7 @@ util.inherits(Network, common.ServiceObject);
 Network.formatName_ = function(compute, name) {
   return format('projects/{projectId}/global/networks/{name}', {
     projectId: compute.projectId,
-    name: name
+    name: name,
   });
 };
 
@@ -232,7 +232,7 @@ Network.formatName_ = function(compute, name) {
  */
 Network.prototype.createFirewall = function(name, config, callback) {
   config = extend({}, config, {
-    network: this.formattedName
+    network: this.formattedName,
   });
 
   this.compute.createFirewall(name, config, callback);
@@ -290,7 +290,7 @@ Network.prototype.createFirewall = function(name, config, callback) {
  */
 Network.prototype.createSubnetwork = function(name, config, callback) {
   config = extend({}, config, {
-    network: this.formattedName
+    network: this.formattedName,
   });
 
   var region = config.region;
@@ -364,7 +364,7 @@ Network.prototype.getSubnetworks = function(options, callback) {
   }
 
   options = extend({}, options, {
-    filter: 'network eq .*' + this.formattedName
+    filter: 'network eq .*' + this.formattedName,
   });
 
   this.compute.getSubnetworks(options, callback);
@@ -399,7 +399,7 @@ Network.prototype.getSubnetworks = function(options, callback) {
  */
 Network.prototype.getSubnetworksStream = function(options) {
   options = extend({}, options, {
-    filter: 'network eq .*' + this.formattedName
+    filter: 'network eq .*' + this.formattedName,
   });
 
   return this.compute.getSubnetworksStream(options);
@@ -462,7 +462,7 @@ Network.prototype.firewall = function(name) {
   var firewall = this.compute.firewall(name);
 
   firewall.metadata = {
-    network: this.formattedName
+    network: this.formattedName,
   };
 
   return firewall;
@@ -521,7 +521,7 @@ Network.prototype.getFirewalls = function(options, callback) {
   }
 
   options = extend({}, options, {
-    filter: 'network eq .*' + this.formattedName
+    filter: 'network eq .*' + this.formattedName,
   });
 
   this.compute.getFirewalls(options, callback);
@@ -556,7 +556,7 @@ Network.prototype.getFirewalls = function(options, callback) {
  */
 Network.prototype.getFirewallsStream = function(options) {
   options = extend({}, options, {
-    filter: 'network eq .*' + this.formattedName
+    filter: 'network eq .*' + this.formattedName,
   });
 
   return this.compute.getFirewallsStream(options);
@@ -568,7 +568,7 @@ Network.prototype.getFirewallsStream = function(options) {
  * that a callback is omitted.
  */
 common.util.promisifyAll(Network, {
-  exclude: ['firewall']
+  exclude: ['firewall'],
 });
 
 module.exports = Network;
