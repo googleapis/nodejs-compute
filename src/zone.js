@@ -508,11 +508,11 @@ Zone.prototype.createInstanceGroup = function(name, options, callback) {
  * @param {string} name - Name of the instance.
  * @param {object} config - See an
  *     [Instance resource](https://cloud.google.com/compute/docs/reference/v1/instances).
- * @param {object[]=} config.disks - See a
+ * @param {?object[]} config.disks - See a
  *     [Disk resource](https://cloud.google.com/compute/docs/reference/v1/disks).
  * @param {boolean=} config.http - Allow HTTP traffic. Default: `false`
  * @param {boolean=} config.https - Allow HTTPS traffic. Default: `false`
- * @param {object[]=} config.networkInterfaces - An array of configurations for
+ * @param {?object[]} config.networkInterfaces - An array of configurations for
  *     this interface. This specifies how this interface should interact with
  *     other network services, such as connecting to the internet. Default:
  *     `[ { network: 'global/networks/default' } ]`
@@ -523,7 +523,7 @@ Zone.prototype.createInstanceGroup = function(name, options, callback) {
  * @param {string=} config.os - Specify the name of an OS, and we will use the
  *     latest version as the source image of a new boot disk. See
  *     [this list of accepted OS names](https://github.com/stephenplusplus/gce-images#accepted-os-names).
- * @param {string[]=} config.tags - An array of tags.
+ * @param {?string[]} config.tags - An array of tags.
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request.
  * @param {module:compute/vm} callback.vm - The created VM object.

@@ -51,7 +51,7 @@ var Network = require('./network.js');
 var Operation = require('./operation.js');
 
 /**
- * @type {module: compute/project}
+ * @type {module:compute/project}
  * @private
  */
 var Project = require('./project.js');
