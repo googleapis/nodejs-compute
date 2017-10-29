@@ -14,10 +14,6 @@
  * limitations under the License.
  */
 
-/*!
- * @module compute
- */
-
 'use strict';
 
 var arrify = require('arrify');
@@ -26,73 +22,59 @@ var extend = require('extend');
 var is = require('is');
 var util = require('util');
 
-/**
- * @type {module:compute/firewall}
- * @private
- */
 var Firewall = require('./firewall.js');
-
-/**
- * @type {module:compute/health-check}
- * @private
- */
 var HealthCheck = require('./health-check.js');
-
-/**
- * @type {module:compute/network}
- * @private
- */
 var Network = require('./network.js');
-
-/**
- * @type {module:compute/operation}
- * @private
- */
 var Operation = require('./operation.js');
-
-/**
- * @type {module:compute/project}
- * @private
- */
 var Project = require('./project.js');
-
-/**
- * @type {module:compute/region}
- * @private
- */
 var Region = require('./region.js');
-
-/**
- * @type {module:compute/rule}
- * @private
- */
 var Rule = require('./rule.js');
-
-/**
- * @type {module:compute/service}
- * @private
- */
 var Service = require('./service.js');
-
-/**
- * @type {module:compute/snapshot}
- * @private
- */
 var Snapshot = require('./snapshot.js');
-
-/**
- * @type {module:compute/zone}
- * @private
- */
 var Zone = require('./zone.js');
 
 /**
- * @alias module:compute
- * @constructor
+ * @typedef {object} ClientConfig
+ * @property {string} [projectId] The project ID from the Google Developer's
+ *     Console, e.g. 'grape-spaceship-123'. We will also check the environment
+ *     variable `GCLOUD_PROJECT` for your project ID. If your app is running in
+ *     an environment which supports {@link https://cloud.google.com/docs/authentication/production#providing_credentials_to_your_application Application Default Credentials},
+ *     your project ID will be detected automatically.
+ * @property {string} [keyFilename] Full path to the a .json, .pem, or .p12 key
+ *     downloaded from the Google Developers Console. If you provide a path to a
+ *     JSON file, the `projectId` option above is not necessary. NOTE: .pem and
+ *     .p12 require you to specify the `email` option as well.
+ * @property {string} [email] Account email address. Required when using a .pem
+ *     or .p12 keyFilename.
+ * @property {object} [credentials] Credentials object.
+ * @property {string} [credentials.client_email]
+ * @property {string} [credentials.private_key]
+ * @property {boolean} [autoRetry=true] Automatically retry requests if the
+ *     response is related to rate limits or certain intermittent server errors.
+ *     We will exponentially backoff subsequent requests by default.
+ * @property {number} [maxRetries=3] Maximum number of automatic retries
+ *     attempted before returning the error.
+ * @property {Constructor} [promise] Custom promise module to use instead of
+ *     native Promises.
+ */
+
+/**
+ * @see [What is Google Compute Engine?]{@link https://cloud.google.com/compute/docs}
  *
- * @resource [What is Google Compute Engine?]{@link https://cloud.google.com/compute/docs}
+ * @class
  *
- * @param {object} options - [Configuration object](#/docs).
+ * @param {ClientConfig} [options] Configuration options.
+ *
+ * @example <caption>Create a client that uses Application Default Credentials (ADC)</caption>
+ * const Compute = require('@google-cloud/compute');
+ * const compute = new Compute();
+ *
+ * @example <caption>Create a client with explicit credentials</caption>
+ * const Compute = require('@google-cloud/compute');
+ * const compute = new Compute({
+ *   projectId: 'your-project-id',
+ *   keyFilename: '/path/to/keyfile.json'
+ * });
  */
 function Compute(options) {
   if (!(this instanceof Compute)) {
@@ -114,8 +96,8 @@ util.inherits(Compute, common.Service);
 /**
  * Create a firewall.
  *
- * @resource [Firewalls Overview]{@link https://cloud.google.com/compute/docs/networking#firewalls}
- * @resource [Firewalls: insert API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/firewalls/insert}
+ * @see [Firewalls Overview]{@link https://cloud.google.com/compute/docs/networking#firewalls}
+ * @see [Firewalls: insert API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/firewalls/insert}
  *
  * @throws {Error} if a name is not provided.
  * @throws {Error} if a config object is not provided.
@@ -135,9 +117,9 @@ util.inherits(Compute, common.Service);
  * @param {string[]} config.tags - Instance tags which this rule applies to.
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request.
- * @param {module:compute/firewall} callback.firewall - The created Firewall
+ * @param {Firewall} callback.firewall - The created Firewall
  *     object.
- * @param {module:compute/operation} callback.operation - An operation object
+ * @param {Operation} callback.operation - An operation object
  *     that can be used to check the status of the request.
  * @param {object} callback.apiResponse - The full API response.
  *
@@ -242,9 +224,9 @@ Compute.prototype.createFirewall = function(name, config, callback) {
 /**
  * Create an HTTP or HTTPS health check.
  *
- * @resource [Health Checks Overview]{@link https://cloud.google.com/compute/docs/load-balancing/health-checks}
- * @resource [HttpHealthCheck: insert API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/httpHealthChecks/insert}
- * @resource [HttpsHealthCheck: insert API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/httpsHealthChecks/insert}
+ * @see [Health Checks Overview]{@link https://cloud.google.com/compute/docs/load-balancing/health-checks}
+ * @see [HttpHealthCheck: insert API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/httpHealthChecks/insert}
+ * @see [HttpsHealthCheck: insert API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/httpsHealthChecks/insert}
  *
  * @param {string} name - Name of the HTTP or HTTPS health check to create.
  * @param {object=} options - See a
@@ -261,9 +243,9 @@ Compute.prototype.createFirewall = function(name, config, callback) {
  *     `options.timeoutSec`)
  * @param {function=} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request.
- * @param {module:compute/health-check} callback.healthCheck - The created
+ * @param {HealthCheck} callback.healthCheck - The created
  *     HealthCheck object.
- * @param {module:compute/operation} callback.operation - An operation object
+ * @param {Operation} callback.operation - An operation object
  *     that can be used to check the status of the request.
  * @param {object} callback.apiResponse - The full API response.
  *
@@ -342,8 +324,8 @@ Compute.prototype.createHealthCheck = function(name, options, callback) {
 /**
  * Create a network.
  *
- * @resource [Networks Overview]{@link https://cloud.google.com/compute/docs/networking#networks}
- * @resource [Networks: insert API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/networks/insert}
+ * @see [Networks Overview]{@link https://cloud.google.com/compute/docs/networking#networks}
+ * @see [Networks: insert API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/networks/insert}
  *
  * @param {string} name - Name of the network.
  * @param {object} config - See a
@@ -356,9 +338,9 @@ Compute.prototype.createHealthCheck = function(name, options, callback) {
  *     `config.IPv4Range`)
  * @param {function=} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request.
- * @param {module:compute/network} callback.network - The created Network
+ * @param {Network} callback.network - The created Network
  *     object.
- * @param {module:compute/operation} callback.operation - An operation object
+ * @param {Operation} callback.operation - An operation object
  *     that can be used to check the status of the request.
  * @param {object} callback.apiResponse - The full API response.
  *
@@ -427,8 +409,8 @@ Compute.prototype.createNetwork = function(name, config, callback) {
 /**
  * Create a global forwarding rule.
  *
- * @resource [GlobalForwardingRule Resource]{@link https://cloud.google.com/compute/docs/reference/v1/globalForwardingRules#resource}
- * @resource [GlobalForwardingRules: insert API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/globalForwardingRules/insert}
+ * @see [GlobalForwardingRule Resource]{@link https://cloud.google.com/compute/docs/reference/v1/globalForwardingRules#resource}
+ * @see [GlobalForwardingRules: insert API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/globalForwardingRules/insert}
  *
  * @param {string} name - Name of the rule.
  * @param {object} config - See a
@@ -453,8 +435,8 @@ Compute.prototype.createNetwork = function(name, config, callback) {
  *     [`TargetHttpProxy` or `TargetHttpsProxy` resource](https://cloud.google.com/compute/docs/load-balancing/http/target-proxies).
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request.
- * @param {module:compute/rule} callback.rule - The created Rule object.
- * @param {module:compute/operation} callback.operation - An operation object
+ * @param {Rule} callback.rule - The created Rule object.
+ * @param {Operation} callback.operation - An operation object
  *     that can be used to check the status of the request.
  * @param {object} callback.apiResponse - The full API response.
  *
@@ -529,17 +511,17 @@ Compute.prototype.createRule = function(name, config, callback) {
 /**
  * Create a backend service.
  *
- * @resource [Backend Services Overview]{@link https://cloud.google.com/compute/docs/load-balancing/http/backend-service}
- * @resource [BackendServices: insert API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/backendServices/insert}
+ * @see [Backend Services Overview]{@link https://cloud.google.com/compute/docs/load-balancing/http/backend-service}
+ * @see [BackendServices: insert API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/backendServices/insert}
  *
  * @param {string} name - Name of the backend service.
  * @param {object} config - See a
  *     [BackendService resource](https://cloud.google.com/compute/docs/reference/v1/backendServices#resource).
  * @param {function=} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request.
- * @param {module:compute/service} callback.service - The created Service
+ * @param {Service} callback.service - The created Service
  *     object.
- * @param {module:compute/operation} callback.operation - An operation object
+ * @param {Operation} callback.operation - An operation object
  *     that can be used to check the status of the request.
  * @param {object} callback.apiResponse - The full API response.
  *
@@ -605,13 +587,13 @@ Compute.prototype.createService = function(name, config, callback) {
 /**
  * Get a reference to a Google Compute Engine firewall.
  *
- * See {module:compute/network#firewall} to get a Firewall object for a specific
+ * See {@link Network#firewall} to get a Firewall object for a specific
  * network.
  *
- * @resource [Firewalls Overview]{@link https://cloud.google.com/compute/docs/networking#firewalls}
+ * @see [Firewalls Overview]{@link https://cloud.google.com/compute/docs/networking#firewalls}
  *
  * @param {string} name - Name of the firewall.
- * @return {module:compute/firewall}
+ * @returns {Firewall}
  *
  * @example
  * var firewall = gce.firewall('firewall-name');
@@ -624,8 +606,8 @@ Compute.prototype.firewall = function(name) {
  * Get a list of addresses. For a detailed description of method's options see
  * [API reference](https://goo.gl/r9XmXJ).
  *
- * @resource [Instances and Networks]{@link https://cloud.google.com/compute/docs/instances-and-network}
- * @resource [Addresses: aggregatedList API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/addresses/aggregatedList}
+ * @see [Instances and Networks]{@link https://cloud.google.com/compute/docs/instances-and-network}
+ * @see [Addresses: aggregatedList API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/addresses/aggregatedList}
  *
  * @param {object=} options - Address search options.
  * @param {boolean} options.autoPaginate - Have pagination handled
@@ -643,7 +625,7 @@ Compute.prototype.firewall = function(name) {
  *     representing part of the larger set of results to view.
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request.
- * @param {module:compute/address[]} callback.addresses - Address objects from
+ * @param {Address[]} callback.addresses - Address objects from
  *     your project.
  * @param {object} callback.apiResponse - The full API response.
  *
@@ -724,11 +706,11 @@ Compute.prototype.getAddresses = function(options, callback) {
 };
 
 /**
- * Get a list of {module:compute/address} objects as a readable object stream.
+ * Get a list of {@link Address} objects as a readable object stream.
  *
  * @param {object=} options - Configuration object. See
- *     {module:compute#getAddresses} for a complete list of options.
- * @return {stream}
+ *     {@link Compute#getAddresses} for a complete list of options.
+ * @returns {stream}
  *
  * @example
  * gce.getAddressesStream()
@@ -757,9 +739,9 @@ Compute.prototype.getAddressesStream = common.paginator.streamify(
  * Get a list of autoscalers. For a detailed description of this method's
  * options, see the [API reference](https://cloud.google.com/compute/docs/reference/v1/autoscalers/aggregatedList).
  *
- * @resource [Managing Autoscalers]{@link https://cloud.google.com/compute/docs/autoscaler/managing-autoscalers}
- * @resource [Understanding Autoscaler Decisions]{@link https://cloud.google.com/compute/docs/autoscaler/understanding-autoscaler-decisions}
- * @resource [Autoscalers: aggregatedList API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/autoscalers/aggregatedList}
+ * @see [Managing Autoscalers]{@link https://cloud.google.com/compute/docs/autoscaler/managing-autoscalers}
+ * @see [Understanding Autoscaler Decisions]{@link https://cloud.google.com/compute/docs/autoscaler/understanding-autoscaler-decisions}
+ * @see [Autoscalers: aggregatedList API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/autoscalers/aggregatedList}
  *
  * @param {object=} options - Address search options.
  * @param {boolean} options.autoPaginate - Have pagination handled
@@ -777,7 +759,7 @@ Compute.prototype.getAddressesStream = common.paginator.streamify(
  *     representing part of the larger set of results to view.
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request.
- * @param {module:compute/autoscaler[]} callback.autoscalers - Autoscaler
+ * @param {Autoscaler[]} callback.autoscalers - Autoscaler
  *     objects from your project.
  * @param {object} callback.apiResponse - The full API response.
  *
@@ -862,12 +844,12 @@ Compute.prototype.getAutoscalers = function(options, callback) {
 };
 
 /**
- * Get a list of {module:compute/autoscaler} objects as a readable object
+ * Get a list of {@link Autoscaler} objects as a readable object
  * stream.
  *
  * @param {object=} query - Configuration object. See
- *     {module:compute#getAutoscalers} for a complete list of options.
- * @return {stream}
+ *     {@link Compute#getAutoscalers} for a complete list of options.
+ * @returns {stream}
  *
  * @example
  * gce.getAutoscalersStream()
@@ -895,8 +877,8 @@ Compute.prototype.getAutoscalersStream = common.paginator.streamify(
 /**
  * Get a list of disks.
  *
- * @resource [Disks Overview]{@link https://cloud.google.com/compute/docs/disks}
- * @resource [Disks: aggregatedList API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/disks/aggregatedList}
+ * @see [Disks Overview]{@link https://cloud.google.com/compute/docs/disks}
+ * @see [Disks: aggregatedList API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/disks/aggregatedList}
  *
  * @param {object=} options - Disk search options.
  * @param {boolean} options.autoPaginate - Have pagination handled
@@ -914,7 +896,7 @@ Compute.prototype.getAutoscalersStream = common.paginator.streamify(
  *     representing part of the larger set of results to view.
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request.
- * @param {module:compute/disk[]} callback.disks - Disk objects from your
+ * @param {Disk[]} callback.disks - Disk objects from your
  *     project.
  * @param {object} callback.apiResponse - The full API response.
  *
@@ -995,11 +977,12 @@ Compute.prototype.getDisks = function(options, callback) {
 };
 
 /**
- * Get a list of {module:compute/disk} objects as a readable object stream.
+ * Get a list of {@link Disk} objects as a readable object stream.
  *
+ * @method Compute#getDisksStream
  * @param {object=} options - Configuration object. See
- *     {module:compute#getDisks} for a complete list of options.
- * @return {stream}
+ *     {@link Compute#getDisks} for a complete list of options.
+ * @returns {stream}
  *
  * @example
  * gce.getDisksStream()
@@ -1026,8 +1009,8 @@ Compute.prototype.getDisksStream = common.paginator.streamify('getDisks');
 /**
  * Get a list of instance groups.
  *
- * @resource [InstanceGroups Overview]{@link https://cloud.google.com/compute/docs/reference/v1/instanceGroups}
- * @resource [InstanceGroups: aggregatedList API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/instanceGroups/aggregatedList}
+ * @see [InstanceGroups Overview]{@link https://cloud.google.com/compute/docs/reference/v1/instanceGroups}
+ * @see [InstanceGroups: aggregatedList API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/instanceGroups/aggregatedList}
  *
  * @param {object=} options - Instance group search options.
  * @param {boolean} options.autoPaginate - Have pagination handled
@@ -1046,7 +1029,7 @@ Compute.prototype.getDisksStream = common.paginator.streamify('getDisks');
  *     representing part of the larger set of results to view.
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request.
- * @param {module:compute/instance-group[]} callback.instanceGroups -
+ * @param {InstanceGroup[]} callback.instanceGroups -
  *     InstanceGroup objects from your project.
  * @param {object} callback.apiResponse - The full API response.
  *
@@ -1127,12 +1110,13 @@ Compute.prototype.getInstanceGroups = function(options, callback) {
 };
 
 /**
- * Get a list of {module:compute/instanceGroup} objects as a readable object
+ * Get a list of {@link InstanceGroup} objects as a readable object
  * stream.
  *
+ * @method Compute#getInstanceGroupsStream
  * @param {object=} options - Configuration object. See
- *     {module:compute#getInstanceGroups} for a complete list of options.
- * @return {stream}
+ *     {@link Compute#getInstanceGroups} for a complete list of options.
+ * @returns {stream}
  *
  * @example
  * gce.getInstanceGroupsStream()
@@ -1161,8 +1145,8 @@ Compute.prototype.getInstanceGroupsStream = common.paginator.streamify(
 /**
  * Get a list of firewalls.
  *
- * @resource [Firewalls Overview]{@link https://cloud.google.com/compute/docs/networking#firewalls}
- * @resource [Firewalls: list API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/firewalls/list}
+ * @see [Firewalls Overview]{@link https://cloud.google.com/compute/docs/networking#firewalls}
+ * @see [Firewalls: list API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/firewalls/list}
  *
  * @param {object=} options - Firewall search options.
  * @param {boolean} options.autoPaginate - Have pagination handled
@@ -1180,7 +1164,7 @@ Compute.prototype.getInstanceGroupsStream = common.paginator.streamify(
  *     representing part of the larger set of results to view.
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request.
- * @param {module:compute/firewall[]} callback.firewalls - Firewall objects from
+ * @param {Firewall[]} callback.firewalls - Firewall objects from
  *     your project.
  * @param {object} callback.apiResponse - The full API response.
  *
@@ -1249,11 +1233,12 @@ Compute.prototype.getFirewalls = function(options, callback) {
 };
 
 /**
- * Get a list of {module:compute/firewall} objects as a readable object stream.
+ * Get a list of {@link Firewall} objects as a readable object stream.
  *
+ * @method Compute#getFirewallsStream
  * @param {object=} query - Configuration object. See
- *     {module:compute#getFirewalls} for a complete list of options.
- * @return {stream}
+ *     {@link Compute#getFirewalls} for a complete list of options.
+ * @returns {stream}
  *
  * @example
  * gce.getFirewallsStream()
@@ -1282,9 +1267,9 @@ Compute.prototype.getFirewallsStream = common.paginator.streamify(
 /**
  * Get a list of health checks.
  *
- * @resource [Health Checks Overview]{@link https://cloud.google.com/compute/docs/load-balancing/health-checks}
- * @resource [HttpHealthCheck: list API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/httpHealthChecks/list}
- * @resource [HttpsHealthCheck: list API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/httpsHealthChecks/list}
+ * @see [Health Checks Overview]{@link https://cloud.google.com/compute/docs/load-balancing/health-checks}
+ * @see [HttpHealthCheck: list API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/httpHealthChecks/list}
+ * @see [HttpsHealthCheck: list API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/httpsHealthChecks/list}
  *
  * @param {object=} options - Health check search options.
  * @param {boolean} options.autoPaginate - Have pagination handled
@@ -1304,7 +1289,7 @@ Compute.prototype.getFirewallsStream = common.paginator.streamify(
  *     representing part of the larger set of results to view.
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request.
- * @param {module:compute/health-check[]} callback.healthChecks - HealthCheck
+ * @param {HealthCheck[]} callback.healthChecks - HealthCheck
  *     objects from your project.
  * @param {object} callback.apiResponse - The full API response.
  *
@@ -1378,12 +1363,13 @@ Compute.prototype.getHealthChecks = function(options, callback) {
 };
 
 /**
- * Get a list of {module:compute/healthCheck} objects as a readable object
+ * Get a list of {@link HealthCheck} objects as a readable object
  * stream.
  *
+ * @method Compute#getHealthChecksStream
  * @param {object=} options - Configuration object. See
- *     {module:compute#getHealthChecks} for a complete list of options.
- * @return {stream}
+ *     {@link Compute#getHealthChecks} for a complete list of options.
+ * @returns {stream}
  *
  * @example
  * gce.getHealthChecksStream()
@@ -1412,9 +1398,9 @@ Compute.prototype.getHealthChecksStream = common.paginator.streamify(
 /**
  * Get a list of machine types in this project.
  *
- * @resource [MachineTypes: list API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/machineTypes/aggregatedList}
- * @resource [Machine Types Overview]{@link https://cloud.google.com/compute/docs/machine-types}
- * @resource [MachineType Resource]{@link https://cloud.google.com/compute/docs/reference/v1/machineTypes}
+ * @see [MachineTypes: list API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/machineTypes/aggregatedList}
+ * @see [Machine Types Overview]{@link https://cloud.google.com/compute/docs/machine-types}
+ * @see [MachineType Resource]{@link https://cloud.google.com/compute/docs/reference/v1/machineTypes}
  *
  * @param {object=} options - Machine type search options.
  * @param {boolean} options.autoPaginate - Have pagination handled
@@ -1433,7 +1419,7 @@ Compute.prototype.getHealthChecksStream = common.paginator.streamify(
  *     representing part of the larger set of results to view.
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request.
- * @param {module:compute/machine-type[]} callback.machineTypes - MachineType
+ * @param {MachineType[]} callback.machineTypes - MachineType
  *     objects from your project.
  * @param {object} callback.apiResponse - The full API response.
  *
@@ -1514,12 +1500,13 @@ Compute.prototype.getMachineTypes = function(options, callback) {
 };
 
 /**
- * Get a list of {module:compute/machineType} objects in this project as a
+ * Get a list of {@link MachineType} objects in this project as a
  * readable object stream.
  *
+ * @method Compute#getMachineTypesStream
  * @param {object=} options - Configuration object. See
- *     {module:compute#getMachineTypes} for a complete list of options.
- * @return {stream}
+ *     {@link Compute#getMachineTypes} for a complete list of options.
+ * @returns {stream}
  *
  * @example
  * gce.getMachineTypesStream()
@@ -1547,8 +1534,8 @@ Compute.prototype.getMachineTypesStream = common.paginator.streamify(
 /**
  * Get a list of networks.
  *
- * @resource [Networks Overview]{@link https://cloud.google.com/compute/docs/networking#networks}
- * @resource [Networks: list API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/networks/list}
+ * @see [Networks Overview]{@link https://cloud.google.com/compute/docs/networking#networks}
+ * @see [Networks: list API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/networks/list}
  *
  * @param {object=} options - Network search options.
  * @param {boolean} options.autoPaginate - Have pagination handled
@@ -1566,7 +1553,7 @@ Compute.prototype.getMachineTypesStream = common.paginator.streamify(
  *     representing part of the larger set of results to view.
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request.
- * @param {module:compute/network[]} callback.networks - Network objects from
+ * @param {Network[]} callback.networks - Network objects from
  *     your project.
  * @param {object} callback.apiResponse - The full API response.
  *
@@ -1638,11 +1625,12 @@ Compute.prototype.getNetworks = function(options, callback) {
 };
 
 /**
- * Get a list of {module:compute/network} objects as a readable object stream.
+ * Get a list of {@link Network} objects as a readable object stream.
  *
+ * @method Compute#getNetworksStream
  * @param {object=} options - Configuration object. See
- *     {module:compute#getNetworks} for a complete list of options.
- * @return {stream}
+ *     {@link Compute#getNetworks} for a complete list of options.
+ * @returns {stream}
  *
  * @example
  * gce.getNetworksStream()
@@ -1668,8 +1656,8 @@ Compute.prototype.getNetworksStream = common.paginator.streamify('getNetworks');
 /**
  * Get a list of global operations.
  *
- * @resource [Global Operation Overview]{@link https://cloud.google.com/compute/docs/reference/v1/globalOperations}
- * @resource [GlobalOperations: list API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/globalOperations/list}
+ * @see [Global Operation Overview]{@link https://cloud.google.com/compute/docs/reference/v1/globalOperations}
+ * @see [GlobalOperations: list API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/globalOperations/list}
  *
  * @param {object=} options - Operation search options.
  * @param {boolean} options.autoPaginate - Have pagination handled
@@ -1687,7 +1675,7 @@ Compute.prototype.getNetworksStream = common.paginator.streamify('getNetworks');
  *     representing part of the larger set of results to view.
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request.
- * @param {module:compute/operation[]} callback.operations - Operation objects
+ * @param {Operation[]} callback.operations - Operation objects
  *     from your project.
  * @param {object} callback.apiResponse - The full API response.
  *
@@ -1759,12 +1747,13 @@ Compute.prototype.getOperations = function(options, callback) {
 };
 
 /**
- * Get a list of global {module:compute/operation} objects as a readable object
+ * Get a list of global {@link Operation} objects as a readable object
  * stream.
  *
+ * @method Compute#getOperationsStream
  * @param {object=} options - Configuration object. See
- *     {module:compute#getOperations} for a complete list of options.
- * @return {stream}
+ *     {@link Compute#getOperations} for a complete list of options.
+ * @returns {stream}
  *
  * @example
  * gce.getOperationsStream()
@@ -1792,8 +1781,8 @@ Compute.prototype.getOperationsStream = common.paginator.streamify(
 /**
  * Return the regions available to your project.
  *
- * @resource [Regions & Zones Overview]{@link https://cloud.google.com/compute/docs/zones}
- * @resource [Regions: list API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/regions/list}
+ * @see [Regions & Zones Overview]{@link https://cloud.google.com/compute/docs/zones}
+ * @see [Regions: list API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/regions/list}
  *
  * @param {object=} options - Instance search options.
  * @param {boolean} options.autoPaginate - Have pagination handled
@@ -1811,7 +1800,7 @@ Compute.prototype.getOperationsStream = common.paginator.streamify(
  *     representing part of the larger set of results to view.
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request.
- * @param {module:compute/region[]} callback.regions - Region objects that are
+ * @param {Region[]} callback.regions - Region objects that are
  *     available to your project.
  * @param {object} callback.apiResponse - The full API response.
  *
@@ -1881,12 +1870,13 @@ Compute.prototype.getRegions = function(options, callback) {
 };
 
 /**
- * Return the {module:compute/region} objects available to your project as a
+ * Return the {@link Region} objects available to your project as a
  * readable object stream.
  *
+ * @method Compute#getRegionsStream
  * @param {object=} options - Configuration object. See
- *     {module:compute#getRegions} for a complete list of options.
- * @return {stream}
+ *     {@link Compute#getRegions} for a complete list of options.
+ * @returns {stream}
  *
  * @example
  * gce.getRegionsStream()
@@ -1912,7 +1902,7 @@ Compute.prototype.getRegionsStream = common.paginator.streamify('getRegions');
 /**
  * Get a list of forwarding rules.
  *
- * @resource [GlobalForwardingRules: list API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/globalForwardingRules/list}
+ * @see [GlobalForwardingRules: list API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/globalForwardingRules/list}
  *
  * @param {object=} options - Rules search options.
  * @param {boolean} options.autoPaginate - Have pagination handled
@@ -1930,7 +1920,7 @@ Compute.prototype.getRegionsStream = common.paginator.streamify('getRegions');
  *     representing part of the larger set of results to view.
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request.
- * @param {module:compute/rule[]} callback.rules - Rule objects from your
+ * @param {Rule[]} callback.rules - Rule objects from your
  *     project.
  * @param {object} callback.apiResponse - The full API response.
  *
@@ -2002,11 +1992,12 @@ Compute.prototype.getRules = function(options, callback) {
 };
 
 /**
- * Get a list of {module:compute/rule} objects as a readable object stream.
+ * Get a list of {@link Rule} objects as a readable object stream.
  *
+ * @method Compute#getRulesStream
  * @param {object=} options - Configuration object. See
- *     {module:compute#getRules} for a complete list of options.
- * @return {stream}
+ *     {@link Compute#getRules} for a complete list of options.
+ * @returns {stream}
  *
  * @example
  * gce.getRulesStream()
@@ -2032,8 +2023,8 @@ Compute.prototype.getRulesStream = common.paginator.streamify('getRules');
 /**
  * Get a list of backend services.
  *
- * @resource [Backend Services Overview]{@link https://cloud.google.com/compute/docs/load-balancing/http/backend-service}
- * @resource [BackendServices: list API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/backendServices/list}
+ * @see [Backend Services Overview]{@link https://cloud.google.com/compute/docs/load-balancing/http/backend-service}
+ * @see [BackendServices: list API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/backendServices/list}
  *
  * @param {object=} options - BackendService search options.
  * @param {boolean} options.autoPaginate - Have pagination handled
@@ -2051,7 +2042,7 @@ Compute.prototype.getRulesStream = common.paginator.streamify('getRules');
  *     representing part of the larger set of results to view.
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request.
- * @param {module:compute/service[]} callback.services - Service objects from
+ * @param {Service[]} callback.services - Service objects from
  *     your project.
  * @param {object} callback.apiResponse - The full API response.
  *
@@ -2123,11 +2114,12 @@ Compute.prototype.getServices = function(options, callback) {
 };
 
 /**
- * Get a list of {module:compute/service} objects as a readable object stream.
+ * Get a list of {@link Service} objects as a readable object stream.
  *
+ * @method Compute#getServicesStream
  * @param {object=} options - Configuration object. See
- *     {module:compute#getServices} for a complete list of options.
- * @return {stream}
+ *     {@link Compute#getServices} for a complete list of options.
+ * @returns {stream}
  *
  * @example
  * gce.getServicesStream()
@@ -2153,8 +2145,8 @@ Compute.prototype.getServicesStream = common.paginator.streamify('getServices');
 /**
  * Get a list of snapshots.
  *
- * @resource [Snapshots Overview]{@link https://cloud.google.com/compute/docs/disks/persistent-disks#snapshots}
- * @resource [Snapshots: list API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/snapshots/list}
+ * @see [Snapshots Overview]{@link https://cloud.google.com/compute/docs/disks/persistent-disks#snapshots}
+ * @see [Snapshots: list API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/snapshots/list}
  *
  * @param {object=} options - Snapshot search options.
  * @param {boolean} options.autoPaginate - Have pagination handled
@@ -2172,7 +2164,7 @@ Compute.prototype.getServicesStream = common.paginator.streamify('getServices');
  *     representing part of the larger set of results to view.
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request.
- * @param {module:compute/snapshot[]} callback.snapshots - Snapshot objects from
+ * @param {Snapshot[]} callback.snapshots - Snapshot objects from
  *     your project.
  * @param {object} callback.apiResponse - The full API response.
  *
@@ -2244,11 +2236,12 @@ Compute.prototype.getSnapshots = function(options, callback) {
 };
 
 /**
- * Get a list of {module:compute/snapshot} objects as a readable object stream.
+ * Get a list of {@link Snapshot} objects as a readable object stream.
  *
+ * @method Compute#getSnapshotsStream
  * @param {object=} options - Configuration object. See
- *     {module:compute#getSnapshots} for a complete list of options.
- * @return {stream}
+ *     {@link Compute#getSnapshots} for a complete list of options.
+ * @returns {stream}
  *
  * @example
  * gce.getSnapshotsStream()
@@ -2276,8 +2269,8 @@ Compute.prototype.getSnapshotsStream = common.paginator.streamify(
 /**
  * Get a list of subnetworks in this project.
  *
- * @resource [Subnetworks Overview]{@link https://cloud.google.com/compute/docs/subnetworks}
- * @resource [Subnetworks: list API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/subnetworks}
+ * @see [Subnetworks Overview]{@link https://cloud.google.com/compute/docs/subnetworks}
+ * @see [Subnetworks: list API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/subnetworks}
  *
  * @param {object=} options - Subnetwork search options.
  * @param {boolean} options.autoPaginate - Have pagination handled
@@ -2295,7 +2288,7 @@ Compute.prototype.getSnapshotsStream = common.paginator.streamify(
  *     representing part of the larger set of results to view.
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request.
- * @param {module:compute/subnetwork[]} callback.subnetworks - Subnetwork
+ * @param {Subnetwork[]} callback.subnetworks - Subnetwork
  *     objects from your project.
  * @param {object} callback.apiResponse - The full API response.
  *
@@ -2376,12 +2369,13 @@ Compute.prototype.getSubnetworks = function(options, callback) {
 };
 
 /**
- * Get a list of {module:compute/subnetwork} objects in this project as a
+ * Get a list of {@link Subnetwork} objects in this project as a
  * readable object stream.
  *
+ * @method Compute#getSubnetworksStream
  * @param {object=} options - Configuration object. See
- *     {module:compute#getSubnetworks} for a complete list of options.
- * @return {stream}
+ *     {@link Compute#getSubnetworks} for a complete list of options.
+ * @returns {stream}
  *
  * @example
  * gce.getSubnetworksStream()
@@ -2409,8 +2403,8 @@ Compute.prototype.getSubnetworksStream = common.paginator.streamify(
 /**
  * Get a list of virtual machine instances.
  *
- * @resource [Instances and Networks]{@link https://cloud.google.com/compute/docs/instances-and-network}
- * @resource [Instances: aggregatedList API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/instances/aggregatedList}
+ * @see [Instances and Networks]{@link https://cloud.google.com/compute/docs/instances-and-network}
+ * @see [Instances: aggregatedList API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/instances/aggregatedList}
  *
  * @param {object=} options - Instance search options.
  * @param {boolean} options.autoPaginate - Have pagination handled
@@ -2428,7 +2422,7 @@ Compute.prototype.getSubnetworksStream = common.paginator.streamify(
  *     representing part of the larger set of results to view.
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request.
- * @param {module:compute/vm[]} callback.vms - VM objects from your project.
+ * @param {VM[]} callback.vms - VM objects from your project.
  * @param {object} callback.apiResponse - The full API response.
  *
  * @example
@@ -2508,11 +2502,12 @@ Compute.prototype.getVMs = function(options, callback) {
 };
 
 /**
- * Get a list of {module:compute/vm} instances as a readable object stream.
+ * Get a list of {@link VM} instances as a readable object stream.
  *
+ * @method Compute#getVMsStream
  * @param {object=} options - Configuration object. See
- *     {module:compute#getVMs} for a complete list of options.
- * @return {stream}
+ *     {@link Compute#getVMs} for a complete list of options.
+ * @returns {stream}
  *
  * @example
  * gce.getVMsStream()
@@ -2538,8 +2533,8 @@ Compute.prototype.getVMsStream = common.paginator.streamify('getVMs');
 /**
  * Return the zones available to your project.
  *
- * @resource [Regions & Zones Overview]{@link https://cloud.google.com/compute/docs/zones}
- * @resource [Zones: list API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/zones/list}
+ * @see [Regions & Zones Overview]{@link https://cloud.google.com/compute/docs/zones}
+ * @see [Zones: list API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/zones/list}
  *
  * @param {object=} options - Instance search options.
  * @param {boolean} options.autoPaginate - Have pagination handled
@@ -2557,7 +2552,7 @@ Compute.prototype.getVMsStream = common.paginator.streamify('getVMs');
  *     representing part of the larger set of results to view.
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request.
- * @param {module:compute/zone[]} callback.zones - Zone objects that are
+ * @param {Zone[]} callback.zones - Zone objects that are
  *     available to your project.
  * @param {object} callback.apiResponse - The full API response.
  *
@@ -2627,12 +2622,13 @@ Compute.prototype.getZones = function(options, callback) {
 };
 
 /**
- * Return the {module:compute/zone} objects available to your project as a
+ * Return the {@link Zone} objects available to your project as a
  * readable object stream.
  *
+ * @method Compute#getZonesStream
  * @param {object=} options - Configuration object. See
- *     {module:compute#getZones} for a complete list of options.
- * @return {stream}
+ *     {@link Compute#getZones} for a complete list of options.
+ * @returns {stream}
  *
  * @example
  * gce.getZonesStream()
@@ -2658,13 +2654,13 @@ Compute.prototype.getZonesStream = common.paginator.streamify('getZones');
 /**
  * Get a reference to a Google Compute Engine health check.
  *
- * @resource [Health Checks Overview]{@link https://cloud.google.com/compute/docs/load-balancing/health-checks}
+ * @see [Health Checks Overview]{@link https://cloud.google.com/compute/docs/load-balancing/health-checks}
  *
  * @param {string} name - Name of the health check.
  * @param {object=} options - Configuration object.
  * @param {boolean} options.https - Specify if this is an HTTPS health check
  *     resource. Default: `false`
- * @return {module:compute/health-check}
+ * @returns {HealthCheck}
  *
  * @example
  * var healthCheck = gce.healthCheck('http-health-check-name');
@@ -2683,10 +2679,10 @@ Compute.prototype.healthCheck = function(name, options) {
 /**
  * Get a reference to a Google Compute Engine network.
  *
- * @resource [Networks Overview]{@link https://cloud.google.com/compute/docs/networking#networks}
+ * @see [Networks Overview]{@link https://cloud.google.com/compute/docs/networking#networks}
  *
  * @param {string} name - Name of the network.
- * @return {module:compute/network}
+ * @returns {Network}
  *
  * @example
  * var network = gce.network('network-name');
@@ -2698,10 +2694,10 @@ Compute.prototype.network = function(name) {
 /**
  * Get a reference to a global Google Compute Engine operation.
  *
- * @resource [Global Operation Overview]{@link https://cloud.google.com/compute/docs/reference/v1/globalOperations}
+ * @see [Global Operation Overview]{@link https://cloud.google.com/compute/docs/reference/v1/globalOperations}
  *
  * @param {string} name - Name of the existing operation.
- * @return {module:compute/operation}
+ * @returns {Operation}
  *
  * @example
  * var operation = gce.operation('operation-name');
@@ -2713,9 +2709,9 @@ Compute.prototype.operation = function(name) {
 /**
  * Get a reference to your Google Compute Engine project.
  *
- * @resource [Projects Overview]{@link https://cloud.google.com/compute/docs/reference/v1/projects}
+ * @see [Projects Overview]{@link https://cloud.google.com/compute/docs/reference/v1/projects}
  *
- * @return {module:compute/project}
+ * @returns {Project}
  *
  * @example
  * var project = gce.project();
@@ -2727,10 +2723,10 @@ Compute.prototype.project = function() {
 /**
  * Get a reference to a Google Compute Engine region.
  *
- * @resource [Regions & Zones Overview]{@link https://cloud.google.com/compute/docs/zones}
+ * @see [Regions & Zones Overview]{@link https://cloud.google.com/compute/docs/zones}
  *
  * @param {string} name - Name of the region.
- * @return {module:compute/region}
+ * @returns {Region}
  *
  * @example
  * var region = gce.region('region-name');
@@ -2743,7 +2739,7 @@ Compute.prototype.region = function(name) {
  * Get a reference to a Google Compute Engine forwading rule.
  *
  * @param {string} name - Name of the rule.
- * @return {module:compute/rule}
+ * @returns {Rule}
  *
  * @example
  * var rule = gce.rule('rule-name');
@@ -2755,10 +2751,10 @@ Compute.prototype.rule = function(name) {
 /**
  * Get a reference to a Google Compute Engine backend service.
  *
- * @resource [Backend Services Overview]{@link https://cloud.google.com/compute/docs/load-balancing/http/backend-service}
+ * @see [Backend Services Overview]{@link https://cloud.google.com/compute/docs/load-balancing/http/backend-service}
  *
  * @param {string} name - Name of the existing service.
- * @return {module:compute/service}
+ * @returns {Service}
  *
  * @example
  * var service = gce.service('service-name');
@@ -2770,10 +2766,10 @@ Compute.prototype.service = function(name) {
 /**
  * Get a reference to a Google Compute Engine snapshot.
  *
- * @resource [Snapshots Overview]{@link https://cloud.google.com/compute/docs/disks/persistent-disks#snapshots}
+ * @see [Snapshots Overview]{@link https://cloud.google.com/compute/docs/disks/persistent-disks#snapshots}
  *
  * @param {string} name - Name of the existing snapshot.
- * @return {module:compute/snapshot}
+ * @returns {Snapshot}
  *
  * @example
  * var snapshot = gce.snapshot('snapshot-name');
@@ -2785,10 +2781,10 @@ Compute.prototype.snapshot = function(name) {
 /**
  * Get a reference to a Google Compute Engine zone.
  *
- * @resource [Regions & Zones Overview]{@link https://cloud.google.com/compute/docs/zones}
+ * @see [Regions & Zones Overview]{@link https://cloud.google.com/compute/docs/zones}
  *
  * @param {string} name - Name of the zone.
- * @return {module:compute/zone}
+ * @returns {Zone}
  *
  * @example
  * var zone = gce.zone('zone-name');
@@ -2801,9 +2797,9 @@ Compute.prototype.zone = function(name) {
  * Register a single callback that will wait for an operation to finish before
  * being executed.
  *
- * @return {function} callback - The callback function.
- * @return {?error} callback.err - An error returned from the operation.
- * @return {object} callback.apiResponse - The operation's final API response.
+ * @returns {function} callback - The callback function.
+ * @returns {?error} callback.err - An error returned from the operation.
+ * @returns {object} callback.apiResponse - The operation's final API response.
  */
 Compute.prototype.execAfterOperation_ = function(callback) {
   return function(err) {
@@ -2872,15 +2868,123 @@ common.util.promisifyAll(Compute, {
   ],
 });
 
+/**
+ * {@link Firewall} class.
+ *
+ * @name Compute.Firewall
+ * @see Firewall
+ * @type {constructor}
+ */
 Compute.Firewall = Firewall;
+
+/**
+ * {@link HealthCheck} class.
+ *
+ * @name Compute.HealthCheck
+ * @see HealthCheck
+ * @type {constructor}
+ */
 Compute.HealthCheck = HealthCheck;
+
+/**
+ * {@link Network} class.
+ *
+ * @name Compute.Network
+ * @see Network
+ * @type {constructor}
+ */
 Compute.Network = Network;
+
+/**
+ * {@link Operation} class.
+ *
+ * @name Compute.Operation
+ * @see Operation
+ * @type {constructor}
+ */
 Compute.Operation = Operation;
+
+/**
+ * {@link Project} class.
+ *
+ * @name Compute.Project
+ * @see Project
+ * @type {constructor}
+ */
 Compute.Project = Project;
+
+/**
+ * {@link Region} class.
+ *
+ * @name Compute.Region
+ * @see Region
+ * @type {constructor}
+ */
 Compute.Region = Region;
+
+/**
+ * {@link Rule} class.
+ *
+ * @name Compute.Rule
+ * @see Rule
+ * @type {constructor}
+ */
 Compute.Rule = Rule;
+
+/**
+ * {@link Service} class.
+ *
+ * @name Compute.Service
+ * @see Service
+ * @type {constructor}
+ */
 Compute.Service = Service;
+
+/**
+ * {@link Snapshot} class.
+ *
+ * @name Compute.Snapshot
+ * @see Snapshot
+ * @type {constructor}
+ */
 Compute.Snapshot = Snapshot;
+
+/**
+ * {@link Zone} class.
+ *
+ * @name Compute.Zone
+ * @see Zone
+ * @type {constructor}
+ */
 Compute.Zone = Zone;
 
+/**
+ * The default export of the `@google-cloud/compute` package is the
+ * {@link Compute} class.
+ *
+ * See {@link Compute} and {@link ClientConfig} for client methods and
+ * configuration options.
+ *
+ * @module {constructor} @google-cloud/compute
+ * @alias nodejs-compute
+ *
+ * @example <caption>Install the client library with <a href="https://www.npmjs.com/">npm</a>:</caption>
+ * npm install --save @google-cloud/compute
+ *
+ * @example <caption>Import the client library</caption>
+ * const Compute = require('@google-cloud/compute');
+ *
+ * @example <caption>Create a client that uses <a href="https://cloud.google.com/docs/authentication/production#providing_credentials_to_your_application">Application Default Credentials (ADC)</a>:</caption>
+ * const compute = new Compute();
+ *
+ * @example <caption>Create a client with <a href="https://cloud.google.com/docs/authentication/production#obtaining_and_providing_service_account_credentials_manually">explicit credentials</a>:</caption>
+ * const compute = new Compute({
+ *   projectId: 'your-project-id',
+ *   keyFilename: '/path/to/keyfile.json'
+ * });
+ *
+ * @example <caption>include:samples/quickstart.js</caption>
+ * region_tag:compute_engine_quickstart
+ * Full quickstart example:
+ */
 module.exports = Compute;

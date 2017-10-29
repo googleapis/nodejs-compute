@@ -21,12 +21,12 @@
 // specified by the GOOGLE_APPLICATION_CREDENTIALS environment variable and use
 // the project specified by the GCLOUD_PROJECT environment variable. See
 // https://googlecloudplatform.github.io/gcloud-node/#/docs/google-cloud/latest/guides/authentication
-var Compute = require('@google-cloud/compute');
+const Compute = require('@google-cloud/compute');
 // [END auth]
 
 // [START initialize]
-// Instantiate a compute client
-var compute = Compute();
+// Creates a client
+const compute = new Compute();
 // [END initialize]
 
 // [START list]
@@ -35,10 +35,10 @@ var compute = Compute();
  */
 function getVmsExample(callback) {
   // In this example we only want one VM per page
-  var options = {
+  const options = {
     maxResults: 1,
   };
-  compute.getVMs(options, function(err, vms) {
+  compute.getVMs(options, (err, vms) => {
     if (err) {
       return callback(err);
     }
@@ -51,7 +51,7 @@ function getVmsExample(callback) {
 // [END complete]
 
 // Run the examples
-exports.main = function(cb) {
+exports.main = cb => {
   getVmsExample(cb);
 };
 

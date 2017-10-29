@@ -1,6 +1,6 @@
 <img src="https://avatars2.githubusercontent.com/u/2810941?v=3&s=96" alt="Google Cloud Platform logo" title="Google Cloud Platform" align="right" height="96" width="96"/>
 
-# Google Compute Engine: Node.js Client
+# [Google Compute Engine: Node.js Client](https://github.com/googleapis/nodejs-compute)
 
 [![release level](https://img.shields.io/badge/release%20level-alpha-orange.svg?style&#x3D;flat)](https://cloud.google.com/terms/launch-stages)
 [![CircleCI](https://img.shields.io/circleci/project/github/googleapis/nodejs-compute.svg?style=flat)](https://circleci.com/gh/googleapis/nodejs-compute)
@@ -11,7 +11,9 @@
 
 [Compute Engine](https://cloud.google.com/compute/docs/) lets you create and run virtual machines on Google infrastructure. Compute Engine offers scale, performance, and value that allows you to easily launch large compute clusters on Google&#x27;s infrastructure. There are no upfront investments and you can run thousands of virtual CPUs on a system that has been designed to be fast, and to offer strong consistency of performance.
 
+
 * [Compute Engine Node.js Client API Reference][client-docs]
+* [github.com/googleapis/nodejs-compute](https://github.com/googleapis/nodejs-compute)
 * [Compute Engine Documentation][product-docs]
 
 Read more about the client libraries for Cloud APIs, including the older
@@ -61,30 +63,39 @@ Google APIs Client Libraries, in [Client Libraries Explained][explained].
 ### Using the client library
 
 ```javascript
-const gce = require('@google-cloud/compute')();
+// Imports the Google Cloud client library
+const Compute = require('@google-cloud/compute');
+
+// Creates a client
+const compute = new Compute();
 
 // Create a new VM using the latest OS image of your choice.
-var zone = gce.zone('us-central1-a');
-var name = 'ubuntu-http';
+const zone = compute.zone('us-central1-a');
+const name = 'ubuntu-http';
 
-zone.createVM(name, { os: 'ubuntu' }, data => {
-  // `operation` lets you check the status of long-running tasks.
-  let vm = data[0];
-  let operation = data[1];
-  return operation.promise();
-}).then(() => {
-  // Virtual machine created!
-});
+zone
+  .createVM(name, {os: 'ubuntu'}, data => {
+    // `operation` lets you check the status of long-running tasks.
+    const vm = data[0];
+    const operation = data[1];
+    return operation.promise();
+  })
+  .then(() => {
+    // Virtual machine created!
+  })
+  .catch(err => {
+    console.error('ERROR:', err);
+  });;
 ```
 
 ## Samples
 
-Samples are in the [`samples/`](https://github.com/blob/master/samples) directory. The samples' `README.md`
+Samples are in the [`samples/`](https://github.com/googleapis/nodejs-compute/tree/master/samples) directory. The samples' `README.md`
 has instructions for running the samples.
 
-| Sample                      | Source Code                       |
-| --------------------------- | --------------------------------- |
-| Virtual Machines | [source code](https://github.com/googleapis/nodejs-compute/blob/master/samples/vms.js) |
+| Sample                      | Source Code                       | Try it |
+| --------------------------- | --------------------------------- | ------ |
+| Virtual Machines | [source code](https://github.com/googleapis/nodejs-compute/blob/master/samples/vms.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-compute&page=editor&open_in_editor=samples/vms.js,samples/README.md) |
 
 The [Compute Engine Node.js Client API Reference][client-docs] documentation
 also contains samples.
@@ -103,13 +114,14 @@ More Information: [Google Cloud Platform Launch Stages][launch_stages]
 
 ## Contributing
 
-Contributions welcome! See the [Contributing Guide](.github/CONTRIBUTING.md).
+Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/nodejs-compute/blob/master/.github/CONTRIBUTING.md).
 
 ## License
 
 Apache Version 2.0
 
-See [LICENSE](LICENSE)
+See [LICENSE](https://github.com/googleapis/nodejs-compute/blob/master/LICENSE)
 
 [client-docs]: https://cloud.google.com/nodejs/docs/reference/compute/latest/
 [product-docs]: https://cloud.google.com/compute/docs/
+[shell_img]: http://gstatic.com/cloudssh/images/open-btn.png

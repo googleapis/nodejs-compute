@@ -9,8 +9,7 @@
       "id": "vms",
       "name": "Virtual Machines",
       "file": "vms.js",
-      "docs_link": "https://cloud.google.com/compute/docs",
-      "usage": "node vms"
+      "docs_link": "https://cloud.google.com/compute/docs"
     }
   ]
 }

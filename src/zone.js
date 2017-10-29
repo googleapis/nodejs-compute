@@ -14,10 +14,6 @@
  * limitations under the License.
  */
 
-/*!
- * @module compute/zone
- */
-
 'use strict';
 
 var arrify = require('arrify');
@@ -29,77 +25,51 @@ var gceImages = require('gce-images');
 var is = require('is');
 var util = require('util');
 
-/**
- * @type {module:compute/autoscaler}
- * @private
- */
 var Autoscaler = require('./autoscaler.js');
-
-/**
- * @type {module:compute/disk}
- * @private
- */
 var Disk = require('./disk.js');
-
-/**
- * @type {module:compute/instance-group}
- * @private
- */
 var InstanceGroup = require('./instance-group.js');
-
-/**
- * @type {module:compute/machine-type}
- * @private
- */
 var MachineType = require('./machine-type.js');
-
-/**
- * @type {module:compute/operation}
- * @private
- */
 var Operation = require('./operation.js');
-
-/**
- * @type {module:compute/vm}
- * @private
- */
 var VM = require('./vm.js');
 
-/*! Developer Documentation
- *
- * @param {module:compute} compute - Compute object this zone belongs to.
- * @param {string} name - Name of the zone.
- */
 /**
  * A Zone object allows you to interact with a Google Compute Engine zone.
  *
- * @resource [Regions & Zones Overview]{@link https://cloud.google.com/compute/docs/zones}
- * @resource [Zone Resource]{@link https://cloud.google.com/compute/docs/reference/v1/zones}
+ * @see [Regions & Zones Overview]{@link https://cloud.google.com/compute/docs/zones}
+ * @see [Zone Resource]{@link https://cloud.google.com/compute/docs/reference/v1/zones}
  *
- * @constructor
- * @alias module:compute/zone
+ * @class
+ * @param {Compute} compute - Compute object this zone belongs to.
+ * @param {string} name - Name of the zone.
  *
  * @example
- * var zone = gce.zone('us-central1-a');
+ * const Compute = require('@google-cloud/compute');
+ * const compute = new Compute();
+ * const zone = compute.zone('us-central1-a');
  */
 function Zone(compute, name) {
   var methods = {
     /**
      * Check if the zone exists.
      *
+     * @method Zone#exists
      * @param {function} callback - The callback function.
      * @param {?error} callback.err - An error returned while making this
      *     request.
      * @param {boolean} callback.exists - Whether the zone exists or not.
      *
      * @example
+     * const Compute = require('@google-cloud/compute');
+     * const compute = new Compute();
+     * const zone = compute.zone('us-central1-a');
+     *
      * zone.exists(function(err, exists) {});
      *
      * //-
      * // If the callback is omitted, we'll return a Promise.
      * //-
      * zone.exists().then(function(data) {
-     *   var exists = data[0];
+     *   const exists = data[0];
      * });
      */
     exists: true,
@@ -107,7 +77,13 @@ function Zone(compute, name) {
     /**
      * Get a zone.
      *
+     * @method Zone#get
+     *
      * @example
+     * const Compute = require('@google-cloud/compute');
+     * const compute = new Compute();
+     * const zone = compute.zone('us-central1-a');
+     *
      * zone.get(function(err, zone, apiResponse) {
      *   // `zone` is a Zone object.
      * });
@@ -116,8 +92,8 @@ function Zone(compute, name) {
      * // If the callback is omitted, we'll return a Promise.
      * //-
      * zone.get().then(function(data) {
-     *   var zone = data[0];
-     *   var apiResponse = data[1];
+     *   const zone = data[0];
+     *   const apiResponse = data[1];
      * });
      */
     get: true,
@@ -125,9 +101,10 @@ function Zone(compute, name) {
     /**
      * Get the zone's metadata.
      *
-     * @resource [Zone Resource]{@link https://cloud.google.com/compute/docs/reference/v1/zones}
-     * @resource [Zones: get API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/zones/get}
+     * @see [Zone Resource]{@link https://cloud.google.com/compute/docs/reference/v1/zones}
+     * @see [Zones: get API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/zones/get}
      *
+     * @method Zone#getMetadata
      * @param {function=} callback - The callback function.
      * @param {?error} callback.err - An error returned while making this
      *     request.
@@ -135,14 +112,18 @@ function Zone(compute, name) {
      * @param {object} callback.apiResponse - The full API response.
      *
      * @example
+     * const Compute = require('@google-cloud/compute');
+     * const compute = new Compute();
+     * const zone = compute.zone('us-central1-a');
+     *
      * zone.getMetadata(function(err, metadata, apiResponse) {});
      *
      * //-
      * // If the callback is omitted, we'll return a Promise.
      * //-
      * zone.getMetadata().then(function(data) {
-     *   var metadata = data[0];
-     *   var apiResponse = data[1];
+     *   const metadata = data[0];
+     *   const apiResponse = data[1];
      * });
      */
     getMetadata: true,
@@ -151,11 +132,25 @@ function Zone(compute, name) {
   common.ServiceObject.call(this, {
     parent: compute,
     baseUrl: '/zones',
+    /**
+     * @name Zone#id
+     * @type {string}
+     */
     id: name,
     methods: methods,
   });
 
+  /**
+   * The parent {@link Compute} instance of this {@link Zone} instance.
+   * @name Zone#compute
+   * @type {Compute}
+   */
   this.compute = compute;
+
+  /**
+   * @name Zone#name
+   * @type {string}
+   */
   this.name = name;
 
   this.gceImages = gceImages({
@@ -169,10 +164,14 @@ util.inherits(Zone, common.ServiceObject);
  * Get a reference to a Google Compute Engine autoscaler in this zone.
  *
  * @param {string} name - Name of the autoscaler.
- * @return {module:compute/autoscaler}
+ * @returns {Autoscaler}
  *
  * @example
- * var autoscaler = zone.autoscaler('autoscaler-name');
+ * const Compute = require('@google-cloud/compute');
+ * const compute = new Compute();
+ * const zone = compute.zone('us-central1-a');
+ *
+ * const autoscaler = zone.autoscaler('autoscaler-name');
  */
 Zone.prototype.autoscaler = function(name) {
   return new Autoscaler(this, name);
@@ -181,9 +180,9 @@ Zone.prototype.autoscaler = function(name) {
 /**
  * Create an autoscaler in this zone.
  *
- * @resource [Load Balancing and Scaling]{@link https://cloud.google.com/compute/docs/load-balancing-and-autoscaling}
- * @resource [Autoscaler Resource]{@link https://cloud.google.com/compute/docs/reference/v1/autoscalers}
- * @resource [Autoscalers: insert API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/autoscalers/insert}
+ * @see [Load Balancing and Scaling]{@link https://cloud.google.com/compute/docs/load-balancing-and-autoscaling}
+ * @see [Autoscaler Resource]{@link https://cloud.google.com/compute/docs/reference/v1/autoscalers}
+ * @see [Autoscalers: insert API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/autoscalers/insert}
  *
  * @throws {Error} If `config.target` is not provided.
  *
@@ -209,14 +208,18 @@ Zone.prototype.autoscaler = function(name) {
  *     this autoscaler will scale.
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request.
- * @param {module:compute/autoscaler} callback.autoscaler - The created
+ * @param {Autoscaler} callback.autoscaler - The created
  *     Autoscaler object.
- * @param {module:compute/operation} callback.operation - An operation object
+ * @param {Operation} callback.operation - An operation object
  *     that can be used to check the status of the request.
  * @param {object} callback.apiResponse - The full API response.
  *
  * @example
- * var config = {
+ * const Compute = require('@google-cloud/compute');
+ * const compute = new Compute();
+ * const zone = compute.zone('us-central1-a');
+ *
+ * const config = {
  *   coolDown: 30,
  *   cpu: 80,
  *   loadBalance: 40,
@@ -238,9 +241,9 @@ Zone.prototype.autoscaler = function(name) {
  * // If the callback is omitted, we'll return a Promise.
  * //-
  * zone.createAutoscaler('name', config).then(function(data) {
- *   var autoscaler = data[0];
- *   var operation = data[1];
- *   var apiResponse = data[2];
+ *   const autoscaler = data[0];
+ *   const operation = data[1];
+ *   const apiResponse = data[2];
  * });
  */
 Zone.prototype.createAutoscaler = function(name, config, callback) {
@@ -320,8 +323,8 @@ Zone.prototype.createAutoscaler = function(name, config, callback) {
 /**
  * Create a persistent disk in this zone.
  *
- * @resource [Disk Resource]{@link https://cloud.google.com/compute/docs/reference/v1/disks}
- * @resource [Disks: insert API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/disks/insert}
+ * @see [Disk Resource]{@link https://cloud.google.com/compute/docs/reference/v1/disks}
+ * @see [Disks: insert API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/disks/insert}
  *
  * @param {string} name - Name of the disk.
  * @param {object} config - See a
@@ -331,17 +334,21 @@ Zone.prototype.createAutoscaler = function(name, config, callback) {
  *     [this list of accepted OS names](https://github.com/stephenplusplus/gce-images#accepted-os-names).
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request.
- * @param {module:compute/disk} callback.disk - The created Disk object.
- * @param {module:compute/operation} callback.operation - An operation object
+ * @param {Disk} callback.disk - The created Disk object.
+ * @param {Operation} callback.operation - An operation object
  *     that can be used to check the status of the request.
  * @param {object} callback.apiResponse - The full API response.
  *
  * @example
+ * const Compute = require('@google-cloud/compute');
+ * const compute = new Compute();
+ * const zone = compute.zone('us-central1-a');
+ *
  * //-
  * // Create a persistent disk using the latest Ubuntu version
  * // as the source image.
  * //-
- * var config = {
+ * const config = {
  *   os: 'ubuntu',
  *   sizeGb: 10
  * };
@@ -350,7 +357,7 @@ Zone.prototype.createAutoscaler = function(name, config, callback) {
  * // Create a persistent disk using the latest Ubuntu version from your project
  * // as the source image.
  * //-
- * var config = {
+ * const config = {
  *   os: 'your-project-id-or-name/ubuntu',
  *   sizeGb: 10
  * };
@@ -366,9 +373,9 @@ Zone.prototype.createAutoscaler = function(name, config, callback) {
  * // If the callback is omitted, we'll return a Promise.
  * //-
  * zone.createDisk('name', config).then(function(data) {
- *   var disk = data[0];
- *   var operation = data[1];
- *   var apiResponse = data[2];
+ *   const disk = data[0];
+ *   const operation = data[1];
+ *   const apiResponse = data[2];
  * });
  */
 Zone.prototype.createDisk = function(name, config, callback) {
@@ -425,8 +432,8 @@ Zone.prototype.createDisk = function(name, config, callback) {
 /**
  * Create an instance group in this zone.
  *
- * @resource [InstanceGroup Resource]{@link https://cloud.google.com/compute/docs/reference/v1/instanceGroups#resource}
- * @resource [InstanceGroups: insert API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/instanceGroups/insert}
+ * @see [InstanceGroup Resource]{@link https://cloud.google.com/compute/docs/reference/v1/instanceGroups#resource}
+ * @see [InstanceGroups: insert API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/instanceGroups/insert}
  *
  * @param {string} name - Name of the instance group.
  * @param {object} options - See an
@@ -435,13 +442,17 @@ Zone.prototype.createDisk = function(name, config, callback) {
  *     the name, and the value the port number. Maps to `options.namedPorts`.
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request.
- * @param {module:compute/instance-group} callback.instanceGroup - The created
+ * @param {InstanceGroup} callback.instanceGroup - The created
  *     InstanceGroup object.
- * @param {module:compute/operation} callback.operation - An operation object
+ * @param {Operation} callback.operation - An operation object
  *     that can be used to check the status of the request.
  * @param {object} callback.apiResponse - The full API response.
  *
  * @example
+ * const Compute = require('@google-cloud/compute');
+ * const compute = new Compute();
+ * const zone = compute.zone('us-central1-a');
+ *
  * function onCreated(err, instanceGroup, operation, apiResponse) {
  *   // `instanceGroup` is an InstanceGroup object.
  *
@@ -455,9 +466,9 @@ Zone.prototype.createDisk = function(name, config, callback) {
  * // If the callback is omitted, we'll return a Promise.
  * //-
  * zone.createInstanceGroup('instance-group-name', config).then(function(data) {
- *   var instanceGroup = data[0];
- *   var operation = data[1];
- *   var apiResponse = data[2];
+ *   const instanceGroup = data[0];
+ *   const operation = data[1];
+ *   const apiResponse = data[2];
  * });
  */
 Zone.prototype.createInstanceGroup = function(name, options, callback) {
@@ -502,8 +513,8 @@ Zone.prototype.createInstanceGroup = function(name, options, callback) {
 /**
  * Create a virtual machine in this zone.
  *
- * @resource [Instance Resource]{@link https://cloud.google.com/compute/docs/reference/v1/instances}
- * @resource [Instances: insert API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/instances/insert}
+ * @see [Instance Resource]{@link https://cloud.google.com/compute/docs/reference/v1/instances}
+ * @see [Instances: insert API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/instances/insert}
  *
  * @param {string} name - Name of the instance.
  * @param {object} config - See an
@@ -526,17 +537,21 @@ Zone.prototype.createInstanceGroup = function(name, options, callback) {
  * @param {?string[]} config.tags - An array of tags.
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request.
- * @param {module:compute/vm} callback.vm - The created VM object.
- * @param {module:compute/operation} callback.operation - An operation object
+ * @param {VM} callback.vm - The created VM object.
+ * @param {Operation} callback.operation - An operation object
  *     that can be used to check the status of the request.
  * @param {object} callback.apiResponse - The full API response.
  *
  * @example
+ * const Compute = require('@google-cloud/compute');
+ * const compute = new Compute();
+ * const zone = compute.zone('us-central1-a');
+ *
  * //-
  * // Create a new instance using the latest Debian version from your project
  * // as the source image for a new boot disk.
  * //-
- * var config = {
+ * const config = {
  *   os: 'your-project-id-or-name/debian',
  *   http: true,
  *   tags: ['debian-server']
@@ -546,7 +561,7 @@ Zone.prototype.createInstanceGroup = function(name, options, callback) {
  * // Create a new instance using the latest Debian version as the source image
  * // for a new boot disk.
  * //-
- * var config = {
+ * const config = {
  *   os: 'debian',
  *   http: true,
  *   tags: ['debian-server']
@@ -556,7 +571,7 @@ Zone.prototype.createInstanceGroup = function(name, options, callback) {
  * // The above object will auto-expand behind the scenes to something like the
  * // following. The Debian version may be different when you run the command.
  * //-
- * var config = {
+ * const config = {
  *   machineType: 'n1-standard-1',
  *   disks: [
  *     {
@@ -596,9 +611,9 @@ Zone.prototype.createInstanceGroup = function(name, options, callback) {
  * // If the callback is omitted, we'll return a Promise.
  * //-
  * zone.createVM('new-vm-name', config).then(function(data) {
- *   var vm = data[0];
- *   var operation = data[1];
- *   var apiResponse = data[2];
+ *   const vm = data[0];
+ *   const operation = data[1];
+ *   const apiResponse = data[2];
  * });
  */
 Zone.prototype.createVM = function(name, config, callback) {
@@ -727,13 +742,17 @@ Zone.prototype.createVM = function(name, config, callback) {
 /**
  * Get a reference to a Google Compute Engine disk in this zone.
  *
- * @resource [Disks Overview]{@link https://cloud.google.com/compute/docs/disks}
+ * @see [Disks Overview]{@link https://cloud.google.com/compute/docs/disks}
  *
  * @param {string} name - Name of the disk.
- * @return {module:compute/disk}
+ * @returns {Disk}
  *
  * @example
- * var disk = zone.disk('disk1');
+ * const Compute = require('@google-cloud/compute');
+ * const compute = new Compute();
+ * const zone = compute.zone('us-central1-a');
+ *
+ * const disk = zone.disk('disk1');
  */
 Zone.prototype.disk = function(name) {
   return new Disk(this, name);
@@ -742,9 +761,9 @@ Zone.prototype.disk = function(name) {
 /**
  * Get a list of autoscalers from this zone.
  *
- * @resource [Managing Autoscalers]{@link https://cloud.google.com/compute/docs/autoscaler/managing-autoscalers}
- * @resource [Understanding Autoscaler Decisions]{@link https://cloud.google.com/compute/docs/autoscaler/understanding-autoscaler-decisions}
- * @resource [Autoscalers: aggregatedList API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/autoscalers/list}
+ * @see [Managing Autoscalers]{@link https://cloud.google.com/compute/docs/autoscaler/managing-autoscalers}
+ * @see [Understanding Autoscaler Decisions]{@link https://cloud.google.com/compute/docs/autoscaler/understanding-autoscaler-decisions}
+ * @see [Autoscalers: aggregatedList API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/autoscalers/list}
  *
  * @param {object=} options - Autoscaler search options.
  * @param {boolean} options.autoPaginate - Have pagination handled
@@ -762,11 +781,15 @@ Zone.prototype.disk = function(name) {
  *     representing part of the larger set of results to view.
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request.
- * @param {module:compute/autoscaler[]} callback.autoscalers - Autoscaler
+ * @param {Autoscaler[]} callback.autoscalers - Autoscaler
  *     objects from your project.
  * @param {object} callback.apiResponse - The full API response.
  *
  * @example
+ * const Compute = require('@google-cloud/compute');
+ * const compute = new Compute();
+ * const zone = compute.zone('us-central1-a');
+ *
  * zone.getAutoscalers(function(err, autoscalers) {
  *   // autoscalers is an array of `Autoscaler` objects.
  * });
@@ -790,7 +813,7 @@ Zone.prototype.disk = function(name) {
  * // If the callback is omitted, we'll return a Promise.
  * //-
  * zone.getAutoscalers().then(function(data) {
- *   var autoscalers = data[0];
+ *   const autoscalers = data[0];
  * });
  */
 Zone.prototype.getAutoscalers = function(options, callback) {
@@ -835,14 +858,18 @@ Zone.prototype.getAutoscalers = function(options, callback) {
 };
 
 /**
- * Get a list of {module:compute/autoscaler} objects from this zone as a
+ * Get a list of {@link Autoscaler} objects from this zone as a
  * readable object stream.
  *
  * @param {object=} options - Configuration object. See
- *     {module:compute/zone#getAutoscalers} for a complete list of options.
- * @return {stream}
+ *     {@link Zone#getAutoscalers} for a complete list of options.
+ * @returns {stream}
  *
  * @example
+ * const Compute = require('@google-cloud/compute');
+ * const compute = new Compute();
+ * const zone = compute.zone('us-central1-a');
+ *
  * zone.getAutoscalersStream()
  *   .on('error', console.error)
  *   .on('data', function(autoscaler) {
@@ -868,8 +895,8 @@ Zone.prototype.getAutoscalersStream = common.paginator.streamify(
 /**
  *  Get a list of disks in this zone.
  *
- * @resource [Disks Overview]{@link https://cloud.google.com/compute/docs/disks}
- * @resource [Disks: list API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/disks/list}
+ * @see [Disks Overview]{@link https://cloud.google.com/compute/docs/disks}
+ * @see [Disks: list API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/disks/list}
  *
  * @param {object=} options - Disk search options.
  * @param {boolean} options.autoPaginate - Have pagination handled
@@ -887,10 +914,14 @@ Zone.prototype.getAutoscalersStream = common.paginator.streamify(
  *     representing part of the larger set of results to view.
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request.
- * @param {module:compute/disk[]} callback.disks - Disk objects from this zone.
+ * @param {Disk[]} callback.disks - Disk objects from this zone.
  * @param {object} callback.apiResponse - The full API response.
  *
  * @example
+ * const Compute = require('@google-cloud/compute');
+ * const compute = new Compute();
+ * const zone = compute.zone('us-central1-a');
+ *
  * zone.getDisks(function(err, disks) {
  *   // `disks` is an array of `Disk` objects.
  * });
@@ -914,7 +945,7 @@ Zone.prototype.getAutoscalersStream = common.paginator.streamify(
  * // If the callback is omitted, we'll return a Promise.
  * //-
  * zone.getDisks().then(function(data) {
- *   var disks = data[0];
+ *   const disks = data[0];
  * });
  */
 Zone.prototype.getDisks = function(options, callback) {
@@ -958,14 +989,18 @@ Zone.prototype.getDisks = function(options, callback) {
 };
 
 /**
- * Get a list of {module:compute/disk} objects in this zone as a readable object
+ * Get a list of {@link Disk} objects in this zone as a readable object
  * stream.
  *
  * @param {object=} options - Configuration object. See
- *     {module:compute/zone#getDisks} for a complete list of options.
- * @return {stream}
+ *     {@link Zone#getDisks} for a complete list of options.
+ * @returns {stream}
  *
  * @example
+ * const Compute = require('@google-cloud/compute');
+ * const compute = new Compute();
+ * const zone = compute.zone('us-central1-a');
+ *
  * zone.getDisksStream()
  *   .on('error', console.error)
  *   .on('data', function(disk) {
@@ -989,8 +1024,8 @@ Zone.prototype.getDisksStream = common.paginator.streamify('getDisks');
 /**
  * Get a list of instance groups for this zone.
  *
- * @resource [InstanceGroups Overview]{@link https://cloud.google.com/compute/docs/reference/v1/instanceGroups}
- * @resource [InstanceGroups: list API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/instanceGroups/list}
+ * @see [InstanceGroups Overview]{@link https://cloud.google.com/compute/docs/reference/v1/instanceGroups}
+ * @see [InstanceGroups: list API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/instanceGroups/list}
  *
  * @param {object=} options - Instance group search options.
  * @param {boolean} options.autoPaginate - Have pagination handled
@@ -1009,11 +1044,15 @@ Zone.prototype.getDisksStream = common.paginator.streamify('getDisks');
  *     representing part of the larger set of results to view.
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request.
- * @param {module:compute/instance-group[]} callback.instanceGroups -
+ * @param {InstanceGroup[]} callback.instanceGroups -
  *     InstanceGroup objects from this zone.
  * @param {object} callback.apiResponse - The full API response.
  *
  * @example
+ * const Compute = require('@google-cloud/compute');
+ * const compute = new Compute();
+ * const zone = compute.zone('us-central1-a');
+ *
  * zone.getInstanceGroups(function(err, instanceGroups) {
  *   // `instanceGroups` is an array of `InstanceGroup` objects.
  * });
@@ -1037,7 +1076,7 @@ Zone.prototype.getDisksStream = common.paginator.streamify('getDisks');
  * // If the callback is omitted, we'll return a Promise.
  * //-
  * zone.getInstanceGroups().then(function(data) {
- *   var instanceGroups = data[0];
+ *   const instanceGroups = data[0];
  * });
  */
 Zone.prototype.getInstanceGroups = function(options, callback) {
@@ -1081,14 +1120,18 @@ Zone.prototype.getInstanceGroups = function(options, callback) {
 };
 
 /**
- * Get a list of {module:compute/instanceGroup} objects for this zone as a
+ * Get a list of {@link InstanceGroup} objects for this zone as a
  * readable object stream.
  *
  * @param {object=} options - Configuration object. See
- *     {module:compute/zone#getInstanceGroups} for a complete list of options.
- * @return {stream}
+ *     {@link Zone#getInstanceGroups} for a complete list of options.
+ * @returns {stream}
  *
  * @example
+ * const Compute = require('@google-cloud/compute');
+ * const compute = new Compute();
+ * const zone = compute.zone('us-central1-a');
+ *
  * zone.getInstanceGroupsStream()
  *   .on('error', console.error)
  *   .on('data', function(instanceGroup) {
@@ -1114,9 +1157,9 @@ Zone.prototype.getInstanceGroupsStream = common.paginator.streamify(
 /**
  * Get a list of machine types for this zone.
  *
- * @resource [MachineTypes: list API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/machineTypes/list}
- * @resource [Machine Types Overview]{@link https://cloud.google.com/compute/docs/machine-types}
- * @resource [MachineType Resource]{@link https://cloud.google.com/compute/docs/reference/v1/machineTypes}
+ * @see [MachineTypes: list API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/machineTypes/list}
+ * @see [Machine Types Overview]{@link https://cloud.google.com/compute/docs/machine-types}
+ * @see [MachineType Resource]{@link https://cloud.google.com/compute/docs/reference/v1/machineTypes}
  *
  * @param {object=} options - Machine type search options.
  * @param {boolean} options.autoPaginate - Have pagination handled
@@ -1128,11 +1171,15 @@ Zone.prototype.getInstanceGroupsStream = common.paginator.streamify(
  *     representing part of the larger set of results to view.
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request.
- * @param {module:compute/machine-type[]} callback.machineTypes - MachineType
+ * @param {MachineType[]} callback.machineTypes - MachineType
  *     objects from this zone.
  * @param {object} callback.apiResponse - The full API response.
  *
  * @example
+ * const Compute = require('@google-cloud/compute');
+ * const compute = new Compute();
+ * const zone = compute.zone('us-central1-a');
+ *
  * zone.getMachineTypes(function(err, machineTypes) {
  *   // `machineTypes` is an array of `MachineType` objects.
  * });
@@ -1156,7 +1203,7 @@ Zone.prototype.getInstanceGroupsStream = common.paginator.streamify(
  * // If the callback is omitted, we'll return a Promise.
  * //-
  * zone.getMachineTypes().then(function(data) {
- *   var machineTypes = data[0];
+ *   const machineTypes = data[0];
  * });
  */
 Zone.prototype.getMachineTypes = function(options, callback) {
@@ -1173,14 +1220,18 @@ Zone.prototype.getMachineTypes = function(options, callback) {
 };
 
 /**
- * Get a list of {module:compute/machineType} objects for this zone as a
+ * Get a list of {@link MachineType} objects for this zone as a
  * readable object stream.
  *
  * @param {object=} options - Configuration object. See
- *     {module:compute/zone#getMachineTypes} for a complete list of options.
- * @return {stream}
+ *     {@link Zone#getMachineTypes} for a complete list of options.
+ * @returns {stream}
  *
  * @example
+ * const Compute = require('@google-cloud/compute');
+ * const compute = new Compute();
+ * const zone = compute.zone('us-central1-a');
+ *
  * zone.getMachineTypesStream()
  *   .on('error', console.error)
  *   .on('data', function(machineType) {
@@ -1206,8 +1257,8 @@ Zone.prototype.getMachineTypesStream = common.paginator.streamify(
 /**
  * Get a list of operations for this zone.
  *
- * @resource [Zone Operation Overview]{@link https://cloud.google.com/compute/docs/reference/v1/zoneOperations}
- * @resource [ZoneOperations: list API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/zoneOperations/list}
+ * @see [Zone Operation Overview]{@link https://cloud.google.com/compute/docs/reference/v1/zoneOperations}
+ * @see [ZoneOperations: list API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/zoneOperations/list}
  *
  * @param {object=} options - Operation search options.
  * @param {boolean} options.autoPaginate - Have pagination handled
@@ -1225,11 +1276,15 @@ Zone.prototype.getMachineTypesStream = common.paginator.streamify(
  *     representing part of the larger set of results to view.
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request.
- * @param {module:compute/operation[]} callback.operations - Operation objects
+ * @param {Operation[]} callback.operations - Operation objects
  *     from this zone.
  * @param {object} callback.apiResponse - The full API response.
  *
  * @example
+ * const Compute = require('@google-cloud/compute');
+ * const compute = new Compute();
+ * const zone = compute.zone('us-central1-a');
+ *
  * zone.getOperations(function(err, operations) {
  *   // `operations` is an array of `Operation` objects.
  * });
@@ -1253,7 +1308,7 @@ Zone.prototype.getMachineTypesStream = common.paginator.streamify(
  * // If the callback is omitted, we'll return a Promise.
  * //-
  * zone.getOperations().then(function(data) {
- *   var operations = data[0];
+ *   const operations = data[0];
  * });
  */
 Zone.prototype.getOperations = function(options, callback) {
@@ -1297,14 +1352,18 @@ Zone.prototype.getOperations = function(options, callback) {
 };
 
 /**
- * Get a list of {module:compute/operation} objects for this zone as a readable
+ * Get a list of {@link Operation} objects for this zone as a readable
  * object stream.
  *
  * @param {object=} options - Configuration object. See
- *     {module:compute/zone#getOperations} for a complete list of options.
- * @return {stream}
+ *     {@link Zone#getOperations} for a complete list of options.
+ * @returns {stream}
  *
  * @example
+ * const Compute = require('@google-cloud/compute');
+ * const compute = new Compute();
+ * const zone = compute.zone('us-central1-a');
+ *
  * zone.getOperationsStream()
  *   .on('error', console.error)
  *   .on('data', function(operation) {
@@ -1330,8 +1389,8 @@ Zone.prototype.getOperationsStream = common.paginator.streamify(
 /**
  * Get a list of VM instances in this zone.
  *
- * @resource [Instances and Networks]{@link https://cloud.google.com/compute/docs/instances-and-network}
- * @resource [Instances: list API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/instances/list}
+ * @see [Instances and Networks]{@link https://cloud.google.com/compute/docs/instances-and-network}
+ * @see [Instances: list API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/instances/list}
  *
  * @param {object=} options - Instance search options.
  * @param {boolean} options.autoPaginate - Have pagination handled
@@ -1347,10 +1406,14 @@ Zone.prototype.getOperationsStream = common.paginator.streamify(
  *     representing part of the larger set of results to view.
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request.
- * @param {module:compute/vm[]} callback.vms - VM objects from this zone.
+ * @param {VM[]} callback.vms - VM objects from this zone.
  * @param {object} callback.apiResponse - The full API response.
  *
  * @example
+ * const Compute = require('@google-cloud/compute');
+ * const compute = new Compute();
+ * const zone = compute.zone('us-central1-a');
+ *
  * zone.getVMs(function(err, vms) {
  *   // `vms` is an array of `VM` objects.
  * });
@@ -1374,7 +1437,7 @@ Zone.prototype.getOperationsStream = common.paginator.streamify(
  * // If the callback is omitted, we'll return a Promise.
  * //-
  * zone.getVMs().then(function(data) {
- *   var vms = data[0];
+ *   const vms = data[0];
  * });
  */
 Zone.prototype.getVMs = function(options, callback) {
@@ -1418,14 +1481,18 @@ Zone.prototype.getVMs = function(options, callback) {
 };
 
 /**
- * Get a list of {module:compute/vm} instances in this zone as a readable object
+ * Get a list of {@link VM} instances in this zone as a readable object
  * stream.
  *
  * @param {object=} options - Configuration object. See
- *     {module:compute/zone#getVMs} for a complete list of options.
- * @return {stream}
+ *     {@link Zone#getVMs} for a complete list of options.
+ * @returns {stream}
  *
  * @example
+ * const Compute = require('@google-cloud/compute');
+ * const compute = new Compute();
+ * const zone = compute.zone('us-central1-a');
+ *
  * zone.getVMsStream()
  *   .on('error', console.error)
  *   .on('data', function(vm) {
@@ -1449,13 +1516,17 @@ Zone.prototype.getVMsStream = common.paginator.streamify('getVMs');
 /**
  * Get a reference to a Google Compute Engine instance group.
  *
- * @resource [InstanceGroups Overview]{@link https://cloud.google.com/compute/docs/reference/v1/instanceGroups}
+ * @see [InstanceGroups Overview]{@link https://cloud.google.com/compute/docs/reference/v1/instanceGroups}
  *
  * @param {string} name - Name of the existing instance group.
- * @return {module:compute/instance-group}
+ * @returns {InstanceGroup}
  *
  * @example
- * var instanceGroup = zone.instanceGroup('my-instance-group');
+ * const Compute = require('@google-cloud/compute');
+ * const compute = new Compute();
+ * const zone = compute.zone('us-central1-a');
+ *
+ * const instanceGroup = zone.instanceGroup('my-instance-group');
  */
 Zone.prototype.instanceGroup = function(name) {
   return new InstanceGroup(this, name);
@@ -1464,14 +1535,18 @@ Zone.prototype.instanceGroup = function(name) {
 /**
  * Get a reference to a Google Compute Engine machine type.
  *
- * @resource [Machine Types Overview]{@link https://cloud.google.com/compute/docs/machine-types}
- * @resource [MachineType Resource]{@link https://cloud.google.com/compute/docs/reference/v1/machineTypes}
+ * @see [Machine Types Overview]{@link https://cloud.google.com/compute/docs/machine-types}
+ * @see [MachineType Resource]{@link https://cloud.google.com/compute/docs/reference/v1/machineTypes}
  *
  * @param {string} name - Name of the existing machine type.
- * @return {module:compute/machine-type}
+ * @returns {MachineType}
  *
  * @example
- * var machienType = zone.machineType('g1-small');
+ * const Compute = require('@google-cloud/compute');
+ * const compute = new Compute();
+ * const zone = compute.zone('us-central1-a');
+ *
+ * const machineType = zone.machineType('g1-small');
  */
 Zone.prototype.machineType = function(name) {
   return new MachineType(this, name);
@@ -1480,13 +1555,17 @@ Zone.prototype.machineType = function(name) {
 /**
  * Get a reference to a Google Compute Engine zone operation.
  *
- * @resource [Zone Operation Overview]{@link https://cloud.google.com/compute/docs/reference/v1/zoneOperations}
+ * @see [Zone Operation Overview]{@link https://cloud.google.com/compute/docs/reference/v1/zoneOperations}
  *
  * @param {string} name - Name of the existing operation.
- * @return {module:compute/operation}
+ * @returns {Operation}
  *
  * @example
- * var operation = zone.operation('operation-1445532685163-8b137d2a-1822afe7');
+ * const Compute = require('@google-cloud/compute');
+ * const compute = new Compute();
+ * const zone = compute.zone('us-central1-a');
+ *
+ * const operation = zone.operation('operation-1445532685163-8b137d2a-1822afe7');
  */
 Zone.prototype.operation = function(name) {
   return new Operation(this, name);
@@ -1495,13 +1574,17 @@ Zone.prototype.operation = function(name) {
 /**
  * Get a reference to a Google Compute Engine virtual machine instance.
  *
- * @resource [Instances and Networks]{@link https://cloud.google.com/compute/docs/instances-and-network}
+ * @see [Instances and Networks]{@link https://cloud.google.com/compute/docs/instances-and-network}
  *
  * @param {string} name - Name of the virtual machine.
- * @return {module:compute/vm}
+ * @returns {VM}
  *
  * @example
- * var vm = zone.vm('vm-name');
+ * const Compute = require('@google-cloud/compute');
+ * const compute = new Compute();
+ * const zone = compute.zone('us-central1-a');
+ *
+ * const vm = zone.vm('vm-name');
  */
 Zone.prototype.vm = function(name) {
   return new VM(this, name);
@@ -1588,4 +1671,9 @@ common.util.promisifyAll(Zone, {
   ],
 });
 
+/**
+ * Reference to the {@link Zone} class.
+ * @name module:@google-cloud/compute.Zone
+ * @see Zone
+ */
 module.exports = Zone;
