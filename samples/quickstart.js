@@ -16,20 +16,27 @@
 'use strict';
 
 // [START compute_engine_quickstart]
-const gce = require('@google-cloud/compute')();
+// Imports the Google Cloud client library
+const Compute = require('@google-cloud/compute');
+
+// Creates a client
+const compute = new Compute();
 
 // Create a new VM using the latest OS image of your choice.
-var zone = gce.zone('us-central1-a');
-var name = 'ubuntu-http';
+const zone = compute.zone('us-central1-a');
+const name = 'ubuntu-http';
 
 zone
   .createVM(name, {os: 'ubuntu'}, data => {
     // `operation` lets you check the status of long-running tasks.
-    let vm = data[0];
-    let operation = data[1];
+    const vm = data[0];
+    const operation = data[1];
     return operation.promise();
   })
   .then(() => {
     // Virtual machine created!
+  })
+  .catch(err => {
+    console.error('ERROR:', err);
   });
 // [END compute_engine_quickstart]
