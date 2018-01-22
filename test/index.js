@@ -57,6 +57,7 @@ var fakeUtil = extend({}, util, {
     ]);
   },
 });
+var originalFakeUtil = extend(true, {}, fakeUtil);
 
 var fakePaginator = {
   extend: function(Class, methods) {
@@ -178,6 +179,7 @@ describe('Compute', function() {
   });
 
   beforeEach(function() {
+    extend(fakeUtil, originalFakeUtil);
     compute = new Compute({
       projectId: PROJECT_ID,
     });
@@ -196,22 +198,24 @@ describe('Compute', function() {
       assert(compute instanceof Compute);
     });
 
+    it('should work without new', function() {
+      assert.doesNotThrow(function() {
+        Compute({projectId: PROJECT_ID});
+      });
+    });
+
     it('should normalize the arguments', function() {
-      var normalizeArguments = fakeUtil.normalizeArguments;
       var normalizeArgumentsCalled = false;
-      var fakeContext = {};
+      var options = {};
 
       fakeUtil.normalizeArguments = function(context, options_) {
         normalizeArgumentsCalled = true;
-        assert.strictEqual(context, fakeContext);
-        assert.strictEqual(options, options_);
+        assert.strictEqual(options_, options);
         return options_;
       };
 
-      Compute.call(fakeContext, options);
-      assert(normalizeArgumentsCalled);
-
-      fakeUtil.normalizeArguments = normalizeArguments;
+      new Compute(options);
+      assert.strictEqual(normalizeArgumentsCalled, true);
     });
 
     it('should inherit from Service', function() {
