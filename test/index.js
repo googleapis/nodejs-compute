@@ -186,13 +186,6 @@ describe('Compute', function() {
   });
 
   describe('instantiation', function() {
-    var options = {
-      projectId: PROJECT_ID,
-      credentials: 'credentials',
-      email: 'email',
-      keyFilename: 'keyFile',
-    };
-
     it('should return a new instance of Compute', function() {
       var compute = new Compute({projectId: PROJECT_ID});
       assert(compute instanceof Compute);
