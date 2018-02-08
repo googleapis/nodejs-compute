@@ -19,6 +19,7 @@
 var common = require('@google-cloud/common');
 var util = require('util');
 var extend = require('extend');
+var is = require('is');
 
 /**
  * A Project object allows you to interact with your Google Compute Engine
@@ -111,10 +112,10 @@ util.inherits(Project, common.ServiceObject);
 /**
  * Create a image from disk in project.
  *
- * @param {string} imageName - Name of the target image.
+ * @param {string} imageName - The name of the target image.
  * @param {Disk} disk - The source disk to create the image from.
- * @param {object} options - Further options, for details please refer to
- *    following link: https://cloud.google.com/compute/docs/reference/rest/v1/images/insert
+ * @param {object} [options] - Further options, for details please refer to:
+ * @see [Images: insert API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/images/insert}
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request.
  * @param {object} callback.apiResponse - The full API response.
@@ -139,6 +140,15 @@ util.inherits(Project, common.ServiceObject);
  * //-
  */
 Project.prototype.createImage = function(imageName, disk, options, callback) {
+  if (!common.util.isCustomType(disk, 'Disk')) {
+    throw new Error('A Disk object is required.');
+  }
+
+  if (is.fn(options)) {
+    callback = options;
+    options = {};
+  }
+
   var body = extend(
     {
       name: imageName,
@@ -153,13 +163,7 @@ Project.prototype.createImage = function(imageName, disk, options, callback) {
       uri: '/global/images',
       json: body,
     },
-    function(err, resp) {
-      if (err) {
-        callback(err, resp);
-        return;
-      }
-      callback(null, resp);
-    }
+    callback
   );
 };
 
