@@ -18,6 +18,7 @@
 
 var common = require('@google-cloud/common');
 var util = require('util');
+var extend = require('extend');
 
 /**
  * A Project object allows you to interact with your Google Compute Engine
@@ -106,6 +107,61 @@ function Project(compute) {
 }
 
 util.inherits(Project, common.ServiceObject);
+
+/**
+ * Create a image from disk in project.
+ *
+ * @param {string} imageName - Name of the target image.
+ * @param {Disk} disk - The source disk to create the image from.
+ * @param {object} options - Further options, for details please refer to
+ *    following link: https://cloud.google.com/compute/docs/reference/rest/v1/images/insert
+ * @param {function} callback - The callback function.
+ * @param {?error} callback.err - An error returned while making this request.
+ * @param {object} callback.apiResponse - The full API response.
+ *
+ * @example
+ * const Compute = require('@google-cloud/compute');
+ * const compute = new Compute();
+ * const project = compute.project();
+ * const zone = compute.zone('us-central1-a');
+ * const disk = zone.disk('disk1');
+ *
+ * function callback(err, apiResponse) {
+ *    // ...
+ *    // apiResponse.targetLink contains uri
+ *    // ...
+ * }
+ *
+ * project.createImage('image1', disk, callback);
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ */
+Project.prototype.createImage = function(imageName, disk, options, callback) {
+  var body = extend(
+    {
+      name: imageName,
+      sourceDisk: 'zones/' + disk.zone.name + '/disks/' + disk.name,
+    },
+    options
+  );
+
+  this.request(
+    {
+      method: 'POST',
+      uri: '/global/images',
+      json: body,
+    },
+    function(err, resp) {
+      if (err) {
+        callback(err, resp);
+        return;
+      }
+      callback(null, resp);
+    }
+  );
+};
 
 /*! Developer Documentation
  *
