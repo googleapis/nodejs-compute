@@ -19,6 +19,7 @@
 var common = require('@google-cloud/common');
 var util = require('util');
 var extend = require('extend');
+var format = require('string-format-obj');
 var is = require('is');
 
 /**
@@ -152,7 +153,10 @@ Project.prototype.createImage = function(imageName, disk, options, callback) {
   var body = extend(
     {
       name: imageName,
-      sourceDisk: 'zones/' + disk.zone.name + '/disks/' + disk.name,
+      sourceDisk: format('zones/{zoneName}/disks/{diskName}', {
+        zoneName: disk.zone.name,
+        diskName: disk.name,
+      }),
     },
     options
   );

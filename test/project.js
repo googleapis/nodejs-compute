@@ -19,6 +19,7 @@
 var assert = require('assert');
 var extend = require('extend');
 var proxyquire = require('proxyquire');
+var format = require('string-format-obj');
 var util = require('@google-cloud/common').util;
 
 var promisified = false;
@@ -108,7 +109,10 @@ describe('Project', function() {
         assert.strictEqual(reqOpts.uri, '/global/images');
         assert.deepEqual(reqOpts.json, {
           name: 'image3',
-          sourceDisk: 'zones/' + ZONE.name + '/disks/' + disk.name,
+          sourceDisk: format('zones/{zoneName}/disks/{diskName}', {
+            zoneName: disk.zone.name,
+            diskName: disk.name,
+          }),
         });
       };
       project.createImage('image3', disk);
