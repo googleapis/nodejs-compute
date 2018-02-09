@@ -22,8 +22,12 @@ var proxyquire = require('proxyquire');
 var format = require('string-format-obj');
 var util = require('@google-cloud/common').util;
 
+var isCustomTypeOverride;
 var promisified = false;
 var fakeUtil = extend({}, util, {
+  isCustomType: function() {
+    return (isCustomTypeOverride || util.isCustomType).apply(null, arguments);
+  },
   promisifyAll: function(Class) {
     if (Class.name === 'Project') {
       promisified = true;
@@ -38,18 +42,11 @@ function FakeServiceObject() {
 describe('Project', function() {
   var Project;
   var project;
-  var Disk;
-  var disk;
 
   var PROJECT_ID = 'project-1';
   var COMPUTE = {
     projectId: PROJECT_ID,
     authConfig: {a: 'b', c: 'd'},
-  };
-  var ZONE = {
-    compute: COMPUTE,
-    name: 'us-central1-a',
-    createDisk: util.noop,
   };
 
   before(function() {
@@ -59,12 +56,11 @@ describe('Project', function() {
         util: fakeUtil,
       },
     });
-    Disk = require('../src/disk.js');
   });
 
   beforeEach(function() {
+    isCustomTypeOverride = null;
     project = new Project(COMPUTE);
-    disk = new Disk(ZONE, 'disk1');
   });
 
   describe('instantiation', function() {
@@ -91,63 +87,73 @@ describe('Project', function() {
     });
   });
 
-  describe('image', function() {
-    it('should throw an error if no disk instance is provided', function() {
-      assert.throws(function() {
-        project.createImage('image1', {});
-      }, /A Disk object is required\./);
+  describe('createImage', function() {
+    var NAME = 'image-name';
+
+    var DISK = {
+      name: 'disk-name',
+      zone: {
+        name: 'zone-name',
+      },
+    };
+
+    beforeEach(function() {
+      isCustomTypeOverride = function() {
+        return true;
+      };
 
       project.request = util.noop;
-      assert.doesNotThrow(function() {
-        project.createImage('image2', disk);
-      });
     });
 
-    it('should use the correct parameters for making the remote call', function() {
+    it('should throw if Disk is not provided', function() {
+      isCustomTypeOverride = function(unknown, type) {
+        assert.strictEqual(unknown, DISK);
+        assert.strictEqual(type, 'Disk');
+        return false;
+      };
+
+      assert.throws(function() {
+        project.createImage(NAME, DISK);
+      }, /A Disk object is required\./);
+    });
+
+    it('should make the correct API request', function(done) {
       project.request = function(reqOpts) {
         assert.strictEqual(reqOpts.method, 'POST');
         assert.strictEqual(reqOpts.uri, '/global/images');
         assert.deepEqual(reqOpts.json, {
-          name: 'image3',
+          name: NAME,
           sourceDisk: format('zones/{zoneName}/disks/{diskName}', {
-            zoneName: disk.zone.name,
-            diskName: disk.name,
+            zoneName: DISK.zone.name,
+            diskName: DISK.name,
           }),
         });
+
+        done();
       };
-      project.createImage('image3', disk);
+
+      project.createImage(NAME, DISK);
     });
 
-    it('should pass optional options', function() {
+    it('should accept options', function(done) {
       var options = {
         a: 1,
         b: 2,
       };
-      project.request = function(reqOpts) {
-        var json = reqOpts.json;
-        assert.ok(json.a, 'The option "a" is not passed');
-        assert.ok(json.b, 'The option "b" is not passed');
-        assert.strictEqual(Object.keys(json).length, 4);
-      };
-      project.createImage('image4', disk, options);
-    });
 
-    it('should use default options if callback is provided', function() {
       project.request = function(reqOpts) {
         var json = reqOpts.json;
-        assert.ok(json.name, 'The option "name" is not passed');
-        assert.ok(json.sourceDisk, 'The option "sourceDisk" is not passed');
-        assert.strictEqual(Object.keys(json).length, 2);
+        assert.strictEqual(reqOpts.json.a, options.a);
+        assert.strictEqual(reqOpts.json.b, options.b);
+        done();
       };
-      project.createImage('image5', disk, util.noop);
+
+      project.createImage(NAME, DISK, options);
     });
 
     it('should not require options', function() {
-      project.request = function(reqOpts) {
-        assert.strictEqual(Object.keys(reqOpts.json).length, 2);
-      };
       assert.doesNotThrow(function() {
-        project.createImage('image6', disk);
+        project.createImage(NAME, DISK, assert.ifError);
       });
     });
   });
