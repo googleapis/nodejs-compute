@@ -564,7 +564,6 @@ describe('Compute', function() {
     });
 
     it('should make the correct API request', function(done) {
-      var name = 'new-image';
       var options = {
         a: 'b',
         c: 'd',

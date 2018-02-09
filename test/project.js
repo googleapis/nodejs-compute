@@ -19,15 +19,10 @@
 var assert = require('assert');
 var extend = require('extend');
 var proxyquire = require('proxyquire');
-var format = require('string-format-obj');
 var util = require('@google-cloud/common').util;
 
-var isCustomTypeOverride;
 var promisified = false;
 var fakeUtil = extend({}, util, {
-  isCustomType: function() {
-    return (isCustomTypeOverride || util.isCustomType).apply(null, arguments);
-  },
   promisifyAll: function(Class) {
     if (Class.name === 'Project') {
       promisified = true;
@@ -59,7 +54,6 @@ describe('Project', function() {
   });
 
   beforeEach(function() {
-    isCustomTypeOverride = null;
     project = new Project(COMPUTE);
   });
 
