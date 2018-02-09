@@ -487,6 +487,25 @@ describe('Compute', function() {
     });
   });
 
+  describe('images', function() {
+    var DISK = zone.disk(generateName('disk'));
+
+    before(create(DISK, {os: 'ubuntu'}));
+
+    after(function(done) {
+      DISK.delete(done);
+    });
+
+    it('should create an image', function(done) {
+      var name = generateName('image');
+
+      compute.createImage(name, DISK, function(err) {
+        assert.ifError(err);
+        getImage(name, done);
+      });
+    });
+  });
+
   describe('instance groups', function() {
     var INSTANCE_GROUP_NAME = generateName('instance-group');
     var instanceGroup = zone.instanceGroup(INSTANCE_GROUP_NAME);
@@ -1477,6 +1496,7 @@ describe('Compute', function() {
     async.series(
       [
         deleteGlobalRules,
+        deleteImages,
         deleteRegionalRules,
         deleteTargetProxies,
         deleteUrlMaps,
@@ -2058,6 +2078,64 @@ describe('Compute', function() {
         }
 
         var operation = zone.operation(resp.name);
+        operation.on('error', callback).on('complete', function() {
+          callback();
+        });
+      }
+    );
+  }
+
+  function getImages(callback) {
+    compute.request(
+      {
+        uri: '/global/images',
+        qs: {
+          filter: 'name eq ' + TESTS_PREFIX + '.*',
+        },
+      },
+      callback
+    );
+  }
+
+  function getImage(name, callback) {
+    compute.request(
+      {
+        uri: '/global/images/' + name,
+      },
+      callback
+    );
+  }
+
+  function deleteImages(callback) {
+    getImages(function(err, resp) {
+      if (err) {
+        callback(err);
+        return;
+      }
+
+      if (!resp.items) {
+        callback();
+        return;
+      }
+
+      var names = resp.items.map(prop('name'));
+      async.each(names, deleteImage, callback);
+    });
+  }
+
+  function deleteImage(name, callback) {
+    compute.request(
+      {
+        method: 'DELETE',
+        uri: '/global/images/' + name,
+      },
+      function(err, resp) {
+        if (err) {
+          callback(err);
+          return;
+        }
+
+        var operation = compute.operation(resp.name);
         operation.on('error', callback).on('complete', function() {
           callback();
         });

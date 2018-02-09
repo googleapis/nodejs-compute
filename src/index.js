@@ -19,6 +19,7 @@
 var arrify = require('arrify');
 var common = require('@google-cloud/common');
 var extend = require('extend');
+var format = require('string-format-obj');
 var is = require('is');
 var util = require('util');
 
@@ -318,6 +319,84 @@ Compute.prototype.createHealthCheck = function(name, options, callback) {
       operation.metadata = resp;
 
       callback(null, healthCheck, operation, resp);
+    }
+  );
+};
+
+/**
+ * Create an image from a disk.
+ *
+ * @see [Images: insert API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/images/insert}
+ *
+ * @param {string} name - The name of the target image.
+ * @param {Disk} disk - The source disk to create the image from.
+ * @param {object} [options] - See the
+ *     [Images: insert API documentation](https://cloud.google.com/compute/docs/reference/v1/images/insert).
+ * @param {function} callback - The callback function.
+ * @param {?error} callback.err - An error returned while making this request.
+ * @param {Operation} callback.operation - An operation object that can be used
+ *     to check the status of the request.
+ * @param {object} callback.apiResponse - The full API response.
+ *
+ * @example
+ * const Compute = require('@google-cloud/compute');
+ * const compute = new Compute();
+ * const zone = compute.zone('us-central1-a');
+ * const disk = zone.disk('disk1');
+ *
+ * compute.createImage('new-image', disk, function(err, operation, apiResponse) {
+ *   // `operation` is an Operation object that can be used to check the status
+ *   // of network creation.
+ * });
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * compute.createImage('new-image', disk).then(function(data) {
+ *   var operation = data[0];
+ *   var apiResponse = data[1];
+ * });
+ */
+Compute.prototype.createImage = function(name, disk, options, callback) {
+  var self = this;
+
+  if (!common.util.isCustomType(disk, 'Disk')) {
+    throw new Error('A Disk object is required.');
+  }
+
+  if (is.fn(options)) {
+    callback = options;
+    options = {};
+  }
+
+  var body = extend(
+    {
+      name: name,
+      sourceDisk: format('zones/{zoneName}/disks/{diskName}', {
+        zoneName: disk.zone.name,
+        diskName: disk.name,
+      }),
+    },
+    options
+  );
+
+  this.request(
+    {
+      method: 'POST',
+      uri: '/global/images',
+      json: body,
+    },
+    function(err, resp) {
+      if (err) {
+        callback(err, null, resp);
+        return;
+      }
+
+      var operation = self.operation(resp.name);
+      operation.metadata = resp;
+
+      // @TODO: create "Image" class and return here.
+      callback(null, operation, resp);
     }
   );
 };

@@ -17,9 +17,6 @@
 'use strict';
 
 var common = require('@google-cloud/common');
-var extend = require('extend');
-var format = require('string-format-obj');
-var is = require('is');
 var util = require('util');
 
 /**
@@ -109,70 +106,6 @@ function Project(compute) {
 }
 
 util.inherits(Project, common.ServiceObject);
-
-/**
- * Create an image from a disk.
- *
- * @see [Images: insert API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/images/insert}
- *
- * @param {string} name - The name of the target image.
- * @param {Disk} disk - The source disk to create the image from.
- * @param {object} [options] - See the
- *     [Images: insert API documentation](https://cloud.google.com/compute/docs/reference/v1/images/insert).
- * @param {function} callback - The callback function.
- * @param {?error} callback.err - An error returned while making this request.
- * @param {object} callback.apiResponse - The full API response.
- *
- * @example
- * const Compute = require('@google-cloud/compute');
- * const compute = new Compute();
- * const project = compute.project();
- * const zone = compute.zone('us-central1-a');
- * const disk = zone.disk('disk1');
- *
- * project.createImage('new-image', disk, function(err, apiResponse) {
- *   if (!err) {
- *     // apiResponse.targetLink contains uri
- *   }
- * });
- *
- * //-
- * // If the callback is omitted, we'll return a Promise.
- * //-
- * project.createImage('new-image', disk).then(function(data) {
- *   var apiResponse = data[0];
- * });
- */
-Project.prototype.createImage = function(name, disk, options, callback) {
-  if (!common.util.isCustomType(disk, 'Disk')) {
-    throw new Error('A Disk object is required.');
-  }
-
-  if (is.fn(options)) {
-    callback = options;
-    options = {};
-  }
-
-  var body = extend(
-    {
-      name: name,
-      sourceDisk: format('zones/{zoneName}/disks/{diskName}', {
-        zoneName: disk.zone.name,
-        diskName: disk.name,
-      }),
-    },
-    options
-  );
-
-  this.request(
-    {
-      method: 'POST',
-      uri: '/global/images',
-      json: body,
-    },
-    callback
-  );
-};
 
 /*! Developer Documentation
  *
