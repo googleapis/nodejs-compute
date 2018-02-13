@@ -80,17 +80,17 @@ describe('Firewall', function() {
       assert.deepEqual(firewall.metadata, {network: FIREWALL_NETWORK});
     });
 
-    it('should inherit from ServiceObject', function(done) {
+    it('should inherit from ServiceObject', function() {
       var computeInstance = extend({}, COMPUTE, {
         createFirewall: {
           bind: function(context) {
             assert.strictEqual(context, computeInstance);
-            done();
           },
         },
       });
 
       var firewall = new Firewall(computeInstance, FIREWALL_NAME);
+
       assert(firewall instanceof ServiceObject);
 
       var calledWith = firewall.calledWith_[0];
