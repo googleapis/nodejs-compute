@@ -686,8 +686,7 @@ Compute.prototype.firewall = function(name) {
 /**
  * Get a reference to a Google Compute Engine image.
  *
- * See {@link Image} to get a Firewall object for a specific
- * network.
+ * See {@link Image} to get a Image object.
  *
  * @see [Images Overview]{@link https://cloud.google.com/compute/docs/images}
  *
@@ -3046,7 +3045,6 @@ common.paginator.extend(Compute, [
   'getAutoscalers',
   'getDisks',
   'getFirewalls',
-  // TODO: there is an issue here
   'getImages',
   'getHealthChecks',
   'getInstanceGroups',
