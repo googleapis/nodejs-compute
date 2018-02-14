@@ -42,6 +42,7 @@ var fakeUtil = extend({}, util, {
       'autoscaler',
       'disk',
       'firewall',
+      'image',
       'healthCheck',
       'instanceGroup',
       'machineType',
@@ -72,6 +73,7 @@ var fakePaginator = {
       'getAutoscalers',
       'getDisks',
       'getFirewalls',
+      'getImages',
       'getHealthChecks',
       'getInstanceGroups',
       'getMachineTypes',
@@ -633,7 +635,7 @@ describe('Compute', function() {
           return operation;
         };
 
-        compute.createImage(NAME, DISK, function(err, op, resp) {
+        compute.createImage(NAME, DISK, function(err, image, op, resp) {
           assert.strictEqual(err, null);
           assert.strictEqual(op, operation);
           assert.strictEqual(op.metadata, apiResponse);

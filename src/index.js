@@ -33,6 +33,7 @@ var Rule = require('./rule.js');
 var Service = require('./service.js');
 var Snapshot = require('./snapshot.js');
 var Zone = require('./zone.js');
+var Image = require('./image.js');
 
 /**
  * @typedef {object} ClientConfig
@@ -391,12 +392,12 @@ Compute.prototype.createImage = function(name, disk, options, callback) {
         callback(err, null, resp);
         return;
       }
+      var image = self.image(name);
 
       var operation = self.operation(resp.name);
       operation.metadata = resp;
 
-      // @TODO: create "Image" class and return here.
-      callback(null, operation, resp);
+      callback(null, image, operation, resp);
     }
   );
 };
@@ -680,6 +681,24 @@ Compute.prototype.createService = function(name, config, callback) {
  */
 Compute.prototype.firewall = function(name) {
   return new Firewall(this, name);
+};
+
+/**
+ * Get a reference to a Google Compute Engine image.
+ *
+ * See {@link Image} to get a Firewall object for a specific
+ * network.
+ *
+ * @see [Images Overview]{@link https://cloud.google.com/compute/docs/images}
+ *
+ * @param {string} name - Name of the image.
+ * @returns {Image}
+ *
+ * @example
+ * var image = gce.image('image-name');
+ */
+Compute.prototype.image = function(name) {
+  return new Image(this, name);
 };
 
 /**
@@ -1343,6 +1362,126 @@ Compute.prototype.getFirewalls = function(options, callback) {
 Compute.prototype.getFirewallsStream = common.paginator.streamify(
   'getFirewalls'
 );
+
+/**
+ * Get a list of images.
+ *
+ * @see [Images Overview]{@link https://cloud.google.com/compute/docs/images}
+ * @see [Images: list API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/images}
+ *
+ * @param {object=} options - Image search options.
+ * @param {boolean} options.autoPaginate - Have pagination handled
+ *     automatically. Default: true.
+ * @param {string} options.filter - Search filter in the format of
+ *     `{name} {comparison} {filterString}`.
+ *     - **`name`**: the name of the field to compare
+ *     - **`comparison`**: the comparison operator, `eq` (equal) or `ne`
+ *       (not equal)
+ *     - **`filterString`**: the string to filter to. For string fields, this
+ *       can be a regular expression.
+ * @param {number} options.maxApiCalls - Maximum number of API calls to make.
+ * @param {number} options.maxResults - Maximum number of images to return.
+ * @param {string} options.pageToken - A previously-returned page token
+ *     representing part of the larger set of results to view.
+ * @param {function} callback - The callback function.
+ * @param {?error} callback.err - An error returned while making this request.
+ * @param {Image[]} callback.images - Image objects from
+ *     your project.
+ * @param {object} callback.apiResponse - The full API response.
+ *
+ * @example
+ * gce.getImages(function(err, images) {
+ *   // `images` is an array of `Image` objects.
+ * });
+ *
+ * //-
+ * // To control how many API requests are made and page through the results
+ * // manually, set `autoPaginate` to `false`.
+ * //-
+ * function callback(err, images, nextQuery, apiResponse) {
+ *   if (nextQuery) {
+ *     // More results exist.
+ *     gce.getImages(nextQuery, callback);
+ *   }
+ * }
+ *
+ * gce.getImages({
+ *   autoPaginate: false
+ * }, callback);
+ *
+ * gce.getImages().then(function(data) {
+ *   var images = data[0];
+ * });
+ */
+Compute.prototype.getImages = function(options, callback) {
+  var self = this;
+
+  if (is.fn(options)) {
+    callback = options;
+    options = {};
+  }
+
+  options = options || {};
+
+  this.request(
+    {
+      uri: '/global/images',
+      qs: options,
+    },
+    function(err, resp) {
+      if (err) {
+        callback(err, null, null, resp);
+        return;
+      }
+
+      var nextQuery = null;
+
+      if (resp.nextPageToken) {
+        nextQuery = extend({}, options, {
+          pageToken: resp.nextPageToken,
+        });
+      }
+
+      var images = (resp.items || []).map(function(image) {
+        var imageInstance = self.image(image.name);
+        imageInstance.metadata = image;
+        return imageInstance;
+      });
+
+      callback(null, images, nextQuery, resp);
+    }
+  );
+};
+
+/**
+ * Get a list of {@link Image} objects as a readable object stream.
+ *
+ * @method Compute#getImagesStream
+ * @param {object=} query - Configuration object. See
+ *     {@link Compute#getImages} for a complete list of options.
+ * @returns {stream}
+ *
+ * @example
+ * gce.getImagesStream()
+ *   .on('error', console.error)
+ *   .on('data', function(images) {
+ *     // `image` is a `Image` object.
+ *   })
+ *   .on('end', function() {
+ *     // All images retrieved.
+ *   });
+ *
+ * //-
+ * // If you anticipate many results, you can end a stream early to prevent
+ * // unnecessary processing and API requests.
+ * //-
+ * gce.getImagesStream()
+ *   .on('data', function(image) {
+ *     this.end();
+ *   });
+ */
+
+Compute.prototype.getImagesStream = common.paginator.streamify('getImages');
 
 /**
  * Get a list of health checks.
@@ -2907,6 +3046,8 @@ common.paginator.extend(Compute, [
   'getAutoscalers',
   'getDisks',
   'getFirewalls',
+  // TODO: there is an issue here
+  'getImages',
   'getHealthChecks',
   'getInstanceGroups',
   'getMachineTypes',
@@ -2932,6 +3073,7 @@ common.util.promisifyAll(Compute, {
     'autoscaler',
     'disk',
     'firewall',
+    'image',
     'healthCheck',
     'instanceGroup',
     'machineType',
@@ -3037,6 +3179,15 @@ Compute.Snapshot = Snapshot;
  * @type {constructor}
  */
 Compute.Zone = Zone;
+
+/**
+ * {@link Image} class.
+ *
+ * @name Compute.Image
+ * @see Image
+ * @type {constructor}
+ */
+Compute.Image = Image;
 
 /**
  * The default export of the `@google-cloud/compute` package is the
