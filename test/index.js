@@ -20,6 +20,7 @@ var arrify = require('arrify');
 var assert = require('assert');
 var events = require('events');
 var extend = require('extend');
+var format = require('string-format-obj');
 var nodeutil = require('util');
 var proxyquire = require('proxyquire');
 var Service = require('@google-cloud/common').Service;
@@ -41,6 +42,7 @@ var fakeUtil = extend({}, util, {
       'autoscaler',
       'disk',
       'firewall',
+      'image',
       'healthCheck',
       'instanceGroup',
       'machineType',
@@ -71,6 +73,7 @@ var fakePaginator = {
       'getAutoscalers',
       'getDisks',
       'getFirewalls',
+      'getImages',
       'getHealthChecks',
       'getInstanceGroups',
       'getMachineTypes',
@@ -530,6 +533,115 @@ describe('Compute', function() {
         };
 
         compute.createHealthCheck('name', {https: true}, assert.ifError);
+      });
+    });
+  });
+
+  describe('createImage', function() {
+    var NAME = 'image-name';
+
+    var DISK = {
+      name: 'disk-name',
+      zone: {
+        name: 'zone-name',
+      },
+    };
+
+    beforeEach(function() {
+      fakeUtil.isCustomType = function() {
+        return true;
+      };
+    });
+
+    it('should throw if Disk is not provided', function() {
+      fakeUtil.isCustomType = function(unknown, type) {
+        assert.strictEqual(unknown, DISK);
+        assert.strictEqual(type, 'Disk');
+        return false;
+      };
+
+      assert.throws(function() {
+        compute.createImage(NAME, DISK);
+      }, /A Disk object is required\./);
+    });
+
+    it('should make the correct API request', function(done) {
+      var options = {
+        a: 'b',
+        c: 'd',
+      };
+
+      compute.request = function(reqOpts) {
+        assert.strictEqual(reqOpts.method, 'POST');
+        assert.strictEqual(reqOpts.uri, '/global/images');
+        assert.deepEqual(reqOpts.json, {
+          name: NAME,
+          sourceDisk: format('zones/{zoneName}/disks/{diskName}', {
+            zoneName: DISK.zone.name,
+            diskName: DISK.name,
+          }),
+          a: 'b',
+          c: 'd',
+        });
+
+        done();
+      };
+
+      compute.createImage(NAME, DISK, options, assert.ifError);
+    });
+
+    describe('error', function() {
+      var error = new Error('Error.');
+      var apiResponse = {};
+
+      beforeEach(function() {
+        compute.request = function(reqOpts, callback) {
+          callback(error, apiResponse);
+        };
+      });
+
+      it('should exec the callback with error & API response', function(done) {
+        compute.createImage(NAME, DISK, function(err, op, resp) {
+          assert.strictEqual(err, error);
+          assert.strictEqual(op, null);
+          assert.strictEqual(resp, apiResponse);
+          done();
+        });
+      });
+    });
+
+    describe('success', function() {
+      var apiResponse = {
+        name: 'op-name',
+      };
+
+      beforeEach(function() {
+        compute.request = function(reqOpts, callback) {
+          callback(null, apiResponse);
+        };
+      });
+
+      it('should exec cb with Operation & apiResp', function(done) {
+        var network = {};
+        var operation = {};
+
+        compute.network = function(name) {
+          assert.strictEqual(name, NAME);
+          return network;
+        };
+
+        compute.operation = function(name) {
+          assert.strictEqual(name, apiResponse.name);
+          return operation;
+        };
+
+        compute.createImage(NAME, DISK, function(err, image, op, resp) {
+          assert.strictEqual(err, null);
+          assert.strictEqual(op, operation);
+          assert.strictEqual(op.metadata, apiResponse);
+          assert.strictEqual(resp, apiResponse);
+          done();
+        });
       });
     });
   });
