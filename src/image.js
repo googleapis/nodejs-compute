@@ -17,7 +17,6 @@
 'use strict';
 
 var common = require('@google-cloud/common');
-var extend = require('extend');
 var util = require('util');
 
 /**

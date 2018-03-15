@@ -101,6 +101,10 @@ function FakeHealthCheck() {
   this.calledWith_ = slice.call(arguments);
 }
 
+function FakeImage() {
+  this.calledWith_ = slice.call(arguments);
+}
+
 function FakeNetwork() {
   this.calledWith_ = slice.call(arguments);
 }
@@ -170,6 +174,7 @@ describe('Compute', function() {
       },
       './firewall.js': FakeFirewall,
       './health-check.js': FakeHealthCheck,
+      './image.js': FakeImage,
       './network.js': FakeNetwork,
       './operation.js': FakeOperation,
       './project.js': FakeProject,
@@ -232,6 +237,7 @@ describe('Compute', function() {
       assert.strictEqual(compute.getAutoscalersStream, 'getAutoscalers');
       assert.strictEqual(compute.getDisksStream, 'getDisks');
       assert.strictEqual(compute.getInstanceGroupsStream, 'getInstanceGroups');
+      assert.strictEqual(compute.getImagesStream, 'getImages');
       assert.strictEqual(compute.getFirewallsStream, 'getFirewalls');
       assert.strictEqual(compute.getHealthChecksStream, 'getHealthChecks');
       assert.strictEqual(compute.getMachineTypesStream, 'getMachineTypes');
@@ -1538,6 +1544,102 @@ describe('Compute', function() {
     });
   });
 
+  describe('getImages', function() {
+    it('should accept only a callback', function(done) {
+      compute.request = function(reqOpts) {
+        assert.deepEqual(reqOpts.qs, {});
+        done();
+      };
+
+      compute.getImages(assert.ifError);
+    });
+
+    it('should make the correct API request', function(done) {
+      var options = {};
+
+      compute.request = function(reqOpts) {
+        assert.strictEqual(reqOpts.uri, '/global/images');
+        assert.strictEqual(reqOpts.qs, options);
+        done();
+      };
+
+      compute.getImages(options, assert.ifError);
+    });
+
+    describe('error', function() {
+      var error = new Error('Error.');
+      var apiResponse = {a: 'b', c: 'd'};
+
+      beforeEach(function() {
+        compute.request = function(reqOpts, callback) {
+          callback(error, apiResponse);
+        };
+      });
+
+      it('should execute callback with error & API response', function(done) {
+        compute.getImages({}, function(err, images, nextQuery, resp) {
+          assert.strictEqual(err, error);
+          assert.strictEqual(images, null);
+          assert.strictEqual(nextQuery, null);
+          assert.strictEqual(resp, apiResponse);
+
+          done();
+        });
+      });
+    });
+
+    describe('success', function() {
+      var image = {name: 'image-1'};
+      var apiResponse = {
+        items: [image],
+      };
+
+      beforeEach(function() {
+        compute.request = function(reqOpts, callback) {
+          callback(null, apiResponse);
+        };
+      });
+
+      it('should create Image objects from the response', function(done) {
+        compute.image = function(name) {
+          assert.strictEqual(name, image.name);
+          setImmediate(done);
+          return image;
+        };
+
+        compute.getImages({}, assert.ifError);
+      });
+
+      it('should build a nextQuery if necessary', function(done) {
+        var apiResponseWithNextPageToken = extend({}, apiResponse, {
+          nextPageToken: 'next-page-token',
+        });
+
+        var query = {a: 'b', c: 'd'};
+        var originalQuery = extend({}, query);
+
+        compute.request = function(reqOpts, callback) {
+          callback(null, apiResponseWithNextPageToken);
+        };
+
+        compute.getImages(query, function(err, images, nextQuery) {
+          assert.ifError(err);
+
+          assert.deepEqual(query, originalQuery);
+
+          assert.deepEqual(
+            nextQuery,
+            extend({}, query, {
+              pageToken: apiResponseWithNextPageToken.nextPageToken,
+            })
+          );
+
+          done();
+        });
+      });
+    });
+  });
+
   describe('getInstanceGroups', function() {
     it('should accept only a callback', function(done) {
       compute.request = function(reqOpts) {
@@ -2691,6 +2793,17 @@ describe('Compute', function() {
       assert.strictEqual(healthCheck.calledWith_[0], compute);
       assert.strictEqual(healthCheck.calledWith_[1], NAME);
       assert.strictEqual(healthCheck.calledWith_[2], OPTIONS);
+    });
+  });
+
+  describe('image', function() {
+    var NAME = 'image-name';
+
+    it('should return an Image object', function() {
+      var image = compute.image(NAME);
+      assert(image instanceof FakeImage);
+      assert.strictEqual(image.calledWith_[0], compute);
+      assert.strictEqual(image.calledWith_[1], NAME);
     });
   });
 

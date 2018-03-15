@@ -1,5 +1,5 @@
 /**
- * Copyright 2015 Google Inc. All Rights Reserved.
+ * Copyright 2018 Google Inc. All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -46,6 +46,7 @@ describe('Image', function() {
   var COMPUTE = {
     projectId: 'project-id',
     createImage: util.noop,
+    operation: util.noop,
   };
   var IMAGE_NAME = 'image-name';
 
@@ -60,19 +61,12 @@ describe('Image', function() {
 
   beforeEach(function() {
     image = new Image(COMPUTE, IMAGE_NAME);
+    image.parent = COMPUTE;
   });
 
   describe('instantiation', function() {
     it('should promisify all the things', function() {
       assert(promisified);
-    });
-
-    it('should localize compute instance', function() {
-      assert.strictEqual(image.compute, COMPUTE);
-    });
-
-    it('should localize the image name', function() {
-      assert.strictEqual(image.name, IMAGE_NAME);
     });
 
     it('should inherit from ServiceObject', function() {
@@ -151,7 +145,7 @@ describe('Image', function() {
       it('should execute callback with Operation & Response', function(done) {
         var operation = {};
 
-        image.compute.operation = function(name) {
+        image.parent.operation = function(name) {
           assert.strictEqual(name, apiResponse.name);
           return operation;
         };
@@ -168,81 +162,6 @@ describe('Image', function() {
       it('should not require a callback', function() {
         assert.doesNotThrow(function() {
           image.delete();
-        });
-      });
-    });
-  });
-
-  describe('setMetadata', function() {
-    it('should make the correct API request', function(done) {
-      var metadata = {};
-
-      image.request = function(reqOpts) {
-        assert.strictEqual(reqOpts.method, 'PATCH');
-        assert.strictEqual(reqOpts.uri, '');
-        assert.strictEqual(reqOpts.json, metadata);
-        assert.deepEqual(metadata, {
-          name: image.name,
-        });
-
-        done();
-      };
-
-      image.setMetadata(metadata, assert.ifError);
-    });
-
-    describe('error', function() {
-      var error = new Error('Error.');
-      var apiResponse = {a: 'b', c: 'd'};
-
-      beforeEach(function() {
-        image.request = function(reqOpts, callback) {
-          callback(error, apiResponse);
-        };
-      });
-
-      it('should return an error if the request fails', function(done) {
-        image.setMetadata({e: 'f'}, function(err, op, apiResponse_) {
-          assert.strictEqual(err, error);
-          assert.strictEqual(op, null);
-          assert.strictEqual(apiResponse_, apiResponse);
-          done();
-        });
-      });
-    });
-
-    describe('success', function() {
-      var apiResponse = {
-        name: 'op-name',
-      };
-
-      beforeEach(function() {
-        image.request = function(reqOpts, callback) {
-          callback(null, apiResponse);
-        };
-      });
-
-      it('should execute callback with operation & response', function(done) {
-        var operation = {};
-        var metadata = {a: 'b'};
-
-        image.compute.operation = function(name) {
-          assert.strictEqual(name, apiResponse.name);
-          return operation;
-        };
-
-        image.setMetadata(metadata, function(err, op, apiResponse_) {
-          assert.ifError(err);
-          assert.strictEqual(op, operation);
-          assert.strictEqual(op.metadata, apiResponse);
-          assert.strictEqual(apiResponse_, apiResponse);
-          done();
-        });
-      });
-
-      it('should not require a callback', function() {
-        assert.doesNotThrow(function() {
-          image.setMetadata({a: 'b'});
         });
       });
     });
