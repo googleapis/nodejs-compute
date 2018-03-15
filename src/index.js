@@ -1357,7 +1357,6 @@ Compute.prototype.getFirewalls = function(options, callback) {
  *     this.end();
  *   });
  */
-
 Compute.prototype.getFirewallsStream = common.paginator.streamify(
   'getFirewalls'
 );
@@ -1384,8 +1383,7 @@ Compute.prototype.getFirewallsStream = common.paginator.streamify(
  *     representing part of the larger set of results to view.
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request.
- * @param {Image[]} callback.images - Image objects from
- *     your project.
+ * @param {Image[]} callback.images - Image objects from your project.
  * @param {object} callback.apiResponse - The full API response.
  *
  * @example
@@ -1456,15 +1454,15 @@ Compute.prototype.getImages = function(options, callback) {
  * Get a list of {@link Image} objects as a readable object stream.
  *
  * @method Compute#getImagesStream
- * @param {object=} query - Configuration object. See
- *     {@link Compute#getImages} for a complete list of options.
+ * @param {object=} query - Configuration object. See {@link Compute#getImages}
+ *     for a complete list of options.
  * @returns {stream}
  *
  * @example
  * gce.getImagesStream()
  *   .on('error', console.error)
- *   .on('data', function(images) {
- *     // `image` is a `Image` object.
+ *   .on('data', function(image) {
+ *     // `image` is an `Image` object.
  *   })
  *   .on('end', function() {
  *     // All images retrieved.
@@ -1479,7 +1477,6 @@ Compute.prototype.getImages = function(options, callback) {
  *     this.end();
  *   });
  */
-
 Compute.prototype.getImagesStream = common.paginator.streamify('getImages');
 
 /**
@@ -3107,6 +3104,15 @@ Compute.Firewall = Firewall;
 Compute.HealthCheck = HealthCheck;
 
 /**
+ * {@link Image} class.
+ *
+ * @name Compute.Image
+ * @see Image
+ * @type {constructor}
+ */
+Compute.Image = Image;
+
+/**
  * {@link Network} class.
  *
  * @name Compute.Network
@@ -3177,15 +3183,6 @@ Compute.Snapshot = Snapshot;
  * @type {constructor}
  */
 Compute.Zone = Zone;
-
-/**
- * {@link Image} class.
- *
- * @name Compute.Image
- * @see Image
- * @type {constructor}
- */
-Compute.Image = Image;
 
 /**
  * The default export of the `@google-cloud/compute` package is the

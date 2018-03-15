@@ -1,5 +1,5 @@
 /*!
- * Copyright 2015 Google Inc. All Rights Reserved.
+ * Copyright 2018 Google Inc. All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,45 +17,42 @@
 'use strict';
 
 var common = require('@google-cloud/common');
+var extend = require('extend');
 var util = require('util');
 
 /**
- * A Image object allows you to interact with a Google Compute Engine
- * image.
+ * An Image object allows you to interact with a Google Compute Engine image.
  *
  * @see [Images Overview]{@link https://cloud.google.com/compute/docs/images}
  * @see [Image Resource]{@link https://cloud.google.com/compute/docs/reference/v1/images}
  *
  * @class
- * @param {Compute} scope - The parent scope this
- *     image belongs to.
+ * @param {Compute} compute - The parent Compute instance this Image belongs to.
  * @param {string} name - Image name.
  *
  * @example
  * const Compute = require('@google-cloud/compute');
  * const compute = new Compute();
  * const image = compute.image('image-name');
- * image.getMetadata().then(data => {});
  */
 function Image(compute, name) {
   var methods = {
     /**
-     * Create an Image.
+     * Create an image.
      *
      * @method Image#create
-     * @param {object} config - See {@link Compute#createImage}.
+     * @param {Disk} disk - See {@link Compute#createImage}.
+     * @param {object} [options] - See {@link Compute#createImage}.
      *
      * @example
      * const Compute = require('@google-cloud/compute');
      * const compute = new Compute();
+     * const zone = compute.zone('us-central1-a');
+     * const disk = zone.disk('disk1');
      * const image = compute.image('image-name');
      *
-     * const config = {
-     *   // ...
-     * };
-     *
-     * image.create(config, function(err, image, operation, apiResponse) {
-     *   // `image` is a Image object.
+     * image.create(disk, function(err, image, operation, apiResponse) {
+     *   // `image` is an Image object.
      *
      *   // `operation` is an Operation object that can be used to check the
      *   // status of the request.
@@ -64,7 +61,7 @@ function Image(compute, name) {
      * //-
      * // If the callback is omitted, we'll return a Promise.
      * //-
-     * image.create(config).then(function(data) {
+     * image.create(disk).then(function(data) {
      *   const image = data[0];
      *   const operation = data[1];
      *   const apiResponse = data[2];
@@ -98,8 +95,7 @@ function Image(compute, name) {
     exists: true,
 
     /**
-     * Get a image if it exists.
-     *
+     * Get an image if it exists.
      *
      * @method Image#get
      * @param {options=} options - Configuration object.
@@ -110,7 +106,7 @@ function Image(compute, name) {
      * const image = compute.image('image-name');
      *
      * image.get(function(err, image, apiResponse) {
-     *   // `image` is a Image object.
+     *   // `image` is an Image object.
      * });
      *
      * //-
@@ -165,19 +161,6 @@ function Image(compute, name) {
     createMethod: compute.createImage.bind(compute),
     methods: methods,
   });
-
-  /**
-   * The parent {@link Compute} instance of this {@link Image} instance.
-   * @name Image#compute
-   * @type {Compute}
-   */
-  this.compute = compute;
-
-  /**
-   * @name Image#name
-   * @type {string}
-   */
-  this.name = name;
 }
 
 util.inherits(Image, common.ServiceObject);
@@ -212,7 +195,7 @@ util.inherits(Image, common.ServiceObject);
  * });
  */
 Image.prototype.delete = function(callback) {
-  var compute = this.compute;
+  var compute = this.parent;
 
   callback = callback || common.util.noop;
 
@@ -227,70 +210,6 @@ Image.prototype.delete = function(callback) {
 
     callback(null, operation, resp);
   });
-};
-
-/**
- * Set the image's metadata.
- *
- * @see [Image Resource]{@link https://cloud.google.com/compute/docs/reference/v1/images}
- *
- * @param {object} metadata - See a
- *     [Image resource](https://cloud.google.com/compute/docs/reference/v1/images).
- * @param {function=} callback - The callback function.
- * @param {?error} callback.err - An error returned while making this request.
- * @param {Operation} callback.operation - An operation object
- *     that can be used to check the status of the request.
- * @param {object} callback.apiResponse - The full API response.
- *
- * @example
- * const Compute = require('@google-cloud/compute');
- * const compute = new Compute();
- * const image = compute.image('image-name');
- *
- * const metadata = {
- *   description: 'New description'
- * };
- *
- * image.setMetadata(metadata, function(err, operation, apiResponse) {
- *   // `operation` is an Operation object that can be used to check the status
- *   // of the request.
- * });
- *
- * //-
- * // If the callback is omitted, we'll return a Promise.
- * //-
- * image.setMetadata(metadata).then(function(data) {
- *   const operation = data[0];
- *   const apiResponse = data[1];
- * });
- */
-
-Image.prototype.setMetadata = function(metadata, callback) {
-  var compute = this.compute;
-
-  callback = callback || common.util.noop;
-
-  metadata = metadata || {};
-  metadata.name = this.name;
-
-  this.request(
-    {
-      method: 'PATCH',
-      uri: '',
-      json: metadata,
-    },
-    function(err, resp) {
-      if (err) {
-        callback(err, null, resp);
-        return;
-      }
-
-      var operation = compute.operation(resp.name);
-      operation.metadata = resp;
-
-      callback(null, operation, resp);
-    }
-  );
 };
 
 /*! Developer Documentation

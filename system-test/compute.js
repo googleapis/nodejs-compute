@@ -489,20 +489,40 @@ describe('Compute', function() {
 
   describe('images', function() {
     var DISK = zone.disk(generateName('disk'));
+    var IMAGE = compute.image(generateName('image'));
 
     before(create(DISK, {os: 'ubuntu'}));
-
-    after(function(done) {
-      DISK.delete(done);
-    });
+    before(create(IMAGE, DISK));
 
     it('should create an image', function(done) {
-      var name = generateName('image');
-
-      compute.createImage(name, DISK, function(err) {
+      IMAGE.exists(function(err, exists) {
         assert.ifError(err);
-        getImage(name, done);
+        assert.strictEqual(exists, true);
+        done();
       });
+    });
+
+    it('should list images', function(done) {
+      compute.getImages(function(err, images) {
+        assert.ifError(err);
+        assert(images.length > 0);
+        done();
+      });
+    });
+
+    it('should list images in stream mode', function(done) {
+      var resultsMatched = 0;
+
+      compute
+        .getImagesStream()
+        .on('error', done)
+        .on('data', function() {
+          resultsMatched++;
+        })
+        .on('end', function() {
+          assert(resultsMatched > 0);
+          done();
+        });
     });
   });
 
@@ -1496,7 +1516,6 @@ describe('Compute', function() {
     async.series(
       [
         deleteGlobalRules,
-        deleteImages,
         deleteRegionalRules,
         deleteTargetProxies,
         deleteUrlMaps,
@@ -1518,6 +1537,7 @@ describe('Compute', function() {
         'getAddresses',
         'getAutoscalers',
         'getDisks',
+        'getImages',
         'getInstanceGroups',
         'getFirewalls',
         'getSubnetworks',
@@ -2078,64 +2098,6 @@ describe('Compute', function() {
         }
 
         var operation = zone.operation(resp.name);
-        operation.on('error', callback).on('complete', function() {
-          callback();
-        });
-      }
-    );
-  }
-
-  function getImages(callback) {
-    compute.request(
-      {
-        uri: '/global/images',
-        qs: {
-          filter: 'name eq ' + TESTS_PREFIX + '.*',
-        },
-      },
-      callback
-    );
-  }
-
-  function getImage(name, callback) {
-    compute.request(
-      {
-        uri: '/global/images/' + name,
-      },
-      callback
-    );
-  }
-
-  function deleteImages(callback) {
-    getImages(function(err, resp) {
-      if (err) {
-        callback(err);
-        return;
-      }
-
-      if (!resp.items) {
-        callback();
-        return;
-      }
-
-      var names = resp.items.map(prop('name'));
-      async.each(names, deleteImage, callback);
-    });
-  }
-
-  function deleteImage(name, callback) {
-    compute.request(
-      {
-        method: 'DELETE',
-        uri: '/global/images/' + name,
-      },
-      function(err, resp) {
-        if (err) {
-          callback(err);
-          return;
-        }
-
-        var operation = compute.operation(resp.name);
         operation.on('error', callback).on('complete', function() {
           callback();
         });
