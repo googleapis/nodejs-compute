@@ -166,6 +166,9 @@ describe('Compute', function() {
   var PROJECT_ID = 'project-id';
 
   before(function() {
+    // Node v4 on Circle times out.
+    this.timeout(0);
+
     Compute = proxyquire('../', {
       '@google-cloud/common': {
         Service: FakeService,
