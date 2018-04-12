@@ -163,7 +163,7 @@ describe('Network', function() {
   describe('createSubnetwork', function() {
     it('should call region.createSubnetwork correctly', function(done) {
       var name = 'subnetwork-name';
-      var region = {};
+      var region: any = {};
       var config = {
         a: 'b',
         c: 'd',

@@ -1038,7 +1038,7 @@ describe('Compute', function() {
       });
 
       it('should create Address objects from the response', function(done) {
-        var region = {};
+        var region: any = {};
 
         compute.region = function(name) {
           assert.strictEqual(name, REGION_NAME);
@@ -1152,7 +1152,7 @@ describe('Compute', function() {
       });
 
       it('should create Autoscaler objects from the response', function(done) {
-        var zone = {};
+        var zone: any = {};
 
         compute.zone = function(name) {
           assert.strictEqual(name, ZONE_NAME);
@@ -1169,7 +1169,7 @@ describe('Compute', function() {
       });
 
       it('should not create zone-less Autoscalers', function(done) {
-        var zone = {};
+        var zone: any = {};
 
         compute.zone = function() {
           return zone;
@@ -1283,7 +1283,7 @@ describe('Compute', function() {
       });
 
       it('should create Disk objects from the response', function(done) {
-        var zone = {};
+        var zone: any = {};
 
         compute.zone = function(name) {
           assert.strictEqual(name, ZONE_NAME);
@@ -1707,7 +1707,7 @@ describe('Compute', function() {
       });
 
       it('should create InstanceGroup objects from the resp', function(done) {
-        var zone = {};
+        var zone: any = {};
 
         compute.zone = function(name) {
           assert.strictEqual(name, ZONE_NAME);
@@ -1818,7 +1818,7 @@ describe('Compute', function() {
       });
 
       it('should create MachineType objects from the response', function(done) {
-        var zone = {};
+        var zone: any = {};
         var machineTypeInstance = {};
 
         compute.zone = function(name) {
@@ -2524,7 +2524,7 @@ describe('Compute', function() {
       });
 
       it('should create Subnetwork objects from the response', function(done) {
-        var region = {};
+        var region: any = {};
         var fakeSubnetwork = {};
 
         compute.region = function(name) {
@@ -2644,7 +2644,7 @@ describe('Compute', function() {
       });
 
       it('should create VM objects from the response', function(done) {
-        var zone = {};
+        var zone: any = {};
 
         compute.zone = function(name) {
           assert.strictEqual(name, ZONE_NAME);

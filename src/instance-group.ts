@@ -202,7 +202,7 @@ util.inherits(InstanceGroup, common.ServiceObject);
  *     and the value the port number.
  * @returns {object[]} - The formatted array of named ports.
  */
-InstanceGroup.formatPorts_ = function(ports) {
+(InstanceGroup as any).formatPorts_ = function(ports) {
   return Object.keys(ports).map(function(port) {
     return {
       name: port,
@@ -580,7 +580,7 @@ InstanceGroup.prototype.setPorts = function(ports, callback) {
       method: 'POST',
       uri: '/setNamedPorts',
       json: {
-        namedPorts: InstanceGroup.formatPorts_(ports),
+        namedPorts: (InstanceGroup as any).formatPorts_(ports),
       },
     },
     function(err, resp) {

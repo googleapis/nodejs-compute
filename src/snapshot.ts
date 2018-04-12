@@ -127,7 +127,7 @@ function Snapshot(scope, name) {
     getMetadata: true,
   };
 
-  var config = {
+  var config: any = {
     parent: scope,
     baseUrl:
       'https://www.googleapis.com/compute/v1/projects/{{projectId}}/global/snapshots',

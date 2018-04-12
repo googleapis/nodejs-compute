@@ -901,7 +901,7 @@ describe('VM', function() {
     });
 
     it('should create a waiter', function(done) {
-      var now = new Date() / 1000;
+      var now = Date.now() / 1000;
       vm.waitFor(VALID_STATUSES[0], done);
 
       var createdWaiter = vm.waiters.pop();
@@ -1103,7 +1103,7 @@ describe('VM', function() {
       });
 
       it('should check for the status again after interval', function(done) {
-        global.setTimeout = function(fn, interval) {
+        (global as any).setTimeout = function(fn, interval) {
           assert.strictEqual(interval, 2000);
 
           vm.getMetadata = function() {

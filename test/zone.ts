@@ -1,3 +1,5 @@
+import { GoogleError } from "../src/error";
+
 /**
  * Copyright 2015 Google Inc. All Rights Reserved.
  *
@@ -58,12 +60,11 @@ function FakeDisk() {
 }
 
 var formatPortsOverride;
-FakeInstanceGroup.formatPorts_ = function() {
-  return (formatPortsOverride || util.noop).apply(null, arguments);
-};
-
 function FakeInstanceGroup() {
   this.calledWith_ = [].slice.call(arguments);
+  this.formatPorts_ = function() {
+    return (formatPortsOverride || util.noop).apply(null, arguments);
+  }
 }
 
 function FakeMachineType() {
@@ -1740,7 +1741,7 @@ describe('Zone', function() {
     });
 
     it('should not execute callback with error if 409', function(done) {
-      var error = new Error('Error.');
+      var error = new GoogleError('Error.');
       error.code = 409;
 
       var apiResponse = {};
@@ -1788,7 +1789,7 @@ describe('Zone', function() {
     });
 
     it('should not execute callback with error if 409', function(done) {
-      var error = new Error('Error.');
+      var error = new GoogleError('Error.');
       error.code = 409;
 
       zone.compute.createFirewall = function(name, config, callback) {

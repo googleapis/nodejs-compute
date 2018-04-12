@@ -173,7 +173,7 @@ Compute.prototype.createFirewall = function(name, config, callback) {
     body.allowed = arrify(body.allowed);
 
     for (var protocol in body.protocols) {
-      var allowedConfig = {
+      var allowedConfig: any = {
         IPProtocol: protocol,
       };
 
@@ -768,7 +768,7 @@ Compute.prototype.getAddresses = function(options, callback) {
 
       var regions = resp.items || {};
 
-      var addresses = Object.keys(regions).reduce(function(acc, regionName) {
+      var addresses = Object.keys(regions).reduce(function(acc: any[], regionName) {
         var region = self.region(regionName.replace('regions/', ''));
         var regionAddresses = regions[regionName].addresses || [];
 
@@ -902,7 +902,7 @@ Compute.prototype.getAutoscalers = function(options, callback) {
 
       var zones = resp.items || {};
 
-      var autoscalers = Object.keys(zones).reduce(function(acc, zoneName) {
+      var autoscalers = Object.keys(zones).reduce(function(acc: any[], zoneName) {
         if (zoneName.indexOf('zones/') !== 0) {
           return acc;
         }
@@ -1039,7 +1039,7 @@ Compute.prototype.getDisks = function(options, callback) {
 
       var zones = resp.items || {};
 
-      var disks = Object.keys(zones).reduce(function(acc, zoneName) {
+      var disks = Object.keys(zones).reduce(function(acc: any[], zoneName) {
         var zone = self.zone(zoneName.replace('zones/', ''));
         var disks = zones[zoneName].disks || [];
 
@@ -1172,7 +1172,7 @@ Compute.prototype.getInstanceGroups = function(options, callback) {
 
       var zones = resp.items || {};
 
-      var instanceGroups = Object.keys(zones).reduce(function(acc, zoneName) {
+      var instanceGroups = Object.keys(zones).reduce(function(acc: any, zoneName) {
         var zone = self.zone(zoneName.replace('zones/', ''));
         var instanceGroups = zones[zoneName].instanceGroups || [];
 
@@ -1678,7 +1678,7 @@ Compute.prototype.getMachineTypes = function(options, callback) {
 
       var zones = resp.items || {};
 
-      var machineTypes = Object.keys(zones).reduce(function(acc, zoneName) {
+      var machineTypes = Object.keys(zones).reduce(function(acc: any[], zoneName) {
         var zone = self.zone(zoneName.replace('zones/', ''));
         var machineTypesByZone = zones[zoneName].machineTypes || [];
 
@@ -2547,7 +2547,7 @@ Compute.prototype.getSubnetworks = function(options, callback) {
 
       var regions = resp.items || {};
 
-      var subnetworks = Object.keys(regions).reduce(function(acc, regionName) {
+      var subnetworks = Object.keys(regions).reduce(function(acc: any[], regionName) {
         var region = self.region(regionName.replace('regions/', ''));
         var subnetworks = regions[regionName].subnetworks || [];
 
@@ -2680,7 +2680,7 @@ Compute.prototype.getVMs = function(options, callback) {
 
       var zones = resp.items || {};
 
-      var vms = Object.keys(zones).reduce(function(acc, zoneName) {
+      var vms = Object.keys(zones).reduce(function(acc: any[], zoneName) {
         var zone = self.zone(zoneName.replace('zones/', ''));
         var instances = zones[zoneName].instances || [];
 

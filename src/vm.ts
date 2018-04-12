@@ -764,7 +764,7 @@ VM.prototype.setMetadata = function(metadata, callback) {
 
     var newMetadata = {
       fingerprint: currentMetadata.metadata.fingerprint,
-      items: [],
+      items: new Array<any>(),
     };
 
     for (var prop in metadata) {
@@ -1008,7 +1008,7 @@ VM.prototype.waitFor = function(status, options, callback) {
   this.waiters.push({
     status: status,
     timeout: timeout,
-    startTime: new Date() / 1000,
+    startTime: Date.now() / 1000,
     callback: callback,
   });
 
@@ -1035,7 +1035,7 @@ VM.prototype.startPolling_ = function() {
   }
 
   this.getMetadata(function(err, metadata) {
-    var now = new Date() / 1000;
+    var now = Date.now() / 1000;
 
     var waitersToRemove = self.waiters.filter(function(waiter) {
       if (err) {
@@ -1058,6 +1058,7 @@ VM.prototype.startPolling_ = function() {
         waiter.callback(waitForTimeoutError);
         return true;
       }
+      return false;
     });
 
     waitersToRemove.forEach(function(waiter) {

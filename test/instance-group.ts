@@ -62,7 +62,7 @@ describe('InstanceGroup', function() {
   var InstanceGroup;
   var instanceGroup;
 
-  var staticMethods = {};
+  var staticMethods: any = {};
 
   var ZONE = {
     createInstanceGroup: util.noop,
@@ -205,7 +205,7 @@ describe('InstanceGroup', function() {
       });
 
       it('should return an Operation and API response', function(done) {
-        var operation = {};
+        var operation: any = {};
 
         instanceGroup.zone.operation = function(name) {
           assert.strictEqual(name, apiResponse.name);
@@ -470,7 +470,7 @@ describe('InstanceGroup', function() {
       });
 
       it('should return an Operation and API response', function(done) {
-        var operation = {};
+        var operation: any = {};
 
         instanceGroup.zone.operation = function(name) {
           assert.strictEqual(name, apiResponse.name);

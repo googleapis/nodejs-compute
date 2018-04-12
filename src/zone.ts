@@ -381,7 +381,7 @@ Zone.prototype.createAutoscaler = function(name, config, callback) {
 Zone.prototype.createDisk = function(name, config, callback) {
   var self = this;
 
-  var query = {};
+  var query: any = {};
   var body = extend({}, config, {
     name: name,
   });
@@ -484,7 +484,7 @@ Zone.prototype.createInstanceGroup = function(name, options, callback) {
   });
 
   if (body.ports) {
-    body.namedPorts = InstanceGroup.formatPorts_(body.ports);
+    body.namedPorts = (InstanceGroup as any).formatPorts_(body.ports);
     delete body.ports;
   }
 
@@ -650,7 +650,7 @@ Zone.prototype.createVM = function(name, config, callback) {
     // We will add tags to the created instance (http-server and/or
     // https-server), and create the appropriate firewall rules to allow
     // connections on the necessary ports to these tags.
-    var createFirewallMethods = [];
+    var createFirewallMethods = new Array<any>();
 
     body.networkInterfaces[0].accessConfigs = [
       {

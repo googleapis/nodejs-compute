@@ -29,7 +29,7 @@ function FakeServiceObject() {
   this.calledWith_ = arguments;
 }
 
-var parseHttpRespBodyOverride = null;
+var parseHttpRespBodyOverride: any = null;
 var promisified = false;
 var fakeUtil = extend({}, util, {
   parseHttpRespBody: function() {
