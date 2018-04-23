@@ -256,9 +256,11 @@ describe('Compute', function() {
         .create(function(err, snapshot, operation) {
           assert.ifError(err);
 
-          operation.on('error', done).on('complete', function() {
-            done();
-          });
+          operation
+            .on('error', done)
+            .on('complete', function() {
+              snapshot.getMetadata(done);
+            });
         });
     });
 
