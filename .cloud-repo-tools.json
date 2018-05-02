@@ -18,6 +18,13 @@
       "file": "vms_api.js",
       "docs_link": "https://cloud.google.com/compute/docs",
       "description": "After explicit authentication, get a list of virtual machine instances and log the first result.\n\n"
+    },
+    {
+      "id": "startup-script",
+      "name": "Install Apache and a custom homepage via startup script",
+      "ref": "startup-script/",
+      "file": "startup-script/index.js",
+      "docs_link": "https://cloud.google.com/compute/docs"
     }
   ]
 }
