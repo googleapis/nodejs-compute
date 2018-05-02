@@ -15,13 +15,9 @@
 
 'use strict';
 
-// [START complete]
-// [START initialize]
 var google = require('googleapis');
 var compute = google.compute('v1');
-// [END initialize]
 
-// [START auth]
 function auth(callback) {
   google.auth.getApplicationDefault(function(err, authClient) {
     if (err) {
@@ -49,9 +45,7 @@ function auth(callback) {
     callback(null, authClient);
   });
 }
-// [END auth]
 
-// [START list]
 /**
  * @param {Function} callback Callback function.
  */
@@ -79,8 +73,6 @@ function getVmsExample(callback) {
     );
   });
 }
-// [END list]
-// [END complete]
 
 // Run the examples
 exports.main = function(cb) {
