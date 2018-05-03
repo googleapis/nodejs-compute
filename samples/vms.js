@@ -13,23 +13,17 @@
  * limitations under the License.
  */
 
-// [START complete]
 'use strict';
 
-// [START auth]
 // By default, the client will authenticate using the service account file
 // specified by the GOOGLE_APPLICATION_CREDENTIALS environment variable and use
 // the project specified by the GCLOUD_PROJECT environment variable. See
 // https://cloud.google.com/docs/authentication/production#providing_credentials_to_your_application
 const Compute = require('@google-cloud/compute');
-// [END auth]
 
-// [START initialize]
 // Creates a client
 const compute = new Compute();
-// [END initialize]
 
-// [START list]
 /**
  * @param {Function} callback Callback function.
  */
@@ -47,8 +41,6 @@ function getVmsExample(callback) {
     callback(null, vms);
   });
 }
-// [END list]
-// [END complete]
 
 // Run the examples
 exports.main = cb => {

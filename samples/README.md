@@ -14,6 +14,7 @@
 * [Samples](#samples)
   * [List Virtual Machines](#list-virtual-machines)
   * [Use Google Auth and list Virtual Machines](#use-google-auth-and-list-virtual-machines)
+  * [Install Apache and a custom homepage via startup script](#install-apache-and-a-custom-homepage-via-startup-script)
 
 ## Before you begin
 
@@ -44,6 +45,13 @@ After explicit authentication, get a list of virtual machine instances and log t
 
 [vms_api_1_docs]: https://cloud.google.com/compute/docs
 [vms_api_1_code]: vms_api.js
+
+### Install Apache and a custom homepage via startup script
+
+
+View the [README](startup-script/).
+
+
 
 [shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [shell_link]: https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-compute&page=editor&open_in_editor=samples/README.md
