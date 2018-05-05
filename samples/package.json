@@ -9,10 +9,7 @@
     "node": ">=4.0.0"
   },
   "scripts": {
-    "unit-test": "ava -T 20s --verbose test/*.test.js",
-    "system-test": "ava -T 20s --verbose system-test/*.test.js",
-    "all-test": "npm run unit-test && npm run system-test",
-    "test": "repo-tools test run --cmd npm -- run all-test"
+    "test": "repo-tools test run --cmd ava -- -T 20s --verbose system-test/*.test.js"
   },
   "dependencies": {
     "@google-cloud/compute": "0.10.0",
