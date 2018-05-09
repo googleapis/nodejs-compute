@@ -47,47 +47,45 @@ function createVm(name, callback) {
     },
   };
 
-  zone
-    .createVM(name, config)
+  const vm = zone.vm(name);
+
+  vm
+    .create(config)
     .then(data => {
-      const vm = data[0];
       const operation = data[1];
+      return operation.promise();
+    })
+    .then(() => {
+      return vm.getMetadata();
+    })
+    .then(data => {
+      const metadata = data[0];
 
-      operation.on('complete', () => {
-        vm
-          .getMetadata()
-          .then(data => {
-            const metadata = data[0];
+      // External IP of the VM.
+      const ip = metadata['networkInterfaces'][0]['accessConfigs'][0]['natIP'];
+      console.log('Booting new VM with IP http://' + ip + '...');
 
-            // External IP of the VM.
-            const ip =
-              metadata['networkInterfaces'][0]['accessConfigs'][0]['natIP'];
-            console.log('Booting new VM with IP http://' + ip + '...');
-
-            // Ping the VM to determine when the HTTP server is ready.
-            const timer = setInterval(
-              ip => {
-                http
-                  .get('http://' + ip, res => {
-                    const statusCode = res.statusCode;
-                    if (statusCode === 200) {
-                      clearTimeout(timer);
-                      // HTTP server is ready.
-                      console.log('Ready!');
-                      callback(null, ip);
-                    }
-                  })
-                  .on('error', () => {
-                    // HTTP server is not ready yet.
-                    process.stdout.write('.');
-                  });
-              },
-              2000,
-              ip
-            );
-          })
-          .catch(err => callback(err));
-      });
+      // Ping the VM to determine when the HTTP server is ready.
+      const timer = setInterval(
+        ip => {
+          http
+            .get('http://' + ip, res => {
+              const statusCode = res.statusCode;
+              if (statusCode === 200) {
+                clearTimeout(timer);
+                // HTTP server is ready.
+                console.log('Ready!');
+                callback(null, ip);
+              }
+            })
+            .on('error', () => {
+              // HTTP server is not ready yet.
+              process.stdout.write('.');
+            });
+        },
+        2000,
+        ip
+      );
     })
     .catch(err => callback(err));
 }
@@ -100,22 +98,21 @@ function listVms(callback) {
     .then(data => {
       const vms = data[0];
       let results = vms.map(vm => vm.getMetadata());
-      Promise.all(results)
-        .then(res =>
-          callback(
-            null,
-            res.map(data => {
-              return {
-                ip: data[0]['networkInterfaces'][0]['accessConfigs']
-                  ? data[0]['networkInterfaces'][0]['accessConfigs'][0]['natIP']
-                  : 'no external ip',
-                name: data[0].name,
-              };
-            })
-          )
-        )
-        .catch(err => callback(err));
+      return Promise.all(results);
     })
+    .then(res =>
+      callback(
+        null,
+        res.map(data => {
+          return {
+            ip: data[0]['networkInterfaces'][0]['accessConfigs']
+              ? data[0]['networkInterfaces'][0]['accessConfigs'][0]['natIP']
+              : 'no external ip',
+            name: data[0].name,
+          };
+        })
+      )
+    )
     .catch(err => callback(err));
 }
 
@@ -126,10 +123,11 @@ function deleteVm(name, callback) {
     .then(data => {
       console.log('Deleting ...');
       const operation = data[0];
-      operation.on('complete', () => {
-        // VM deleted
-        callback(null, name);
-      });
+      return operation.promise();
+    })
+    .then(() => {
+      // VM deleted
+      callback(null, name);
     })
     .catch(err => callback(err));
 }
