@@ -1565,7 +1565,13 @@ describe('Compute', function() {
         async.each(
           objects,
           function(object, callback) {
-            object.delete(compute.execAfterOperation_(callback));
+            object.delete(
+              compute.execAfterOperation_(function(err) {
+                if (err) {
+                  callback(err);
+                }
+              })
+            );
           },
           callback
         );
