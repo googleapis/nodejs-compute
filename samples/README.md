@@ -1,3 +1,5 @@
+[//]: # "This README.md file is auto-generated, all changes to this file will be lost."
+[//]: # "To regenerate it, use `npm run generate-scaffolding`."
 <img src="https://avatars2.githubusercontent.com/u/2810941?v=3&s=96" alt="Google Cloud Platform logo" title="Google Cloud Platform" align="right" height="96" width="96"/>
 
 # Google Compute Engine: Node.js Samples
@@ -10,7 +12,8 @@
 
 * [Before you begin](#before-you-begin)
 * [Samples](#samples)
-  * [Virtual Machines](#virtual-machines)
+  * [Create Virtual Machine with Apache and Custom Homepage](#create-virtual-machine-with-apache-and-custom-homepage)
+  * [List Virtual Machines](#list-virtual-machines)
 
 ## Before you begin
 
@@ -20,12 +23,23 @@ library's README.
 
 ## Samples
 
-### Virtual Machines
+### Create Virtual Machine with Apache and Custom Homepage
 
-View the [source code][vms_0_code].
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-compute&page=editor&open_in_editor=samples/vms.js,samples/README.md)[vms_0_docs]: https://cloud.google.com/compute/docs
-[vms_0_code]: vms.js
+View the [README](startup-script/README.md).
 
-[shell_img]: //gstatic.com/cloudssh/images/open-btn.png
+
+
+### List Virtual Machines
+
+View the [source code][vms_1_code].
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-compute&page=editor&open_in_editor=samples/vms.js,samples/README.md)
+
+Get a list of virtual machine instances and log the first result.
+
+[vms_1_docs]: https://cloud.google.com/compute/docs
+[vms_1_code]: vms.js
+
+[shell_img]: https://gstatic.com/cloudssh/images/open-btn.png
 [shell_link]: https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-compute&page=editor&open_in_editor=samples/README.md
