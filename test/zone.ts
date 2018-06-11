@@ -1,5 +1,3 @@
-import { GoogleError } from "../src/error";
-
 /**
  * Copyright 2015 Google Inc. All Rights Reserved.
  *
@@ -25,6 +23,7 @@ var gceImages = require('gce-images');
 import * as nodeutil from 'util';
 import proxyquire from 'proxyquire';
 import {ServiceObject, util} from '@google-cloud/common';
+import { GoogleError } from "../src/error";
 
 var promisified = false;
 var fakeUtil = extend({}, util, {
@@ -59,11 +58,12 @@ function FakeDisk() {
 }
 
 var formatPortsOverride;
+(FakeInstanceGroup as any).formatPorts_ = function() {
+  return (formatPortsOverride || util.noop).apply(null, arguments);
+};
+
 function FakeInstanceGroup() {
   this.calledWith_ = [].slice.call(arguments);
-  this.formatPorts_ = function() {
-    return (formatPortsOverride || util.noop).apply(null, arguments);
-  }
 }
 
 function FakeMachineType() {
@@ -657,7 +657,7 @@ describe('Zone', function() {
         https: 443,
       };
 
-      it.skip('should format named ports', function(done) {
+      it('should format named ports', function(done) {
         var expectedNamedPorts = [];
 
         formatPortsOverride = function(ports) {
