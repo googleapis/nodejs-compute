@@ -16,14 +16,14 @@
 
 'use strict';
 
-var arrify = require('arrify');
-var async = require('async');
-var common = require('@google-cloud/common');
-var extend = require('extend');
-var format = require('string-format-obj');
+import arrify from 'arrify';
+import async from 'async';
+import * as common from '@google-cloud/common';
+import extend from 'extend';
+import format from 'string-format-obj';
 var gceImages = require('gce-images');
-var is = require('is');
-var util = require('util');
+import is from 'is';
+import * as util from 'util';
 
 var Autoscaler = require('./autoscaler.js');
 var Disk = require('./disk.js');

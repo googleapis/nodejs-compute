@@ -16,10 +16,10 @@
 
 'use strict';
 
-var assert = require('assert');
-var extend = require('extend');
-var proxyquire = require('proxyquire').noPreserveCache();
-var util = require('@google-cloud/common').util;
+import assert from 'assert';
+import extend from 'extend';
+const proxyquire = require('proxyquire').noPreserveCache();
+import {util} from '@google-cloud/common';
 
 function FakeOperation() {
   this.calledWith_ = arguments;

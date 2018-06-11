@@ -16,15 +16,14 @@
 
 'use strict';
 
-var arrify = require('arrify');
-var assert = require('assert');
-var events = require('events');
-var extend = require('extend');
-var format = require('string-format-obj');
-var nodeutil = require('util');
-var proxyquire = require('proxyquire');
-var Service = require('@google-cloud/common').Service;
-var util = require('@google-cloud/common').util;
+import arrify from 'arrify';
+import assert from 'assert';
+import events from 'events';
+import extend from 'extend';
+import format from 'string-format-obj';
+import * as nodeutil from 'util';
+import proxyquire from 'proxyquire';
+import {Service, util} from '@google-cloud/common';
 
 var slice = Array.prototype.slice;
 
@@ -169,7 +168,7 @@ describe('Compute', function() {
     // Node v4 on Circle times out.
     this.timeout(0);
 
-    Compute = proxyquire('../', {
+    Compute = proxyquire('../src', {
       '@google-cloud/common': {
         Service: FakeService,
         paginator: fakePaginator,
@@ -202,12 +201,6 @@ describe('Compute', function() {
       assert(compute instanceof Compute);
     });
 
-    it('should work without new', function() {
-      assert.doesNotThrow(function() {
-        Compute({projectId: PROJECT_ID});
-      });
-    });
-
     it('should normalize the arguments', function() {
       var normalizeArgumentsCalled = false;
       var options = {};
@@ -232,7 +225,7 @@ describe('Compute', function() {
       assert.deepEqual(calledWith.scopes, [
         'https://www.googleapis.com/auth/compute',
       ]);
-      assert.deepEqual(calledWith.packageJson, require('../package.json'));
+      assert.deepEqual(calledWith.packageJson, require('../../package.json'));
     });
 
     it('should streamify the correct methods', function() {

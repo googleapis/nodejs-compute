@@ -16,14 +16,12 @@
 
 'use strict';
 
-var arrify = require('arrify');
-var assert = require('assert');
-var extend = require('extend');
-var nodeutil = require('util');
-var proxyquire = require('proxyquire');
-
-var ServiceObject = require('@google-cloud/common').ServiceObject;
-var util = require('@google-cloud/common').util;
+import arrify from 'arrify';
+import assert from 'assert';
+import extend from 'extend';
+import * as nodeutil from 'util';
+import proxyquire from 'proxyquire';
+import {ServiceObject, util} from '@google-cloud/common';
 
 var promisified = false;
 var fakeUtil = extend({}, util, {

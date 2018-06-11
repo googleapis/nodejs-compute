@@ -16,15 +16,14 @@
 
 'use strict';
 
-var assert = require('assert');
-var extend = require('extend');
-var common = require('@google-cloud/common');
-var nodeutil = require('util');
-var proxyquire = require('proxyquire');
-var ServiceObject = common.ServiceObject;
+import assert from 'assert';
+import extend from 'extend';
+import {ServiceObject, util} from '@google-cloud/common';
+import * as nodeutil from 'util';
+import proxyquire from 'proxyquire';
 
 var promisified = false;
-var fakeUtil = extend({}, common.util, {
+var fakeUtil = extend({}, util, {
   promisifyAll: function(Class) {
     if (Class.name === 'Snapshot') {
       promisified = true;

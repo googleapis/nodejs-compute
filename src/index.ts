@@ -16,12 +16,12 @@
 
 'use strict';
 
-var arrify = require('arrify');
-var common = require('@google-cloud/common');
-var extend = require('extend');
-var format = require('string-format-obj');
-var is = require('is');
-var util = require('util');
+import arrify from 'arrify';
+import * as common from '@google-cloud/common';
+import extend from 'extend';
+import format from 'string-format-obj';
+import is from 'is';
+import * as util from 'util';
 
 var Firewall = require('./firewall.js');
 var HealthCheck = require('./health-check.js');
@@ -79,16 +79,16 @@ var Image = require('./image.js');
  * });
  */
 function Compute(options) {
-  if (!(this instanceof Compute)) {
-    return new Compute(options);
-  }
+  // if (!(this instanceof Compute)) {
+  //   return new Compute(options);
+  // }
 
   options = common.util.normalizeArguments(this, options);
 
   var config = {
     baseUrl: 'https://www.googleapis.com/compute/v1',
     scopes: ['https://www.googleapis.com/auth/compute'],
-    packageJson: require('../package.json'),
+    packageJson: require('../../package.json'),
   };
 
   common.Service.call(this, config, options);
@@ -3089,7 +3089,7 @@ common.util.promisifyAll(Compute, {
  * @see Firewall
  * @type {constructor}
  */
-Compute.Firewall = Firewall;
+(Compute as any).Firewall = Firewall;
 
 /**
  * {@link HealthCheck} class.
@@ -3098,7 +3098,7 @@ Compute.Firewall = Firewall;
  * @see HealthCheck
  * @type {constructor}
  */
-Compute.HealthCheck = HealthCheck;
+(Compute as any).HealthCheck = HealthCheck;
 
 /**
  * {@link Image} class.
@@ -3107,7 +3107,7 @@ Compute.HealthCheck = HealthCheck;
  * @see Image
  * @type {constructor}
  */
-Compute.Image = Image;
+(Compute as any).Image = Image;
 
 /**
  * {@link Network} class.
@@ -3116,7 +3116,7 @@ Compute.Image = Image;
  * @see Network
  * @type {constructor}
  */
-Compute.Network = Network;
+(Compute as any).Network = Network;
 
 /**
  * {@link Operation} class.
@@ -3125,7 +3125,7 @@ Compute.Network = Network;
  * @see Operation
  * @type {constructor}
  */
-Compute.Operation = Operation;
+(Compute as any).Operation = Operation;
 
 /**
  * {@link Project} class.
@@ -3134,7 +3134,7 @@ Compute.Operation = Operation;
  * @see Project
  * @type {constructor}
  */
-Compute.Project = Project;
+(Compute as any).Project = Project;
 
 /**
  * {@link Region} class.
@@ -3143,7 +3143,7 @@ Compute.Project = Project;
  * @see Region
  * @type {constructor}
  */
-Compute.Region = Region;
+(Compute as any).Region = Region;
 
 /**
  * {@link Rule} class.
@@ -3152,7 +3152,7 @@ Compute.Region = Region;
  * @see Rule
  * @type {constructor}
  */
-Compute.Rule = Rule;
+(Compute as any).Rule = Rule;
 
 /**
  * {@link Service} class.
@@ -3161,7 +3161,7 @@ Compute.Rule = Rule;
  * @see Service
  * @type {constructor}
  */
-Compute.Service = Service;
+(Compute as any).Service = Service;
 
 /**
  * {@link Snapshot} class.
@@ -3170,7 +3170,7 @@ Compute.Service = Service;
  * @see Snapshot
  * @type {constructor}
  */
-Compute.Snapshot = Snapshot;
+(Compute as any).Snapshot = Snapshot;
 
 /**
  * {@link Zone} class.
@@ -3179,7 +3179,7 @@ Compute.Snapshot = Snapshot;
  * @see Zone
  * @type {constructor}
  */
-Compute.Zone = Zone;
+(Compute as any).Zone = Zone;
 
 /**
  * The default export of the `@google-cloud/compute` package is the

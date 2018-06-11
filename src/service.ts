@@ -16,11 +16,11 @@
 
 'use strict';
 
-var arrify = require('arrify');
-var common = require('@google-cloud/common');
-var format = require('string-format-obj');
-var is = require('is');
-var util = require('util');
+import arrify from 'arrify';
+import * as common from '@google-cloud/common';
+import format from 'string-format-obj';
+import is from 'is';
+import * as util from 'util';
 
 /**
  * An HTTP(S) load balancing backend service is a centralized service for

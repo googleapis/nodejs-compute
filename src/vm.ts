@@ -16,12 +16,12 @@
 
 'use strict';
 
-var common = require('@google-cloud/common');
+import * as common from '@google-cloud/common';
 var createErrorClass = require('create-error-class');
-var extend = require('extend');
-var format = require('string-format-obj');
-var is = require('is');
-var util = require('util');
+import extend from 'extend';
+import format from 'string-format-obj';
+import is from 'is';
+import * as util from 'util';
 
 var Disk = require('./disk.js');
 

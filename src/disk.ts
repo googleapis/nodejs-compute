@@ -16,11 +16,11 @@
 
 'use strict';
 
-var common = require('@google-cloud/common');
-var extend = require('extend');
-var format = require('string-format-obj');
-var is = require('is');
-var util = require('util');
+import * as common from '@google-cloud/common';
+import extend from 'extend';
+import format from 'string-format-obj';
+import is from 'is';
+import * as util from 'util';
 
 var Snapshot = require('./snapshot.js');
 
@@ -196,7 +196,7 @@ function Disk(zone, name) {
    * @name Disk#formattedName
    * @type {string}
    */
-  this.formattedName = Disk.formatName_(zone, name);
+  this.formattedName = (Disk as any).formatName_(zone, name);
 }
 
 util.inherits(Disk, common.ServiceObject);
@@ -210,7 +210,7 @@ util.inherits(Disk, common.ServiceObject);
  * @param {string} name - The name of the disk.
  * @returns {string} - The formatted name.
  */
-Disk.formatName_ = function(zone, name) {
+(Disk as any).formatName_ = function(zone, name) {
   return format('projects/{pId}/zones/{zoneName}/disks/{diskName}', {
     pId: zone.compute.projectId,
     zoneName: zone.name,

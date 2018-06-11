@@ -16,11 +16,11 @@
 
 'use strict';
 
-var arrify = require('arrify');
-var common = require('@google-cloud/common');
-var extend = require('extend');
-var is = require('is');
-var util = require('util');
+import arrify from 'arrify';
+import * as common from '@google-cloud/common';
+import extend from 'extend';
+import is from 'is';
+import * as util from 'util';
 
 /**
  * You can create and manage groups of virtual machine instances so that you

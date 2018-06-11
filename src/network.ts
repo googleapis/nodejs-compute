@@ -16,11 +16,11 @@
 
 'use strict';
 
-var common = require('@google-cloud/common');
-var extend = require('extend');
-var format = require('string-format-obj');
-var is = require('is');
-var util = require('util');
+import * as common from '@google-cloud/common';
+import extend from 'extend';
+import format from 'string-format-obj';
+import is from 'is';
+import * as util from 'util';
 
 /**
  * A Network object allows you to interact with a Google Compute Engine network.
@@ -183,7 +183,7 @@ function Network(compute, name) {
    * @name Network#formattedName
    * @type {string}
    */
-  this.formattedName = Network.formatName_(compute, name);
+  this.formattedName = (Network as any).formatName_(compute, name);
   /**
    * @name Network#name
    * @type {string}
@@ -202,7 +202,7 @@ util.inherits(Network, common.ServiceObject);
  * @param {string} name - The name of the network.
  * @returns {string} - The formatted name.
  */
-Network.formatName_ = function(compute, name) {
+(Network as any).formatName_ = function(compute, name) {
   return format('projects/{projectId}/global/networks/{name}', {
     projectId: compute.projectId,
     name: name,

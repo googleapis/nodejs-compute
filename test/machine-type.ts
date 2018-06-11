@@ -16,10 +16,10 @@
 
 'use strict';
 
-var assert = require('assert');
-var nodeutil = require('util');
-var proxyquire = require('proxyquire');
-var ServiceObject = require('@google-cloud/common').ServiceObject;
+import assert from 'assert';
+import * as nodeutil from 'util';
+import proxyquire from 'proxyquire';
+import {ServiceObject} from '@google-cloud/common';
 
 function FakeServiceObject() {
   this.calledWith_ = arguments;

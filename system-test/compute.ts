@@ -16,14 +16,13 @@
 
 'use strict';
 
-var assert = require('assert');
-var async = require('async');
-var concat = require('concat-stream');
-var is = require('is');
-var prop = require('propprop');
-var uuid = require('uuid');
+import assert from 'assert';
+import async from 'async';
+import concat from 'concat-stream';
+import is from 'is';
+import uuid from 'uuid';
 
-var Compute = require('../');
+const Compute = require('../src');
 
 describe('Compute', function() {
   // Since the Compute Engine API is rather large and involves long-running
@@ -48,14 +47,37 @@ describe('Compute', function() {
   var region = compute.region(REGION_NAME);
   var zone = compute.zone(ZONE_NAME);
 
-  before(deleteAllTestObjects);
-  after(deleteAllTestObjects);
+  before(done => {
+    deleteAllTestObjects(err => {
+      if (err) {
+        throw err;
+      }
+      done();
+    });
+  });
+
+  after(done => {
+    deleteAllTestObjects(err => {
+      if (err) {
+        throw err;
+      }
+      done();
+    });
+  });
 
   describe('addresses', function() {
     var ADDRESS_NAME = generateName('address');
     var address = region.address(ADDRESS_NAME);
 
-    before(create(address));
+    before(done => {
+      const meth = create(address);
+      meth(err => {
+        if (err) {
+          throw err;
+        }
+        done();
+      });
+    });
 
     it('should have created the address', function(done) {
       address.getMetadata(function(err, metadata) {
@@ -637,7 +659,7 @@ describe('Compute', function() {
         instanceGroup.getVMs(function(err, vms) {
           assert.ifError(err);
 
-          var vmNamesInGroup = vms.map(prop('name'));
+          var vmNamesInGroup = vms.map(x => x.name);
           assert(vmNamesInGroup.indexOf(vm.name) > -1);
 
           done();
@@ -650,7 +672,7 @@ describe('Compute', function() {
           .on('error', done)
           .pipe(
             concat(function(vms) {
-              var vmNamesInGroup = vms.map(prop('name'));
+              var vmNamesInGroup = vms.map(x => x.name);
               assert(vmNamesInGroup.indexOf(vm.name) > -1);
 
               done();
@@ -1564,7 +1586,7 @@ describe('Compute', function() {
 
         async.each(
           objects,
-          function(object, callback) {
+          function(object: any, callback) {
             object.delete(compute.execAfterOperation_(callback));
           },
           callback
@@ -1573,7 +1595,7 @@ describe('Compute', function() {
     );
   }
 
-  function create(object, cfg) {
+  function create(object, cfg?) {
     return function(callback) {
       object.create(cfg, compute.execAfterOperation_(callback));
     };
@@ -1592,7 +1614,7 @@ describe('Compute', function() {
 
         async.each(
           rules,
-          function(rule, callback) {
+          function(rule: any, callback) {
             rule.delete(compute.execAfterOperation_(callback));
           },
           callback
@@ -1614,7 +1636,7 @@ describe('Compute', function() {
 
         async.each(
           rules,
-          function(rule, callback) {
+          function(rule: any, callback) {
             rule.delete(compute.execAfterOperation_(callback));
           },
           callback
@@ -1636,7 +1658,7 @@ describe('Compute', function() {
 
         async.each(
           services,
-          function(service, callback) {
+          function(service: any, callback) {
             service.delete(compute.execAfterOperation_(callback));
           },
           callback
@@ -1711,7 +1733,7 @@ describe('Compute', function() {
 
         async.each(
           healthChecks,
-          function(healthCheck, callback) {
+          function(healthCheck: any, callback) {
             healthCheck.delete(compute.execAfterOperation_(callback));
           },
           callback
@@ -1744,7 +1766,7 @@ describe('Compute', function() {
         return;
       }
 
-      async.each(resp.items.map(prop('name')), deleteUrlMap, callback);
+      async.each(resp.items.map(x => x.name), deleteUrlMap, callback);
     });
   }
 
@@ -1813,7 +1835,7 @@ describe('Compute', function() {
         return;
       }
 
-      async.each(resp.items.map(prop('name')), deleteTargetProxy, callback);
+      async.each(resp.items.map(x => x.name), deleteTargetProxy, callback);
     });
   }
 
@@ -1882,7 +1904,7 @@ describe('Compute', function() {
         return;
       }
 
-      async.each(resp.items.map(prop('name')), deleteTargetInstance, callback);
+      async.each(resp.items.map(x => x.name), deleteTargetInstance, callback);
     });
   }
 
@@ -1954,7 +1976,7 @@ describe('Compute', function() {
         return;
       }
 
-      var names = resp.items.map(prop('name'));
+      var names = resp.items.map(x => x.name);
       async.each(names, deleteInstanceTemplate, callback);
     });
   }
@@ -2054,7 +2076,7 @@ describe('Compute', function() {
         return;
       }
 
-      var names = resp.items.map(prop('name'));
+      var names = resp.items.map(x => x.name);
       async.each(names, deleteInstanceGroupManager, callback);
     });
   }

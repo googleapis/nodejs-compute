@@ -16,10 +16,10 @@
 
 'use strict';
 
-var common = require('@google-cloud/common');
-var extend = require('extend');
-var is = require('is');
-var util = require('util');
+import * as common from '@google-cloud/common';
+import extend from 'extend';
+import is from 'is';
+import * as util from 'util';
 
 var Address = require('./address.js');
 var Network = require('./network.js');

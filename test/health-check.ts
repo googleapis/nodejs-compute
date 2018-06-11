@@ -16,12 +16,11 @@
 
 'use strict';
 
-var assert = require('assert');
-var extend = require('extend');
-var nodeutil = require('util');
-var proxyquire = require('proxyquire');
-var ServiceObject = require('@google-cloud/common').ServiceObject;
-var util = require('@google-cloud/common').util;
+import assert from 'assert';
+import extend from 'extend';
+import * as nodeutil from 'util';
+import proxyquire from 'proxyquire';
+import {ServiceObject, util} from '@google-cloud/common';
 
 var promisified = false;
 var fakeUtil = extend({}, util, {
@@ -99,7 +98,7 @@ describe('HealthCheck', function() {
         var OPTIONS = {a: 'b'};
         var originalOptions = extend({}, OPTIONS);
 
-        COMPUTE.createHealthCheck = function(name, opts, callback) {
+        (COMPUTE as any).createHealthCheck = function(name, opts, callback) {
           assert.strictEqual(name, NAME);
           assert.deepEqual(opts, OPTIONS);
           assert.deepEqual(OPTIONS, originalOptions);
@@ -112,7 +111,7 @@ describe('HealthCheck', function() {
       it('should not require a callback when creating', function(done) {
         var createMethod = healthCheck.calledWith_[0].createMethod;
 
-        COMPUTE.createHealthCheck = function(name, opts, callback) {
+        (COMPUTE as any).createHealthCheck = function(name, opts, callback) {
           assert.deepEqual(opts, {});
           callback(); // done()
         };
@@ -143,7 +142,7 @@ describe('HealthCheck', function() {
         var OPTIONS = {a: 'b'};
         var originalOptions = extend({}, OPTIONS);
 
-        COMPUTE.createHealthCheck = function(name, opts, callback) {
+        (COMPUTE as any).createHealthCheck = function(name, opts, callback) {
           assert.strictEqual(name, NAME);
           assert.deepEqual(opts, extend({https: true}, OPTIONS));
           assert.deepEqual(OPTIONS, originalOptions);
@@ -156,7 +155,7 @@ describe('HealthCheck', function() {
       it('should not require a callback when creating', function(done) {
         var createMethod = healthCheck.calledWith_[0].createMethod;
 
-        COMPUTE.createHealthCheck = function(name, opts, callback) {
+        (COMPUTE as any).createHealthCheck = function(name, opts, callback) {
           assert.deepEqual(opts, {https: true});
           callback(); // done()
         };

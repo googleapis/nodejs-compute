@@ -16,8 +16,8 @@
 
 'use strict';
 
-var common = require('@google-cloud/common');
-var util = require('util');
+import * as common from '@google-cloud/common';
+import * as util from 'util';
 
 /**
  * Forwarding rules work in conjunction with target pools and target instances
