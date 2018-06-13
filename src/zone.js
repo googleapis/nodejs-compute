@@ -27,7 +27,7 @@ var util = require('util');
 
 var Autoscaler = require('./autoscaler.js');
 var Disk = require('./disk.js');
-var InstanceGroupManager = require("./instance-group-manager.js")
+var InstanceGroupManager = require('./instance-group-manager.js');
 var InstanceGroup = require('./instance-group.js');
 var MachineType = require('./machine-type.js');
 var Operation = require('./operation.js');
@@ -1183,8 +1183,12 @@ Zone.prototype.getInstanceGroupManagers = function(options, callback) {
         });
       }
 
-      var instanceGroupManagers = (resp.items || []).map(function(instanceGroupManager) {
-        var instanceGroupManagerInstance = self.instanceGroupManager(instanceGroupManager.name);
+      var instanceGroupManagers = (resp.items || []).map(function(
+        instanceGroupManager
+      ) {
+        var instanceGroupManagerInstance = self.instanceGroupManager(
+          instanceGroupManager.name
+        );
         instanceGroupManagerInstance.metadata = instanceGroupManager;
         return instanceGroupManagerInstance;
       });

@@ -702,7 +702,12 @@ describe('Zone', function() {
         });
 
         it('should execute callback with error & API response', function(done) {
-          zone.createInstanceGroupManager(NAME, OPTIONS, function(err, ig, op, resp) {
+          zone.createInstanceGroupManager(NAME, OPTIONS, function(
+            err,
+            ig,
+            op,
+            resp
+          ) {
             assert.strictEqual(err, error);
             assert.strictEqual(ig, null);
             assert.strictEqual(op, null);
@@ -735,7 +740,12 @@ describe('Zone', function() {
             return operation;
           };
 
-          zone.createInstanceGroupManager(NAME, OPTIONS, function(err, ig, op, resp) {
+          zone.createInstanceGroupManager(NAME, OPTIONS, function(
+            err,
+            ig,
+            op,
+            resp
+          ) {
             assert.ifError(err);
 
             assert.strictEqual(ig, instanceGroupManager);

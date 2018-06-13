@@ -375,7 +375,9 @@ InstanceGroupManager.prototype.getVMs = function(options, callback) {
  *     this.end();
  *   });
  */
-InstanceGroupManager.prototype.getVMsStream = common.paginator.streamify('getVMs');
+InstanceGroupManager.prototype.getVMsStream = common.paginator.streamify(
+  'getVMs'
+);
 
 /**
  * Recreate the VMs managed by this instance group.
@@ -413,7 +415,7 @@ InstanceGroupManager.prototype.recreateVMs = function(callback) {
   this.request(
     {
       method: 'POST',
-      uri: '/recreateInstances'
+      uri: '/recreateInstances',
     },
     function(err, resp) {
       if (err) {

@@ -271,7 +271,12 @@ describe('InstanceGroupManager', function() {
       });
 
       it('should execute callback with error & API response', function(done) {
-        instanceGroupManager.getVMs({}, function(err, vms, nextQuery, apiResponse_) {
+        instanceGroupManager.getVMs({}, function(
+          err,
+          vms,
+          nextQuery,
+          apiResponse_
+        ) {
           assert.strictEqual(err, error);
           assert.strictEqual(vms, null);
           assert.strictEqual(nextQuery, null);
@@ -322,7 +327,12 @@ describe('InstanceGroupManager', function() {
           return vm;
         };
 
-        instanceGroupManager.getVMs({}, function(err, vms, nextQuery, apiResponse_) {
+        instanceGroupManager.getVMs({}, function(
+          err,
+          vms,
+          nextQuery,
+          apiResponse_
+        ) {
           assert.ifError(err);
 
           assert.strictEqual(vms[0], vm);
@@ -359,7 +369,11 @@ describe('InstanceGroupManager', function() {
       });
 
       it('should return an error and API response', function(done) {
-        instanceGroupManager.recreateVMs(function(err, operation, apiResponse_) {
+        instanceGroupManager.recreateVMs(function(
+          err,
+          operation,
+          apiResponse_
+        ) {
           assert.strictEqual(err, error);
           assert.strictEqual(operation, null);
           assert.strictEqual(apiResponse_, apiResponse);
@@ -385,7 +399,11 @@ describe('InstanceGroupManager', function() {
           return operation;
         };
 
-        instanceGroupManager.recreateVMs(function(err, operation_, apiResponse_) {
+        instanceGroupManager.recreateVMs(function(
+          err,
+          operation_,
+          apiResponse_
+        ) {
           assert.ifError(err);
           assert.strictEqual(operation_, operation);
           assert.strictEqual(operation.metadata, apiResponse);
