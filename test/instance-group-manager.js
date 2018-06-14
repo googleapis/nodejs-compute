@@ -473,4 +473,77 @@ describe('InstanceGroupManager', function() {
       });
     });
   });
+
+  describe('resize', function() {
+    var SIZE = 10;
+
+    describe('error', function() {
+      var error = new Error('Error.');
+      var apiResponse = {a: 'b', c: 'd'};
+
+      beforeEach(function() {
+        instanceGroupManager.request = function(reqOpts, callback) {
+          callback(error, apiResponse);
+        };
+      });
+
+      it('should return an error if the request fails', function(done) {
+        instanceGroupManager.resize(SIZE, function(
+          err,
+          operation,
+          apiResponse_
+        ) {
+          assert.strictEqual(err, error);
+          assert.strictEqual(operation, null);
+          assert.strictEqual(apiResponse_, apiResponse);
+          done();
+        });
+      });
+
+      it('should not require a callback', function() {
+        assert.doesNotThrow(function() {
+          instanceGroupManager.resize(SIZE);
+        });
+      });
+    });
+
+    describe('success', function() {
+      var apiResponse = {
+        name: 'op-name',
+      };
+
+      beforeEach(function() {
+        instanceGroupManager.request = function(reqOpts, callback) {
+          callback(null, apiResponse);
+        };
+      });
+
+      it('should execute callback with Operation & Response', function(done) {
+        var operation = {};
+
+        instanceGroupManager.zone.operation = function(name) {
+          assert.strictEqual(name, apiResponse.name);
+          return operation;
+        };
+
+        instanceGroupManager.resize(SIZE, function(
+          err,
+          operation_,
+          apiResponse_
+        ) {
+          assert.ifError(err);
+          assert.strictEqual(operation_, operation);
+          assert.strictEqual(operation_.metadata, apiResponse);
+          assert.strictEqual(apiResponse_, apiResponse);
+          done();
+        });
+      });
+
+      it('should not require a callback', function() {
+        assert.doesNotThrow(function() {
+          instanceGroupManager.resize(SIZE);
+        });
+      });
+    });
+  });
 });

@@ -483,6 +483,62 @@ InstanceGroupManager.prototype.recreateVMs = function(callback) {
   );
 };
 
+/**
+ * Changes the intended size for this managed instance group.
+ *
+ * @see [InstanceGroupManagerManagers: resize API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/instanceGroupManagers/resize}
+ *
+ * @param {number}  - Number of instances that should exist in this
+ *     instance group manager.
+ * @param {function=} callback - The callback function.
+ * @param {?error} callback.err - An error returned while making this request.
+ * @param {Operation} callback.operation - An operation object
+ *     that can be used to check the status of the request.
+ * @param {object} callback.apiResponse - The full API response.
+ *
+ * @example
+ * const Compute = require('@google-cloud/compute');
+ * const compute = new Compute();
+ * const zone = compute.zone('us-central1-a');
+ * const instanceGroup = zone.instanceGroup('web-servers');
+ *
+ * instanceGroup.resize(size, function(err, operation, apiResponse) {
+ *   // `operation` is an Operation object that can be used to check the status
+ *   // of the request.
+ * });
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * instanceGroup.resize(size).then(function(data) {
+ *   const operation = data[0];
+ *   const apiResponse = data[1];
+ * });
+ */
+InstanceGroupManager.prototype.resize = function(size, callback) {
+  var self = this;
+
+  callback = callback || common.util.noop;
+
+  this.request(
+    {
+      method: 'POST',
+      uri: '/resize?size=' + parseInt(size),
+    },
+    function(err, resp) {
+      if (err) {
+        callback(err, null, resp);
+        return;
+      }
+
+      var operation = self.zone.operation(resp.name);
+      operation.metadata = resp;
+
+      callback(null, operation, resp);
+    }
+  );
+};
+
 /*! Developer Documentation
  *
  * These methods can be auto-paginated.
