@@ -1473,7 +1473,12 @@ describe('Zone', function() {
       });
 
       it('should execute callback with error & API response', function(done) {
-        zone.getInstanceGroupManagers({}, function(err, groups, nextQuery, apiResp) {
+        zone.getInstanceGroupManagers({}, function(
+          err,
+          groups,
+          nextQuery,
+          apiResp
+        ) {
           assert.strictEqual(err, error);
           assert.strictEqual(groups, null);
           assert.strictEqual(nextQuery, null);
@@ -1524,7 +1529,12 @@ describe('Zone', function() {
           return group;
         };
 
-        zone.getInstanceGroupManagers({}, function(err, groups, nextQuery, apiResp) {
+        zone.getInstanceGroupManagers({}, function(
+          err,
+          groups,
+          nextQuery,
+          apiResp
+        ) {
           assert.ifError(err);
 
           assert.strictEqual(groups[0], group);
