@@ -18,7 +18,6 @@
 
 var common = require('@google-cloud/common');
 var extend = require('extend');
-var is = require('is');
 var util = require('util');
 
 var Operation = require('./operation.js');
