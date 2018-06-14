@@ -1439,6 +1439,105 @@ describe('Zone', function() {
     });
   });
 
+  describe('getInstanceGroupManagers', function() {
+    it('should accept only a callback', function(done) {
+      zone.request = function(reqOpts) {
+        assert.deepEqual(reqOpts.qs, {});
+        done();
+      };
+
+      zone.getInstanceGroupManagers(assert.ifError);
+    });
+
+    it('should make the correct API request', function(done) {
+      var query = {a: 'b', c: 'd'};
+
+      zone.request = function(reqOpts) {
+        assert.strictEqual(reqOpts.uri, '/instanceGroupManagers');
+        assert.strictEqual(reqOpts.qs, query);
+
+        done();
+      };
+
+      zone.getInstanceGroupManagers(query, assert.ifError);
+    });
+
+    describe('error', function() {
+      var error = new Error('Error.');
+      var apiResponse = {a: 'b', c: 'd'};
+
+      beforeEach(function() {
+        zone.request = function(reqOpts, callback) {
+          callback(error, apiResponse);
+        };
+      });
+
+      it('should execute callback with error & API response', function(done) {
+        zone.getInstanceGroupManagers({}, function(err, groups, nextQuery, apiResp) {
+          assert.strictEqual(err, error);
+          assert.strictEqual(groups, null);
+          assert.strictEqual(nextQuery, null);
+          assert.strictEqual(apiResp, apiResponse);
+          done();
+        });
+      });
+    });
+
+    describe('success', function() {
+      var apiResponse = {
+        items: [{name: 'operation-name'}],
+      };
+
+      beforeEach(function() {
+        zone.request = function(reqOpts, callback) {
+          callback(null, apiResponse);
+        };
+      });
+
+      it('should build a nextQuery if necessary', function(done) {
+        var nextPageToken = 'next-page-token';
+        var apiResponseWithNextPageToken = extend({}, apiResponse, {
+          nextPageToken: nextPageToken,
+        });
+        var expectedNextQuery = {
+          pageToken: nextPageToken,
+        };
+
+        zone.request = function(reqOpts, callback) {
+          callback(null, apiResponseWithNextPageToken);
+        };
+
+        zone.getInstanceGroupManagers({}, function(err, groups, nextQuery) {
+          assert.ifError(err);
+
+          assert.deepEqual(nextQuery, expectedNextQuery);
+
+          done();
+        });
+      });
+
+      it('should execute callback with Groups & API resp', function(done) {
+        var group = {};
+
+        zone.instanceGroupManager = function(name) {
+          assert.strictEqual(name, apiResponse.items[0].name);
+          return group;
+        };
+
+        zone.getInstanceGroupManagers({}, function(err, groups, nextQuery, apiResp) {
+          assert.ifError(err);
+
+          assert.strictEqual(groups[0], group);
+          assert.strictEqual(groups[0].metadata, apiResponse.items[0]);
+
+          assert.strictEqual(apiResp, apiResponse);
+
+          done();
+        });
+      });
+    });
+  });
+
   describe('getInstanceGroups', function() {
     it('should accept only a callback', function(done) {
       zone.request = function(reqOpts) {
