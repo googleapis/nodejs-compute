@@ -438,6 +438,7 @@ Zone.prototype.createDisk = function(name, config, callback) {
  *
  * @param {string} name - Name of the instance group manger.
  * @param {InstanceTemplate} instanceTemplate - Instance template to use for this instance group manager.
+ * @param {number} targetSize - Target number of running instances
  * @param {object} options - See an
  *     [InstanceGroupManager resource](https://cloud.google.com/compute/docs/reference/v1/instanceGroupManagers#resource).
  * @param {function} callback - The callback function.
@@ -453,15 +454,27 @@ Zone.prototype.createDisk = function(name, config, callback) {
  * const compute = new Compute();
  * const zone = compute.zone('us-central1-a');
  * const instanceTemplate = compute.instanceTemplate('my-instance-template');
+ * const targetSize = 10;
  *
- * function onCreated(err, instanceGroupManager, operation, apiResponse) {
+ * function onCreated(
+ *   err,
+ *   instanceGroupManager,
+ *   targetSize,
+ *   operation,
+ *   apiResponse
+ * ) {
  *   // `instanceGroupManager` is an InstanceGroupManager object.
  *
  *   // `operation` is an Operation object that can be used to check the status
  *   // of the request.
  * }
  *
- * zone.createInstanceGroupManager('instance-group-manager-name', instanceTemplate, onCreated);
+ * zone.createInstanceGroupManager(
+ *   'instance-group-manager-name',
+ *   instanceTemplate,
+ *   targetSize,
+ *   onCreated
+ * );
  *
  * //-
  * // If the callback is omitted, we'll return a Promise.
@@ -475,6 +488,7 @@ Zone.prototype.createDisk = function(name, config, callback) {
 Zone.prototype.createInstanceGroupManager = function(
   name,
   instanceTemplate,
+  targetSize,
   options,
   callback
 ) {
@@ -484,6 +498,10 @@ Zone.prototype.createInstanceGroupManager = function(
     throw new Error('An InstanceTemplate object is required.');
   }
 
+  if (typeof targetSize !== 'number') {
+    throw new Error('Target size is required.');
+  }
+
   if (is.fn(options)) {
     callback = options;
     options = {};
@@ -491,13 +509,13 @@ Zone.prototype.createInstanceGroupManager = function(
 
   var body = extend({}, options, {
     name: name,
-    // Try undocumented partial URL
     instanceTemplate: format(
       'global/instanceTemplates/{instanceTemplateName}',
       {
         instanceTemplateName: instanceTemplate.name,
       }
     ),
+    targetSize: targetSize,
   });
 
   this.request(

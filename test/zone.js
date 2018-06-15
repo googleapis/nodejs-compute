@@ -662,6 +662,8 @@ describe('Zone', function() {
       name: 'my-instance-template',
     };
 
+    var TARGET_SIZE = 10;
+
     beforeEach(function() {
       fakeUtil.isCustomType = function() {
         return true;
@@ -677,8 +679,14 @@ describe('Zone', function() {
       };
 
       assert.throws(function() {
-        zone.createInstanceGroupManager(NAME, INSTANCE_TEMPLATE);
+        zone.createInstanceGroupManager(NAME, INSTANCE_TEMPLATE, TARGET_SIZE);
       }, /An InstanceTemplate object is required\./);
+    });
+
+    it('should throw if targetSize is not provided', function() {
+      assert.throws(function() {
+        zone.createInstanceGroupManager(NAME, INSTANCE_TEMPLATE, null);
+      }, /Target size is required\./);
     });
 
     describe('API request', function() {
@@ -690,6 +698,7 @@ describe('Zone', function() {
       var expectedBody = {
         name: NAME,
         instanceTemplate: 'global/instanceTemplates/my-instance-template',
+        targetSize: 10,
         a: 'b',
         c: 'd',
       };
@@ -706,6 +715,7 @@ describe('Zone', function() {
         zone.createInstanceGroupManager(
           NAME,
           INSTANCE_TEMPLATE,
+          TARGET_SIZE,
           OPTIONS,
           assert.ifError
         );
@@ -716,6 +726,7 @@ describe('Zone', function() {
           assert.deepEqual(reqOpts.json, {
             name: NAME,
             instanceTemplate: 'global/instanceTemplates/my-instance-template',
+            targetSize: 10,
           });
           done();
         };
@@ -723,6 +734,7 @@ describe('Zone', function() {
         zone.createInstanceGroupManager(
           NAME,
           INSTANCE_TEMPLATE,
+          TARGET_SIZE,
           assert.ifError
         );
       });
@@ -741,6 +753,7 @@ describe('Zone', function() {
           zone.createInstanceGroupManager(
             NAME,
             INSTANCE_TEMPLATE,
+            TARGET_SIZE,
             OPTIONS,
             function(err, ig, op, resp) {
               assert.strictEqual(err, error);
@@ -779,6 +792,7 @@ describe('Zone', function() {
           zone.createInstanceGroupManager(
             NAME,
             INSTANCE_TEMPLATE,
+            TARGET_SIZE,
             OPTIONS,
             function(err, ig, op, resp) {
               assert.ifError(err);
