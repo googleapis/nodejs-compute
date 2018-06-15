@@ -17,10 +17,7 @@
 'use strict';
 
 var common = require('@google-cloud/common');
-var extend = require('extend');
 var util = require('util');
-
-var Operation = require('./operation.js');
 
 /**
  * @class
@@ -34,6 +31,38 @@ var Operation = require('./operation.js');
  */
 function InstanceTemplate(compute, name) {
   var methods = {
+    /**
+     * Create an instance template.
+     *
+     * @method InstanceTemplate#create
+     * @param {object=} options - See an
+     *     [InstanceTemplate resource](https://cloud.google.com/compute/docs/reference/v1/instanceTemplate#resource).
+     *
+     * @example
+     * const Compute = require('@google-cloud/compute');
+     * const compute = new Compute();
+     * const instanceTemplate = compute.instanceTemplate('my-instance-template');
+     *
+     * function onCreated(err, instanceTemplate, operation, apiResponse) {
+     *   // `instanceTemplate` is an InstanceTemplate object.
+     *
+     *   // `operation` is an Operation object that can be used to check the
+     *   // status of the request.
+     * }
+     *
+     * instanceTemplate.create(options, onCreated);
+     *
+     * //-
+     * // If the callback is omitted, we'll return a Promise.
+     * //-
+     * instanceTemplate.create(options).then(function(data) {
+     *   const instanceTemplate = data[0];
+     *   const operation = data[1];
+     *   const apiResponse = data[2];
+     * });
+     */
+    create: true,
+
     /**
      * Check if the instance template exists.
      *
@@ -131,6 +160,7 @@ function InstanceTemplate(compute, name) {
      * @type {string}
      */
     id: name,
+    createMethod: compute.createInstanceTemplate.bind(compute),
     methods: methods,
   });
 
@@ -149,65 +179,6 @@ function InstanceTemplate(compute, name) {
 }
 
 util.inherits(InstanceTemplate, common.ServiceObject);
-
-/**
- * Create an instance template.
- *
- * @method InstanceTemplate#create
- * @param {object=} options - See an
- *     [InstanceTemplate resource](https://cloud.google.com/compute/docs/reference/v1/instanceTemplate#resource).
- *
- * @example
- * const Compute = require('@google-cloud/compute');
- * const compute = new Compute();
- * const instanceTemplate = compute.instanceTemplate('my-instance-template');
- *
- * function onCreated(err, instanceTemplate, operation, apiResponse) {
- *   // `instanceTemplate` is an InstanceTemplate object.
- *
- *   // `operation` is an Operation object that can be used to check the
- *   // status of the request.
- * }
- *
- * instanceTemplate.create(options, onCreated);
- *
- * //-
- * // If the callback is omitted, we'll return a Promise.
- * //-
- * instanceTemplate.create(options).then(function(data) {
- *   const instanceTemplate = data[0];
- *   const operation = data[1];
- *   const apiResponse = data[2];
- * });
- */
-InstanceTemplate.prototype.create = function(options, callback) {
-  var self = this;
-
-  callback = callback || common.util.noop;
-
-  var body = extend({}, options, {
-    name: self.name,
-  });
-
-  this.request(
-    {
-      method: 'POST',
-      uri: '',
-      json: body,
-    },
-    function(err, resp) {
-      if (err) {
-        callback(err, null, null, resp);
-        return;
-      }
-
-      var operation = self.operation(resp.name);
-      operation.metadata = resp;
-
-      callback(null, self, operation, resp);
-    }
-  );
-};
 
 /**
  * Delete the instance template.
@@ -249,30 +220,11 @@ InstanceTemplate.prototype.delete = function(callback) {
       return;
     }
 
-    var operation = self.operation(resp.name);
+    var operation = self.compute.operation(resp.name);
     operation.metadata = resp;
 
     callback(null, operation, resp);
   });
-};
-
-/**
- * Get a reference to a Google Compute Engine global operation.
- *
- * @see [Global Operation Overview]{@link https://cloud.google.com/compute/docs/reference/v1/globalOperations}
- *
- * @param {string} name - Name of the existing operation.
- * @returns {Operation}
- *
- * @example
- * const Compute = require('@google-cloud/compute');
- * const compute = new Compute();
- * const instanceTemplate = compute.instanceTemplate('my-instance-template');
- *
- * const operation = instanceTemplate.operation('operation-1445532685163-8b137d2a-1822afe7');
- */
-InstanceTemplate.prototype.operation = function(name) {
-  return new Operation(this.compute, name);
 };
 
 /*! Developer Documentation

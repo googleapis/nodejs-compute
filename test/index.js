@@ -43,6 +43,7 @@ var fakeUtil = extend({}, util, {
       'disk',
       'firewall',
       'image',
+      'instanceTemplate',
       'healthCheck',
       'instanceGroup',
       'machineType',
@@ -74,6 +75,7 @@ var fakePaginator = {
       'getDisks',
       'getFirewalls',
       'getImages',
+      'getInstanceTemplates',
       'getHealthChecks',
       'getInstanceGroups',
       'getMachineTypes',
@@ -102,6 +104,10 @@ function FakeHealthCheck() {
 }
 
 function FakeImage() {
+  this.calledWith_ = slice.call(arguments);
+}
+
+function FakeInstanceTemplate() {
   this.calledWith_ = slice.call(arguments);
 }
 
@@ -178,6 +184,7 @@ describe('Compute', function() {
       './firewall.js': FakeFirewall,
       './health-check.js': FakeHealthCheck,
       './image.js': FakeImage,
+      './instance-template.js': FakeInstanceTemplate,
       './network.js': FakeNetwork,
       './operation.js': FakeOperation,
       './project.js': FakeProject,
@@ -235,6 +242,10 @@ describe('Compute', function() {
       assert.strictEqual(compute.getDisksStream, 'getDisks');
       assert.strictEqual(compute.getInstanceGroupsStream, 'getInstanceGroups');
       assert.strictEqual(compute.getImagesStream, 'getImages');
+      assert.strictEqual(
+        compute.getInstanceTemplatesStream,
+        'getInstanceTemplates'
+      );
       assert.strictEqual(compute.getFirewallsStream, 'getFirewalls');
       assert.strictEqual(compute.getHealthChecksStream, 'getHealthChecks');
       assert.strictEqual(compute.getMachineTypesStream, 'getMachineTypes');
@@ -604,8 +615,9 @@ describe('Compute', function() {
       });
 
       it('should exec the callback with error & API response', function(done) {
-        compute.createImage(NAME, DISK, function(err, op, resp) {
+        compute.createImage(NAME, DISK, function(err, image, op, resp) {
           assert.strictEqual(err, error);
+          assert.strictEqual(image, null);
           assert.strictEqual(op, null);
           assert.strictEqual(resp, apiResponse);
           done();
@@ -639,6 +651,92 @@ describe('Compute', function() {
         };
 
         compute.createImage(NAME, DISK, function(err, image, op, resp) {
+          assert.strictEqual(err, null);
+          assert.strictEqual(op, operation);
+          assert.strictEqual(op.metadata, apiResponse);
+          assert.strictEqual(resp, apiResponse);
+          done();
+        });
+      });
+    });
+  });
+
+  describe('createInstanceTemplate', function() {
+    var NAME = 'my-instance-template';
+
+    it('should make the correct API request', function(done) {
+      var options = {
+        a: 'b',
+        c: 'd',
+      };
+
+      compute.request = function(reqOpts) {
+        assert.strictEqual(reqOpts.method, 'POST');
+        assert.strictEqual(reqOpts.uri, '/global/instanceTemplates');
+        assert.deepEqual(reqOpts.json, {
+          name: NAME,
+          a: 'b',
+          c: 'd',
+        });
+
+        done();
+      };
+
+      compute.createInstanceTemplate(NAME, options, assert.ifError);
+    });
+
+    describe('error', function() {
+      var error = new Error('Error.');
+      var apiResponse = {};
+
+      beforeEach(function() {
+        compute.request = function(reqOpts, callback) {
+          callback(error, apiResponse);
+        };
+      });
+
+      it('should exec the callback with error & API response', function(done) {
+        compute.createInstanceTemplate(NAME, function(
+          err,
+          instanceTemplate,
+          op,
+          resp
+        ) {
+          assert.strictEqual(err, error);
+          assert.strictEqual(instanceTemplate, null);
+          assert.strictEqual(op, null);
+          assert.strictEqual(resp, apiResponse);
+          done();
+        });
+      });
+    });
+
+    describe('success', function() {
+      var apiResponse = {
+        name: 'op-name',
+      };
+
+      beforeEach(function() {
+        compute.request = function(reqOpts, callback) {
+          callback(null, apiResponse);
+        };
+      });
+
+      it('should exec cb with Operation & apiResp', function(done) {
+        var network = {};
+        var operation = {};
+
+        compute.network = function(name) {
+          assert.strictEqual(name, NAME);
+          return network;
+        };
+
+        compute.operation = function(name) {
+          assert.strictEqual(name, apiResponse.name);
+          return operation;
+        };
+
+        compute.createInstanceTemplate(NAME, function(err, image, op, resp) {
           assert.strictEqual(err, null);
           assert.strictEqual(op, operation);
           assert.strictEqual(op.metadata, apiResponse);
@@ -1620,6 +1718,111 @@ describe('Compute', function() {
         };
 
         compute.getImages(query, function(err, images, nextQuery) {
+          assert.ifError(err);
+
+          assert.deepEqual(query, originalQuery);
+
+          assert.deepEqual(
+            nextQuery,
+            extend({}, query, {
+              pageToken: apiResponseWithNextPageToken.nextPageToken,
+            })
+          );
+
+          done();
+        });
+      });
+    });
+  });
+
+  describe('getInstanceTemplates', function() {
+    it('should accept only a callback', function(done) {
+      compute.request = function(reqOpts) {
+        assert.deepEqual(reqOpts.qs, {});
+        done();
+      };
+
+      compute.getInstanceTemplates(assert.ifError);
+    });
+
+    it('should make the correct API request', function(done) {
+      var options = {};
+
+      compute.request = function(reqOpts) {
+        assert.strictEqual(reqOpts.uri, '/global/instanceTemplates');
+        assert.strictEqual(reqOpts.qs, options);
+        done();
+      };
+
+      compute.getInstanceTemplates(options, assert.ifError);
+    });
+
+    describe('error', function() {
+      var error = new Error('Error.');
+      var apiResponse = {a: 'b', c: 'd'};
+
+      beforeEach(function() {
+        compute.request = function(reqOpts, callback) {
+          callback(error, apiResponse);
+        };
+      });
+
+      it('should execute callback with error & API response', function(done) {
+        compute.getInstanceTemplates({}, function(
+          err,
+          instanceTemplates,
+          nextQuery,
+          resp
+        ) {
+          assert.strictEqual(err, error);
+          assert.strictEqual(instanceTemplates, null);
+          assert.strictEqual(nextQuery, null);
+          assert.strictEqual(resp, apiResponse);
+
+          done();
+        });
+      });
+    });
+
+    describe('success', function() {
+      var instanceTemplate = {name: 'instanceTemplate-1'};
+      var apiResponse = {
+        items: [instanceTemplate],
+      };
+
+      beforeEach(function() {
+        compute.request = function(reqOpts, callback) {
+          callback(null, apiResponse);
+        };
+      });
+
+      it('should create InstanceTemplate objects from the response', function(done) {
+        compute.instanceTemplate = function(name) {
+          assert.strictEqual(name, instanceTemplate.name);
+          setImmediate(done);
+          return instanceTemplate;
+        };
+
+        compute.getInstanceTemplates({}, assert.ifError);
+      });
+
+      it('should build a nextQuery if necessary', function(done) {
+        var apiResponseWithNextPageToken = extend({}, apiResponse, {
+          nextPageToken: 'next-page-token',
+        });
+
+        var query = {a: 'b', c: 'd'};
+        var originalQuery = extend({}, query);
+
+        compute.request = function(reqOpts, callback) {
+          callback(null, apiResponseWithNextPageToken);
+        };
+
+        compute.getInstanceTemplates(query, function(
+          err,
+          instanceTemplates,
+          nextQuery
+        ) {
           assert.ifError(err);
 
           assert.deepEqual(query, originalQuery);

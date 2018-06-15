@@ -43,8 +43,12 @@ describe('InstanceTemplate', function() {
   var InstanceTemplate;
   var instanceTemplate;
 
+  var COMPUTE = {
+    projectId: 'project-id',
+    createInstanceTemplate: util.noop,
+    operation: util.noop,
+  };
   var INSTANCE_TEMPLATE_NAME = 'my-instance-template';
-  var COMPUTE = {};
 
   before(function() {
     InstanceTemplate = proxyquire('../src/instance-template.js', {
@@ -57,6 +61,7 @@ describe('InstanceTemplate', function() {
 
   beforeEach(function() {
     instanceTemplate = new InstanceTemplate(COMPUTE, INSTANCE_TEMPLATE_NAME);
+    instanceTemplate.parent = COMPUTE;
   });
 
   describe('instantiation', function() {
@@ -81,97 +86,12 @@ describe('InstanceTemplate', function() {
       assert.strictEqual(calledWith.baseUrl, '/global/instanceTemplates');
       assert.strictEqual(calledWith.id, INSTANCE_TEMPLATE_NAME);
       assert.deepEqual(calledWith.methods, {
+        create: true,
         exists: true,
         get: true,
         getMetadata: true,
       });
       done();
-    });
-  });
-
-  describe('create', function() {
-    var OPTIONS = {};
-
-    it('should make the correct API request', function(done) {
-      instanceTemplate.request = function(reqOpts) {
-        assert.strictEqual(reqOpts.method, 'POST');
-        assert.strictEqual(reqOpts.uri, '');
-        assert.strictEqual(reqOpts.json.name, INSTANCE_TEMPLATE_NAME);
-        done();
-      };
-
-      instanceTemplate.create(assert.ifError);
-    });
-
-    describe('error', function() {
-      var error = new Error('Error.');
-      var apiResponse = {a: 'b', c: 'd'};
-
-      beforeEach(function() {
-        instanceTemplate.request = function(reqOpts, callback) {
-          callback(error, apiResponse);
-        };
-      });
-
-      it('should return an error if the request fails', function(done) {
-        instanceTemplate.create(OPTIONS, function(
-          err,
-          instanceTemplate,
-          operation,
-          apiResponse_
-        ) {
-          assert.strictEqual(err, error);
-          assert.strictEqual(instanceTemplate, null);
-          assert.strictEqual(operation, null);
-          assert.strictEqual(apiResponse_, apiResponse);
-          done();
-        });
-      });
-
-      it('should not require a callback', function() {
-        assert.doesNotThrow(function() {
-          instanceTemplate.create(OPTIONS);
-        });
-      });
-    });
-
-    describe('success', function() {
-      var apiResponse = {
-        name: 'op-name',
-      };
-
-      beforeEach(function() {
-        instanceTemplate.request = function(reqOpts, callback) {
-          callback(null, apiResponse);
-        };
-      });
-
-      it('should execute callback with Operation & Response', function(done) {
-        var operation = {};
-
-        instanceTemplate.operation = function(name) {
-          assert.strictEqual(name, apiResponse.name);
-          return operation;
-        };
-
-        instanceTemplate.create(OPTIONS, function(
-          err,
-          instanceTemplate,
-          operation_,
-          apiResponse_
-        ) {
-          assert.ifError(err);
-          assert.strictEqual(operation_, operation);
-          assert.strictEqual(apiResponse_, apiResponse);
-          done();
-        });
-      });
-
-      it('should not require a callback', function() {
-        assert.doesNotThrow(function() {
-          instanceTemplate.create(OPTIONS);
-        });
-      });
     });
   });
 
@@ -225,7 +145,7 @@ describe('InstanceTemplate', function() {
       it('should execute callback with Operation & Response', function(done) {
         var operation = {};
 
-        instanceTemplate.operation = function(name) {
+        instanceTemplate.compute.operation = function(name) {
           assert.strictEqual(name, apiResponse.name);
           return operation;
         };
