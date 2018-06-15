@@ -162,6 +162,10 @@ describe('Zone', function() {
       assert.strictEqual(zone.getAutoscalersStream, 'getAutoscalers');
       assert.strictEqual(zone.getDisksStream, 'getDisks');
       assert.strictEqual(zone.getInstanceGroupsStream, 'getInstanceGroups');
+      assert.strictEqual(
+        zone.getInstanceGroupManagersStream,
+        'getInstanceGroupManagers'
+      );
       assert.strictEqual(zone.getMachineTypesStream, 'getMachineTypes');
       assert.strictEqual(zone.getOperationsStream, 'getOperations');
       assert.strictEqual(zone.getVMsStream, 'getVMs');

@@ -1332,6 +1332,41 @@ Zone.prototype.getInstanceGroupsStream = common.paginator.streamify(
 );
 
 /**
+ * Get a list of {@link InstanceGroupManager} objects for this zone as a
+ * readable object stream.
+ *
+ * @param {object=} options - Configuration object. See
+ *     {@link Zone#getInstanceGroupManagers} for a complete list of options.
+ * @returns {stream}
+ *
+ * @example
+ * const Compute = require('@google-cloud/compute');
+ * const compute = new Compute();
+ * const zone = compute.zone('us-central1-a');
+ *
+ * zone.getInstanceGroupManagersStream()
+ *   .on('error', console.error)
+ *   .on('data', function(instanceGroup) {
+ *     // `instanceGroup` is an `InstanceGroupManager` object.
+ *   })
+ *   .on('end', function() {
+ *     // All instance groups retrieved.
+ *   });
+ *
+ * //-
+ * // If you anticipate many results, you can end a stream early to prevent
+ * // unnecessary processing and API requests.
+ * //-
+ * zone.getInstanceGroupManagersStream()
+ *   .on('data', function(instanceGroup) {
+ *     this.end();
+ *   });
+ */
+Zone.prototype.getInstanceGroupManagersStream = common.paginator.streamify(
+  'getInstanceGroupManagers'
+);
+
+/**
  * Get a list of machine types for this zone.
  *
  * @see [MachineTypes: list API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/machineTypes/list}

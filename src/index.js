@@ -1650,7 +1650,7 @@ Compute.prototype.getImages = function(options, callback) {
  *     representing part of the larger set of results to view.
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request.
- * @param {InstanceTemplate[]} callback.instanceTemplates - Image objects from your project.
+ * @param {InstanceTemplate[]} callback.instanceTemplates - InstanceTemplate objects from your project.
  * @param {object} callback.apiResponse - The full API response.
  *
  * @example
@@ -3314,6 +3314,15 @@ Compute.HealthCheck = HealthCheck;
  * @type {constructor}
  */
 Compute.Image = Image;
+
+/**
+ * {@link InstanceTemplate} class.
+ *
+ * @name Compute.InstanceTemplate
+ * @see InstaneTemplate
+ * @type {constructor}
+ */
+Compute.InstanceTemplate = InstanceTemplate;
 
 /**
  * {@link Network} class.
