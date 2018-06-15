@@ -663,6 +663,13 @@ describe('Compute', function() {
 
   describe('createInstanceTemplate', function() {
     var NAME = 'my-instance-template';
+    var OPTIONS = {};
+
+    it('should throw if options is not provided', function() {
+      assert.throws(function() {
+        compute.createInstanceTemplate(NAME);
+      }, /options object is required\./);
+    });
 
     it('should make the correct API request', function(done) {
       var options = {
@@ -696,7 +703,7 @@ describe('Compute', function() {
       });
 
       it('should exec the callback with error & API response', function(done) {
-        compute.createInstanceTemplate(NAME, function(
+        compute.createInstanceTemplate(NAME, OPTIONS, function(
           err,
           instanceTemplate,
           op,
@@ -736,7 +743,12 @@ describe('Compute', function() {
           return operation;
         };
 
-        compute.createInstanceTemplate(NAME, function(err, image, op, resp) {
+        compute.createInstanceTemplate(NAME, OPTIONS, function(
+          err,
+          image,
+          op,
+          resp
+        ) {
           assert.strictEqual(err, null);
           assert.strictEqual(op, operation);
           assert.strictEqual(op.metadata, apiResponse);

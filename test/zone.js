@@ -685,7 +685,7 @@ describe('Zone', function() {
 
     it('should throw if targetSize is not provided', function() {
       assert.throws(function() {
-        zone.createInstanceGroupManager(NAME, INSTANCE_TEMPLATE, null);
+        zone.createInstanceGroupManager(NAME, INSTANCE_TEMPLATE);
       }, /Target size is required\./);
     });
 

@@ -439,9 +439,8 @@ Compute.prototype.createImage = function(name, disk, options, callback) {
 Compute.prototype.createInstanceTemplate = function(name, options, callback) {
   var self = this;
 
-  if (is.fn(options)) {
-    callback = options;
-    options = {};
+  if (typeof options !== 'object') {
+    throw new Error('options object is required.');
   }
 
   var body = extend({name: name}, options);
