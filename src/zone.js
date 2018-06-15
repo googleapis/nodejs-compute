@@ -437,6 +437,7 @@ Zone.prototype.createDisk = function(name, config, callback) {
  * @see [InstanceGroupManagers: insert API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/instanceGroupManagers/insert}
  *
  * @param {string} name - Name of the instance group manger.
+ * @param {InstanceTemplate} instanceTemplate - Instance template to use for this instance group manager.
  * @param {object} options - See an
  *     [InstanceGroupManager resource](https://cloud.google.com/compute/docs/reference/v1/instanceGroupManagers#resource).
  * @param {function} callback - The callback function.
@@ -451,6 +452,7 @@ Zone.prototype.createDisk = function(name, config, callback) {
  * const Compute = require('@google-cloud/compute');
  * const compute = new Compute();
  * const zone = compute.zone('us-central1-a');
+ * const instanceTemplate = compute.instanceTemplate('my-instance-template');
  *
  * function onCreated(err, instanceGroupManager, operation, apiResponse) {
  *   // `instanceGroupManager` is an InstanceGroupManager object.
@@ -459,19 +461,28 @@ Zone.prototype.createDisk = function(name, config, callback) {
  *   // of the request.
  * }
  *
- * zone.createInstanceGroupManager('instance-group-manager-name', onCreated);
+ * zone.createInstanceGroupManager('instance-group-manager-name', instanceTemplate, onCreated);
  *
  * //-
  * // If the callback is omitted, we'll return a Promise.
  * //-
- * zone.createInstanceGroup('instance-group-manager-name', config).then(function(data) {
+ * zone.createInstanceGroup('instance-group-manager-name', instanceTemplate).then(function(data) {
  *   const instanceGroupManager = data[0];
  *   const operation = data[1];
  *   const apiResponse = data[2];
  * });
  */
-Zone.prototype.createInstanceGroupManager = function(name, options, callback) {
+Zone.prototype.createInstanceGroupManager = function(
+  name,
+  instanceTemplate,
+  options,
+  callback
+) {
   var self = this;
+
+  if (!common.util.isCustomType(instanceTemplate, 'InstanceTemplate')) {
+    throw new Error('An InstanceTemplate object is required.');
+  }
 
   if (is.fn(options)) {
     callback = options;
@@ -480,6 +491,13 @@ Zone.prototype.createInstanceGroupManager = function(name, options, callback) {
 
   var body = extend({}, options, {
     name: name,
+    // Try undocumented partial URL
+    instanceTemplate: format(
+      'global/instanceTemplates/{instanceTemplateName}',
+      {
+        instanceTemplateName: instanceTemplate.name,
+      }
+    ),
   });
 
   this.request(

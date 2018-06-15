@@ -658,8 +658,27 @@ describe('Zone', function() {
   describe('createInstanceGroupManager', function() {
     var NAME = 'instance-group-manager';
 
+    var INSTANCE_TEMPLATE = {
+      name: 'my-instance-template',
+    };
+
     beforeEach(function() {
+      fakeUtil.isCustomType = function() {
+        return true;
+      };
       zone.request = util.noop;
+    });
+
+    it('should throw if InstanceTemplate is not provided', function() {
+      fakeUtil.isCustomType = function(unknown, type) {
+        assert.strictEqual(unknown, INSTANCE_TEMPLATE);
+        assert.strictEqual(type, 'InstanceTemplate');
+        return false;
+      };
+
+      assert.throws(function() {
+        zone.createInstanceGroupManager(NAME, INSTANCE_TEMPLATE);
+      }, /An InstanceTemplate object is required\./);
     });
 
     describe('API request', function() {
@@ -670,6 +689,7 @@ describe('Zone', function() {
 
       var expectedBody = {
         name: NAME,
+        instanceTemplate: 'global/instanceTemplates/my-instance-template',
         a: 'b',
         c: 'd',
       };
@@ -683,16 +703,28 @@ describe('Zone', function() {
           done();
         };
 
-        zone.createInstanceGroupManager(NAME, OPTIONS, assert.ifError);
+        zone.createInstanceGroupManager(
+          NAME,
+          INSTANCE_TEMPLATE,
+          OPTIONS,
+          assert.ifError
+        );
       });
 
       it('should not require options', function(done) {
         zone.request = function(reqOpts) {
-          assert.deepEqual(reqOpts.json, {name: NAME});
+          assert.deepEqual(reqOpts.json, {
+            name: NAME,
+            instanceTemplate: 'global/instanceTemplates/my-instance-template',
+          });
           done();
         };
 
-        zone.createInstanceGroupManager(NAME, assert.ifError);
+        zone.createInstanceGroupManager(
+          NAME,
+          INSTANCE_TEMPLATE,
+          assert.ifError
+        );
       });
 
       describe('error', function() {
@@ -706,18 +738,18 @@ describe('Zone', function() {
         });
 
         it('should execute callback with error & API response', function(done) {
-          zone.createInstanceGroupManager(NAME, OPTIONS, function(
-            err,
-            ig,
-            op,
-            resp
-          ) {
-            assert.strictEqual(err, error);
-            assert.strictEqual(ig, null);
-            assert.strictEqual(op, null);
-            assert.strictEqual(resp, apiResponse);
-            done();
-          });
+          zone.createInstanceGroupManager(
+            NAME,
+            INSTANCE_TEMPLATE,
+            OPTIONS,
+            function(err, ig, op, resp) {
+              assert.strictEqual(err, error);
+              assert.strictEqual(ig, null);
+              assert.strictEqual(op, null);
+              assert.strictEqual(resp, apiResponse);
+              done();
+            }
+          );
         });
       });
 
@@ -744,22 +776,22 @@ describe('Zone', function() {
             return operation;
           };
 
-          zone.createInstanceGroupManager(NAME, OPTIONS, function(
-            err,
-            ig,
-            op,
-            resp
-          ) {
-            assert.ifError(err);
+          zone.createInstanceGroupManager(
+            NAME,
+            INSTANCE_TEMPLATE,
+            OPTIONS,
+            function(err, ig, op, resp) {
+              assert.ifError(err);
 
-            assert.strictEqual(ig, instanceGroupManager);
+              assert.strictEqual(ig, instanceGroupManager);
 
-            assert.strictEqual(op, operation);
-            assert.strictEqual(op.metadata, resp);
+              assert.strictEqual(op, operation);
+              assert.strictEqual(op.metadata, resp);
 
-            assert.strictEqual(resp, apiResponse);
-            done();
-          });
+              assert.strictEqual(resp, apiResponse);
+              done();
+            }
+          );
         });
       });
     });

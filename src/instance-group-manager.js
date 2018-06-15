@@ -39,13 +39,15 @@ function InstanceGroupManager(zone, name) {
      * Create an instance group manager.
      *
      * @method InstanceGroupManager#create
+     * @param {InstanceTemplate} instanceTemplate - Instance template to use for this instance group manager.
      * @param {object=} options - See {@link Zone#createInstanceGroupManager}.
      *
      * @example
      * const Compute = require('@google-cloud/compute');
      * const compute = new Compute();
+     * const instanceTemplate = compute.instanceTemplate('my-instance-template');
      * const zone = compute.zone('us-central1-a');
-     * const instanceGroupManager = zone.instanceGroupManager('web-servers');
+     * const instanceGroupManager = zone.instanceGroupManager('web-servers', instanceTemplate);
      *
      * function onCreated(err, instanceGroupManager, operation, apiResponse) {
      *   // `instanceGroupManager` is an InstanceGroupManager object.
@@ -54,12 +56,12 @@ function InstanceGroupManager(zone, name) {
      *   // status of the request.
      * }
      *
-     * instanceGroupManager.create(onCreated);
+     * instanceGroupManager.create(instanceTemplate, onCreated);
      *
      * //-
      * // If the callback is omitted, we'll return a Promise.
      * //-
-     * instanceGroupManager.create().then(function(data) {
+     * instanceGroupManager.create(instanceTemplate).then(function(data) {
      *   const instanceGroupManager = data[0];
      *   const operation = data[1];
      *   const apiResponse = data[2];
@@ -97,15 +99,8 @@ function InstanceGroupManager(zone, name) {
     /**
      * Get an instance group manager if it exists.
      *
-     * You may optionally use this to "get or create" an object by providing an
-     * object with `autoCreate` set to `true`. Any extra configuration that is
-     * normally required for the `create` method must be contained within this
-     * object as well.
-     *
      * @method InstanceGroupManager#get
      * @param {options=} options - Configuration object.
-     * @param {boolean} options.autoCreate - Automatically create the object if
-     *     it does not exist. Default: `false`
      *
      * @example
      * const Compute = require('@google-cloud/compute');
