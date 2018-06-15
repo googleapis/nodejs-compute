@@ -332,7 +332,7 @@ Compute.prototype.createHealthCheck = function(name, options, callback) {
  *     [Images: insert API documentation](https://cloud.google.com/compute/docs/reference/v1/images/insert).
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request.
- * @param {?error} callback.image - The created Image.
+ * @param {Image} callback.image - The created Image.
  * @param {Operation} callback.operation - An operation object that can be used
  *     to check the status of the request.
  * @param {object} callback.apiResponse - The full API response.
@@ -407,6 +407,12 @@ Compute.prototype.createImage = function(name, disk, options, callback) {
  * @param {string} name - The name of the target image.
  * @param {object=} options - See an
  *     [InstanceTemplate resource](https://cloud.google.com/compute/docs/reference/v1/instanceTemplate#resource).
+ * @param {function} callback - The callback function.
+ * @param {?error} callback.err - An error returned while making this request.
+ * @param {InstanceTemplate} callback.instanceTemplate - The created InstanceTemplate.
+ * @param {Operation} callback.operation - An operation object that can be used
+ *     to check the status of the request.
+ * @param {object} callback.apiResponse - The full API response.
  *
  * @example
  * const Compute = require('@google-cloud/compute');
