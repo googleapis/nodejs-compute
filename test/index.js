@@ -663,6 +663,13 @@ describe('Compute', function() {
 
   describe('createInstanceTemplate', function() {
     var NAME = 'my-instance-template';
+    var MACHINE_TYPE = 'machine-type-1';
+
+    it('should throw if machineType is not provided', function() {
+      assert.throws(function() {
+        compute.createInstanceTemplate(NAME, null);
+      }, /Machine type is required\./);
+    });
 
     it('should make the correct API request', function(done) {
       var options = {
@@ -675,6 +682,7 @@ describe('Compute', function() {
         assert.strictEqual(reqOpts.uri, '/global/instanceTemplates');
         assert.deepEqual(reqOpts.json, {
           name: NAME,
+          machineType: MACHINE_TYPE,
           a: 'b',
           c: 'd',
         });
@@ -682,7 +690,12 @@ describe('Compute', function() {
         done();
       };
 
-      compute.createInstanceTemplate(NAME, options, assert.ifError);
+      compute.createInstanceTemplate(
+        NAME,
+        MACHINE_TYPE,
+        options,
+        assert.ifError
+      );
     });
 
     describe('error', function() {
@@ -696,7 +709,7 @@ describe('Compute', function() {
       });
 
       it('should exec the callback with error & API response', function(done) {
-        compute.createInstanceTemplate(NAME, function(
+        compute.createInstanceTemplate(NAME, MACHINE_TYPE, function(
           err,
           instanceTemplate,
           op,
@@ -736,7 +749,12 @@ describe('Compute', function() {
           return operation;
         };
 
-        compute.createInstanceTemplate(NAME, function(err, image, op, resp) {
+        compute.createInstanceTemplate(NAME, MACHINE_TYPE, function(
+          err,
+          image,
+          op,
+          resp
+        ) {
           assert.strictEqual(err, null);
           assert.strictEqual(op, operation);
           assert.strictEqual(op.metadata, apiResponse);

@@ -405,6 +405,7 @@ Compute.prototype.createImage = function(name, disk, options, callback) {
  * Create an instance template.
  *
  * @param {string} name - The name of the target image.
+ * @param {string} machineType - Machine type to use.
  * @param {object=} options - See an
  *     [InstanceTemplate resource](https://cloud.google.com/compute/docs/reference/v1/instanceTemplate#resource).
  * @param {function} callback - The callback function.
@@ -417,34 +418,52 @@ Compute.prototype.createImage = function(name, disk, options, callback) {
  * @example
  * const Compute = require('@google-cloud/compute');
  * const compute = new Compute();
+ * const machineType = 'n1-standard-1';
  *
- * function onCreated(err, instanceTemplate, operation, apiResponse) {
+ * function onCreated(
+ *   err,
+ *   instanceTemplate,
+ *   operation,
+ *   apiResponse
+ * ) {
  *   // `instanceTemplate` is an InstanceTemplate object.
  *
  *   // `operation` is an Operation object that can be used to check the
  *   // status of the request.
  * }
  *
- * compute.createInstanceTemplate('my-instance-template', options, onCreated);
+ * compute.createInstanceTemplate(
+ *   'my-instance-template',
+ *   machineType,
+ *   options,
+ *   onCreated
+ * );
  *
  * //-
  * // If the callback is omitted, we'll return a Promise.
  * //-
- * compute.createInstanceTemplate('my-instance-template', options).then(function(data) {
+ * compute.createInstanceTemplate('my-instance-template', machineType, options).then(function(data) {
  *   const instanceTemplate = data[0];
  *   const operation = data[1];
  *   const apiResponse = data[2];
  * });
  */
-Compute.prototype.createInstanceTemplate = function(name, options, callback) {
+Compute.prototype.createInstanceTemplate = function(name, machineType, options, callback) {
   var self = this;
+
+  if (typeof machineType !== 'string') {
+    throw new Error('Machine type is required.');
+  }
 
   if (is.fn(options)) {
     callback = options;
     options = {};
   }
 
-  var body = extend({name: name}, options);
+  var body = extend({}, options, {
+    name: name,
+    machineType: machineType
+  });
 
   this.request(
     {
