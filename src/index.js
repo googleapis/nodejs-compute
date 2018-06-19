@@ -48,7 +48,7 @@ var Image = require('./image.js');
  *     .p12 require you to specify the `email` option as well.
  * @property {string} [email] Account email address. Required when using a .pem
  *     or .p12 keyFilename.
- * @property {string} [baseUrl] Base API url. Use this is you want to switch 
+ * @property {string} [baseUrl] Base API url. Use this if you want to switch
  *     the API version, e.g. to use the beta API.
  * @property {object} [credentials] Credentials object.
  * @property {string} [credentials.client_email]
