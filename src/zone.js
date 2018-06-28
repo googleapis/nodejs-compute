@@ -437,10 +437,10 @@ Zone.prototype.createDisk = function(name, config, callback) {
  * @see [InstanceGroupManagers: insert API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/instanceGroupManagers/insert}
  *
  * @param {string} name - Name of the instance group manger.
- * @param {InstanceTemplate} instanceTemplate - Instance template to use for this instance group manager.
- * @param {number} targetSize - Target number of running instances
- * @param {object} options - See an
- *     [InstanceGroupManager resource](https://cloud.google.com/compute/docs/reference/v1/instanceGroupManagers#resource).
+ * @param {config=} config - Configuration object.
+ * @param {instanceTemplate} config.instanceTemplate - Instance template to use for this instance group manager.
+ * @param {string} config.instanceTemplate - URL to an instance template to use for this instance group manager.
+ * @param {number} config.targetSize - Target number of running instances
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request.
  * @param {InstanceGroup} callback.instanceGroupManager - The created
@@ -453,8 +453,10 @@ Zone.prototype.createDisk = function(name, config, callback) {
  * const Compute = require('@google-cloud/compute');
  * const compute = new Compute();
  * const zone = compute.zone('us-central1-a');
- * const instanceTemplate = compute.instanceTemplate('my-instance-template');
- * const targetSize = 10;
+ * const config = {
+ *   instanceTemplate: compute.instanceTemplate('my-instance-template'),
+ *   targetSize: 10
+ * };
  *
  * function onCreated(
  *   err,
@@ -471,52 +473,36 @@ Zone.prototype.createDisk = function(name, config, callback) {
  *
  * zone.createInstanceGroupManager(
  *   'instance-group-manager-name',
- *   instanceTemplate,
- *   targetSize,
+ *   config,
  *   onCreated
  * );
  *
  * //-
  * // If the callback is omitted, we'll return a Promise.
  * //-
- * zone.createInstanceGroup('instance-group-manager-name', instanceTemplate).then(function(data) {
+ * zone.createInstanceGroup('instance-group-manager-name', config).then(function(data) {
  *   const instanceGroupManager = data[0];
  *   const operation = data[1];
  *   const apiResponse = data[2];
  * });
  */
-Zone.prototype.createInstanceGroupManager = function(
-  name,
-  instanceTemplate,
-  targetSize,
-  options,
-  callback
-) {
+Zone.prototype.createInstanceGroupManager = function(name, config, callback) {
   var self = this;
 
-  if (!common.util.isCustomType(instanceTemplate, 'InstanceTemplate')) {
-    throw new Error('An InstanceTemplate object is required.');
+  if (!config.instanceTemplate) {
+    throw new Error('An InstanceTemplate is required.');
   }
 
-  if (typeof targetSize !== 'number') {
-    throw new Error('Target size is required.');
-  }
+  var body = extend({}, config, {name: name});
 
-  if (is.fn(options)) {
-    callback = options;
-    options = {};
-  }
-
-  var body = extend({}, options, {
-    name: name,
-    instanceTemplate: format(
+  if (common.util.isCustomType(body.instanceTemplate, 'InstanceTemplate')) {
+    body.instanceTemplate = format(
       'global/instanceTemplates/{instanceTemplateName}',
       {
-        instanceTemplateName: instanceTemplate.name,
+        instanceTemplateName: body.instanceTemplate.name,
       }
-    ),
-    targetSize: targetSize,
-  });
+    );
+  }
 
   this.request(
     {

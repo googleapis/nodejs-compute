@@ -1,5 +1,5 @@
 /*!
- * Copyright 2016 Google Inc. All Rights Reserved.
+ * Copyright 2018 Google Inc. All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,6 +19,7 @@
 var arrify = require('arrify');
 var common = require('@google-cloud/common');
 var extend = require('extend');
+var format = require('string-format-obj');
 var is = require('is');
 var util = require('util');
 
@@ -233,7 +234,7 @@ InstanceGroupManager.prototype.delete = function(callback) {
 /**
  * Get a list of managed VM instances in this instance group manager.
  *
- * @see [InstaceGroups: listInstances API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/instanceGroupManagers/listInstances}
+ * @see [Instance Groups: listInstances API Documentation]{@link https://cloud.google.com/compute/docs/reference/rest/v1/instanceGroupManagers/list}
  *
  * @param {object=} options - Instance search options.
  * @param {boolean} options.autoPaginate - Have pagination handled
@@ -431,6 +432,8 @@ InstanceGroupManager.prototype.removeVMs = function(callback) {
  *
  * @see [InstanceGroupManagers: recreateInstances API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/instanceGroupManagers/recreateInstances}
  *
+ * @param {VM[]} instances - Instances to recreate
+ * @param {string[]} instances - URLs to instances to recreate
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request.
  * @param {Operation} callback.operation - An operation object
@@ -442,8 +445,9 @@ InstanceGroupManager.prototype.removeVMs = function(callback) {
  * const compute = new Compute();
  * const zone = compute.zone('us-central1-a');
  * const instanceGroupManager = zone.instanceGroupManager('web-servers');
+ * const instances = [zone.vm('vm-name')];
  *
- * instanceGroupManager.recreateVMs(function(err, operation, apiResponse) {
+ * instanceGroupManager.recreateVMs(instances, function(err, operation, apiResponse) {
  *   // `operation` is an Operation object that can be used to check the status
  *   // of the request.
  * });
@@ -451,18 +455,35 @@ InstanceGroupManager.prototype.removeVMs = function(callback) {
  * //-
  * // If the callback is omitted, we'll return a Promise.
  * //-
- * instanceGroupManager.recreateVMs().then(function(data) {
+ * instanceGroupManager.recreateVMs(instances).then(function(data) {
  *   const operation = data[0];
  *   const apiResponse = data[1];
  * });
  */
-InstanceGroupManager.prototype.recreateVMs = function(callback) {
+InstanceGroupManager.prototype.recreateVMs = function(instances, callback) {
   var self = this;
+
+  var body = {
+    instances: [],
+  };
+
+  var idx, instance;
+  for (idx in instances) {
+    instance = instances[idx];
+    if (common.util.isCustomType(instance, 'VM')) {
+      instance = format('zones/{zone}/instances/{instanceName}', {
+        zone: self.zone.name,
+        instanceName: instance.name,
+      });
+    }
+    body.instances.push(instance);
+  }
 
   this.request(
     {
       method: 'POST',
       uri: '/recreateInstances',
+      json: body,
     },
     function(err, resp) {
       if (err) {
@@ -518,7 +539,10 @@ InstanceGroupManager.prototype.resize = function(size, callback) {
   this.request(
     {
       method: 'POST',
-      uri: '/resize?size=' + parseInt(size),
+      uri: 'resize',
+      qs: {
+        size: parseInt(size),
+      },
     },
     function(err, resp) {
       if (err) {

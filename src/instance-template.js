@@ -1,5 +1,5 @@
 /*!
- * Copyright 2016 Google Inc. All Rights Reserved.
+ * Copyright 2018 Google Inc. All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -36,7 +36,7 @@ function InstanceTemplate(compute, name) {
      *
      * @method InstanceTemplate#create
      * @param {object=} options - See an
-     *     [InstanceTemplate resource](https://cloud.google.com/compute/docs/reference/v1/instanceTemplate#resource).
+     *     [Instance Template resource](https://cloud.google.com/compute/docs/reference/rest/v1/instanceTemplates#resource)
      *
      * @example
      * const Compute = require('@google-cloud/compute');

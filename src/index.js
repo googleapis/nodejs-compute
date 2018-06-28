@@ -352,8 +352,8 @@ Compute.prototype.createHealthCheck = function(name, options, callback) {
  * // If the callback is omitted, we'll return a Promise.
  * //-
  * compute.createImage('new-image', disk).then(function(data) {
- *   var operation = data[0];
- *   var image = data[1];
+ *   var image = data[0];
+ *   var operation = data[1];
  *   var apiResponse = data[2];
  * });
  */
@@ -404,9 +404,12 @@ Compute.prototype.createImage = function(name, disk, options, callback) {
 /**
  * Create an instance template.
  *
+ * @see [Instance Templates Overview]{@link https://cloud.google.com/compute/docs/instance-templates}
+ * @see [InstanceTemplates: insert API Documentation]{@link https://cloud.google.com/compute/docs/reference/rest/v1/instanceTemplates/insert}
+ *
  * @param {string} name - The name of the target image.
- * @param {object=} options - See an
- *     [InstanceTemplate resource](https://cloud.google.com/compute/docs/reference/v1/instanceTemplate#resource).
+ * @param {object=} config - See an
+ *     [InstanceTemplate resource](https://cloud.google.com/compute/docs/reference/rest/v1/instanceTemplates#resource).
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request.
  * @param {InstanceTemplate} callback.instanceTemplate - The created InstanceTemplate.
@@ -425,25 +428,25 @@ Compute.prototype.createImage = function(name, disk, options, callback) {
  *   // status of the request.
  * }
  *
- * compute.createInstanceTemplate('my-instance-template', options, onCreated);
+ * compute.createInstanceTemplate('my-instance-template', config, onCreated);
  *
  * //-
  * // If the callback is omitted, we'll return a Promise.
  * //-
- * compute.createInstanceTemplate('my-instance-template', options).then(function(data) {
+ * compute.createInstanceTemplate('my-instance-template', config).then(function(data) {
  *   const instanceTemplate = data[0];
  *   const operation = data[1];
  *   const apiResponse = data[2];
  * });
  */
-Compute.prototype.createInstanceTemplate = function(name, options, callback) {
+Compute.prototype.createInstanceTemplate = function(name, config, callback) {
   var self = this;
 
-  if (typeof options !== 'object') {
-    throw new Error('options object is required.');
+  if (typeof config !== 'object') {
+    throw new Error('A configuration object is required.');
   }
 
-  var body = extend({name: name}, options);
+  var body = extend({name: name}, config);
 
   this.request(
     {
@@ -1630,8 +1633,8 @@ Compute.prototype.getImages = function(options, callback) {
 /**
  * Get a list of instance templates.
  *
- * @see [InstanceTemplates Overview]{@link https://cloud.google.com/compute/docs/instanceTemplates}
- * @see [InstanceTemplates: list API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/instanceTemplates}
+ * @see [Instance Templates Overview]{@link https://cloud.google.com/compute/docs/instance-templates}
+ * @see [Instance Templates: list API Documentation]{@link https://cloud.google.com/compute/docs/reference/rest/v1/instanceTemplates/list}
  *
  * @param {object=} options - InstanceTemplate search options.
  * @param {boolean} options.autoPaginate - Have pagination handled
@@ -3079,7 +3082,7 @@ Compute.prototype.image = function(name) {
 /**
  * Get a reference to a Google Compute Engine instance template.
  *
- * @see [InstanceTemplates Overview]{@link https://cloud.google.com/compute/docs/instanceTemplates}
+ * @see [Instance Templates Overview]{@link https://cloud.google.com/compute/docs/instance-templates}
  *
  * @param {string} name - Name of the instance template.
  * @returns {InstanceTemplate}

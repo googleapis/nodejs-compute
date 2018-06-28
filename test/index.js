@@ -665,10 +665,10 @@ describe('Compute', function() {
     var NAME = 'my-instance-template';
     var OPTIONS = {};
 
-    it('should throw if options is not provided', function() {
+    it('should throw if config is not provided', function() {
       assert.throws(function() {
         compute.createInstanceTemplate(NAME);
-      }, /options object is required\./);
+      }, /A configuration object is required\./);
     });
 
     it('should make the correct API request', function(done) {

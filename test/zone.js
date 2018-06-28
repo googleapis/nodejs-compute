@@ -664,6 +664,11 @@ describe('Zone', function() {
 
     var TARGET_SIZE = 10;
 
+    var CONFIG = {
+      instanceTemplate: INSTANCE_TEMPLATE,
+      targetSize: TARGET_SIZE,
+    };
+
     beforeEach(function() {
       fakeUtil.isCustomType = function() {
         return true;
@@ -672,35 +677,16 @@ describe('Zone', function() {
     });
 
     it('should throw if InstanceTemplate is not provided', function() {
-      fakeUtil.isCustomType = function(unknown, type) {
-        assert.strictEqual(unknown, INSTANCE_TEMPLATE);
-        assert.strictEqual(type, 'InstanceTemplate');
-        return false;
-      };
-
       assert.throws(function() {
-        zone.createInstanceGroupManager(NAME, INSTANCE_TEMPLATE, TARGET_SIZE);
-      }, /An InstanceTemplate object is required\./);
-    });
-
-    it('should throw if targetSize is not provided', function() {
-      assert.throws(function() {
-        zone.createInstanceGroupManager(NAME, INSTANCE_TEMPLATE);
-      }, /Target size is required\./);
+        zone.createInstanceGroupManager(NAME, {});
+      }, /An InstanceTemplate is required\./);
     });
 
     describe('API request', function() {
-      var OPTIONS = {
-        a: 'b',
-        c: 'd',
-      };
-
       var expectedBody = {
         name: NAME,
         instanceTemplate: 'global/instanceTemplates/my-instance-template',
         targetSize: 10,
-        a: 'b',
-        c: 'd',
       };
 
       it('should make the correct API request', function(done) {
@@ -712,13 +698,7 @@ describe('Zone', function() {
           done();
         };
 
-        zone.createInstanceGroupManager(
-          NAME,
-          INSTANCE_TEMPLATE,
-          TARGET_SIZE,
-          OPTIONS,
-          assert.ifError
-        );
+        zone.createInstanceGroupManager(NAME, CONFIG, assert.ifError);
       });
 
       it('should not require options', function(done) {
@@ -731,12 +711,7 @@ describe('Zone', function() {
           done();
         };
 
-        zone.createInstanceGroupManager(
-          NAME,
-          INSTANCE_TEMPLATE,
-          TARGET_SIZE,
-          assert.ifError
-        );
+        zone.createInstanceGroupManager(NAME, CONFIG, assert.ifError);
       });
 
       describe('error', function() {
@@ -750,19 +725,18 @@ describe('Zone', function() {
         });
 
         it('should execute callback with error & API response', function(done) {
-          zone.createInstanceGroupManager(
-            NAME,
-            INSTANCE_TEMPLATE,
-            TARGET_SIZE,
-            OPTIONS,
-            function(err, ig, op, resp) {
-              assert.strictEqual(err, error);
-              assert.strictEqual(ig, null);
-              assert.strictEqual(op, null);
-              assert.strictEqual(resp, apiResponse);
-              done();
-            }
-          );
+          zone.createInstanceGroupManager(NAME, CONFIG, function(
+            err,
+            ig,
+            op,
+            resp
+          ) {
+            assert.strictEqual(err, error);
+            assert.strictEqual(ig, null);
+            assert.strictEqual(op, null);
+            assert.strictEqual(resp, apiResponse);
+            done();
+          });
         });
       });
 
@@ -789,23 +763,22 @@ describe('Zone', function() {
             return operation;
           };
 
-          zone.createInstanceGroupManager(
-            NAME,
-            INSTANCE_TEMPLATE,
-            TARGET_SIZE,
-            OPTIONS,
-            function(err, ig, op, resp) {
-              assert.ifError(err);
+          zone.createInstanceGroupManager(NAME, CONFIG, function(
+            err,
+            ig,
+            op,
+            resp
+          ) {
+            assert.ifError(err);
 
-              assert.strictEqual(ig, instanceGroupManager);
+            assert.strictEqual(ig, instanceGroupManager);
 
-              assert.strictEqual(op, operation);
-              assert.strictEqual(op.metadata, resp);
+            assert.strictEqual(op, operation);
+            assert.strictEqual(op.metadata, resp);
 
-              assert.strictEqual(resp, apiResponse);
-              done();
-            }
-          );
+            assert.strictEqual(resp, apiResponse);
+            done();
+          });
         });
       });
     });

@@ -65,6 +65,7 @@ describe('InstanceGroupManager', function() {
   var staticMethods = {};
 
   var ZONE = {
+    name: 'my-zone',
     createInstanceGroupManager: util.noop,
     vm: util.noop,
   };
@@ -407,15 +408,32 @@ describe('InstanceGroupManager', function() {
   });
 
   describe('recreateVMs', function() {
+    var VM = {
+      name: 'my-vm',
+    };
+
+    var INSTANCES = [VM];
+
+    beforeEach(function() {
+      fakeUtil.isCustomType = function() {
+        return true;
+      };
+    });
+
     it('should make the correct API request', function(done) {
+      var expectedBody = {
+        instances: ['zones/my-zone/instances/my-vm'],
+      };
+
       instanceGroupManager.request = function(reqOpts) {
         assert.strictEqual(reqOpts.method, 'POST');
         assert.strictEqual(reqOpts.uri, '/recreateInstances');
+        assert.deepEqual(reqOpts.json, expectedBody);
 
         done();
       };
 
-      instanceGroupManager.recreateVMs(assert.ifError);
+      instanceGroupManager.recreateVMs(INSTANCES, assert.ifError);
     });
 
     describe('error', function() {
@@ -429,7 +447,7 @@ describe('InstanceGroupManager', function() {
       });
 
       it('should return an error and API response', function(done) {
-        instanceGroupManager.recreateVMs(function(
+        instanceGroupManager.recreateVMs(INSTANCES, function(
           err,
           operation,
           apiResponse_
@@ -459,7 +477,7 @@ describe('InstanceGroupManager', function() {
           return operation;
         };
 
-        instanceGroupManager.recreateVMs(function(
+        instanceGroupManager.recreateVMs(INSTANCES, function(
           err,
           operation_,
           apiResponse_
