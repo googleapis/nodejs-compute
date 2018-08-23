@@ -216,6 +216,20 @@ describe('Compute', function() {
       assert.strictEqual(normalizeArgumentsCalled, true);
     });
 
+    it('should accept alternative baseUrl', function() {
+      var options = {baseUrl: 'foo'};
+      var normalizeArgumentsCalled = false;
+
+      fakeUtil.normalizeArguments = function(context, options_) {
+        normalizeArgumentsCalled = true;
+        return options_;
+      };
+
+      new Compute(options);
+      assert.strictEqual(normalizeArgumentsCalled, true);
+      assert.strictEqual(options.baseUrl, undefined);
+    });
+
     it('should inherit from Service', function() {
       assert(compute instanceof Service);
 
