@@ -187,8 +187,8 @@ describe('Firewall', function() {
         assert.strictEqual(reqOpts.uri, '');
         assert.strictEqual(reqOpts.json, metadata);
         assert.deepStrictEqual(metadata, {
-          name: firewall.name,
-          network: FIREWALL_NETWORK,
+          name: FIREWALL_NAME,
+          network: FIREWALL_NETWORK
         });
 
         done();
@@ -196,6 +196,24 @@ describe('Firewall', function() {
 
       firewall.setMetadata(metadata, assert.ifError);
     });
+
+    it('should respect network specification', function(done) {
+      var metadata = {'network': 'custom-network'};
+
+      firewall.request = function(reqOpts) {
+        assert.strictEqual(reqOpts.method, 'PATCH');
+        assert.strictEqual(reqOpts.uri, '');
+        assert.strictEqual(reqOpts.json, metadata);
+        assert.deepStrictEqual(metadata, {
+          name: FIREWALL_NAME,
+          network: 'custom-network',
+        });
+
+        done();
+      };
+
+      firewall.setMetadata(metadata, assert.ifError);
+    })
 
     describe('error', function() {
       const error = new Error('Error.');
