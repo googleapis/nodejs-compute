@@ -34,6 +34,7 @@ var Service = require('./service.js');
 var Snapshot = require('./snapshot.js');
 var Zone = require('./zone.js');
 var Image = require('./image.js');
+var InstanceTemplate = require('./instance-template.js');
 
 /**
  * @typedef {object} ClientConfig
@@ -331,6 +332,7 @@ Compute.prototype.createHealthCheck = function(name, options, callback) {
  *     [Images: insert API documentation](https://cloud.google.com/compute/docs/reference/v1/images/insert).
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request.
+ * @param {Image} callback.image - The created Image.
  * @param {Operation} callback.operation - An operation object that can be used
  *     to check the status of the request.
  * @param {object} callback.apiResponse - The full API response.
@@ -341,7 +343,7 @@ Compute.prototype.createHealthCheck = function(name, options, callback) {
  * const zone = compute.zone('us-central1-a');
  * const disk = zone.disk('disk1');
  *
- * compute.createImage('new-image', disk, function(err, operation, apiResponse) {
+ * compute.createImage('new-image', disk, function(err, image, operation, apiResponse) {
  *   // `operation` is an Operation object that can be used to check the status
  *   // of network creation.
  * });
@@ -350,8 +352,9 @@ Compute.prototype.createHealthCheck = function(name, options, callback) {
  * // If the callback is omitted, we'll return a Promise.
  * //-
  * compute.createImage('new-image', disk).then(function(data) {
- *   var operation = data[0];
- *   var apiResponse = data[1];
+ *   var image = data[0];
+ *   var operation = data[1];
+ *   var apiResponse = data[2];
  * });
  */
 Compute.prototype.createImage = function(name, disk, options, callback) {
@@ -385,7 +388,7 @@ Compute.prototype.createImage = function(name, disk, options, callback) {
     },
     function(err, resp) {
       if (err) {
-        callback(err, null, resp);
+        callback(err, null, null, resp);
         return;
       }
       var image = self.image(name);
@@ -394,6 +397,74 @@ Compute.prototype.createImage = function(name, disk, options, callback) {
       operation.metadata = resp;
 
       callback(null, image, operation, resp);
+    }
+  );
+};
+
+/**
+ * Create an instance template.
+ *
+ * @see [Instance Templates Overview]{@link https://cloud.google.com/compute/docs/instance-templates}
+ * @see [InstanceTemplates: insert API Documentation]{@link https://cloud.google.com/compute/docs/reference/rest/v1/instanceTemplates/insert}
+ *
+ * @param {string} name - The name of the target image.
+ * @param {object=} config - See an
+ *     [InstanceTemplate resource](https://cloud.google.com/compute/docs/reference/rest/v1/instanceTemplates#resource).
+ * @param {function} callback - The callback function.
+ * @param {?error} callback.err - An error returned while making this request.
+ * @param {InstanceTemplate} callback.instanceTemplate - The created InstanceTemplate.
+ * @param {Operation} callback.operation - An operation object that can be used
+ *     to check the status of the request.
+ * @param {object} callback.apiResponse - The full API response.
+ *
+ * @example
+ * const Compute = require('@google-cloud/compute');
+ * const compute = new Compute();
+ *
+ * function onCreated(err, instanceTemplate, operation, apiResponse) {
+ *   // `instanceTemplate` is an InstanceTemplate object.
+ *
+ *   // `operation` is an Operation object that can be used to check the
+ *   // status of the request.
+ * }
+ *
+ * compute.createInstanceTemplate('my-instance-template', config, onCreated);
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * compute.createInstanceTemplate('my-instance-template', config).then(function(data) {
+ *   const instanceTemplate = data[0];
+ *   const operation = data[1];
+ *   const apiResponse = data[2];
+ * });
+ */
+Compute.prototype.createInstanceTemplate = function(name, config, callback) {
+  var self = this;
+
+  if (!is.object(config)) {
+    throw new Error('A configuration object is required.');
+  }
+
+  var body = extend({name: name}, config);
+
+  this.request(
+    {
+      method: 'POST',
+      uri: '/global/instanceTemplates',
+      json: body,
+    },
+    function(err, resp) {
+      if (err) {
+        callback(err, null, null, resp);
+        return;
+      }
+      var instanceTemplate = self.instanceTemplate(name);
+
+      var operation = self.operation(resp.name);
+      operation.metadata = resp;
+
+      callback(null, instanceTemplate, operation, resp);
     }
   );
 };
@@ -1560,6 +1631,99 @@ Compute.prototype.getImages = function(options, callback) {
 };
 
 /**
+ * Get a list of instance templates.
+ *
+ * @see [Instance Templates Overview]{@link https://cloud.google.com/compute/docs/instance-templates}
+ * @see [Instance Templates: list API Documentation]{@link https://cloud.google.com/compute/docs/reference/rest/v1/instanceTemplates/list}
+ *
+ * @param {object=} options - InstanceTemplate search options.
+ * @param {boolean} options.autoPaginate - Have pagination handled
+ *     automatically. Default: true.
+ * @param {string} options.filter - Search filter in the format of
+ *     `{name} {comparison} {filterString}`.
+ *     - **`name`**: the name of the field to compare
+ *     - **`comparison`**: the comparison operator, `eq` (equal) or `ne`
+ *       (not equal)
+ *     - **`filterString`**: the string to filter to. For string fields, this
+ *       can be a regular expression.
+ * @param {number} options.maxApiCalls - Maximum number of API calls to make.
+ * @param {number} options.maxResults - Maximum number of instance templates to return.
+ * @param {string} options.pageToken - A previously-returned page token
+ *     representing part of the larger set of results to view.
+ * @param {function} callback - The callback function.
+ * @param {?error} callback.err - An error returned while making this request.
+ * @param {InstanceTemplate[]} callback.instanceTemplates - InstanceTemplate objects from your project.
+ * @param {object} callback.apiResponse - The full API response.
+ *
+ * @example
+ * gce.getInstanceTemplates(function(err, instanceTemplates) {
+ *   // `instanceTemplates` is an array of `InstanceTemplate` objects.
+ * });
+ *
+ * //-
+ * // To control how many API requests are made and page through the results
+ * // manually, set `autoPaginate` to `false`.
+ * //-
+ * function callback(err, instanceTemplates, nextQuery, apiResponse) {
+ *   if (nextQuery) {
+ *     // More results exist.
+ *     gce.getInstanceTemplates(nextQuery, callback);
+ *   }
+ * }
+ *
+ * gce.getInstanceTemplates({
+ *   autoPaginate: false
+ * }, callback);
+ *
+ * gce.getInstanceTemplates().then(function(data) {
+ *   var instanceTemplates = data[0];
+ * });
+ */
+Compute.prototype.getInstanceTemplates = function(options, callback) {
+  var self = this;
+
+  if (is.fn(options)) {
+    callback = options;
+    options = {};
+  }
+
+  options = options || {};
+
+  this.request(
+    {
+      uri: '/global/instanceTemplates',
+      qs: options,
+    },
+    function(err, resp) {
+      if (err) {
+        callback(err, null, null, resp);
+        return;
+      }
+
+      var nextQuery = null;
+
+      if (resp.nextPageToken) {
+        nextQuery = extend({}, options, {
+          pageToken: resp.nextPageToken,
+        });
+      }
+
+      var instanceTemplates = (resp.items || []).map(function(
+        instanceTemplate
+      ) {
+        var instanceTemplateInstance = self.instanceTemplate(
+          instanceTemplate.name
+        );
+        instanceTemplateInstance.metadata = instanceTemplate;
+        return instanceTemplateInstance;
+      });
+
+      callback(null, instanceTemplates, nextQuery, resp);
+    }
+  );
+};
+
+/**
  * Get a list of {@link Image} objects as a readable object stream.
  *
  * @method Compute#getImagesStream
@@ -1587,6 +1751,37 @@ Compute.prototype.getImages = function(options, callback) {
  *   });
  */
 Compute.prototype.getImagesStream = common.paginator.streamify('getImages');
+
+/**
+ * Get a list of {@link InstanceTemplate} objects as a readable object stream.
+ *
+ * @method Compute#getInstanceTemplatesStream
+ * @param {object=} query - Configuration object. See {@link Compute#getInstanceTemplates}
+ *     for a complete list of options.
+ * @returns {stream}
+ *
+ * @example
+ * gce.getInstanceTemplatesStream()
+ *   .on('error', console.error)
+ *   .on('data', function(instanceTemplate) {
+ *     // `instanceTemplate` is an `InstanceTemplate` object.
+ *   })
+ *   .on('end', function() {
+ *     // All instance templates retrieved.
+ *   });
+ *
+ * //-
+ * // If you anticipate many results, you can end a stream early to prevent
+ * // unnecessary processing and API requests.
+ * //-
+ * gce.getInstanceTemplatesStream()
+ *   .on('data', function(instanceTemplate) {
+ *     this.end();
+ *   });
+ */
+Compute.prototype.getInstanceTemplatesStream = common.paginator.streamify(
+  'getInstanceTemplates'
+);
 
 /**
  * Get a list of machine types in this project.
@@ -2885,6 +3080,21 @@ Compute.prototype.image = function(name) {
 };
 
 /**
+ * Get a reference to a Google Compute Engine instance template.
+ *
+ * @see [Instance Templates Overview]{@link https://cloud.google.com/compute/docs/instance-templates}
+ *
+ * @param {string} name - Name of the instance template.
+ * @returns {InstanceTemplate}
+ *
+ * @example
+ * var image = gce.instanceTemplate('my-instance-template');
+ */
+Compute.prototype.instanceTemplate = function(name) {
+  return new InstanceTemplate(this, name);
+};
+
+/**
  * Get a reference to a Google Compute Engine network.
  *
  * @see [Networks Overview]{@link https://cloud.google.com/compute/docs/networking#networks}
@@ -3036,6 +3246,7 @@ common.paginator.extend(Compute, [
   'getDisks',
   'getFirewalls',
   'getImages',
+  'getInstanceTemplates',
   'getHealthChecks',
   'getInstanceGroups',
   'getMachineTypes',
@@ -3062,6 +3273,7 @@ common.util.promisifyAll(Compute, {
     'disk',
     'firewall',
     'image',
+    'instanceTemplate',
     'healthCheck',
     'instanceGroup',
     'machineType',
@@ -3104,6 +3316,15 @@ Compute.HealthCheck = HealthCheck;
  * @type {constructor}
  */
 Compute.Image = Image;
+
+/**
+ * {@link InstanceTemplate} class.
+ *
+ * @name Compute.InstanceTemplate
+ * @see InstaneTemplate
+ * @type {constructor}
+ */
+Compute.InstanceTemplate = InstanceTemplate;
 
 /**
  * {@link Network} class.

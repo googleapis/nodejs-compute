@@ -252,7 +252,7 @@ Autoscaler.prototype.delete = function(callback) {
  * @see [Autoscaler Resource]{@link https://cloud.google.com/compute/docs/reference/v1/autoscalers}
  *
  * @param {object} metadata - See a
- *     [Firewall resource](https://cloud.google.com/compute/docs/reference/v1/autoscalers).
+ *     [Autoscaler resource](https://cloud.google.com/compute/docs/reference/v1/autoscalers).
  * @param {function=} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request.
  * @param {Operation} callback.operation - An operation object

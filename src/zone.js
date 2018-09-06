@@ -27,6 +27,7 @@ var util = require('util');
 
 var Autoscaler = require('./autoscaler.js');
 var Disk = require('./disk.js');
+var InstanceGroupManager = require('./instance-group-manager.js');
 var InstanceGroup = require('./instance-group.js');
 var MachineType = require('./machine-type.js');
 var Operation = require('./operation.js');
@@ -425,6 +426,98 @@ Zone.prototype.createDisk = function(name, config, callback) {
       operation.metadata = resp;
 
       callback(null, disk, operation, resp);
+    }
+  );
+};
+
+/**
+ * Create an instance group manager in this zone.
+ *
+ * @see [InstanceGroupManager Resource]{@link https://cloud.google.com/compute/docs/reference/v1/instanceGroupManagers#resource}
+ * @see [InstanceGroupManagers: insert API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/instanceGroupManagers/insert}
+ *
+ * @param {string} name - Name of the instance group manager.
+ * @param {config} config - Configuration object - See an
+ *     [InstanceGroupManager resource](https://cloud.google.com/compute/docs/reference/v1/instanceGroupManagers#resource)
+ * @param {InstanceTemplate|string} config.instanceTemplate - Instance template to use for this instance group manager. If a string, it is treated as a complete URL to an instance template.
+ * @param {number} config.targetSize - Target number of running instances
+ * @param {function} callback - The callback function.
+ * @param {?error} callback.err - An error returned while making this request.
+ * @param {InstanceGroup} callback.instanceGroupManager - The created
+ *     InstanceGroupManager object.
+ * @param {Operation} callback.operation - An operation object
+ *     that can be used to check the status of the request.
+ * @param {object} callback.apiResponse - The full API response.
+ *
+ * @example
+ * const Compute = require('@google-cloud/compute');
+ * const compute = new Compute();
+ * const zone = compute.zone('us-central1-a');
+ * const config = {
+ *   instanceTemplate: compute.instanceTemplate('my-instance-template'),
+ *   targetSize: 10
+ * };
+ *
+ * function onCreated(
+ *   err,
+ *   instanceGroupManager,
+ *   operation,
+ *   apiResponse
+ * ) {
+ *   // `instanceGroupManager` is an InstanceGroupManager object.
+ *
+ *   // `operation` is an Operation object that can be used to check the status
+ *   // of the request.
+ * }
+ *
+ * zone.createInstanceGroupManager(
+ *   'instance-group-manager-name',
+ *   config,
+ *   onCreated
+ * );
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * zone.createInstanceGroup('instance-group-manager-name', config).then(function(data) {
+ *   const instanceGroupManager = data[0];
+ *   const operation = data[1];
+ *   const apiResponse = data[2];
+ * });
+ */
+Zone.prototype.createInstanceGroupManager = function(name, config, callback) {
+  var self = this;
+
+  if (!config.instanceTemplate) {
+    throw new Error('An InstanceTemplate is required.');
+  }
+
+  var body = extend({}, config, {name: name});
+
+  if (common.util.isCustomType(body.instanceTemplate, 'InstanceTemplate')) {
+    body.instanceTemplate = `global/instanceTemplates/${
+      body.instanceTemplate.name
+    }`;
+  }
+
+  this.request(
+    {
+      method: 'POST',
+      uri: '/instanceGroupManagers',
+      json: body,
+    },
+    function(err, resp) {
+      if (err) {
+        callback(err, null, null, resp);
+        return;
+      }
+
+      var instanceGroupManager = self.instanceGroupManager(name);
+
+      var operation = self.operation(resp.name);
+      operation.metadata = resp;
+
+      callback(null, instanceGroupManager, operation, resp);
     }
   );
 };
@@ -1022,6 +1115,108 @@ Zone.prototype.getDisks = function(options, callback) {
 Zone.prototype.getDisksStream = common.paginator.streamify('getDisks');
 
 /**
+ * Get a list of instance group managers for this zone.
+ *
+ * @see [InstanceGroupManagers Overview]{@link https://cloud.google.com/compute/docs/reference/v1/instanceGroupManagers}
+ * @see [InstanceGroupManagers: list API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/instanceGroupManagers/list}
+ *
+ * @param {object=} options - Instance group manager search options.
+ * @param {boolean} options.autoPaginate - Have pagination handled
+ *     automatically. Default: true.
+ * @param {string} options.filter - Search filter in the format of
+ *     `{name} {comparison} {filterString}`.
+ *     - **`name`**: the name of the field to compare
+ *     - **`comparison`**: the comparison operator, `eq` (equal) or `ne`
+ *       (not equal)
+ *     - **`filterString`**: the string to filter to. For string fields, this
+ *       can be a regular expression.
+ * @param {number} options.maxApiCalls - Maximum number of API calls to make.
+ * @param {number} options.maxResults - Maximum number of instance group managers to
+ *     return.
+ * @param {string} options.pageToken - A previously-returned page token
+ *     representing part of the larger set of results to view.
+ * @param {function} callback - The callback function.
+ * @param {?error} callback.err - An error returned while making this request.
+ * @param {InstanceGroup[]} callback.instanceGroupManagers -
+ *     InstanceGroup objects from this zone.
+ * @param {object} callback.apiResponse - The full API response.
+ *
+ * @example
+ * const Compute = require('@google-cloud/compute');
+ * const compute = new Compute();
+ * const zone = compute.zone('us-central1-a');
+ *
+ * zone.getInstanceGroupManagers(function(err, instanceGroupManagers) {
+ *   // `instanceGroupManagers` is an array of `InstanceGroup` objects.
+ * });
+ *
+ * //-
+ * // To control how many API requests are made and page through the results
+ * // manually, set `autoPaginate` to `false`.
+ * //-
+ * function callback(err, instanceGroupManagers, nextQuery, apiResponse) {
+ *   if (nextQuery) {
+ *     // More results exist.
+ *     zone.getInstanceGroupManagers(nextQuery, callback);
+ *   }
+ * }
+ *
+ * zone.getInstanceGroupManagers({
+ *   autoPaginate: false
+ * }, callback);
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * zone.getInstanceGroupManagers().then(function(data) {
+ *   const instanceGroupManagers = data[0];
+ * });
+ */
+Zone.prototype.getInstanceGroupManagers = function(options, callback) {
+  var self = this;
+
+  if (is.fn(options)) {
+    callback = options;
+    options = {};
+  }
+
+  options = options || {};
+
+  this.request(
+    {
+      uri: '/instanceGroupManagers',
+      qs: options,
+    },
+    function(err, resp) {
+      if (err) {
+        callback(err, null, null, resp);
+        return;
+      }
+
+      var nextQuery = null;
+
+      if (resp.nextPageToken) {
+        nextQuery = extend({}, options, {
+          pageToken: resp.nextPageToken,
+        });
+      }
+
+      var instanceGroupManagers = (resp.items || []).map(function(
+        instanceGroupManager
+      ) {
+        var instanceGroupManagerInstance = self.instanceGroupManager(
+          instanceGroupManager.name
+        );
+        instanceGroupManagerInstance.metadata = instanceGroupManager;
+        return instanceGroupManagerInstance;
+      });
+
+      callback(null, instanceGroupManagers, nextQuery, resp);
+    }
+  );
+};
+
+/**
  * Get a list of instance groups for this zone.
  *
  * @see [InstanceGroups Overview]{@link https://cloud.google.com/compute/docs/reference/v1/instanceGroups}
@@ -1152,6 +1347,41 @@ Zone.prototype.getInstanceGroups = function(options, callback) {
  */
 Zone.prototype.getInstanceGroupsStream = common.paginator.streamify(
   'getInstanceGroups'
+);
+
+/**
+ * Get a list of {@link InstanceGroupManager} objects for this zone as a
+ * readable object stream.
+ *
+ * @param {object=} options - Configuration object. See
+ *     {@link Zone#getInstanceGroupManagers} for a complete list of options.
+ * @returns {stream}
+ *
+ * @example
+ * const Compute = require('@google-cloud/compute');
+ * const compute = new Compute();
+ * const zone = compute.zone('us-central1-a');
+ *
+ * zone.getInstanceGroupManagersStream()
+ *   .on('error', console.error)
+ *   .on('data', function(instanceGroup) {
+ *     // `instanceGroup` is an `InstanceGroupManager` object.
+ *   })
+ *   .on('end', function() {
+ *     // All instance groups retrieved.
+ *   });
+ *
+ * //-
+ * // If you anticipate many results, you can end a stream early to prevent
+ * // unnecessary processing and API requests.
+ * //-
+ * zone.getInstanceGroupManagersStream()
+ *   .on('data', function(instanceGroup) {
+ *     this.end();
+ *   });
+ */
+Zone.prototype.getInstanceGroupManagersStream = common.paginator.streamify(
+  'getInstanceGroupManagers'
 );
 
 /**
@@ -1514,6 +1744,25 @@ Zone.prototype.getVMs = function(options, callback) {
 Zone.prototype.getVMsStream = common.paginator.streamify('getVMs');
 
 /**
+ * Get a reference to a Google Compute Engine instance group manager.
+ *
+ * @see [InstanceGroupManagers Overview]{@link https://cloud.google.com/compute/docs/reference/v1/instanceGroupManagers}
+ *
+ * @param {string} name - Name of the existing instance group manager.
+ * @returns {InstanceGroupManager}
+ *
+ * @example
+ * const Compute = require('@google-cloud/compute');
+ * const compute = new Compute();
+ * const zone = compute.zone('us-central1-a');
+ *
+ * const instanceGroup = zone.instanceGroupManager('my-instance-group-manager');
+ */
+Zone.prototype.instanceGroupManager = function(name) {
+  return new InstanceGroupManager(this, name);
+};
+
+/**
  * Get a reference to a Google Compute Engine instance group.
  *
  * @see [InstanceGroups Overview]{@link https://cloud.google.com/compute/docs/reference/v1/instanceGroups}
@@ -1649,6 +1898,7 @@ Zone.prototype.createHttpsServerFirewall_ = function(callback) {
 common.paginator.extend(Zone, [
   'getAutoscalers',
   'getDisks',
+  'getInstanceGroupManagers',
   'getInstanceGroups',
   'getMachineTypes',
   'getOperations',
@@ -1664,6 +1914,7 @@ common.util.promisifyAll(Zone, {
   exclude: [
     'autoscaler',
     'disk',
+    'instanceGroupManager',
     'instanceGroup',
     'machineType',
     'operation',
