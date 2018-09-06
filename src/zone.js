@@ -436,10 +436,10 @@ Zone.prototype.createDisk = function(name, config, callback) {
  * @see [InstanceGroupManager Resource]{@link https://cloud.google.com/compute/docs/reference/v1/instanceGroupManagers#resource}
  * @see [InstanceGroupManagers: insert API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/instanceGroupManagers/insert}
  *
- * @param {string} name - Name of the instance group manger.
- * @param {config=} config - Configuration object.
- * @param {instanceTemplate} config.instanceTemplate - Instance template to use for this instance group manager.
- * @param {string} config.instanceTemplate - URL to an instance template to use for this instance group manager.
+ * @param {string} name - Name of the instance group manager.
+ * @param {config} config - Configuration object - See an
+ *     [InstanceGroupManager resource](https://cloud.google.com/compute/docs/reference/v1/instanceGroupManagers#resource)
+ * @param {InstanceTemplate|string} config.instanceTemplate - Instance template to use for this instance group manager. If a string, it is treated as a complete URL to an instance template.
  * @param {number} config.targetSize - Target number of running instances
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request.
@@ -461,7 +461,6 @@ Zone.prototype.createDisk = function(name, config, callback) {
  * function onCreated(
  *   err,
  *   instanceGroupManager,
- *   targetSize,
  *   operation,
  *   apiResponse
  * ) {
@@ -496,12 +495,7 @@ Zone.prototype.createInstanceGroupManager = function(name, config, callback) {
   var body = extend({}, config, {name: name});
 
   if (common.util.isCustomType(body.instanceTemplate, 'InstanceTemplate')) {
-    body.instanceTemplate = format(
-      'global/instanceTemplates/{instanceTemplateName}',
-      {
-        instanceTemplateName: body.instanceTemplate.name,
-      }
-    );
+    body.instanceTemplate = `global/instanceTemplates/${body.instanceTemplate.name}`;
   }
 
   this.request(

@@ -432,8 +432,7 @@ InstanceGroupManager.prototype.removeVMs = function(callback) {
  *
  * @see [InstanceGroupManagers: recreateInstances API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/instanceGroupManagers/recreateInstances}
  *
- * @param {VM[]} instances - Instances to recreate
- * @param {string[]} instances - URLs to instances to recreate
+ * @param {VM[]|string[]} instances - Instances to recreate. If a string, it is treated as a complete URL to an instance resource.
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request.
  * @param {Operation} callback.operation - An operation object
@@ -464,20 +463,13 @@ InstanceGroupManager.prototype.recreateVMs = function(instances, callback) {
   var self = this;
 
   var body = {
-    instances: [],
+    instances: instances.map(instance => {
+      if (common.util.isCustomType(instance, 'VM')) {
+        return `zones/${self.zone.name}/instances/${instance.name}`;
+      }
+      return instance;
+    }),
   };
-
-  var idx, instance;
-  for (idx in instances) {
-    instance = instances[idx];
-    if (common.util.isCustomType(instance, 'VM')) {
-      instance = format('zones/{zone}/instances/{instanceName}', {
-        zone: self.zone.name,
-        instanceName: instance.name,
-      });
-    }
-    body.instances.push(instance);
-  }
 
   this.request(
     {

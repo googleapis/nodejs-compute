@@ -412,17 +412,17 @@ describe('InstanceGroupManager', function() {
       name: 'my-vm',
     };
 
-    var INSTANCES = [VM];
+    var INSTANCES = [VM, 'some/instance'];
 
     beforeEach(function() {
-      fakeUtil.isCustomType = function() {
-        return true;
+      fakeUtil.isCustomType = function(instance) {
+        return typeof instance === 'object';
       };
     });
 
     it('should make the correct API request', function(done) {
       var expectedBody = {
-        instances: ['zones/my-zone/instances/my-vm'],
+        instances: ['zones/my-zone/instances/my-vm','some/instance'],
       };
 
       instanceGroupManager.request = function(reqOpts) {

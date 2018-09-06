@@ -442,7 +442,7 @@ Compute.prototype.createImage = function(name, disk, options, callback) {
 Compute.prototype.createInstanceTemplate = function(name, config, callback) {
   var self = this;
 
-  if (typeof config !== 'object') {
+  if (!is.object(config)) {
     throw new Error('A configuration object is required.');
   }
 
