@@ -37,7 +37,7 @@ var fakeUtil = extend({}, util, {
     }
 
     promisified = true;
-    assert.deepEqual(options.exclude, [
+    assert.deepStrictEqual(options.exclude, [
       'address',
       'autoscaler',
       'disk',
@@ -69,7 +69,7 @@ var fakePaginator = {
     }
 
     methods = arrify(methods);
-    assert.deepEqual(methods, [
+    assert.deepStrictEqual(methods, [
       'getAddresses',
       'getAutoscalers',
       'getDisks',
@@ -230,10 +230,13 @@ describe('Compute', function() {
 
       var baseUrl = 'https://www.googleapis.com/compute/v1';
       assert.strictEqual(calledWith.baseUrl, baseUrl);
-      assert.deepEqual(calledWith.scopes, [
+      assert.deepStrictEqual(calledWith.scopes, [
         'https://www.googleapis.com/auth/compute',
       ]);
-      assert.deepEqual(calledWith.packageJson, require('../package.json'));
+      assert.deepStrictEqual(
+        calledWith.packageJson,
+        require('../package.json')
+      );
     });
 
     it('should streamify the correct methods', function() {
@@ -295,7 +298,7 @@ describe('Compute', function() {
         };
 
         compute.request = function(reqOpts) {
-          assert.deepEqual(reqOpts.json.allowed, [
+          assert.deepStrictEqual(reqOpts.json.allowed, [
             {IPProtocol: 'http', ports: [8000]},
             {IPProtocol: 'https', ports: [8080, 9000]},
             {IPProtocol: 'ssh', ports: [22]},
@@ -316,7 +319,7 @@ describe('Compute', function() {
         };
 
         compute.request = function(reqOpts) {
-          assert.deepEqual(reqOpts.json.sourceRanges, [options.ranges]);
+          assert.deepStrictEqual(reqOpts.json.sourceRanges, [options.ranges]);
           assert.strictEqual(reqOpts.json.ranges, undefined);
           done();
         };
@@ -332,7 +335,7 @@ describe('Compute', function() {
         };
 
         compute.request = function(reqOpts) {
-          assert.deepEqual(reqOpts.json.sourceTags, [options.tags]);
+          assert.deepStrictEqual(reqOpts.json.sourceTags, [options.tags]);
           assert.strictEqual(reqOpts.json.tags, undefined);
           done();
         };
@@ -347,7 +350,7 @@ describe('Compute', function() {
       compute.request = function(reqOpts) {
         assert.strictEqual(reqOpts.method, 'POST');
         assert.strictEqual(reqOpts.uri, '/global/firewalls');
-        assert.deepEqual(reqOpts.json, {name: name});
+        assert.deepStrictEqual(reqOpts.json, {name: name});
         done();
       };
 
@@ -471,8 +474,8 @@ describe('Compute', function() {
       compute.request = function(reqOpts) {
         assert.strictEqual(reqOpts.method, 'POST');
         assert.strictEqual(reqOpts.uri, '/global/httpHealthChecks');
-        assert.deepEqual(reqOpts.json, {a: 'b', name: name});
-        assert.deepEqual(options, originalOptions);
+        assert.deepStrictEqual(reqOpts.json, {a: 'b', name: name});
+        assert.deepStrictEqual(options, originalOptions);
         done();
       };
 
@@ -518,7 +521,7 @@ describe('Compute', function() {
 
         compute.healthCheck = function(name_, options) {
           assert.strictEqual(name_, name);
-          assert.deepEqual(options.https, undefined);
+          assert.deepStrictEqual(options.https, undefined);
           return healthCheck;
         };
 
@@ -588,7 +591,7 @@ describe('Compute', function() {
       compute.request = function(reqOpts) {
         assert.strictEqual(reqOpts.method, 'POST');
         assert.strictEqual(reqOpts.uri, '/global/images');
-        assert.deepEqual(reqOpts.json, {
+        assert.deepStrictEqual(reqOpts.json, {
           name: NAME,
           sourceDisk: format('zones/{zoneName}/disks/{diskName}', {
             zoneName: DISK.zone.name,
@@ -798,7 +801,7 @@ describe('Compute', function() {
       compute.request = function(reqOpts) {
         assert.strictEqual(reqOpts.method, 'POST');
         assert.strictEqual(reqOpts.uri, '/global/networks');
-        assert.deepEqual(reqOpts.json, {name: name});
+        assert.deepStrictEqual(reqOpts.json, {name: name});
         done();
       };
 
@@ -875,8 +878,8 @@ describe('Compute', function() {
       compute.request = function(reqOpts) {
         assert.strictEqual(reqOpts.method, 'POST');
         assert.strictEqual(reqOpts.uri, '/global/forwardingRules');
-        assert.deepEqual(config, originalConfig);
-        assert.deepEqual(reqOpts.json, expectedConfig);
+        assert.deepStrictEqual(config, originalConfig);
+        assert.deepStrictEqual(reqOpts.json, expectedConfig);
         done();
       };
 
@@ -890,7 +893,7 @@ describe('Compute', function() {
 
       it('should accept an array of tags', function(done) {
         compute.request = function(reqOpts) {
-          assert.deepEqual(reqOpts.json, {
+          assert.deepStrictEqual(reqOpts.json, {
             name: NAME,
             IPAddress: CONFIG.ip,
           });
@@ -908,7 +911,7 @@ describe('Compute', function() {
 
       it('should accept an array of tags', function(done) {
         compute.request = function(reqOpts) {
-          assert.deepEqual(reqOpts.json, {
+          assert.deepStrictEqual(reqOpts.json, {
             name: NAME,
             IPProtocol: CONFIG.protocol,
           });
@@ -926,7 +929,7 @@ describe('Compute', function() {
 
       it('should accept an array of tags', function(done) {
         compute.request = function(reqOpts) {
-          assert.deepEqual(reqOpts.json, {
+          assert.deepStrictEqual(reqOpts.json, {
             name: NAME,
             portRange: CONFIG.range,
           });
@@ -1002,7 +1005,7 @@ describe('Compute', function() {
       compute.request = function(reqOpts) {
         assert.strictEqual(reqOpts.method, 'POST');
         assert.strictEqual(reqOpts.uri, '/global/backendServices');
-        assert.deepEqual(reqOpts.json, {name: NAME});
+        assert.deepStrictEqual(reqOpts.json, {name: NAME});
         done();
       };
 
@@ -1081,7 +1084,7 @@ describe('Compute', function() {
   describe('getAddresses', function() {
     it('should accept only a callback', function(done) {
       compute.request = function(reqOpts) {
-        assert.deepEqual(reqOpts.qs, {});
+        assert.deepStrictEqual(reqOpts.qs, {});
         done();
       };
 
@@ -1173,9 +1176,9 @@ describe('Compute', function() {
         compute.getAddresses(query, function(err, addresses, nextQuery) {
           assert.ifError(err);
 
-          assert.deepEqual(query, originalQuery);
+          assert.deepStrictEqual(query, originalQuery);
 
-          assert.deepEqual(
+          assert.deepStrictEqual(
             nextQuery,
             extend({}, query, {
               pageToken: apiResponseWithNextPageToken.nextPageToken,
@@ -1191,7 +1194,7 @@ describe('Compute', function() {
   describe('getAutoscalers', function() {
     it('should accept only a callback', function(done) {
       compute.request = function(reqOpts) {
-        assert.deepEqual(reqOpts.qs, {});
+        assert.deepStrictEqual(reqOpts.qs, {});
         done();
       };
 
@@ -1308,9 +1311,9 @@ describe('Compute', function() {
         compute.getAutoscalers(query, function(err, autoscalers, nextQuery) {
           assert.ifError(err);
 
-          assert.deepEqual(query, originalQuery);
+          assert.deepStrictEqual(query, originalQuery);
 
-          assert.deepEqual(
+          assert.deepStrictEqual(
             nextQuery,
             extend({}, query, {
               pageToken: apiResponseWithNextPageToken.nextPageToken,
@@ -1326,7 +1329,7 @@ describe('Compute', function() {
   describe('getDisks', function() {
     it('should accept only a callback', function(done) {
       compute.request = function(reqOpts) {
-        assert.deepEqual(reqOpts.qs, {});
+        assert.deepStrictEqual(reqOpts.qs, {});
         done();
       };
 
@@ -1418,9 +1421,9 @@ describe('Compute', function() {
         compute.getDisks(query, function(err, disks, nextQuery) {
           assert.ifError(err);
 
-          assert.deepEqual(query, originalQuery);
+          assert.deepStrictEqual(query, originalQuery);
 
-          assert.deepEqual(
+          assert.deepStrictEqual(
             nextQuery,
             extend({}, query, {
               pageToken: apiResponseWithNextPageToken.nextPageToken,
@@ -1436,7 +1439,7 @@ describe('Compute', function() {
   describe('getFirewalls', function() {
     it('should accept only a callback', function(done) {
       compute.request = function(reqOpts) {
-        assert.deepEqual(reqOpts.qs, {});
+        assert.deepStrictEqual(reqOpts.qs, {});
         done();
       };
 
@@ -1514,9 +1517,9 @@ describe('Compute', function() {
         compute.getFirewalls(query, function(err, firewalls, nextQuery) {
           assert.ifError(err);
 
-          assert.deepEqual(query, originalQuery);
+          assert.deepStrictEqual(query, originalQuery);
 
-          assert.deepEqual(
+          assert.deepStrictEqual(
             nextQuery,
             extend({}, query, {
               pageToken: apiResponseWithNextPageToken.nextPageToken,
@@ -1532,7 +1535,7 @@ describe('Compute', function() {
   describe('getHealthChecks', function() {
     it('should accept only a callback', function(done) {
       compute.request = function(reqOpts) {
-        assert.deepEqual(reqOpts.qs, {});
+        assert.deepStrictEqual(reqOpts.qs, {});
         done();
       };
 
@@ -1544,7 +1547,7 @@ describe('Compute', function() {
 
       compute.request = function(reqOpts) {
         assert.strictEqual(reqOpts.uri, '/global/httpHealthChecks');
-        assert.deepEqual(reqOpts.qs, options);
+        assert.deepStrictEqual(reqOpts.qs, options);
         done();
       };
 
@@ -1558,8 +1561,8 @@ describe('Compute', function() {
 
         compute.request = function(reqOpts) {
           assert.strictEqual(reqOpts.uri, '/global/httpsHealthChecks');
-          assert.deepEqual(reqOpts.qs, {});
-          assert.deepEqual(options, originalOptions);
+          assert.deepStrictEqual(reqOpts.qs, {});
+          assert.deepStrictEqual(options, originalOptions);
           done();
         };
 
@@ -1636,9 +1639,9 @@ describe('Compute', function() {
         compute.getHealthChecks(query, function(err, firewalls, nextQuery) {
           assert.ifError(err);
 
-          assert.deepEqual(query, originalQuery);
+          assert.deepStrictEqual(query, originalQuery);
 
-          assert.deepEqual(
+          assert.deepStrictEqual(
             nextQuery,
             extend({}, query, {
               pageToken: apiResponseWithNextPageToken.nextPageToken,
@@ -1654,7 +1657,7 @@ describe('Compute', function() {
   describe('getImages', function() {
     it('should accept only a callback', function(done) {
       compute.request = function(reqOpts) {
-        assert.deepEqual(reqOpts.qs, {});
+        assert.deepStrictEqual(reqOpts.qs, {});
         done();
       };
 
@@ -1732,9 +1735,9 @@ describe('Compute', function() {
         compute.getImages(query, function(err, images, nextQuery) {
           assert.ifError(err);
 
-          assert.deepEqual(query, originalQuery);
+          assert.deepStrictEqual(query, originalQuery);
 
-          assert.deepEqual(
+          assert.deepStrictEqual(
             nextQuery,
             extend({}, query, {
               pageToken: apiResponseWithNextPageToken.nextPageToken,
@@ -1855,7 +1858,7 @@ describe('Compute', function() {
   describe('getInstanceGroups', function() {
     it('should accept only a callback', function(done) {
       compute.request = function(reqOpts) {
-        assert.deepEqual(reqOpts.qs, {});
+        assert.deepStrictEqual(reqOpts.qs, {});
         done();
       };
 
@@ -1867,7 +1870,7 @@ describe('Compute', function() {
 
       compute.request = function(reqOpts) {
         assert.strictEqual(reqOpts.uri, '/aggregated/instanceGroups');
-        assert.deepEqual(reqOpts.qs, options);
+        assert.deepStrictEqual(reqOpts.qs, options);
         done();
       };
 
@@ -1949,9 +1952,9 @@ describe('Compute', function() {
         compute.getInstanceGroups(query, function(err, groups, nextQuery) {
           assert.ifError(err);
 
-          assert.deepEqual(query, originalQuery);
+          assert.deepStrictEqual(query, originalQuery);
 
-          assert.deepEqual(
+          assert.deepStrictEqual(
             nextQuery,
             extend({}, query, {
               pageToken: apiResponseWithNextPageToken.nextPageToken,
@@ -1967,7 +1970,7 @@ describe('Compute', function() {
   describe('getMachineTypes', function() {
     it('should accept only a callback', function(done) {
       compute.request = function(reqOpts) {
-        assert.deepEqual(reqOpts.qs, {});
+        assert.deepStrictEqual(reqOpts.qs, {});
         done();
       };
 
@@ -2065,9 +2068,9 @@ describe('Compute', function() {
         compute.getMachineTypes(query, function(err, machineTypes, nextQuery) {
           assert.ifError(err);
 
-          assert.deepEqual(query, originalQuery);
+          assert.deepStrictEqual(query, originalQuery);
 
-          assert.deepEqual(
+          assert.deepStrictEqual(
             nextQuery,
             extend({}, query, {
               pageToken: apiResponseWithNextPageToken.nextPageToken,
@@ -2083,7 +2086,7 @@ describe('Compute', function() {
   describe('getNetworks', function() {
     it('should work with only a callback', function(done) {
       compute.request = function(reqOpts) {
-        assert.deepEqual(reqOpts.qs, {});
+        assert.deepStrictEqual(reqOpts.qs, {});
         done();
       };
 
@@ -2161,9 +2164,9 @@ describe('Compute', function() {
         compute.getNetworks(query, function(err, networks, nextQuery) {
           assert.ifError(err);
 
-          assert.deepEqual(query, originalQuery);
+          assert.deepStrictEqual(query, originalQuery);
 
-          assert.deepEqual(
+          assert.deepStrictEqual(
             nextQuery,
             extend({}, query, {
               pageToken: apiResponseWithNextPageToken.nextPageToken,
@@ -2179,7 +2182,7 @@ describe('Compute', function() {
   describe('getOperations', function() {
     it('should work with only a callback', function(done) {
       compute.request = function(reqOpts) {
-        assert.deepEqual(reqOpts.qs, {});
+        assert.deepStrictEqual(reqOpts.qs, {});
         done();
       };
 
@@ -2257,9 +2260,9 @@ describe('Compute', function() {
         compute.getOperations(query, function(err, operations, nextQuery) {
           assert.ifError(err);
 
-          assert.deepEqual(query, originalQuery);
+          assert.deepStrictEqual(query, originalQuery);
 
-          assert.deepEqual(
+          assert.deepStrictEqual(
             nextQuery,
             extend({}, query, {
               pageToken: apiResponseWithNextPageToken.nextPageToken,
@@ -2275,7 +2278,7 @@ describe('Compute', function() {
   describe('getRegions', function() {
     it('should work with only a callback', function(done) {
       compute.request = function(reqOpts) {
-        assert.deepEqual(reqOpts.qs, {});
+        assert.deepStrictEqual(reqOpts.qs, {});
         done();
       };
 
@@ -2353,9 +2356,9 @@ describe('Compute', function() {
         compute.getRegions(query, function(err, regions, nextQuery) {
           assert.ifError(err);
 
-          assert.deepEqual(query, originalQuery);
+          assert.deepStrictEqual(query, originalQuery);
 
-          assert.deepEqual(
+          assert.deepStrictEqual(
             nextQuery,
             extend({}, query, {
               pageToken: apiResponseWithNextPageToken.nextPageToken,
@@ -2371,7 +2374,7 @@ describe('Compute', function() {
   describe('getRules', function() {
     it('should work with only a callback', function(done) {
       compute.request = function(reqOpts) {
-        assert.deepEqual(reqOpts.qs, {});
+        assert.deepStrictEqual(reqOpts.qs, {});
         done();
       };
 
@@ -2434,7 +2437,7 @@ describe('Compute', function() {
 
         compute.getRules({}, function(err, rules) {
           assert.ifError(err);
-          assert.deepEqual(rules, [rule]);
+          assert.deepStrictEqual(rules, [rule]);
           done();
         });
       });
@@ -2457,9 +2460,9 @@ describe('Compute', function() {
         compute.getRules(query, function(err, rules, nextQuery) {
           assert.ifError(err);
 
-          assert.deepEqual(query, originalQuery);
+          assert.deepStrictEqual(query, originalQuery);
 
-          assert.deepEqual(
+          assert.deepStrictEqual(
             nextQuery,
             extend({}, query, {
               pageToken: apiResponseWithNextPageToken.nextPageToken,
@@ -2475,7 +2478,7 @@ describe('Compute', function() {
   describe('getServices', function() {
     it('should work with only a callback', function(done) {
       compute.request = function(reqOpts) {
-        assert.deepEqual(reqOpts.qs, {});
+        assert.deepStrictEqual(reqOpts.qs, {});
         done();
       };
 
@@ -2558,9 +2561,9 @@ describe('Compute', function() {
         compute.getServices(query, function(err, services, nextQuery) {
           assert.ifError(err);
 
-          assert.deepEqual(query, originalQuery);
+          assert.deepStrictEqual(query, originalQuery);
 
-          assert.deepEqual(
+          assert.deepStrictEqual(
             nextQuery,
             extend({}, query, {
               pageToken: apiResponseWithNextPageToken.nextPageToken,
@@ -2576,7 +2579,7 @@ describe('Compute', function() {
   describe('getSnapshots', function() {
     it('should work with only a callback', function(done) {
       compute.request = function(reqOpts) {
-        assert.deepEqual(reqOpts.qs, {});
+        assert.deepStrictEqual(reqOpts.qs, {});
         done();
       };
 
@@ -2654,9 +2657,9 @@ describe('Compute', function() {
         compute.getSnapshots(query, function(err, snapshots, nextQuery) {
           assert.ifError(err);
 
-          assert.deepEqual(query, originalQuery);
+          assert.deepStrictEqual(query, originalQuery);
 
-          assert.deepEqual(
+          assert.deepStrictEqual(
             nextQuery,
             extend({}, query, {
               pageToken: apiResponseWithNextPageToken.nextPageToken,
@@ -2672,7 +2675,7 @@ describe('Compute', function() {
   describe('getSubnetworks', function() {
     it('should accept only a callback', function(done) {
       compute.request = function(reqOpts) {
-        assert.deepEqual(reqOpts.qs, {});
+        assert.deepStrictEqual(reqOpts.qs, {});
         done();
       };
 
@@ -2774,9 +2777,9 @@ describe('Compute', function() {
         compute.getSubnetworks(query, function(err, subnetworks, nextQuery) {
           assert.ifError(err);
 
-          assert.deepEqual(query, originalQuery);
+          assert.deepStrictEqual(query, originalQuery);
 
-          assert.deepEqual(
+          assert.deepStrictEqual(
             nextQuery,
             extend({}, query, {
               pageToken: apiResponseWithNextPageToken.nextPageToken,
@@ -2792,7 +2795,7 @@ describe('Compute', function() {
   describe('getVMs', function() {
     it('should work with only a callback', function(done) {
       compute.request = function(reqOpts) {
-        assert.deepEqual(reqOpts.qs, {});
+        assert.deepStrictEqual(reqOpts.qs, {});
         done();
       };
 
@@ -2884,9 +2887,9 @@ describe('Compute', function() {
         compute.getVMs(query, function(err, vms, nextQuery) {
           assert.ifError(err);
 
-          assert.deepEqual(query, originalQuery);
+          assert.deepStrictEqual(query, originalQuery);
 
-          assert.deepEqual(
+          assert.deepStrictEqual(
             nextQuery,
             extend({}, query, {
               pageToken: apiResponseWithNextPageToken.nextPageToken,
@@ -2902,7 +2905,7 @@ describe('Compute', function() {
   describe('getZones', function() {
     it('should work with only a callback', function(done) {
       compute.request = function(reqOpts) {
-        assert.deepEqual(reqOpts.qs, {});
+        assert.deepStrictEqual(reqOpts.qs, {});
         done();
       };
 
@@ -2980,9 +2983,9 @@ describe('Compute', function() {
         compute.getZones(query, function(err, snapshots, nextQuery) {
           assert.ifError(err);
 
-          assert.deepEqual(query, originalQuery);
+          assert.deepStrictEqual(query, originalQuery);
 
-          assert.deepEqual(
+          assert.deepStrictEqual(
             nextQuery,
             extend({}, query, {
               pageToken: apiResponseWithNextPageToken.nextPageToken,

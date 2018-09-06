@@ -6,7 +6,7 @@
   "author": "Google Inc.",
   "repository": "googleapis/nodejs-compute",
   "engines": {
-    "node": ">=6.0.0"
+    "node": ">=8"
   },
   "scripts": {
     "system-test": "ava -T 20s --verbose system-test/*.test.js",
@@ -15,7 +15,7 @@
   },
   "dependencies": {
     "@google-cloud/compute": "^0.10.0",
-    "googleapis": "^32.0.0",
+    "googleapis": "^33.0.0",
     "nodemailer": "^4.3.1",
     "nodemailer-smtp-transport": "^2.7.4",
     "sendgrid": "^5.2.3"
