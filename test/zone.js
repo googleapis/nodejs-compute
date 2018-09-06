@@ -693,7 +693,7 @@ describe('Zone', function() {
         zone.request = function(reqOpts) {
           assert.strictEqual(reqOpts.method, 'POST');
           assert.strictEqual(reqOpts.uri, '/instanceGroupManagers');
-          assert.deepEqual(reqOpts.json, expectedBody);
+          assert.deepStrictEqual(reqOpts.json, expectedBody);
 
           done();
         };
@@ -703,7 +703,7 @@ describe('Zone', function() {
 
       it('should not require options', function(done) {
         zone.request = function(reqOpts) {
-          assert.deepEqual(reqOpts.json, {
+          assert.deepStrictEqual(reqOpts.json, {
             name: NAME,
             instanceTemplate: 'global/instanceTemplates/my-instance-template',
             targetSize: 10,
@@ -1471,7 +1471,7 @@ describe('Zone', function() {
   describe('getInstanceGroupManagers', function() {
     it('should accept only a callback', function(done) {
       zone.request = function(reqOpts) {
-        assert.deepEqual(reqOpts.qs, {});
+        assert.deepStrictEqual(reqOpts.qs, {});
         done();
       };
 
@@ -1544,7 +1544,7 @@ describe('Zone', function() {
         zone.getInstanceGroupManagers({}, function(err, groups, nextQuery) {
           assert.ifError(err);
 
-          assert.deepEqual(nextQuery, expectedNextQuery);
+          assert.deepStrictEqual(nextQuery, expectedNextQuery);
 
           done();
         });

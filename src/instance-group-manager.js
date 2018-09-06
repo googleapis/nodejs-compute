@@ -19,7 +19,6 @@
 var arrify = require('arrify');
 var common = require('@google-cloud/common');
 var extend = require('extend');
-var format = require('string-format-obj');
 var is = require('is');
 var util = require('util');
 

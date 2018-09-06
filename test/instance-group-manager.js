@@ -50,8 +50,8 @@ var fakePaginator = {
 
     extended = true;
     methods = arrify(methods);
-    assert.equal(Class.name, 'InstanceGroupManager');
-    assert.deepEqual(methods, ['getVMs']);
+    assert.strictEqual(Class.name, 'InstanceGroupManager');
+    assert.deepStrictEqual(methods, ['getVMs']);
   },
   streamify: function(methodName) {
     return methodName;
@@ -124,7 +124,7 @@ describe('InstanceGroupManager', function() {
               assert.strictEqual(calledWith.parent, zoneInstance);
               assert.strictEqual(calledWith.baseUrl, '/instanceGroupManagers');
               assert.strictEqual(calledWith.id, NAME);
-              assert.deepEqual(calledWith.methods, {
+              assert.deepStrictEqual(calledWith.methods, {
                 create: true,
                 exists: true,
                 get: true,
@@ -222,7 +222,7 @@ describe('InstanceGroupManager', function() {
 
     it('should accept only a callback', function(done) {
       instanceGroupManager.request = function(reqOpts) {
-        assert.deepEqual(reqOpts.qs, {});
+        assert.deepStrictEqual(reqOpts.qs, {});
         done();
       };
 
@@ -251,7 +251,7 @@ describe('InstanceGroupManager', function() {
 
       it('should set the instanceState filter', function(done) {
         instanceGroupManager.request = function(reqOpts) {
-          assert.deepEqual(reqOpts.json, {
+          assert.deepStrictEqual(reqOpts.json, {
             instanceState: 'RUNNING',
           });
           done();
@@ -314,7 +314,7 @@ describe('InstanceGroupManager', function() {
         instanceGroupManager.getVMs({}, function(err, vms, nextQuery) {
           assert.ifError(err);
 
-          assert.deepEqual(nextQuery, expectedNextQuery);
+          assert.deepStrictEqual(nextQuery, expectedNextQuery);
 
           done();
         });
@@ -422,13 +422,13 @@ describe('InstanceGroupManager', function() {
 
     it('should make the correct API request', function(done) {
       var expectedBody = {
-        instances: ['zones/my-zone/instances/my-vm','some/instance'],
+        instances: ['zones/my-zone/instances/my-vm', 'some/instance'],
       };
 
       instanceGroupManager.request = function(reqOpts) {
         assert.strictEqual(reqOpts.method, 'POST');
         assert.strictEqual(reqOpts.uri, '/recreateInstances');
-        assert.deepEqual(reqOpts.json, expectedBody);
+        assert.deepStrictEqual(reqOpts.json, expectedBody);
 
         done();
       };

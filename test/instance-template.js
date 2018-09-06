@@ -85,7 +85,7 @@ describe('InstanceTemplate', function() {
       assert.strictEqual(calledWith.parent, COMPUTE);
       assert.strictEqual(calledWith.baseUrl, '/global/instanceTemplates');
       assert.strictEqual(calledWith.id, INSTANCE_TEMPLATE_NAME);
-      assert.deepEqual(calledWith.methods, {
+      assert.deepStrictEqual(calledWith.methods, {
         create: true,
         exists: true,
         get: true,

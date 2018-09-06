@@ -495,7 +495,9 @@ Zone.prototype.createInstanceGroupManager = function(name, config, callback) {
   var body = extend({}, config, {name: name});
 
   if (common.util.isCustomType(body.instanceTemplate, 'InstanceTemplate')) {
-    body.instanceTemplate = `global/instanceTemplates/${body.instanceTemplate.name}`;
+    body.instanceTemplate = `global/instanceTemplates/${
+      body.instanceTemplate.name
+    }`;
   }
 
   this.request(

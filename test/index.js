@@ -683,7 +683,7 @@ describe('Compute', function() {
       compute.request = function(reqOpts) {
         assert.strictEqual(reqOpts.method, 'POST');
         assert.strictEqual(reqOpts.uri, '/global/instanceTemplates');
-        assert.deepEqual(reqOpts.json, {
+        assert.deepStrictEqual(reqOpts.json, {
           name: NAME,
           a: 'b',
           c: 'd',
@@ -1753,7 +1753,7 @@ describe('Compute', function() {
   describe('getInstanceTemplates', function() {
     it('should accept only a callback', function(done) {
       compute.request = function(reqOpts) {
-        assert.deepEqual(reqOpts.qs, {});
+        assert.deepStrictEqual(reqOpts.qs, {});
         done();
       };
 
@@ -1840,9 +1840,9 @@ describe('Compute', function() {
         ) {
           assert.ifError(err);
 
-          assert.deepEqual(query, originalQuery);
+          assert.deepStrictEqual(query, originalQuery);
 
-          assert.deepEqual(
+          assert.deepStrictEqual(
             nextQuery,
             extend({}, query, {
               pageToken: apiResponseWithNextPageToken.nextPageToken,
