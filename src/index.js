@@ -25,6 +25,10 @@ var util = require('util');
 
 var Firewall = require('./firewall.js');
 var HealthCheck = require('./health-check.js');
+var Image = require('./image.js');
+var InstanceGroupManager = require('./instance-group-manager.js');
+var InstanceGroup = require('./instance-group.js');
+var InstanceTemplate = require('./instance-template.js');
 var Network = require('./network.js');
 var Operation = require('./operation.js');
 var Project = require('./project.js');
@@ -33,8 +37,6 @@ var Rule = require('./rule.js');
 var Service = require('./service.js');
 var Snapshot = require('./snapshot.js');
 var Zone = require('./zone.js');
-var Image = require('./image.js');
-var InstanceTemplate = require('./instance-template.js');
 
 /**
  * @typedef {object} ClientConfig
@@ -1153,6 +1155,141 @@ Compute.prototype.getDisks = function(options, callback) {
  */
 
 Compute.prototype.getDisksStream = common.paginator.streamify('getDisks');
+
+/**
+ * Get a list of instance group managers.
+ *
+ * @see [instanceGroupManagers Overview]{@link https://cloud.google.com/compute/docs/reference/v1/instanceGroupManagers}
+ * @see [instanceGroupManagers: aggregatedList API Documentation]{@link https://cloud.google.com/compute/docs/reference/rest/v1/instanceGroupManagers/aggregatedList}
+ *
+ * @param {object=} options - Instance group search options.
+ * @param {boolean} options.autoPaginate - Have pagination handled
+ *     automatically. Default: true.
+ * @param {string} options.filter - Search filter in the format of
+ *     `{name} {comparison} {filterString}`.
+ *     - **`name`**: the name of the field to compare
+ *     - **`comparison`**: the comparison operator, `eq` (equal) or `ne`
+ *       (not equal)
+ *     - **`filterString`**: the string to filter to. For string fields, this
+ *       can be a regular expression.
+ * @param {number} options.maxApiCalls - Maximum number of API calls to make.
+ * @param {number} options.maxResults - Maximum number of instance groups to
+ *     return.
+ * @param {string} options.pageToken - A previously-returned page token
+ *     representing part of the larger set of results to view.
+ * @param {function} callback - The callback function.
+ * @param {?error} callback.err - An error returned while making this request.
+ * @param {InstanceGroup[]} callback.instanceGroups -
+ *     InstanceGroup objects from your project.
+ * @param {object} callback.apiResponse - The full API response.
+ *
+ * @example
+ * gce.getInstanceGroupManagers(function(err, instanceGroupManagers) {
+ *   // `instanceGroupManagers` is an array of `InstanceGroupManager` objects.
+ * });
+ *
+ * //-
+ * // To control how many API requests are made and page through the results
+ * // manually, set `autoPaginate` to `false`.
+ * //-
+ * function callback(err, instanceGroupManagers, nextQuery, apiResponse) {
+ *   if (nextQuery) {
+ *     // More results exist.
+ *     gce.getInstanceGroupManagers(nextQuery, callback);
+ *   }
+ * }
+ *
+ * gce.getInstanceGroupManagers({
+ *   autoPaginate: false
+ * }, callback);
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * gce.getInstanceGroupManagers().then(function(data) {
+ *   var instanceGroupManagers = data[0];
+ * });
+ */
+Compute.prototype.getInstanceGroupManagers = function(options, callback) {
+  var self = this;
+
+  if (is.fn(options)) {
+    callback = options;
+    options = {};
+  }
+
+  options = options || {};
+
+  this.request(
+    {
+      uri: '/aggregated/instanceGroupManagers',
+      qs: options,
+    },
+    function(err, resp) {
+      if (err) {
+        callback(err, null, null, resp);
+        return;
+      }
+
+      var nextQuery = null;
+
+      if (resp.nextPageToken) {
+        nextQuery = extend({}, options, {
+          pageToken: resp.nextPageToken,
+        });
+      }
+
+      var zones = resp.items || {};
+
+      var instanceGroupManagers = Object.keys(zones).reduce(function(acc, zoneName) {
+        var zone = self.zone(zoneName.replace('zones/', ''));
+        var instanceGroupManagers = zones[zoneName].instanceGroupManagers || [];
+
+        instanceGroupManagers.forEach(function(instanceGroupManager) {
+          var instanceGroupManagerInstance = zone.instanceGroupManager(instanceGroupManager.name);
+          instanceGroupManagerInstance.metadata = instanceGroupManager;
+          acc.push(instanceGroupManagerInstance);
+        });
+
+        return acc;
+      }, []);
+
+      callback(null, instanceGroupManagers, nextQuery, resp);
+    }
+  );
+};
+
+/**
+ * Get a list of {@link InstanceGroupManager} objects as a readable object
+ * stream.
+ *
+ * @method Compute#getInstanceGroupManagersStream
+ * @param {object=} options - Configuration object. See
+ *     {@link Compute#getInstanceGroupManagers} for a complete list of options.
+ * @returns {stream}
+ *
+ * @example
+ * gce.getInstanceGroupManagersStream()
+ *   .on('error', console.error)
+ *   .on('data', function(instanceGroupManager) {
+ *     // `instanceGroupManager` is an `InstanceGroupManager` object.
+ *   })
+ *   .on('end', function() {
+ *     // All instance group managers retrieved.
+ *   });
+ *
+ * //-
+ * // If you anticipate many results, you can end a stream early to prevent
+ * // unnecessary processing and API requests.
+ * //-
+ * gce.getInstanceGroupManagersStream()
+ *   .on('data', function(instanceGroupManager) {
+ *     this.end();
+ *   });
+ */
+Compute.prototype.getInstanceGroupManagersStream = common.paginator.streamify(
+  'getInstanceGroupManagers'
+);
 
 /**
  * Get a list of instance groups.
@@ -3248,6 +3385,7 @@ common.paginator.extend(Compute, [
   'getImages',
   'getInstanceTemplates',
   'getHealthChecks',
+  'getInstanceGroupManagers',
   'getInstanceGroups',
   'getMachineTypes',
   'getNetworks',
@@ -3316,6 +3454,24 @@ Compute.HealthCheck = HealthCheck;
  * @type {constructor}
  */
 Compute.Image = Image;
+
+/**
+ * {@link InstanceGroupManager} class.
+ *
+ * @name Compute.InstanceGroupManager
+ * @see InstanceGroupManager
+ * @type {constructor}
+ */
+Compute.InstanceGroupManager = InstanceGroupManager;
+
+/**
+ * {@link InstanceGroup} class.
+ *
+ * @name Compute.InstanceGroup
+ * @see InstanceGroup
+ * @type {constructor}
+ */
+Compute.InstanceGroup = InstanceGroup;
 
 /**
  * {@link InstanceTemplate} class.

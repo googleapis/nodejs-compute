@@ -375,63 +375,12 @@ InstanceGroupManager.prototype.getVMsStream = common.paginator.streamify(
 );
 
 /**
- * Remove the VMs managed by this instance group.
- *
- * @see [InstanceGroupManagers: abandonInstances API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/instanceGroupManagers/abandonInstances}
- *
- * @param {function} callback - The callback function.
- * @param {?error} callback.err - An error returned while making this request.
- * @param {Operation} callback.operation - An operation object
- *     that can be used to check the status of the request.
- * @param {object} callback.apiResponse - The full API response.
- *
- * @example
- * const Compute = require('@google-cloud/compute');
- * const compute = new Compute();
- * const zone = compute.zone('us-central1-a');
- * const instanceGroupManager = zone.instanceGroupManager('web-servers');
- *
- * instanceGroupManager.removeVMs(function(err, operation, apiResponse) {
- *   // `operation` is an Operation object that can be used to check the status
- *   // of the request.
- * });
- *
- * //-
- * // If the callback is omitted, we'll return a Promise.
- * //-
- * instanceGroupManager.removeVMs().then(function(data) {
- *   const operation = data[0];
- *   const apiResponse = data[1];
- * });
- */
-InstanceGroupManager.prototype.removeVMs = function(callback) {
-  var self = this;
-
-  this.request(
-    {
-      method: 'POST',
-      uri: '/abandonInstances',
-    },
-    function(err, resp) {
-      if (err) {
-        callback(err, null, resp);
-        return;
-      }
-
-      var operation = self.zone.operation(resp.name);
-      operation.metadata = resp;
-
-      callback(err, operation, resp);
-    }
-  );
-};
-
-/**
  * Recreate the VMs managed by this instance group.
  *
  * @see [InstanceGroupManagers: recreateInstances API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/instanceGroupManagers/recreateInstances}
  *
- * @param {VM[]|string[]} instances - Instances to recreate. If a string, it is treated as a complete URL to an instance resource.
+ * @param {VM|VM[]|string|string[]} instances - Instances to recreate. If a
+ *     string, it is treated as a complete URL to an instance resource.
  * @param {function} callback - The callback function.
  * @param {?error} callback.err - An error returned while making this request.
  * @param {Operation} callback.operation - An operation object
@@ -461,20 +410,80 @@ InstanceGroupManager.prototype.removeVMs = function(callback) {
 InstanceGroupManager.prototype.recreateVMs = function(instances, callback) {
   var self = this;
 
-  var body = {
-    instances: instances.map(instance => {
-      if (common.util.isCustomType(instance, 'VM')) {
-        return `zones/${self.zone.name}/instances/${instance.name}`;
-      }
-      return instance;
-    }),
-  };
-
   this.request(
     {
       method: 'POST',
       uri: '/recreateInstances',
-      json: body,
+      json: {
+        instances: arrify(instances).map(function(instance) {
+          if (common.util.isCustomType(instance, 'VM')) {
+            return `zones/${self.zone.name}/instances/${instance.name}`;
+          }
+          return instance;
+        }),
+      },
+    },
+    function(err, resp) {
+      if (err) {
+        callback(err, null, resp);
+        return;
+      }
+
+      var operation = self.zone.operation(resp.name);
+      operation.metadata = resp;
+
+      callback(err, operation, resp);
+    }
+  );
+};
+
+/**
+ * Remove VMs managed by this instance group.
+ *
+ * @see [InstanceGroupManagers: abandonInstances API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/instanceGroupManagers/abandonInstances}
+ *
+ * @param {VM|VM[]|string|string[]} instances - Instances to recreate. If a
+ *     string, it is treated as a complete URL to an instance resource.
+ * @param {function} callback - The callback function.
+ * @param {?error} callback.err - An error returned while making this request.
+ * @param {Operation} callback.operation - An operation object
+ *     that can be used to check the status of the request.
+ * @param {object} callback.apiResponse - The full API response.
+ *
+ * @example
+ * const Compute = require('@google-cloud/compute');
+ * const compute = new Compute();
+ * const zone = compute.zone('us-central1-a');
+ * const instanceGroupManager = zone.instanceGroupManager('web-servers');
+ *
+ * instanceGroupManager.removeVMs(function(err, operation, apiResponse) {
+ *   // `operation` is an Operation object that can be used to check the status
+ *   // of the request.
+ * });
+ *
+ * //-
+ * // If the callback is omitted, we'll return a Promise.
+ * //-
+ * instanceGroupManager.removeVMs().then(function(data) {
+ *   const operation = data[0];
+ *   const apiResponse = data[1];
+ * });
+ */
+InstanceGroupManager.prototype.removeVMs = function(instances, callback) {
+  var self = this;
+
+  this.request(
+    {
+      method: 'POST',
+      uri: '/abandonInstances',
+      json: {
+        instances: arrify(instances).map(function(instance) {
+          if (common.util.isCustomType(instance, 'VM')) {
+            return `zones/${self.zone.name}/instances/${instance.name}`;
+          }
+          return instance;
+        }),
+      }
     },
     function(err, resp) {
       if (err) {
@@ -533,6 +542,50 @@ InstanceGroupManager.prototype.resize = function(size, callback) {
       uri: 'resize',
       qs: {
         size: parseInt(size),
+      },
+    },
+    function(err, resp) {
+      if (err) {
+        callback(err, null, resp);
+        return;
+      }
+
+      var operation = self.zone.operation(resp.name);
+      operation.metadata = resp;
+
+      callback(null, operation, resp);
+    }
+  );
+};
+
+InstanceGroupManager.prototype.setInstanceTemplate = function(instanceTemplate, callback) {
+  var self = this;
+
+  callback = callback || common.util.noop;
+
+  if (util.isCustomType(instanceTemplate, 'InstanceTemplate')) {
+    if (!instanceTemplate.metadata.selfLink) {
+      // Refresh the metadata, so we can get the resource URI.
+      instanceTemplate.getMetadata(function(err, metadata) {
+        if (err) {
+          callback(err, null, apiResponse);
+          return;
+        }
+
+        self.setInstanceTemplate(instanceTemplate, callback);
+      })
+      return;
+    }
+
+    instanceTemplate = instanceTemplate.metadata.selfLink;
+  }
+
+  this.request(
+    {
+      method: 'POST',
+      uri: 'setInstanceTemplate',
+      json: {
+        instanceTemplate,
       },
     },
     function(err, resp) {

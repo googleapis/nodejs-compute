@@ -97,39 +97,13 @@ describe('Compute', function() {
     var AUTOSCALER_NAME = generateName('autoscaler');
     var autoscaler = zone.autoscaler(AUTOSCALER_NAME);
 
-    var NETWORK_NAME = generateName('network');
-    var network = compute.network(NETWORK_NAME);
-
-    var INSTANCE_TEMPLATE_NAME = generateName('instance-template');
     var INSTANCE_GROUP_MANAGER_NAME = generateName('instance-group-manager');
+    var instanceGroupManager = zone.instanceGroupManager(INSTANCE_GROUP_MANAGER_NAME);
 
     before(function(done) {
       async.series(
         [
-          create(network, {
-            range: '10.240.0.0/16',
-          }),
-
-          function(callback) {
-            createInstanceTemplate(
-              INSTANCE_TEMPLATE_NAME,
-              network.formattedName,
-              callback
-            );
-          },
-
-          function(callback) {
-            createInstanceGroupManager(
-              INSTANCE_GROUP_MANAGER_NAME,
-              [
-                'https://www.googleapis.com/compute/v1/projects',
-                compute.projectId,
-                'global/instanceTemplates',
-                INSTANCE_TEMPLATE_NAME,
-              ].join('/'),
-              callback
-            );
-          },
+          createInstanceGroupManager(instanceGroupManager),
 
           create(autoscaler, {
             coolDown: 30,
@@ -664,6 +638,113 @@ describe('Compute', function() {
       it('should remove a VM from the instance group', function(done) {
         instanceGroup.remove(vm, compute.execAfterOperation_(done));
       });
+    });
+  });
+
+  describe.only('instance group managers', function() {
+    var INSTANCE_GROUP_MANAGER_NAME = generateName('instance-group-manager');
+    var instanceGroupManager = zone.instanceGroupManager(INSTANCE_GROUP_MANAGER_NAME);
+
+    var VM_NAME = generateName('vm');
+    var vm = zone.vm(VM_NAME);
+
+    before(function(done) {
+      async.parallel(
+        [
+          createInstanceGroupManager(instanceGroupManager),
+          create(vm, {os: 'ubuntu', http: true}),
+        ],
+        done
+      );
+    });
+
+    it('should have created an instance group manager', function(done) {
+      instanceGroupManager.getMetadata(function(err, metadata) {
+        assert.ifError(err);
+        assert.strictEqual(metadata.name, INSTANCE_GROUP_MANAGER_NAME);
+        done();
+      });
+    });
+
+    it('should list project instance group managers', function(done) {
+      compute.getInstanceGroupManagers(function(err, instanceGroupManagers) {
+        assert.ifError(err);
+        assert(instanceGroupManagers.length > 0);
+        done();
+      });
+    });
+
+    it('should list project instance group managers in stream mode', function(done) {
+      var resultsMatched = 0;
+
+      compute
+        .getInstanceGroupManagersStream()
+        .on('error', done)
+        .on('data', function() {
+          resultsMatched++;
+        })
+        .on('end', function() {
+          assert(resultsMatched > 0);
+          done();
+        });
+    });
+
+    it('should list zonal instance group managers', function(done) {
+      zone.getInstanceGroupManagers(function(err, instanceGroupManagers) {
+        assert.ifError(err);
+        assert(instanceGroupManagers.length > 0);
+        done();
+      });
+    });
+
+    it('should list zonal instance group managers in stream mode', function(done) {
+      var resultsMatched = 0;
+
+      zone
+        .getInstanceGroupManagersStream()
+        .on('error', done)
+        .on('data', function() {
+          resultsMatched++;
+        })
+        .on('end', function() {
+          assert(resultsMatched > 0);
+          done();
+        });
+    });
+
+    it('should list VMs', function(done) {
+      instanceGroupManager.getVMs(function(err, vms) {
+        assert.ifError(err);
+        assert(vms.length > 0);
+        done();
+      });
+    });
+
+    it('should list VMs as a stream', function(done) {
+      var resultsMatched = 0;
+
+      instanceGroupManager
+        .getVMs()
+        .on('error', done)
+        .on('data', function() {
+          resultsMatched++;
+        })
+        .on('end', function() {
+          assert(resultsMatched > 0);
+          done();
+        });
+    });
+
+    it.only('should recreate VMs', function(done) {
+      instanceGroupManager.recreateVMs(vm, compute.execAfterOperation_(done));
+    });
+
+    it('should remove VMs', function(done) {
+      instanceGroupManager.removeVMs(vm, compute.execAfterOperation_(done));
+    });
+
+    it('should resize', function() {
+
     });
   });
 
@@ -1524,8 +1605,6 @@ describe('Compute', function() {
         deleteUrlMaps,
         deleteServices,
         deleteHttpsHealthChecks,
-        deleteInstanceGroupManagers,
-        deleteInstanceTemplates,
         deleteTargetInstances,
         deleteAllGcloudTestObjects,
       ],
@@ -1539,9 +1618,11 @@ describe('Compute', function() {
         'getVMs',
         'getAddresses',
         'getAutoscalers',
-        'getDisks',
         'getImages',
+        'getInstanceGroupManagers',
         'getInstanceGroups',
+        'getDisks',
+        'getInstanceTemplates',
         'getFirewalls',
         'getSubnetworks',
         'getHealthChecks',
@@ -1579,6 +1660,63 @@ describe('Compute', function() {
   function create(object, cfg) {
     return function(callback) {
       object.create(cfg, compute.execAfterOperation_(callback));
+    };
+  }
+
+  function createInstanceGroupManager(instanceGroupManager, callback) {
+    var NETWORK_NAME = generateName('network');
+    var network = compute.network(NETWORK_NAME);
+
+    var INSTANCE_TEMPLATE_NAME = generateName('instance-template');
+    var instanceTemplate = compute.instanceTemplate(INSTANCE_TEMPLATE_NAME);
+
+    return function(callback) {
+      async.series(
+        [
+          create(network, {
+            range: '10.240.0.0/16',
+          }),
+
+          create(instanceTemplate, {
+            properties: {
+              disks: [
+                {
+                  boot: true,
+                  mode: 'READ_ONLY',
+                  initializeParams: {
+                    diskName: generateName('disk'),
+                    diskSizeGb: 10,
+                    diskType: 'pd-standard',
+                    sourceImage: [
+                      'projects/centos-cloud/global/images/centos-6-v20150710',
+                    ].join(''),
+                  },
+                },
+              ],
+              machineType: 'n1-standard-1',
+              networkInterfaces: [
+                {
+                  network: network.formattedName,
+                  accessConfigs: [
+                    {
+                      name: generateName('access_config'),
+                      type: 'ONE_TO_ONE_NAT',
+                    },
+                  ],
+                },
+              ],
+            },
+          }),
+
+          create(instanceGroupManager, {
+            baseInstanceName: instanceGroupManager.name.replace(/\W/g, ''),
+            targetSize: 1,
+            instanceTemplate: instanceTemplate,
+          })
+        ],
+
+        callback
+      );
     };
   }
 
@@ -1918,181 +2056,6 @@ describe('Compute', function() {
       {
         method: 'DELETE',
         uri: '/targetInstances/' + name,
-      },
-      function(err, resp) {
-        if (err) {
-          callback(err);
-          return;
-        }
-
-        var operation = zone.operation(resp.name);
-        operation.on('error', callback).on('complete', function() {
-          callback();
-        });
-      }
-    );
-  }
-
-  function getInstanceTemplates(callback) {
-    compute.request(
-      {
-        uri: '/global/instanceTemplates',
-        qs: {
-          filter: 'name eq ' + TESTS_PREFIX + '.*',
-        },
-      },
-      callback
-    );
-  }
-
-  function deleteInstanceTemplates(callback) {
-    getInstanceTemplates(function(err, resp) {
-      if (err) {
-        callback(err);
-        return;
-      }
-
-      if (!resp.items) {
-        callback();
-        return;
-      }
-
-      var names = resp.items.map(prop('name'));
-      async.each(names, deleteInstanceTemplate, callback);
-    });
-  }
-
-  function createInstanceTemplate(name, networkName, callback) {
-    compute.request(
-      {
-        method: 'POST',
-        uri: '/global/instanceTemplates',
-        json: {
-          name: name,
-          properties: {
-            disks: [
-              {
-                boot: true,
-                mode: 'READ_ONLY',
-                initializeParams: {
-                  diskName: generateName('disk'),
-                  diskSizeGb: 10,
-                  diskType: 'pd-standard',
-                  sourceImage: [
-                    'projects/centos-cloud/global/images/centos-6-v20150710',
-                  ].join(''),
-                },
-              },
-            ],
-            machineType: 'n1-standard-1',
-            networkInterfaces: [
-              {
-                network: networkName,
-                accessConfigs: [
-                  {
-                    name: generateName('access_config'),
-                    type: 'ONE_TO_ONE_NAT',
-                  },
-                ],
-              },
-            ],
-          },
-        },
-      },
-      function(err, resp) {
-        if (err) {
-          callback(err);
-          return;
-        }
-
-        var operation = compute.operation(resp.name);
-        operation.on('error', callback).on('complete', function() {
-          callback();
-        });
-      }
-    );
-  }
-
-  function deleteInstanceTemplate(name, callback) {
-    compute.request(
-      {
-        method: 'DELETE',
-        uri: '/global/instanceTemplates/' + name,
-      },
-      function(err, resp) {
-        if (err) {
-          callback(err);
-          return;
-        }
-
-        var operation = compute.operation(resp.name);
-        operation.on('error', callback).on('complete', function() {
-          callback();
-        });
-      }
-    );
-  }
-
-  function getInstanceGroupManagers(callback) {
-    zone.request(
-      {
-        uri: '/instanceGroupManagers',
-        qs: {
-          filter: 'name eq ' + TESTS_PREFIX + '.*',
-        },
-      },
-      callback
-    );
-  }
-
-  function deleteInstanceGroupManagers(callback) {
-    getInstanceGroupManagers(function(err, resp) {
-      if (err) {
-        callback(err);
-        return;
-      }
-
-      if (!resp.items) {
-        callback();
-        return;
-      }
-
-      var names = resp.items.map(prop('name'));
-      async.each(names, deleteInstanceGroupManager, callback);
-    });
-  }
-
-  function createInstanceGroupManager(name, instanceTemplateName, callback) {
-    zone.request(
-      {
-        method: 'POST',
-        uri: '/instanceGroupManagers',
-        json: {
-          baseInstanceName: name.replace(/\W/g, ''),
-          name: name,
-          targetSize: 1,
-          instanceTemplate: instanceTemplateName,
-        },
-      },
-      function(err, resp) {
-        if (err) {
-          callback(err);
-          return;
-        }
-
-        var operation = zone.operation(resp.name);
-        operation.on('error', callback).on('complete', function() {
-          callback();
-        });
-      }
-    );
-  }
-
-  function deleteInstanceGroupManager(name, callback) {
-    zone.request(
-      {
-        method: 'DELETE',
-        uri: '/instanceGroupManagers/' + name,
       },
       function(err, resp) {
         if (err) {
