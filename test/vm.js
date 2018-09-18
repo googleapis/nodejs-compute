@@ -123,7 +123,7 @@ describe('VM', function() {
     });
 
     it('should inherit from ServiceObject', function(done) {
-      var zoneInstance = extend({}, ZONE, {
+      const zoneInstance = extend({}, ZONE, {
         createVM: {
           bind: function(context) {
             assert.strictEqual(context, zoneInstance);
@@ -181,7 +181,7 @@ describe('VM', function() {
     });
 
     describe('options.readOnly', function() {
-      var CONFIG = extend({}, CONFIG, {readOnly: true});
+      const CONFIG = extend({}, CONFIG, {readOnly: true});
 
       it('should set the correct mode', function(done) {
         let expectedBody = extend({}, EXPECTED_BODY, {mode: 'READ_ONLY'});
