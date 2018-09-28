@@ -16,27 +16,27 @@
 
 'use strict';
 
-var arrify = require('arrify');
-var common = require('@google-cloud/common');
-var extend = require('extend');
-var format = require('string-format-obj');
-var is = require('is');
-var util = require('util');
+const arrify = require('arrify');
+const common = require('@google-cloud/common');
+const extend = require('extend');
+const format = require('string-format-obj');
+const is = require('is');
+const util = require('util');
 
-var Firewall = require('./firewall.js');
-var HealthCheck = require('./health-check.js');
-var Image = require('./image.js');
-var InstanceGroupManager = require('./instance-group-manager.js');
-var InstanceGroup = require('./instance-group.js');
-var InstanceTemplate = require('./instance-template.js');
-var Network = require('./network.js');
-var Operation = require('./operation.js');
-var Project = require('./project.js');
-var Region = require('./region.js');
-var Rule = require('./rule.js');
-var Service = require('./service.js');
-var Snapshot = require('./snapshot.js');
-var Zone = require('./zone.js');
+const Firewall = require('./firewall.js');
+const HealthCheck = require('./health-check.js');
+const Network = require('./network.js');
+const Operation = require('./operation.js');
+const Project = require('./project.js');
+const Region = require('./region.js');
+const Rule = require('./rule.js');
+const Service = require('./service.js');
+const Snapshot = require('./snapshot.js');
+const Zone = require('./zone.js');
+const Image = require('./image.js');
+const InstanceGroup = require('./instance-group.js');
+const InstanceGroupManager = require('./instance-group-manager.js');
+const InstanceTemplate = require('./instance-template.js');
 
 /**
  * @typedef {object} ClientConfig
@@ -84,7 +84,7 @@ var Zone = require('./zone.js');
 function Compute(options) {
   options = common.util.normalizeArguments(this, options);
 
-  var config = {
+  const config = {
     baseUrl: 'https://www.googleapis.com/compute/v1',
     scopes: ['https://www.googleapis.com/auth/compute'],
     packageJson: require('../package.json'),
@@ -126,7 +126,7 @@ util.inherits(Compute, common.Service);
  * @param {object} callback.apiResponse - The full API response.
  *
  * @example
- * var config = {
+ * const config = {
  *   protocols: {
  *     tcp: [3000],
  *     udp: [] // An empty array means all ports are allowed.
@@ -148,13 +148,13 @@ util.inherits(Compute, common.Service);
  * // If the callback is omitted, we'll return a Promise.
  * //-
  * gce.createFirewall('new-firewall-name', config).then(function(data) {
- *   var firewall = data[0];
- *   var operation = data[1];
- *   var apiResponse = data[2];
+ *   const firewall = data[0];
+ *   const operation = data[1];
+ *   const apiResponse = data[2];
  * });
  */
 Compute.prototype.createFirewall = function(name, config, callback) {
-  var self = this;
+  const self = this;
 
   if (!is.string(name)) {
     throw new Error('A firewall name must be provided.');
@@ -164,19 +164,19 @@ Compute.prototype.createFirewall = function(name, config, callback) {
     throw new Error('A firewall configuration object must be provided.');
   }
 
-  var body = extend({}, config, {
+  const body = extend({}, config, {
     name: name,
   });
 
   if (body.protocols) {
     body.allowed = arrify(body.allowed);
 
-    for (var protocol in body.protocols) {
-      var allowedConfig = {
+    for (const protocol in body.protocols) {
+      const allowedConfig = {
         IPProtocol: protocol,
       };
 
-      var ports = body.protocols[protocol];
+      const ports = body.protocols[protocol];
 
       if (ports === false || ports.length === 0) {
         continue;
@@ -213,9 +213,9 @@ Compute.prototype.createFirewall = function(name, config, callback) {
         return;
       }
 
-      var firewall = self.firewall(name);
+      const firewall = self.firewall(name);
 
-      var operation = self.operation(resp.name);
+      const operation = self.operation(resp.name);
       operation.metadata = resp;
 
       callback(null, firewall, operation, resp);
@@ -265,13 +265,13 @@ Compute.prototype.createFirewall = function(name, config, callback) {
  * // If the callback is omitted, we'll return a Promise.
  * //-
  * gce.createHealthCheck('new-health-check-name').then(function(data) {
- *   var healthCheck = data[0];
- *   var operation = data[1];
- *   var apiResponse = data[2];
+ *   const healthCheck = data[0];
+ *   const operation = data[1];
+ *   const apiResponse = data[2];
  * });
  */
 Compute.prototype.createHealthCheck = function(name, options, callback) {
-  var self = this;
+  const self = this;
 
   if (is.fn(options)) {
     callback = options;
@@ -282,11 +282,11 @@ Compute.prototype.createHealthCheck = function(name, options, callback) {
     throw new Error('A health check name must be provided.');
   }
 
-  var body = extend({}, options, {
+  const body = extend({}, options, {
     name: name,
   });
 
-  var https = options.https;
+  const https = options.https;
   delete body.https;
 
   if (body.interval) {
@@ -311,11 +311,11 @@ Compute.prototype.createHealthCheck = function(name, options, callback) {
         return;
       }
 
-      var healthCheck = self.healthCheck(name, {
+      const healthCheck = self.healthCheck(name, {
         https: https,
       });
 
-      var operation = self.operation(resp.name);
+      const operation = self.operation(resp.name);
       operation.metadata = resp;
 
       callback(null, healthCheck, operation, resp);
@@ -354,13 +354,13 @@ Compute.prototype.createHealthCheck = function(name, options, callback) {
  * // If the callback is omitted, we'll return a Promise.
  * //-
  * compute.createImage('new-image', disk).then(function(data) {
- *   var image = data[0];
- *   var operation = data[1];
- *   var apiResponse = data[2];
+ *   const image = data[0];
+ *   const operation = data[1];
+ *   const apiResponse = data[2];
  * });
  */
 Compute.prototype.createImage = function(name, disk, options, callback) {
-  var self = this;
+  const self = this;
 
   if (!common.util.isCustomType(disk, 'Disk')) {
     throw new Error('A Disk object is required.');
@@ -371,7 +371,7 @@ Compute.prototype.createImage = function(name, disk, options, callback) {
     options = {};
   }
 
-  var body = extend(
+  const body = extend(
     {
       name: name,
       sourceDisk: format('zones/{zoneName}/disks/{diskName}', {
@@ -393,9 +393,9 @@ Compute.prototype.createImage = function(name, disk, options, callback) {
         callback(err, null, null, resp);
         return;
       }
-      var image = self.image(name);
+      const image = self.image(name);
 
-      var operation = self.operation(resp.name);
+      const operation = self.operation(resp.name);
       operation.metadata = resp;
 
       callback(null, image, operation, resp);
@@ -442,13 +442,13 @@ Compute.prototype.createImage = function(name, disk, options, callback) {
  * });
  */
 Compute.prototype.createInstanceTemplate = function(name, config, callback) {
-  var self = this;
+  const self = this;
 
   if (!is.object(config)) {
     throw new Error('A configuration object is required.');
   }
 
-  var body = extend({name: name}, config);
+  const body = extend({name: name}, config);
 
   this.request(
     {
@@ -461,9 +461,9 @@ Compute.prototype.createInstanceTemplate = function(name, config, callback) {
         callback(err, null, null, resp);
         return;
       }
-      var instanceTemplate = self.instanceTemplate(name);
+      const instanceTemplate = self.instanceTemplate(name);
 
-      var operation = self.operation(resp.name);
+      const operation = self.operation(resp.name);
       operation.metadata = resp;
 
       callback(null, instanceTemplate, operation, resp);
@@ -495,7 +495,7 @@ Compute.prototype.createInstanceTemplate = function(name, config, callback) {
  * @param {object} callback.apiResponse - The full API response.
  *
  * @example
- * var config = {
+ * const config = {
  *   range: '10.240.0.0/16'
  * };
  *
@@ -512,15 +512,15 @@ Compute.prototype.createInstanceTemplate = function(name, config, callback) {
  * // If the callback is omitted, we'll return a Promise.
  * //-
  * gce.createNetwork('new-network', config).then(function(data) {
- *   var network = data[0];
- *   var operation = data[1];
- *   var apiResponse = data[2];
+ *   const network = data[0];
+ *   const operation = data[1];
+ *   const apiResponse = data[2];
  * });
  */
 Compute.prototype.createNetwork = function(name, config, callback) {
-  var self = this;
+  const self = this;
 
-  var body = extend({}, config, {
+  const body = extend({}, config, {
     name: name,
   });
 
@@ -546,9 +546,9 @@ Compute.prototype.createNetwork = function(name, config, callback) {
         return;
       }
 
-      var network = self.network(name);
+      const network = self.network(name);
 
-      var operation = self.operation(resp.name);
+      const operation = self.operation(resp.name);
       operation.metadata = resp;
 
       callback(null, network, operation, resp);
@@ -591,9 +591,9 @@ Compute.prototype.createNetwork = function(name, config, callback) {
  * @param {object} callback.apiResponse - The full API response.
  *
  * @example
- * var name = 'new-rule-name';
+ * const name = 'new-rule-name';
  *
- * var config = {
+ * const config = {
  *   target: 'global/targetHttpProxies/my-proxy',
  *   range: '8080-8089'
  * };
@@ -609,15 +609,15 @@ Compute.prototype.createNetwork = function(name, config, callback) {
  * // If the callback is omitted, we'll return a Promise.
  * //-
  * gce.createRule(name, config).then(function(data) {
- *   var rule = data[0];
- *   var operation = data[1];
- *   var apiResponse = data[2];
+ *   const rule = data[0];
+ *   const operation = data[1];
+ *   const apiResponse = data[2];
  * });
  */
 Compute.prototype.createRule = function(name, config, callback) {
-  var self = this;
+  const self = this;
 
-  var body = extend({}, config, {
+  const body = extend({}, config, {
     name: name,
   });
 
@@ -648,9 +648,9 @@ Compute.prototype.createRule = function(name, config, callback) {
         return;
       }
 
-      var rule = self.rule(name);
+      const rule = self.rule(name);
 
-      var operation = self.operation(resp.name);
+      const operation = self.operation(resp.name);
       operation.metadata = resp;
 
       callback(null, rule, operation, resp);
@@ -676,7 +676,7 @@ Compute.prototype.createRule = function(name, config, callback) {
  * @param {object} callback.apiResponse - The full API response.
  *
  * @example
- * var config = {
+ * const config = {
  *   backends: [
  *     {
  *       group: 'URL of an Instance Group resource'
@@ -700,15 +700,15 @@ Compute.prototype.createRule = function(name, config, callback) {
  * // If the callback is omitted, we'll return a Promise.
  * //-
  * gce.createService('new-service', config).then(function(data) {
- *   var service = data[0];
- *   var operation = data[1];
- *   var apiResponse = data[2];
+ *   const service = data[0];
+ *   const operation = data[1];
+ *   const apiResponse = data[2];
  * });
  */
 Compute.prototype.createService = function(name, config, callback) {
-  var self = this;
+  const self = this;
 
-  var body = extend({}, config, {
+  const body = extend({}, config, {
     name: name,
   });
 
@@ -724,9 +724,9 @@ Compute.prototype.createService = function(name, config, callback) {
         return;
       }
 
-      var service = self.service(name);
+      const service = self.service(name);
 
-      var operation = self.operation(resp.name);
+      const operation = self.operation(resp.name);
       operation.metadata = resp;
 
       callback(null, service, operation, resp);
@@ -746,7 +746,7 @@ Compute.prototype.createService = function(name, config, callback) {
  * @returns {Firewall}
  *
  * @example
- * var firewall = gce.firewall('firewall-name');
+ * const firewall = gce.firewall('firewall-name');
  */
 Compute.prototype.firewall = function(name) {
   return new Firewall(this, name);
@@ -803,11 +803,11 @@ Compute.prototype.firewall = function(name) {
  * // If the callback is omitted, we'll return a Promise.
  * //-
  * gce.getAddresses().then(function(data) {
- *   var addresses = data[0];
+ *   const addresses = data[0];
  * });
  */
 Compute.prototype.getAddresses = function(options, callback) {
-  var self = this;
+  const self = this;
 
   if (is.fn(options)) {
     callback = options;
@@ -827,7 +827,7 @@ Compute.prototype.getAddresses = function(options, callback) {
         return;
       }
 
-      var nextQuery = null;
+      let nextQuery = null;
 
       if (resp.nextPageToken) {
         nextQuery = extend({}, options, {
@@ -835,14 +835,14 @@ Compute.prototype.getAddresses = function(options, callback) {
         });
       }
 
-      var regions = resp.items || {};
+      const regions = resp.items || {};
 
-      var addresses = Object.keys(regions).reduce(function(acc, regionName) {
-        var region = self.region(regionName.replace('regions/', ''));
-        var regionAddresses = regions[regionName].addresses || [];
+      const addresses = Object.keys(regions).reduce(function(acc, regionName) {
+        const region = self.region(regionName.replace('regions/', ''));
+        const regionAddresses = regions[regionName].addresses || [];
 
         regionAddresses.forEach(function(address) {
-          var addressInstance = region.address(address.name);
+          const addressInstance = region.address(address.name);
           addressInstance.metadata = address;
           acc.push(addressInstance);
         });
@@ -937,11 +937,11 @@ Compute.prototype.getAddressesStream = common.paginator.streamify(
  * // If the callback is omitted, we'll return a Promise.
  * //-
  * gce.getAutoscalers().then(function(data) {
- *   var autoscalers = data[0];
+ *   const autoscalers = data[0];
  * });
  */
 Compute.prototype.getAutoscalers = function(options, callback) {
-  var self = this;
+  const self = this;
 
   if (is.fn(options)) {
     callback = options;
@@ -961,7 +961,7 @@ Compute.prototype.getAutoscalers = function(options, callback) {
         return;
       }
 
-      var nextQuery = null;
+      let nextQuery = null;
 
       if (resp.nextPageToken) {
         nextQuery = extend({}, options, {
@@ -969,18 +969,18 @@ Compute.prototype.getAutoscalers = function(options, callback) {
         });
       }
 
-      var zones = resp.items || {};
+      const zones = resp.items || {};
 
-      var autoscalers = Object.keys(zones).reduce(function(acc, zoneName) {
+      const autoscalers = Object.keys(zones).reduce(function(acc, zoneName) {
         if (zoneName.indexOf('zones/') !== 0) {
           return acc;
         }
 
-        var zone = self.zone(zoneName.replace('zones/', ''));
-        var zoneAutoscalers = zones[zoneName].autoscalers || [];
+        const zone = self.zone(zoneName.replace('zones/', ''));
+        const zoneAutoscalers = zones[zoneName].autoscalers || [];
 
         zoneAutoscalers.forEach(function(autoscaler) {
-          var autoscalerInstance = zone.autoscaler(autoscaler.name);
+          const autoscalerInstance = zone.autoscaler(autoscaler.name);
           autoscalerInstance.metadata = autoscaler;
           acc.push(autoscalerInstance);
         });
@@ -1074,11 +1074,11 @@ Compute.prototype.getAutoscalersStream = common.paginator.streamify(
  * // If the callback is omitted, we'll return a Promise.
  * //-
  * gce.getDisks().then(function(data) {
- *   var disks = data[0];
+ *   const disks = data[0];
  * });
  */
 Compute.prototype.getDisks = function(options, callback) {
-  var self = this;
+  const self = this;
 
   if (is.fn(options)) {
     callback = options;
@@ -1098,7 +1098,7 @@ Compute.prototype.getDisks = function(options, callback) {
         return;
       }
 
-      var nextQuery = null;
+      let nextQuery = null;
 
       if (resp.nextPageToken) {
         nextQuery = extend({}, options, {
@@ -1106,14 +1106,14 @@ Compute.prototype.getDisks = function(options, callback) {
         });
       }
 
-      var zones = resp.items || {};
+      const zones = resp.items || {};
 
-      var disks = Object.keys(zones).reduce(function(acc, zoneName) {
-        var zone = self.zone(zoneName.replace('zones/', ''));
-        var disks = zones[zoneName].disks || [];
+      const disks = Object.keys(zones).reduce(function(acc, zoneName) {
+        const zone = self.zone(zoneName.replace('zones/', ''));
+        const disks = zones[zoneName].disks || [];
 
         disks.forEach(function(disk) {
-          var diskInstance = zone.disk(disk.name);
+          const diskInstance = zone.disk(disk.name);
           diskInstance.metadata = disk;
           acc.push(diskInstance);
         });
@@ -1207,11 +1207,11 @@ Compute.prototype.getDisksStream = common.paginator.streamify('getDisks');
  * // If the callback is omitted, we'll return a Promise.
  * //-
  * gce.getInstanceGroupManagers().then(function(data) {
- *   var instanceGroupManagers = data[0];
+ *   const instanceGroupManagers = data[0];
  * });
  */
 Compute.prototype.getInstanceGroupManagers = function(options, callback) {
-  var self = this;
+  const self = this;
 
   if (is.fn(options)) {
     callback = options;
@@ -1231,7 +1231,7 @@ Compute.prototype.getInstanceGroupManagers = function(options, callback) {
         return;
       }
 
-      var nextQuery = null;
+      const nextQuery = null;
 
       if (resp.nextPageToken) {
         nextQuery = extend({}, options, {
@@ -1239,14 +1239,14 @@ Compute.prototype.getInstanceGroupManagers = function(options, callback) {
         });
       }
 
-      var zones = resp.items || {};
+      const zones = resp.items || {};
 
-      var instanceGroupManagers = Object.keys(zones).reduce(function(acc, zoneName) {
-        var zone = self.zone(zoneName.replace('zones/', ''));
-        var instanceGroupManagers = zones[zoneName].instanceGroupManagers || [];
+      const instanceGroupManagers = Object.keys(zones).reduce(function(acc, zoneName) {
+        const zone = self.zone(zoneName.replace('zones/', ''));
+        const instanceGroupManagers = zones[zoneName].instanceGroupManagers || [];
 
         instanceGroupManagers.forEach(function(instanceGroupManager) {
-          var instanceGroupManagerInstance = zone.instanceGroupManager(instanceGroupManager.name);
+          const instanceGroupManagerInstance = zone.instanceGroupManager(instanceGroupManager.name);
           instanceGroupManagerInstance.metadata = instanceGroupManager;
           acc.push(instanceGroupManagerInstance);
         });
@@ -1342,11 +1342,11 @@ Compute.prototype.getInstanceGroupManagersStream = common.paginator.streamify(
  * // If the callback is omitted, we'll return a Promise.
  * //-
  * gce.getInstanceGroups().then(function(data) {
- *   var instanceGroups = data[0];
+ *   const instanceGroups = data[0];
  * });
  */
 Compute.prototype.getInstanceGroups = function(options, callback) {
-  var self = this;
+  const self = this;
 
   if (is.fn(options)) {
     callback = options;
@@ -1366,7 +1366,7 @@ Compute.prototype.getInstanceGroups = function(options, callback) {
         return;
       }
 
-      var nextQuery = null;
+      let nextQuery = null;
 
       if (resp.nextPageToken) {
         nextQuery = extend({}, options, {
@@ -1374,14 +1374,14 @@ Compute.prototype.getInstanceGroups = function(options, callback) {
         });
       }
 
-      var zones = resp.items || {};
+      const zones = resp.items || {};
 
-      var instanceGroups = Object.keys(zones).reduce(function(acc, zoneName) {
-        var zone = self.zone(zoneName.replace('zones/', ''));
-        var instanceGroups = zones[zoneName].instanceGroups || [];
+      const instanceGroups = Object.keys(zones).reduce(function(acc, zoneName) {
+        const zone = self.zone(zoneName.replace('zones/', ''));
+        const instanceGroups = zones[zoneName].instanceGroups || [];
 
         instanceGroups.forEach(function(group) {
-          var instanceGroupInstance = zone.instanceGroup(group.name);
+          const instanceGroupInstance = zone.instanceGroup(group.name);
           instanceGroupInstance.metadata = group;
           acc.push(instanceGroupInstance);
         });
@@ -1474,11 +1474,11 @@ Compute.prototype.getInstanceGroupsStream = common.paginator.streamify(
  * }, callback);
  *
  * gce.getFirewalls().then(function(data) {
- *   var firewalls = data[0];
+ *   const firewalls = data[0];
  * });
  */
 Compute.prototype.getFirewalls = function(options, callback) {
-  var self = this;
+  const self = this;
 
   if (is.fn(options)) {
     callback = options;
@@ -1498,7 +1498,7 @@ Compute.prototype.getFirewalls = function(options, callback) {
         return;
       }
 
-      var nextQuery = null;
+      let nextQuery = null;
 
       if (resp.nextPageToken) {
         nextQuery = extend({}, options, {
@@ -1506,8 +1506,8 @@ Compute.prototype.getFirewalls = function(options, callback) {
         });
       }
 
-      var firewalls = (resp.items || []).map(function(firewall) {
-        var firewallInstance = self.firewall(firewall.name);
+      const firewalls = (resp.items || []).map(function(firewall) {
+        const firewallInstance = self.firewall(firewall.name);
         firewallInstance.metadata = firewall;
         return firewallInstance;
       });
@@ -1598,11 +1598,11 @@ Compute.prototype.getFirewallsStream = common.paginator.streamify(
  * }, callback);
  *
  * gce.getHealthChecks().then(function(data) {
- *   var healthChecks = data[0];
+ *   const healthChecks = data[0];
  * });
  */
 Compute.prototype.getHealthChecks = function(options, callback) {
-  var self = this;
+  const self = this;
 
   if (is.fn(options)) {
     callback = options;
@@ -1611,7 +1611,7 @@ Compute.prototype.getHealthChecks = function(options, callback) {
 
   options = extend({}, options);
 
-  var https = options.https;
+  const https = options.https;
   delete options.https;
 
   this.request(
@@ -1625,7 +1625,7 @@ Compute.prototype.getHealthChecks = function(options, callback) {
         return;
       }
 
-      var nextQuery = null;
+      let nextQuery = null;
 
       if (resp.nextPageToken) {
         nextQuery = extend({}, options, {
@@ -1633,8 +1633,8 @@ Compute.prototype.getHealthChecks = function(options, callback) {
         });
       }
 
-      var healthChecks = (resp.items || []).map(function(healthCheck) {
-        var healthCheckInstance = self.healthCheck(healthCheck.name, {
+      const healthChecks = (resp.items || []).map(function(healthCheck) {
+        const healthCheckInstance = self.healthCheck(healthCheck.name, {
           https: https,
         });
         healthCheckInstance.metadata = healthCheck;
@@ -1724,11 +1724,11 @@ Compute.prototype.getHealthChecksStream = common.paginator.streamify(
  * }, callback);
  *
  * gce.getImages().then(function(data) {
- *   var images = data[0];
+ *   const images = data[0];
  * });
  */
 Compute.prototype.getImages = function(options, callback) {
-  var self = this;
+  const self = this;
 
   if (is.fn(options)) {
     callback = options;
@@ -1748,7 +1748,7 @@ Compute.prototype.getImages = function(options, callback) {
         return;
       }
 
-      var nextQuery = null;
+      let nextQuery = null;
 
       if (resp.nextPageToken) {
         nextQuery = extend({}, options, {
@@ -1756,8 +1756,8 @@ Compute.prototype.getImages = function(options, callback) {
         });
       }
 
-      var images = (resp.items || []).map(function(image) {
-        var imageInstance = self.image(image.name);
+      const images = (resp.items || []).map(function(image) {
+        const imageInstance = self.image(image.name);
         imageInstance.metadata = image;
         return imageInstance;
       });
@@ -1813,11 +1813,11 @@ Compute.prototype.getImages = function(options, callback) {
  * }, callback);
  *
  * gce.getInstanceTemplates().then(function(data) {
- *   var instanceTemplates = data[0];
+ *   const instanceTemplates = data[0];
  * });
  */
 Compute.prototype.getInstanceTemplates = function(options, callback) {
-  var self = this;
+  const self = this;
 
   if (is.fn(options)) {
     callback = options;
@@ -1837,7 +1837,7 @@ Compute.prototype.getInstanceTemplates = function(options, callback) {
         return;
       }
 
-      var nextQuery = null;
+      let nextQuery = null;
 
       if (resp.nextPageToken) {
         nextQuery = extend({}, options, {
@@ -1845,10 +1845,10 @@ Compute.prototype.getInstanceTemplates = function(options, callback) {
         });
       }
 
-      var instanceTemplates = (resp.items || []).map(function(
+      const instanceTemplates = (resp.items || []).map(function(
         instanceTemplate
       ) {
-        var instanceTemplateInstance = self.instanceTemplate(
+        const instanceTemplateInstance = self.instanceTemplate(
           instanceTemplate.name
         );
         instanceTemplateInstance.metadata = instanceTemplate;
@@ -1972,11 +1972,11 @@ Compute.prototype.getInstanceTemplatesStream = common.paginator.streamify(
  * // If the callback is omitted, we'll return a Promise.
  * //-
  * gce.getMachineTypes().then(function(data) {
- *   var machineTypes = data[0];
+ *   const machineTypes = data[0];
  * });
  */
 Compute.prototype.getMachineTypes = function(options, callback) {
-  var self = this;
+  const self = this;
 
   if (is.fn(options)) {
     callback = options;
@@ -1996,7 +1996,7 @@ Compute.prototype.getMachineTypes = function(options, callback) {
         return;
       }
 
-      var nextQuery = null;
+      let nextQuery = null;
 
       if (resp.nextPageToken) {
         nextQuery = extend({}, options, {
@@ -2004,14 +2004,14 @@ Compute.prototype.getMachineTypes = function(options, callback) {
         });
       }
 
-      var zones = resp.items || {};
+      const zones = resp.items || {};
 
-      var machineTypes = Object.keys(zones).reduce(function(acc, zoneName) {
-        var zone = self.zone(zoneName.replace('zones/', ''));
-        var machineTypesByZone = zones[zoneName].machineTypes || [];
+      const machineTypes = Object.keys(zones).reduce(function(acc, zoneName) {
+        const zone = self.zone(zoneName.replace('zones/', ''));
+        const machineTypesByZone = zones[zoneName].machineTypes || [];
 
         machineTypesByZone.forEach(function(machineType) {
-          var machineTypeInstance = zone.machineType(machineType.name);
+          const machineTypeInstance = zone.machineType(machineType.name);
           machineTypeInstance.metadata = machineType;
           acc.push(machineTypeInstance);
         });
@@ -2106,11 +2106,11 @@ Compute.prototype.getMachineTypesStream = common.paginator.streamify(
  * // If the callback is omitted, we'll return a Promise.
  * //-
  * gce.getNetworks().then(function(data) {
- *   var networks = data[0];
+ *   const networks = data[0];
  * });
  */
 Compute.prototype.getNetworks = function(options, callback) {
-  var self = this;
+  const self = this;
 
   if (is.fn(options)) {
     callback = options;
@@ -2130,7 +2130,7 @@ Compute.prototype.getNetworks = function(options, callback) {
         return;
       }
 
-      var nextQuery = null;
+      let nextQuery = null;
 
       if (resp.nextPageToken) {
         nextQuery = extend({}, options, {
@@ -2138,8 +2138,8 @@ Compute.prototype.getNetworks = function(options, callback) {
         });
       }
 
-      var networks = (resp.items || []).map(function(network) {
-        var networkInstance = self.network(network.name);
+      const networks = (resp.items || []).map(function(network) {
+        const networkInstance = self.network(network.name);
         networkInstance.metadata = network;
         return networkInstance;
       });
@@ -2228,11 +2228,11 @@ Compute.prototype.getNetworksStream = common.paginator.streamify('getNetworks');
  * // If the callback is omitted, we'll return a Promise.
  * //-
  * gce.getOperations().then(function(data) {
- *   var operations = data[0];
+ *   const operations = data[0];
  * });
  */
 Compute.prototype.getOperations = function(options, callback) {
-  var self = this;
+  const self = this;
 
   if (is.fn(options)) {
     callback = options;
@@ -2252,7 +2252,7 @@ Compute.prototype.getOperations = function(options, callback) {
         return;
       }
 
-      var nextQuery = null;
+      let nextQuery = null;
 
       if (resp.nextPageToken) {
         nextQuery = extend({}, options, {
@@ -2260,8 +2260,8 @@ Compute.prototype.getOperations = function(options, callback) {
         });
       }
 
-      var operations = (resp.items || []).map(function(operation) {
-        var operationInstance = self.operation(operation.name);
+      const operations = (resp.items || []).map(function(operation) {
+        const operationInstance = self.operation(operation.name);
         operationInstance.metadata = operation;
         return operationInstance;
       });
@@ -2353,11 +2353,11 @@ Compute.prototype.getOperationsStream = common.paginator.streamify(
  * // If the callback is omitted, we'll return a Promise.
  * //-
  * gce.getRegions().then(function(data) {
- *   var regions = data[0];
+ *   const regions = data[0];
  * });
  */
 Compute.prototype.getRegions = function(options, callback) {
-  var self = this;
+  const self = this;
 
   if (is.fn(options)) {
     callback = options;
@@ -2375,7 +2375,7 @@ Compute.prototype.getRegions = function(options, callback) {
         return;
       }
 
-      var nextQuery = null;
+      let nextQuery = null;
 
       if (resp.nextPageToken) {
         nextQuery = extend({}, options, {
@@ -2383,8 +2383,8 @@ Compute.prototype.getRegions = function(options, callback) {
         });
       }
 
-      var regions = resp.items.map(function(region) {
-        var regionInstance = self.region(region.name);
+      const regions = resp.items.map(function(region) {
+        const regionInstance = self.region(region.name);
         regionInstance.metadata = region;
         return regionInstance;
       });
@@ -2473,11 +2473,11 @@ Compute.prototype.getRegionsStream = common.paginator.streamify('getRegions');
  * // If the callback is omitted, we'll return a Promise.
  * //-
  * gce.getRules().then(function(data) {
- *   var rules = data[0];
+ *   const rules = data[0];
  * });
  */
 Compute.prototype.getRules = function(options, callback) {
-  var self = this;
+  const self = this;
 
   if (is.fn(options)) {
     callback = options;
@@ -2497,7 +2497,7 @@ Compute.prototype.getRules = function(options, callback) {
         return;
       }
 
-      var nextQuery = null;
+      let nextQuery = null;
 
       if (resp.nextPageToken) {
         nextQuery = extend({}, options, {
@@ -2505,8 +2505,8 @@ Compute.prototype.getRules = function(options, callback) {
         });
       }
 
-      var rules = (resp.items || []).map(function(rule) {
-        var ruleInstance = self.rule(rule.name);
+      const rules = (resp.items || []).map(function(rule) {
+        const ruleInstance = self.rule(rule.name);
         ruleInstance.metadata = rule;
         return ruleInstance;
       });
@@ -2595,11 +2595,11 @@ Compute.prototype.getRulesStream = common.paginator.streamify('getRules');
  * // If the callback is omitted, we'll return a Promise.
  * //-
  * gce.getServices().then(function(data) {
- *   var services = data[0];
+ *   const services = data[0];
  * });
  */
 Compute.prototype.getServices = function(options, callback) {
-  var self = this;
+  const self = this;
 
   if (is.fn(options)) {
     callback = options;
@@ -2619,7 +2619,7 @@ Compute.prototype.getServices = function(options, callback) {
         return;
       }
 
-      var nextQuery = null;
+      let nextQuery = null;
 
       if (resp.nextPageToken) {
         nextQuery = extend({}, options, {
@@ -2627,8 +2627,8 @@ Compute.prototype.getServices = function(options, callback) {
         });
       }
 
-      var services = (resp.items || []).map(function(service) {
-        var serviceInstance = self.service(service.name);
+      const services = (resp.items || []).map(function(service) {
+        const serviceInstance = self.service(service.name);
         serviceInstance.metadata = service;
         return serviceInstance;
       });
@@ -2717,11 +2717,11 @@ Compute.prototype.getServicesStream = common.paginator.streamify('getServices');
  * // If the callback is omitted, we'll return a Promise.
  * //-
  * gce.getSnapshots().then(function(data) {
- *   var snapshots = data[0];
+ *   const snapshots = data[0];
  * });
  */
 Compute.prototype.getSnapshots = function(options, callback) {
-  var self = this;
+  const self = this;
 
   if (is.fn(options)) {
     callback = options;
@@ -2741,7 +2741,7 @@ Compute.prototype.getSnapshots = function(options, callback) {
         return;
       }
 
-      var nextQuery = null;
+      let nextQuery = null;
 
       if (resp.nextPageToken) {
         nextQuery = extend({}, options, {
@@ -2749,8 +2749,8 @@ Compute.prototype.getSnapshots = function(options, callback) {
         });
       }
 
-      var snapshots = (resp.items || []).map(function(snapshot) {
-        var snapshotInstance = self.snapshot(snapshot.name);
+      const snapshots = (resp.items || []).map(function(snapshot) {
+        const snapshotInstance = self.snapshot(snapshot.name);
         snapshotInstance.metadata = snapshot;
         return snapshotInstance;
       });
@@ -2841,11 +2841,11 @@ Compute.prototype.getSnapshotsStream = common.paginator.streamify(
  * // If the callback is omitted, we'll return a Promise.
  * //-
  * gce.getSubnetworks().then(function(data) {
- *   var subnetworks = data[0];
+ *   const subnetworks = data[0];
  * });
  */
 Compute.prototype.getSubnetworks = function(options, callback) {
-  var self = this;
+  const self = this;
 
   if (is.fn(options)) {
     callback = options;
@@ -2865,7 +2865,7 @@ Compute.prototype.getSubnetworks = function(options, callback) {
         return;
       }
 
-      var nextQuery = null;
+      let nextQuery = null;
 
       if (resp.nextPageToken) {
         nextQuery = extend({}, options, {
@@ -2873,20 +2873,24 @@ Compute.prototype.getSubnetworks = function(options, callback) {
         });
       }
 
-      var regions = resp.items || {};
+      const regions = resp.items || {};
 
-      var subnetworks = Object.keys(regions).reduce(function(acc, regionName) {
-        var region = self.region(regionName.replace('regions/', ''));
-        var subnetworks = regions[regionName].subnetworks || [];
+      const subnetworks = Object.keys(regions).reduce(function(
+        acc,
+        regionName
+      ) {
+        const region = self.region(regionName.replace('regions/', ''));
+        const subnetworks = regions[regionName].subnetworks || [];
 
         subnetworks.forEach(function(subnetwork) {
-          var subnetworkInstance = region.subnetwork(subnetwork.name);
+          const subnetworkInstance = region.subnetwork(subnetwork.name);
           subnetworkInstance.metadata = subnetwork;
           acc.push(subnetworkInstance);
         });
 
         return acc;
-      }, []);
+      },
+      []);
 
       callback(null, subnetworks, nextQuery, resp);
     }
@@ -2974,11 +2978,11 @@ Compute.prototype.getSubnetworksStream = common.paginator.streamify(
  * // If the callback is omitted, we'll return a Promise.
  * //-
  * gce.getVMs().then(function(data) {
- *   var vms = data[0];
+ *   const vms = data[0];
  * });
  */
 Compute.prototype.getVMs = function(options, callback) {
-  var self = this;
+  const self = this;
 
   if (is.fn(options)) {
     callback = options;
@@ -2998,7 +3002,7 @@ Compute.prototype.getVMs = function(options, callback) {
         return;
       }
 
-      var nextQuery = null;
+      let nextQuery = null;
 
       if (resp.nextPageToken) {
         nextQuery = extend({}, options, {
@@ -3006,14 +3010,14 @@ Compute.prototype.getVMs = function(options, callback) {
         });
       }
 
-      var zones = resp.items || {};
+      const zones = resp.items || {};
 
-      var vms = Object.keys(zones).reduce(function(acc, zoneName) {
-        var zone = self.zone(zoneName.replace('zones/', ''));
-        var instances = zones[zoneName].instances || [];
+      const vms = Object.keys(zones).reduce(function(acc, zoneName) {
+        const zone = self.zone(zoneName.replace('zones/', ''));
+        const instances = zones[zoneName].instances || [];
 
         instances.forEach(function(instance) {
-          var vmInstance = zone.vm(instance.name);
+          const vmInstance = zone.vm(instance.name);
           vmInstance.metadata = instance;
           acc.push(vmInstance);
         });
@@ -3105,11 +3109,11 @@ Compute.prototype.getVMsStream = common.paginator.streamify('getVMs');
  * // If the callback is omitted, we'll return a Promise.
  * //-
  * gce.getZones().then(function(data) {
- *   var zones = data[0];
+ *   const zones = data[0];
  * });
  */
 Compute.prototype.getZones = function(options, callback) {
-  var self = this;
+  const self = this;
 
   if (is.fn(options)) {
     callback = options;
@@ -3127,7 +3131,7 @@ Compute.prototype.getZones = function(options, callback) {
         return;
       }
 
-      var nextQuery = null;
+      let nextQuery = null;
 
       if (resp.nextPageToken) {
         nextQuery = extend({}, options, {
@@ -3135,8 +3139,8 @@ Compute.prototype.getZones = function(options, callback) {
         });
       }
 
-      var zones = resp.items.map(function(zone) {
-        var zoneInstance = self.zone(zone.name);
+      const zones = resp.items.map(function(zone) {
+        const zoneInstance = self.zone(zone.name);
         zoneInstance.metadata = zone;
         return zoneInstance;
       });
@@ -3188,12 +3192,12 @@ Compute.prototype.getZonesStream = common.paginator.streamify('getZones');
  * @returns {HealthCheck}
  *
  * @example
- * var healthCheck = gce.healthCheck('http-health-check-name');
+ * const healthCheck = gce.healthCheck('http-health-check-name');
  *
  * //-
  * // Access an HTTPS health check.
  * //-
- * var httpsHealthCheck = gce.healthCheck('https-health-check-name', {
+ * const httpsHealthCheck = gce.healthCheck('https-health-check-name', {
  *   https: true
  * });
  */
@@ -3210,7 +3214,7 @@ Compute.prototype.healthCheck = function(name, options) {
  * @returns {Image}
  *
  * @example
- * var image = gce.image('image-name');
+ * const image = gce.image('image-name');
  */
 Compute.prototype.image = function(name) {
   return new Image(this, name);
@@ -3225,7 +3229,7 @@ Compute.prototype.image = function(name) {
  * @returns {InstanceTemplate}
  *
  * @example
- * var image = gce.instanceTemplate('my-instance-template');
+ * const image = gce.instanceTemplate('my-instance-template');
  */
 Compute.prototype.instanceTemplate = function(name) {
   return new InstanceTemplate(this, name);
@@ -3240,7 +3244,7 @@ Compute.prototype.instanceTemplate = function(name) {
  * @returns {Network}
  *
  * @example
- * var network = gce.network('network-name');
+ * const network = gce.network('network-name');
  */
 Compute.prototype.network = function(name) {
   return new Network(this, name);
@@ -3255,7 +3259,7 @@ Compute.prototype.network = function(name) {
  * @returns {Operation}
  *
  * @example
- * var operation = gce.operation('operation-name');
+ * const operation = gce.operation('operation-name');
  */
 Compute.prototype.operation = function(name) {
   return new Operation(this, name);
@@ -3269,7 +3273,7 @@ Compute.prototype.operation = function(name) {
  * @returns {Project}
  *
  * @example
- * var project = gce.project();
+ * const project = gce.project();
  */
 Compute.prototype.project = function() {
   return new Project(this);
@@ -3284,7 +3288,7 @@ Compute.prototype.project = function() {
  * @returns {Region}
  *
  * @example
- * var region = gce.region('region-name');
+ * const region = gce.region('region-name');
  */
 Compute.prototype.region = function(name) {
   return new Region(this, name);
@@ -3297,7 +3301,7 @@ Compute.prototype.region = function(name) {
  * @returns {Rule}
  *
  * @example
- * var rule = gce.rule('rule-name');
+ * const rule = gce.rule('rule-name');
  */
 Compute.prototype.rule = function(name) {
   return new Rule(this, name);
@@ -3312,7 +3316,7 @@ Compute.prototype.rule = function(name) {
  * @returns {Service}
  *
  * @example
- * var service = gce.service('service-name');
+ * const service = gce.service('service-name');
  */
 Compute.prototype.service = function(name) {
   return new Service(this, name);
@@ -3327,7 +3331,7 @@ Compute.prototype.service = function(name) {
  * @returns {Snapshot}
  *
  * @example
- * var snapshot = gce.snapshot('snapshot-name');
+ * const snapshot = gce.snapshot('snapshot-name');
  */
 Compute.prototype.snapshot = function(name) {
   return new Snapshot(this, name);
@@ -3342,7 +3346,7 @@ Compute.prototype.snapshot = function(name) {
  * @returns {Zone}
  *
  * @example
- * var zone = gce.zone('zone-name');
+ * const zone = gce.zone('zone-name');
  */
 Compute.prototype.zone = function(name) {
   return new Zone(this, name);
@@ -3359,8 +3363,8 @@ Compute.prototype.zone = function(name) {
 Compute.prototype.execAfterOperation_ = function(callback) {
   return function(err) {
     // arguments = [..., op, apiResponse]
-    var operation = arguments[arguments.length - 2];
-    var apiResponse = arguments[arguments.length - 1];
+    const operation = arguments[arguments.length - 2];
+    const apiResponse = arguments[arguments.length - 1];
 
     if (err) {
       callback(err, apiResponse);

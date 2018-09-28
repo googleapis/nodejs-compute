@@ -16,15 +16,15 @@
 
 'use strict';
 
-var assert = require('assert');
-var extend = require('extend');
-var common = require('@google-cloud/common');
-var nodeutil = require('util');
-var proxyquire = require('proxyquire');
-var ServiceObject = common.ServiceObject;
+const assert = require('assert');
+const extend = require('extend');
+const common = require('@google-cloud/common');
+const nodeutil = require('util');
+const proxyquire = require('proxyquire');
+const ServiceObject = common.ServiceObject;
 
-var promisified = false;
-var fakeUtil = extend({}, common.util, {
+let promisified = false;
+const fakeUtil = extend({}, common.util, {
   promisifyAll: function(Class) {
     if (Class.name === 'Snapshot') {
       promisified = true;
@@ -40,11 +40,11 @@ function FakeServiceObject() {
 nodeutil.inherits(FakeServiceObject, ServiceObject);
 
 describe('Snapshot', function() {
-  var Snapshot;
-  var snapshot;
+  let Snapshot;
+  let snapshot;
 
-  var COMPUTE = {};
-  var SNAPSHOT_NAME = 'snapshot-name';
+  const COMPUTE = {};
+  const SNAPSHOT_NAME = 'snapshot-name';
 
   before(function() {
     Snapshot = proxyquire('../src/snapshot.js', {
@@ -69,7 +69,7 @@ describe('Snapshot', function() {
     });
 
     it('should inherit from ServiceObject', function() {
-      var calledWith = snapshot.calledWith_[0];
+      const calledWith = snapshot.calledWith_[0];
 
       assert.strictEqual(calledWith.parent, COMPUTE);
       assert.strictEqual(
@@ -89,7 +89,7 @@ describe('Snapshot', function() {
     });
 
     it('should allow creating for a Disk object snapshot', function(done) {
-      var scope = {
+      const scope = {
         constructor: {
           name: 'Disk',
         },
@@ -99,10 +99,10 @@ describe('Snapshot', function() {
         },
       };
 
-      var snapshot = new Snapshot(scope, SNAPSHOT_NAME);
+      const snapshot = new Snapshot(scope, SNAPSHOT_NAME);
       assert(snapshot instanceof ServiceObject);
 
-      var calledWith = snapshot.calledWith_[0];
+      const calledWith = snapshot.calledWith_[0];
       assert.strictEqual(calledWith.methods.create, true);
 
       calledWith.createMethod(); // (scope.createSnapshot)
@@ -120,8 +120,8 @@ describe('Snapshot', function() {
     });
 
     describe('error', function() {
-      var error = new Error('Error.');
-      var apiResponse = {a: 'b', c: 'd'};
+      const error = new Error('Error.');
+      const apiResponse = {a: 'b', c: 'd'};
 
       beforeEach(function() {
         FakeServiceObject.prototype.delete = function(callback) {
@@ -146,7 +146,7 @@ describe('Snapshot', function() {
     });
 
     describe('success', function() {
-      var apiResponse = {name: 'operation-name'};
+      const apiResponse = {name: 'operation-name'};
 
       beforeEach(function() {
         FakeServiceObject.prototype.delete = function(callback) {
@@ -155,7 +155,7 @@ describe('Snapshot', function() {
       });
 
       it('should exec callback with Operation & API response', function(done) {
-        var operation = {};
+        const operation = {};
 
         snapshot.compute.operation = function(name) {
           assert.strictEqual(name, apiResponse.name);

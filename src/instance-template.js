@@ -16,8 +16,8 @@
 
 'use strict';
 
-var common = require('@google-cloud/common');
-var util = require('util');
+const common = require('@google-cloud/common');
+const util = require('util');
 
 /**
  * @class
@@ -30,7 +30,7 @@ var util = require('util');
  * const instanceTemplate = compute.instanceTemplate('my-instance-template');
  */
 function InstanceTemplate(compute, name) {
-  var methods = {
+  const methods = {
     /**
      * Create an instance template.
      *
@@ -210,7 +210,7 @@ util.inherits(InstanceTemplate, common.ServiceObject);
  * });
  */
 InstanceTemplate.prototype.delete = function(callback) {
-  var self = this;
+  const self = this;
 
   callback = callback || common.util.noop;
 
@@ -220,7 +220,7 @@ InstanceTemplate.prototype.delete = function(callback) {
       return;
     }
 
-    var operation = self.compute.operation(resp.name);
+    const operation = self.compute.operation(resp.name);
     operation.metadata = resp;
 
     callback(null, operation, resp);

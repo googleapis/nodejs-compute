@@ -16,15 +16,15 @@
 
 'use strict';
 
-var assert = require('assert');
-var extend = require('extend');
-var nodeutil = require('util');
-var proxyquire = require('proxyquire');
-var ServiceObject = require('@google-cloud/common').ServiceObject;
-var util = require('@google-cloud/common').util;
+const assert = require('assert');
+const extend = require('extend');
+const nodeutil = require('util');
+const proxyquire = require('proxyquire');
+const ServiceObject = require('@google-cloud/common').ServiceObject;
+const util = require('@google-cloud/common').util;
 
-var promisified = false;
-var fakeUtil = extend({}, util, {
+let promisified = false;
+const fakeUtil = extend({}, util, {
   promisifyAll: function(Class) {
     if (Class.name === 'Service') {
       promisified = true;
@@ -40,12 +40,12 @@ function FakeServiceObject() {
 nodeutil.inherits(FakeServiceObject, ServiceObject);
 
 describe('Service', function() {
-  var Service;
-  var service;
+  let Service;
+  let service;
 
-  var SERVICE_NAME = 'service-name';
+  const SERVICE_NAME = 'service-name';
 
-  var COMPUTE = {
+  const COMPUTE = {
     projectId: 'project-id',
     createService: util.noop,
   };
@@ -77,9 +77,9 @@ describe('Service', function() {
     });
 
     it('should inherit from ServiceObject', function() {
-      var createMethod = util.noop;
+      const createMethod = util.noop;
 
-      var computeInstance = extend({}, COMPUTE, {
+      const computeInstance = extend({}, COMPUTE, {
         createService: {
           bind: function(context) {
             assert.strictEqual(context, computeInstance);
@@ -88,10 +88,10 @@ describe('Service', function() {
         },
       });
 
-      var service = new Service(computeInstance, SERVICE_NAME);
+      const service = new Service(computeInstance, SERVICE_NAME);
       assert(service instanceof ServiceObject);
 
-      var calledWith = service.calledWith_[0];
+      const calledWith = service.calledWith_[0];
 
       assert.strictEqual(calledWith.parent, computeInstance);
       assert.strictEqual(calledWith.baseUrl, '/global/backendServices');
@@ -117,8 +117,8 @@ describe('Service', function() {
     });
 
     describe('error', function() {
-      var error = new Error('Error.');
-      var apiResponse = {a: 'b', c: 'd'};
+      const error = new Error('Error.');
+      const apiResponse = {a: 'b', c: 'd'};
 
       beforeEach(function() {
         FakeServiceObject.prototype.delete = function(callback) {
@@ -143,7 +143,7 @@ describe('Service', function() {
     });
 
     describe('success', function() {
-      var apiResponse = {
+      const apiResponse = {
         name: 'op-name',
       };
 
@@ -154,7 +154,7 @@ describe('Service', function() {
       });
 
       it('should execute callback with Operation & Response', function(done) {
-        var operation = {};
+        const operation = {};
 
         service.compute.operation = function(name) {
           assert.strictEqual(name, apiResponse.name);
@@ -179,7 +179,7 @@ describe('Service', function() {
   });
 
   describe('getHealth', function() {
-    var GROUP = 'http://group-url';
+    const GROUP = 'http://group-url';
 
     it('should make the correct request', function(done) {
       service.request = function(reqOpts) {
@@ -197,7 +197,7 @@ describe('Service', function() {
 
     describe('group object', function() {
       it('should compose the right URL', function(done) {
-        var group = {
+        const group = {
           name: 'instance-group-name',
           zone: 'zone-name',
         };
@@ -221,7 +221,7 @@ describe('Service', function() {
       });
 
       it('should compose the right URL', function(done) {
-        var group = {
+        const group = {
           name: 'instance-group-name',
           // Simulating a {module:compute/zone}:
           zone: {
@@ -249,8 +249,8 @@ describe('Service', function() {
     });
 
     describe('error', function() {
-      var error = new Error('Error.');
-      var apiResponse = {a: 'b', c: 'd'};
+      const error = new Error('Error.');
+      const apiResponse = {a: 'b', c: 'd'};
 
       beforeEach(function() {
         service.request = function(reqOpts, callback) {
@@ -269,7 +269,7 @@ describe('Service', function() {
     });
 
     describe('success', function() {
-      var apiResponse = {
+      const apiResponse = {
         healthStatus: {},
       };
 
@@ -292,7 +292,7 @@ describe('Service', function() {
 
   describe('setMetadata', function() {
     it('should make the correct API request', function(done) {
-      var metadata = {};
+      const metadata = {};
 
       service.request = function(reqOpts) {
         assert.strictEqual(reqOpts.method, 'PATCH');
@@ -306,8 +306,8 @@ describe('Service', function() {
     });
 
     describe('error', function() {
-      var error = new Error('Error.');
-      var apiResponse = {a: 'b', c: 'd'};
+      const error = new Error('Error.');
+      const apiResponse = {a: 'b', c: 'd'};
 
       beforeEach(function() {
         service.request = function(reqOpts, callback) {
@@ -326,7 +326,7 @@ describe('Service', function() {
     });
 
     describe('success', function() {
-      var apiResponse = {
+      const apiResponse = {
         name: 'op-name',
       };
 
@@ -337,8 +337,8 @@ describe('Service', function() {
       });
 
       it('should execute callback with operation & response', function(done) {
-        var operation = {};
-        var metadata = {a: 'b'};
+        const operation = {};
+        const metadata = {a: 'b'};
 
         service.compute.operation = function(name) {
           assert.strictEqual(name, apiResponse.name);

@@ -16,8 +16,8 @@
 
 'use strict';
 
-var common = require('@google-cloud/common');
-var util = require('util');
+const common = require('@google-cloud/common');
+const util = require('util');
 
 /**
  * A MachineType object allows you to interact with a Google Compute Engine
@@ -37,7 +37,7 @@ var util = require('util');
  * const machineType = zone.machineType('g1-small');
  */
 function MachineType(zone, name) {
-  var methods = {
+  const methods = {
     /**
      * Check if the machine type exists.
      *

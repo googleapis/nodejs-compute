@@ -16,15 +16,15 @@
 
 'use strict';
 
-var assert = require('assert');
-var extend = require('extend');
-var nodeutil = require('util');
-var proxyquire = require('proxyquire');
-var ServiceObject = require('@google-cloud/common').ServiceObject;
-var util = require('@google-cloud/common').util;
+const assert = require('assert');
+const extend = require('extend');
+const nodeutil = require('util');
+const proxyquire = require('proxyquire');
+const ServiceObject = require('@google-cloud/common').ServiceObject;
+const util = require('@google-cloud/common').util;
 
-var promisified = false;
-var fakeUtil = extend({}, util, {
+let promisified = false;
+const fakeUtil = extend({}, util, {
   promisifyAll: function(Class) {
     if (Class.name === 'Address') {
       promisified = true;
@@ -40,11 +40,11 @@ function FakeServiceObject() {
 nodeutil.inherits(FakeServiceObject, ServiceObject);
 
 describe('Address', function() {
-  var Address;
-  var address;
+  let Address;
+  let address;
 
-  var ADDRESS_NAME = 'us-central1';
-  var REGION = {
+  const ADDRESS_NAME = 'us-central1';
+  const REGION = {
     createAddress: util.noop,
   };
 
@@ -75,7 +75,7 @@ describe('Address', function() {
     });
 
     it('should inherit from ServiceObject', function(done) {
-      var regionInstance = extend({}, REGION, {
+      const regionInstance = extend({}, REGION, {
         createAddress: {
           bind: function(context) {
             assert.strictEqual(context, regionInstance);
@@ -84,10 +84,10 @@ describe('Address', function() {
         },
       });
 
-      var address = new Address(regionInstance, ADDRESS_NAME);
+      const address = new Address(regionInstance, ADDRESS_NAME);
       assert(address instanceof ServiceObject);
 
-      var calledWith = address.calledWith_[0];
+      const calledWith = address.calledWith_[0];
 
       assert.strictEqual(calledWith.parent, regionInstance);
       assert.strictEqual(calledWith.baseUrl, '/addresses');
@@ -113,8 +113,8 @@ describe('Address', function() {
     });
 
     describe('error', function() {
-      var error = new Error('Error.');
-      var apiResponse = {a: 'b', c: 'd'};
+      const error = new Error('Error.');
+      const apiResponse = {a: 'b', c: 'd'};
 
       beforeEach(function() {
         address.request = function(reqOpts, callback) {
@@ -139,7 +139,7 @@ describe('Address', function() {
     });
 
     describe('success', function() {
-      var apiResponse = {
+      const apiResponse = {
         name: 'op-name',
       };
 
@@ -150,7 +150,7 @@ describe('Address', function() {
       });
 
       it('should execute callback with Operation & Response', function(done) {
-        var operation = {};
+        const operation = {};
 
         address.region.operation = function(name) {
           assert.strictEqual(name, apiResponse.name);

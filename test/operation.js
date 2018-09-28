@@ -16,10 +16,10 @@
 
 'use strict';
 
-var assert = require('assert');
-var extend = require('extend');
-var proxyquire = require('proxyquire').noPreserveCache();
-var util = require('@google-cloud/common').util;
+const assert = require('assert');
+const extend = require('extend');
+const proxyquire = require('proxyquire').noPreserveCache();
+const util = require('@google-cloud/common').util;
 
 function FakeOperation() {
   this.calledWith_ = arguments;
@@ -29,9 +29,9 @@ function FakeServiceObject() {
   this.calledWith_ = arguments;
 }
 
-var parseHttpRespBodyOverride = null;
-var promisified = false;
-var fakeUtil = extend({}, util, {
+let parseHttpRespBodyOverride = null;
+let promisified = false;
+const fakeUtil = extend({}, util, {
   parseHttpRespBody: function() {
     if (parseHttpRespBodyOverride) {
       return parseHttpRespBodyOverride.apply(null, arguments);
@@ -47,13 +47,13 @@ var fakeUtil = extend({}, util, {
 });
 
 describe('Operation', function() {
-  var Operation;
-  var operation;
+  let Operation;
+  let operation;
 
-  var SCOPE = {
+  const SCOPE = {
     Promise: Promise,
   };
-  var OPERATION_NAME = 'operation-name';
+  const OPERATION_NAME = 'operation-name';
 
   before(function() {
     Operation = proxyquire('../src/operation.js', {
@@ -78,7 +78,7 @@ describe('Operation', function() {
     it('should inherit from Operation', function() {
       assert(operation instanceof FakeOperation);
 
-      var calledWith = operation.calledWith_[0];
+      const calledWith = operation.calledWith_[0];
 
       assert.strictEqual(calledWith.parent, SCOPE);
       assert.strictEqual(calledWith.baseUrl, '/operations');
@@ -95,7 +95,7 @@ describe('Operation', function() {
     });
 
     it('should give the right baseUrl for a global Operation', function() {
-      var operation = new Operation(
+      const operation = new Operation(
         {
           constructor: {
             name: 'Compute',
@@ -104,7 +104,7 @@ describe('Operation', function() {
         OPERATION_NAME
       );
 
-      var calledWith = operation.calledWith_[0];
+      const calledWith = operation.calledWith_[0];
       assert.strictEqual(calledWith.baseUrl, '/global/operations');
     });
   });
@@ -120,8 +120,8 @@ describe('Operation', function() {
     });
 
     describe('error', function() {
-      var error = new Error('Error.');
-      var apiResponse = {a: 'b', c: 'd'};
+      const error = new Error('Error.');
+      const apiResponse = {a: 'b', c: 'd'};
 
       beforeEach(function() {
         FakeServiceObject.prototype.getMetadata = function(callback) {
@@ -130,7 +130,7 @@ describe('Operation', function() {
       });
 
       it('should ignore false errors', function(done) {
-        var apiResponse = {
+        const apiResponse = {
           name: operation.name,
           error: {
             errors: [],
@@ -166,7 +166,7 @@ describe('Operation', function() {
     });
 
     describe('success', function() {
-      var apiResponse = {a: 'b', c: 'd'};
+      const apiResponse = {a: 'b', c: 'd'};
 
       beforeEach(function() {
         FakeServiceObject.prototype.getMetadata = function(callback) {
@@ -213,7 +213,7 @@ describe('Operation', function() {
     });
 
     describe('API error', function() {
-      var error = new Error('Error.');
+      const error = new Error('Error.');
 
       beforeEach(function() {
         operation.getMetadata = function(callback) {
@@ -230,8 +230,8 @@ describe('Operation', function() {
     });
 
     describe('operation failure', function() {
-      var error = new Error('Error.');
-      var apiResponse = {error: error};
+      const error = new Error('Error.');
+      const apiResponse = {error: error};
 
       beforeEach(function() {
         operation.getMetadata = function(callback) {
@@ -240,7 +240,7 @@ describe('Operation', function() {
       });
 
       it('should parse and return the response body', function(done) {
-        var parsedHttpRespBody = {err: {}};
+        const parsedHttpRespBody = {err: {}};
 
         parseHttpRespBodyOverride = function(body) {
           assert.strictEqual(body, apiResponse);
@@ -255,7 +255,7 @@ describe('Operation', function() {
     });
 
     describe('operation running', function() {
-      var apiResponse = {status: 'RUNNING'};
+      const apiResponse = {status: 'RUNNING'};
 
       beforeEach(function() {
         operation.getMetadata = function(callback) {
@@ -296,7 +296,7 @@ describe('Operation', function() {
     });
 
     describe('operation complete', function() {
-      var apiResponse = {status: 'DONE'};
+      const apiResponse = {status: 'DONE'};
 
       beforeEach(function() {
         operation.getMetadata = function(callback) {

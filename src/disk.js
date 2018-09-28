@@ -16,13 +16,13 @@
 
 'use strict';
 
-var common = require('@google-cloud/common');
-var extend = require('extend');
-var format = require('string-format-obj');
-var is = require('is');
-var util = require('util');
+const common = require('@google-cloud/common');
+const extend = require('extend');
+const format = require('string-format-obj');
+const is = require('is');
+const util = require('util');
 
-var Snapshot = require('./snapshot.js');
+const Snapshot = require('./snapshot.js');
 
 /**
  * A Disk object allows you to interact with a Google Compute Engine disk.
@@ -41,7 +41,7 @@ var Snapshot = require('./snapshot.js');
  * const disk = zone.disk('disk1');
  */
 function Disk(zone, name) {
-  var methods = {
+  const methods = {
     /**
      * Create a persistent disk.
      *
@@ -261,8 +261,8 @@ Disk.formatName_ = function(zone, name) {
  * });
  */
 Disk.prototype.createSnapshot = function(name, options, callback) {
-  var self = this;
-  var zone = this.zone;
+  const self = this;
+  const zone = this.zone;
 
   if (is.fn(options)) {
     callback = options;
@@ -283,9 +283,9 @@ Disk.prototype.createSnapshot = function(name, options, callback) {
         return;
       }
 
-      var snapshot = self.snapshot(name);
+      const snapshot = self.snapshot(name);
 
-      var operation = zone.operation(resp.name);
+      const operation = zone.operation(resp.name);
       operation.metadata = resp;
 
       callback(null, snapshot, operation, resp);
@@ -324,7 +324,7 @@ Disk.prototype.createSnapshot = function(name, options, callback) {
  * });
  */
 Disk.prototype.delete = function(callback) {
-  var zone = this.zone;
+  const zone = this.zone;
 
   callback = callback || common.util.noop;
 
@@ -334,7 +334,7 @@ Disk.prototype.delete = function(callback) {
       return;
     }
 
-    var operation = zone.operation(resp.name);
+    const operation = zone.operation(resp.name);
     operation.metadata = resp;
 
     callback(null, operation, resp);

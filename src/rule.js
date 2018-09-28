@@ -16,8 +16,8 @@
 
 'use strict';
 
-var common = require('@google-cloud/common');
-var util = require('util');
+const common = require('@google-cloud/common');
+const util = require('util');
 
 /**
  * Forwarding rules work in conjunction with target pools and target instances
@@ -49,9 +49,9 @@ var util = require('util');
  * const rule = region.rule('rule-name');
  */
 function Rule(scope, name) {
-  var isGlobalRule = scope.constructor.name === 'Compute';
+  const isGlobalRule = scope.constructor.name === 'Compute';
 
-  var methods = {
+  const methods = {
     /**
      * Create a forwarding rule.
      *
@@ -234,7 +234,7 @@ util.inherits(Rule, common.ServiceObject);
 Rule.prototype.delete = function(callback) {
   callback = callback || common.util.noop;
 
-  var scope = this.scope;
+  const scope = this.scope;
 
   common.ServiceObject.prototype.delete.call(this, function(err, resp) {
     if (err) {
@@ -242,7 +242,7 @@ Rule.prototype.delete = function(callback) {
       return;
     }
 
-    var operation = scope.operation(resp.name);
+    const operation = scope.operation(resp.name);
     operation.metadata = resp;
 
     callback(null, operation, resp);
@@ -285,7 +285,7 @@ Rule.prototype.delete = function(callback) {
 Rule.prototype.setTarget = function(target, callback) {
   callback = callback || common.util.noop;
 
-  var scope = this.scope;
+  const scope = this.scope;
 
   this.request(
     {
@@ -301,7 +301,7 @@ Rule.prototype.setTarget = function(target, callback) {
         return;
       }
 
-      var operation = scope.operation(resp.name);
+      const operation = scope.operation(resp.name);
       operation.metadata = resp;
 
       callback(null, operation, resp);

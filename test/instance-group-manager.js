@@ -16,17 +16,17 @@
 
 'use strict';
 
-var arrify = require('arrify');
-var assert = require('assert');
-var extend = require('extend');
-var nodeutil = require('util');
-var proxyquire = require('proxyquire');
+const arrify = require('arrify');
+const assert = require('assert');
+const extend = require('extend');
+const nodeutil = require('util');
+const proxyquire = require('proxyquire');
 
-var ServiceObject = require('@google-cloud/common').ServiceObject;
-var util = require('@google-cloud/common').util;
+const ServiceObject = require('@google-cloud/common').ServiceObject;
+const util = require('@google-cloud/common').util;
 
-var promisified = false;
-var fakeUtil = extend({}, util, {
+let promisified = false;
+const fakeUtil = extend({}, util, {
   promisifyAll: function(Class) {
     if (Class.name === 'InstanceGroupManager') {
       promisified = true;
@@ -41,8 +41,8 @@ function FakeServiceObject() {
 
 nodeutil.inherits(FakeServiceObject, ServiceObject);
 
-var extended = false;
-var fakePaginator = {
+let extended = false;
+const fakePaginator = {
   extend: function(Class, methods) {
     if (Class.name !== 'InstanceGroupManager') {
       return;
@@ -59,17 +59,17 @@ var fakePaginator = {
 };
 
 describe('InstanceGroupManager', function() {
-  var InstanceGroupManager;
-  var instanceGroupManager;
+  let InstanceGroupManager;
+  let instanceGroupManager;
 
-  var staticMethods = {};
+  const staticMethods = {};
 
-  var ZONE = {
+  const ZONE = {
     name: 'my-zone',
     createInstanceGroupManager: util.noop,
     vm: util.noop,
   };
-  var NAME = 'instance-group-manager-name';
+  const NAME = 'instance-group-manager-name';
 
   before(function() {
     InstanceGroupManager = proxyquire('../src/instance-group-manager.js', {
@@ -109,9 +109,9 @@ describe('InstanceGroupManager', function() {
     });
 
     it('should inherit from ServiceObject', function(done) {
-      var instanceGroupManager;
+      let instanceGroupManager;
 
-      var zoneInstance = extend({}, ZONE, {
+      const zoneInstance = extend({}, ZONE, {
         createInstanceGroupManager: {
           bind: function(context) {
             assert.strictEqual(context, zoneInstance);
@@ -119,7 +119,7 @@ describe('InstanceGroupManager', function() {
             setImmediate(function() {
               assert(instanceGroupManager instanceof ServiceObject);
 
-              var calledWith = instanceGroupManager.calledWith_[0];
+              const calledWith = instanceGroupManager.calledWith_[0];
 
               assert.strictEqual(calledWith.parent, zoneInstance);
               assert.strictEqual(calledWith.baseUrl, '/instanceGroupManagers');
@@ -152,8 +152,8 @@ describe('InstanceGroupManager', function() {
     });
 
     describe('error', function() {
-      var error = new Error('Error.');
-      var apiResponse = {a: 'b', c: 'd'};
+      const error = new Error('Error.');
+      const apiResponse = {a: 'b', c: 'd'};
 
       beforeEach(function() {
         FakeServiceObject.prototype.delete = function(callback) {
@@ -178,7 +178,7 @@ describe('InstanceGroupManager', function() {
     });
 
     describe('success', function() {
-      var apiResponse = {
+      const apiResponse = {
         name: 'op-name',
       };
 
@@ -189,7 +189,7 @@ describe('InstanceGroupManager', function() {
       });
 
       it('should execute callback with Operation & Response', function(done) {
-        var operation = {};
+        const operation = {};
 
         instanceGroupManager.zone.operation = function(name) {
           assert.strictEqual(name, apiResponse.name);
@@ -230,13 +230,13 @@ describe('InstanceGroupManager', function() {
     });
 
     it('should make the correct API request', function(done) {
-      var query = {a: 'b', c: 'd'};
+      const query = {a: 'b', c: 'd'};
 
       instanceGroupManager.request = function(reqOpts) {
         assert.strictEqual(reqOpts.method, 'POST');
         assert.strictEqual(reqOpts.uri, '/listManagedInstances');
         assert.strictEqual(reqOpts.qs, query);
-        assert.strictEqual(reqOpts.json, undefined);
+        assert.strictEqual(reqOpts.json, null);
 
         done();
       };
@@ -245,7 +245,7 @@ describe('InstanceGroupManager', function() {
     });
 
     describe('options.running', function() {
-      var OPTIONS = {
+      const OPTIONS = {
         running: true,
       };
 
@@ -262,8 +262,8 @@ describe('InstanceGroupManager', function() {
     });
 
     describe('error', function() {
-      var error = new Error('Error.');
-      var apiResponse = {a: 'b', c: 'd'};
+      const error = new Error('Error.');
+      const apiResponse = {a: 'b', c: 'd'};
 
       beforeEach(function() {
         instanceGroupManager.request = function(reqOpts, callback) {
@@ -288,7 +288,7 @@ describe('InstanceGroupManager', function() {
     });
 
     describe('success', function() {
-      var apiResponse = {
+      const apiResponse = {
         items: [{instance: 'vm-name'}],
       };
 
@@ -299,11 +299,11 @@ describe('InstanceGroupManager', function() {
       });
 
       it('should build a nextQuery if necessary', function(done) {
-        var nextPageToken = 'next-page-token';
-        var apiResponseWithNextPageToken = extend({}, apiResponse, {
+        const nextPageToken = 'next-page-token';
+        const apiResponseWithNextPageToken = extend({}, apiResponse, {
           nextPageToken: nextPageToken,
         });
-        var expectedNextQuery = {
+        const expectedNextQuery = {
           pageToken: nextPageToken,
         };
 
@@ -321,7 +321,7 @@ describe('InstanceGroupManager', function() {
       });
 
       it('should execute callback with VMs & API response', function(done) {
-        var vm = {};
+        const vm = {};
 
         instanceGroupManager.zone.vm = function(name) {
           assert.strictEqual(name, apiResponse.items[0].instance);
@@ -360,8 +360,8 @@ describe('InstanceGroupManager', function() {
     });
 
     describe('error', function() {
-      var apiResponse = {};
-      var error = new Error('Error.');
+      const apiResponse = {};
+      const error = new Error('Error.');
 
       beforeEach(function() {
         instanceGroupManager.request = function(reqOpts, callback) {
@@ -370,7 +370,7 @@ describe('InstanceGroupManager', function() {
       });
 
       it('should return an error and API response', function(done) {
-        instanceGroupManager.removeVMs(function(err, operation, apiResponse_) {
+        instanceGroupManager.removeVMs(null, function(err, operation, apiResponse_) {
           assert.strictEqual(err, error);
           assert.strictEqual(operation, null);
           assert.strictEqual(apiResponse_, apiResponse);
@@ -380,7 +380,7 @@ describe('InstanceGroupManager', function() {
     });
 
     describe('success', function() {
-      var apiResponse = {name: 'op-name'};
+      const apiResponse = {name: 'op-name'};
 
       beforeEach(function() {
         instanceGroupManager.request = function(reqOpts, callback) {
@@ -389,14 +389,14 @@ describe('InstanceGroupManager', function() {
       });
 
       it('should return an Operation and API response', function(done) {
-        var operation = {};
+        const operation = {};
 
         instanceGroupManager.zone.operation = function(name) {
           assert.strictEqual(name, apiResponse.name);
           return operation;
         };
 
-        instanceGroupManager.removeVMs(function(err, operation_, apiResponse_) {
+        instanceGroupManager.removeVMs(null, function(err, operation_, apiResponse_) {
           assert.ifError(err);
           assert.strictEqual(operation_, operation);
           assert.strictEqual(operation.metadata, apiResponse);
@@ -408,11 +408,11 @@ describe('InstanceGroupManager', function() {
   });
 
   describe('recreateVMs', function() {
-    var VM = {
+    const VM = {
       name: 'my-vm',
     };
 
-    var INSTANCES = [VM, 'some/instance'];
+    const INSTANCES = [VM, 'some/instance'];
 
     beforeEach(function() {
       fakeUtil.isCustomType = function(instance) {
@@ -421,7 +421,7 @@ describe('InstanceGroupManager', function() {
     });
 
     it('should make the correct API request', function(done) {
-      var expectedBody = {
+      const expectedBody = {
         instances: ['zones/my-zone/instances/my-vm', 'some/instance'],
       };
 
@@ -437,8 +437,8 @@ describe('InstanceGroupManager', function() {
     });
 
     describe('error', function() {
-      var apiResponse = {};
-      var error = new Error('Error.');
+      const apiResponse = {};
+      const error = new Error('Error.');
 
       beforeEach(function() {
         instanceGroupManager.request = function(reqOpts, callback) {
@@ -461,7 +461,7 @@ describe('InstanceGroupManager', function() {
     });
 
     describe('success', function() {
-      var apiResponse = {name: 'op-name'};
+      const apiResponse = {name: 'op-name'};
 
       beforeEach(function() {
         instanceGroupManager.request = function(reqOpts, callback) {
@@ -470,7 +470,7 @@ describe('InstanceGroupManager', function() {
       });
 
       it('should return an Operation and API response', function(done) {
-        var operation = {};
+        const operation = {};
 
         instanceGroupManager.zone.operation = function(name) {
           assert.strictEqual(name, apiResponse.name);
@@ -493,11 +493,11 @@ describe('InstanceGroupManager', function() {
   });
 
   describe('resize', function() {
-    var SIZE = 10;
+    const SIZE = 10;
 
     describe('error', function() {
-      var error = new Error('Error.');
-      var apiResponse = {a: 'b', c: 'd'};
+      const error = new Error('Error.');
+      const apiResponse = {a: 'b', c: 'd'};
 
       beforeEach(function() {
         instanceGroupManager.request = function(reqOpts, callback) {
@@ -526,7 +526,7 @@ describe('InstanceGroupManager', function() {
     });
 
     describe('success', function() {
-      var apiResponse = {
+      const apiResponse = {
         name: 'op-name',
       };
 
@@ -537,7 +537,7 @@ describe('InstanceGroupManager', function() {
       });
 
       it('should execute callback with Operation & Response', function(done) {
-        var operation = {};
+        const operation = {};
 
         instanceGroupManager.zone.operation = function(name) {
           assert.strictEqual(name, apiResponse.name);

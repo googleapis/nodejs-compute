@@ -16,20 +16,20 @@
 
 'use strict';
 
-var arrify = require('arrify');
-var assert = require('assert');
-var events = require('events');
-var extend = require('extend');
-var format = require('string-format-obj');
-var nodeutil = require('util');
-var proxyquire = require('proxyquire');
-var Service = require('@google-cloud/common').Service;
-var util = require('@google-cloud/common').util;
+const arrify = require('arrify');
+const assert = require('assert');
+const events = require('events');
+const extend = require('extend');
+const format = require('string-format-obj');
+const nodeutil = require('util');
+const proxyquire = require('proxyquire');
+const Service = require('@google-cloud/common').Service;
+const util = require('@google-cloud/common').util;
 
-var slice = Array.prototype.slice;
+const slice = Array.prototype.slice;
 
-var promisified = false;
-var fakeUtil = extend({}, util, {
+let promisified = false;
+const fakeUtil = extend({}, util, {
   makeAuthenticatedRequestFactory: util.noop,
   promisifyAll: function(Class, options) {
     if (Class.name !== 'Compute') {
@@ -60,9 +60,9 @@ var fakeUtil = extend({}, util, {
     ]);
   },
 });
-var originalFakeUtil = extend(true, {}, fakeUtil);
+const originalFakeUtil = extend(true, {}, fakeUtil);
 
-var fakePaginator = {
+const fakePaginator = {
   extend: function(Class, methods) {
     if (Class.name !== 'Compute') {
       return;
@@ -77,6 +77,7 @@ var fakePaginator = {
       'getImages',
       'getInstanceTemplates',
       'getHealthChecks',
+      'getInstanceGroupManagers',
       'getInstanceGroups',
       'getMachineTypes',
       'getNetworks',
@@ -166,10 +167,10 @@ function FakeService() {
 nodeutil.inherits(FakeService, Service);
 
 describe('Compute', function() {
-  var Compute;
-  var compute;
+  let Compute;
+  let compute;
 
-  var PROJECT_ID = 'project-id';
+  const PROJECT_ID = 'project-id';
 
   before(function() {
     // Node v4 on Circle times out.
@@ -205,13 +206,13 @@ describe('Compute', function() {
 
   describe('instantiation', function() {
     it('should return a new instance of Compute', function() {
-      var compute = new Compute({projectId: PROJECT_ID});
+      const compute = new Compute({projectId: PROJECT_ID});
       assert(compute instanceof Compute);
     });
 
     it('should normalize the arguments', function() {
-      var normalizeArgumentsCalled = false;
-      var options = {};
+      let normalizeArgumentsCalled = false;
+      const options = {};
 
       fakeUtil.normalizeArguments = function(context, options_) {
         normalizeArgumentsCalled = true;
@@ -226,9 +227,9 @@ describe('Compute', function() {
     it('should inherit from Service', function() {
       assert(compute instanceof Service);
 
-      var calledWith = compute.calledWith_[0];
+      const calledWith = compute.calledWith_[0];
 
-      var baseUrl = 'https://www.googleapis.com/compute/v1';
+      const baseUrl = 'https://www.googleapis.com/compute/v1';
       assert.strictEqual(calledWith.baseUrl, baseUrl);
       assert.deepStrictEqual(calledWith.scopes, [
         'https://www.googleapis.com/auth/compute',
@@ -283,7 +284,7 @@ describe('Compute', function() {
 
     describe('config.protocols', function() {
       it('should format protocols', function(done) {
-        var options = {
+        const options = {
           allowed: {
             IPProtocol: 'http',
             ports: [8000],
@@ -314,7 +315,7 @@ describe('Compute', function() {
 
     describe('config.ranges', function() {
       it('should format ranges to sourceRanges', function(done) {
-        var options = {
+        const options = {
           ranges: '0.0.0.0/0', // non-array to test that it's arrified.
         };
 
@@ -330,7 +331,7 @@ describe('Compute', function() {
 
     describe('config.tags', function() {
       it('should format tags to sourceTags', function(done) {
-        var options = {
+        const options = {
           tags: 'tag', // non-array to test that it's arrified.
         };
 
@@ -345,7 +346,7 @@ describe('Compute', function() {
     });
 
     it('should make the correct API request', function(done) {
-      var name = 'new-firewall-name';
+      const name = 'new-firewall-name';
 
       compute.request = function(reqOpts) {
         assert.strictEqual(reqOpts.method, 'POST');
@@ -358,8 +359,8 @@ describe('Compute', function() {
     });
 
     describe('error', function() {
-      var error = new Error('Error.');
-      var apiResponse = {a: 'b', c: 'd'};
+      const error = new Error('Error.');
+      const apiResponse = {a: 'b', c: 'd'};
 
       beforeEach(function() {
         compute.request = function(reqOpts, callback) {
@@ -379,7 +380,7 @@ describe('Compute', function() {
     });
 
     describe('success', function() {
-      var apiResponse = {
+      const apiResponse = {
         name: 'op-name',
       };
 
@@ -390,9 +391,9 @@ describe('Compute', function() {
       });
 
       it('should exec cb with Firewall, Operation & apiResp', function(done) {
-        var name = 'name';
-        var firewall = {};
-        var operation = {};
+        const name = 'name';
+        const firewall = {};
+        const operation = {};
 
         compute.firewall = function(name_) {
           assert.strictEqual(name_, name);
@@ -425,7 +426,7 @@ describe('Compute', function() {
 
     describe('options.interval', function() {
       it('should set checkIntervalSec', function(done) {
-        var options = {interval: 50};
+        const options = {interval: 50};
 
         compute.request = function(reqOpts) {
           assert.strictEqual(reqOpts.json.checkIntervalSec, options.interval);
@@ -439,7 +440,7 @@ describe('Compute', function() {
 
     describe('config.timeout', function() {
       it('should set timeoutSec', function(done) {
-        var options = {timeout: 50};
+        const options = {timeout: 50};
 
         compute.request = function(reqOpts) {
           assert.strictEqual(reqOpts.json.timeoutSec, options.timeout);
@@ -453,7 +454,7 @@ describe('Compute', function() {
 
     describe('options.https', function() {
       it('should make the correct API request', function(done) {
-        var name = 'https-health-check-name';
+        const name = 'https-health-check-name';
 
         compute.request = function(reqOpts) {
           assert.strictEqual(reqOpts.json.https, undefined);
@@ -467,9 +468,9 @@ describe('Compute', function() {
     });
 
     it('should make the correct default API request', function(done) {
-      var name = 'new-health-check-name';
-      var options = {a: 'b'};
-      var originalOptions = extend({}, options);
+      const name = 'new-health-check-name';
+      const options = {a: 'b'};
+      const originalOptions = extend({}, options);
 
       compute.request = function(reqOpts) {
         assert.strictEqual(reqOpts.method, 'POST');
@@ -483,8 +484,8 @@ describe('Compute', function() {
     });
 
     describe('error', function() {
-      var error = new Error('Error.');
-      var apiResponse = {a: 'b', c: 'd'};
+      const error = new Error('Error.');
+      const apiResponse = {a: 'b', c: 'd'};
 
       beforeEach(function() {
         compute.request = function(reqOpts, callback) {
@@ -504,7 +505,7 @@ describe('Compute', function() {
     });
 
     describe('success', function() {
-      var apiResponse = {
+      const apiResponse = {
         name: 'op-name',
       };
 
@@ -515,9 +516,9 @@ describe('Compute', function() {
       });
 
       it('should exec cb with HealthCheck, Op, & apiResp', function(done) {
-        var name = 'name';
-        var healthCheck = {};
-        var operation = {};
+        const name = 'name';
+        const healthCheck = {};
+        const operation = {};
 
         compute.healthCheck = function(name_, options) {
           assert.strictEqual(name_, name);
@@ -541,7 +542,7 @@ describe('Compute', function() {
       });
 
       it('should create an HTTPS HealthCheck object', function(done) {
-        var name = 'name';
+        const name = 'name';
 
         compute.healthCheck = function(name_, options) {
           assert.strictEqual(name_, name);
@@ -555,9 +556,9 @@ describe('Compute', function() {
   });
 
   describe('createImage', function() {
-    var NAME = 'image-name';
+    const NAME = 'image-name';
 
-    var DISK = {
+    const DISK = {
       name: 'disk-name',
       zone: {
         name: 'zone-name',
@@ -583,7 +584,7 @@ describe('Compute', function() {
     });
 
     it('should make the correct API request', function(done) {
-      var options = {
+      const options = {
         a: 'b',
         c: 'd',
       };
@@ -608,8 +609,8 @@ describe('Compute', function() {
     });
 
     describe('error', function() {
-      var error = new Error('Error.');
-      var apiResponse = {};
+      const error = new Error('Error.');
+      const apiResponse = {};
 
       beforeEach(function() {
         compute.request = function(reqOpts, callback) {
@@ -629,7 +630,7 @@ describe('Compute', function() {
     });
 
     describe('success', function() {
-      var apiResponse = {
+      const apiResponse = {
         name: 'op-name',
       };
 
@@ -640,8 +641,8 @@ describe('Compute', function() {
       });
 
       it('should exec cb with Operation & apiResp', function(done) {
-        var network = {};
-        var operation = {};
+        const network = {};
+        const operation = {};
 
         compute.network = function(name) {
           assert.strictEqual(name, NAME);
@@ -665,8 +666,8 @@ describe('Compute', function() {
   });
 
   describe('createInstanceTemplate', function() {
-    var NAME = 'my-instance-template';
-    var OPTIONS = {};
+    const NAME = 'my-instance-template';
+    const OPTIONS = {};
 
     it('should throw if config is not provided', function() {
       assert.throws(function() {
@@ -675,7 +676,7 @@ describe('Compute', function() {
     });
 
     it('should make the correct API request', function(done) {
-      var options = {
+      const options = {
         a: 'b',
         c: 'd',
       };
@@ -696,8 +697,8 @@ describe('Compute', function() {
     });
 
     describe('error', function() {
-      var error = new Error('Error.');
-      var apiResponse = {};
+      const error = new Error('Error.');
+      const apiResponse = {};
 
       beforeEach(function() {
         compute.request = function(reqOpts, callback) {
@@ -722,7 +723,7 @@ describe('Compute', function() {
     });
 
     describe('success', function() {
-      var apiResponse = {
+      const apiResponse = {
         name: 'op-name',
       };
 
@@ -733,8 +734,8 @@ describe('Compute', function() {
       });
 
       it('should exec cb with Operation & apiResp', function(done) {
-        var network = {};
-        var operation = {};
+        const network = {};
+        const operation = {};
 
         compute.network = function(name) {
           assert.strictEqual(name, NAME);
@@ -765,7 +766,7 @@ describe('Compute', function() {
   describe('createNetwork', function() {
     describe('config.range', function() {
       it('should set the IPv4Range', function(done) {
-        var options = {
+        const options = {
           range: '10.240.0.0/16',
         };
 
@@ -781,7 +782,7 @@ describe('Compute', function() {
 
     describe('config.gateway', function() {
       it('should set the gatewayIPv4', function(done) {
-        var options = {
+        const options = {
           gateway: '10.1.1.1',
         };
 
@@ -796,7 +797,7 @@ describe('Compute', function() {
     });
 
     it('should make the correct API request', function(done) {
-      var name = 'new-network';
+      const name = 'new-network';
 
       compute.request = function(reqOpts) {
         assert.strictEqual(reqOpts.method, 'POST');
@@ -809,8 +810,8 @@ describe('Compute', function() {
     });
 
     describe('error', function() {
-      var error = new Error('Error.');
-      var apiResponse = {a: 'b', c: 'd'};
+      const error = new Error('Error.');
+      const apiResponse = {a: 'b', c: 'd'};
 
       beforeEach(function() {
         compute.request = function(reqOpts, callback) {
@@ -830,8 +831,8 @@ describe('Compute', function() {
     });
 
     describe('success', function() {
-      var NAME = 'network-name';
-      var apiResponse = {
+      const NAME = 'network-name';
+      const apiResponse = {
         name: 'op-name',
       };
 
@@ -842,8 +843,8 @@ describe('Compute', function() {
       });
 
       it('should exec cb with Network, Operation & apiResp', function(done) {
-        var network = {};
-        var operation = {};
+        const network = {};
+        const operation = {};
 
         compute.network = function(name_) {
           assert.strictEqual(name_, NAME);
@@ -868,12 +869,12 @@ describe('Compute', function() {
   });
 
   describe('createRule', function() {
-    var NAME = 'new-rule';
+    const NAME = 'new-rule';
 
     it('should make the correct API request', function(done) {
-      var config = {a: 'b'};
-      var originalConfig = extend({}, config);
-      var expectedConfig = extend({}, config, {name: NAME});
+      const config = {a: 'b'};
+      const originalConfig = extend({}, config);
+      const expectedConfig = extend({}, config, {name: NAME});
 
       compute.request = function(reqOpts) {
         assert.strictEqual(reqOpts.method, 'POST');
@@ -887,7 +888,7 @@ describe('Compute', function() {
     });
 
     describe('config.ip', function() {
-      var CONFIG = {
+      const CONFIG = {
         ip: '0.0.0.0',
       };
 
@@ -905,7 +906,7 @@ describe('Compute', function() {
     });
 
     describe('config.protocol', function() {
-      var CONFIG = {
+      const CONFIG = {
         protocol: 'TCP',
       };
 
@@ -923,7 +924,7 @@ describe('Compute', function() {
     });
 
     describe('config.range', function() {
-      var CONFIG = {
+      const CONFIG = {
         range: '200-300',
       };
 
@@ -941,8 +942,8 @@ describe('Compute', function() {
     });
 
     describe('error', function() {
-      var error = new Error('Error.');
-      var apiResponse = {a: 'b', c: 'd'};
+      const error = new Error('Error.');
+      const apiResponse = {a: 'b', c: 'd'};
 
       beforeEach(function() {
         compute.request = function(reqOpts, callback) {
@@ -962,7 +963,7 @@ describe('Compute', function() {
     });
 
     describe('success', function() {
-      var apiResponse = {
+      const apiResponse = {
         name: 'op-name',
       };
 
@@ -973,8 +974,8 @@ describe('Compute', function() {
       });
 
       it('should exec cb with Rule, Operation & apiResp', function(done) {
-        var rule = {};
-        var operation = {};
+        const rule = {};
+        const operation = {};
 
         compute.rule = function(name) {
           assert.strictEqual(name, NAME);
@@ -999,7 +1000,7 @@ describe('Compute', function() {
   });
 
   describe('createService', function() {
-    var NAME = 'new-service';
+    const NAME = 'new-service';
 
     it('should make the correct API request', function(done) {
       compute.request = function(reqOpts) {
@@ -1013,8 +1014,8 @@ describe('Compute', function() {
     });
 
     describe('error', function() {
-      var error = new Error('Error.');
-      var apiResponse = {a: 'b', c: 'd'};
+      const error = new Error('Error.');
+      const apiResponse = {a: 'b', c: 'd'};
 
       beforeEach(function() {
         compute.request = function(reqOpts, callback) {
@@ -1034,7 +1035,7 @@ describe('Compute', function() {
     });
 
     describe('success', function() {
-      var apiResponse = {
+      const apiResponse = {
         name: 'op-name',
       };
 
@@ -1045,8 +1046,8 @@ describe('Compute', function() {
       });
 
       it('should exec cb with Service, Operation & apiResp', function(done) {
-        var service = {};
-        var operation = {};
+        const service = {};
+        const operation = {};
 
         compute.service = function(name) {
           assert.strictEqual(name, NAME);
@@ -1071,10 +1072,10 @@ describe('Compute', function() {
   });
 
   describe('firewall', function() {
-    var NAME = 'firewall-name';
+    const NAME = 'firewall-name';
 
     it('should return a Firewall object', function() {
-      var firewall = compute.firewall(NAME);
+      const firewall = compute.firewall(NAME);
       assert(firewall instanceof FakeFirewall);
       assert.strictEqual(firewall.calledWith_[0], compute);
       assert.strictEqual(firewall.calledWith_[1], NAME);
@@ -1092,7 +1093,7 @@ describe('Compute', function() {
     });
 
     it('should make the correct API request', function(done) {
-      var options = {};
+      const options = {};
 
       compute.request = function(reqOpts) {
         assert.strictEqual(reqOpts.uri, '/aggregated/addresses');
@@ -1104,8 +1105,8 @@ describe('Compute', function() {
     });
 
     describe('error', function() {
-      var error = new Error('Error.');
-      var apiResponse = {a: 'b', c: 'd'};
+      const error = new Error('Error.');
+      const apiResponse = {a: 'b', c: 'd'};
 
       beforeEach(function() {
         compute.request = function(reqOpts, callback) {
@@ -1126,11 +1127,11 @@ describe('Compute', function() {
     });
 
     describe('success', function() {
-      var REGION_NAME = 'region-1';
-      var FULL_REGION_NAME = 'regions/' + REGION_NAME;
+      const REGION_NAME = 'region-1';
+      const FULL_REGION_NAME = 'regions/' + REGION_NAME;
 
-      var address = {name: 'address-1'};
-      var apiResponse = {
+      const address = {name: 'address-1'};
+      const apiResponse = {
         items: {},
       };
 
@@ -1145,7 +1146,7 @@ describe('Compute', function() {
       });
 
       it('should create Address objects from the response', function(done) {
-        var region = {};
+        const region = {};
 
         compute.region = function(name) {
           assert.strictEqual(name, REGION_NAME);
@@ -1162,12 +1163,12 @@ describe('Compute', function() {
       });
 
       it('should build a nextQuery if necessary', function(done) {
-        var apiResponseWithNextPageToken = extend({}, apiResponse, {
+        const apiResponseWithNextPageToken = extend({}, apiResponse, {
           nextPageToken: 'next-page-token',
         });
 
-        var query = {a: 'b', c: 'd'};
-        var originalQuery = extend({}, query);
+        const query = {a: 'b', c: 'd'};
+        const originalQuery = extend({}, query);
 
         compute.request = function(reqOpts, callback) {
           callback(null, apiResponseWithNextPageToken);
@@ -1202,7 +1203,7 @@ describe('Compute', function() {
     });
 
     it('should make the correct API request', function(done) {
-      var options = {};
+      const options = {};
 
       compute.request = function(reqOpts) {
         assert.strictEqual(reqOpts.uri, '/aggregated/autoscalers');
@@ -1214,8 +1215,8 @@ describe('Compute', function() {
     });
 
     describe('error', function() {
-      var error = new Error('Error.');
-      var apiResponse = {a: 'b', c: 'd'};
+      const error = new Error('Error.');
+      const apiResponse = {a: 'b', c: 'd'};
 
       beforeEach(function() {
         compute.request = function(reqOpts, callback) {
@@ -1236,11 +1237,11 @@ describe('Compute', function() {
     });
 
     describe('success', function() {
-      var ZONE_NAME = 'us-central1-a';
-      var FULL_ZONE_NAME = 'zones/' + ZONE_NAME;
+      const ZONE_NAME = 'us-central1-a';
+      const FULL_ZONE_NAME = 'zones/' + ZONE_NAME;
 
-      var autoscaler = {name: 'autoscaler-1'};
-      var apiResponse = {
+      const autoscaler = {name: 'autoscaler-1'};
+      const apiResponse = {
         items: {},
       };
 
@@ -1259,7 +1260,7 @@ describe('Compute', function() {
       });
 
       it('should create Autoscaler objects from the response', function(done) {
-        var zone = {};
+        const zone = {};
 
         compute.zone = function(name) {
           assert.strictEqual(name, ZONE_NAME);
@@ -1276,7 +1277,7 @@ describe('Compute', function() {
       });
 
       it('should not create zone-less Autoscalers', function(done) {
-        var zone = {};
+        const zone = {};
 
         compute.zone = function() {
           return zone;
@@ -1295,14 +1296,14 @@ describe('Compute', function() {
       });
 
       it('should build a nextQuery if necessary', function(done) {
-        var apiResponseWithNextPageToken = extend({}, apiResponse, {
+        const apiResponseWithNextPageToken = extend({}, apiResponse, {
           nextPageToken: 'next-page-token',
         });
 
         delete apiResponseWithNextPageToken.items;
 
-        var query = {a: 'b', c: 'd'};
-        var originalQuery = extend({}, query);
+        const query = {a: 'b', c: 'd'};
+        const originalQuery = extend({}, query);
 
         compute.request = function(reqOpts, callback) {
           callback(null, apiResponseWithNextPageToken);
@@ -1337,7 +1338,7 @@ describe('Compute', function() {
     });
 
     it('should make the correct API request', function(done) {
-      var options = {};
+      const options = {};
 
       compute.request = function(reqOpts) {
         assert.strictEqual(reqOpts.uri, '/aggregated/disks');
@@ -1349,8 +1350,8 @@ describe('Compute', function() {
     });
 
     describe('error', function() {
-      var error = new Error('Error.');
-      var apiResponse = {a: 'b', c: 'd'};
+      const error = new Error('Error.');
+      const apiResponse = {a: 'b', c: 'd'};
 
       beforeEach(function() {
         compute.request = function(reqOpts, callback) {
@@ -1371,11 +1372,11 @@ describe('Compute', function() {
     });
 
     describe('success', function() {
-      var ZONE_NAME = 'zone-1';
-      var FULL_ZONE_NAME = 'zones/' + ZONE_NAME;
+      const ZONE_NAME = 'zone-1';
+      const FULL_ZONE_NAME = 'zones/' + ZONE_NAME;
 
-      var disk = {name: 'disk-1'};
-      var apiResponse = {
+      const disk = {name: 'disk-1'};
+      const apiResponse = {
         items: {},
       };
 
@@ -1390,7 +1391,7 @@ describe('Compute', function() {
       });
 
       it('should create Disk objects from the response', function(done) {
-        var zone = {};
+        const zone = {};
 
         compute.zone = function(name) {
           assert.strictEqual(name, ZONE_NAME);
@@ -1407,12 +1408,12 @@ describe('Compute', function() {
       });
 
       it('should build a nextQuery if necessary', function(done) {
-        var apiResponseWithNextPageToken = extend({}, apiResponse, {
+        const apiResponseWithNextPageToken = extend({}, apiResponse, {
           nextPageToken: 'next-page-token',
         });
 
-        var query = {a: 'b', c: 'd'};
-        var originalQuery = extend({}, query);
+        const query = {a: 'b', c: 'd'};
+        const originalQuery = extend({}, query);
 
         compute.request = function(reqOpts, callback) {
           callback(null, apiResponseWithNextPageToken);
@@ -1447,7 +1448,7 @@ describe('Compute', function() {
     });
 
     it('should make the correct API request', function(done) {
-      var options = {};
+      const options = {};
 
       compute.request = function(reqOpts) {
         assert.strictEqual(reqOpts.uri, '/global/firewalls');
@@ -1459,8 +1460,8 @@ describe('Compute', function() {
     });
 
     describe('error', function() {
-      var error = new Error('Error.');
-      var apiResponse = {a: 'b', c: 'd'};
+      const error = new Error('Error.');
+      const apiResponse = {a: 'b', c: 'd'};
 
       beforeEach(function() {
         compute.request = function(reqOpts, callback) {
@@ -1481,8 +1482,8 @@ describe('Compute', function() {
     });
 
     describe('success', function() {
-      var firewall = {name: 'firewall-1'};
-      var apiResponse = {
+      const firewall = {name: 'firewall-1'};
+      const apiResponse = {
         items: [firewall],
       };
 
@@ -1503,12 +1504,12 @@ describe('Compute', function() {
       });
 
       it('should build a nextQuery if necessary', function(done) {
-        var apiResponseWithNextPageToken = extend({}, apiResponse, {
+        const apiResponseWithNextPageToken = extend({}, apiResponse, {
           nextPageToken: 'next-page-token',
         });
 
-        var query = {a: 'b', c: 'd'};
-        var originalQuery = extend({}, query);
+        const query = {a: 'b', c: 'd'};
+        const originalQuery = extend({}, query);
 
         compute.request = function(reqOpts, callback) {
           callback(null, apiResponseWithNextPageToken);
@@ -1543,7 +1544,7 @@ describe('Compute', function() {
     });
 
     it('should make the correct default API request', function(done) {
-      var options = {};
+      const options = {};
 
       compute.request = function(reqOpts) {
         assert.strictEqual(reqOpts.uri, '/global/httpHealthChecks');
@@ -1556,8 +1557,8 @@ describe('Compute', function() {
 
     describe('options.https', function() {
       it('should make the correct API request', function(done) {
-        var options = {https: true};
-        var originalOptions = extend({}, options);
+        const options = {https: true};
+        const originalOptions = extend({}, options);
 
         compute.request = function(reqOpts) {
           assert.strictEqual(reqOpts.uri, '/global/httpsHealthChecks');
@@ -1571,8 +1572,8 @@ describe('Compute', function() {
     });
 
     describe('error', function() {
-      var error = new Error('Error.');
-      var apiResponse = {a: 'b', c: 'd'};
+      const error = new Error('Error.');
+      const apiResponse = {a: 'b', c: 'd'};
 
       beforeEach(function() {
         compute.request = function(reqOpts, callback) {
@@ -1593,8 +1594,8 @@ describe('Compute', function() {
     });
 
     describe('success', function() {
-      var healthCheck = {name: 'health-check-1'};
-      var apiResponse = {items: [healthCheck]};
+      const healthCheck = {name: 'health-check-1'};
+      const apiResponse = {items: [healthCheck]};
 
       beforeEach(function() {
         compute.request = function(reqOpts, callback) {
@@ -1625,12 +1626,12 @@ describe('Compute', function() {
       });
 
       it('should build a nextQuery if necessary', function(done) {
-        var apiResponseWithNextPageToken = extend({}, apiResponse, {
+        const apiResponseWithNextPageToken = extend({}, apiResponse, {
           nextPageToken: 'next-page-token',
         });
 
-        var query = {a: 'b', c: 'd'};
-        var originalQuery = extend({}, query);
+        const query = {a: 'b', c: 'd'};
+        const originalQuery = extend({}, query);
 
         compute.request = function(reqOpts, callback) {
           callback(null, apiResponseWithNextPageToken);
@@ -1665,7 +1666,7 @@ describe('Compute', function() {
     });
 
     it('should make the correct API request', function(done) {
-      var options = {};
+      const options = {};
 
       compute.request = function(reqOpts) {
         assert.strictEqual(reqOpts.uri, '/global/images');
@@ -1677,8 +1678,8 @@ describe('Compute', function() {
     });
 
     describe('error', function() {
-      var error = new Error('Error.');
-      var apiResponse = {a: 'b', c: 'd'};
+      const error = new Error('Error.');
+      const apiResponse = {a: 'b', c: 'd'};
 
       beforeEach(function() {
         compute.request = function(reqOpts, callback) {
@@ -1699,8 +1700,8 @@ describe('Compute', function() {
     });
 
     describe('success', function() {
-      var image = {name: 'image-1'};
-      var apiResponse = {
+      const image = {name: 'image-1'};
+      const apiResponse = {
         items: [image],
       };
 
@@ -1721,12 +1722,12 @@ describe('Compute', function() {
       });
 
       it('should build a nextQuery if necessary', function(done) {
-        var apiResponseWithNextPageToken = extend({}, apiResponse, {
+        const apiResponseWithNextPageToken = extend({}, apiResponse, {
           nextPageToken: 'next-page-token',
         });
 
-        var query = {a: 'b', c: 'd'};
-        var originalQuery = extend({}, query);
+        const query = {a: 'b', c: 'd'};
+        const originalQuery = extend({}, query);
 
         compute.request = function(reqOpts, callback) {
           callback(null, apiResponseWithNextPageToken);
@@ -1761,7 +1762,7 @@ describe('Compute', function() {
     });
 
     it('should make the correct API request', function(done) {
-      var options = {};
+      const options = {};
 
       compute.request = function(reqOpts) {
         assert.strictEqual(reqOpts.uri, '/global/instanceTemplates');
@@ -1773,8 +1774,8 @@ describe('Compute', function() {
     });
 
     describe('error', function() {
-      var error = new Error('Error.');
-      var apiResponse = {a: 'b', c: 'd'};
+      const error = new Error('Error.');
+      const apiResponse = {a: 'b', c: 'd'};
 
       beforeEach(function() {
         compute.request = function(reqOpts, callback) {
@@ -1800,8 +1801,8 @@ describe('Compute', function() {
     });
 
     describe('success', function() {
-      var instanceTemplate = {name: 'instanceTemplate-1'};
-      var apiResponse = {
+      const instanceTemplate = {name: 'instanceTemplate-1'};
+      const apiResponse = {
         items: [instanceTemplate],
       };
 
@@ -1822,12 +1823,12 @@ describe('Compute', function() {
       });
 
       it('should build a nextQuery if necessary', function(done) {
-        var apiResponseWithNextPageToken = extend({}, apiResponse, {
+        const apiResponseWithNextPageToken = extend({}, apiResponse, {
           nextPageToken: 'next-page-token',
         });
 
-        var query = {a: 'b', c: 'd'};
-        var originalQuery = extend({}, query);
+        const query = {a: 'b', c: 'd'};
+        const originalQuery = extend({}, query);
 
         compute.request = function(reqOpts, callback) {
           callback(null, apiResponseWithNextPageToken);
@@ -1866,7 +1867,7 @@ describe('Compute', function() {
     });
 
     it('should make the correct default API request', function(done) {
-      var options = {};
+      const options = {};
 
       compute.request = function(reqOpts) {
         assert.strictEqual(reqOpts.uri, '/aggregated/instanceGroups');
@@ -1878,8 +1879,8 @@ describe('Compute', function() {
     });
 
     describe('error', function() {
-      var error = new Error('Error.');
-      var apiResponse = {a: 'b', c: 'd'};
+      const error = new Error('Error.');
+      const apiResponse = {a: 'b', c: 'd'};
 
       beforeEach(function() {
         compute.request = function(reqOpts, callback) {
@@ -1900,11 +1901,11 @@ describe('Compute', function() {
     });
 
     describe('success', function() {
-      var ZONE_NAME = 'zone-1';
-      var FULL_ZONE_NAME = 'zones/' + ZONE_NAME;
+      const ZONE_NAME = 'zone-1';
+      const FULL_ZONE_NAME = 'zones/' + ZONE_NAME;
 
-      var instanceGroup = {name: 'instance-group-1'};
-      var apiResponse = {
+      const instanceGroup = {name: 'instance-group-1'};
+      const apiResponse = {
         items: {},
       };
 
@@ -1919,7 +1920,7 @@ describe('Compute', function() {
       });
 
       it('should create InstanceGroup objects from the resp', function(done) {
-        var zone = {};
+        const zone = {};
 
         compute.zone = function(name) {
           assert.strictEqual(name, ZONE_NAME);
@@ -1936,14 +1937,14 @@ describe('Compute', function() {
       });
 
       it('should build a nextQuery if necessary', function(done) {
-        var apiResponseWithNextPageToken = extend({}, apiResponse, {
+        const apiResponseWithNextPageToken = extend({}, apiResponse, {
           nextPageToken: 'next-page-token',
         });
 
         delete apiResponseWithNextPageToken.items;
 
-        var query = {a: 'b', c: 'd'};
-        var originalQuery = extend({}, query);
+        const query = {a: 'b', c: 'd'};
+        const originalQuery = extend({}, query);
 
         compute.request = function(reqOpts, callback) {
           callback(null, apiResponseWithNextPageToken);
@@ -1978,7 +1979,7 @@ describe('Compute', function() {
     });
 
     it('should make the correct API request', function(done) {
-      var options = {};
+      const options = {};
 
       compute.request = function(reqOpts) {
         assert.strictEqual(reqOpts.uri, '/aggregated/machineTypes');
@@ -1990,8 +1991,8 @@ describe('Compute', function() {
     });
 
     describe('error', function() {
-      var error = new Error('Error.');
-      var apiResponse = {};
+      const error = new Error('Error.');
+      const apiResponse = {};
 
       beforeEach(function() {
         compute.request = function(reqOpts, callback) {
@@ -2011,11 +2012,11 @@ describe('Compute', function() {
     });
 
     describe('success', function() {
-      var ZONE_NAME = 'zone-1';
-      var FULL_ZONE_NAME = 'zones/' + ZONE_NAME;
+      const ZONE_NAME = 'zone-1';
+      const FULL_ZONE_NAME = 'zones/' + ZONE_NAME;
 
-      var machineType = {name: 'machineType-1'};
-      var apiResponse = {
+      const machineType = {name: 'machineType-1'};
+      const apiResponse = {
         items: {},
       };
 
@@ -2030,8 +2031,8 @@ describe('Compute', function() {
       });
 
       it('should create MachineType objects from the response', function(done) {
-        var zone = {};
-        var machineTypeInstance = {};
+        const zone = {};
+        const machineTypeInstance = {};
 
         compute.zone = function(name) {
           assert.strictEqual(name, ZONE_NAME);
@@ -2054,12 +2055,12 @@ describe('Compute', function() {
       });
 
       it('should build a nextQuery if necessary', function(done) {
-        var apiResponseWithNextPageToken = extend({}, apiResponse, {
+        const apiResponseWithNextPageToken = extend({}, apiResponse, {
           nextPageToken: 'next-page-token',
         });
 
-        var query = {a: 'b', c: 'd'};
-        var originalQuery = extend({}, query);
+        const query = {a: 'b', c: 'd'};
+        const originalQuery = extend({}, query);
 
         compute.request = function(reqOpts, callback) {
           callback(null, apiResponseWithNextPageToken);
@@ -2094,7 +2095,7 @@ describe('Compute', function() {
     });
 
     it('should make the correct API request', function(done) {
-      var options = {};
+      const options = {};
 
       compute.request = function(reqOpts) {
         assert.strictEqual(reqOpts.uri, '/global/networks');
@@ -2106,8 +2107,8 @@ describe('Compute', function() {
     });
 
     describe('error', function() {
-      var error = new Error('Error.');
-      var apiResponse = {a: 'b', c: 'd'};
+      const error = new Error('Error.');
+      const apiResponse = {a: 'b', c: 'd'};
 
       beforeEach(function() {
         compute.request = function(reqOpts, callback) {
@@ -2128,8 +2129,8 @@ describe('Compute', function() {
     });
 
     describe('success', function() {
-      var network = {name: 'network-1'};
-      var apiResponse = {
+      const network = {name: 'network-1'};
+      const apiResponse = {
         items: [network],
       };
 
@@ -2150,12 +2151,12 @@ describe('Compute', function() {
       });
 
       it('should build a nextQuery if necessary', function(done) {
-        var apiResponseWithNextPageToken = extend({}, apiResponse, {
+        const apiResponseWithNextPageToken = extend({}, apiResponse, {
           nextPageToken: 'next-page-token',
         });
 
-        var query = {a: 'b', c: 'd'};
-        var originalQuery = extend({}, query);
+        const query = {a: 'b', c: 'd'};
+        const originalQuery = extend({}, query);
 
         compute.request = function(reqOpts, callback) {
           callback(null, apiResponseWithNextPageToken);
@@ -2190,7 +2191,7 @@ describe('Compute', function() {
     });
 
     it('should make the correct API request', function(done) {
-      var options = {};
+      const options = {};
 
       compute.request = function(reqOpts) {
         assert.strictEqual(reqOpts.uri, '/global/operations');
@@ -2202,8 +2203,8 @@ describe('Compute', function() {
     });
 
     describe('error', function() {
-      var error = new Error('Error.');
-      var apiResponse = {a: 'b', c: 'd'};
+      const error = new Error('Error.');
+      const apiResponse = {a: 'b', c: 'd'};
 
       beforeEach(function() {
         compute.request = function(reqOpts, callback) {
@@ -2224,8 +2225,8 @@ describe('Compute', function() {
     });
 
     describe('success', function() {
-      var operation = {name: 'op-1'};
-      var apiResponse = {
+      const operation = {name: 'op-1'};
+      const apiResponse = {
         items: [operation],
       };
 
@@ -2246,12 +2247,12 @@ describe('Compute', function() {
       });
 
       it('should build a nextQuery if necessary', function(done) {
-        var apiResponseWithNextPageToken = extend({}, apiResponse, {
+        const apiResponseWithNextPageToken = extend({}, apiResponse, {
           nextPageToken: 'next-page-token',
         });
 
-        var query = {a: 'b', c: 'd'};
-        var originalQuery = extend({}, query);
+        const query = {a: 'b', c: 'd'};
+        const originalQuery = extend({}, query);
 
         compute.request = function(reqOpts, callback) {
           callback(null, apiResponseWithNextPageToken);
@@ -2286,7 +2287,7 @@ describe('Compute', function() {
     });
 
     it('should make the correct API request', function(done) {
-      var options = {};
+      const options = {};
 
       compute.request = function(reqOpts) {
         assert.strictEqual(reqOpts.uri, '/regions');
@@ -2298,8 +2299,8 @@ describe('Compute', function() {
     });
 
     describe('error', function() {
-      var error = new Error('Error.');
-      var apiResponse = {a: 'b', c: 'd'};
+      const error = new Error('Error.');
+      const apiResponse = {a: 'b', c: 'd'};
 
       beforeEach(function() {
         compute.request = function(reqOpts, callback) {
@@ -2320,8 +2321,8 @@ describe('Compute', function() {
     });
 
     describe('success', function() {
-      var region = {name: 'region-1'};
-      var apiResponse = {
+      const region = {name: 'region-1'};
+      const apiResponse = {
         items: [region],
       };
 
@@ -2342,12 +2343,12 @@ describe('Compute', function() {
       });
 
       it('should build a nextQuery if necessary', function(done) {
-        var apiResponseWithNextPageToken = extend({}, apiResponse, {
+        const apiResponseWithNextPageToken = extend({}, apiResponse, {
           nextPageToken: 'next-page-token',
         });
 
-        var query = {a: 'b', c: 'd'};
-        var originalQuery = extend({}, query);
+        const query = {a: 'b', c: 'd'};
+        const originalQuery = extend({}, query);
 
         compute.request = function(reqOpts, callback) {
           callback(null, apiResponseWithNextPageToken);
@@ -2382,7 +2383,7 @@ describe('Compute', function() {
     });
 
     it('should make the correct API request', function(done) {
-      var options = {};
+      const options = {};
 
       compute.request = function(reqOpts) {
         assert.strictEqual(reqOpts.uri, '/global/forwardingRules');
@@ -2394,8 +2395,8 @@ describe('Compute', function() {
     });
 
     describe('error', function() {
-      var error = new Error('Error.');
-      var apiResponse = {a: 'b', c: 'd'};
+      const error = new Error('Error.');
+      const apiResponse = {a: 'b', c: 'd'};
 
       beforeEach(function() {
         compute.request = function(reqOpts, callback) {
@@ -2416,10 +2417,10 @@ describe('Compute', function() {
     });
 
     describe('success', function() {
-      var rule = {
+      const rule = {
         name: 'rule-1',
       };
-      var apiResponse = {
+      const apiResponse = {
         items: [rule],
       };
 
@@ -2443,15 +2444,15 @@ describe('Compute', function() {
       });
 
       it('should build a nextQuery if necessary', function(done) {
-        var apiResponseWithNextPageToken = extend({}, apiResponse, {
+        const apiResponseWithNextPageToken = extend({}, apiResponse, {
           nextPageToken: 'next-page-token',
         });
 
-        var query = {
+        const query = {
           a: 'b',
           c: 'd',
         };
-        var originalQuery = extend({}, query);
+        const originalQuery = extend({}, query);
 
         compute.request = function(reqOpts, callback) {
           callback(null, apiResponseWithNextPageToken);
@@ -2486,7 +2487,7 @@ describe('Compute', function() {
     });
 
     it('should make the correct API request', function(done) {
-      var options = {};
+      const options = {};
 
       compute.request = function(reqOpts) {
         assert.strictEqual(reqOpts.uri, '/global/backendServices');
@@ -2498,8 +2499,8 @@ describe('Compute', function() {
     });
 
     describe('error', function() {
-      var error = new Error('Error.');
-      var apiResponse = {a: 'b', c: 'd'};
+      const error = new Error('Error.');
+      const apiResponse = {a: 'b', c: 'd'};
 
       beforeEach(function() {
         compute.request = function(reqOpts, callback) {
@@ -2520,10 +2521,10 @@ describe('Compute', function() {
     });
 
     describe('success', function() {
-      var service = {
+      const service = {
         name: 'service-1',
       };
-      var apiResponse = {
+      const apiResponse = {
         items: [service],
       };
 
@@ -2544,15 +2545,15 @@ describe('Compute', function() {
       });
 
       it('should build a nextQuery if necessary', function(done) {
-        var apiResponseWithNextPageToken = extend({}, apiResponse, {
+        const apiResponseWithNextPageToken = extend({}, apiResponse, {
           nextPageToken: 'next-page-token',
         });
 
-        var query = {
+        const query = {
           a: 'b',
           c: 'd',
         };
-        var originalQuery = extend({}, query);
+        const originalQuery = extend({}, query);
 
         compute.request = function(reqOpts, callback) {
           callback(null, apiResponseWithNextPageToken);
@@ -2587,7 +2588,7 @@ describe('Compute', function() {
     });
 
     it('should make the correct API request', function(done) {
-      var options = {};
+      const options = {};
 
       compute.request = function(reqOpts) {
         assert.strictEqual(reqOpts.uri, '/global/snapshots');
@@ -2599,8 +2600,8 @@ describe('Compute', function() {
     });
 
     describe('error', function() {
-      var error = new Error('Error.');
-      var apiResponse = {a: 'b', c: 'd'};
+      const error = new Error('Error.');
+      const apiResponse = {a: 'b', c: 'd'};
 
       beforeEach(function() {
         compute.request = function(reqOpts, callback) {
@@ -2621,8 +2622,8 @@ describe('Compute', function() {
     });
 
     describe('success', function() {
-      var snapshot = {name: 'snapshot-1'};
-      var apiResponse = {
+      const snapshot = {name: 'snapshot-1'};
+      const apiResponse = {
         items: [snapshot],
       };
 
@@ -2643,12 +2644,12 @@ describe('Compute', function() {
       });
 
       it('should build a nextQuery if necessary', function(done) {
-        var apiResponseWithNextPageToken = extend({}, apiResponse, {
+        const apiResponseWithNextPageToken = extend({}, apiResponse, {
           nextPageToken: 'next-page-token',
         });
 
-        var query = {a: 'b', c: 'd'};
-        var originalQuery = extend({}, query);
+        const query = {a: 'b', c: 'd'};
+        const originalQuery = extend({}, query);
 
         compute.request = function(reqOpts, callback) {
           callback(null, apiResponseWithNextPageToken);
@@ -2683,7 +2684,7 @@ describe('Compute', function() {
     });
 
     it('should make the correct API request', function(done) {
-      var options = {};
+      const options = {};
 
       compute.request = function(reqOpts) {
         assert.strictEqual(reqOpts.uri, '/aggregated/subnetworks');
@@ -2695,8 +2696,8 @@ describe('Compute', function() {
     });
 
     describe('error', function() {
-      var error = new Error('Error.');
-      var apiResponse = {a: 'b', c: 'd'};
+      const error = new Error('Error.');
+      const apiResponse = {a: 'b', c: 'd'};
 
       beforeEach(function() {
         compute.request = function(reqOpts, callback) {
@@ -2717,11 +2718,11 @@ describe('Compute', function() {
     });
 
     describe('success', function() {
-      var REGION_NAME = 'region-1';
-      var FULL_REGION_NAME = 'regions/' + REGION_NAME;
+      const REGION_NAME = 'region-1';
+      const FULL_REGION_NAME = 'regions/' + REGION_NAME;
 
-      var subnetwork = {name: 'subnetwork-1'};
-      var apiResponse = {
+      const subnetwork = {name: 'subnetwork-1'};
+      const apiResponse = {
         items: {},
       };
 
@@ -2736,8 +2737,8 @@ describe('Compute', function() {
       });
 
       it('should create Subnetwork objects from the response', function(done) {
-        var region = {};
-        var fakeSubnetwork = {};
+        const region = {};
+        const fakeSubnetwork = {};
 
         compute.region = function(name) {
           assert.strictEqual(name, REGION_NAME);
@@ -2763,12 +2764,12 @@ describe('Compute', function() {
       });
 
       it('should build a nextQuery if necessary', function(done) {
-        var apiResponseWithNextPageToken = extend({}, apiResponse, {
+        const apiResponseWithNextPageToken = extend({}, apiResponse, {
           nextPageToken: 'next-page-token',
         });
 
-        var query = {a: 'b', c: 'd'};
-        var originalQuery = extend({}, query);
+        const query = {a: 'b', c: 'd'};
+        const originalQuery = extend({}, query);
 
         compute.request = function(reqOpts, callback) {
           callback(null, apiResponseWithNextPageToken);
@@ -2803,7 +2804,7 @@ describe('Compute', function() {
     });
 
     it('should make the correct API request', function(done) {
-      var options = {};
+      const options = {};
 
       compute.request = function(reqOpts) {
         assert.strictEqual(reqOpts.uri, '/aggregated/instances');
@@ -2815,8 +2816,8 @@ describe('Compute', function() {
     });
 
     describe('error', function() {
-      var error = new Error('Error.');
-      var apiResponse = {a: 'b', c: 'd'};
+      const error = new Error('Error.');
+      const apiResponse = {a: 'b', c: 'd'};
 
       beforeEach(function() {
         compute.request = function(reqOpts, callback) {
@@ -2837,11 +2838,11 @@ describe('Compute', function() {
     });
 
     describe('success', function() {
-      var ZONE_NAME = 'zone-1';
-      var FULL_ZONE_NAME = 'zones/' + ZONE_NAME;
+      const ZONE_NAME = 'zone-1';
+      const FULL_ZONE_NAME = 'zones/' + ZONE_NAME;
 
-      var vm = {name: 'vm-1'};
-      var apiResponse = {
+      const vm = {name: 'vm-1'};
+      const apiResponse = {
         items: {},
       };
 
@@ -2856,7 +2857,7 @@ describe('Compute', function() {
       });
 
       it('should create VM objects from the response', function(done) {
-        var zone = {};
+        const zone = {};
 
         compute.zone = function(name) {
           assert.strictEqual(name, ZONE_NAME);
@@ -2873,12 +2874,12 @@ describe('Compute', function() {
       });
 
       it('should build a nextQuery if necessary', function(done) {
-        var apiResponseWithNextPageToken = extend({}, apiResponse, {
+        const apiResponseWithNextPageToken = extend({}, apiResponse, {
           nextPageToken: 'next-page-token',
         });
 
-        var query = {a: 'b', c: 'd'};
-        var originalQuery = extend({}, query);
+        const query = {a: 'b', c: 'd'};
+        const originalQuery = extend({}, query);
 
         compute.request = function(reqOpts, callback) {
           callback(null, apiResponseWithNextPageToken);
@@ -2913,7 +2914,7 @@ describe('Compute', function() {
     });
 
     it('should make the correct API request', function(done) {
-      var options = {};
+      const options = {};
 
       compute.request = function(reqOpts) {
         assert.strictEqual(reqOpts.uri, '/zones');
@@ -2925,8 +2926,8 @@ describe('Compute', function() {
     });
 
     describe('error', function() {
-      var error = new Error('Error.');
-      var apiResponse = {a: 'b', c: 'd'};
+      const error = new Error('Error.');
+      const apiResponse = {a: 'b', c: 'd'};
 
       beforeEach(function() {
         compute.request = function(reqOpts, callback) {
@@ -2947,8 +2948,8 @@ describe('Compute', function() {
     });
 
     describe('success', function() {
-      var zone = {name: 'zone-1'};
-      var apiResponse = {
+      const zone = {name: 'zone-1'};
+      const apiResponse = {
         items: [zone],
       };
 
@@ -2969,12 +2970,12 @@ describe('Compute', function() {
       });
 
       it('should build a nextQuery if necessary', function(done) {
-        var apiResponseWithNextPageToken = extend({}, apiResponse, {
+        const apiResponseWithNextPageToken = extend({}, apiResponse, {
           nextPageToken: 'next-page-token',
         });
 
-        var query = {a: 'b', c: 'd'};
-        var originalQuery = extend({}, query);
+        const query = {a: 'b', c: 'd'};
+        const originalQuery = extend({}, query);
 
         compute.request = function(reqOpts, callback) {
           callback(null, apiResponseWithNextPageToken);
@@ -2999,11 +3000,11 @@ describe('Compute', function() {
   });
 
   describe('healthCheck', function() {
-    var NAME = 'health-check-name';
-    var OPTIONS = {};
+    const NAME = 'health-check-name';
+    const OPTIONS = {};
 
     it('should return a HealthCheck object', function() {
-      var healthCheck = compute.healthCheck(NAME, OPTIONS);
+      const healthCheck = compute.healthCheck(NAME, OPTIONS);
       assert(healthCheck instanceof FakeHealthCheck);
       assert.strictEqual(healthCheck.calledWith_[0], compute);
       assert.strictEqual(healthCheck.calledWith_[1], NAME);
@@ -3012,10 +3013,10 @@ describe('Compute', function() {
   });
 
   describe('image', function() {
-    var NAME = 'image-name';
+    const NAME = 'image-name';
 
     it('should return an Image object', function() {
-      var image = compute.image(NAME);
+      const image = compute.image(NAME);
       assert(image instanceof FakeImage);
       assert.strictEqual(image.calledWith_[0], compute);
       assert.strictEqual(image.calledWith_[1], NAME);
@@ -3023,10 +3024,10 @@ describe('Compute', function() {
   });
 
   describe('network', function() {
-    var NAME = 'network-name';
+    const NAME = 'network-name';
 
     it('should return a Network object', function() {
-      var network = compute.network(NAME);
+      const network = compute.network(NAME);
       assert(network instanceof FakeNetwork);
       assert.strictEqual(network.calledWith_[0], compute);
       assert.strictEqual(network.calledWith_[1], NAME);
@@ -3034,10 +3035,10 @@ describe('Compute', function() {
   });
 
   describe('operation', function() {
-    var NAME = 'op-name';
+    const NAME = 'op-name';
 
     it('should return an Operation object', function() {
-      var op = compute.operation(NAME);
+      const op = compute.operation(NAME);
       assert(op instanceof FakeOperation);
       assert.strictEqual(op.calledWith_[0], compute);
       assert.strictEqual(op.calledWith_[1], NAME);
@@ -3046,17 +3047,17 @@ describe('Compute', function() {
 
   describe('project', function() {
     it('should return a Project object', function() {
-      var project = compute.project();
+      const project = compute.project();
       assert(project instanceof FakeProject);
       assert.strictEqual(project.calledWith_[0], compute);
     });
   });
 
   describe('region', function() {
-    var NAME = 'region-name';
+    const NAME = 'region-name';
 
     it('should return a Region object', function() {
-      var region = compute.region(NAME);
+      const region = compute.region(NAME);
       assert(region instanceof FakeRegion);
       assert.strictEqual(region.calledWith_[0], compute);
       assert.strictEqual(region.calledWith_[1], NAME);
@@ -3064,10 +3065,10 @@ describe('Compute', function() {
   });
 
   describe('rule', function() {
-    var NAME = 'rule-name';
+    const NAME = 'rule-name';
 
     it('should return a Rule object', function() {
-      var rule = compute.rule(NAME);
+      const rule = compute.rule(NAME);
       assert(rule instanceof FakeRule);
       assert.strictEqual(rule.calledWith_[0], compute);
       assert.strictEqual(rule.calledWith_[1], NAME);
@@ -3075,10 +3076,10 @@ describe('Compute', function() {
   });
 
   describe('service', function() {
-    var NAME = 'service-name';
+    const NAME = 'service-name';
 
     it('should return a Service object', function() {
-      var service = compute.service(NAME);
+      const service = compute.service(NAME);
       assert(service instanceof FakeServiceClass);
       assert.strictEqual(service.calledWith_[0], compute);
       assert.strictEqual(service.calledWith_[1], NAME);
@@ -3086,10 +3087,10 @@ describe('Compute', function() {
   });
 
   describe('snapshot', function() {
-    var NAME = 'snapshot-name';
+    const NAME = 'snapshot-name';
 
     it('should return a Snapshot object', function() {
-      var snapshot = compute.snapshot(NAME);
+      const snapshot = compute.snapshot(NAME);
       assert(snapshot instanceof FakeSnapshot);
       assert.strictEqual(snapshot.calledWith_[0], compute);
       assert.strictEqual(snapshot.calledWith_[1], NAME);
@@ -3097,10 +3098,10 @@ describe('Compute', function() {
   });
 
   describe('zone', function() {
-    var NAME = 'zone-name';
+    const NAME = 'zone-name';
 
     it('should return a Zone object', function() {
-      var zone = compute.zone(NAME);
+      const zone = compute.zone(NAME);
       assert(zone instanceof FakeZone);
       assert.strictEqual(zone.calledWith_[0], compute);
       assert.strictEqual(zone.calledWith_[1], NAME);
@@ -3108,11 +3109,11 @@ describe('Compute', function() {
   });
 
   describe('execAfterOperation_', function() {
-    var OPERATION = new events.EventEmitter();
+    const OPERATION = new events.EventEmitter();
 
     it('should execute callback with error & API response', function(done) {
-      var error = new Error('Error.');
-      var apiResponse = {};
+      const error = new Error('Error.');
+      const apiResponse = {};
 
       function onComplete(err, apiResponse_) {
         assert.strictEqual(err, error);
@@ -3120,14 +3121,14 @@ describe('Compute', function() {
         done();
       }
 
-      var execWithOperation = compute.execAfterOperation_(onComplete);
+      const execWithOperation = compute.execAfterOperation_(onComplete);
 
       execWithOperation(error, OPERATION, apiResponse);
     });
 
     it('should support variable arity', function(done) {
-      var error = new Error('Error.');
-      var apiResponse = {};
+      const error = new Error('Error.');
+      const apiResponse = {};
 
       function onComplete(err, apiResponse_) {
         assert.strictEqual(err, error);
@@ -3135,13 +3136,13 @@ describe('Compute', function() {
         done();
       }
 
-      var execWithOperation = compute.execAfterOperation_(onComplete);
+      const execWithOperation = compute.execAfterOperation_(onComplete);
 
       execWithOperation(error, null, null, OPERATION, apiResponse);
     });
 
     it('should register callback on operation error', function(done) {
-      var apiResponse = {};
+      const apiResponse = {};
 
       function onComplete() {}
 
@@ -3151,12 +3152,12 @@ describe('Compute', function() {
         done();
       });
 
-      var execWithOperation = compute.execAfterOperation_(onComplete);
+      const execWithOperation = compute.execAfterOperation_(onComplete);
       execWithOperation(null, OPERATION, apiResponse);
     });
 
     it('should execute callback on operation complete', function(done) {
-      var apiResponse = {};
+      const apiResponse = {};
 
       function onComplete(err, apiResponse_) {
         assert.strictEqual(err, null);
@@ -3164,7 +3165,7 @@ describe('Compute', function() {
         done();
       }
 
-      var execWithOperation = compute.execAfterOperation_(onComplete);
+      const execWithOperation = compute.execAfterOperation_(onComplete);
       execWithOperation(null, OPERATION, {});
 
       OPERATION.emit('complete', apiResponse);

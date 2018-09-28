@@ -16,8 +16,8 @@
 
 'use strict';
 
-var common = require('@google-cloud/common');
-var util = require('util');
+const common = require('@google-cloud/common');
+const util = require('util');
 
 /**
  * A Project object allows you to interact with your Google Compute Engine
@@ -41,7 +41,7 @@ function Project(compute) {
    */
   this.id = compute.projectId;
 
-  var methods = {
+  const methods = {
     /**
      * Get a Project object.
      *
@@ -90,8 +90,8 @@ function Project(compute) {
      * // If the callback is omitted, we'll return a Promise.
      * //-
      * project.getMetadata().then(function(data) {
-     *   var metadata = data[0];
-     *   var apiResponse = data[1];
+     *   const metadata = data[0];
+     *   const apiResponse = data[1];
      * });
      */
     getMetadata: true,

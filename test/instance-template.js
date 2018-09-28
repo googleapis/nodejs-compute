@@ -16,15 +16,15 @@
 
 'use strict';
 
-var assert = require('assert');
-var extend = require('extend');
-var nodeutil = require('util');
-var proxyquire = require('proxyquire');
-var ServiceObject = require('@google-cloud/common').ServiceObject;
-var util = require('@google-cloud/common').util;
+const assert = require('assert');
+const extend = require('extend');
+const nodeutil = require('util');
+const proxyquire = require('proxyquire');
+const ServiceObject = require('@google-cloud/common').ServiceObject;
+const util = require('@google-cloud/common').util;
 
-var promisified = false;
-var fakeUtil = extend({}, util, {
+let promisified = false;
+const fakeUtil = extend({}, util, {
   promisifyAll: function(Class) {
     if (Class.name === 'InstanceTemplate') {
       promisified = true;
@@ -40,15 +40,15 @@ function FakeServiceObject() {
 nodeutil.inherits(FakeServiceObject, ServiceObject);
 
 describe('InstanceTemplate', function() {
-  var InstanceTemplate;
-  var instanceTemplate;
+  let InstanceTemplate;
+  let instanceTemplate;
 
-  var COMPUTE = {
+  const COMPUTE = {
     projectId: 'project-id',
     createInstanceTemplate: util.noop,
     operation: util.noop,
   };
-  var INSTANCE_TEMPLATE_NAME = 'my-instance-template';
+  const INSTANCE_TEMPLATE_NAME = 'my-instance-template';
 
   before(function() {
     InstanceTemplate = proxyquire('../src/instance-template.js', {
@@ -74,13 +74,13 @@ describe('InstanceTemplate', function() {
     });
 
     it('should inherit from ServiceObject', function(done) {
-      var instanceTemplate = new InstanceTemplate(
+      const instanceTemplate = new InstanceTemplate(
         COMPUTE,
         INSTANCE_TEMPLATE_NAME
       );
       assert(instanceTemplate instanceof ServiceObject);
 
-      var calledWith = instanceTemplate.calledWith_[0];
+      const calledWith = instanceTemplate.calledWith_[0];
 
       assert.strictEqual(calledWith.parent, COMPUTE);
       assert.strictEqual(calledWith.baseUrl, '/global/instanceTemplates');
@@ -106,8 +106,8 @@ describe('InstanceTemplate', function() {
     });
 
     describe('error', function() {
-      var error = new Error('Error.');
-      var apiResponse = {a: 'b', c: 'd'};
+      const error = new Error('Error.');
+      const apiResponse = {a: 'b', c: 'd'};
 
       beforeEach(function() {
         FakeServiceObject.prototype.delete = function(callback) {
@@ -132,7 +132,7 @@ describe('InstanceTemplate', function() {
     });
 
     describe('success', function() {
-      var apiResponse = {
+      const apiResponse = {
         name: 'op-name',
       };
 
@@ -143,7 +143,7 @@ describe('InstanceTemplate', function() {
       });
 
       it('should execute callback with Operation & Response', function(done) {
-        var operation = {};
+        const operation = {};
 
         instanceTemplate.compute.operation = function(name) {
           assert.strictEqual(name, apiResponse.name);

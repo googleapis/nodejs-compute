@@ -16,16 +16,16 @@
 
 'use strict';
 
-var assert = require('assert');
-var extend = require('extend');
-var format = require('string-format-obj');
-var nodeutil = require('util');
-var proxyquire = require('proxyquire');
-var ServiceObject = require('@google-cloud/common').ServiceObject;
-var util = require('@google-cloud/common').util;
+const assert = require('assert');
+const extend = require('extend');
+const format = require('string-format-obj');
+const nodeutil = require('util');
+const proxyquire = require('proxyquire');
+const ServiceObject = require('@google-cloud/common').ServiceObject;
+const util = require('@google-cloud/common').util;
 
-var promisified = false;
-var fakeUtil = extend({}, util, {
+let promisified = false;
+const fakeUtil = extend({}, util, {
   promisifyAll: function(Class, options) {
     if (Class.name !== 'Network') {
       return;
@@ -44,23 +44,23 @@ function FakeServiceObject() {
 nodeutil.inherits(FakeServiceObject, ServiceObject);
 
 describe('Network', function() {
-  var Network;
-  var network;
+  let Network;
+  let network;
 
   /* eslint-disable no-unused-vars */
-  var REGION;
-  var Region;
+  let REGION;
+  let Region;
 
-  var COMPUTE = {
+  const COMPUTE = {
     projectId: 'project-id',
     createNetwork: util.noop,
   };
-  var NETWORK_NAME = 'network-name';
-  var NETWORK_FULL_NAME = format('projects/{pId}/global/networks/{name}', {
+  const NETWORK_NAME = 'network-name';
+  const NETWORK_FULL_NAME = format('projects/{pId}/global/networks/{name}', {
     pId: COMPUTE.projectId,
     name: NETWORK_NAME,
   });
-  var REGION_NAME = 'region-name';
+  const REGION_NAME = 'region-name';
 
   before(function() {
     Network = proxyquire('../src/network.js', {
@@ -92,8 +92,8 @@ describe('Network', function() {
     });
 
     it('should format the network name', function() {
-      var formatName_ = Network.formatName_;
-      var formattedName = 'projects/a/global/networks/b';
+      const formatName_ = Network.formatName_;
+      const formattedName = 'projects/a/global/networks/b';
 
       Network.formatName_ = function(compute, name) {
         Network.formatName_ = formatName_;
@@ -104,12 +104,12 @@ describe('Network', function() {
         return formattedName;
       };
 
-      var network = new Network(COMPUTE, NETWORK_NAME);
+      const network = new Network(COMPUTE, NETWORK_NAME);
       assert(network.formattedName, formattedName);
     });
 
     it('should inherit from ServiceObject', function(done) {
-      var computeInstance = extend({}, COMPUTE, {
+      const computeInstance = extend({}, COMPUTE, {
         createNetwork: {
           bind: function(context) {
             assert.strictEqual(context, computeInstance);
@@ -118,10 +118,10 @@ describe('Network', function() {
         },
       });
 
-      var network = new Network(computeInstance, NETWORK_NAME);
+      const network = new Network(computeInstance, NETWORK_NAME);
       assert(network instanceof ServiceObject);
 
-      var calledWith = network.calledWith_[0];
+      const calledWith = network.calledWith_[0];
 
       assert.strictEqual(calledWith.parent, computeInstance);
       assert.strictEqual(calledWith.baseUrl, '/global/networks');
@@ -137,16 +137,16 @@ describe('Network', function() {
 
   describe('formatName_', function() {
     it('should format the name', function() {
-      var formattedName_ = Network.formatName_(COMPUTE, NETWORK_NAME);
+      const formattedName_ = Network.formatName_(COMPUTE, NETWORK_NAME);
       assert.strictEqual(formattedName_, NETWORK_FULL_NAME);
     });
   });
 
   describe('createFirewall', function() {
     it('should make the correct call to Compute', function(done) {
-      var name = 'firewall-name';
-      var config = {a: 'b', c: 'd'};
-      var expectedConfig = extend({}, config, {
+      const name = 'firewall-name';
+      const config = {a: 'b', c: 'd'};
+      const expectedConfig = extend({}, config, {
         network: network.formattedName,
       });
 
@@ -162,15 +162,15 @@ describe('Network', function() {
 
   describe('createSubnetwork', function() {
     it('should call region.createSubnetwork correctly', function(done) {
-      var name = 'subnetwork-name';
-      var region = {};
-      var config = {
+      const name = 'subnetwork-name';
+      const region = {};
+      const config = {
         a: 'b',
         c: 'd',
         region: REGION_NAME,
       };
 
-      var expectedConfig = extend({}, config, {
+      const expectedConfig = extend({}, config, {
         network: network.formattedName,
       });
       delete expectedConfig.region;
@@ -202,8 +202,8 @@ describe('Network', function() {
     });
 
     describe('error', function() {
-      var error = new Error('Error.');
-      var apiResponse = {a: 'b', c: 'd'};
+      const error = new Error('Error.');
+      const apiResponse = {a: 'b', c: 'd'};
 
       beforeEach(function() {
         FakeServiceObject.prototype.delete = function(callback) {
@@ -228,7 +228,7 @@ describe('Network', function() {
     });
 
     describe('success', function() {
-      var apiResponse = {
+      const apiResponse = {
         name: 'op-name',
       };
 
@@ -239,7 +239,7 @@ describe('Network', function() {
       });
 
       it('should execute callback with Operation & Response', function(done) {
-        var operation = {};
+        const operation = {};
 
         network.compute.operation = function(name) {
           assert.strictEqual(name, apiResponse.name);
@@ -265,15 +265,15 @@ describe('Network', function() {
 
   describe('firewall', function() {
     it('should return a Firewall with the correct metadata', function() {
-      var name = 'firewall-name';
-      var firewall = {};
+      const name = 'firewall-name';
+      const firewall = {};
 
       network.compute.firewall = function(name_) {
         assert.strictEqual(name_, name);
         return firewall;
       };
 
-      var firewallInstance = network.firewall(name);
+      const firewallInstance = network.firewall(name);
       assert.deepStrictEqual(firewallInstance.metadata, {
         network: network.formattedName,
       });
@@ -282,8 +282,8 @@ describe('Network', function() {
 
   describe('getFirewalls', function() {
     it('should make the correct call to Compute', function(done) {
-      var options = {a: 'b', c: 'd'};
-      var expectedOptions = extend({}, options, {
+      const options = {a: 'b', c: 'd'};
+      const expectedOptions = extend({}, options, {
         filter: 'network eq .*' + network.formattedName,
       });
 
@@ -306,8 +306,8 @@ describe('Network', function() {
 
   describe('getFirewallsStream', function() {
     it('should call to getFirewallsStream correctly', function(done) {
-      var options = {a: 'b', c: 'd'};
-      var expectedOptions = extend({}, options, {
+      const options = {a: 'b', c: 'd'};
+      const expectedOptions = extend({}, options, {
         filter: 'network eq .*' + network.formattedName,
       });
 
@@ -328,22 +328,22 @@ describe('Network', function() {
     });
 
     it('should return a stream', function(done) {
-      var fakeStream = {};
+      const fakeStream = {};
 
       network.compute.getFirewallsStream = function() {
         setImmediate(done);
         return fakeStream;
       };
 
-      var stream = network.getFirewallsStream();
+      const stream = network.getFirewallsStream();
       assert.strictEqual(stream, fakeStream);
     });
   });
 
   describe('getSubnetworks', function() {
     it('should call to compute.getSubnetworks correctly', function(done) {
-      var options = {a: 'b', c: 'd'};
-      var expectedOptions = extend({}, options, {
+      const options = {a: 'b', c: 'd'};
+      const expectedOptions = extend({}, options, {
         filter: 'network eq .*' + network.formattedName,
       });
 
@@ -366,8 +366,8 @@ describe('Network', function() {
 
   describe('getSubnetworksStream', function() {
     it('should call to getSubnetworksStream correctly', function(done) {
-      var options = {a: 'b', c: 'd'};
-      var expectedOptions = extend({}, options, {
+      const options = {a: 'b', c: 'd'};
+      const expectedOptions = extend({}, options, {
         filter: 'network eq .*' + network.formattedName,
       });
 
@@ -388,14 +388,14 @@ describe('Network', function() {
     });
 
     it('should return a stream', function(done) {
-      var fakeStream = {};
+      const fakeStream = {};
 
       network.compute.getSubnetworksStream = function() {
         setImmediate(done);
         return fakeStream;
       };
 
-      var stream = network.getSubnetworksStream();
+      const stream = network.getSubnetworksStream();
       assert.strictEqual(stream, fakeStream);
     });
   });

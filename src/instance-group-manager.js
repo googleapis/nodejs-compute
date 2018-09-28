@@ -16,11 +16,11 @@
 
 'use strict';
 
-var arrify = require('arrify');
-var common = require('@google-cloud/common');
-var extend = require('extend');
-var is = require('is');
-var util = require('util');
+const arrify = require('arrify');
+const common = require('@google-cloud/common');
+const extend = require('extend');
+const is = require('is');
+const util = require('util');
 
 /**
  * @class
@@ -34,7 +34,7 @@ var util = require('util');
  * const instanceGroupManager = zone.instanceGroupManager('web-servers');
  */
 function InstanceGroupManager(zone, name) {
-  var methods = {
+  const methods = {
     /**
      * Create an instance group manager.
      *
@@ -213,7 +213,7 @@ util.inherits(InstanceGroupManager, common.ServiceObject);
  * });
  */
 InstanceGroupManager.prototype.delete = function(callback) {
-  var self = this;
+  const self = this;
 
   callback = callback || common.util.noop;
 
@@ -223,7 +223,7 @@ InstanceGroupManager.prototype.delete = function(callback) {
       return;
     }
 
-    var operation = self.zone.operation(resp.name);
+    let operation = self.zone.operation(resp.name);
     operation.metadata = resp;
 
     callback(null, operation, resp);
@@ -289,7 +289,7 @@ InstanceGroupManager.prototype.delete = function(callback) {
  * });
  */
 InstanceGroupManager.prototype.getVMs = function(options, callback) {
-  var self = this;
+  const self = this;
 
   if (is.fn(options)) {
     callback = options;
@@ -298,7 +298,7 @@ InstanceGroupManager.prototype.getVMs = function(options, callback) {
 
   options = options || {};
 
-  var body;
+  let body = null;
 
   if (options.running) {
     body = {
@@ -319,7 +319,7 @@ InstanceGroupManager.prototype.getVMs = function(options, callback) {
         return;
       }
 
-      var nextQuery = null;
+      let nextQuery = null;
 
       if (resp.nextPageToken) {
         nextQuery = extend({}, options, {
@@ -327,8 +327,8 @@ InstanceGroupManager.prototype.getVMs = function(options, callback) {
         });
       }
 
-      var vms = arrify(resp.items).map(function(vm) {
-        var vmInstance = self.zone.vm(vm.instance);
+      const vms = arrify(resp.items).map(function(vm) {
+        const vmInstance = self.zone.vm(vm.instance);
         vmInstance.metadata = vm;
         return vmInstance;
       });
@@ -408,7 +408,7 @@ InstanceGroupManager.prototype.getVMsStream = common.paginator.streamify(
  * });
  */
 InstanceGroupManager.prototype.recreateVMs = function(instances, callback) {
-  var self = this;
+  const self = this;
 
   this.request(
     {
@@ -429,7 +429,7 @@ InstanceGroupManager.prototype.recreateVMs = function(instances, callback) {
         return;
       }
 
-      var operation = self.zone.operation(resp.name);
+      const operation = self.zone.operation(resp.name);
       operation.metadata = resp;
 
       callback(err, operation, resp);
@@ -470,7 +470,7 @@ InstanceGroupManager.prototype.recreateVMs = function(instances, callback) {
  * });
  */
 InstanceGroupManager.prototype.removeVMs = function(instances, callback) {
-  var self = this;
+  const self = this;
 
   this.request(
     {
@@ -491,7 +491,7 @@ InstanceGroupManager.prototype.removeVMs = function(instances, callback) {
         return;
       }
 
-      var operation = self.zone.operation(resp.name);
+      const operation = self.zone.operation(resp.name);
       operation.metadata = resp;
 
       callback(err, operation, resp);
@@ -532,7 +532,7 @@ InstanceGroupManager.prototype.removeVMs = function(instances, callback) {
  * });
  */
 InstanceGroupManager.prototype.resize = function(size, callback) {
-  var self = this;
+  const self = this;
 
   callback = callback || common.util.noop;
 
@@ -550,7 +550,7 @@ InstanceGroupManager.prototype.resize = function(size, callback) {
         return;
       }
 
-      var operation = self.zone.operation(resp.name);
+      const operation = self.zone.operation(resp.name);
       operation.metadata = resp;
 
       callback(null, operation, resp);
@@ -559,7 +559,7 @@ InstanceGroupManager.prototype.resize = function(size, callback) {
 };
 
 InstanceGroupManager.prototype.setInstanceTemplate = function(instanceTemplate, callback) {
-  var self = this;
+  const self = this;
 
   callback = callback || common.util.noop;
 
@@ -594,7 +594,7 @@ InstanceGroupManager.prototype.setInstanceTemplate = function(instanceTemplate, 
         return;
       }
 
-      var operation = self.zone.operation(resp.name);
+      const operation = self.zone.operation(resp.name);
       operation.metadata = resp;
 
       callback(null, operation, resp);
