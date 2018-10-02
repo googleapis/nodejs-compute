@@ -227,7 +227,8 @@ function VM(zone, name) {
      * // If the callback is omitted, we'll return a Promise.
      * //-
      * vm.getMetadata().then(function(data) {
-     *   const metadata = data[0];
+     *   const operation = data[0];
+     *   const metadata = operation.metadata;
      *   const apiResponse = data[1];
      * });
      */
