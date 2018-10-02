@@ -776,7 +776,7 @@ describe('VM', function() {
             });
 
             vm.request = function(reqOpts, callback) {
-              assert.strictEqual(reqOpts.method, 'POST');
+              assert.strictEqual(reqOpts.method, 'PATCH');
               assert.strictEqual(reqOpts.uri, '/setMetadata');
               assert.deepStrictEqual(reqOpts.json, expectedNewMetadata);
 

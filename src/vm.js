@@ -725,7 +725,9 @@ VM.prototype.resize = function(machineType, options, callback) {
 };
 
 /**
- * Set the metadata for this instance.
+ * Set the custom metadata for this instance. This uses `PATCH` semantics by
+ * default, which means that values will be overwritten with the passed in
+ * metadata, but keys that were not overwritten will also exist.
  *
  * @see [Instances: setMetadata API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/instances/setMetadata}
  *
@@ -786,7 +788,7 @@ VM.prototype.setMetadata = function(metadata, callback) {
 
     self.request(
       {
-        method: 'POST',
+        method: 'PATCH',
         uri: '/setMetadata',
         json: newMetadata,
       },
