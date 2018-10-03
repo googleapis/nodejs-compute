@@ -21,6 +21,8 @@ const common = require('@google-cloud/common');
 const extend = require('extend');
 const is = require('is');
 const util = require('util');
+const {promisifyAll} = require('@google-cloud/promisify');
+const {paginator} = require('@google-cloud/paginator');
 
 /**
  * You can create and manage groups of virtual machine instances so that you
@@ -465,7 +467,7 @@ InstanceGroup.prototype.getVMs = function(options, callback) {
  *     this.end();
  *   });
  */
-InstanceGroup.prototype.getVMsStream = common.paginator.streamify('getVMs');
+InstanceGroup.prototype.getVMsStream = paginator.streamify('getVMs');
 
 /**
  * Remove one or more VMs from this instance group.
@@ -601,13 +603,13 @@ InstanceGroup.prototype.setPorts = function(ports, callback) {
  *
  * These methods can be auto-paginated.
  */
-common.paginator.extend(InstanceGroup, ['getVMs']);
+paginator.extend(InstanceGroup, ['getVMs']);
 
 /*! Developer Documentation
  *
  * All async methods (except for streams) will return a Promise in the event
  * that a callback is omitted.
  */
-common.util.promisifyAll(InstanceGroup);
+promisifyAll(InstanceGroup);
 
 module.exports = InstanceGroup;

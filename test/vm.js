@@ -20,19 +20,26 @@ const assert = require('assert');
 const extend = require('extend');
 const nodeutil = require('util');
 const proxyquire = require('proxyquire');
-const ServiceObject = require('@google-cloud/common').ServiceObject;
-const util = require('@google-cloud/common').util;
-
-const utilCached = extend({}, util);
+const {ServiceObject, util} = require('@google-cloud/common');
+const promisify = require('@google-cloud/promisify');
+const {replaceProjectIdToken} = require('@google-cloud/projectify');
 
 let promisified = false;
-const fakeUtil = extend({}, util, {
+const fakePromisify = extend({}, promisify, {
   promisifyAll: function(Class) {
     if (Class.name === 'VM') {
       promisified = true;
     }
   },
 });
+
+let replaceProjectIdTokenOverride;
+function fakeReplaceProjectIdToken() {
+  return (replaceProjectIdTokenOverride || replaceProjectIdToken).apply(
+    null,
+    arguments
+  );
+}
 
 function FakeServiceObject() {
   this.calledWith_ = arguments;
@@ -71,13 +78,16 @@ describe('VM', function() {
     VM = proxyquire('../src/vm.js', {
       '@google-cloud/common': {
         ServiceObject: FakeServiceObject,
-        util: fakeUtil,
+      },
+      '@google-cloud/promisify': fakePromisify,
+      '@google-cloud/projectify': {
+        replaceProjectIdToken: fakeReplaceProjectIdToken,
       },
     });
   });
 
   beforeEach(function() {
-    extend(fakeUtil, utilCached);
+    replaceProjectIdTokenOverride = null;
     vm = new VM(ZONE, VM_NAME);
     DISK = new Disk(ZONE, 'disk-name');
   });
@@ -275,7 +285,7 @@ describe('VM', function() {
     it('should replace projectId token in disk name', function(done) {
       const REPLACED_DEVICE_NAME = 'replaced-device-name';
 
-      fakeUtil.replaceProjectIdToken = function(value, projectId) {
+      replaceProjectIdTokenOverride = function(value, projectId) {
         assert.strictEqual(value, DISK.formattedName);
         assert.strictEqual(projectId, COMPUTE.authClient.projectId);
         return REPLACED_DEVICE_NAME;

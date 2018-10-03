@@ -22,6 +22,8 @@ const extend = require('extend');
 const format = require('string-format-obj');
 const is = require('is');
 const util = require('util');
+const {promisifyAll} = require('@google-cloud/promisify');
+const {replaceProjectIdToken} = require('@google-cloud/projectify');
 
 const Disk = require('./disk.js');
 
@@ -431,7 +433,7 @@ VM.prototype.detachDisk = function(disk, callback) {
       return;
     }
 
-    const diskName = common.util.replaceProjectIdToken(
+    const diskName = replaceProjectIdToken(
       disk.formattedName,
       self.zone.compute.authClient.projectId
     );
@@ -1116,6 +1118,6 @@ VM.prototype.request = function(reqOpts, callback) {
  * All async methods (except for streams) will return a Promise in the event
  * that a callback is omitted.
  */
-common.util.promisifyAll(VM);
+promisifyAll(VM);
 
 module.exports = VM;

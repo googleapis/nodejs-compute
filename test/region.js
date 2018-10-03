@@ -18,20 +18,19 @@
 
 const arrify = require('arrify');
 const assert = require('assert');
-const common = require('@google-cloud/common');
+const {ServiceObject} = require('@google-cloud/common');
 const extend = require('extend');
 const is = require('is');
 const nodeutil = require('util');
 const proxyquire = require('proxyquire');
-const ServiceObject = common.ServiceObject;
+const promisify = require('@google-cloud/promisify');
 
 let promisified = false;
-const fakeUtil = extend({}, common.util, {
+const fakePromisify = extend({}, promisify, {
   promisifyAll: function(Class, options) {
     if (Class.name !== 'Region') {
       return;
     }
-
     promisified = true;
     assert.deepStrictEqual(options.exclude, [
       'address',
@@ -71,23 +70,25 @@ nodeutil.inherits(FakeServiceObject, ServiceObject);
 
 let extended = false;
 const fakePaginator = {
-  extend: function(Class, methods) {
-    if (Class.name !== 'Region') {
-      return;
-    }
+  paginator: {
+    extend: function(Class, methods) {
+      if (Class.name !== 'Region') {
+        return;
+      }
 
-    extended = true;
-    methods = arrify(methods);
-    assert.strictEqual(Class.name, 'Region');
-    assert.deepStrictEqual(methods, [
-      'getAddresses',
-      'getOperations',
-      'getRules',
-      'getSubnetworks',
-    ]);
-  },
-  streamify: function(methodName) {
-    return methodName;
+      extended = true;
+      methods = arrify(methods);
+      assert.strictEqual(Class.name, 'Region');
+      assert.deepStrictEqual(methods, [
+        'getAddresses',
+        'getOperations',
+        'getRules',
+        'getSubnetworks',
+      ]);
+    },
+    streamify: function(methodName) {
+      return methodName;
+    },
   },
 };
 
@@ -104,9 +105,9 @@ describe('Region', function() {
     Region = proxyquire('../src/region.js', {
       '@google-cloud/common': {
         ServiceObject: FakeServiceObject,
-        paginator: fakePaginator,
-        util: fakeUtil,
       },
+      '@google-cloud/paginator': fakePaginator,
+      '@google-cloud/promisify': fakePromisify,
       './address.js': FakeAddress,
       './network.js': FakeNetwork,
       './operation.js': FakeOperation,

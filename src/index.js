@@ -22,6 +22,8 @@ const extend = require('extend');
 const format = require('string-format-obj');
 const is = require('is');
 const util = require('util');
+const {promisifyAll} = require('@google-cloud/promisify');
+const {paginator} = require('@google-cloud/paginator');
 
 const Firewall = require('./firewall.js');
 const HealthCheck = require('./health-check.js');
@@ -808,9 +810,7 @@ Compute.prototype.getAddresses = function(options, callback) {
  *     this.end();
  *   });
  */
-Compute.prototype.getAddressesStream = common.paginator.streamify(
-  'getAddresses'
-);
+Compute.prototype.getAddressesStream = paginator.streamify('getAddresses');
 
 /**
  * Get a list of autoscalers. For a detailed description of this method's
@@ -947,9 +947,7 @@ Compute.prototype.getAutoscalers = function(options, callback) {
  *     this.end();
  *   });
  */
-Compute.prototype.getAutoscalersStream = common.paginator.streamify(
-  'getAutoscalers'
-);
+Compute.prototype.getAutoscalersStream = paginator.streamify('getAutoscalers');
 
 /**
  * Get a list of disks.
@@ -1081,7 +1079,7 @@ Compute.prototype.getDisks = function(options, callback) {
  *   });
  */
 
-Compute.prototype.getDisksStream = common.paginator.streamify('getDisks');
+Compute.prototype.getDisksStream = paginator.streamify('getDisks');
 
 /**
  * Get a list of instance groups.
@@ -1215,7 +1213,7 @@ Compute.prototype.getInstanceGroups = function(options, callback) {
  *   });
  */
 
-Compute.prototype.getInstanceGroupsStream = common.paginator.streamify(
+Compute.prototype.getInstanceGroupsStream = paginator.streamify(
   'getInstanceGroups'
 );
 
@@ -1336,9 +1334,7 @@ Compute.prototype.getFirewalls = function(options, callback) {
  *     this.end();
  *   });
  */
-Compute.prototype.getFirewallsStream = common.paginator.streamify(
-  'getFirewalls'
-);
+Compute.prototype.getFirewallsStream = paginator.streamify('getFirewalls');
 
 /**
  * Get a list of health checks.
@@ -1466,7 +1462,7 @@ Compute.prototype.getHealthChecks = function(options, callback) {
  *     this.end();
  *   });
  */
-Compute.prototype.getHealthChecksStream = common.paginator.streamify(
+Compute.prototype.getHealthChecksStream = paginator.streamify(
   'getHealthChecks'
 );
 
@@ -1586,7 +1582,7 @@ Compute.prototype.getImages = function(options, callback) {
  *     this.end();
  *   });
  */
-Compute.prototype.getImagesStream = common.paginator.streamify('getImages');
+Compute.prototype.getImagesStream = paginator.streamify('getImages');
 
 /**
  * Get a list of machine types in this project.
@@ -1720,7 +1716,7 @@ Compute.prototype.getMachineTypes = function(options, callback) {
  *     this.end();
  *   });
  */
-Compute.prototype.getMachineTypesStream = common.paginator.streamify(
+Compute.prototype.getMachineTypesStream = paginator.streamify(
   'getMachineTypes'
 );
 
@@ -1844,7 +1840,7 @@ Compute.prototype.getNetworks = function(options, callback) {
  *     this.end();
  *   });
  */
-Compute.prototype.getNetworksStream = common.paginator.streamify('getNetworks');
+Compute.prototype.getNetworksStream = paginator.streamify('getNetworks');
 
 /**
  * Get a list of global operations.
@@ -1967,9 +1963,7 @@ Compute.prototype.getOperations = function(options, callback) {
  *     this.end();
  *   });
  */
-Compute.prototype.getOperationsStream = common.paginator.streamify(
-  'getOperations'
-);
+Compute.prototype.getOperationsStream = paginator.streamify('getOperations');
 
 /**
  * Return the regions available to your project.
@@ -2090,7 +2084,7 @@ Compute.prototype.getRegions = function(options, callback) {
  *     this.end();
  *   });
  */
-Compute.prototype.getRegionsStream = common.paginator.streamify('getRegions');
+Compute.prototype.getRegionsStream = paginator.streamify('getRegions');
 
 /**
  * Get a list of forwarding rules.
@@ -2211,7 +2205,7 @@ Compute.prototype.getRules = function(options, callback) {
  *     this.end();
  *   });
  */
-Compute.prototype.getRulesStream = common.paginator.streamify('getRules');
+Compute.prototype.getRulesStream = paginator.streamify('getRules');
 
 /**
  * Get a list of backend services.
@@ -2333,7 +2327,7 @@ Compute.prototype.getServices = function(options, callback) {
  *     this.end();
  *   });
  */
-Compute.prototype.getServicesStream = common.paginator.streamify('getServices');
+Compute.prototype.getServicesStream = paginator.streamify('getServices');
 
 /**
  * Get a list of snapshots.
@@ -2455,9 +2449,7 @@ Compute.prototype.getSnapshots = function(options, callback) {
  *     this.end();
  *   });
  */
-Compute.prototype.getSnapshotsStream = common.paginator.streamify(
-  'getSnapshots'
-);
+Compute.prototype.getSnapshotsStream = paginator.streamify('getSnapshots');
 
 /**
  * Get a list of subnetworks in this project.
@@ -2593,9 +2585,7 @@ Compute.prototype.getSubnetworks = function(options, callback) {
  *     this.end();
  *   });
  */
-Compute.prototype.getSubnetworksStream = common.paginator.streamify(
-  'getSubnetworks'
-);
+Compute.prototype.getSubnetworksStream = paginator.streamify('getSubnetworks');
 
 /**
  * Get a list of virtual machine instances.
@@ -2725,7 +2715,7 @@ Compute.prototype.getVMs = function(options, callback) {
  *     this.end();
  *   });
  */
-Compute.prototype.getVMsStream = common.paginator.streamify('getVMs');
+Compute.prototype.getVMsStream = paginator.streamify('getVMs');
 
 /**
  * Return the zones available to your project.
@@ -2846,7 +2836,7 @@ Compute.prototype.getZones = function(options, callback) {
  *     this.end();
  *   });
  */
-Compute.prototype.getZonesStream = common.paginator.streamify('getZones');
+Compute.prototype.getZonesStream = paginator.streamify('getZones');
 
 /**
  * Get a reference to a Google Compute Engine health check.
@@ -3034,7 +3024,7 @@ Compute.prototype.execAfterOperation_ = function(callback) {
  *
  * These methods can be auto-paginated.
  */
-common.paginator.extend(Compute, [
+paginator.extend(Compute, [
   'getAddresses',
   'getAutoscalers',
   'getDisks',
@@ -3059,7 +3049,7 @@ common.paginator.extend(Compute, [
  * All async methods (except for streams) will return a Promise in the event
  * that a callback is omitted.
  */
-common.util.promisifyAll(Compute, {
+promisifyAll(Compute, {
   exclude: [
     'address',
     'autoscaler',
