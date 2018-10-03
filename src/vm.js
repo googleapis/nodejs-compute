@@ -772,25 +772,33 @@ VM.prototype.setMetadata = function(metadata, callback) {
       return;
     }
 
-    const newMetadata = {
+    const request = {
       fingerprint: currentMetadata.metadata.fingerprint,
       items: [],
     };
 
-    for (const prop in metadata) {
-      if (metadata.hasOwnProperty(prop)) {
-        newMetadata.items.push({
-          key: prop,
-          value: metadata[prop],
-        });
+    const metadataJSON = (currentMetadata.metadata.items || []).reduce((metadataJSON, keyValPair) => {
+      metadataJSON[keyValPair.key] = keyValPair.value;
+      return metadataJSON;
+    }, {});
+
+    const newMetadataJSON = extend(metadataJSON, metadata);
+
+    for (const key in newMetadataJSON) {
+      if (newMetadataJSON.hasOwnProperty(key)) {
+        let value = newMetadataJSON[key];
+
+        if (value !== null) {
+          request.items.push({key, value});
+        }
       }
     }
 
     self.request(
       {
-        method: 'PATCH',
+        method: 'POST',
         uri: '/setMetadata',
-        json: newMetadata,
+        json: request,
       },
       callback
     );

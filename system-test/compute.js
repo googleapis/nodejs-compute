@@ -1394,28 +1394,45 @@ describe('Compute', function() {
       const key = 'newKey';
       const value = 'newValue';
 
-      const newMetadata = {};
-      newMetadata[key] = value;
+      async.series([
+        next => vm.setMetadata({[key]: value}, compute.execAfterOperation_(next)),
+        next => vm.getMetadata(next),
+      ], err => {
+        assert.ifError(err);
+        assert.deepStrictEqual(vm.metadata.metadata.items, [{key, value}]);
+        done();
+      });
+    });
 
-      vm.setMetadata(
-        newMetadata,
-        compute.execAfterOperation_(function(err) {
-          assert.ifError(err);
+    it('should allow updating old metadata', function(done) {
+      const key = 'newKey';
+      const value = 'newValue';
+      const overriddenValue = `${value}${value}`;
 
-          vm.getMetadata(function(err, metadata) {
-            assert.ifError(err);
+      async.series([
+        next => vm.setMetadata({[key]: value}, compute.execAfterOperation_(next)),
+        next => vm.setMetadata({[key]: overriddenValue}, compute.execAfterOperation_(next)),
+        next => vm.getMetadata(next),
+      ], err => {
+        assert.ifError(err);
+        assert.deepStrictEqual(vm.metadata.metadata.items, [{key, value: overriddenValue}]);
+        done();
+      });
+    });
 
-            assert.deepStrictEqual(metadata.metadata.items, [
-              {
-                key: key,
-                value: value,
-              },
-            ]);
+    it.only('should allow removing old metadata', function(done) {
+      const key = 'newKey';
+      const value = 'newValue';
 
-            done();
-          });
-        })
-      );
+      async.series([
+        next => vm.setMetadata({[key]: value}, compute.execAfterOperation_(next)),
+        next => vm.setMetadata({[key]: null}, compute.execAfterOperation_(next)),
+        next => vm.getMetadata(next),
+      ], err => {
+        assert.ifError(err);
+        assert.strictEqual(vm.metadata.metadata.items, undefined);
+        done();
+      });
     });
 
     it('should start', function(done) {
