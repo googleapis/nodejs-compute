@@ -21,8 +21,7 @@ const extend = require('extend');
 const format = require('string-format-obj');
 const nodeutil = require('util');
 const proxyquire = require('proxyquire');
-const {ServiceObject} = require('@google-cloud/common');
-const {util} = require('@google-cloud/common');
+const {ServiceObject, util} = require('@google-cloud/common');
 const promisify = require('@google-cloud/promisify');
 
 let promisified = false;
