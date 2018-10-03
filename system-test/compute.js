@@ -1420,7 +1420,7 @@ describe('Compute', function() {
       });
     });
 
-    it.only('should allow removing old metadata', function(done) {
+    it('should allow removing old metadata', function(done) {
       const key = 'newKey';
       const value = 'newValue';
 
