@@ -1394,14 +1394,18 @@ describe('Compute', function() {
       const key = 'newKey';
       const value = 'newValue';
 
-      async.series([
-        next => vm.setMetadata({[key]: value}, compute.execAfterOperation_(next)),
-        next => vm.getMetadata(next),
-      ], err => {
-        assert.ifError(err);
-        assert.deepStrictEqual(vm.metadata.metadata.items, [{key, value}]);
-        done();
-      });
+      async.series(
+        [
+          next =>
+            vm.setMetadata({[key]: value}, compute.execAfterOperation_(next)),
+          next => vm.getMetadata(next),
+        ],
+        err => {
+          assert.ifError(err);
+          assert.deepStrictEqual(vm.metadata.metadata.items, [{key, value}]);
+          done();
+        }
+      );
     });
 
     it('should allow updating old metadata', function(done) {
@@ -1409,30 +1413,45 @@ describe('Compute', function() {
       const value = 'newValue';
       const overriddenValue = `${value}${value}`;
 
-      async.series([
-        next => vm.setMetadata({[key]: value}, compute.execAfterOperation_(next)),
-        next => vm.setMetadata({[key]: overriddenValue}, compute.execAfterOperation_(next)),
-        next => vm.getMetadata(next),
-      ], err => {
-        assert.ifError(err);
-        assert.deepStrictEqual(vm.metadata.metadata.items, [{key, value: overriddenValue}]);
-        done();
-      });
+      async.series(
+        [
+          next =>
+            vm.setMetadata({[key]: value}, compute.execAfterOperation_(next)),
+          next =>
+            vm.setMetadata(
+              {[key]: overriddenValue},
+              compute.execAfterOperation_(next)
+            ),
+          next => vm.getMetadata(next),
+        ],
+        err => {
+          assert.ifError(err);
+          assert.deepStrictEqual(vm.metadata.metadata.items, [
+            {key, value: overriddenValue},
+          ]);
+          done();
+        }
+      );
     });
 
     it('should allow removing old metadata', function(done) {
       const key = 'newKey';
       const value = 'newValue';
 
-      async.series([
-        next => vm.setMetadata({[key]: value}, compute.execAfterOperation_(next)),
-        next => vm.setMetadata({[key]: null}, compute.execAfterOperation_(next)),
-        next => vm.getMetadata(next),
-      ], err => {
-        assert.ifError(err);
-        assert.strictEqual(vm.metadata.metadata.items, undefined);
-        done();
-      });
+      async.series(
+        [
+          next =>
+            vm.setMetadata({[key]: value}, compute.execAfterOperation_(next)),
+          next =>
+            vm.setMetadata({[key]: null}, compute.execAfterOperation_(next)),
+          next => vm.getMetadata(next),
+        ],
+        err => {
+          assert.ifError(err);
+          assert.strictEqual(vm.metadata.metadata.items, undefined);
+          done();
+        }
+      );
     });
 
     it('should start', function(done) {

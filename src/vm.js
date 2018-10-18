@@ -780,10 +780,13 @@ VM.prototype.setMetadata = function(metadata, callback) {
       items: [],
     };
 
-    const metadataJSON = (currentMetadata.metadata.items || []).reduce((metadataJSON, keyValPair) => {
-      metadataJSON[keyValPair.key] = keyValPair.value;
-      return metadataJSON;
-    }, {});
+    const metadataJSON = (currentMetadata.metadata.items || []).reduce(
+      (metadataJSON, keyValPair) => {
+        metadataJSON[keyValPair.key] = keyValPair.value;
+        return metadataJSON;
+      },
+      {}
+    );
 
     const newMetadataJSON = Object.assign(metadataJSON, metadata);
 
