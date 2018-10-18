@@ -785,7 +785,7 @@ VM.prototype.setMetadata = function(metadata, callback) {
       return metadataJSON;
     }, {});
 
-    const newMetadataJSON = extend(metadataJSON, metadata);
+    const newMetadataJSON = Object.assign(metadataJSON, metadata);
 
     for (const key in newMetadataJSON) {
       if (newMetadataJSON.hasOwnProperty(key)) {
