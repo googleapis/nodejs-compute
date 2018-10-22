@@ -26,85 +26,85 @@ const zone = compute.zone('us-central1-a');
 function createVm(name, callback) {
   // Create a new VM, using default ubuntu image. The startup script
   // installs apache and a custom homepage.
-  const config = {
-    os: 'ubuntu',
-    http: true,
-    metadata: {
-      items: [
-        {
-          key: 'startup-script',
-          value: `#! /bin/bash
-
-        # Installs apache and a custom homepage
-        apt-get update
-        apt-get install -y apache2
-        cat <<EOF > /var/www/html/index.html
-        <!doctype html>
-        <h1>Hello World</h1>
-        <p>This page was created from a simple start-up script!</p>`,
+  (async() =>{
+    try{
+      const config = {
+        os: 'ubuntu',
+        http: true,
+        metadata: {
+          items: [
+            {
+              key: 'startup-script',
+              value: `#! /bin/bash
+    
+            # Installs apache and a custom homepage
+            apt-get update
+            apt-get install -y apache2
+            cat <<EOF > /var/www/html/index.html
+            <!doctype html>
+            <h1>Hello World</h1>
+            <p>This page was created from a simple start-up script!</p>`,
+            },
+          ],
         },
-      ],
-    },
-  };
-
-  const vm = zone.vm(name);
-
-  vm.create(config)
-    .then(data => {
-      const operation = data[1];
-      return operation.promise();
-    })
-    .then(() => {
-      return vm.getMetadata();
-    })
-    .then(data => {
-      const metadata = data[0];
-
+      };
+      const vm = zone.vm(name);
+      
+      const data = await vm.create(config);
+      console.log('Creating VM ...');
+      await data[1].promise();
+      const metadata = await vm.getMetadata();
+      
       // External IP of the VM.
-      const ip = metadata.networkInterfaces[0].accessConfigs[0].natIP;
+      const ip = metadata[0].networkInterfaces[0].accessConfigs[0].natIP;
       console.log(`Booting new VM with IP http://${ip}...`);
 
       // Ping the VM to determine when the HTTP server is ready.
       let waiting = true;
-      const timer = setInterval(
-        ip => {
-          http
-            .get('http://' + ip, res => {
-              const statusCode = res.statusCode;
-              if (statusCode === 200 && waiting) {
-                waiting = false;
-                clearTimeout(timer);
-                // HTTP server is ready.
-                console.log('Ready!');
-                callback(null, ip);
-              }
-            })
-            .on('error', () => {
-              // HTTP server is not ready yet.
-              process.stdout.write('.');
-            });
-        },
-        2000,
-        ip
-      );
-    })
-    .catch(err => callback(err));
+        const timer = setInterval(
+          ip => {
+            http
+              .get('http://' + ip, res => {
+                const statusCode = res.statusCode;
+                if (statusCode === 200 && waiting) {
+                  waiting = false;
+                  clearTimeout(timer);
+                  // HTTP server is ready.
+                  console.log('Ready!');
+                  callback(null, ip);
+                }
+              })
+              .on('error', () => {
+                // HTTP server is not ready yet.
+                process.stdout.write('.');
+              });
+          },
+          2000,
+          ip
+        );
+      
+    }catch(err){
+      callback(err);
+    }
+  })();
+
 }
 
 // List all VMs and their external IPs in a given zone.
 // callback(error, [[name, ip], [name, ip], ...])
 function listVms(callback) {
-  zone
-    .getVMs()
-    .then(data => {
+  (async () => {
+    try{
+      const data = await zone.getVMs();
       const vms = data[0];
-      const results = vms.map(vm => vm.getMetadata());
-      return Promise.all(results);
-    })
-    .then(res =>
+      const results=[];
+      for(var i in vms){
+        var metadata = await vms[i].getMetadata();
+        results.push(metadata);
+      }
       callback(
         null,
-        res.map(data => {
+        results.map(data => {
           return {
             ip: data[0]['networkInterfaces'][0]['accessConfigs']
               ? data[0]['networkInterfaces'][0]['accessConfigs'][0]['natIP']
@@ -112,24 +112,28 @@ function listVms(callback) {
             name: data[0].name,
           };
         })
-      )
     )
-    .catch(err => callback(err));
+    }
+    catch(err){
+      callback(err);
+    }
+  })();
 }
 
 function deleteVm(name, callback) {
-  const vm = zone.vm(name);
-  vm.delete()
-    .then(data => {
-      console.log('Deleting ...');
-      const operation = data[0];
-      return operation.promise();
-    })
-    .then(() => {
-      // VM deleted
-      callback(null, name);
-    })
-    .catch(err => callback(err));
+  (async () => {
+    try{
+        const vm = zone.vm(name);
+        const data = await vm.delete()
+        console.log('Deleting ...');
+        await data[0].promise();
+        // VM deleted
+        callback(null, name);
+    }catch(err){
+      callback(err);
+    }
+  })();  
+  
 }
 
 exports.create = (name, cb) => {

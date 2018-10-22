@@ -15,44 +15,48 @@
 
 'use strict';
 
-const test = require(`ava`);
 const tools = require(`@google-cloud/nodejs-repo-tools`);
 const uuid = require('uuid');
+const assert = require('assert');
 
 const example = require(`../index`);
 
-test.before(tools.checkCredentials);
-test.beforeEach(tools.stubConsole);
-test.afterEach.always(tools.restoreConsole);
 
-test.cb(`should list vms`, t => {
-  example.list((err, result) => {
-    t.ifError(err);
-    t.truthy(result);
-    t.true(Array.isArray(result));
-    t.end();
+describe('start-up script',() =>{
+  before(tools.checkCredentials);
+  beforeEach(tools.stubConsole);
+  afterEach(tools.restoreConsole);
+
+  it('should list vms', () => {
+      example.list((err, result) => {
+        assert.ifError(err);
+        assert.ok(result);
+        assert.strictEqual(Array.isArray(result),true);
+      });
   });
-});
 
-test.cb(`should create vm`, t => {
-  const TESTS_PREFIX = 'gcloud-tests-';
-  const name = generateName('vm-with-apache');
+  
+  it('should create vm', () => {
+    const TESTS_PREFIX = 'gcloud-tests-';
+    const name = generateName('vm-with-apache');
 
-  function generateName(customPrefix) {
-    return [TESTS_PREFIX, customPrefix + '-', uuid.v4().replace('-', '')]
-      .join('')
-      .substr(0, 61);
-  }
+    function generateName(customPrefix) {
+      return [TESTS_PREFIX, customPrefix + '-', uuid.v4().replace('-', '')]
+        .join('')
+        .substr(0, 61);
+    }
 
-  example.create(name, (err, result) => {
-    t.ifError(err);
-    t.truthy(result);
+    example.create(name, (err, result) => {
+      assert.ifError(err);
+      assert.ok(result);
 
-    // Clean up newly created vm.
-    example.delete(name, (err, result) => {
-      t.ifError(err);
-      t.truthy(result);
-      t.end();
+      // Clean up newly created vm.
+      example.delete(name, (err, result) => {
+        assert.ifError(err);
+        assert.ok(result);
+       
+      });
     });
   });
+
 });
