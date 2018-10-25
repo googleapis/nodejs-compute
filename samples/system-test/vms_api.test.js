@@ -22,13 +22,10 @@ const assert = require('assert');
 const cmd = `node vms_api.js`;
 const cwd = path.join(__dirname, `..`);
 
-describe('should retrieve list of vms via api',function(){
- 
+describe('should retrieve list of vms via api', function() {
   it('vms_api_inspect_string', async function() {
-      const output =  await tools.runAsync(cmd,cwd);
+    const output = await tools.runAsync(cmd, cwd);
 
-      assert.strictEqual(output.includes('VMs:'), true);
-     
-    });
-
+    assert.strictEqual(output.includes('VMs:'), true);
+  });
 });

@@ -10,7 +10,7 @@
   },
   "scripts": {
     "system-test": "mocha system-test/*.js --timeout 600000",
-    "startup-test": "ava -T 200s --verbose startup-script/system-test/*.test.js",
+    "startup-test": "mocha startup-script/system-test/*.test.js --timeout 600000",
     "test": "npm run system-test && npm run startup-test"
   },
   "dependencies": {
@@ -18,10 +18,12 @@
     "googleapis": "^34.0.0",
     "nodemailer": "^4.3.1",
     "nodemailer-smtp-transport": "^2.7.4",
-    "sendgrid": "^5.2.3"
+    "sendgrid": "^5.2.3",
+    "axios": "^0.18.0"
   },
   "devDependencies": {
     "@google-cloud/nodejs-repo-tools": "^2.3.1",
-    "mocha": "^5.0.0"
+    "mocha": "^5.0.0",
+    "proxyquire": "^2.0.1"
   }
 }

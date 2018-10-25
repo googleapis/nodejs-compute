@@ -22,8 +22,7 @@ const assert = require('assert');
 process.env.MAILJET_API_KEY = `foo`;
 process.env.MAILJET_API_SECRET = `bar`;
 
-describe('mailjet',() =>{
-  
+describe('mailjet', () => {
   beforeEach(tools.stubConsole);
   afterEach(tools.restoreConsole);
 
@@ -33,20 +32,20 @@ describe('mailjet',() =>{
         createTransport: arg => {
           assert.strictEqual(arg, `test`);
           return {
-            sendMail: (payload, cb) => {
-              assert.deepEqual(payload, {
+            sendMail: payload => {
+              assert.deepStrictEqual(payload, {
                 from: `ANOTHER_EMAIL@ANOTHER_EXAMPLE.COM`,
                 to: `EMAIL@EXAMPLE.COM`,
                 subject: `test email from Node.js on Google Cloud Platform`,
                 text: `Hello!\n\nThis a test email from Node.js.`,
               });
-              cb(null, `done`);
+              return `done`;
             },
           };
         },
       },
       'nodemailer-smtp-transport': options => {
-        assert.deepEqual(options, {
+        assert.deepStrictEqual(options, {
           host: `in.mailjet.com`,
           port: 2525,
           auth: {
@@ -58,7 +57,4 @@ describe('mailjet',() =>{
       },
     });
   });
-
 });
-
-

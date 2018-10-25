@@ -21,22 +21,18 @@ const assert = require('assert');
 
 const example = require(`../index`);
 
-
-describe('start-up script',() =>{
+describe('start-up script', async () => {
   before(tools.checkCredentials);
   beforeEach(tools.stubConsole);
   afterEach(tools.restoreConsole);
 
-  it('should list vms', () => {
-      example.list((err, result) => {
-        assert.ifError(err);
-        assert.ok(result);
-        assert.strictEqual(Array.isArray(result),true);
-      });
+  it('should list vms', async () => {
+    const vms = await example.list();
+    assert.ok(vms);
+    assert.strictEqual(Array.isArray(vms), true);
   });
 
-  
-  it('should create vm', () => {
+  it('should create vm', async () => {
     const TESTS_PREFIX = 'gcloud-tests-';
     const name = generateName('vm-with-apache');
 
@@ -46,17 +42,9 @@ describe('start-up script',() =>{
         .substr(0, 61);
     }
 
-    example.create(name, (err, result) => {
-      assert.ifError(err);
-      assert.ok(result);
-
-      // Clean up newly created vm.
-      example.delete(name, (err, result) => {
-        assert.ifError(err);
-        assert.ok(result);
-       
-      });
-    });
+    const ip = await example.create(name);
+    assert.ok(ip);
+    const result = await example.delete(name);
+    assert.strictEqual(result, name);
   });
-
 });

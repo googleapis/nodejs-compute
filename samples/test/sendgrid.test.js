@@ -21,9 +21,7 @@ const assert = require('assert');
 
 process.env.SENDGRID_API_KEY = `foo`;
 
-
-describe('sendgrid',() =>{
-  
+describe('sendgrid', () => {
   beforeEach(tools.stubConsole);
   afterEach(tools.restoreConsole);
 
@@ -34,7 +32,7 @@ describe('sendgrid',() =>{
         return {
           emptyRequest: x => x,
           API: request => {
-            assert.deepEqual(request, {
+            assert.deepStrictEqual(request, {
               method: `POST`,
               path: `/v3/mail/send`,
               body: {
@@ -53,12 +51,9 @@ describe('sendgrid',() =>{
                 ],
               },
             });
-           
           },
         };
       },
     });
   });
-
 });
-

@@ -22,13 +22,10 @@ const assert = require('assert');
 const cmd = `node vms.js`;
 const cwd = path.join(__dirname, `..`);
 
-describe('should retrieve list of vms',function(){
- 
+describe('should retrieve list of vms', function() {
   it('vms_inspect_string', async function() {
-      const output =  await tools.runAsync(cmd,cwd);
+    const output = await tools.runAsync(cmd, cwd);
 
-      assert.strictEqual(output.includes('VMs:'), true);
-     
-    });
-
+    assert.strictEqual(output.includes('VMs:'), true);
+  });
 });

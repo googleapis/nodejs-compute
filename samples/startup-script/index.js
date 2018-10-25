@@ -16,26 +16,25 @@
 'use strict';
 
 const Compute = require('@google-cloud/compute');
-const http = require('http');
+const axios = require('axios');
 
 const compute = new Compute();
 
 const zone = compute.zone('us-central1-a');
 
-// callback(error, externalIp)
-function createVm(name, callback) {
+async function createVm(name) {
   // Create a new VM, using default ubuntu image. The startup script
   // installs apache and a custom homepage.
-  (async() =>{
-    try{
-      const config = {
-        os: 'ubuntu',
-        http: true,
-        metadata: {
-          items: [
-            {
-              key: 'startup-script',
-              value: `#! /bin/bash
+
+  try {
+    const config = {
+      os: 'ubuntu',
+      http: true,
+      metadata: {
+        items: [
+          {
+            key: 'startup-script',
+            value: `#! /bin/bash
     
             # Installs apache and a custom homepage
             apt-get update
@@ -44,106 +43,107 @@ function createVm(name, callback) {
             <!doctype html>
             <h1>Hello World</h1>
             <p>This page was created from a simple start-up script!</p>`,
-            },
-          ],
-        },
-      };
-      const vm = zone.vm(name);
-      
-      const data = await vm.create(config);
-      console.log('Creating VM ...');
-      await data[1].promise();
-      const metadata = await vm.getMetadata();
-      
-      // External IP of the VM.
-      const ip = metadata[0].networkInterfaces[0].accessConfigs[0].natIP;
-      console.log(`Booting new VM with IP http://${ip}...`);
-
-      // Ping the VM to determine when the HTTP server is ready.
-      let waiting = true;
-        const timer = setInterval(
-          ip => {
-            http
-              .get('http://' + ip, res => {
-                const statusCode = res.statusCode;
-                if (statusCode === 200 && waiting) {
-                  waiting = false;
-                  clearTimeout(timer);
-                  // HTTP server is ready.
-                  console.log('Ready!');
-                  callback(null, ip);
-                }
-              })
-              .on('error', () => {
-                // HTTP server is not ready yet.
-                process.stdout.write('.');
-              });
           },
-          2000,
-          ip
-        );
-      
-    }catch(err){
-      callback(err);
-    }
-  })();
+        ],
+      },
+    };
+    const vm = zone.vm(name);
+    console.log('Creating VM ...');
+    const data = await vm.create(config);
+    await data[1].promise();
+    const metadata = await vm.getMetadata();
 
+    // External IP of the VM.
+    const ip = metadata[0].networkInterfaces[0].accessConfigs[0].natIP;
+    console.log(`Booting new VM with IP http://${ip}...`);
+
+    // Ping the VM to determine when the HTTP server is ready.
+    return await pingVM(ip);
+  } catch (err) {
+    console.error(`Something went wrong while creating ${name} :`, err);
+  }
+}
+
+async function pingVM(ip) {
+  return new Promise(resolve => {
+    const timer = setInterval(
+      async ip => {
+        try {
+          const res = await axios.get('http://' + ip);
+          const statusCode = res.status;
+          if (statusCode === 200) {
+            // waiting = false;
+            clearTimeout(timer);
+            // HTTP server is ready.
+            console.log('Ready!');
+            resolve(ip);
+            //return Promise.resolve(ip);
+          } else {
+            // HTTP server is not ready yet.
+            process.stdout.write('.');
+          }
+        } catch (err) {
+          process.stdout.write('.');
+        }
+      },
+      2000,
+      ip
+    );
+  });
 }
 
 // List all VMs and their external IPs in a given zone.
-// callback(error, [[name, ip], [name, ip], ...])
-function listVms(callback) {
-  (async () => {
-    try{
-      const data = await zone.getVMs();
-      const vms = data[0];
-      const results=[];
-      for(var i in vms){
-        var metadata = await vms[i].getMetadata();
-        results.push(metadata);
-      }
-      callback(
-        null,
-        results.map(data => {
-          return {
-            ip: data[0]['networkInterfaces'][0]['accessConfigs']
-              ? data[0]['networkInterfaces'][0]['accessConfigs'][0]['natIP']
-              : 'no external ip',
-            name: data[0].name,
-          };
-        })
-    )
+async function listVms() {
+  try {
+    const data = await zone.getVMs();
+    const vms = data[0];
+    const results = [];
+    for (const i in vms) {
+      const metadata = await vms[i].getMetadata();
+      results.push(metadata);
     }
-    catch(err){
-      callback(err);
-    }
-  })();
+
+    return results.map(data => {
+      return {
+        ip: data[0]['networkInterfaces'][0]['accessConfigs']
+          ? data[0]['networkInterfaces'][0]['accessConfigs'][0]['natIP']
+          : 'no external ip',
+        name: data[0].name,
+      };
+    });
+  } catch (err) {
+    console.error('Something went wrong while listing VMs :', err);
+  }
 }
 
-function deleteVm(name, callback) {
-  (async () => {
-    try{
-        const vm = zone.vm(name);
-        const data = await vm.delete()
-        console.log('Deleting ...');
-        await data[0].promise();
-        // VM deleted
-        callback(null, name);
-    }catch(err){
-      callback(err);
-    }
-  })();  
-  
+async function deleteVm(name) {
+  try {
+    const vm = zone.vm(name);
+    const data = await vm.delete();
+    console.log('Deleting ...');
+    await data[0].promise();
+    // VM deleted
+    return name;
+  } catch (err) {
+    console.error(`Something went wrong while deleting ${name} :`, err);
+  }
 }
 
-exports.create = (name, cb) => {
-  createVm(name, cb);
+exports.create = async name => {
+  const ip = await createVm(name);
+  console.log('ip is ' + ip);
+  console.log(`${name} created succesfully`);
+  return ip;
 };
 
-exports.list = cb => {
-  listVms(cb);
+exports.list = async () => {
+  const vms = await listVms();
+  console.log(vms);
+  return vms;
 };
 
-exports.delete = (name, cb) => {
-  deleteVm(name, cb);
+exports.delete = async name => {
+  const result = await deleteVm(name);
+  console.log(`${name} deleted succesfully`);
+  return result;
 };

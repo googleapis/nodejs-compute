@@ -4,7 +4,11 @@
   "description": "Start a Google Compute Engine and run the startup script.",
   "main": "index.js",
   "dependencies": {
-    "@google-cloud/compute": "0.10.0"
+    "@google-cloud/compute": "0.10.0",
+    "axios": "^0.18.0"
+  },
+  "engines": {
+    "node": ">=7.6.0"
   },
   "devDependencies": {
     "@google-cloud/nodejs-repo-tools": "^2.3.0",
