@@ -41,7 +41,7 @@ async function sendgrid() {
     },
   });
 
-  const response = Sendgrid.API(request);
+  const response = await Sendgrid.API(request);
   console.log(response);
 }
 sendgrid().catch(console.error);

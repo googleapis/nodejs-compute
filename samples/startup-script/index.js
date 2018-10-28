@@ -47,62 +47,52 @@ async function createVm(name) {
         ],
       },
     };
-    const vm = zone.vm(name);
+    const vmObj = zone.vm(name);
     console.log('Creating VM ...');
-    const data = await vm.create(config);
-    await data[1].promise();
-    const metadata = await vm.getMetadata();
+    const [vm, operation] = await vmObj.create(config);
+    await operation.promise();
+    const [metadata] = await vm.getMetadata();
 
     // External IP of the VM.
-    const ip = metadata[0].networkInterfaces[0].accessConfigs[0].natIP;
+    const ip = metadata.networkInterfaces[0].accessConfigs[0].natIP;
     console.log(`Booting new VM with IP http://${ip}...`);
 
     // Ping the VM to determine when the HTTP server is ready.
-    return await pingVM(ip);
+    await pingVM(ip);
+    return ip;
   } catch (err) {
     console.error(`Something went wrong while creating ${name} :`, err);
   }
 }
 
 async function pingVM(ip) {
-  return new Promise(resolve => {
-    const timer = setInterval(
-      async ip => {
-        try {
-          const res = await axios.get('http://' + ip);
-          const statusCode = res.status;
-          if (statusCode === 200) {
-            // waiting = false;
-            clearTimeout(timer);
-            // HTTP server is ready.
-            console.log('Ready!');
-            resolve(ip);
-            //return Promise.resolve(ip);
-          } else {
-            // HTTP server is not ready yet.
-            process.stdout.write('.');
-          }
-        } catch (err) {
-          process.stdout.write('.');
-        }
-      },
-      2000,
-      ip
-    );
-  });
+  let waiting = true;
+  while (waiting) {
+    await new Promise(r => setTimeout(r, 2000));
+    try {
+      const res = await axios.get(`http://${ip}`);
+      const statusCode = res.status;
+      if (statusCode === 200) {
+        waiting = false;
+        console.log('Ready!');
+        return;
+      } else {
+        process.stdout.write('.');
+      }
+    } catch (err) {
+      process.stdout.write('.');
+    }
+  }
 }
-
 // List all VMs and their external IPs in a given zone.
 async function listVms() {
   try {
-    const data = await zone.getVMs();
-    const vms = data[0];
+    const [vms] = await zone.getVMs();
     const results = [];
     for (const i in vms) {
       const metadata = await vms[i].getMetadata();
       results.push(metadata);
     }
-
     return results.map(data => {
       return {
         ip: data[0]['networkInterfaces'][0]['accessConfigs']
@@ -131,7 +121,6 @@ async function deleteVm(name) {
 
 exports.create = async name => {
   const ip = await createVm(name);
-  console.log('ip is ' + ip);
   console.log(`${name} created succesfully`);
   return ip;
 };
