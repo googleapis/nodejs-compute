@@ -26,15 +26,14 @@ async function createVm(name) {
   // Create a new VM, using default ubuntu image. The startup script
   // installs apache and a custom homepage.
 
-  try {
-    const config = {
-      os: 'ubuntu',
-      http: true,
-      metadata: {
-        items: [
-          {
-            key: 'startup-script',
-            value: `#! /bin/bash
+  const config = {
+    os: 'ubuntu',
+    http: true,
+    metadata: {
+      items: [
+        {
+          key: 'startup-script',
+          value: `#! /bin/bash
     
             # Installs apache and a custom homepage
             apt-get update
@@ -43,26 +42,23 @@ async function createVm(name) {
             <!doctype html>
             <h1>Hello World</h1>
             <p>This page was created from a simple start-up script!</p>`,
-          },
-        ],
-      },
-    };
-    const vmObj = zone.vm(name);
-    console.log('Creating VM ...');
-    const [vm, operation] = await vmObj.create(config);
-    await operation.promise();
-    const [metadata] = await vm.getMetadata();
+        },
+      ],
+    },
+  };
+  const vmObj = zone.vm(name);
+  console.log('Creating VM ...');
+  const [vm, operation] = await vmObj.create(config);
+  await operation.promise();
+  const [metadata] = await vm.getMetadata();
 
-    // External IP of the VM.
-    const ip = metadata.networkInterfaces[0].accessConfigs[0].natIP;
-    console.log(`Booting new VM with IP http://${ip}...`);
+  // External IP of the VM.
+  const ip = metadata.networkInterfaces[0].accessConfigs[0].natIP;
+  console.log(`Booting new VM with IP http://${ip}...`);
 
-    // Ping the VM to determine when the HTTP server is ready.
-    await pingVM(ip);
-    return ip;
-  } catch (err) {
-    console.error(`Something went wrong while creating ${name} :`, err);
-  }
+  // Ping the VM to determine when the HTTP server is ready.
+  await pingVM(ip);
+  return ip;
 }
 
 async function pingVM(ip) {
@@ -86,37 +82,27 @@ async function pingVM(ip) {
 }
 // List all VMs and their external IPs in a given zone.
 async function listVms() {
-  try {
-    const [vms] = await zone.getVMs();
-    const results = [];
-    for (const i in vms) {
-      const metadata = await vms[i].getMetadata();
-      results.push(metadata);
-    }
-    return results.map(data => {
+  const [vms] = await zone.getVMs();
+  return await Promise.all(
+    vms.map(async vm => {
+      const [metadata] = await vm.getMetadata();
       return {
-        ip: data[0]['networkInterfaces'][0]['accessConfigs']
-          ? data[0]['networkInterfaces'][0]['accessConfigs'][0]['natIP']
+        ip: metadata['networkInterfaces'][0]['accessConfigs']
+          ? metadata['networkInterfaces'][0]['accessConfigs'][0]['natIP']
           : 'no external ip',
-        name: data[0].name,
+        name: metadata.name,
       };
-    });
-  } catch (err) {
-    console.error('Something went wrong while listing VMs :', err);
-  }
+    })
+  );
 }
 
 async function deleteVm(name) {
-  try {
-    const vm = zone.vm(name);
-    const data = await vm.delete();
-    console.log('Deleting ...');
-    await data[0].promise();
-    // VM deleted
-    return name;
-  } catch (err) {
-    console.error(`Something went wrong while deleting ${name} :`, err);
-  }
+  const vm = zone.vm(name);
+  console.log('Deleting ...');
+  const [operation] = await vm.delete();
+  await operation.promise();
+  // VM deleted
+  return name;
 }
 
 exports.create = async name => {
