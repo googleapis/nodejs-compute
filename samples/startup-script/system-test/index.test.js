@@ -26,24 +26,24 @@ describe('start-up script', async () => {
   beforeEach(tools.stubConsole);
   afterEach(tools.restoreConsole);
 
+  const TESTS_PREFIX = 'gcloud-tests-';
+  const name = generateName('vm-with-apache');
+
+  function generateName(customPrefix) {
+    return [TESTS_PREFIX, customPrefix + '-', uuid.v4().replace('-', '')]
+      .join('')
+      .substr(0, 61);
+  }
+  it('should create vm', async () => {
+    const ip = await example.create(name);
+    assert.ok(ip);
+  });
   it('should list vms', async () => {
     const vms = await example.list();
     assert.ok(vms);
     assert.strictEqual(Array.isArray(vms), true);
   });
-
-  it('should create vm', async () => {
-    const TESTS_PREFIX = 'gcloud-tests-';
-    const name = generateName('vm-with-apache');
-
-    function generateName(customPrefix) {
-      return [TESTS_PREFIX, customPrefix + '-', uuid.v4().replace('-', '')]
-        .join('')
-        .substr(0, 61);
-    }
-
-    const ip = await example.create(name);
-    assert.ok(ip);
+  it('should delete vm', async () => {
     const result = await example.delete(name);
     assert.strictEqual(result, name);
   });
