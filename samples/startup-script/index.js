@@ -16,7 +16,7 @@
 'use strict';
 
 const Compute = require('@google-cloud/compute');
-const axios = require('axios');
+const fetch = require('node-fetch');
 
 const compute = new Compute();
 
@@ -66,7 +66,7 @@ async function pingVM(ip) {
   while (waiting) {
     await new Promise(r => setTimeout(r, 2000));
     try {
-      const res = await axios.get(`http://${ip}`);
+      const res = await fetch(`http://${ip}`);
       const statusCode = res.status;
       if (statusCode === 200) {
         waiting = false;
