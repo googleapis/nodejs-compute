@@ -16,7 +16,7 @@
 'use strict';
 
 const Compute = require('@google-cloud/compute');
-const fetch = require('node-fetch');
+//const fetch = require('node-fetch');
 
 const compute = new Compute();
 
@@ -64,8 +64,9 @@ async function createVm(name) {
 async function pingVM(ip) {
   let waiting = true;
   while (waiting) {
-    await new Promise(r => setTimeout(r, 2000));
-    try {
+    await new Promise(r => setTimeout(r, 500000));
+    waiting = false;
+   /* try {
       const res = await fetch(`http://${ip}`);
       const statusCode = res.status;
       if (statusCode === 200) {
@@ -77,7 +78,7 @@ async function pingVM(ip) {
       }
     } catch (err) {
       process.stdout.write('.');
-    }
+    }*/
   }
 }
 // List all VMs and their external IPs in a given zone.
