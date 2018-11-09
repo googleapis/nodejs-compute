@@ -48,7 +48,7 @@
     "async": "^2.6.1",
     "create-error-class": "^3.0.2",
     "extend": "^3.0.1",
-    "gce-images": "^0.3.3",
+    "gce-images": "^1.0.0",
     "is": "^3.2.1",
     "string-format-obj": "^1.1.1",
     "teeny-request": "^3.10.0"
