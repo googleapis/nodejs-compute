@@ -47,7 +47,7 @@ describe('Firewall', function() {
     createFirewall: util.noop,
   };
   const FIREWALL_NAME = 'tcp-3000';
-  const FIREWALL_NETWORK = 'global/networks/default';
+  const DEFAULT_FIREWALL_NETWORK = 'global/networks/default';
 
   before(function() {
     Firewall = proxyquire('../src/firewall.js', {
@@ -76,7 +76,9 @@ describe('Firewall', function() {
     });
 
     it('should default to the global network', function() {
-      assert.deepStrictEqual(firewall.metadata, {network: FIREWALL_NETWORK});
+      assert.deepStrictEqual(firewall.metadata, {
+        network: DEFAULT_FIREWALL_NETWORK,
+      });
     });
 
     it('should inherit from ServiceObject', function() {
@@ -187,8 +189,8 @@ describe('Firewall', function() {
         assert.strictEqual(reqOpts.uri, '');
         assert.strictEqual(reqOpts.json, metadata);
         assert.deepStrictEqual(metadata, {
-          name: FIREWALL_NAME,
-          network: FIREWALL_NETWORK,
+          name: firewall.name,
+          network: DEFAULT_FIREWALL_NETWORK,
         });
 
         done();
@@ -198,17 +200,10 @@ describe('Firewall', function() {
     });
 
     it('should respect network specification', function(done) {
-      var metadata = {network: 'custom-network'};
+      const metadata = {network: 'custom-network'};
 
       firewall.request = function(reqOpts) {
-        assert.strictEqual(reqOpts.method, 'PATCH');
-        assert.strictEqual(reqOpts.uri, '');
-        assert.strictEqual(reqOpts.json, metadata);
-        assert.deepStrictEqual(metadata, {
-          name: FIREWALL_NAME,
-          network: 'custom-network',
-        });
-
+        assert.strictEqual(reqOpts.json.network, metadata.network);
         done();
       };
 
