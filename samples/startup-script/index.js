@@ -59,8 +59,7 @@ async function createVM(name) {
   await operation.promise();
 
   console.log('Acquiring VM metadata...');
-  const [metadata] = await vm.getMetadata();
-  console.log(metadata);
+  const [{metadata}] = await vm.getMetadata();
 
   // External IP of the VM.
   const ip = metadata.networkInterfaces[0].accessConfigs[0].natIP;
@@ -104,7 +103,7 @@ async function listVMs() {
   const [vms] = await zone.getVMs();
   const results = await Promise.all(
     vms.map(async vm => {
-      const [metadata] = await vm.getMetadata();
+      const [{metadata}] = await vm.getMetadata();
       return {
         ip: metadata['networkInterfaces'][0]['accessConfigs']
           ? metadata['networkInterfaces'][0]['accessConfigs'][0]['natIP']

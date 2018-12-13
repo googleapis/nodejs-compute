@@ -1053,15 +1053,14 @@ class VM extends common.ServiceObject {
    */
   request(reqOpts, callback) {
     const zone = this.zone;
-    const request = common.ServiceObject.prototype.request;
-    request.call(this, reqOpts, function(err, resp) {
+    super.request(reqOpts, (err, body, res) => {
       if (err) {
-        callback(err, null, resp);
+        callback(err, null, res);
         return;
       }
-      const operation = zone.operation(resp.name);
-      operation.metadata = resp;
-      callback(null, operation, resp);
+      const operation = zone.operation(body.name);
+      operation.metadata = body;
+      callback(null, operation, res);
     });
   }
 }
