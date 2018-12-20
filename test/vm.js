@@ -57,9 +57,9 @@ describe('VM', function() {
   const COMPUTE = {
     authClient: {
       projectId: 'project-id',
-      getProjectId: (callback) => {
+      getProjectId: callback => {
         callback(null, 'project-id');
-      }
+      },
     },
     projectId: 'project-id',
   };
