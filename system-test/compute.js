@@ -1049,7 +1049,7 @@ describe('Compute', () => {
     it('should stop and trigger STOPPING `waitFor` event', async () => {
       await Promise.all([
         vm.waitFor('STOPPING', {timeout: 600}),
-        awaitResult(vm.stop(compute)),
+        awaitResult(vm.stop()),
       ]);
     });
   });
@@ -1411,9 +1411,7 @@ describe('Compute', () => {
       return;
     }
     const names = filterExpired(opts, resp.items).map(x => x.name);
-    await Promise.all(
-      names.map(name => deleteInstanceGroupManager(name))
-    );
+    await Promise.all(names.map(name => deleteInstanceGroupManager(name)));
   }
 
   async function createInstanceGroupManager(name, instanceTemplateName) {
