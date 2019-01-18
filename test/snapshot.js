@@ -96,8 +96,8 @@ describe('Snapshot', function() {
           done();
         },
         zone: {
-          compute: COMPUTE
-        }
+          compute: COMPUTE,
+        },
       };
 
       const snapshot = new Snapshot(scope, SNAPSHOT_NAME);
