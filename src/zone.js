@@ -969,7 +969,7 @@ class Zone extends common.ServiceObject {
    * Get a list of instance group managers for this zone.
    *
    * @see [InstanceGroupManagers Overview]{@link https://cloud.google.com/compute/docs/reference/v1/instanceGroupManagers}
-   * @see [InstanceGroupManagers: list API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/instanceGroupManagerss/list}
+   * @see [InstanceGroupManagers: list API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/instanceGroupManagers/list}
    *
    * @param {object=} options - Instance group manager search options.
    * @param {boolean} options.autoPaginate - Have pagination handled
