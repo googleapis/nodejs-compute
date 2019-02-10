@@ -20,6 +20,23 @@ const common = require('@google-cloud/common');
 const {promisifyAll} = require('@google-cloud/promisify');
 const {teenyRequest} = require('teeny-request');
 
+/**
+ * A managed instance group uses an instance template to create a group of identical instances.
+ * You control a managed instance group as a single entity.
+ *
+ * @see [Creating Groups of Instances]{@link https://cloud.google.com/compute/docs/instance-groups}
+ * @see [Managed Instance Groups]{@link https://cloud.google.com/compute/docs/instance-groups/#managed_instance_groups}
+ *
+ * @class
+ * @param {Zone} zone
+ * @param {string} name
+ *
+ * @example
+ * const Compute = require('@google-cloud/compute');
+ * const compute = new Compute();
+ * const zone = compute.zone('us-central1-a');
+ * const instanceGroupManager = zone.instanceGroupManager('web-servers');
+ */
 class InstanceGroupManager extends common.ServiceObject {
   constructor(zone, name) {
     const methods = {
