@@ -120,7 +120,11 @@ describe('InstanceGroupManager', function() {
       });
 
       it('should return an error and API response', function(done) {
-        instanceGroupManager.resize(query, function(err, operation, apiResponse_) {
+        instanceGroupManager.resize(query, function(
+          err,
+          operation,
+          apiResponse_
+        ) {
           assert.strictEqual(err, error);
           assert.strictEqual(operation, null);
           assert.strictEqual(apiResponse_, apiResponse);
@@ -146,7 +150,11 @@ describe('InstanceGroupManager', function() {
           return operation;
         };
 
-        instanceGroupManager.resize(query, function(err, operation_, apiResponse_) {
+        instanceGroupManager.resize(query, function(
+          err,
+          operation_,
+          apiResponse_
+        ) {
           assert.ifError(err);
           assert.strictEqual(operation_, operation);
           assert.strictEqual(operation.metadata, apiResponse);

@@ -1046,8 +1046,12 @@ class Zone extends common.ServiceObject {
             pageToken: resp.nextPageToken,
           });
         }
-        const instanceGroupManagers = (resp.items || []).map(function(instanceGroupManager) {
-          const instanceGroupManagerInstance = self.instanceGroupManager(instanceGroupManager.name);
+        const instanceGroupManagers = (resp.items || []).map(function(
+          instanceGroupManager
+        ) {
+          const instanceGroupManagerInstance = self.instanceGroupManager(
+            instanceGroupManager.name
+          );
           instanceGroupManagerInstance.metadata = instanceGroupManager;
           return instanceGroupManagerInstance;
         });
