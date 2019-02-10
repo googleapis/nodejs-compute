@@ -155,5 +155,5 @@ describe('InstanceGroupManager', function() {
         });
       });
     });
-  });  
+  });
 });
