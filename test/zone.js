@@ -1783,6 +1783,17 @@ describe('Zone', function() {
     });
   });
 
+  describe('instanceGroupManager', function() {
+    const NAME = 'instance-group-manager';
+
+    it('should return an InstanceGroupManager object', function() {
+      const instanceGroupManager = zone.instanceGroupManager(NAME);
+      assert(instanceGroupManager instanceof FakeInstanceGroupManager);
+      assert.strictEqual(instanceGroupManager.calledWith_[0], zone);
+      assert.strictEqual(instanceGroupManager.calledWith_[1], NAME);
+    });
+  });
+
   describe('machineType', function() {
     const NAME = 'machine-name';
 
