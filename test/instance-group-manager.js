@@ -16,10 +16,9 @@
 
 'use strict';
 
-const arrify = require('arrify');
 const assert = require('assert');
 const proxyquire = require('proxyquire');
-const {ServiceObject, util} = require('@google-cloud/common');
+const {ServiceObject} = require('@google-cloud/common');
 const promisify = require('@google-cloud/promisify');
 
 let promisified = false;

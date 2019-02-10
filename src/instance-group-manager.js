@@ -16,9 +16,7 @@
 
 'use strict';
 
-const arrify = require('arrify');
 const common = require('@google-cloud/common');
-const is = require('is');
 const {promisifyAll} = require('@google-cloud/promisify');
 const {teenyRequest} = require('teeny-request');
 
@@ -144,8 +142,7 @@ class InstanceGroupManager extends common.ServiceObject {
    *
    * @see [InstanceGroupManagers: resize API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/instanceGroupManagers/resize}
    *
-   * @param {number} size - The number of running instances that the managed 
-   *     instance group should maintain at any given time.
+   * @param {number} size - The number of running instances that the managed instance group should maintain at any given time.
    * @param {function} callback - The callback function.
    * @param {?error} callback.err - An error returned while making this request.
    * @param {Operation} callback.operation - An operation object
@@ -177,7 +174,7 @@ class InstanceGroupManager extends common.ServiceObject {
       {
         method: 'POST',
         uri: '/resize',
-        qs: { size: size }
+        qs: {size: size},
       },
       function(err, resp) {
         if (err) {
