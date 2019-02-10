@@ -35,6 +35,7 @@ const fakePromisify = Object.assign({}, promisify, {
       'autoscaler',
       'disk',
       'instanceGroup',
+      'instanceGroupManager',
       'machineType',
       'operation',
       'vm',
@@ -56,6 +57,10 @@ FakeInstanceGroup.formatPorts_ = function() {
 };
 
 function FakeInstanceGroup() {
+  this.calledWith_ = [].slice.call(arguments);
+}
+
+function FakeInstanceGroupManager() {
   this.calledWith_ = [].slice.call(arguments);
 }
 
@@ -93,6 +98,7 @@ const fakePaginator = {
         'getAutoscalers',
         'getDisks',
         'getInstanceGroups',
+        'getInstanceGroupManagers',
         'getMachineTypes',
         'getOperations',
         'getVMs',
@@ -124,6 +130,7 @@ describe('Zone', function() {
       './autoscaler.js': FakeAutoscaler,
       './disk.js': FakeDisk,
       './instance-group.js': FakeInstanceGroup,
+      './instance-group-manager.js': FakeInstanceGroupManager,
       './machine-type.js': FakeMachineType,
       './operation.js': FakeOperation,
       './vm.js': FakeVM,
