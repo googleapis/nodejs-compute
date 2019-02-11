@@ -168,7 +168,7 @@ describe('InstanceGroupManager', function() {
     });
   });
 
-  describe('listManagedInstances', function() {
+  describe('getManagedInstances', function() {
     beforeEach(function() {
       instanceGroupManager.zone.vm = function() {
         return {};
@@ -181,7 +181,7 @@ describe('InstanceGroupManager', function() {
         done();
       };
 
-      instanceGroupManager.listManagedInstances(assert.ifError);
+      instanceGroupManager.getManagedInstances(assert.ifError);
     });
 
     it('should make the correct API request', function(done) {
@@ -194,7 +194,7 @@ describe('InstanceGroupManager', function() {
         done();
       };
 
-      instanceGroupManager.listManagedInstances(query, assert.ifError);
+      instanceGroupManager.getManagedInstances(query, assert.ifError);
     });
 
     describe('error', function() {
@@ -208,7 +208,7 @@ describe('InstanceGroupManager', function() {
       });
 
       it('should execute callback with error & API response', function(done) {
-        instanceGroupManager.listManagedInstances({}, function(
+        instanceGroupManager.getManagedInstances({}, function(
           err,
           vms,
           nextQuery,
@@ -246,7 +246,7 @@ describe('InstanceGroupManager', function() {
           callback(null, apiResponseWithNextPageToken);
         };
 
-        instanceGroupManager.listManagedInstances({}, function(
+        instanceGroupManager.getManagedInstances({}, function(
           err,
           vms,
           nextQuery
@@ -267,7 +267,7 @@ describe('InstanceGroupManager', function() {
           return vm;
         };
 
-        instanceGroupManager.listManagedInstances({}, function(
+        instanceGroupManager.getManagedInstances({}, function(
           err,
           vms,
           nextQuery,

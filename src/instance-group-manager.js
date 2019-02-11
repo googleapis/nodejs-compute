@@ -244,7 +244,7 @@ class InstanceGroupManager extends common.ServiceObject {
    * const zone = compute.zone('us-central1-a');
    * const instanceGroupManager = zone.instanceGroupManager('web-servers');
    *
-   * instanceGroupManager.listManagedInstances(function(err, vms) {
+   * instanceGroupManager.getManagedInstances(function(err, vms) {
    *   // `vms` is an array of `VM` objects.
    * });
    *
@@ -255,22 +255,22 @@ class InstanceGroupManager extends common.ServiceObject {
    * function callback(err, vms, nextQuery, apiResponse) {
    *   if (nextQuery) {
    *     // More results exist.
-   *     instanceGroupManager.listManagedInstances(nextQuery, callback);
+   *     instanceGroupManager.getManagedInstances(nextQuery, callback);
    *   }
    * }
    *
-   * instanceGroupManager.listManagedInstances({
+   * instanceGroupManager.getManagedInstances({
    *   autoPaginate: false
    * }, callback);
    *
    * //-
    * // If the callback is omitted, we'll return a Promise.
    * //-
-   * instanceGroupManager.listManagedInstances().then(function(data) {
+   * instanceGroupManager.getManagedInstances().then(function(data) {
    *   const vms = data[0];
    * });
    */
-  listManagedInstances(options, callback) {
+  getManagedInstances(options, callback) {
     const self = this;
     if (is.fn(options)) {
       callback = options;
