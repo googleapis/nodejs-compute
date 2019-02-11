@@ -216,7 +216,7 @@ class InstanceGroupManager extends common.ServiceObject {
   /**
    * Get a list of managed VM instances in this instance group manager.
    *
-   * @see [InstanceGroupManagers: listManagedInstances API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/instanceGroupManagerss/listManagedInstances}
+   * @see [InstanceGroupManagers: listManagedInstances API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/instanceGroupManagers/listManagedInstances}
    *
    * @param {object=} options - Instance search options.
    * @param {boolean} options.autoPaginate - Have pagination handled
