@@ -57,7 +57,7 @@ describe('start-up script', async () => {
   after(async () => deleteVM(name));
   it('should create vm with startup script', async () => {
     const output = execSync(`node startupScript ${name}`);
-    assert.match(output, /created succesfully$/);
+    assert.match(output, /created succesfully/);
   });
 });
 
