@@ -20,7 +20,7 @@ const cp = require('child_process');
 const {assert} = require('chai');
 const Compute = require('@google-cloud/compute');
 
-const execSync = (cmd) => cp.execSync(cmd, {encoding: 'utf-8'});
+const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
 
 const compute = new Compute();
 
