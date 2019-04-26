@@ -13,6 +13,10 @@
  * limitations under the License.
  */
 
+// sample-metadata:
+//  title: Mailjet
+//  usage: node mailjet
+
 'use strict';
 
 // [START send]

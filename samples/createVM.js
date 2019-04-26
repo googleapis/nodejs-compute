@@ -11,6 +11,10 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+// sample-metadata:
+//  title: Create VM
+//  usage: node createVM <vmName>
+
 'use strict';
 
 async function main(

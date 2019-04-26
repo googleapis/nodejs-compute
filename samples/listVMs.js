@@ -13,6 +13,10 @@
  * limitations under the License.
  */
 
+// sample-metadata:
+//  title: List VMs
+//  usage: node listVMs
+
 'use strict';
 
 async function main() {

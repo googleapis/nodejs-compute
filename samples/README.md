@@ -14,7 +14,7 @@
 * [Samples](#samples)
   * [Create VM](#create-vm)
   * [Delete VM](#delete-vm)
-  * [List V Ms](#list-v-ms)
+  * [List VMs](#list-vms)
   * [Mailjet](#mailjet)
   * [Quickstart](#quickstart)
   * [Sendgrid](#sendgrid)
@@ -39,7 +39,7 @@ View the [source code](https://github.com/googleapis/nodejs-compute/blob/master/
 __Usage:__
 
 
-`node createVM.js`
+`node createVM <vmName>`
 
 
 -----
@@ -56,7 +56,7 @@ View the [source code](https://github.com/googleapis/nodejs-compute/blob/master/
 __Usage:__
 
 
-`node deleteVM.js`
+`node deleteVM <vmName>`
 
 
 -----
@@ -64,7 +64,7 @@ __Usage:__
 
 
 
-### List V Ms
+### List VMs
 
 View the [source code](https://github.com/googleapis/nodejs-compute/blob/master/samples/listVMs.js).
 
@@ -73,7 +73,7 @@ View the [source code](https://github.com/googleapis/nodejs-compute/blob/master/
 __Usage:__
 
 
-`node listVMs.js`
+`node listVMs`
 
 
 -----
@@ -90,7 +90,7 @@ View the [source code](https://github.com/googleapis/nodejs-compute/blob/master/
 __Usage:__
 
 
-`node mailjet.js`
+`node mailjet`
 
 
 -----
