@@ -154,6 +154,64 @@ class InstanceGroupManager extends common.ServiceObject {
     this.name = name;
   }
   /**
+   * Flags the specified instances to be removed from the managed instance group.
+   * @see [InstanceGroupManagers: abandonInstances API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/instanceGroupManagers/abandonInstances}
+   * @param {VM|VM[]} vms - VM instances to abandon from
+   *     this instance group manager.
+   * @param {function} callback - The callback function.
+   * @param {?error} callback.err - An error returned while making this request.
+   * @param {Operation} callback.operation - An operation object
+   *     that can be used to check the status of the request.
+   * @param {object} callback.apiResponse - The full API response.
+   *
+   * @example
+   * const Compute = require('@google-cloud/compute');
+   * const compute = new Compute();
+   * const zone = compute.zone('us-central1-a');
+   * const instanceGroupManager = zone.instanceGroupManager('web-servers');
+   *
+   * const vms = [
+   *   gce.zone('us-central1-a').vm('http-server'),
+   *   gce.zone('us-central1-a').vm('https-server')
+   * ];
+   *
+   * instanceGroupManager.abandonInstances(vms, function(err, operation, apiResponse) {
+   *   // `operation` is an Operation object that can be used to check the status
+   *   // of the request.
+   * });
+   *
+   * //-
+   * // If the callback is omitted, we'll return a Promise.
+   * //-
+   * instanceGroupManager.abandonInstances(vms).then(function(data) {
+   *   const operation = data[0];
+   *   const apiResponse = data[1];
+   * });
+   */
+  abandonInstances(vms, callback) {
+    const self = this;
+    this.request(
+      {
+        method: 'POST',
+        uri: '/abandonInstances',
+        json: {
+          instances: arrify(vms).map(function(vm) {
+            return vm.url;
+          }),
+        },
+      },
+      function(err, resp) {
+        if (err) {
+          callback(err, null, resp);
+          return;
+        }
+        const operation = self.zone.operation(resp.name);
+        operation.metadata = resp;
+        callback(null, operation, resp);
+      }
+    );
+  }
+  /**
    * Flags the specified instances in the managed instance group for immediate deletion.
    * @see [InstanceGroupManagers: deleteInstances API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/instanceGroupManagers/deleteInstances}
    * @param {VM|VM[]} vms - VM instances to delete from
