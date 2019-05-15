@@ -189,23 +189,20 @@ class InstanceGroupManager extends common.ServiceObject {
    * });
    */
   abandonInstances(vms, callback) {
-    const self = this;
     this.request(
       {
         method: 'POST',
         uri: '/abandonInstances',
         json: {
-          instances: arrify(vms).map(function(vm) {
-            return vm.url;
-          }),
+          instances: arrify(vms).map(vm => vm.url),
         },
       },
-      function(err, resp) {
+      (err, resp) => {
         if (err) {
           callback(err, null, resp);
           return;
         }
-        const operation = self.zone.operation(resp.name);
+        const operation = this.zone.operation(resp.name);
         operation.metadata = resp;
         callback(null, operation, resp);
       }
@@ -247,23 +244,20 @@ class InstanceGroupManager extends common.ServiceObject {
    * });
    */
   deleteInstances(vms, callback) {
-    const self = this;
     this.request(
       {
         method: 'POST',
         uri: '/deleteInstances',
         json: {
-          instances: arrify(vms).map(function(vm) {
-            return vm.url;
-          }),
+          instances: arrify(vms).map(vm => vm.url),
         },
       },
-      function(err, resp) {
+      (err, resp) => {
         if (err) {
           callback(err, null, resp);
           return;
         }
-        const operation = self.zone.operation(resp.name);
+        const operation = this.zone.operation(resp.name);
         operation.metadata = resp;
         callback(null, operation, resp);
       }
@@ -327,7 +321,6 @@ class InstanceGroupManager extends common.ServiceObject {
    * });
    */
   getManagedInstances(options, callback) {
-    const self = this;
     if (is.fn(options)) {
       callback = options;
       options = {};
@@ -339,7 +332,7 @@ class InstanceGroupManager extends common.ServiceObject {
         uri: '/listManagedInstances',
         qs: options,
       },
-      function(err, resp) {
+      (err, resp) => {
         if (err) {
           callback(err, null, null, resp);
           return;
@@ -350,8 +343,8 @@ class InstanceGroupManager extends common.ServiceObject {
             pageToken: resp.nextPageToken,
           });
         }
-        const vms = arrify(resp.managedInstances).map(function(vm) {
-          const vmInstance = self.zone.vm(vm.instance);
+        const vms = arrify(resp.managedInstances).map(vm => {
+          const vmInstance = this.zone.vm(vm.instance);
           vmInstance.metadata = vm;
           return vmInstance;
         });
@@ -391,19 +384,18 @@ class InstanceGroupManager extends common.ServiceObject {
    * });
    */
   resize(size, callback) {
-    const self = this;
     this.request(
       {
         method: 'POST',
         uri: '/resize',
         qs: {size: size},
       },
-      function(err, resp) {
+      (err, resp) => {
         if (err) {
           callback(err, null, resp);
           return;
         }
-        const operation = self.zone.operation(resp.name);
+        const operation = this.zone.operation(resp.name);
         operation.metadata = resp;
         callback(null, operation, resp);
       }
