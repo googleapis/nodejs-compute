@@ -1119,6 +1119,7 @@ describe('Compute', () => {
     await callAndDeleteGcloudTestObject('Rules', opts);
     await deleteTargetProxies(opts);
     await deleteUrlMaps(opts);
+    await callAndDeleteGcloudTestObject('Services', opts);
     await deleteHttpsHealthChecks(opts);
     await deleteInstanceGroupManagers(opts);
     await deleteInstanceTemplates(opts);
@@ -1139,7 +1140,6 @@ describe('Compute', () => {
       'HealthChecks',
       'Networks',
       'Snapshots',
-      'Services',
     ];
     for (const type of objectTypes) {
       await callAndDeleteGcloudTestObject(type, opts);
