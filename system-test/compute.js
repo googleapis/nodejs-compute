@@ -1414,6 +1414,7 @@ async function awaitResult(promise) {
 }
 
 function filterExpired(resources, opts) {
+  resources = resources || [];
   if (opts.expiredOnly) {
     return resources.filter(isExpired);
   } else {
