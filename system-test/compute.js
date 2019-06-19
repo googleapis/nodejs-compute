@@ -51,8 +51,8 @@ describe('Compute', () => {
   const computeRequest = promisify(compute.request).bind(compute);
   const zoneRequest = promisify(zone.request).bind(zone);
 
-  before(async () => deleteAllTestObjects({expiredOnly: true}));
-  after(async () => deleteAllTestObjects({expiredOnly: false}));
+  before(() => deleteAllTestObjects({expiredOnly: true}));
+  after(() => deleteAllTestObjects({expiredOnly: false}));
 
   describe('addresses', () => {
     const ADDRESS_NAME = generateName('address');
@@ -146,7 +146,7 @@ describe('Compute', () => {
       assert(autoscalers.length > 0);
     });
 
-    it('should get a list of autoscalers in stream mode', done => {
+    it.only('should get a list of autoscalers in stream mode', done => {
       let resultsMatched = 0;
       compute
         .getAutoscalersStream()
@@ -1115,11 +1115,9 @@ describe('Compute', () => {
 
   async function deleteAllTestObjects(opts) {
     opts.name = opts.expiredOnly ? TESTS_PREFIX : FULL_PREFIX;
-    await deleteGlobalRules(opts);
     await deleteRegionalRules(opts);
     await deleteTargetProxies(opts);
     await deleteUrlMaps(opts);
-    await deleteServices(opts);
     await deleteHttpsHealthChecks(opts);
     await deleteInstanceGroupManagers(opts);
     await deleteInstanceTemplates(opts);
@@ -1141,6 +1139,7 @@ describe('Compute', () => {
       'Networks',
       'Rules',
       'Snapshots',
+      'Services',
     ];
     for (const type of objectTypes) {
       await callAndDeleteGcloudTestObject(type, opts);
@@ -1151,7 +1150,10 @@ describe('Compute', () => {
     let [objects] = await compute[`get${type}`]({
       filter: `name eq ${opts.name}.*`,
     });
-    objects = filterExpired(opts, objects);
+    objects = filterExpired(objects, opts);
+    if (objects.length === 0) {
+      return Promise.resolve();
+    }
     console.log(`deleting ${objects.length} ${type}...`);
     await Promise.all(
       objects.map(async o => {
@@ -1166,32 +1168,12 @@ describe('Compute', () => {
     return awaitResult(object.create(cfg));
   }
 
-  async function deleteGlobalRules(opts) {
-    const [rules] = await compute.getRules({
-      filter: `name eq ${opts.name}.*`,
-    });
-    await Promise.all(
-      filterExpired(opts, rules).map(rule => awaitResult(rule.delete()))
-    );
-  }
-
   async function deleteRegionalRules(opts) {
     const [rules] = await region.getRules({
       filter: `name eq ${opts.name}.*`,
     });
     return Promise.all(
-      filterExpired(opts, rules).map(rule => awaitResult(rule.delete()))
-    );
-  }
-
-  async function deleteServices(opts) {
-    const [services] = await compute.getServices({
-      filter: `name eq ${opts.name}.*`,
-    });
-    return Promise.all(
-      filterExpired(opts, services).map(service =>
-        awaitResult(service.delete())
-      )
+      filterExpired(rules, opts).map(rule => awaitResult(rule.delete()))
     );
   }
 
@@ -1221,7 +1203,7 @@ describe('Compute', () => {
       https: true,
     });
     return Promise.all(
-      filterExpired(opts, healthChecks).map(healthCheck =>
+      filterExpired(healthChecks, opts).map(healthCheck =>
         awaitResult(healthCheck.delete())
       )
     );
@@ -1234,11 +1216,8 @@ describe('Compute', () => {
         filter: `name eq ${opts.name}.*`,
       },
     });
-    if (!resp.items) {
-      return;
-    }
     return Promise.all(
-      filterExpired(opts, resp.items)
+      filterExpired(resp.items, opts)
         .map(x => x.name)
         .map(deleteUrlMap)
     );
@@ -1270,11 +1249,8 @@ describe('Compute', () => {
         filter: `name eq ${opts.name}.*`,
       },
     });
-    if (!resp.items) {
-      return;
-    }
     return Promise.all(
-      filterExpired(opts, resp.items)
+      filterExpired(resp.items, opts)
         .map(x => x.name)
         .map(deleteTargetProxy)
     );
@@ -1306,11 +1282,8 @@ describe('Compute', () => {
         filter: `name eq ${opts.name}.*`,
       },
     });
-    if (!resp.items) {
-      return;
-    }
     return Promise.all(
-      filterExpired(opts, resp.items)
+      filterExpired(resp.items, opts)
         .map(x => x.name)
         .map(x => deleteTargetInstance(x))
     );
@@ -1345,10 +1318,7 @@ describe('Compute', () => {
         filter: `name eq ${opts.name}.*`,
       },
     });
-    if (!resp.items) {
-      return;
-    }
-    const names = filterExpired(opts, resp.items).map(x => x.name);
+    const names = filterExpired(resp.items, opts).map(x => x.name);
     return Promise.all(names.map(x => deleteInstanceTemplate(x)));
   }
 
@@ -1408,10 +1378,7 @@ describe('Compute', () => {
         filter: `name eq ${opts.name}.*`,
       },
     });
-    if (!resp.items) {
-      return;
-    }
-    const names = filterExpired(opts, resp.items).map(x => x.name);
+    const names = filterExpired(resp.items, opts).map(x => x.name);
     await Promise.all(names.map(name => deleteInstanceGroupManager(name)));
   }
 
@@ -1446,7 +1413,7 @@ async function awaitResult(promise) {
   await operation.promise();
 }
 
-function filterExpired(opts, resources) {
+function filterExpired(resources, opts) {
   if (opts.expiredOnly) {
     return resources.filter(isExpired);
   } else {
