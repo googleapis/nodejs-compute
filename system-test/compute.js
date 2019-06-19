@@ -146,7 +146,7 @@ describe('Compute', () => {
       assert(autoscalers.length > 0);
     });
 
-    it.only('should get a list of autoscalers in stream mode', done => {
+    it('should get a list of autoscalers in stream mode', done => {
       let resultsMatched = 0;
       compute
         .getAutoscalersStream()
