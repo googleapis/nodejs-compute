@@ -1116,6 +1116,7 @@ describe('Compute', () => {
   async function deleteAllTestObjects(opts) {
     opts.name = opts.expiredOnly ? TESTS_PREFIX : FULL_PREFIX;
     await deleteRegionalRules(opts);
+    await callAndDeleteGcloudTestObject('Rules', opts);
     await deleteTargetProxies(opts);
     await deleteUrlMaps(opts);
     await deleteHttpsHealthChecks(opts);
@@ -1137,7 +1138,6 @@ describe('Compute', () => {
       'Subnetworks',
       'HealthChecks',
       'Networks',
-      'Rules',
       'Snapshots',
       'Services',
     ];
