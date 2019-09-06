@@ -46,7 +46,7 @@ describe('Service', function() {
   const COMPUTE = {
     projectId: 'project-id',
     createService: util.noop,
-    apiEndpoint: 'www.googleapis.com',
+    apiEndpoint: 'compute.googleapis.com',
   };
 
   before(function() {
@@ -204,7 +204,7 @@ describe('Service', function() {
         service.request = function(reqOpts) {
           assert.deepStrictEqual(reqOpts.json, {
             group: [
-              'https://www.googleapis.com/compute/v1/projects/',
+              'https://compute.googleapis.com/compute/v1/projects/',
               COMPUTE.projectId,
               '/zones/',
               group.zone,
@@ -231,7 +231,7 @@ describe('Service', function() {
         service.request = function(reqOpts) {
           assert.deepStrictEqual(reqOpts.json, {
             group: [
-              'https://www.googleapis.com/compute/v1/projects/',
+              'https://compute.googleapis.com/compute/v1/projects/',
               COMPUTE.projectId,
               '/zones/',
               group.zone.name,
