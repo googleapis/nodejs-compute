@@ -746,8 +746,7 @@ describe('Compute', () => {
 
     it('should set a new target', async () => {
       let target = [
-        'https://www.googleapis.com/compute/v1/projects/' +
-          compute.projectId,
+        'https://www.googleapis.com/compute/v1/projects/' + compute.projectId,
         '/global/targetHttpProxies/' + TARGET_PROXY_NAME,
       ].join('');
 
@@ -790,8 +789,7 @@ describe('Compute', () => {
 
     it('should have created the right rule', async () => {
       let target = [
-        'https://www.googleapis.com/compute/v1/projects/' +
-          compute.projectId,
+        'https://www.googleapis.com/compute/v1/projects/' + compute.projectId,
         '/zones/' + zone.name + '/targetInstances/' + TARGET_INSTANCE_NAME,
       ].join('');
 
