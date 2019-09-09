@@ -540,7 +540,7 @@ class Zone extends common.ServiceObject {
    *       boot: true,
    *       initializeParams: {
    *         sourceImage:
-   *           'https://compute.googleapis.com/compute/v1/projects' +
+   *           'https://www.googleapis.com/compute/v1/projects' +
    *           '/debian-cloud/global/images/debian-7-wheezy-v20150710'
    *       }
    *     }

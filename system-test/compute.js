@@ -108,7 +108,7 @@ describe('Compute', () => {
       await createInstanceGroupManager(
         INSTANCE_GROUP_MANAGER_NAME,
         [
-          'https://compute.googleapis.com/compute/v1/projects',
+          'https://www.googleapis.com/compute/v1/projects',
           compute.projectId,
           'global/instanceTemplates',
           INSTANCE_TEMPLATE_NAME,
@@ -729,7 +729,7 @@ describe('Compute', () => {
 
     it('should have created the right rule', async () => {
       const target = [
-        'https://compute.googleapis.com/compute/v1/global/targetHttpProxies/',
+        'https://www.googleapis.com/compute/v1/global/targetHttpProxies/',
         TARGET_PROXY_NAME,
       ].join('');
 
@@ -746,7 +746,7 @@ describe('Compute', () => {
 
     it('should set a new target', async () => {
       let target = [
-        'https://compute.googleapis.com/compute/v1/projects/' +
+        'https://www.googleapis.com/compute/v1/projects/' +
           compute.projectId,
         '/global/targetHttpProxies/' + TARGET_PROXY_NAME,
       ].join('');
@@ -790,7 +790,7 @@ describe('Compute', () => {
 
     it('should have created the right rule', async () => {
       let target = [
-        'https://compute.googleapis.com/compute/v1/projects/' +
+        'https://www.googleapis.com/compute/v1/projects/' +
           compute.projectId,
         '/zones/' + zone.name + '/targetInstances/' + TARGET_INSTANCE_NAME,
       ].join('');
@@ -1000,7 +1000,7 @@ describe('Compute', () => {
       await vm.resize(machineType);
       const [metadata] = await vm.getMetadata();
       const expectedMachineType = [
-        'https://compute.googleapis.com/compute/v1',
+        'https://www.googleapis.com/compute/v1',
         'zones',
         zone.id,
         'machineTypes',
