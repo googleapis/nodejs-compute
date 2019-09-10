@@ -249,7 +249,7 @@ class VM extends common.ServiceObject {
     this.hasActiveWaiters = false;
     this.waiters = [];
     this.url = format('{base}/{project}/zones/{zone}/instances/{name}', {
-      base: `https://${this.zone.compute.apiEndpoint}/compute/v1/projects`,
+      base: `https://www.googleapis.com/compute/v1/projects`,
       project: zone.compute.projectId,
       zone: zone.name,
       name: this.name,
@@ -431,7 +431,7 @@ class VM extends common.ServiceObject {
         }
         const diskName = replaceProjectIdToken(disk.formattedName, projectId);
         let deviceName;
-        const baseUrl = `https://${self.zone.compute.apiEndpoint}/compute/v1/`;
+        const baseUrl = `https://www.googleapis.com/compute/v1/`;
         const disks = metadata.disks || [];
         // Try to find the deviceName by matching the source of the attached disks
         // to the name of the disk provided by the user.

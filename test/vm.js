@@ -125,7 +125,7 @@ describe('VM', function() {
       assert.strictEqual(
         vm.url,
         [
-          'https://compute.googleapis.com/compute/v1/projects',
+          'https://www.googleapis.com/compute/v1/projects',
           COMPUTE.projectId,
           'zones',
           ZONE.name,
