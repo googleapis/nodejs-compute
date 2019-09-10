@@ -248,12 +248,15 @@ class VM extends common.ServiceObject {
     this.zone = zone;
     this.hasActiveWaiters = false;
     this.waiters = [];
-    this.url = format('{resourceBaseUrl}/{project}/zones/{zone}/instances/{name}', {
-      resourceBaseUrl: `https://www.googleapis.com/compute/v1/projects`,
-      project: zone.compute.projectId,
-      zone: zone.name,
-      name: this.name,
-    });
+    this.url = format(
+      '{resourceBaseUrl}/{project}/zones/{zone}/instances/{name}',
+      {
+        resourceBaseUrl: `https://www.googleapis.com/compute/v1/projects`,
+        project: zone.compute.projectId,
+        zone: zone.name,
+        name: this.name,
+      }
+    );
   }
   /**
    * Attach a disk to the instance.
