@@ -44,6 +44,7 @@
     "extend": "^3.0.2",
     "gce-images": "^2.0.0",
     "is": "^3.2.1",
+    "jsdoc-region-tag": "^1.0.2",
     "string-format-obj": "^1.1.1"
   },
   "devDependencies": {
