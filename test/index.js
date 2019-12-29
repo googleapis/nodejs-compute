@@ -16,6 +16,7 @@
 
 const arrify = require('arrify');
 const assert = require('assert');
+const {describe, it} = require('mocha');
 const events = require('events');
 const extend = require('extend');
 const format = require('string-format-obj');

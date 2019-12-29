@@ -16,6 +16,7 @@
 
 const proxyquire = require('proxyquire');
 const {assert} = require('chai');
+const {describe, it} = require('mocha');
 
 process.env.SENDGRID_API_KEY = `foo`;
 

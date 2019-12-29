@@ -15,6 +15,7 @@
 'use strict';
 
 const assert = require('assert');
+const {describe, it} = require('mocha');
 const format = require('string-format-obj');
 const proxyquire = require('proxyquire');
 const {ServiceObject, util} = require('@google-cloud/common');

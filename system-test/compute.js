@@ -15,6 +15,7 @@
 'use strict';
 
 const assert = require('assert');
+const {describe, it} = require('mocha');
 const concat = require('concat-stream');
 const uuid = require('uuid');
 const {promisify} = require('util');

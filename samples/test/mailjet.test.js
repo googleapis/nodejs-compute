@@ -16,6 +16,7 @@
 
 const proxyquire = require(`proxyquire`).noPreserveCache();
 const assert = require('assert');
+const {describe, it} = require('mocha');
 
 process.env.MAILJET_API_KEY = `foo`;
 process.env.MAILJET_API_SECRET = `bar`;
