@@ -17,7 +17,7 @@
 const uuid = require('uuid');
 const cp = require('child_process');
 const {assert} = require('chai');
-const {describe, it} = require('mocha');
+const {describe, it, after} = require('mocha');
 const Compute = require('@google-cloud/compute');
 
 const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
