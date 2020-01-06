@@ -34,6 +34,7 @@ const Service = require('./service.js');
 const Snapshot = require('./snapshot.js');
 const Zone = require('./zone.js');
 const Image = require('./image.js');
+const InstanceTemplate = require('./instance-template.js');
 
 /**
  * @typedef {object} ClientConfig
@@ -360,6 +361,69 @@ class Compute extends common.Service {
         const operation = self.operation(resp.name);
         operation.metadata = resp;
         callback(null, image, operation, resp);
+      }
+    );
+  }
+  /**
+   * Create an instance template.
+   *
+   * @see [Instance Templates: insert API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/instanceTemplates/insert}
+   *
+   * @param {string} name - The name of the target image.
+   * @param {object} [options] - See the
+   *     [Instance Templates: insert API documentation](https://cloud.google.com/compute/docs/reference/v1/instanceTemplates/insert).
+   * @param {function} callback - The callback function.
+   *
+   * @example
+   * const Compute = require('@google-cloud/compute');
+   * const compute = new Compute();
+   *
+   * const options = {
+   *   properties: {
+   *     machineType: "f1-micro", // set a size
+   *     networkInterfaces: [{ accessConfigs: [{}] }], // give it network
+   *   }
+   * }
+   * compute.createInstanceTemplate('new-template', options, function(err, operation, apiResponse) {
+   *   // `operation` is an Operation object that can be used to check the status
+   *   // of instance template creation.
+   * });
+   *
+   * //-
+   * // If the callback is omitted, we'll return a Promise.
+   * //-
+   * compute.createInstanceTemplate('new-image', options).then(function(data) {
+   *   var operation = data[0];
+   *   var apiResponse = data[1];
+   * });
+   */
+  createInstanceTemplate(name, options, callback) {
+    const self = this;
+    if (is.fn(options)) {
+      callback = options;
+      options = {};
+    }
+    const body = Object.assign(
+      {
+        name: name,
+      },
+      options
+    );
+    this.request(
+      {
+        method: 'POST',
+        uri: '/global/instanceTemplates',
+        json: body,
+      },
+      function(err, resp) {
+        if (err) {
+          callback(err, null, resp);
+          return;
+        }
+        const instanceTemplate = self.instanceTemplate(name);
+        const operation = self.operation(resp.name);
+        operation.metadata = resp;
+        callback(null, instanceTemplate, operation, resp);
       }
     );
   }
@@ -2158,6 +2222,23 @@ class Compute extends common.Service {
    */
   image(name) {
     return new Image(this, name);
+  }
+  /**
+   * Get a reference to a Google Compute Engine instance template.
+   *
+   * @see [Instance Templates Overview]{@link https://cloud.google.com/compute/docs/instanceTemplates}
+   *
+   * @param {string} name - Name of the instance template.
+   * @returns {Image}
+   *
+   * @example
+   * var instanceTemplate = gce.instanceTemplate('instance-template-name');
+   */
+  instanceTemplate(name) {
+    if (!name) {
+      throw new Error('An instance template name is required.');
+    }
+    return new InstanceTemplate(this, name);
   }
   /**
    * Get a reference to a Google Compute Engine network.
