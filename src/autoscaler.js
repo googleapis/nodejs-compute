@@ -177,7 +177,7 @@ class Autoscaler extends common.ServiceObject {
       id: name,
       createMethod: zone.createAutoscaler.bind(zone),
       methods: methods,
-      pollIntervalMs: zone.compute.pollIntervalMs
+      pollIntervalMs: zone.compute.pollIntervalMs,
     });
     /**
      * @name Autoscaler#name

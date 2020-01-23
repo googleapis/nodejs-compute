@@ -156,7 +156,7 @@ class Image extends common.ServiceObject {
       id: name,
       createMethod: compute.createImage.bind(compute),
       methods: methods,
-      pollIntervalMs: compute.pollIntervalMs
+      pollIntervalMs: compute.pollIntervalMs,
     });
   }
   /**
