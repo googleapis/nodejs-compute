@@ -55,30 +55,30 @@ npm install @google-cloud/compute
 ### Using the client library
 
 ```javascript
-  // Imports the Google Cloud client library
-  const Compute = require('@google-cloud/compute');
+// Imports the Google Cloud client library
+const Compute = require('@google-cloud/compute');
 
-  // Creates a client
-  const compute = new Compute();
+// Creates a client
+const compute = new Compute();
 
-  async function quickstart() {
-    // Create a new VM using the latest OS image of your choice.
-    const zone = compute.zone('us-central1-c');
+async function quickstart() {
+  // Create a new VM using the latest OS image of your choice.
+  const zone = compute.zone('us-central1-c');
 
-    // TODO(developer): choose a name for the VM
-    // const vmName = 'vm-name';
+  // TODO(developer): choose a name for the VM
+  // const vmName = 'vm-name';
 
-    // Start the VM create task
-    const [vm, operation] = await zone.createVM(vmName, {os: 'ubuntu'});
-    console.log(vm);
+  // Start the VM create task
+  const [vm, operation] = await zone.createVM(vmName, {os: 'ubuntu'});
+  console.log(vm);
 
-    // `operation` lets you check the status of long-running tasks.
-    await operation.promise();
+  // `operation` lets you check the status of long-running tasks.
+  await operation.promise();
 
-    // Complete!
-    console.log('Virtual machine created!');
-  }
-  quickstart();
+  // Complete!
+  console.log('Virtual machine created!');
+}
+quickstart();
 
 ```
 
@@ -126,11 +126,13 @@ More Information: [Google Cloud Platform Launch Stages][launch_stages]
 
 Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/nodejs-compute/blob/master/CONTRIBUTING.md).
 
-Please note that this `README.md`, the `samples/README.md`,
+Please note that this [README.md](README.md), the [samples/README.md](samples/README.md),
 and a variety of configuration files in this repository (including `.nycrc` and `tsconfig.json`)
-are generated from a central template. To edit one of these files, make an edit
-to its template in this
-[directory](https://github.com/googleapis/synthtool/tree/master/synthtool/gcp/templates/node_library).
+are generated from a central template.
+
+If you would like to make edits to one of those files
+(or if you aren't certain if the file you're changing is one, check in the template repository before making changes),
+look for the file in the [template](https://github.com/googleapis/synthtool/tree/master/synthtool/gcp/templates/node_library).
 
 ## License
 
