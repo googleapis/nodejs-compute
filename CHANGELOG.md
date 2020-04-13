@@ -4,6 +4,17 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/compute?activeTab=versions
 
+### [1.2.1](https://www.github.com/googleapis/nodejs-compute/compare/v1.2.0...v1.2.1) (2020-04-13)
+
+
+### Bug Fixes
+
+* apache license URL ([#468](https://www.github.com/googleapis/nodejs-compute/issues/468)) ([#427](https://www.github.com/googleapis/nodejs-compute/issues/427)) ([02d63ed](https://www.github.com/googleapis/nodejs-compute/commit/02d63ed5a5a3559be0b5e49ed4c771b3661518a1))
+* **deps:** update dependency @google-cloud/paginator to v3 ([#419](https://www.github.com/googleapis/nodejs-compute/issues/419)) ([e667aee](https://www.github.com/googleapis/nodejs-compute/commit/e667aeecf7b9f51875c06cb6a885040828dc1181))
+* **deps:** update dependency @google-cloud/projectify to v2 ([#418](https://www.github.com/googleapis/nodejs-compute/issues/418)) ([b861540](https://www.github.com/googleapis/nodejs-compute/commit/b861540aa17118a7508c7c970d84864a9028f588))
+* **deps:** update dependency @google-cloud/promisify to v2 ([#417](https://www.github.com/googleapis/nodejs-compute/issues/417)) ([eedce75](https://www.github.com/googleapis/nodejs-compute/commit/eedce75e0d3f10dfed8151f12150d38d032f6a27))
+* **deps:** update dependency @sendgrid/mail to v7 ([#424](https://www.github.com/googleapis/nodejs-compute/issues/424)) ([17af0f4](https://www.github.com/googleapis/nodejs-compute/commit/17af0f425354b261f9afc8ab30e16e66b7193fec))
+
 ## [1.2.0](https://www.github.com/googleapis/nodejs-compute/compare/v1.1.8...v1.2.0) (2020-01-23)
 
 
