@@ -31,7 +31,7 @@ async function main(
     const vm = zone.vm(name);
     const [operation] = await vm.delete();
     await operation.promise();
-    console.log(`VM deleted!`);
+    console.log('VM deleted!');
   }
   deleteVM();
   // [END gce_delete_vm]
