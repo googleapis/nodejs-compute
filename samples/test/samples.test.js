@@ -55,13 +55,10 @@ describe('samples', () => {
   describe('start-up script', () => {
     const name = `gcloud-apache-${uuid.v4().split('-')[0]}`;
     after(async () => deleteVM(name));
-    it('should create vm with startup script', function() {
-      console.info('start the test');
+    it('should create vm with startup script', async function() {
       this.timeout(280000);
       this.retries(3);
-      console.info('wait on output');
-      const output = execSync(`node startupScript ${name}`);
-      console.info('output finished');
+      const output = execSync(`node startupScript ${name}`, {timeout: 280000});
       assert.match(output, /created succesfully/);
     });
   });
