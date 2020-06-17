@@ -56,9 +56,12 @@ describe('samples', () => {
     const name = `gcloud-apache-${uuid.v4().split('-')[0]}`;
     after(async () => deleteVM(name));
     it('should create vm with startup script', function() {
+      console.info('start the test');
       this.timeout(280000);
       this.retries(3);
+      console.info('wait on output');
       const output = execSync(`node startupScript ${name}`);
+      console.info('output finished');
       assert.match(output, /created succesfully/);
     });
   });
@@ -69,6 +72,7 @@ describe('samples', () => {
  * @param {string} name
  */
 async function deleteVM(name) {
+  console.info('delete VM');
   const zone = compute.zone('us-central1-c');
   const vm = zone.vm(name);
   const [operation] = await vm.delete();
