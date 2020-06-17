@@ -75,7 +75,6 @@ describe('samples', () => {
  * @param {string} name
  */
 async function deleteVM(name) {
-  console.info('delete VM');
   const zone = compute.zone('us-central1-c');
   const vm = zone.vm(name);
   const [operation] = await vm.delete();
