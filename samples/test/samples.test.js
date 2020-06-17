@@ -59,7 +59,7 @@ describe('samples', () => {
       this.timeout(280000);
       this.retries(3);
       const {spawn} = require('child_process');
-      const startupScript = spawn('ls', ['startupScript', name], {
+      const startupScript = spawn('node', ['startupScript', name], {
         stdio: 'inherit',
       });
       startupScript.on('close', code => {
