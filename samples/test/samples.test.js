@@ -23,40 +23,42 @@ const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
 
 const compute = new Compute();
 
-describe('quickstart', () => {
-  const name = `gcloud-ubuntu-${uuid.v4().split('-')[0]}`;
-  after(async () => deleteVM(name));
-  it('should run the quickstart', async () => {
-    const output = execSync(`node quickstart ${name}`);
-    assert.match(output, /Virtual machine created!/);
-  });
-});
-
-describe('lifecycle', async () => {
-  const name = `gcloud-ubuntu-${uuid.v4().split('-')[0]}`;
-
-  it('should create a VM', async () => {
-    const output = execSync(`node createVM ${name}`);
-    assert.match(output, /Virtual machine created!/);
+describe('samples', () => {
+  describe('quickstart', () => {
+    const name = `gcloud-ubuntu-${uuid.v4().split('-')[0]}`;
+    after(async () => deleteVM(name));
+    it('should run the quickstart', async () => {
+      const output = execSync(`node quickstart ${name}`);
+      assert.match(output, /Virtual machine created!/);
+    });
   });
 
-  it('should list the VMs', async () => {
-    const output = execSync('node listVMs');
-    assert.match(output, /Found \d+ VMs!/);
+  describe('lifecycle', async () => {
+    const name = `gcloud-ubuntu-${uuid.v4().split('-')[0]}`;
+
+    it('should create a VM', async () => {
+      const output = execSync(`node createVM ${name}`);
+      assert.match(output, /Virtual machine created!/);
+    });
+
+    it('should list the VMs', async () => {
+      const output = execSync('node listVMs');
+      assert.match(output, /Found \d+ VMs!/);
+    });
+
+    it('should delete the VM', async () => {
+      const output = execSync(`node deleteVM ${name}`);
+      assert.match(output, /VM deleted!/);
+    });
   });
 
-  it('should delete the VM', async () => {
-    const output = execSync(`node deleteVM ${name}`);
-    assert.match(output, /VM deleted!/);
-  });
-});
-
-describe('start-up script', async () => {
-  const name = `gcloud-apache-${uuid.v4().split('-')[0]}`;
-  after(async () => deleteVM(name));
-  it('should create vm with startup script', async () => {
-    const output = execSync(`node startupScript ${name}`);
-    assert.match(output, /created succesfully/);
+  describe('start-up script', async () => {
+    const name = `gcloud-apache-${uuid.v4().split('-')[0]}`;
+    after(async () => deleteVM(name));
+    it('should create vm with startup script', async () => {
+      const output = execSync(`node startupScript ${name}`);
+      assert.match(output, /created succesfully/);
+    });
   });
 });
 
