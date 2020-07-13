@@ -18,6 +18,7 @@
 
 const arrify = require('arrify');
 const common = require('@google-cloud/common');
+const extend = require('extend');
 const format = require('string-format-obj');
 const is = require('is');
 const {promisifyAll} = require('@google-cloud/promisify');
@@ -83,7 +84,13 @@ const InstanceTemplate = require('./instance-template.js');
  */
 class Compute extends common.Service {
   constructor(options = {}) {
-    options.apiEndpoint = options.apiEndpoint || 'compute.googleapis.com';
+    options = extend(
+      true,
+      {
+        apiEndpoint: 'compute.googleapis.com',
+      },
+      options
+    );
     const config = {
       apiEndpoint: options.apiEndpoint,
       baseUrl: `https://${options.apiEndpoint}/compute/v1`,
