@@ -922,6 +922,45 @@ class VM extends common.ServiceObject {
     );
   }
   /**
+   * Suspend the instance.
+   *
+   * @see [Instances: Suspend API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/instances/suspend}
+   *
+   * @param {function=} callback - The callback function.
+   * @param {?error} callback.err - An error returned while making this request.
+   * @param {Operation} callback.operation - An operation object
+   *     that can be used to check the status of the request.
+   * @param {object} callback.apiResponse - The full API response.
+   *
+   * @example
+   * const Compute = require('@google-cloud/compute');
+   * const compute = new Compute();
+   * const zone = compute.zone('zone-name');
+   * const vm = zone.vm('vm-name');
+   *
+   * vm.suspend(function(err, operation, apiResponse) {
+   *   // `operation` is an Operation object that can be used to check the status
+   *   // of the request.
+   * });
+   *
+   * //-
+   * // If the callback is omitted, we'll return a Promise.
+   * //-
+   * vm.suspend().then(function(data) {
+   *   const operation = data[0];
+   *   const apiResponse = data[1];
+   * });
+   */
+  suspend(callback) {
+    this.request(
+      {
+        method: 'POST',
+        uri: '/suspend',
+      },
+      callback || common.util.noop
+    );
+  }
+  /**
    * Update the instance.
    *
    * NOTE: This method will pull the latest record of the current metadata, then
