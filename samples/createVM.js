@@ -22,7 +22,7 @@ async function main(
 ) {
   // [START gce_create_vm]
   const Compute = require('@google-cloud/compute');
-  const compute = new Compute();
+  const compute = new Compute({apiEndpoint: 'http://localhost:8080/'});
   const zone = compute.zone('us-central1-c');
 
   async function createVM() {
