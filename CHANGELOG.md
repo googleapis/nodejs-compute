@@ -4,6 +4,37 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/compute?activeTab=versions
 
+## [2.1.0](https://www.github.com/googleapis/nodejs-compute/compare/v2.0.3...v2.1.0) (2020-08-10)
+
+
+### Features
+
+* add vm.update() method ([#478](https://www.github.com/googleapis/nodejs-compute/issues/478)) ([7bcb79c](https://www.github.com/googleapis/nodejs-compute/commit/7bcb79ce515b56b0a2c5aee2aadda4115ddb4fe7))
+
+### [2.0.3](https://www.github.com/googleapis/nodejs-compute/compare/v2.0.2...v2.0.3) (2020-07-27)
+
+
+### Bug Fixes
+
+* move gitattributes files to node templates ([#472](https://www.github.com/googleapis/nodejs-compute/issues/472)) ([4e1dd20](https://www.github.com/googleapis/nodejs-compute/commit/4e1dd2032e09d90ffa4e80970091ac50de24ef17))
+
+### [2.0.2](https://www.github.com/googleapis/nodejs-compute/compare/v2.0.1...v2.0.2) (2020-07-09)
+
+
+### Bug Fixes
+
+* do not override user-provided options ([#463](https://www.github.com/googleapis/nodejs-compute/issues/463)) ([e51074c](https://www.github.com/googleapis/nodejs-compute/commit/e51074c9c9524c7d4b3b8b64b897094ff344bce2))
+* typeo in nodejs .gitattribute ([#461](https://www.github.com/googleapis/nodejs-compute/issues/461)) ([67ab7d7](https://www.github.com/googleapis/nodejs-compute/commit/67ab7d7a9b246e7f200fa769653a0fb73d119bef))
+
+### [2.0.1](https://www.github.com/googleapis/nodejs-compute/compare/v2.0.0...v2.0.1) (2020-06-28)
+
+
+### Bug Fixes
+
+* **deps:** update dependency gce-images to v3 ([#443](https://www.github.com/googleapis/nodejs-compute/issues/443)) ([c861b8c](https://www.github.com/googleapis/nodejs-compute/commit/c861b8c0754cecfa15cef22be3c030bb146ce987))
+* correct engines range to include node v10 ([#451](https://www.github.com/googleapis/nodejs-compute/issues/451)) ([c8a2b29](https://www.github.com/googleapis/nodejs-compute/commit/c8a2b29a12b8d5b2061b6979d2b8ffb2d96e208a))
+* update node issue template ([#456](https://www.github.com/googleapis/nodejs-compute/issues/456)) ([65ab831](https://www.github.com/googleapis/nodejs-compute/commit/65ab8312edceee2316a2b2ba6cfa294b218cf164))
+
 ## [2.0.0](https://www.github.com/googleapis/nodejs-compute/compare/v1.2.0...v2.0.0) (2020-05-08)
 
 

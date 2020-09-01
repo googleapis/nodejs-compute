@@ -1021,6 +1021,12 @@ describe('Compute', () => {
       assert.deepStrictEqual(vm.metadata.metadata.items, [{key, value}]);
     });
 
+    it('should update the VM', async () => {
+      await awaitResult(vm.update({deletionProtection: false}));
+      const [metadata] = await vm.getMetadata();
+      assert.strictEqual(metadata.deletionProtection, false);
+    });
+
     it('should allow updating old metadata', async () => {
       const key = 'newKey';
       const value = 'newValue';
@@ -1114,16 +1120,20 @@ describe('Compute', () => {
 
   async function deleteAllTestObjects(opts) {
     opts.name = opts.expiredOnly ? TESTS_PREFIX : FULL_PREFIX;
-    await deleteRegionalRules(opts);
-    await callAndDeleteGcloudTestObject('Rules', opts);
-    await deleteTargetProxies(opts);
-    await deleteUrlMaps(opts);
-    await callAndDeleteGcloudTestObject('Services', opts);
-    await deleteHttpsHealthChecks(opts);
-    await deleteInstanceGroupManagers(opts);
-    await deleteInstanceTemplates(opts);
-    await deleteTargetInstances(opts);
-    await deleteAllGcloudTestObjects(opts);
+    try {
+      await deleteRegionalRules(opts);
+      await callAndDeleteGcloudTestObject('Rules', opts);
+      await deleteTargetProxies(opts);
+      await deleteUrlMaps(opts);
+      await callAndDeleteGcloudTestObject('Services', opts);
+      await deleteHttpsHealthChecks(opts);
+      await deleteInstanceGroupManagers(opts);
+      await deleteInstanceTemplates(opts);
+      await deleteTargetInstances(opts);
+      await deleteAllGcloudTestObjects(opts);
+    } catch (err) {
+      console.warn(err);
+    }
   }
 
   async function deleteAllGcloudTestObjects(opts) {
