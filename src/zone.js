@@ -594,9 +594,9 @@ class Zone extends common.ServiceObject {
       },
       config
     );
-    if (body.sourceInstanceTemplate) {
-      query.sourceInstanceTemplate = body.sourceInstanceTemplate;
-      delete body.sourceInstanceTemplate;
+    if (body.template) {
+      query.sourceInstanceTemplate = body.template;
+      delete body.template;
     }
     if (body.machineType.indexOf('/') === -1) {
       // The specified machineType is only a partial name, e.g. 'n1-standard-1'.
