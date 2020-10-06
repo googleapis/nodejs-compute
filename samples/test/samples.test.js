@@ -29,7 +29,7 @@ describe('samples', () => {
     const name = `gcloud-ubuntu-${uuid.v4().split('-')[0]}`;
 
     after(async () => deleteVM(name));
-    it.only('should run the quickstart', async () => {
+    it('should run the quickstart', async () => {
       const output = execSync(`node quickstart ${name}`);
       const externalIP = cp
         .execSync(
