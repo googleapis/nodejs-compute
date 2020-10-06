@@ -18,6 +18,7 @@ const uuid = require('uuid');
 const cp = require('child_process');
 const {assert} = require('chai');
 const Compute = require('@google-cloud/compute');
+const waitOn = require('wait-on');
 
 const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
 
@@ -26,9 +27,25 @@ const compute = new Compute();
 describe('samples', () => {
   describe('quickstart', () => {
     const name = `gcloud-ubuntu-${uuid.v4().split('-')[0]}`;
+
     after(async () => deleteVM(name));
-    it('should run the quickstart', () => {
+    it.only('should run the quickstart', async () => {
       const output = execSync(`node quickstart ${name}`);
+      const externalIP = cp
+        .execSync(
+          `gcloud compute instances describe ${name} \
+    --format='get(networkInterfaces[0].accessConfigs[0].natIP)' --zone=us-central1-c`
+        )
+        .toString('utf8')
+        .trim();
+      try {
+        await waitOn({
+          resources: [externalIP],
+        });
+      } catch (err) {
+        console.log(err);
+      }
+      console.log(output);
       assert.match(output, /Virtual machine created!/);
     });
   });
@@ -55,7 +72,7 @@ describe('samples', () => {
   describe('start-up script', () => {
     const name = `gcloud-apache-${uuid.v4().split('-')[0]}`;
     after(async () => deleteVM(name));
-    it('should create vm with startup script', function (done) {
+    it('should create vm with startup script', function(done) {
       this.timeout(280000);
       this.retries(3);
       const {spawn} = require('child_process');
