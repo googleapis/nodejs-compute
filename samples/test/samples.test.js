@@ -31,11 +31,12 @@ describe('samples', () => {
     after(async () => deleteVM(name));
     it('should run the quickstart', async () => {
       const output = execSync(`node quickstart ${name}`);
-      const externalIP = execSync(`gcloud compute instances describe ${name} \
-    --format='get(networkInterfaces[0].accessConfigs[0].natIP)' --zone=us-central1-c`)
-        .toString('utf8')
-        .trim();
+      await new Promise(r => setTimeout(r, 2000));
       try {
+        const externalIP = execSync(`gcloud compute instances describe ${name} \
+    --format='get(networkInterfaces[0].accessConfigs[0].natIP)' --zone=us-central1-c`)
+          .toString('utf8')
+          .trim();
         await waitOn({
           resources: [externalIP],
         });
