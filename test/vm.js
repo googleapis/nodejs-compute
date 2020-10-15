@@ -417,19 +417,6 @@ describe('VM', () => {
       vm.getSerialPortOutput({start}, assert.ifError);
     });
 
-    it('should override the port and start', done => {
-      const port = 8001;
-      const start = 10;
-
-      FakeServiceObject.prototype.request = function (reqOpts) {
-        assert.strictEqual(reqOpts.qs.start, start);
-        assert.strictEqual(reqOpts.qs.port, port);
-        done();
-      };
-
-      vm.getSerialPortOutput(port, {start}, assert.ifError);
-    });
-
     it('should make the correct API request', done => {
       FakeServiceObject.prototype.request = function (reqOpts) {
         assert.strictEqual(reqOpts.uri, '/serialPort');
