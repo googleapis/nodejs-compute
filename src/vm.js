@@ -501,12 +501,7 @@ class VM extends common.ServiceObject {
         callback(err, null, null, apiResponse);
         return;
       }
-      callback(
-        null,
-        metadata.labels,
-        metadata.labelFingerprint,
-        apiResponse
-      );
+      callback(null, metadata.labels, metadata.labelFingerprint, apiResponse);
     });
   }
   /**
