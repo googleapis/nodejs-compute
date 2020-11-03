@@ -934,7 +934,7 @@ describe('Compute', () => {
     });
   });
 
-  describe('vms', () => {
+  describe.only('vms', () => {
     const VM_NAME = generateName('vm');
     const vm = zone.vm(VM_NAME);
 
@@ -977,6 +977,13 @@ describe('Compute', () => {
 
     it('should get serial port output', async () => {
       return vm.getSerialPortOutput();
+    });
+
+    it('should set labels', async () => {
+      let [labels, fingerprint] = await vm.getLabels();
+      await awaitResult(vm.setLabels({foo: 'bar'}, fingerprint));
+      [labels, fingerprint] = await vm.getLabels();
+      assert.strictEqual(labels.foo, 'bar');
     });
 
     it('should set tags', async () => {
