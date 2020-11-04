@@ -934,7 +934,7 @@ describe('Compute', () => {
     });
   });
 
-  describe.only('vms', () => {
+  describe('vms', () => {
     const VM_NAME = generateName('vm');
     const vm = zone.vm(VM_NAME);
 
