@@ -156,7 +156,7 @@ class InstanceTemplate extends common.ServiceObject {
   /**
    * Delete the instance template.
    *
-   * @see [InstanceTemplates: delete API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/instanceTemplates/delete}
+   * @see [InstanceTemplates: delete API Documentation]{@link https://cloud.google.com/compute/docs/reference/rest/v1/instanceTemplates/delete}
    *
    * @param {function=} callback - The callback function.
    * @param {?error} callback.err - An error returned while making this request.

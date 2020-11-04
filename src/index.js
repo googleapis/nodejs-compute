@@ -374,11 +374,11 @@ class Compute extends common.Service {
   /**
    * Create an instance template.
    *
-   * @see [Instance Templates: insert API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/instanceTemplates/insert}
+   * @see [Instance Templates: insert API Documentation]{@link https://cloud.google.com/compute/docs/reference/rest/v1/instanceTemplates/insert}
    *
    * @param {string} name - The name of the target image.
    * @param {object} [options] - See the
-   *     [Instance Templates: insert API documentation](https://cloud.google.com/compute/docs/reference/v1/instanceTemplates/insert).
+   *     [Instance Templates: insert API documentation](https://cloud.google.com/compute/docs/reference/rest/v1/instanceTemplates/insert).
    * @param {function} callback - The callback function.
    *
    * @example
