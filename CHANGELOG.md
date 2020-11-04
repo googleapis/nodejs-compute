@@ -4,6 +4,34 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/compute?activeTab=versions
 
+## [2.3.0](https://www.github.com/googleapis/nodejs-compute/compare/v2.2.0...v2.3.0) (2020-10-15)
+
+
+### Features
+
+* add start param in getSerialPortOutput options ([#507](https://www.github.com/googleapis/nodejs-compute/issues/507)) ([de3ecd4](https://www.github.com/googleapis/nodejs-compute/commit/de3ecd42194a6997e27f409bb7ab59e4576e36c6))
+
+## [2.2.0](https://www.github.com/googleapis/nodejs-compute/compare/v2.1.0...v2.2.0) (2020-09-30)
+
+
+### Features
+
+* support a source template when creating a VM ([#500](https://www.github.com/googleapis/nodejs-compute/issues/500)) ([62f33be](https://www.github.com/googleapis/nodejs-compute/commit/62f33be7b84bff7d75b38b20dbd29e0642359bb2))
+
+## [2.1.0](https://www.github.com/googleapis/nodejs-compute/compare/v2.0.3...v2.1.0) (2020-08-10)
+
+
+### Features
+
+* add vm.update() method ([#478](https://www.github.com/googleapis/nodejs-compute/issues/478)) ([7bcb79c](https://www.github.com/googleapis/nodejs-compute/commit/7bcb79ce515b56b0a2c5aee2aadda4115ddb4fe7))
+
+### [2.0.3](https://www.github.com/googleapis/nodejs-compute/compare/v2.0.2...v2.0.3) (2020-07-27)
+
+
+### Bug Fixes
+
+* move gitattributes files to node templates ([#472](https://www.github.com/googleapis/nodejs-compute/issues/472)) ([4e1dd20](https://www.github.com/googleapis/nodejs-compute/commit/4e1dd2032e09d90ffa4e80970091ac50de24ef17))
+
 ### [2.0.2](https://www.github.com/googleapis/nodejs-compute/compare/v2.0.1...v2.0.2) (2020-07-09)
 
 
