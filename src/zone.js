@@ -654,7 +654,7 @@ class Zone extends common.ServiceObject {
         }
         delete body.os;
         body.disks = body.disks || [];
-        body.disks.push({
+        body.disks.unshift({
           autoDelete: true,
           boot: true,
           initializeParams: {
