@@ -691,7 +691,9 @@ describe('Compute', () => {
     });
   });
 
-  describe('rules', () => {
+  // skipping this suite of tests because we are creating an external forwarding rule
+  // which is not allowed by the org
+  describe.skip('rules', () => {
     const RULE_NAME = generateName('rule');
     const rule = compute.rule(RULE_NAME);
     const service = compute.service(generateName('service'));
