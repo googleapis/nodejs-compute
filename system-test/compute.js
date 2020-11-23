@@ -20,6 +20,7 @@ const uuid = require('uuid');
 const {promisify} = require('util');
 
 const Compute = require('../');
+const {execSync} = require('child_process');
 
 describe('Compute', () => {
   // Since the Compute Engine API is rather large and involves long-running
@@ -49,8 +50,8 @@ describe('Compute', () => {
   const computeRequest = promisify(compute.request).bind(compute);
   const zoneRequest = promisify(zone.request).bind(zone);
 
-  before(() => deleteAllTestObjects({expiredOnly: true}));
-  after(() => deleteAllTestObjects({expiredOnly: false}));
+  before(async () => await deleteAllTestObjects({expiredOnly: true}));
+  after(async () => await deleteAllTestObjects({expiredOnly: false}));
 
   describe('addresses', () => {
     const ADDRESS_NAME = generateName('address');
@@ -691,74 +692,47 @@ describe('Compute', () => {
     });
   });
 
-  // skipping this suite of tests because we are creating an external forwarding rule
-  // which is not allowed by the org
-  describe.skip('rules', () => {
+  describe('rules', () => {
     const RULE_NAME = generateName('rule');
-    const rule = compute.rule(RULE_NAME);
-    const service = compute.service(generateName('service'));
-    const INSTANCE_GROUP_NAME = generateName('instance-group');
-    const HEALTH_CHECK_NAME = generateName('health-check');
+    const NETWORK_NAME = generateName('network-name');
+    const SUBNETWORK_NAME = generateName('subnetwork-name');
+    const BACKEND_SERVICE_NAME = generateName('backend-service-name');
 
-    // To create a rule, we need to also create a TargetHttpProxy and UrlMap.
-    // Until they are officially supported by google-cloud-node, we make manual
-    // requests to create and delete them.
-    const TARGET_PROXY_NAME = generateName('target-proxy');
-    const URL_MAP_NAME = generateName('url-map');
-
+    //finish fixing tests
     before(async () => {
-      await createService(service.name, INSTANCE_GROUP_NAME, HEALTH_CHECK_NAME);
-      await createUrlMap({
-        name: URL_MAP_NAME,
-        defaultService: 'global/backendServices/' + service.name,
-      });
-      await createTargetProxy({
-        name: TARGET_PROXY_NAME,
-        urlMap: 'global/urlMaps/' + URL_MAP_NAME,
-      });
-      await create(rule, {
-        target: 'global/targetHttpProxies/' + TARGET_PROXY_NAME,
-        portRange: '8080',
-        IPProtocol: 'TCP',
-      });
+      execSync(
+        `gcloud compute networks create ${NETWORK_NAME} --subnet-mode=custom`
+      );
+      execSync(
+        `gcloud compute networks subnets create ${SUBNETWORK_NAME} --network=${NETWORK_NAME} --range=10.0.1.0/24 --region=us-central1`
+      );
+      execSync(
+        `gcloud compute backend-services create ${BACKEND_SERVICE_NAME} --load-balancing-scheme=INTERNAL --region=us-central1`
+      );
+      execSync(
+        `gcloud compute forwarding-rules create ${RULE_NAME} --load-balancing-scheme=INTERNAL --backend-service=${BACKEND_SERVICE_NAME} --subnet=${SUBNETWORK_NAME}  --network=${NETWORK_NAME} --region=us-central1 --ports=80-82`
+      );
     });
 
-    it('should get a list of rules', async () => {
-      const [rules] = await compute.getRules();
-      assert(rules.length > 0);
+    after(async () => {
+      const [firewalls] = await compute.getFirewalls();
+      const firewallsToDelete = firewalls
+        .filter(x => x.name.includes('network-name'))
+        .map(y => y.name);
+      for (const firewall of firewallsToDelete) {
+        await deleteFirewallRule(firewall);
+      }
+      await deleteForwardingRules(RULE_NAME);
+      await deleteBackendService(BACKEND_SERVICE_NAME);
+      await deleteSubnetworks(SUBNETWORK_NAME);
     });
 
-    it('should have created the right rule', async () => {
-      const target = [
-        'https://www.googleapis.com/compute/v1/global/targetHttpProxies/',
-        TARGET_PROXY_NAME,
-      ].join('');
-
-      const [metadata] = await rule.getMetadata();
-      assert.strictEqual(metadata.name, RULE_NAME);
-      assert.strictEqual(metadata.IPProtocol, 'TCP');
-      assert.strictEqual(metadata.portRange, '8080-8080');
-
-      // The projectId may have been replaced depending on how the system
-      // tests are being run, so let's not care about that.
-      metadata.target = metadata.target.replace(/projects\/[^/]*\//, '');
-      assert.strictEqual(metadata.target, target);
-    });
-
-    it('should set a new target', async () => {
-      let target = [
-        'https://www.googleapis.com/compute/v1/projects/' + compute.projectId,
-        '/global/targetHttpProxies/' + TARGET_PROXY_NAME,
-      ].join('');
-
-      await awaitResult(rule.setTarget(target));
-      const [metadata] = await rule.getMetadata();
-
-      // The projectId may have been replaced depending on how the system
-      // tests are being run, so let's not care about that.
-      target = target.replace(/projects\/[^/]*\//, '');
-      metadata.target = metadata.target.replace(/projects\/[^/]*\//, '');
-      assert.strictEqual(metadata.target, target);
+    it.only('should have created the right rule', async () => {
+      const rule = await getForwardingRules(RULE_NAME);
+      assert.strictEqual(rule.name, RULE_NAME);
+      assert.strictEqual(rule.IPProtocol, 'TCP');
+      assert.deepStrictEqual(rule.ports, ['80', '81', '82']);
+      assert.strictEqual(rule.loadBalancingScheme, 'INTERNAL');
     });
   });
 
@@ -1241,16 +1215,6 @@ describe('Compute', () => {
     );
   }
 
-  async function createUrlMap(config) {
-    const resp = await computeRequest({
-      method: 'POST',
-      uri: '/global/urlMaps',
-      json: config,
-    });
-    const operation = compute.operation(resp.name);
-    await operation.promise();
-  }
-
   async function deleteUrlMap(name) {
     const resp = await computeRequest({
       method: 'DELETE',
@@ -1258,6 +1222,27 @@ describe('Compute', () => {
     });
     const operation = compute.operation(resp.name);
     await operation.promise();
+  }
+
+  async function getForwardingRules(name) {
+    return await computeRequest({
+      method: 'GET',
+      uri: 'regions/us-central1/forwardingRules/' + name,
+    });
+  }
+
+  async function deleteBackendService(name) {
+    await computeRequest({
+      method: 'DELETE',
+      uri: 'regions/us-central1/backendServices/' + name,
+    });
+  }
+
+  async function deleteFirewallRule(name) {
+    await computeRequest({
+      method: 'DELETE',
+      uri: 'global/firewalls/' + name,
+    });
   }
 
   async function deleteTargetProxies(opts) {
@@ -1274,14 +1259,19 @@ describe('Compute', () => {
     );
   }
 
-  async function createTargetProxy(config) {
-    const resp = await computeRequest({
-      method: 'POST',
-      uri: '/global/targetHttpProxies',
-      json: config,
+  async function deleteSubnetworks(subnetwork) {
+    await computeRequest({
+      method: 'DELETE',
+      uri: 'regions/us-central1/subnetworks/' + subnetwork,
     });
-    const operation = compute.operation(resp.name);
-    await operation.promise();
+  }
+
+  async function deleteForwardingRules(rule) {
+    await computeRequest({
+      method: 'DELETE',
+      uri: 'regions/us-central1/forwardingRules/' + rule,
+    });
+    console.log(`${rule} deleted!`);
   }
 
   async function deleteTargetProxy(name) {
