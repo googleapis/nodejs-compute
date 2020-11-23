@@ -698,7 +698,6 @@ describe('Compute', () => {
     const SUBNETWORK_NAME = generateName('subnetwork-name');
     const BACKEND_SERVICE_NAME = generateName('backend-service-name');
 
-    //finish fixing tests
     before(async () => {
       execSync(
         `gcloud compute networks create ${NETWORK_NAME} --subnet-mode=custom`
@@ -727,7 +726,7 @@ describe('Compute', () => {
       await deleteSubnetworks(SUBNETWORK_NAME);
     });
 
-    it.only('should have created the right rule', async () => {
+    it('should have created the right rule', async () => {
       const rule = await getForwardingRules(RULE_NAME);
       assert.strictEqual(rule.name, RULE_NAME);
       assert.strictEqual(rule.IPProtocol, 'TCP');
