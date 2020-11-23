@@ -50,8 +50,8 @@ describe('Compute', () => {
   const computeRequest = promisify(compute.request).bind(compute);
   const zoneRequest = promisify(zone.request).bind(zone);
 
-  before(async () => await deleteAllTestObjects({expiredOnly: true}));
-  after(async () => await deleteAllTestObjects({expiredOnly: false}));
+  before(() => deleteAllTestObjects({expiredOnly: true}));
+  after(() => deleteAllTestObjects({expiredOnly: false}));
 
   describe('addresses', () => {
     const ADDRESS_NAME = generateName('address');
