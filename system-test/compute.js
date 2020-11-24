@@ -694,9 +694,9 @@ describe('Compute', () => {
 
   describe('rules', () => {
     const RULE_NAME = generateName('rule');
-    const NETWORK_NAME = generateName('network-name');
-    const SUBNETWORK_NAME = generateName('subnetwork-name');
-    const BACKEND_SERVICE_NAME = generateName('backend-service-name');
+    const NETWORK_NAME = generateName('network');
+    const SUBNETWORK_NAME = generateName('subnetwork');
+    const BACKEND_SERVICE_NAME = generateName('backend-service');
 
     before(async () => {
       execSync(
