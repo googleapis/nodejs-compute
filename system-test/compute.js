@@ -692,7 +692,7 @@ describe('Compute', () => {
     });
   });
 
-  describe.only('rules', () => {
+  describe('rules', () => {
     const RULE_NAME = generateName('rule');
     const NETWORK_NAME = generateName('network');
     const SUBNETWORK_NAME = generateName('subnetwork');
