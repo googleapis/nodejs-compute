@@ -692,46 +692,83 @@ describe('Compute', () => {
     });
   });
 
-  describe('rules', () => {
+  describe.only('rules', () => {
     const RULE_NAME = generateName('rule');
-    const NETWORK_NAME = generateName('network-name');
-    const SUBNETWORK_NAME = generateName('subnetwork-name');
-    const BACKEND_SERVICE_NAME = generateName('backend-service-name');
+    const NETWORK_NAME = generateName('network');
+    const SUBNETWORK_NAME = generateName('subnetwork');
+    const BACKEND_SERVICE_NAME = generateName('backend-service');
+    let RULE;
+    let SUBNETWORK;
 
     before(async () => {
-      execSync(
-        `gcloud compute networks create ${NETWORK_NAME} --subnet-mode=custom`
+      const projectId = await compute.authClient.getProjectId();
+      const resourceUrlPrefix = `https://www.googleapis.com/compute/v1/projects/${projectId}`;
+      const [network, networkOperation] = await compute.createNetwork(
+        NETWORK_NAME,
+        {
+          autoCreateSubnetworks: false,
+        }
       );
-      execSync(
-        `gcloud compute networks subnets create ${SUBNETWORK_NAME} --network=${NETWORK_NAME} --range=10.0.1.0/24 --region=us-central1`
+      await networkOperation.promise();
+
+      const [subnetwork, subnetworkOperation] = await network.createSubnetwork(
+        SUBNETWORK_NAME,
+        {
+          region: 'us-central1',
+          range: '10.0.1.0/24',
+        }
       );
-      execSync(
-        `gcloud compute backend-services create ${BACKEND_SERVICE_NAME} --load-balancing-scheme=INTERNAL --region=us-central1`
-      );
-      execSync(
-        `gcloud compute forwarding-rules create ${RULE_NAME} --load-balancing-scheme=INTERNAL --backend-service=${BACKEND_SERVICE_NAME} --subnet=${SUBNETWORK_NAME}  --network=${NETWORK_NAME} --region=us-central1 --ports=80-82`
-      );
+      SUBNETWORK = subnetwork;
+      await subnetworkOperation.promise();
+
+      const region = compute.region('us-central1');
+
+      const resp = await computeRequest({
+        method: 'POST',
+        uri: '/regions/us-central1/backendServices',
+        json: {
+          name: BACKEND_SERVICE_NAME,
+          loadBalancingScheme: 'INTERNAL',
+        },
+      });
+      await region.operation(resp.name).promise();
+
+      const [rule, ruleOperation] = await region.createRule(RULE_NAME, {
+        loadBalancingScheme: 'INTERNAL',
+        backendService: `${resourceUrlPrefix}/regions/us-central1/backendServices/${BACKEND_SERVICE_NAME}`,
+        subnetwork: `${resourceUrlPrefix}/regions/us-central1/subnetworks/${SUBNETWORK_NAME}`,
+        network: `${resourceUrlPrefix}/global/networks/${NETWORK_NAME}`,
+        ports: ['80', '81', '82'],
+      });
+      RULE = rule;
+      await ruleOperation.promise();
     });
 
     after(async () => {
       const [firewalls] = await compute.getFirewalls();
-      const firewallsToDelete = firewalls
-        .filter(x => x.name.includes('network-name'))
-        .map(y => y.name);
+      const firewallsToDelete = firewalls.filter(x =>
+        x.name.startsWith(TESTS_PREFIX)
+      );
       for (const firewall of firewallsToDelete) {
-        await deleteFirewallRule(firewall);
+        await firewall.delete();
       }
-      await deleteForwardingRules(RULE_NAME);
-      await deleteBackendService(BACKEND_SERVICE_NAME);
-      await deleteSubnetworks(SUBNETWORK_NAME);
+      const [ruleOperation] = await RULE.delete();
+      await ruleOperation.promise();
+      await computeRequest({
+        method: 'DELETE',
+        uri: 'regions/us-central1/backendServices/' + BACKEND_SERVICE_NAME,
+      });
+
+      const [subnetworkOperation] = await SUBNETWORK.delete();
+      await subnetworkOperation.promise();
     });
 
     it('should have created the right rule', async () => {
-      const rule = await getForwardingRules(RULE_NAME);
-      assert.strictEqual(rule.name, RULE_NAME);
-      assert.strictEqual(rule.IPProtocol, 'TCP');
-      assert.deepStrictEqual(rule.ports, ['80', '81', '82']);
-      assert.strictEqual(rule.loadBalancingScheme, 'INTERNAL');
+      const [metadata] = await RULE.getMetadata();
+      assert.strictEqual(metadata.name, RULE_NAME);
+      assert.strictEqual(metadata.IPProtocol, 'TCP');
+      assert.deepStrictEqual(metadata.ports, ['80', '81', '82']);
+      assert.strictEqual(metadata.loadBalancingScheme, 'INTERNAL');
     });
   });
 
@@ -1223,27 +1260,6 @@ describe('Compute', () => {
     await operation.promise();
   }
 
-  async function getForwardingRules(name) {
-    return await computeRequest({
-      method: 'GET',
-      uri: 'regions/us-central1/forwardingRules/' + name,
-    });
-  }
-
-  async function deleteBackendService(name) {
-    await computeRequest({
-      method: 'DELETE',
-      uri: 'regions/us-central1/backendServices/' + name,
-    });
-  }
-
-  async function deleteFirewallRule(name) {
-    await computeRequest({
-      method: 'DELETE',
-      uri: 'global/firewalls/' + name,
-    });
-  }
-
   async function deleteTargetProxies(opts) {
     const resp = await computeRequest({
       uri: '/global/targetHttpProxies',
@@ -1256,21 +1272,6 @@ describe('Compute', () => {
         .map(x => x.name)
         .map(deleteTargetProxy)
     );
-  }
-
-  async function deleteSubnetworks(subnetwork) {
-    await computeRequest({
-      method: 'DELETE',
-      uri: 'regions/us-central1/subnetworks/' + subnetwork,
-    });
-  }
-
-  async function deleteForwardingRules(rule) {
-    await computeRequest({
-      method: 'DELETE',
-      uri: 'regions/us-central1/forwardingRules/' + rule,
-    });
-    console.log(`${rule} deleted!`);
   }
 
   async function deleteTargetProxy(name) {
