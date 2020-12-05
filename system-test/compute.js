@@ -20,7 +20,6 @@ const uuid = require('uuid');
 const {promisify} = require('util');
 
 const Compute = require('../');
-const {execSync} = require('child_process');
 
 describe('Compute', () => {
   // Since the Compute Engine API is rather large and involves long-running
