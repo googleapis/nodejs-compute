@@ -55,7 +55,7 @@ const fakeUtil = Object.assign({}, util, {
         (arguments as unknown) as [any]
       );
     }
-        // eslint-disable-next-line prefer-rest-params
+    // eslint-disable-next-line prefer-rest-params
     return util.parseHttpRespBody.apply(this, (arguments as unknown) as [any]);
   },
 });

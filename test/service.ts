@@ -22,7 +22,12 @@ import type {
 } from '@google-cloud/common';
 import * as promisify from '@google-cloud/promisify';
 
-import type {Compute, InstanceGroup, Operation, Service as ServiceType} from '../src';
+import type {
+  Compute,
+  InstanceGroup,
+  Operation,
+  Service as ServiceType,
+} from '../src';
 
 let promisified = false;
 const fakePromisify = Object.assign({}, promisify, {
