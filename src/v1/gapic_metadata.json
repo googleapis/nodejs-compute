@@ -1,0 +1,6361 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "typescript",
+  "protoPackage": "google.cloud.compute.v1",
+  "libraryPackage": "@google-cloud/compute",
+  "services": {
+    "AcceleratorTypes": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "AcceleratorTypesClient",
+          "rpcs": {
+            "AggregatedList": {
+              "methods": [
+                "aggregatedList"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "AcceleratorTypesClient",
+          "rpcs": {
+            "AggregatedList": {
+              "methods": [
+                "aggregatedList"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "Addresses": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "AddressesClient",
+          "rpcs": {
+            "AggregatedList": {
+              "methods": [
+                "aggregatedList"
+              ]
+            },
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "AddressesClient",
+          "rpcs": {
+            "AggregatedList": {
+              "methods": [
+                "aggregatedList"
+              ]
+            },
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "Autoscalers": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "AutoscalersClient",
+          "rpcs": {
+            "AggregatedList": {
+              "methods": [
+                "aggregatedList"
+              ]
+            },
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            },
+            "Patch": {
+              "methods": [
+                "patch"
+              ]
+            },
+            "Update": {
+              "methods": [
+                "update"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "AutoscalersClient",
+          "rpcs": {
+            "AggregatedList": {
+              "methods": [
+                "aggregatedList"
+              ]
+            },
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            },
+            "Patch": {
+              "methods": [
+                "patch"
+              ]
+            },
+            "Update": {
+              "methods": [
+                "update"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "BackendBuckets": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "BackendBucketsClient",
+          "rpcs": {
+            "AddSignedUrlKey": {
+              "methods": [
+                "addSignedUrlKey"
+              ]
+            },
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "DeleteSignedUrlKey": {
+              "methods": [
+                "deleteSignedUrlKey"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            },
+            "Patch": {
+              "methods": [
+                "patch"
+              ]
+            },
+            "Update": {
+              "methods": [
+                "update"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "BackendBucketsClient",
+          "rpcs": {
+            "AddSignedUrlKey": {
+              "methods": [
+                "addSignedUrlKey"
+              ]
+            },
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "DeleteSignedUrlKey": {
+              "methods": [
+                "deleteSignedUrlKey"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            },
+            "Patch": {
+              "methods": [
+                "patch"
+              ]
+            },
+            "Update": {
+              "methods": [
+                "update"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "BackendServices": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "BackendServicesClient",
+          "rpcs": {
+            "AddSignedUrlKey": {
+              "methods": [
+                "addSignedUrlKey"
+              ]
+            },
+            "AggregatedList": {
+              "methods": [
+                "aggregatedList"
+              ]
+            },
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "DeleteSignedUrlKey": {
+              "methods": [
+                "deleteSignedUrlKey"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "GetHealth": {
+              "methods": [
+                "getHealth"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            },
+            "Patch": {
+              "methods": [
+                "patch"
+              ]
+            },
+            "SetSecurityPolicy": {
+              "methods": [
+                "setSecurityPolicy"
+              ]
+            },
+            "Update": {
+              "methods": [
+                "update"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "BackendServicesClient",
+          "rpcs": {
+            "AddSignedUrlKey": {
+              "methods": [
+                "addSignedUrlKey"
+              ]
+            },
+            "AggregatedList": {
+              "methods": [
+                "aggregatedList"
+              ]
+            },
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "DeleteSignedUrlKey": {
+              "methods": [
+                "deleteSignedUrlKey"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "GetHealth": {
+              "methods": [
+                "getHealth"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            },
+            "Patch": {
+              "methods": [
+                "patch"
+              ]
+            },
+            "SetSecurityPolicy": {
+              "methods": [
+                "setSecurityPolicy"
+              ]
+            },
+            "Update": {
+              "methods": [
+                "update"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "Disks": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "DisksClient",
+          "rpcs": {
+            "AddResourcePolicies": {
+              "methods": [
+                "addResourcePolicies"
+              ]
+            },
+            "AggregatedList": {
+              "methods": [
+                "aggregatedList"
+              ]
+            },
+            "CreateSnapshot": {
+              "methods": [
+                "createSnapshot"
+              ]
+            },
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "GetIamPolicy": {
+              "methods": [
+                "getIamPolicy"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            },
+            "RemoveResourcePolicies": {
+              "methods": [
+                "removeResourcePolicies"
+              ]
+            },
+            "Resize": {
+              "methods": [
+                "resize"
+              ]
+            },
+            "SetIamPolicy": {
+              "methods": [
+                "setIamPolicy"
+              ]
+            },
+            "SetLabels": {
+              "methods": [
+                "setLabels"
+              ]
+            },
+            "TestIamPermissions": {
+              "methods": [
+                "testIamPermissions"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "DisksClient",
+          "rpcs": {
+            "AddResourcePolicies": {
+              "methods": [
+                "addResourcePolicies"
+              ]
+            },
+            "AggregatedList": {
+              "methods": [
+                "aggregatedList"
+              ]
+            },
+            "CreateSnapshot": {
+              "methods": [
+                "createSnapshot"
+              ]
+            },
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "GetIamPolicy": {
+              "methods": [
+                "getIamPolicy"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            },
+            "RemoveResourcePolicies": {
+              "methods": [
+                "removeResourcePolicies"
+              ]
+            },
+            "Resize": {
+              "methods": [
+                "resize"
+              ]
+            },
+            "SetIamPolicy": {
+              "methods": [
+                "setIamPolicy"
+              ]
+            },
+            "SetLabels": {
+              "methods": [
+                "setLabels"
+              ]
+            },
+            "TestIamPermissions": {
+              "methods": [
+                "testIamPermissions"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "DiskTypes": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "DiskTypesClient",
+          "rpcs": {
+            "AggregatedList": {
+              "methods": [
+                "aggregatedList"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "DiskTypesClient",
+          "rpcs": {
+            "AggregatedList": {
+              "methods": [
+                "aggregatedList"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "ExternalVpnGateways": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "ExternalVpnGatewaysClient",
+          "rpcs": {
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            },
+            "SetLabels": {
+              "methods": [
+                "setLabels"
+              ]
+            },
+            "TestIamPermissions": {
+              "methods": [
+                "testIamPermissions"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "ExternalVpnGatewaysClient",
+          "rpcs": {
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            },
+            "SetLabels": {
+              "methods": [
+                "setLabels"
+              ]
+            },
+            "TestIamPermissions": {
+              "methods": [
+                "testIamPermissions"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "Firewalls": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "FirewallsClient",
+          "rpcs": {
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            },
+            "Patch": {
+              "methods": [
+                "patch"
+              ]
+            },
+            "Update": {
+              "methods": [
+                "update"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "FirewallsClient",
+          "rpcs": {
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            },
+            "Patch": {
+              "methods": [
+                "patch"
+              ]
+            },
+            "Update": {
+              "methods": [
+                "update"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "ForwardingRules": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "ForwardingRulesClient",
+          "rpcs": {
+            "AggregatedList": {
+              "methods": [
+                "aggregatedList"
+              ]
+            },
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            },
+            "Patch": {
+              "methods": [
+                "patch"
+              ]
+            },
+            "SetTarget": {
+              "methods": [
+                "setTarget"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "ForwardingRulesClient",
+          "rpcs": {
+            "AggregatedList": {
+              "methods": [
+                "aggregatedList"
+              ]
+            },
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            },
+            "Patch": {
+              "methods": [
+                "patch"
+              ]
+            },
+            "SetTarget": {
+              "methods": [
+                "setTarget"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "GlobalAddresses": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "GlobalAddressesClient",
+          "rpcs": {
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "GlobalAddressesClient",
+          "rpcs": {
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "GlobalForwardingRules": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "GlobalForwardingRulesClient",
+          "rpcs": {
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            },
+            "Patch": {
+              "methods": [
+                "patch"
+              ]
+            },
+            "SetTarget": {
+              "methods": [
+                "setTarget"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "GlobalForwardingRulesClient",
+          "rpcs": {
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            },
+            "Patch": {
+              "methods": [
+                "patch"
+              ]
+            },
+            "SetTarget": {
+              "methods": [
+                "setTarget"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "GlobalNetworkEndpointGroups": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "GlobalNetworkEndpointGroupsClient",
+          "rpcs": {
+            "AttachNetworkEndpoints": {
+              "methods": [
+                "attachNetworkEndpoints"
+              ]
+            },
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "DetachNetworkEndpoints": {
+              "methods": [
+                "detachNetworkEndpoints"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            },
+            "ListNetworkEndpoints": {
+              "methods": [
+                "listNetworkEndpoints"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "GlobalNetworkEndpointGroupsClient",
+          "rpcs": {
+            "AttachNetworkEndpoints": {
+              "methods": [
+                "attachNetworkEndpoints"
+              ]
+            },
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "DetachNetworkEndpoints": {
+              "methods": [
+                "detachNetworkEndpoints"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            },
+            "ListNetworkEndpoints": {
+              "methods": [
+                "listNetworkEndpoints"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "GlobalOperations": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "GlobalOperationsClient",
+          "rpcs": {
+            "AggregatedList": {
+              "methods": [
+                "aggregatedList"
+              ]
+            },
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            },
+            "Wait": {
+              "methods": [
+                "wait"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "GlobalOperationsClient",
+          "rpcs": {
+            "AggregatedList": {
+              "methods": [
+                "aggregatedList"
+              ]
+            },
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            },
+            "Wait": {
+              "methods": [
+                "wait"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "GlobalOrganizationOperations": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "GlobalOrganizationOperationsClient",
+          "rpcs": {
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "GlobalOrganizationOperationsClient",
+          "rpcs": {
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "HealthChecks": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "HealthChecksClient",
+          "rpcs": {
+            "AggregatedList": {
+              "methods": [
+                "aggregatedList"
+              ]
+            },
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            },
+            "Patch": {
+              "methods": [
+                "patch"
+              ]
+            },
+            "Update": {
+              "methods": [
+                "update"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "HealthChecksClient",
+          "rpcs": {
+            "AggregatedList": {
+              "methods": [
+                "aggregatedList"
+              ]
+            },
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            },
+            "Patch": {
+              "methods": [
+                "patch"
+              ]
+            },
+            "Update": {
+              "methods": [
+                "update"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "Images": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "ImagesClient",
+          "rpcs": {
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Deprecate": {
+              "methods": [
+                "deprecate"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "GetFromFamily": {
+              "methods": [
+                "getFromFamily"
+              ]
+            },
+            "GetIamPolicy": {
+              "methods": [
+                "getIamPolicy"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            },
+            "Patch": {
+              "methods": [
+                "patch"
+              ]
+            },
+            "SetIamPolicy": {
+              "methods": [
+                "setIamPolicy"
+              ]
+            },
+            "SetLabels": {
+              "methods": [
+                "setLabels"
+              ]
+            },
+            "TestIamPermissions": {
+              "methods": [
+                "testIamPermissions"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "ImagesClient",
+          "rpcs": {
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Deprecate": {
+              "methods": [
+                "deprecate"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "GetFromFamily": {
+              "methods": [
+                "getFromFamily"
+              ]
+            },
+            "GetIamPolicy": {
+              "methods": [
+                "getIamPolicy"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            },
+            "Patch": {
+              "methods": [
+                "patch"
+              ]
+            },
+            "SetIamPolicy": {
+              "methods": [
+                "setIamPolicy"
+              ]
+            },
+            "SetLabels": {
+              "methods": [
+                "setLabels"
+              ]
+            },
+            "TestIamPermissions": {
+              "methods": [
+                "testIamPermissions"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "InstanceGroupManagers": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "InstanceGroupManagersClient",
+          "rpcs": {
+            "AbandonInstances": {
+              "methods": [
+                "abandonInstances"
+              ]
+            },
+            "AggregatedList": {
+              "methods": [
+                "aggregatedList"
+              ]
+            },
+            "ApplyUpdatesToInstances": {
+              "methods": [
+                "applyUpdatesToInstances"
+              ]
+            },
+            "CreateInstances": {
+              "methods": [
+                "createInstances"
+              ]
+            },
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "DeleteInstances": {
+              "methods": [
+                "deleteInstances"
+              ]
+            },
+            "DeletePerInstanceConfigs": {
+              "methods": [
+                "deletePerInstanceConfigs"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            },
+            "ListErrors": {
+              "methods": [
+                "listErrors"
+              ]
+            },
+            "ListManagedInstances": {
+              "methods": [
+                "listManagedInstances"
+              ]
+            },
+            "ListPerInstanceConfigs": {
+              "methods": [
+                "listPerInstanceConfigs"
+              ]
+            },
+            "Patch": {
+              "methods": [
+                "patch"
+              ]
+            },
+            "PatchPerInstanceConfigs": {
+              "methods": [
+                "patchPerInstanceConfigs"
+              ]
+            },
+            "RecreateInstances": {
+              "methods": [
+                "recreateInstances"
+              ]
+            },
+            "Resize": {
+              "methods": [
+                "resize"
+              ]
+            },
+            "SetInstanceTemplate": {
+              "methods": [
+                "setInstanceTemplate"
+              ]
+            },
+            "SetTargetPools": {
+              "methods": [
+                "setTargetPools"
+              ]
+            },
+            "UpdatePerInstanceConfigs": {
+              "methods": [
+                "updatePerInstanceConfigs"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "InstanceGroupManagersClient",
+          "rpcs": {
+            "AbandonInstances": {
+              "methods": [
+                "abandonInstances"
+              ]
+            },
+            "AggregatedList": {
+              "methods": [
+                "aggregatedList"
+              ]
+            },
+            "ApplyUpdatesToInstances": {
+              "methods": [
+                "applyUpdatesToInstances"
+              ]
+            },
+            "CreateInstances": {
+              "methods": [
+                "createInstances"
+              ]
+            },
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "DeleteInstances": {
+              "methods": [
+                "deleteInstances"
+              ]
+            },
+            "DeletePerInstanceConfigs": {
+              "methods": [
+                "deletePerInstanceConfigs"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            },
+            "ListErrors": {
+              "methods": [
+                "listErrors"
+              ]
+            },
+            "ListManagedInstances": {
+              "methods": [
+                "listManagedInstances"
+              ]
+            },
+            "ListPerInstanceConfigs": {
+              "methods": [
+                "listPerInstanceConfigs"
+              ]
+            },
+            "Patch": {
+              "methods": [
+                "patch"
+              ]
+            },
+            "PatchPerInstanceConfigs": {
+              "methods": [
+                "patchPerInstanceConfigs"
+              ]
+            },
+            "RecreateInstances": {
+              "methods": [
+                "recreateInstances"
+              ]
+            },
+            "Resize": {
+              "methods": [
+                "resize"
+              ]
+            },
+            "SetInstanceTemplate": {
+              "methods": [
+                "setInstanceTemplate"
+              ]
+            },
+            "SetTargetPools": {
+              "methods": [
+                "setTargetPools"
+              ]
+            },
+            "UpdatePerInstanceConfigs": {
+              "methods": [
+                "updatePerInstanceConfigs"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "InstanceGroups": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "InstanceGroupsClient",
+          "rpcs": {
+            "AddInstances": {
+              "methods": [
+                "addInstances"
+              ]
+            },
+            "AggregatedList": {
+              "methods": [
+                "aggregatedList"
+              ]
+            },
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            },
+            "ListInstances": {
+              "methods": [
+                "listInstances"
+              ]
+            },
+            "RemoveInstances": {
+              "methods": [
+                "removeInstances"
+              ]
+            },
+            "SetNamedPorts": {
+              "methods": [
+                "setNamedPorts"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "InstanceGroupsClient",
+          "rpcs": {
+            "AddInstances": {
+              "methods": [
+                "addInstances"
+              ]
+            },
+            "AggregatedList": {
+              "methods": [
+                "aggregatedList"
+              ]
+            },
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            },
+            "ListInstances": {
+              "methods": [
+                "listInstances"
+              ]
+            },
+            "RemoveInstances": {
+              "methods": [
+                "removeInstances"
+              ]
+            },
+            "SetNamedPorts": {
+              "methods": [
+                "setNamedPorts"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "Instances": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "InstancesClient",
+          "rpcs": {
+            "AddAccessConfig": {
+              "methods": [
+                "addAccessConfig"
+              ]
+            },
+            "AddResourcePolicies": {
+              "methods": [
+                "addResourcePolicies"
+              ]
+            },
+            "AggregatedList": {
+              "methods": [
+                "aggregatedList"
+              ]
+            },
+            "AttachDisk": {
+              "methods": [
+                "attachDisk"
+              ]
+            },
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "DeleteAccessConfig": {
+              "methods": [
+                "deleteAccessConfig"
+              ]
+            },
+            "DetachDisk": {
+              "methods": [
+                "detachDisk"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "GetGuestAttributes": {
+              "methods": [
+                "getGuestAttributes"
+              ]
+            },
+            "GetIamPolicy": {
+              "methods": [
+                "getIamPolicy"
+              ]
+            },
+            "GetScreenshot": {
+              "methods": [
+                "getScreenshot"
+              ]
+            },
+            "GetSerialPortOutput": {
+              "methods": [
+                "getSerialPortOutput"
+              ]
+            },
+            "GetShieldedInstanceIdentity": {
+              "methods": [
+                "getShieldedInstanceIdentity"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            },
+            "ListReferrers": {
+              "methods": [
+                "listReferrers"
+              ]
+            },
+            "RemoveResourcePolicies": {
+              "methods": [
+                "removeResourcePolicies"
+              ]
+            },
+            "Reset": {
+              "methods": [
+                "reset"
+              ]
+            },
+            "SetDeletionProtection": {
+              "methods": [
+                "setDeletionProtection"
+              ]
+            },
+            "SetDiskAutoDelete": {
+              "methods": [
+                "setDiskAutoDelete"
+              ]
+            },
+            "SetIamPolicy": {
+              "methods": [
+                "setIamPolicy"
+              ]
+            },
+            "SetLabels": {
+              "methods": [
+                "setLabels"
+              ]
+            },
+            "SetMachineResources": {
+              "methods": [
+                "setMachineResources"
+              ]
+            },
+            "SetMachineType": {
+              "methods": [
+                "setMachineType"
+              ]
+            },
+            "SetMetadata": {
+              "methods": [
+                "setMetadata"
+              ]
+            },
+            "SetMinCpuPlatform": {
+              "methods": [
+                "setMinCpuPlatform"
+              ]
+            },
+            "SetScheduling": {
+              "methods": [
+                "setScheduling"
+              ]
+            },
+            "SetServiceAccount": {
+              "methods": [
+                "setServiceAccount"
+              ]
+            },
+            "SetShieldedInstanceIntegrityPolicy": {
+              "methods": [
+                "setShieldedInstanceIntegrityPolicy"
+              ]
+            },
+            "SetTags": {
+              "methods": [
+                "setTags"
+              ]
+            },
+            "SimulateMaintenanceEvent": {
+              "methods": [
+                "simulateMaintenanceEvent"
+              ]
+            },
+            "Start": {
+              "methods": [
+                "start"
+              ]
+            },
+            "StartWithEncryptionKey": {
+              "methods": [
+                "startWithEncryptionKey"
+              ]
+            },
+            "Stop": {
+              "methods": [
+                "stop"
+              ]
+            },
+            "TestIamPermissions": {
+              "methods": [
+                "testIamPermissions"
+              ]
+            },
+            "Update": {
+              "methods": [
+                "update"
+              ]
+            },
+            "UpdateAccessConfig": {
+              "methods": [
+                "updateAccessConfig"
+              ]
+            },
+            "UpdateDisplayDevice": {
+              "methods": [
+                "updateDisplayDevice"
+              ]
+            },
+            "UpdateNetworkInterface": {
+              "methods": [
+                "updateNetworkInterface"
+              ]
+            },
+            "UpdateShieldedInstanceConfig": {
+              "methods": [
+                "updateShieldedInstanceConfig"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "InstancesClient",
+          "rpcs": {
+            "AddAccessConfig": {
+              "methods": [
+                "addAccessConfig"
+              ]
+            },
+            "AddResourcePolicies": {
+              "methods": [
+                "addResourcePolicies"
+              ]
+            },
+            "AggregatedList": {
+              "methods": [
+                "aggregatedList"
+              ]
+            },
+            "AttachDisk": {
+              "methods": [
+                "attachDisk"
+              ]
+            },
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "DeleteAccessConfig": {
+              "methods": [
+                "deleteAccessConfig"
+              ]
+            },
+            "DetachDisk": {
+              "methods": [
+                "detachDisk"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "GetGuestAttributes": {
+              "methods": [
+                "getGuestAttributes"
+              ]
+            },
+            "GetIamPolicy": {
+              "methods": [
+                "getIamPolicy"
+              ]
+            },
+            "GetScreenshot": {
+              "methods": [
+                "getScreenshot"
+              ]
+            },
+            "GetSerialPortOutput": {
+              "methods": [
+                "getSerialPortOutput"
+              ]
+            },
+            "GetShieldedInstanceIdentity": {
+              "methods": [
+                "getShieldedInstanceIdentity"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            },
+            "ListReferrers": {
+              "methods": [
+                "listReferrers"
+              ]
+            },
+            "RemoveResourcePolicies": {
+              "methods": [
+                "removeResourcePolicies"
+              ]
+            },
+            "Reset": {
+              "methods": [
+                "reset"
+              ]
+            },
+            "SetDeletionProtection": {
+              "methods": [
+                "setDeletionProtection"
+              ]
+            },
+            "SetDiskAutoDelete": {
+              "methods": [
+                "setDiskAutoDelete"
+              ]
+            },
+            "SetIamPolicy": {
+              "methods": [
+                "setIamPolicy"
+              ]
+            },
+            "SetLabels": {
+              "methods": [
+                "setLabels"
+              ]
+            },
+            "SetMachineResources": {
+              "methods": [
+                "setMachineResources"
+              ]
+            },
+            "SetMachineType": {
+              "methods": [
+                "setMachineType"
+              ]
+            },
+            "SetMetadata": {
+              "methods": [
+                "setMetadata"
+              ]
+            },
+            "SetMinCpuPlatform": {
+              "methods": [
+                "setMinCpuPlatform"
+              ]
+            },
+            "SetScheduling": {
+              "methods": [
+                "setScheduling"
+              ]
+            },
+            "SetServiceAccount": {
+              "methods": [
+                "setServiceAccount"
+              ]
+            },
+            "SetShieldedInstanceIntegrityPolicy": {
+              "methods": [
+                "setShieldedInstanceIntegrityPolicy"
+              ]
+            },
+            "SetTags": {
+              "methods": [
+                "setTags"
+              ]
+            },
+            "SimulateMaintenanceEvent": {
+              "methods": [
+                "simulateMaintenanceEvent"
+              ]
+            },
+            "Start": {
+              "methods": [
+                "start"
+              ]
+            },
+            "StartWithEncryptionKey": {
+              "methods": [
+                "startWithEncryptionKey"
+              ]
+            },
+            "Stop": {
+              "methods": [
+                "stop"
+              ]
+            },
+            "TestIamPermissions": {
+              "methods": [
+                "testIamPermissions"
+              ]
+            },
+            "Update": {
+              "methods": [
+                "update"
+              ]
+            },
+            "UpdateAccessConfig": {
+              "methods": [
+                "updateAccessConfig"
+              ]
+            },
+            "UpdateDisplayDevice": {
+              "methods": [
+                "updateDisplayDevice"
+              ]
+            },
+            "UpdateNetworkInterface": {
+              "methods": [
+                "updateNetworkInterface"
+              ]
+            },
+            "UpdateShieldedInstanceConfig": {
+              "methods": [
+                "updateShieldedInstanceConfig"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "InstanceTemplates": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "InstanceTemplatesClient",
+          "rpcs": {
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "GetIamPolicy": {
+              "methods": [
+                "getIamPolicy"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            },
+            "SetIamPolicy": {
+              "methods": [
+                "setIamPolicy"
+              ]
+            },
+            "TestIamPermissions": {
+              "methods": [
+                "testIamPermissions"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "InstanceTemplatesClient",
+          "rpcs": {
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "GetIamPolicy": {
+              "methods": [
+                "getIamPolicy"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            },
+            "SetIamPolicy": {
+              "methods": [
+                "setIamPolicy"
+              ]
+            },
+            "TestIamPermissions": {
+              "methods": [
+                "testIamPermissions"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "InterconnectAttachments": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "InterconnectAttachmentsClient",
+          "rpcs": {
+            "AggregatedList": {
+              "methods": [
+                "aggregatedList"
+              ]
+            },
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            },
+            "Patch": {
+              "methods": [
+                "patch"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "InterconnectAttachmentsClient",
+          "rpcs": {
+            "AggregatedList": {
+              "methods": [
+                "aggregatedList"
+              ]
+            },
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            },
+            "Patch": {
+              "methods": [
+                "patch"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "InterconnectLocations": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "InterconnectLocationsClient",
+          "rpcs": {
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "InterconnectLocationsClient",
+          "rpcs": {
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "Interconnects": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "InterconnectsClient",
+          "rpcs": {
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "GetDiagnostics": {
+              "methods": [
+                "getDiagnostics"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            },
+            "Patch": {
+              "methods": [
+                "patch"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "InterconnectsClient",
+          "rpcs": {
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "GetDiagnostics": {
+              "methods": [
+                "getDiagnostics"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            },
+            "Patch": {
+              "methods": [
+                "patch"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "LicenseCodes": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "LicenseCodesClient",
+          "rpcs": {
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "TestIamPermissions": {
+              "methods": [
+                "testIamPermissions"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "LicenseCodesClient",
+          "rpcs": {
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "TestIamPermissions": {
+              "methods": [
+                "testIamPermissions"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "Licenses": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "LicensesClient",
+          "rpcs": {
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "GetIamPolicy": {
+              "methods": [
+                "getIamPolicy"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            },
+            "SetIamPolicy": {
+              "methods": [
+                "setIamPolicy"
+              ]
+            },
+            "TestIamPermissions": {
+              "methods": [
+                "testIamPermissions"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "LicensesClient",
+          "rpcs": {
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "GetIamPolicy": {
+              "methods": [
+                "getIamPolicy"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            },
+            "SetIamPolicy": {
+              "methods": [
+                "setIamPolicy"
+              ]
+            },
+            "TestIamPermissions": {
+              "methods": [
+                "testIamPermissions"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "MachineTypes": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "MachineTypesClient",
+          "rpcs": {
+            "AggregatedList": {
+              "methods": [
+                "aggregatedList"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "MachineTypesClient",
+          "rpcs": {
+            "AggregatedList": {
+              "methods": [
+                "aggregatedList"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "NetworkEndpointGroups": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "NetworkEndpointGroupsClient",
+          "rpcs": {
+            "AggregatedList": {
+              "methods": [
+                "aggregatedList"
+              ]
+            },
+            "AttachNetworkEndpoints": {
+              "methods": [
+                "attachNetworkEndpoints"
+              ]
+            },
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "DetachNetworkEndpoints": {
+              "methods": [
+                "detachNetworkEndpoints"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            },
+            "ListNetworkEndpoints": {
+              "methods": [
+                "listNetworkEndpoints"
+              ]
+            },
+            "TestIamPermissions": {
+              "methods": [
+                "testIamPermissions"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "NetworkEndpointGroupsClient",
+          "rpcs": {
+            "AggregatedList": {
+              "methods": [
+                "aggregatedList"
+              ]
+            },
+            "AttachNetworkEndpoints": {
+              "methods": [
+                "attachNetworkEndpoints"
+              ]
+            },
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "DetachNetworkEndpoints": {
+              "methods": [
+                "detachNetworkEndpoints"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            },
+            "ListNetworkEndpoints": {
+              "methods": [
+                "listNetworkEndpoints"
+              ]
+            },
+            "TestIamPermissions": {
+              "methods": [
+                "testIamPermissions"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "Networks": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "NetworksClient",
+          "rpcs": {
+            "AddPeering": {
+              "methods": [
+                "addPeering"
+              ]
+            },
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            },
+            "ListPeeringRoutes": {
+              "methods": [
+                "listPeeringRoutes"
+              ]
+            },
+            "Patch": {
+              "methods": [
+                "patch"
+              ]
+            },
+            "RemovePeering": {
+              "methods": [
+                "removePeering"
+              ]
+            },
+            "SwitchToCustomMode": {
+              "methods": [
+                "switchToCustomMode"
+              ]
+            },
+            "UpdatePeering": {
+              "methods": [
+                "updatePeering"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "NetworksClient",
+          "rpcs": {
+            "AddPeering": {
+              "methods": [
+                "addPeering"
+              ]
+            },
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            },
+            "ListPeeringRoutes": {
+              "methods": [
+                "listPeeringRoutes"
+              ]
+            },
+            "Patch": {
+              "methods": [
+                "patch"
+              ]
+            },
+            "RemovePeering": {
+              "methods": [
+                "removePeering"
+              ]
+            },
+            "SwitchToCustomMode": {
+              "methods": [
+                "switchToCustomMode"
+              ]
+            },
+            "UpdatePeering": {
+              "methods": [
+                "updatePeering"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "NodeGroups": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "NodeGroupsClient",
+          "rpcs": {
+            "AddNodes": {
+              "methods": [
+                "addNodes"
+              ]
+            },
+            "AggregatedList": {
+              "methods": [
+                "aggregatedList"
+              ]
+            },
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "DeleteNodes": {
+              "methods": [
+                "deleteNodes"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "GetIamPolicy": {
+              "methods": [
+                "getIamPolicy"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            },
+            "ListNodes": {
+              "methods": [
+                "listNodes"
+              ]
+            },
+            "Patch": {
+              "methods": [
+                "patch"
+              ]
+            },
+            "SetIamPolicy": {
+              "methods": [
+                "setIamPolicy"
+              ]
+            },
+            "SetNodeTemplate": {
+              "methods": [
+                "setNodeTemplate"
+              ]
+            },
+            "TestIamPermissions": {
+              "methods": [
+                "testIamPermissions"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "NodeGroupsClient",
+          "rpcs": {
+            "AddNodes": {
+              "methods": [
+                "addNodes"
+              ]
+            },
+            "AggregatedList": {
+              "methods": [
+                "aggregatedList"
+              ]
+            },
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "DeleteNodes": {
+              "methods": [
+                "deleteNodes"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "GetIamPolicy": {
+              "methods": [
+                "getIamPolicy"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            },
+            "ListNodes": {
+              "methods": [
+                "listNodes"
+              ]
+            },
+            "Patch": {
+              "methods": [
+                "patch"
+              ]
+            },
+            "SetIamPolicy": {
+              "methods": [
+                "setIamPolicy"
+              ]
+            },
+            "SetNodeTemplate": {
+              "methods": [
+                "setNodeTemplate"
+              ]
+            },
+            "TestIamPermissions": {
+              "methods": [
+                "testIamPermissions"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "NodeTemplates": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "NodeTemplatesClient",
+          "rpcs": {
+            "AggregatedList": {
+              "methods": [
+                "aggregatedList"
+              ]
+            },
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "GetIamPolicy": {
+              "methods": [
+                "getIamPolicy"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            },
+            "SetIamPolicy": {
+              "methods": [
+                "setIamPolicy"
+              ]
+            },
+            "TestIamPermissions": {
+              "methods": [
+                "testIamPermissions"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "NodeTemplatesClient",
+          "rpcs": {
+            "AggregatedList": {
+              "methods": [
+                "aggregatedList"
+              ]
+            },
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "GetIamPolicy": {
+              "methods": [
+                "getIamPolicy"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            },
+            "SetIamPolicy": {
+              "methods": [
+                "setIamPolicy"
+              ]
+            },
+            "TestIamPermissions": {
+              "methods": [
+                "testIamPermissions"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "NodeTypes": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "NodeTypesClient",
+          "rpcs": {
+            "AggregatedList": {
+              "methods": [
+                "aggregatedList"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "NodeTypesClient",
+          "rpcs": {
+            "AggregatedList": {
+              "methods": [
+                "aggregatedList"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "PacketMirrorings": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "PacketMirroringsClient",
+          "rpcs": {
+            "AggregatedList": {
+              "methods": [
+                "aggregatedList"
+              ]
+            },
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            },
+            "Patch": {
+              "methods": [
+                "patch"
+              ]
+            },
+            "TestIamPermissions": {
+              "methods": [
+                "testIamPermissions"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "PacketMirroringsClient",
+          "rpcs": {
+            "AggregatedList": {
+              "methods": [
+                "aggregatedList"
+              ]
+            },
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            },
+            "Patch": {
+              "methods": [
+                "patch"
+              ]
+            },
+            "TestIamPermissions": {
+              "methods": [
+                "testIamPermissions"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "Projects": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "ProjectsClient",
+          "rpcs": {
+            "DisableXpnHost": {
+              "methods": [
+                "disableXpnHost"
+              ]
+            },
+            "DisableXpnResource": {
+              "methods": [
+                "disableXpnResource"
+              ]
+            },
+            "EnableXpnHost": {
+              "methods": [
+                "enableXpnHost"
+              ]
+            },
+            "EnableXpnResource": {
+              "methods": [
+                "enableXpnResource"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "GetXpnHost": {
+              "methods": [
+                "getXpnHost"
+              ]
+            },
+            "GetXpnResources": {
+              "methods": [
+                "getXpnResources"
+              ]
+            },
+            "ListXpnHosts": {
+              "methods": [
+                "listXpnHosts"
+              ]
+            },
+            "MoveDisk": {
+              "methods": [
+                "moveDisk"
+              ]
+            },
+            "MoveInstance": {
+              "methods": [
+                "moveInstance"
+              ]
+            },
+            "SetCommonInstanceMetadata": {
+              "methods": [
+                "setCommonInstanceMetadata"
+              ]
+            },
+            "SetDefaultNetworkTier": {
+              "methods": [
+                "setDefaultNetworkTier"
+              ]
+            },
+            "SetUsageExportBucket": {
+              "methods": [
+                "setUsageExportBucket"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "ProjectsClient",
+          "rpcs": {
+            "DisableXpnHost": {
+              "methods": [
+                "disableXpnHost"
+              ]
+            },
+            "DisableXpnResource": {
+              "methods": [
+                "disableXpnResource"
+              ]
+            },
+            "EnableXpnHost": {
+              "methods": [
+                "enableXpnHost"
+              ]
+            },
+            "EnableXpnResource": {
+              "methods": [
+                "enableXpnResource"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "GetXpnHost": {
+              "methods": [
+                "getXpnHost"
+              ]
+            },
+            "GetXpnResources": {
+              "methods": [
+                "getXpnResources"
+              ]
+            },
+            "ListXpnHosts": {
+              "methods": [
+                "listXpnHosts"
+              ]
+            },
+            "MoveDisk": {
+              "methods": [
+                "moveDisk"
+              ]
+            },
+            "MoveInstance": {
+              "methods": [
+                "moveInstance"
+              ]
+            },
+            "SetCommonInstanceMetadata": {
+              "methods": [
+                "setCommonInstanceMetadata"
+              ]
+            },
+            "SetDefaultNetworkTier": {
+              "methods": [
+                "setDefaultNetworkTier"
+              ]
+            },
+            "SetUsageExportBucket": {
+              "methods": [
+                "setUsageExportBucket"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "RegionAutoscalers": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "RegionAutoscalersClient",
+          "rpcs": {
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            },
+            "Patch": {
+              "methods": [
+                "patch"
+              ]
+            },
+            "Update": {
+              "methods": [
+                "update"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "RegionAutoscalersClient",
+          "rpcs": {
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            },
+            "Patch": {
+              "methods": [
+                "patch"
+              ]
+            },
+            "Update": {
+              "methods": [
+                "update"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "RegionBackendServices": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "RegionBackendServicesClient",
+          "rpcs": {
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "GetHealth": {
+              "methods": [
+                "getHealth"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            },
+            "Patch": {
+              "methods": [
+                "patch"
+              ]
+            },
+            "Update": {
+              "methods": [
+                "update"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "RegionBackendServicesClient",
+          "rpcs": {
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "GetHealth": {
+              "methods": [
+                "getHealth"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            },
+            "Patch": {
+              "methods": [
+                "patch"
+              ]
+            },
+            "Update": {
+              "methods": [
+                "update"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "RegionCommitments": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "RegionCommitmentsClient",
+          "rpcs": {
+            "AggregatedList": {
+              "methods": [
+                "aggregatedList"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "RegionCommitmentsClient",
+          "rpcs": {
+            "AggregatedList": {
+              "methods": [
+                "aggregatedList"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "RegionDisks": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "RegionDisksClient",
+          "rpcs": {
+            "AddResourcePolicies": {
+              "methods": [
+                "addResourcePolicies"
+              ]
+            },
+            "CreateSnapshot": {
+              "methods": [
+                "createSnapshot"
+              ]
+            },
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "GetIamPolicy": {
+              "methods": [
+                "getIamPolicy"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            },
+            "RemoveResourcePolicies": {
+              "methods": [
+                "removeResourcePolicies"
+              ]
+            },
+            "Resize": {
+              "methods": [
+                "resize"
+              ]
+            },
+            "SetIamPolicy": {
+              "methods": [
+                "setIamPolicy"
+              ]
+            },
+            "SetLabels": {
+              "methods": [
+                "setLabels"
+              ]
+            },
+            "TestIamPermissions": {
+              "methods": [
+                "testIamPermissions"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "RegionDisksClient",
+          "rpcs": {
+            "AddResourcePolicies": {
+              "methods": [
+                "addResourcePolicies"
+              ]
+            },
+            "CreateSnapshot": {
+              "methods": [
+                "createSnapshot"
+              ]
+            },
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "GetIamPolicy": {
+              "methods": [
+                "getIamPolicy"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            },
+            "RemoveResourcePolicies": {
+              "methods": [
+                "removeResourcePolicies"
+              ]
+            },
+            "Resize": {
+              "methods": [
+                "resize"
+              ]
+            },
+            "SetIamPolicy": {
+              "methods": [
+                "setIamPolicy"
+              ]
+            },
+            "SetLabels": {
+              "methods": [
+                "setLabels"
+              ]
+            },
+            "TestIamPermissions": {
+              "methods": [
+                "testIamPermissions"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "RegionDiskTypes": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "RegionDiskTypesClient",
+          "rpcs": {
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "RegionDiskTypesClient",
+          "rpcs": {
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "RegionHealthChecks": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "RegionHealthChecksClient",
+          "rpcs": {
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            },
+            "Patch": {
+              "methods": [
+                "patch"
+              ]
+            },
+            "Update": {
+              "methods": [
+                "update"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "RegionHealthChecksClient",
+          "rpcs": {
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            },
+            "Patch": {
+              "methods": [
+                "patch"
+              ]
+            },
+            "Update": {
+              "methods": [
+                "update"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "RegionHealthCheckServices": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "RegionHealthCheckServicesClient",
+          "rpcs": {
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            },
+            "Patch": {
+              "methods": [
+                "patch"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "RegionHealthCheckServicesClient",
+          "rpcs": {
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            },
+            "Patch": {
+              "methods": [
+                "patch"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "RegionInstanceGroupManagers": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "RegionInstanceGroupManagersClient",
+          "rpcs": {
+            "AbandonInstances": {
+              "methods": [
+                "abandonInstances"
+              ]
+            },
+            "ApplyUpdatesToInstances": {
+              "methods": [
+                "applyUpdatesToInstances"
+              ]
+            },
+            "CreateInstances": {
+              "methods": [
+                "createInstances"
+              ]
+            },
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "DeleteInstances": {
+              "methods": [
+                "deleteInstances"
+              ]
+            },
+            "DeletePerInstanceConfigs": {
+              "methods": [
+                "deletePerInstanceConfigs"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            },
+            "ListErrors": {
+              "methods": [
+                "listErrors"
+              ]
+            },
+            "ListManagedInstances": {
+              "methods": [
+                "listManagedInstances"
+              ]
+            },
+            "ListPerInstanceConfigs": {
+              "methods": [
+                "listPerInstanceConfigs"
+              ]
+            },
+            "Patch": {
+              "methods": [
+                "patch"
+              ]
+            },
+            "PatchPerInstanceConfigs": {
+              "methods": [
+                "patchPerInstanceConfigs"
+              ]
+            },
+            "RecreateInstances": {
+              "methods": [
+                "recreateInstances"
+              ]
+            },
+            "Resize": {
+              "methods": [
+                "resize"
+              ]
+            },
+            "SetInstanceTemplate": {
+              "methods": [
+                "setInstanceTemplate"
+              ]
+            },
+            "SetTargetPools": {
+              "methods": [
+                "setTargetPools"
+              ]
+            },
+            "UpdatePerInstanceConfigs": {
+              "methods": [
+                "updatePerInstanceConfigs"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "RegionInstanceGroupManagersClient",
+          "rpcs": {
+            "AbandonInstances": {
+              "methods": [
+                "abandonInstances"
+              ]
+            },
+            "ApplyUpdatesToInstances": {
+              "methods": [
+                "applyUpdatesToInstances"
+              ]
+            },
+            "CreateInstances": {
+              "methods": [
+                "createInstances"
+              ]
+            },
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "DeleteInstances": {
+              "methods": [
+                "deleteInstances"
+              ]
+            },
+            "DeletePerInstanceConfigs": {
+              "methods": [
+                "deletePerInstanceConfigs"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            },
+            "ListErrors": {
+              "methods": [
+                "listErrors"
+              ]
+            },
+            "ListManagedInstances": {
+              "methods": [
+                "listManagedInstances"
+              ]
+            },
+            "ListPerInstanceConfigs": {
+              "methods": [
+                "listPerInstanceConfigs"
+              ]
+            },
+            "Patch": {
+              "methods": [
+                "patch"
+              ]
+            },
+            "PatchPerInstanceConfigs": {
+              "methods": [
+                "patchPerInstanceConfigs"
+              ]
+            },
+            "RecreateInstances": {
+              "methods": [
+                "recreateInstances"
+              ]
+            },
+            "Resize": {
+              "methods": [
+                "resize"
+              ]
+            },
+            "SetInstanceTemplate": {
+              "methods": [
+                "setInstanceTemplate"
+              ]
+            },
+            "SetTargetPools": {
+              "methods": [
+                "setTargetPools"
+              ]
+            },
+            "UpdatePerInstanceConfigs": {
+              "methods": [
+                "updatePerInstanceConfigs"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "RegionInstanceGroups": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "RegionInstanceGroupsClient",
+          "rpcs": {
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            },
+            "ListInstances": {
+              "methods": [
+                "listInstances"
+              ]
+            },
+            "SetNamedPorts": {
+              "methods": [
+                "setNamedPorts"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "RegionInstanceGroupsClient",
+          "rpcs": {
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            },
+            "ListInstances": {
+              "methods": [
+                "listInstances"
+              ]
+            },
+            "SetNamedPorts": {
+              "methods": [
+                "setNamedPorts"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "RegionNetworkEndpointGroups": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "RegionNetworkEndpointGroupsClient",
+          "rpcs": {
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "RegionNetworkEndpointGroupsClient",
+          "rpcs": {
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "RegionNotificationEndpoints": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "RegionNotificationEndpointsClient",
+          "rpcs": {
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "RegionNotificationEndpointsClient",
+          "rpcs": {
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "RegionOperations": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "RegionOperationsClient",
+          "rpcs": {
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            },
+            "Wait": {
+              "methods": [
+                "wait"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "RegionOperationsClient",
+          "rpcs": {
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            },
+            "Wait": {
+              "methods": [
+                "wait"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "Regions": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "RegionsClient",
+          "rpcs": {
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "RegionsClient",
+          "rpcs": {
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "RegionSslCertificates": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "RegionSslCertificatesClient",
+          "rpcs": {
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "RegionSslCertificatesClient",
+          "rpcs": {
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "RegionTargetHttpProxies": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "RegionTargetHttpProxiesClient",
+          "rpcs": {
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            },
+            "SetUrlMap": {
+              "methods": [
+                "setUrlMap"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "RegionTargetHttpProxiesClient",
+          "rpcs": {
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            },
+            "SetUrlMap": {
+              "methods": [
+                "setUrlMap"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "RegionTargetHttpsProxies": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "RegionTargetHttpsProxiesClient",
+          "rpcs": {
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            },
+            "SetSslCertificates": {
+              "methods": [
+                "setSslCertificates"
+              ]
+            },
+            "SetUrlMap": {
+              "methods": [
+                "setUrlMap"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "RegionTargetHttpsProxiesClient",
+          "rpcs": {
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            },
+            "SetSslCertificates": {
+              "methods": [
+                "setSslCertificates"
+              ]
+            },
+            "SetUrlMap": {
+              "methods": [
+                "setUrlMap"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "RegionUrlMaps": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "RegionUrlMapsClient",
+          "rpcs": {
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            },
+            "Patch": {
+              "methods": [
+                "patch"
+              ]
+            },
+            "Update": {
+              "methods": [
+                "update"
+              ]
+            },
+            "Validate": {
+              "methods": [
+                "validate"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "RegionUrlMapsClient",
+          "rpcs": {
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            },
+            "Patch": {
+              "methods": [
+                "patch"
+              ]
+            },
+            "Update": {
+              "methods": [
+                "update"
+              ]
+            },
+            "Validate": {
+              "methods": [
+                "validate"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "Reservations": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "ReservationsClient",
+          "rpcs": {
+            "AggregatedList": {
+              "methods": [
+                "aggregatedList"
+              ]
+            },
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "GetIamPolicy": {
+              "methods": [
+                "getIamPolicy"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            },
+            "Resize": {
+              "methods": [
+                "resize"
+              ]
+            },
+            "SetIamPolicy": {
+              "methods": [
+                "setIamPolicy"
+              ]
+            },
+            "TestIamPermissions": {
+              "methods": [
+                "testIamPermissions"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "ReservationsClient",
+          "rpcs": {
+            "AggregatedList": {
+              "methods": [
+                "aggregatedList"
+              ]
+            },
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "GetIamPolicy": {
+              "methods": [
+                "getIamPolicy"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            },
+            "Resize": {
+              "methods": [
+                "resize"
+              ]
+            },
+            "SetIamPolicy": {
+              "methods": [
+                "setIamPolicy"
+              ]
+            },
+            "TestIamPermissions": {
+              "methods": [
+                "testIamPermissions"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "ResourcePolicies": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "ResourcePoliciesClient",
+          "rpcs": {
+            "AggregatedList": {
+              "methods": [
+                "aggregatedList"
+              ]
+            },
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "GetIamPolicy": {
+              "methods": [
+                "getIamPolicy"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            },
+            "SetIamPolicy": {
+              "methods": [
+                "setIamPolicy"
+              ]
+            },
+            "TestIamPermissions": {
+              "methods": [
+                "testIamPermissions"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "ResourcePoliciesClient",
+          "rpcs": {
+            "AggregatedList": {
+              "methods": [
+                "aggregatedList"
+              ]
+            },
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "GetIamPolicy": {
+              "methods": [
+                "getIamPolicy"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            },
+            "SetIamPolicy": {
+              "methods": [
+                "setIamPolicy"
+              ]
+            },
+            "TestIamPermissions": {
+              "methods": [
+                "testIamPermissions"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "Routers": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "RoutersClient",
+          "rpcs": {
+            "AggregatedList": {
+              "methods": [
+                "aggregatedList"
+              ]
+            },
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "GetNatMappingInfo": {
+              "methods": [
+                "getNatMappingInfo"
+              ]
+            },
+            "GetRouterStatus": {
+              "methods": [
+                "getRouterStatus"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            },
+            "Patch": {
+              "methods": [
+                "patch"
+              ]
+            },
+            "Preview": {
+              "methods": [
+                "preview"
+              ]
+            },
+            "Update": {
+              "methods": [
+                "update"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "RoutersClient",
+          "rpcs": {
+            "AggregatedList": {
+              "methods": [
+                "aggregatedList"
+              ]
+            },
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "GetNatMappingInfo": {
+              "methods": [
+                "getNatMappingInfo"
+              ]
+            },
+            "GetRouterStatus": {
+              "methods": [
+                "getRouterStatus"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            },
+            "Patch": {
+              "methods": [
+                "patch"
+              ]
+            },
+            "Preview": {
+              "methods": [
+                "preview"
+              ]
+            },
+            "Update": {
+              "methods": [
+                "update"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "Routes": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "RoutesClient",
+          "rpcs": {
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "RoutesClient",
+          "rpcs": {
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "SecurityPolicies": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "SecurityPoliciesClient",
+          "rpcs": {
+            "AddRule": {
+              "methods": [
+                "addRule"
+              ]
+            },
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "GetRule": {
+              "methods": [
+                "getRule"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            },
+            "ListPreconfiguredExpressionSets": {
+              "methods": [
+                "listPreconfiguredExpressionSets"
+              ]
+            },
+            "Patch": {
+              "methods": [
+                "patch"
+              ]
+            },
+            "PatchRule": {
+              "methods": [
+                "patchRule"
+              ]
+            },
+            "RemoveRule": {
+              "methods": [
+                "removeRule"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "SecurityPoliciesClient",
+          "rpcs": {
+            "AddRule": {
+              "methods": [
+                "addRule"
+              ]
+            },
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "GetRule": {
+              "methods": [
+                "getRule"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            },
+            "ListPreconfiguredExpressionSets": {
+              "methods": [
+                "listPreconfiguredExpressionSets"
+              ]
+            },
+            "Patch": {
+              "methods": [
+                "patch"
+              ]
+            },
+            "PatchRule": {
+              "methods": [
+                "patchRule"
+              ]
+            },
+            "RemoveRule": {
+              "methods": [
+                "removeRule"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "Snapshots": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "SnapshotsClient",
+          "rpcs": {
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "GetIamPolicy": {
+              "methods": [
+                "getIamPolicy"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            },
+            "SetIamPolicy": {
+              "methods": [
+                "setIamPolicy"
+              ]
+            },
+            "SetLabels": {
+              "methods": [
+                "setLabels"
+              ]
+            },
+            "TestIamPermissions": {
+              "methods": [
+                "testIamPermissions"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "SnapshotsClient",
+          "rpcs": {
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "GetIamPolicy": {
+              "methods": [
+                "getIamPolicy"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            },
+            "SetIamPolicy": {
+              "methods": [
+                "setIamPolicy"
+              ]
+            },
+            "SetLabels": {
+              "methods": [
+                "setLabels"
+              ]
+            },
+            "TestIamPermissions": {
+              "methods": [
+                "testIamPermissions"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "SslCertificates": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "SslCertificatesClient",
+          "rpcs": {
+            "AggregatedList": {
+              "methods": [
+                "aggregatedList"
+              ]
+            },
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "SslCertificatesClient",
+          "rpcs": {
+            "AggregatedList": {
+              "methods": [
+                "aggregatedList"
+              ]
+            },
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "SslPolicies": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "SslPoliciesClient",
+          "rpcs": {
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            },
+            "ListAvailableFeatures": {
+              "methods": [
+                "listAvailableFeatures"
+              ]
+            },
+            "Patch": {
+              "methods": [
+                "patch"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "SslPoliciesClient",
+          "rpcs": {
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            },
+            "ListAvailableFeatures": {
+              "methods": [
+                "listAvailableFeatures"
+              ]
+            },
+            "Patch": {
+              "methods": [
+                "patch"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "Subnetworks": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "SubnetworksClient",
+          "rpcs": {
+            "AggregatedList": {
+              "methods": [
+                "aggregatedList"
+              ]
+            },
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "ExpandIpCidrRange": {
+              "methods": [
+                "expandIpCidrRange"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "GetIamPolicy": {
+              "methods": [
+                "getIamPolicy"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            },
+            "ListUsable": {
+              "methods": [
+                "listUsable"
+              ]
+            },
+            "Patch": {
+              "methods": [
+                "patch"
+              ]
+            },
+            "SetIamPolicy": {
+              "methods": [
+                "setIamPolicy"
+              ]
+            },
+            "SetPrivateIpGoogleAccess": {
+              "methods": [
+                "setPrivateIpGoogleAccess"
+              ]
+            },
+            "TestIamPermissions": {
+              "methods": [
+                "testIamPermissions"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "SubnetworksClient",
+          "rpcs": {
+            "AggregatedList": {
+              "methods": [
+                "aggregatedList"
+              ]
+            },
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "ExpandIpCidrRange": {
+              "methods": [
+                "expandIpCidrRange"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "GetIamPolicy": {
+              "methods": [
+                "getIamPolicy"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            },
+            "ListUsable": {
+              "methods": [
+                "listUsable"
+              ]
+            },
+            "Patch": {
+              "methods": [
+                "patch"
+              ]
+            },
+            "SetIamPolicy": {
+              "methods": [
+                "setIamPolicy"
+              ]
+            },
+            "SetPrivateIpGoogleAccess": {
+              "methods": [
+                "setPrivateIpGoogleAccess"
+              ]
+            },
+            "TestIamPermissions": {
+              "methods": [
+                "testIamPermissions"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "TargetGrpcProxies": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "TargetGrpcProxiesClient",
+          "rpcs": {
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            },
+            "Patch": {
+              "methods": [
+                "patch"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "TargetGrpcProxiesClient",
+          "rpcs": {
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            },
+            "Patch": {
+              "methods": [
+                "patch"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "TargetHttpProxies": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "TargetHttpProxiesClient",
+          "rpcs": {
+            "AggregatedList": {
+              "methods": [
+                "aggregatedList"
+              ]
+            },
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            },
+            "Patch": {
+              "methods": [
+                "patch"
+              ]
+            },
+            "SetUrlMap": {
+              "methods": [
+                "setUrlMap"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "TargetHttpProxiesClient",
+          "rpcs": {
+            "AggregatedList": {
+              "methods": [
+                "aggregatedList"
+              ]
+            },
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            },
+            "Patch": {
+              "methods": [
+                "patch"
+              ]
+            },
+            "SetUrlMap": {
+              "methods": [
+                "setUrlMap"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "TargetHttpsProxies": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "TargetHttpsProxiesClient",
+          "rpcs": {
+            "AggregatedList": {
+              "methods": [
+                "aggregatedList"
+              ]
+            },
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            },
+            "SetQuicOverride": {
+              "methods": [
+                "setQuicOverride"
+              ]
+            },
+            "SetSslCertificates": {
+              "methods": [
+                "setSslCertificates"
+              ]
+            },
+            "SetSslPolicy": {
+              "methods": [
+                "setSslPolicy"
+              ]
+            },
+            "SetUrlMap": {
+              "methods": [
+                "setUrlMap"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "TargetHttpsProxiesClient",
+          "rpcs": {
+            "AggregatedList": {
+              "methods": [
+                "aggregatedList"
+              ]
+            },
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            },
+            "SetQuicOverride": {
+              "methods": [
+                "setQuicOverride"
+              ]
+            },
+            "SetSslCertificates": {
+              "methods": [
+                "setSslCertificates"
+              ]
+            },
+            "SetSslPolicy": {
+              "methods": [
+                "setSslPolicy"
+              ]
+            },
+            "SetUrlMap": {
+              "methods": [
+                "setUrlMap"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "TargetInstances": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "TargetInstancesClient",
+          "rpcs": {
+            "AggregatedList": {
+              "methods": [
+                "aggregatedList"
+              ]
+            },
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "TargetInstancesClient",
+          "rpcs": {
+            "AggregatedList": {
+              "methods": [
+                "aggregatedList"
+              ]
+            },
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "TargetPools": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "TargetPoolsClient",
+          "rpcs": {
+            "AddHealthCheck": {
+              "methods": [
+                "addHealthCheck"
+              ]
+            },
+            "AddInstance": {
+              "methods": [
+                "addInstance"
+              ]
+            },
+            "AggregatedList": {
+              "methods": [
+                "aggregatedList"
+              ]
+            },
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "GetHealth": {
+              "methods": [
+                "getHealth"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            },
+            "RemoveHealthCheck": {
+              "methods": [
+                "removeHealthCheck"
+              ]
+            },
+            "RemoveInstance": {
+              "methods": [
+                "removeInstance"
+              ]
+            },
+            "SetBackup": {
+              "methods": [
+                "setBackup"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "TargetPoolsClient",
+          "rpcs": {
+            "AddHealthCheck": {
+              "methods": [
+                "addHealthCheck"
+              ]
+            },
+            "AddInstance": {
+              "methods": [
+                "addInstance"
+              ]
+            },
+            "AggregatedList": {
+              "methods": [
+                "aggregatedList"
+              ]
+            },
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "GetHealth": {
+              "methods": [
+                "getHealth"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            },
+            "RemoveHealthCheck": {
+              "methods": [
+                "removeHealthCheck"
+              ]
+            },
+            "RemoveInstance": {
+              "methods": [
+                "removeInstance"
+              ]
+            },
+            "SetBackup": {
+              "methods": [
+                "setBackup"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "TargetSslProxies": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "TargetSslProxiesClient",
+          "rpcs": {
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            },
+            "SetBackendService": {
+              "methods": [
+                "setBackendService"
+              ]
+            },
+            "SetProxyHeader": {
+              "methods": [
+                "setProxyHeader"
+              ]
+            },
+            "SetSslCertificates": {
+              "methods": [
+                "setSslCertificates"
+              ]
+            },
+            "SetSslPolicy": {
+              "methods": [
+                "setSslPolicy"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "TargetSslProxiesClient",
+          "rpcs": {
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            },
+            "SetBackendService": {
+              "methods": [
+                "setBackendService"
+              ]
+            },
+            "SetProxyHeader": {
+              "methods": [
+                "setProxyHeader"
+              ]
+            },
+            "SetSslCertificates": {
+              "methods": [
+                "setSslCertificates"
+              ]
+            },
+            "SetSslPolicy": {
+              "methods": [
+                "setSslPolicy"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "TargetTcpProxies": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "TargetTcpProxiesClient",
+          "rpcs": {
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            },
+            "SetBackendService": {
+              "methods": [
+                "setBackendService"
+              ]
+            },
+            "SetProxyHeader": {
+              "methods": [
+                "setProxyHeader"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "TargetTcpProxiesClient",
+          "rpcs": {
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            },
+            "SetBackendService": {
+              "methods": [
+                "setBackendService"
+              ]
+            },
+            "SetProxyHeader": {
+              "methods": [
+                "setProxyHeader"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "TargetVpnGateways": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "TargetVpnGatewaysClient",
+          "rpcs": {
+            "AggregatedList": {
+              "methods": [
+                "aggregatedList"
+              ]
+            },
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "TargetVpnGatewaysClient",
+          "rpcs": {
+            "AggregatedList": {
+              "methods": [
+                "aggregatedList"
+              ]
+            },
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "UrlMaps": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "UrlMapsClient",
+          "rpcs": {
+            "AggregatedList": {
+              "methods": [
+                "aggregatedList"
+              ]
+            },
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "InvalidateCache": {
+              "methods": [
+                "invalidateCache"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            },
+            "Patch": {
+              "methods": [
+                "patch"
+              ]
+            },
+            "Update": {
+              "methods": [
+                "update"
+              ]
+            },
+            "Validate": {
+              "methods": [
+                "validate"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "UrlMapsClient",
+          "rpcs": {
+            "AggregatedList": {
+              "methods": [
+                "aggregatedList"
+              ]
+            },
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "InvalidateCache": {
+              "methods": [
+                "invalidateCache"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            },
+            "Patch": {
+              "methods": [
+                "patch"
+              ]
+            },
+            "Update": {
+              "methods": [
+                "update"
+              ]
+            },
+            "Validate": {
+              "methods": [
+                "validate"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "VpnGateways": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "VpnGatewaysClient",
+          "rpcs": {
+            "AggregatedList": {
+              "methods": [
+                "aggregatedList"
+              ]
+            },
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "GetStatus": {
+              "methods": [
+                "getStatus"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            },
+            "SetLabels": {
+              "methods": [
+                "setLabels"
+              ]
+            },
+            "TestIamPermissions": {
+              "methods": [
+                "testIamPermissions"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "VpnGatewaysClient",
+          "rpcs": {
+            "AggregatedList": {
+              "methods": [
+                "aggregatedList"
+              ]
+            },
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "GetStatus": {
+              "methods": [
+                "getStatus"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            },
+            "SetLabels": {
+              "methods": [
+                "setLabels"
+              ]
+            },
+            "TestIamPermissions": {
+              "methods": [
+                "testIamPermissions"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "VpnTunnels": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "VpnTunnelsClient",
+          "rpcs": {
+            "AggregatedList": {
+              "methods": [
+                "aggregatedList"
+              ]
+            },
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "VpnTunnelsClient",
+          "rpcs": {
+            "AggregatedList": {
+              "methods": [
+                "aggregatedList"
+              ]
+            },
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "Insert": {
+              "methods": [
+                "insert"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "ZoneOperations": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "ZoneOperationsClient",
+          "rpcs": {
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            },
+            "Wait": {
+              "methods": [
+                "wait"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "ZoneOperationsClient",
+          "rpcs": {
+            "Delete": {
+              "methods": [
+                "delete"
+              ]
+            },
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            },
+            "Wait": {
+              "methods": [
+                "wait"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "Zones": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "ZonesClient",
+          "rpcs": {
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            }
+          }
+        },
+        "grpc-fallback": {
+          "libraryClient": "ZonesClient",
+          "rpcs": {
+            "Get": {
+              "methods": [
+                "get"
+              ]
+            },
+            "List": {
+              "methods": [
+                "list"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
