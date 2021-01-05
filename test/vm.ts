@@ -14,7 +14,7 @@
 import * as assert from 'assert';
 import * as extend from 'extend';
 import * as proxyquire from 'proxyquire';
-import {ServiceObject, util} from '@google-cloud/common';
+import { ResponseBody, ServiceObject, util } from '@google-cloud/common';
 import type {
   BodyResponseCallback,
   DecorateRequestOptions,
@@ -296,8 +296,7 @@ describe('VM', () => {
       };
 
       vm.getMetadata = function (callback: MetadataCallback): any {
-        // @ts-ignore
-        callback(null, METADATA, METADATA);
+        callback(null, METADATA, METADATA as ResponseBody);
       };
     });
 
@@ -332,8 +331,7 @@ describe('VM', () => {
           ],
         };
 
-        // @ts-ignore
-        callback(null, metadata, metadata);
+        callback(null, metadata, metadata as ResponseBody);
       };
 
       vm.request = function (reqOpts: DecorateRequestOptions): any {
@@ -355,8 +353,7 @@ describe('VM', () => {
       };
 
       vm.getMetadata = function (callback: MetadataCallback): any {
-        // @ts-ignore
-        callback(null, metadata, metadata);
+        callback(null, metadata, metadata as ResponseBody);
       };
 
       vm.detachDisk(DISK, err => {
@@ -430,11 +427,10 @@ describe('VM', () => {
 
     describe('error', () => {
       const error = new Error('Error.');
-      const apiResponse = {a: 'b', c: 'd'};
+      const apiResponse = {a: 'b', c: 'd'} as ResponseBody;
 
       beforeEach(() => {
         vm.getMetadata = function (callback: MetadataCallback): any {
-          // @ts-ignore
           callback(error, null, apiResponse);
         };
       });
@@ -457,11 +453,10 @@ describe('VM', () => {
         labelFingerprint: 'fingerprint',
       };
 
-      const apiResponse = {a: 'b', c: 'd'};
+      const apiResponse = {a: 'b', c: 'd'} as ResponseBody;
 
       beforeEach(() => {
         vm.getMetadata = function (callback: MetadataCallback): any {
-          // @ts-ignore
           callback(null, metadata, apiResponse);
         };
       });
@@ -592,11 +587,10 @@ describe('VM', () => {
 
     describe('error', () => {
       const error = new Error('Error.');
-      const apiResponse = {a: 'b', c: 'd'};
+      const apiResponse = {a: 'b', c: 'd'} as ResponseBody;
 
       beforeEach(() => {
         vm.getMetadata = function (callback: MetadataCallback): any {
-          // @ts-ignore
           callback(error, null, apiResponse);
         };
       });
@@ -621,11 +615,10 @@ describe('VM', () => {
         },
       };
 
-      const apiResponse = {a: 'b', c: 'd'};
+      const apiResponse = {a: 'b', c: 'd'} as ResponseBody;
 
       beforeEach(() => {
         vm.getMetadata = function (callback: MetadataCallback): any {
-          // @ts-ignore
           callback(null, metadata, apiResponse);
         };
       });
@@ -916,11 +909,10 @@ describe('VM', () => {
     describe('getting the current fingerprint', () => {
       describe('error', () => {
         const error = new Error('Error.');
-        const apiResponse = {};
+        const apiResponse = {} as ResponseBody;
 
         beforeEach(() => {
           vm.getMetadata = function (callback: MetadataCallback): any {
-            // @ts-ignore
             callback(error, null, apiResponse);
           };
         });
@@ -942,11 +934,10 @@ describe('VM', () => {
             },
           };
 
-          const apiResponse = {};
+          const apiResponse = {} as ResponseBody;
 
           beforeEach(() => {
             vm.getMetadata = function (callback: MetadataCallback): any {
-              // @ts-ignore
               callback(null, metadata, apiResponse);
             };
           });
@@ -1478,7 +1469,7 @@ describe('VM', () => {
       });
 
       it('should execute callback with Zone object & API resp', done => {
-        const operation = ({} as unknown) as Operation;
+        const operation = ({}) as Operation;
 
         vm.zone.operation = function (name) {
           assert.strictEqual(name, apiResponse.name);

@@ -224,7 +224,7 @@ describe('InstanceGroup', () => {
       });
 
       it('should return an Operation and API response', done => {
-        const operation = ({} as unknown) as Operation;
+        const operation = ({}) as Operation;
 
         instanceGroup.zone.operation = function (name) {
           assert.strictEqual(name, apiResponse.name);
@@ -296,7 +296,7 @@ describe('InstanceGroup', () => {
       });
 
       it('should execute callback with Operation & Response', done => {
-        const operation = ({} as unknown) as Operation;
+        const operation = ({}) as Operation;
 
         instanceGroup.zone.operation = function (name) {
           assert.strictEqual(name, apiResponse.name);
@@ -323,7 +323,7 @@ describe('InstanceGroup', () => {
   describe('getVMs', () => {
     beforeEach(() => {
       instanceGroup.zone.vm = function () {
-        return ({} as unknown) as VM;
+        return ({}) as VM;
       };
     });
 
@@ -337,7 +337,7 @@ describe('InstanceGroup', () => {
     });
 
     it('should make the correct API request', done => {
-      const query = ({a: 'b', c: 'd'} as unknown) as GetResourcesOptions;
+      const query = ({a: 'b', c: 'd'}) as GetResourcesOptions;
 
       instanceGroup.request = function (reqOpts: DecorateRequestOptions): any {
         assert.strictEqual(reqOpts.method, 'POST');
@@ -434,7 +434,7 @@ describe('InstanceGroup', () => {
       });
 
       it('should execute callback with VMs & API response', done => {
-        const vm = ({} as unknown) as VM;
+        const vm = ({}) as VM;
 
         instanceGroup.zone.vm = function (name) {
           assert.strictEqual(name, apiResponse.items[0].instance);
@@ -456,7 +456,7 @@ describe('InstanceGroup', () => {
   });
 
   describe('remove', () => {
-    const VMS = ([{url: 'vm-url'}, {url: 'vm-url-2'}] as unknown) as VM[];
+    const VMS = ([{url: 'vm-url'}, {url: 'vm-url-2'}]) as VM[];
 
     it('should make the correct API request', done => {
       instanceGroup.request = function (reqOpts: DecorateRequestOptions): any {
@@ -512,7 +512,7 @@ describe('InstanceGroup', () => {
       });
 
       it('should return an Operation and API response', done => {
-        const operation = ({} as unknown) as Operation;
+        const operation = ({}) as Operation;
 
         instanceGroup.zone.operation = function (name) {
           assert.strictEqual(name, apiResponse.name);
@@ -598,7 +598,7 @@ describe('InstanceGroup', () => {
       });
 
       it('should execute callback with Operation & Response', done => {
-        const operation = ({} as unknown) as Operation;
+        const operation = ({}) as Operation;
 
         instanceGroup.zone.operation = function (name) {
           assert.strictEqual(name, apiResponse.name);

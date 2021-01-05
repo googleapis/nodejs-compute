@@ -467,8 +467,8 @@ describe('Compute', () => {
 
       it('should exec cb with Firewall, Operation & apiResp', done => {
         const name = 'name';
-        const firewall = ({} as unknown) as Firewall;
-        const operation = ({} as unknown) as Operation;
+        const firewall = ({}) as Firewall;
+        const operation = ({}) as Operation;
 
         compute.firewall = function (name_) {
           assert.strictEqual(name_, name);
@@ -545,7 +545,7 @@ describe('Compute', () => {
 
     it('should make the correct default API request', done => {
       const name = 'new-health-check-name';
-      const options = ({a: 'b'} as unknown) as CreateHealthCheckOptions;
+      const options = ({a: 'b'}) as CreateHealthCheckOptions;
       const originalOptions = Object.assign({}, options);
 
       compute.request = function (reqOpts) {
@@ -593,8 +593,8 @@ describe('Compute', () => {
 
       it('should exec cb with HealthCheck, Op, & apiResp', done => {
         const name = 'name';
-        const healthCheck = ({} as unknown) as HealthCheck;
-        const operation = ({} as unknown) as Operation;
+        const healthCheck = ({}) as HealthCheck;
+        const operation = ({}) as Operation;
 
         compute.healthCheck = function (name_, options) {
           assert.strictEqual(name_, name);
@@ -639,7 +639,7 @@ describe('Compute', () => {
       zone: {
         name: 'zone-name',
       },
-    } as unknown) as Disk;
+    }) as Disk;
 
     beforeEach(() => {
       fakeUtil.isCustomType = function () {
@@ -663,7 +663,7 @@ describe('Compute', () => {
       const options = ({
         a: 'b',
         c: 'd',
-      } as unknown) as CreateImageOptions;
+      }) as CreateImageOptions;
 
       compute.request = function (reqOpts) {
         assert.strictEqual(reqOpts.method, 'POST');
@@ -713,8 +713,8 @@ describe('Compute', () => {
       });
 
       it('should exec cb with Operation & apiResp', done => {
-        const network = ({} as unknown) as Network;
-        const operation = ({} as unknown) as Operation;
+        const network = ({}) as Network;
+        const operation = ({}) as Operation;
 
         compute.network = function (name) {
           assert.strictEqual(name, NAME);
@@ -817,8 +817,8 @@ describe('Compute', () => {
       });
 
       it('should exec cb with Network, Operation & apiResp', done => {
-        const network = ({} as unknown) as Network;
-        const operation = ({} as unknown) as Operation;
+        const network = ({}) as Network;
+        const operation = ({}) as Operation;
 
         compute.network = function (name_) {
           assert.strictEqual(name_, NAME);
@@ -846,7 +846,7 @@ describe('Compute', () => {
     const NAME = 'new-rule';
 
     it('should make the correct API request', done => {
-      const config = ({a: 'b'} as unknown) as CreateRuleOptions;
+      const config = ({a: 'b'}) as CreateRuleOptions;
       const originalConfig = Object.assign({}, config);
       const expectedConfig = Object.assign({}, config, {name: NAME});
 
@@ -948,8 +948,8 @@ describe('Compute', () => {
       });
 
       it('should exec cb with Rule, Operation & apiResp', done => {
-        const rule = ({} as unknown) as Rule;
-        const operation = ({} as unknown) as Operation;
+        const rule = ({}) as Rule;
+        const operation = ({}) as Operation;
 
         compute.rule = function (name) {
           assert.strictEqual(name, NAME);
@@ -1020,8 +1020,8 @@ describe('Compute', () => {
       });
 
       it('should exec cb with Service, Operation & apiResp', done => {
-        const service = ({} as unknown) as ServiceClass;
-        const operation = ({} as unknown) as Operation;
+        const service = ({}) as ServiceClass;
+        const operation = ({}) as Operation;
 
         compute.service = function (name) {
           assert.strictEqual(name, NAME);
@@ -1112,7 +1112,7 @@ describe('Compute', () => {
       const REGION_NAME = 'region-1';
       const FULL_REGION_NAME = 'regions/' + REGION_NAME;
 
-      const address = ({name: 'address-1'} as unknown) as Address;
+      const address = ({name: 'address-1'}) as Address;
       const apiResponse = {
         items: {},
       };
@@ -1128,7 +1128,7 @@ describe('Compute', () => {
       });
 
       it('should create Address objects from the response', done => {
-        const region = ({} as unknown) as Region;
+        const region = ({}) as Region;
 
         compute.region = function (name) {
           assert.strictEqual(name, REGION_NAME);
@@ -1149,7 +1149,7 @@ describe('Compute', () => {
           nextPageToken: 'next-page-token',
         });
 
-        const query = ({a: 'b', c: 'd'} as unknown) as GetResourcesOptions;
+        const query = ({a: 'b', c: 'd'}) as GetResourcesOptions;
         const originalQuery = Object.assign({}, query);
 
         compute.request = function (reqOpts, callback) {
@@ -1222,7 +1222,7 @@ describe('Compute', () => {
       const ZONE_NAME = 'us-central1-a';
       const FULL_ZONE_NAME = 'zones/' + ZONE_NAME;
 
-      const autoscaler = ({name: 'autoscaler-1'} as unknown) as Autoscaler;
+      const autoscaler = ({name: 'autoscaler-1'}) as Autoscaler;
       const apiResponse = {
         items: {} as Record<string, unknown>,
       };
@@ -1242,7 +1242,7 @@ describe('Compute', () => {
       });
 
       it('should create Autoscaler objects from the response', done => {
-        const zone = ({} as unknown) as Zone;
+        const zone = ({}) as Zone;
 
         compute.zone = function (name) {
           assert.strictEqual(name, ZONE_NAME);
@@ -1259,7 +1259,7 @@ describe('Compute', () => {
       });
 
       it('should not create zone-less Autoscalers', done => {
-        const zone = ({} as unknown) as Zone;
+        const zone = ({}) as Zone;
 
         compute.zone = function () {
           return zone;
@@ -1284,7 +1284,7 @@ describe('Compute', () => {
 
         delete apiResponseWithNextPageToken.items;
 
-        const query = ({a: 'b', c: 'd'} as unknown) as GetResourcesOptions;
+        const query = ({a: 'b', c: 'd'}) as GetResourcesOptions;
         const originalQuery = Object.assign({}, query);
 
         compute.request = function (reqOpts, callback) {
@@ -1357,7 +1357,7 @@ describe('Compute', () => {
       const ZONE_NAME = 'zone-1';
       const FULL_ZONE_NAME = 'zones/' + ZONE_NAME;
 
-      const disk = ({name: 'disk-1'} as unknown) as Disk;
+      const disk = ({name: 'disk-1'}) as Disk;
       const apiResponse = {
         items: {} as Record<string, unknown>,
       };
@@ -1373,7 +1373,7 @@ describe('Compute', () => {
       });
 
       it('should create Disk objects from the response', done => {
-        const zone = ({} as unknown) as Zone;
+        const zone = ({}) as Zone;
 
         compute.zone = function (name) {
           assert.strictEqual(name, ZONE_NAME);
@@ -1394,7 +1394,7 @@ describe('Compute', () => {
           nextPageToken: 'next-page-token',
         });
 
-        const query = ({a: 'b', c: 'd'} as unknown) as GetResourcesOptions;
+        const query = ({a: 'b', c: 'd'}) as GetResourcesOptions;
         const originalQuery = Object.assign({}, query);
 
         compute.request = function (reqOpts, callback) {
@@ -1464,7 +1464,7 @@ describe('Compute', () => {
     });
 
     describe('success', () => {
-      const firewall = ({name: 'firewall-1'} as unknown) as Firewall;
+      const firewall = ({name: 'firewall-1'}) as Firewall;
       const apiResponse = {
         items: [firewall],
       };
@@ -1490,7 +1490,7 @@ describe('Compute', () => {
           nextPageToken: 'next-page-token',
         });
 
-        const query = ({a: 'b', c: 'd'} as unknown) as GetResourcesOptions;
+        const query = ({a: 'b', c: 'd'}) as GetResourcesOptions;
         const originalQuery = Object.assign({}, query);
 
         compute.request = function (reqOpts, callback) {
@@ -1576,7 +1576,7 @@ describe('Compute', () => {
     });
 
     describe('success', () => {
-      const healthCheck = ({name: 'health-check-1'} as unknown) as HealthCheck;
+      const healthCheck = ({name: 'health-check-1'}) as HealthCheck;
       const apiResponse = {items: [healthCheck]};
 
       beforeEach(() => {
@@ -1612,7 +1612,7 @@ describe('Compute', () => {
           nextPageToken: 'next-page-token',
         });
 
-        const query = ({a: 'b', c: 'd'} as unknown) as GetResourcesOptions;
+        const query = ({a: 'b', c: 'd'}) as GetResourcesOptions;
         const originalQuery = Object.assign({}, query);
 
         compute.request = function (reqOpts, callback) {
@@ -1682,7 +1682,7 @@ describe('Compute', () => {
     });
 
     describe('success', () => {
-      const image = ({name: 'image-1'} as unknown) as Image;
+      const image = ({name: 'image-1'}) as Image;
       const apiResponse = {
         items: [image],
       };
@@ -1708,7 +1708,7 @@ describe('Compute', () => {
           nextPageToken: 'next-page-token',
         });
 
-        const query = ({a: 'b', c: 'd'} as unknown) as GetResourcesOptions;
+        const query = ({a: 'b', c: 'd'}) as GetResourcesOptions;
         const originalQuery = Object.assign({}, query);
 
         compute.request = function (reqOpts, callback) {
@@ -1783,7 +1783,7 @@ describe('Compute', () => {
 
       const instanceGroup = ({
         name: 'instance-group-1',
-      } as unknown) as InstanceGroup;
+      }) as InstanceGroup;
       const apiResponse = {
         items: {} as Record<string, unknown>,
       };
@@ -1799,7 +1799,7 @@ describe('Compute', () => {
       });
 
       it('should create InstanceGroup objects from the resp', done => {
-        const zone = ({} as unknown) as Zone;
+        const zone = ({}) as Zone;
 
         compute.zone = function (name) {
           assert.strictEqual(name, ZONE_NAME);
@@ -1822,7 +1822,7 @@ describe('Compute', () => {
 
         delete apiResponseWithNextPageToken.items;
 
-        const query = ({a: 'b', c: 'd'} as unknown) as GetResourcesOptions;
+        const query = ({a: 'b', c: 'd'}) as GetResourcesOptions;
         const originalQuery = Object.assign({}, query);
 
         compute.request = function (reqOpts, callback) {
@@ -1910,8 +1910,8 @@ describe('Compute', () => {
       });
 
       it('should create MachineType objects from the response', done => {
-        const zone = ({} as unknown) as Zone;
-        const machineTypeInstance = ({} as unknown) as MachineType;
+        const zone = ({}) as Zone;
+        const machineTypeInstance = ({}) as MachineType;
 
         compute.zone = function (name) {
           assert.strictEqual(name, ZONE_NAME);
@@ -1938,7 +1938,7 @@ describe('Compute', () => {
           nextPageToken: 'next-page-token',
         });
 
-        const query = ({a: 'b', c: 'd'} as unknown) as GetResourcesOptions;
+        const query = ({a: 'b', c: 'd'}) as GetResourcesOptions;
         const originalQuery = Object.assign({}, query);
 
         compute.request = function (reqOpts, callback) {
@@ -2008,7 +2008,7 @@ describe('Compute', () => {
     });
 
     describe('success', () => {
-      const network = ({name: 'network-1'} as unknown) as Network;
+      const network = ({name: 'network-1'}) as Network;
       const apiResponse = {
         items: [network],
       };
@@ -2034,7 +2034,7 @@ describe('Compute', () => {
           nextPageToken: 'next-page-token',
         });
 
-        const query = ({a: 'b', c: 'd'} as unknown) as GetResourcesOptions;
+        const query = ({a: 'b', c: 'd'}) as GetResourcesOptions;
         const originalQuery = Object.assign({}, query);
 
         compute.request = function (reqOpts, callback) {
@@ -2104,7 +2104,7 @@ describe('Compute', () => {
     });
 
     describe('success', () => {
-      const operation = ({name: 'op-1'} as unknown) as Operation;
+      const operation = ({name: 'op-1'}) as Operation;
       const apiResponse = {
         items: [operation],
       };
@@ -2130,7 +2130,7 @@ describe('Compute', () => {
           nextPageToken: 'next-page-token',
         });
 
-        const query = ({a: 'b', c: 'd'} as unknown) as GetResourcesOptions;
+        const query = ({a: 'b', c: 'd'}) as GetResourcesOptions;
         const originalQuery = Object.assign({}, query);
 
         compute.request = function (reqOpts, callback) {
@@ -2200,7 +2200,7 @@ describe('Compute', () => {
     });
 
     describe('success', () => {
-      const region = ({name: 'region-1'} as unknown) as Region;
+      const region = ({name: 'region-1'}) as Region;
       const apiResponse = {
         items: [region],
       };
@@ -2226,7 +2226,7 @@ describe('Compute', () => {
           nextPageToken: 'next-page-token',
         });
 
-        const query = ({a: 'b', c: 'd'} as unknown) as GetResourcesOptions;
+        const query = ({a: 'b', c: 'd'}) as GetResourcesOptions;
         const originalQuery = Object.assign({}, query);
 
         compute.request = function (reqOpts, callback) {
@@ -2298,7 +2298,7 @@ describe('Compute', () => {
     describe('success', () => {
       const rule = ({
         name: 'rule-1',
-      } as unknown) as Rule;
+      }) as Rule;
       const apiResponse = {
         items: [rule],
       };
@@ -2330,7 +2330,7 @@ describe('Compute', () => {
         const query = ({
           a: 'b',
           c: 'd',
-        } as unknown) as GetResourcesOptions;
+        }) as GetResourcesOptions;
         const originalQuery = Object.assign({}, query);
 
         compute.request = function (reqOpts, callback) {
@@ -2402,7 +2402,7 @@ describe('Compute', () => {
     describe('success', () => {
       const service = ({
         name: 'service-1',
-      } as unknown) as ServiceClass;
+      }) as ServiceClass;
       const apiResponse = {
         items: [service],
       };
@@ -2431,7 +2431,7 @@ describe('Compute', () => {
         const query = ({
           a: 'b',
           c: 'd',
-        } as unknown) as GetResourcesOptions;
+        }) as GetResourcesOptions;
         const originalQuery = Object.assign({}, query);
 
         compute.request = function (reqOpts, callback) {
@@ -2501,7 +2501,7 @@ describe('Compute', () => {
     });
 
     describe('success', () => {
-      const snapshot = ({name: 'snapshot-1'} as unknown) as Snapshot;
+      const snapshot = ({name: 'snapshot-1'}) as Snapshot;
       const apiResponse = {
         items: [snapshot],
       };
@@ -2527,7 +2527,7 @@ describe('Compute', () => {
           nextPageToken: 'next-page-token',
         });
 
-        const query = ({a: 'b', c: 'd'} as unknown) as GetResourcesOptions;
+        const query = ({a: 'b', c: 'd'}) as GetResourcesOptions;
         const originalQuery = Object.assign({}, query);
 
         compute.request = function (reqOpts, callback) {
@@ -2616,8 +2616,8 @@ describe('Compute', () => {
       });
 
       it('should create Subnetwork objects from the response', done => {
-        const region = ({} as unknown) as Region;
-        const fakeSubnetwork = ({} as unknown) as Subnetwork;
+        const region = ({}) as Region;
+        const fakeSubnetwork = ({}) as Subnetwork;
 
         compute.region = function (name) {
           assert.strictEqual(name, REGION_NAME);
@@ -2647,7 +2647,7 @@ describe('Compute', () => {
           nextPageToken: 'next-page-token',
         });
 
-        const query = ({a: 'b', c: 'd'} as unknown) as GetResourcesOptions;
+        const query = ({a: 'b', c: 'd'}) as GetResourcesOptions;
         const originalQuery = Object.assign({}, query);
 
         compute.request = function (reqOpts, callback) {
@@ -2720,7 +2720,7 @@ describe('Compute', () => {
       const ZONE_NAME = 'zone-1';
       const FULL_ZONE_NAME = 'zones/' + ZONE_NAME;
 
-      const vm = ({name: 'vm-1'} as unknown) as VM;
+      const vm = ({name: 'vm-1'}) as VM;
       const apiResponse = {
         items: {} as Record<string, unknown>,
       };
@@ -2736,7 +2736,7 @@ describe('Compute', () => {
       });
 
       it('should create VM objects from the response', done => {
-        const zone = ({} as unknown) as Zone;
+        const zone = ({}) as Zone;
 
         compute.zone = function (name) {
           assert.strictEqual(name, ZONE_NAME);
@@ -2757,7 +2757,7 @@ describe('Compute', () => {
           nextPageToken: 'next-page-token',
         });
 
-        const query = ({a: 'b', c: 'd'} as unknown) as GetResourcesOptions;
+        const query = ({a: 'b', c: 'd'}) as GetResourcesOptions;
         const originalQuery = Object.assign({}, query);
 
         compute.request = function (reqOpts, callback) {
@@ -2827,7 +2827,7 @@ describe('Compute', () => {
     });
 
     describe('success', () => {
-      const zone = ({name: 'zone-1'} as unknown) as Zone;
+      const zone = ({name: 'zone-1'}) as Zone;
       const apiResponse = {
         items: [zone],
       };
@@ -2853,7 +2853,7 @@ describe('Compute', () => {
           nextPageToken: 'next-page-token',
         });
 
-        const query = ({a: 'b', c: 'd'} as unknown) as GetResourcesOptions;
+        const query = ({a: 'b', c: 'd'}) as GetResourcesOptions;
         const originalQuery = Object.assign({}, query);
 
         compute.request = function (reqOpts, callback) {

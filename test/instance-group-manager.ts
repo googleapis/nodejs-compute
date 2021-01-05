@@ -55,7 +55,7 @@ describe('InstanceGroupManager', () => {
 
   const ZONE = ({
     compute: {},
-  } as unknown) as Zone;
+  }) as Zone;
   const NAME = 'instance-group-manager-name';
 
   before(() => {
@@ -107,7 +107,7 @@ describe('InstanceGroupManager', () => {
   });
 
   describe('abandonInstances', () => {
-    const VMS = ([{url: 'vm-url'}, {url: 'vm-url-2'}] as unknown) as VM[];
+    const VMS = ([{url: 'vm-url'}, {url: 'vm-url-2'}]) as VM[];
 
     it('should make the correct API request', done => {
       instanceGroupManager.request = function (
@@ -166,7 +166,7 @@ describe('InstanceGroupManager', () => {
       });
 
       it('should return an Operation and API response', done => {
-        const operation = ({} as unknown) as Operation;
+        const operation = ({}) as Operation;
 
         instanceGroupManager.zone.operation = function (name) {
           assert.strictEqual(name, apiResponse.name);
@@ -247,7 +247,7 @@ describe('InstanceGroupManager', () => {
       });
 
       it('should return an Operation and API response', done => {
-        const operation = ({} as unknown) as Operation;
+        const operation = ({}) as Operation;
 
         instanceGroupManager.zone.operation = function (name) {
           assert.strictEqual(name, apiResponse.name);
@@ -271,7 +271,7 @@ describe('InstanceGroupManager', () => {
   describe('getManagedInstances', () => {
     beforeEach(() => {
       instanceGroupManager.zone.vm = function () {
-        return ({} as unknown) as VM;
+        return ({}) as VM;
       };
     });
 
@@ -287,7 +287,7 @@ describe('InstanceGroupManager', () => {
     });
 
     it('should make the correct API request', done => {
-      const query = ({a: 'b', c: 'd'} as unknown) as GetResourcesOptions;
+      const query = ({a: 'b', c: 'd'}) as GetResourcesOptions;
 
       instanceGroupManager.request = function (
         reqOpts: DecorateRequestOptions
@@ -367,7 +367,7 @@ describe('InstanceGroupManager', () => {
       });
 
       it('should execute callback with VMs & API response', done => {
-        const vm = ({} as unknown) as VM;
+        const vm = ({}) as VM;
 
         instanceGroupManager.zone.vm = function (name) {
           assert.strictEqual(name, apiResponse.managedInstances[0].instance);
@@ -449,7 +449,7 @@ describe('InstanceGroupManager', () => {
       });
 
       it('should return an Operation and API response', done => {
-        const operation = ({} as unknown) as Operation;
+        const operation = ({}) as Operation;
 
         instanceGroupManager.zone.operation = function (name) {
           assert.strictEqual(name, apiResponse.name);

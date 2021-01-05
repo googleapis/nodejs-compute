@@ -238,7 +238,7 @@ describe('Region', () => {
 
   describe('createAddress', () => {
     const NAME = 'address-name';
-    const OPTIONS = ({a: 'b', c: 'd'} as unknown) as CreateAddressOptions;
+    const OPTIONS = ({a: 'b', c: 'd'}) as CreateAddressOptions;
     const EXPECTED_BODY = Object.assign({}, OPTIONS, {name: NAME});
 
     it('should not require any options', done => {
@@ -301,8 +301,8 @@ describe('Region', () => {
       });
 
       it('should exec callback with Address, Op & apiResponse', done => {
-        const address = ({} as unknown) as Address;
-        const operation = ({} as unknown) as Operation;
+        const address = ({}) as Address;
+        const operation = ({}) as Operation;
 
         region.address = function (name) {
           assert.strictEqual(name, NAME);
@@ -334,7 +334,7 @@ describe('Region', () => {
     const CONFIG = {};
 
     it('should call compute#createRule', done => {
-      ((region.parent as unknown) as Compute).createRule = function (
+      ((region.parent) as Compute).createRule = function (
         name: string,
         config: CreateRuleOptions,
         callback?: CreateResourceCallback<Rule>
@@ -442,8 +442,8 @@ describe('Region', () => {
       });
 
       it('should exec cb with Subnetwork, Op & apiResponse', done => {
-        const subnetwork = ({} as unknown) as Subnetwork;
-        const operation = ({} as unknown) as Operation;
+        const subnetwork = ({}) as Subnetwork;
+        const operation = ({}) as Operation;
 
         region.subnetwork = function (name) {
           assert.strictEqual(name, NAME);
@@ -481,7 +481,7 @@ describe('Region', () => {
     });
 
     it('should make the correct API request', done => {
-      const query = ({a: 'b', c: 'd'} as unknown) as GetResourcesOptions;
+      const query = ({a: 'b', c: 'd'}) as GetResourcesOptions;
 
       region.request = function (reqOpts: DecorateRequestOptions): any {
         assert.strictEqual(reqOpts.uri, '/addresses');
@@ -557,7 +557,7 @@ describe('Region', () => {
       });
 
       it('should execute callback with Operations & API resp', done => {
-        const address = ({} as unknown) as Address;
+        const address = ({}) as Address;
 
         region.address = function (name) {
           assert.strictEqual(name, apiResponse.items[0].name);
@@ -589,7 +589,7 @@ describe('Region', () => {
     });
 
     it('should make the correct API request', done => {
-      const query = ({a: 'b', c: 'd'} as unknown) as GetResourcesOptions;
+      const query = ({a: 'b', c: 'd'}) as GetResourcesOptions;
 
       region.request = function (reqOpts: DecorateRequestOptions): any {
         assert.strictEqual(reqOpts.uri, '/operations');
@@ -665,7 +665,7 @@ describe('Region', () => {
       });
 
       it('should execute callback with Operations & API resp', done => {
-        const operation = ({} as unknown) as Operation;
+        const operation = ({}) as Operation;
 
         region.operation = function (name) {
           assert.strictEqual(name, apiResponse.items[0].name);
@@ -697,7 +697,7 @@ describe('Region', () => {
     });
 
     it('should make the correct API request', done => {
-      const query = ({a: 'b', c: 'd'} as unknown) as GetResourcesOptions;
+      const query = ({a: 'b', c: 'd'}) as GetResourcesOptions;
 
       region.request = function (reqOpts: DecorateRequestOptions): any {
         assert.strictEqual(reqOpts.uri, '/forwardingRules');
@@ -773,7 +773,7 @@ describe('Region', () => {
       });
 
       it('should execute callback with Operations & API resp', done => {
-        const rule = ({} as unknown) as Rule;
+        const rule = ({}) as Rule;
 
         region.rule = function (name) {
           assert.strictEqual(name, apiResponse.items[0].name);
@@ -805,7 +805,7 @@ describe('Region', () => {
     });
 
     it('should make the correct API request', done => {
-      const query = ({a: 'b', c: 'd'} as unknown) as GetResourcesOptions;
+      const query = ({a: 'b', c: 'd'}) as GetResourcesOptions;
 
       region.request = function (reqOpts: DecorateRequestOptions): any {
         assert.strictEqual(reqOpts.uri, '/subnetworks');
@@ -881,7 +881,7 @@ describe('Region', () => {
       });
 
       it('should execute callback with Operations & API resp', done => {
-        const subnetwork = ({} as unknown) as Subnetwork;
+        const subnetwork = ({}) as Subnetwork;
 
         region.subnetwork = function (name) {
           assert.strictEqual(name, apiResponse.items[0].name);

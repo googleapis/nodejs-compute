@@ -165,7 +165,7 @@ describe('Subnetwork', () => {
       });
 
       it('should execute callback with Operation & Response', done => {
-        const operation = ({} as unknown) as Operation;
+        const operation = ({}) as Operation;
 
         subnetwork.region.operation = function (name) {
           assert.strictEqual(name, apiResponse.name);

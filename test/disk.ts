@@ -168,7 +168,7 @@ describe('Disk', () => {
 
       disk.createSnapshot(
         'test',
-        ({a: 'b'} as unknown) as CreateSnapshotOptions,
+        ({a: 'b'}) as CreateSnapshotOptions,
         util.noop
       );
     });
@@ -218,8 +218,8 @@ describe('Disk', () => {
       });
 
       it('should execute callback with Snapshot & Operation', done => {
-        const snapshot = ({} as unknown) as Snapshot;
-        const operation = ({} as unknown) as Operation;
+        const snapshot = ({}) as Snapshot;
+        const operation = ({}) as Operation;
 
         disk.snapshot = function (name) {
           assert.strictEqual(name, 'test');
@@ -305,7 +305,7 @@ describe('Disk', () => {
       });
 
       it('should execute callback with Operation & Response', done => {
-        const operation = ({} as unknown) as Operation;
+        const operation = ({}) as Operation;
 
         disk.zone.operation = function (name) {
           assert.strictEqual(name, apiResponse.name);

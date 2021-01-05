@@ -45,9 +45,9 @@ describe('Snapshot', () => {
   let Snapshot: typeof SnapshotType;
   let snapshot: SnapshotType;
 
-  const COMPUTE = ({
+  const COMPUTE = {
     apiEndpoint: 'compute.googleapis.com',
-  } as unknown) as Compute;
+  } as Compute;
   const SNAPSHOT_NAME = 'snapshot-name';
 
   before(() => {
@@ -172,7 +172,7 @@ describe('Snapshot', () => {
       });
 
       it('should exec callback with Operation & API response', done => {
-        const operation = ({} as unknown) as Operation;
+        const operation = ({}) as Operation;
 
         snapshot.compute.operation = function (name) {
           assert.strictEqual(name, apiResponse.name);

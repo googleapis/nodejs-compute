@@ -741,7 +741,6 @@ describe('Compute', () => {
         loadBalancingScheme: 'INTERNAL',
         backendService: `${resourceUrlPrefix}/regions/us-central1/backendServices/${BACKEND_SERVICE_NAME}`,
         subnetwork: `${resourceUrlPrefix}/regions/us-central1/subnetworks/${SUBNETWORK_NAME}`,
-        // @ts-ignore // TODO
         network: `${resourceUrlPrefix}/global/networks/${NETWORK_NAME}`,
         ports: ['80', '81', '82'],
       });
@@ -1000,7 +999,6 @@ describe('Compute', () => {
       let [labels, fingerprint] = await vm.getLabels();
       await awaitResult(vm.setLabels({foo: 'bar'}, fingerprint));
       [labels, fingerprint] = await vm.getLabels();
-      // @ts-ignore // TODO
       assert.strictEqual(labels.foo, 'bar');
     });
 

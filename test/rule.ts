@@ -187,7 +187,7 @@ describe('Rule', () => {
       });
 
       it('should execute callback with Operation & Response', done => {
-        const operation = ({} as unknown) as Operation;
+        const operation = ({}) as Operation;
 
         rule.scope.operation = function (name) {
           assert.strictEqual(name, apiResponse.name);
@@ -270,7 +270,7 @@ describe('Rule', () => {
       });
 
       it('should execute callback with operation & response', done => {
-        const operation = ({} as unknown) as Operation;
+        const operation = ({}) as Operation;
 
         rule.scope.operation = function (name) {
           assert.strictEqual(name, apiResponse.name);

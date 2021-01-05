@@ -14,12 +14,11 @@
 import * as assert from 'assert';
 import * as proxyquireDefault from 'proxyquire';
 import {ServiceObject, util} from '@google-cloud/common';
-import type {ResponseBody, ServiceObjectConfig} from '@google-cloud/common';
+import type {MetadataCallback, ResponseBody, ServiceObjectConfig} from '@google-cloud/common';
 import * as promisify from '@google-cloud/promisify';
 
 import type {
   Compute,
-  MetadataCallback,
   Operation as OperationType,
   Region,
 } from '../src';
@@ -125,7 +124,7 @@ describe('Operation', () => {
           constructor: {
             name: 'Compute',
           },
-        } as unknown) as Compute,
+        }) as Compute,
         OPERATION_NAME
       );
 
@@ -252,11 +251,10 @@ describe('Operation', () => {
 
     describe('operation failure', () => {
       const error = new Error('Error.');
-      const apiResponse = {error: error};
+      const apiResponse = {error: error} as ResponseBody;
 
       beforeEach(() => {
         operation.getMetadata = function (callback?: MetadataCallback): any {
-          // @ts-ignore
           callback!(null, apiResponse, apiResponse);
         };
       });
@@ -277,12 +275,11 @@ describe('Operation', () => {
     });
 
     describe('operation running', () => {
-      const apiResponse = {status: 'RUNNING'};
+      const apiResponse = {status: 'RUNNING'} as ResponseBody;
 
       beforeEach(() => {
-        // @ts-ignore
-        operation.getMetadata = function (callback) {
-          callback(null, apiResponse, apiResponse);
+        operation.getMetadata = function (callback?: MetadataCallback): any {
+          callback!(null, apiResponse, apiResponse);
         };
       });
 
@@ -319,12 +316,11 @@ describe('Operation', () => {
     });
 
     describe('operation complete', () => {
-      const apiResponse = {status: 'DONE'};
+      const apiResponse = {status: 'DONE'} as ResponseBody;
 
       beforeEach(() => {
-        // @ts-ignore
-        operation.getMetadata = function (callback) {
-          callback(null, apiResponse, apiResponse);
+        operation.getMetadata = function (callback?: MetadataCallback): any {
+          callback!(null, apiResponse, apiResponse);
         };
       });
 

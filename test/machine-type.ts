@@ -34,7 +34,7 @@ describe('MachineType', () => {
   const ZONE = ({
     name: ZONE_NAME,
     compute: {},
-  } as unknown) as Zone;
+  }) as Zone;
 
   const MACHINE_TYPE_NAME = 'g1-small';
 

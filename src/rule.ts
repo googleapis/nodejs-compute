@@ -37,6 +37,7 @@ export interface CreateRuleOptions extends BaseOptions {
     | 'INTERNAL_MANAGED'
     | 'INTERNAL_SELF_MANAGED';
   subnetwork?: string;
+  network?: string;
   backendService?: string;
   serviceLabel?: string;
   networkTier?: NetworkTier;

@@ -112,11 +112,11 @@ export interface CreateVMOptions extends BaseOptions, Labeled {
 }
 export type GetFingerprintedItemsCallback<T> = (
   error: ApiError | null,
-  items?: T[] | null,
+  items?: T | null,
   fingerprint?: string | null,
   apiResponse?: Metadata | null
 ) => void;
-export type FingerprintedItemsPromise<T> = Promise<[T[], string, Metadata]>;
+export type FingerprintedItemsPromise<T> = Promise<[T, string, Metadata]>;
 export interface GetSerialPortOptions {
   start?: string | number;
 }
@@ -718,8 +718,8 @@ export class VM extends ServiceObject {
       cb(null, resp.contents, resp);
     });
   }
-  getTags(): FingerprintedItemsPromise<string>;
-  getTags(callback: GetFingerprintedItemsCallback<string>): void;
+  getTags(): FingerprintedItemsPromise<string[]>;
+  getTags(callback: GetFingerprintedItemsCallback<string[]>): void;
   /**
    * Get the instance's tags and their fingerprint.
    *
@@ -750,8 +750,8 @@ export class VM extends ServiceObject {
    * });
    */
   getTags(
-    callback?: GetFingerprintedItemsCallback<string>
-  ): void | FingerprintedItemsPromise<string> {
+    callback?: GetFingerprintedItemsCallback<string[]>
+  ): void | FingerprintedItemsPromise<string[]> {
     this.getMetadata(
       (
         err: ApiError | null,

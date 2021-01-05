@@ -170,7 +170,7 @@ describe('Service', () => {
       });
 
       it('should execute callback with Operation & Response', done => {
-        const operation = ({} as unknown) as Operation;
+        const operation = ({}) as Operation;
 
         service.compute.operation = function (name) {
           assert.strictEqual(name, apiResponse.name);
@@ -243,7 +243,7 @@ describe('Service', () => {
           zone: {
             name: 'zone-name',
           },
-        } as unknown) as InstanceGroup;
+        }) as InstanceGroup;
 
         service.request = function (reqOpts: DecorateRequestOptions): any {
           assert.deepStrictEqual(reqOpts.json, {
@@ -365,7 +365,7 @@ describe('Service', () => {
       });
 
       it('should execute callback with operation & response', done => {
-        const operation = ({} as unknown) as Operation;
+        const operation = ({}) as Operation;
         const metadata = {a: 'b'};
 
         service.compute.operation = function (name) {
