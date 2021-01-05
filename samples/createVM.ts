@@ -18,6 +18,7 @@ async function main(
   vmName = 'new_virtual_machine' // VM name of your choice
 ) {
   // [START gce_create_vm]
+  // eslint-disable-next-line @typescript-eslint/no-var-requires
   const Compute = require('@google-cloud/compute');
   const compute = new Compute();
   const zone = compute.zone('us-central1-c');

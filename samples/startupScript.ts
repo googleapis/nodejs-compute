@@ -13,7 +13,9 @@
 // limitations under the License.
 async function main(name = 'start-script-example') {
   // [START gce_startup_script]
+  // eslint-disable-next-line @typescript-eslint/no-var-requires
   const Compute = require('@google-cloud/compute');
+  // eslint-disable-next-line @typescript-eslint/no-var-requires
   const fetch = require('node-fetch');
 
   const compute = new Compute();
@@ -93,6 +95,7 @@ async function main(name = 'start-script-example') {
   }
 
   createVMWithStartupScript();
+  // [END gce_startup_script]
 }
 
 main(...process.argv.slice(2));

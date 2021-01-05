@@ -15,6 +15,7 @@ async function main(
 ) {
   // [START compute_engine_quickstart]
   // Imports the Google Cloud client library
+  // eslint-disable-next-line @typescript-eslint/no-var-requires
   const Compute = require('@google-cloud/compute');
 
   // Creates a client

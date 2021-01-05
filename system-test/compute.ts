@@ -12,7 +12,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 import * as assert from 'assert';
-import concat = require('concat-stream');
 import * as uuid from 'uuid';
 import {promisify} from 'util';
 import type {ApiError, Metadata, ServiceObject} from '@google-cloud/common';
@@ -488,18 +487,17 @@ describe('Compute', () => {
       });
 
       it('should list the VMs in stream mode', done => {
+        let vmEmitted = false;
         instanceGroup
           .getVMsStream()
           .on('error', done)
-          .pipe(
-            concat(vms => {
-              // @ts-ignore // TODO
-              const vmNamesInGroup = vms.map(x => x.name);
-              // @ts-ignore
-              assert(vmNamesInGroup.indexOf(vm.name) > -1);
-              done();
-            })
-          );
+          .on('data', vmEmit => {
+            vmEmitted = vmEmitted || vmEmit.name === vm.name;
+          })
+          .on('end', () => {
+            assert.strictEqual(vmEmitted, true);
+            done();
+          });
       });
 
       it('should remove a VM from the instance group', async () => {

@@ -17,6 +17,7 @@
 //  usage: node listVMs
 async function main() {
   // [START gce_list_vms]
+  // eslint-disable-next-line @typescript-eslint/no-var-requires
   const Compute = require('@google-cloud/compute');
   const compute = new Compute();
   async function listVMs() {

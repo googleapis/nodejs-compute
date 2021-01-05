@@ -55,6 +55,7 @@ describe('samples', () => {
     it('should create vm with startup script', function (done) {
       this.timeout(280000);
       this.retries(3);
+      // eslint-disable-next-line @typescript-eslint/no-var-requires
       const {spawn} = require('child_process');
       const startupScript = spawn('node', ['startupScript', name], {
         stdio: 'inherit',

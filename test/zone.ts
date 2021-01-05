@@ -86,11 +86,12 @@ function FakeDisk(this: {calledWith_: unknown[]}) {
 let formatPortsOverride: typeof InstanceGroup.formatPorts_ | null;
 FakeInstanceGroup.formatPorts_ = function () {
   return (
+    // eslint-disable-next-line prefer-spread
     (
       formatPortsOverride ||
       ((util.noop as unknown) as typeof InstanceGroup.formatPorts_)
     )
-      // eslint-disable-next-line prefer-rest-params,prefer-spread
+      // eslint-disable-next-line prefer-rest-params
       .apply(null, arguments as any)
   );
 };

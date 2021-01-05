@@ -24,7 +24,7 @@ describe('sendgrid', () => {
         setApiKey: (key: string) => {
           assert.strictEqual(key, 'foo');
         },
-        send: (msg: any) => {
+        send: (msg: Record<string, unknown>) => {
           assert.deepStrictEqual(msg, {
             to: 'to_email@example.com',
             from: 'from_email@example.com',

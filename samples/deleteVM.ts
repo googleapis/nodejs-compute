@@ -18,6 +18,7 @@ async function main(
   name = 'virtual_machine_name' // VM name of your choice
 ) {
   // [START gce_delete_vm]
+  // eslint-disable-next-line @typescript-eslint/no-var-requires
   const Compute = require('@google-cloud/compute');
 
   async function deleteVM() {
