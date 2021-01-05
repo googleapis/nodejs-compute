@@ -170,10 +170,10 @@ describe('Zone', () => {
   let Zone: typeof ZoneType;
   let zone: ZoneType;
 
-  const COMPUTE = ({
+  const COMPUTE = {
     authClient: {},
     projectId: 'project-id',
-  }) as Compute;
+  } as Compute;
   const ZONE_NAME = 'us-central1-a';
 
   before(() => {
@@ -296,13 +296,13 @@ describe('Zone', () => {
     });
 
     it('should use a provided autoscalingPolicy', done => {
-      const config = ({
+      const config = {
         autoscalingPolicy: {
           a: 'b',
           c: 'd',
         },
         target: TARGET,
-      }) as CreateAutoscalerOptions;
+      } as CreateAutoscalerOptions;
 
       zone.request = function (reqOpts: DecorateRequestOptions): any {
         const policy = reqOpts.json.autoscalingPolicy;
@@ -520,8 +520,8 @@ describe('Zone', () => {
         });
 
         it('should exec callback with AutoS, Op & apiResponse', done => {
-          const autoscaler = ({}) as Autoscaler;
-          const operation = ({}) as Operation;
+          const autoscaler = {} as Autoscaler;
+          const operation = {} as Operation;
 
           zone.autoscaler = function (name) {
             assert.strictEqual(name, NAME);
@@ -631,10 +631,10 @@ describe('Zone', () => {
     });
 
     describe('API request', () => {
-      const CONFIG = ({
+      const CONFIG = {
         a: 'b',
         c: 'd',
-      }) as CreateDiskOptions;
+      } as CreateDiskOptions;
 
       const expectedBody = {
         name: NAME,
@@ -692,8 +692,8 @@ describe('Zone', () => {
         });
 
         it('should exec callback with Disk, Op & apiResponse', done => {
-          const disk = ({}) as Disk;
-          const operation = ({}) as Operation;
+          const disk = {} as Disk;
+          const operation = {} as Operation;
 
           zone.disk = function (name) {
             assert.strictEqual(name, NAME);
@@ -753,10 +753,10 @@ describe('Zone', () => {
     });
 
     describe('API request', () => {
-      const OPTIONS = ({
+      const OPTIONS = {
         a: 'b',
         c: 'd',
-      }) as CreateInstanceGroupOptions;
+      } as CreateInstanceGroupOptions;
 
       const expectedBody = {
         name: NAME,
@@ -822,8 +822,8 @@ describe('Zone', () => {
         });
 
         it('should exec callback with Group, Op & apiResponse', done => {
-          const instanceGroup = ({}) as InstanceGroup;
-          const operation = ({}) as Operation;
+          const instanceGroup = {} as InstanceGroup;
+          const operation = {} as Operation;
 
           zone.instanceGroup = function (name) {
             assert.strictEqual(name, NAME);
@@ -1201,8 +1201,8 @@ describe('Zone', () => {
         });
 
         it('should exec callback with Disk, Op & apiResponse', done => {
-          const vm = ({}) as VM;
-          const operation = ({}) as Operation;
+          const vm = {} as VM;
+          const operation = {} as Operation;
 
           zone.vm = function (name) {
             assert.strictEqual(name, NAME);
@@ -1258,7 +1258,7 @@ describe('Zone', () => {
     });
 
     it('should make the correct API request', done => {
-      const query = ({a: 'b', c: 'd'}) as GetResourcesOptions;
+      const query = {a: 'b', c: 'd'} as GetResourcesOptions;
 
       zone.request = function (reqOpts: DecorateRequestOptions): any {
         assert.strictEqual(reqOpts.uri, '/autoscalers');
@@ -1334,7 +1334,7 @@ describe('Zone', () => {
       });
 
       it('should execute callback with Autoscalers & API resp', done => {
-        const autoscaler = ({}) as Autoscaler;
+        const autoscaler = {} as Autoscaler;
 
         zone.autoscaler = function (name) {
           assert.strictEqual(name, apiResponse.items[0].name);
@@ -1366,7 +1366,7 @@ describe('Zone', () => {
     });
 
     it('should make the correct API request', done => {
-      const query = ({a: 'b', c: 'd'}) as GetResourcesOptions;
+      const query = {a: 'b', c: 'd'} as GetResourcesOptions;
 
       zone.request = function (reqOpts: DecorateRequestOptions): any {
         assert.strictEqual(reqOpts.uri, '/disks');
@@ -1442,7 +1442,7 @@ describe('Zone', () => {
       });
 
       it('should execute callback with Disks & API resp', done => {
-        const disk = ({}) as Disk;
+        const disk = {} as Disk;
 
         zone.disk = function (name) {
           assert.strictEqual(name, apiResponse.items[0].name);
@@ -1474,7 +1474,7 @@ describe('Zone', () => {
     });
 
     it('should make the correct API request', done => {
-      const query = ({a: 'b', c: 'd'}) as GetResourcesOptions;
+      const query = {a: 'b', c: 'd'} as GetResourcesOptions;
 
       zone.request = function (reqOpts: DecorateRequestOptions): any {
         assert.strictEqual(reqOpts.uri, '/instanceGroups');
@@ -1550,7 +1550,7 @@ describe('Zone', () => {
       });
 
       it('should execute callback with Groups & API resp', done => {
-        const group = ({}) as InstanceGroup;
+        const group = {} as InstanceGroup;
 
         zone.instanceGroup = function (name) {
           assert.strictEqual(name, apiResponse.items[0].name);
@@ -1582,7 +1582,7 @@ describe('Zone', () => {
     });
 
     it('should make the correct API request', done => {
-      const query = ({a: 'b', c: 'd'}) as GetResourcesOptions;
+      const query = {a: 'b', c: 'd'} as GetResourcesOptions;
 
       zone.request = function (reqOpts: DecorateRequestOptions): any {
         assert.strictEqual(reqOpts.uri, '/instanceGroupManagers');
@@ -1658,7 +1658,7 @@ describe('Zone', () => {
       });
 
       it('should execute callback with Groups & API resp', done => {
-        const group = ({}) as InstanceGroupManager;
+        const group = {} as InstanceGroupManager;
 
         zone.instanceGroupManager = function (name) {
           assert.strictEqual(name, apiResponse.items[0].name);
@@ -1820,7 +1820,7 @@ describe('Zone', () => {
       });
 
       it('should execute callback with Operations & API resp', done => {
-        const operation = ({}) as Operation;
+        const operation = {} as Operation;
 
         zone.operation = function (name) {
           assert.strictEqual(name, apiResponse.items[0].name);
@@ -1927,7 +1927,7 @@ describe('Zone', () => {
       });
 
       it('should execute callback with VMs & API response', done => {
-        const vm = ({}) as VM;
+        const vm = {} as VM;
 
         zone.vm = function (name) {
           assert.strictEqual(name, apiResponse.items[0].name);

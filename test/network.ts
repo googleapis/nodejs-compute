@@ -159,7 +159,7 @@ describe('Network', () => {
   describe('createFirewall', () => {
     it('should make the correct call to Compute', done => {
       const name = 'firewall-name';
-      const config = ({a: 'b', c: 'd'}) as CreateFirewallOptions;
+      const config = {a: 'b', c: 'd'} as CreateFirewallOptions;
       const expectedConfig = Object.assign({}, config, {
         network: network.formattedName,
       });
@@ -181,7 +181,7 @@ describe('Network', () => {
   describe('createSubnetwork', () => {
     it('should call region.createSubnetwork correctly', done => {
       const name = 'subnetwork-name';
-      const region = ({}) as RegionType;
+      const region = {} as RegionType;
       const config = {
         a: 'b',
         c: 'd',
@@ -267,7 +267,7 @@ describe('Network', () => {
       });
 
       it('should execute callback with Operation & Response', done => {
-        const operation = ({}) as Operation;
+        const operation = {} as Operation;
 
         network.compute.operation = function (name) {
           assert.strictEqual(name, apiResponse.name);
@@ -294,7 +294,7 @@ describe('Network', () => {
   describe('firewall', () => {
     it('should return a Firewall with the correct metadata', () => {
       const name = 'firewall-name';
-      const firewall = ({}) as Firewall;
+      const firewall = {} as Firewall;
 
       network.compute.firewall = function (name_) {
         assert.strictEqual(name_, name);
@@ -310,7 +310,7 @@ describe('Network', () => {
 
   describe('getFirewalls', () => {
     it('should make the correct call to Compute', done => {
-      const options = ({a: 'b', c: 'd'}) as GetResourcesOptions;
+      const options = {a: 'b', c: 'd'} as GetResourcesOptions;
       const expectedOptions = Object.assign({}, options, {
         filter: 'network eq .*' + network.formattedName,
       });
@@ -340,7 +340,7 @@ describe('Network', () => {
 
   describe('getFirewallsStream', () => {
     it('should call to getFirewallsStream correctly', done => {
-      const options = ({a: 'b', c: 'd'}) as GetResourcesOptions;
+      const options = {a: 'b', c: 'd'} as GetResourcesOptions;
       const expectedOptions = Object.assign({}, options, {
         filter: 'network eq .*' + network.formattedName,
       });
@@ -364,7 +364,7 @@ describe('Network', () => {
     });
 
     it('should return a stream', done => {
-      const fakeStream = ({}) as ResourceStream<Firewall>;
+      const fakeStream = {} as ResourceStream<Firewall>;
 
       network.compute.getFirewallsStream = function () {
         setImmediate(done);
@@ -378,7 +378,7 @@ describe('Network', () => {
 
   describe('getSubnetworks', () => {
     it('should call to compute.getSubnetworks correctly', done => {
-      const options = ({a: 'b', c: 'd'}) as GetResourcesOptions;
+      const options = {a: 'b', c: 'd'} as GetResourcesOptions;
       const expectedOptions = Object.assign({}, options, {
         filter: 'network eq .*' + network.formattedName,
       });
@@ -408,7 +408,7 @@ describe('Network', () => {
 
   describe('getSubnetworksStream', () => {
     it('should call to getSubnetworksStream correctly', done => {
-      const options = ({a: 'b', c: 'd'}) as GetResourcesOptions;
+      const options = {a: 'b', c: 'd'} as GetResourcesOptions;
       const expectedOptions = Object.assign({}, options, {
         filter: 'network eq .*' + network.formattedName,
       });
@@ -432,7 +432,7 @@ describe('Network', () => {
     });
 
     it('should return a stream', done => {
-      const fakeStream = ({}) as ResourceStream<Subnetwork>;
+      const fakeStream = {} as ResourceStream<Subnetwork>;
 
       network.compute.getSubnetworksStream = function () {
         setImmediate(done);

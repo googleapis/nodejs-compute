@@ -160,7 +160,7 @@ describe('Address', () => {
       });
 
       it('should execute callback with Operation & Response', done => {
-        const operation = ({}) as Operation;
+        const operation = {} as Operation;
 
         address.region.operation = function (name) {
           assert.strictEqual(name, apiResponse.name);

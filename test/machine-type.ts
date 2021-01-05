@@ -31,10 +31,10 @@ describe('MachineType', () => {
   let MachineType: typeof MachineTypeType;
   let machineType: MachineTypeType;
   const ZONE_NAME = 'zone-1';
-  const ZONE = ({
+  const ZONE = {
     name: ZONE_NAME,
     compute: {},
-  }) as Zone;
+  } as Zone;
 
   const MACHINE_TYPE_NAME = 'g1-small';
 

@@ -166,7 +166,7 @@ describe('Autoscaler', () => {
       });
 
       it('should execute callback with Operation & Response', done => {
-        const operation = ({}) as Operation;
+        const operation = {} as Operation;
 
         autoscaler.zone.operation = function (name) {
           assert.strictEqual(name, apiResponse.name);
@@ -249,7 +249,7 @@ describe('Autoscaler', () => {
       });
 
       it('should execute callback with operation & response', done => {
-        const operation = ({}) as Operation;
+        const operation = {} as Operation;
         const metadata = {a: 'b'};
 
         autoscaler.zone.operation = function (name) {

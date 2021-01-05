@@ -83,8 +83,7 @@ describe('Image', () => {
       const image = new Image(computeInstance, IMAGE_NAME);
       assert(image instanceof ServiceObject);
 
-      const calledWith = (image as FakeServiceObject)
-        .calledWith_[0];
+      const calledWith = (image as FakeServiceObject).calledWith_[0];
 
       assert.strictEqual(calledWith.parent, computeInstance);
       assert.strictEqual(calledWith.baseUrl, '/global/images');
@@ -152,7 +151,7 @@ describe('Image', () => {
       });
 
       it('should execute callback with Operation & Response', done => {
-        const operation = ({}) as Operation;
+        const operation = {} as Operation;
 
         (image.parent as Compute).operation = function (name) {
           assert.strictEqual(name, apiResponse.name);

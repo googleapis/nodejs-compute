@@ -167,7 +167,7 @@ describe('Firewall', () => {
       });
 
       it('should execute callback with Operation & Response', done => {
-        const operation = ({}) as Operation;
+        const operation = {} as Operation;
 
         firewall.compute.operation = function (name) {
           assert.strictEqual(name, apiResponse.name);
@@ -259,7 +259,7 @@ describe('Firewall', () => {
       });
 
       it('should execute callback with operation & response', done => {
-        const operation = ({}) as Operation;
+        const operation = {} as Operation;
         const metadata = {a: 'b'};
 
         firewall.compute.operation = function (name) {

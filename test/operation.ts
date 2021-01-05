@@ -14,14 +14,14 @@
 import * as assert from 'assert';
 import * as proxyquireDefault from 'proxyquire';
 import {ServiceObject, util} from '@google-cloud/common';
-import type {MetadataCallback, ResponseBody, ServiceObjectConfig} from '@google-cloud/common';
+import type {
+  MetadataCallback,
+  ResponseBody,
+  ServiceObjectConfig,
+} from '@google-cloud/common';
 import * as promisify from '@google-cloud/promisify';
 
-import type {
-  Compute,
-  Operation as OperationType,
-  Region,
-} from '../src';
+import type {Compute, Operation as OperationType, Region} from '../src';
 
 const proxyquire = proxyquireDefault.noPreserveCache();
 
@@ -120,11 +120,11 @@ describe('Operation', () => {
 
     it('should give the right baseUrl for a global Operation', () => {
       const operation = new Operation(
-        ({
+        {
           constructor: {
             name: 'Compute',
           },
-        }) as Compute,
+        } as Compute,
         OPERATION_NAME
       );
 

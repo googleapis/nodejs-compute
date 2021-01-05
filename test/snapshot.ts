@@ -172,7 +172,7 @@ describe('Snapshot', () => {
       });
 
       it('should exec callback with Operation & API response', done => {
-        const operation = ({}) as Operation;
+        const operation = {} as Operation;
 
         snapshot.compute.operation = function (name) {
           assert.strictEqual(name, apiResponse.name);

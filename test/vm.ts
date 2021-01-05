@@ -14,7 +14,7 @@
 import * as assert from 'assert';
 import * as extend from 'extend';
 import * as proxyquire from 'proxyquire';
-import { ResponseBody, ServiceObject, util } from '@google-cloud/common';
+import {ResponseBody, ServiceObject, util} from '@google-cloud/common';
 import type {
   BodyResponseCallback,
   DecorateRequestOptions,
@@ -1469,7 +1469,7 @@ describe('VM', () => {
       });
 
       it('should execute callback with Zone object & API resp', done => {
-        const operation = ({}) as Operation;
+        const operation = {} as Operation;
 
         vm.zone.operation = function (name) {
           assert.strictEqual(name, apiResponse.name);

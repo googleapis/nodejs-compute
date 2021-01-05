@@ -257,7 +257,7 @@ describe('HealthCheck', () => {
       });
 
       it('should execute callback with Operation & Response', done => {
-        const operation = ({}) as Operation;
+        const operation = {} as Operation;
 
         healthCheck.compute.operation = function (name) {
           assert.strictEqual(name, apiResponse.name);
@@ -334,7 +334,7 @@ describe('HealthCheck', () => {
       });
 
       it('should execute callback with operation & response', done => {
-        const operation = ({}) as Operation;
+        const operation = {} as Operation;
         const metadata = {a: 'b'};
 
         healthCheck.compute.operation = function (name) {
