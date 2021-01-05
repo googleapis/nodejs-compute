@@ -116,6 +116,17 @@ export interface ClientConfig {
  * });
  */
 export class Compute extends common.Service {
+  static Firewall: typeof Firewall = Firewall;
+  static HealthCheck: typeof HealthCheck = HealthCheck;
+  static Image: typeof Image = Image;
+  static Network: typeof Network = Network;
+  static Operation: typeof Operation = Operation;
+  static Project: typeof Project = Project;
+  static Region: typeof Region = Region;
+  static Rule: typeof Rule = Rule;
+  static Service: typeof Service = Service;
+  static Snapshot: typeof Snapshot = Snapshot;
+  static Zone: typeof Zone = Zone;
   pollIntervalMs?: number;
   /**
    * Get a list of {@link Address} objects as a readable object stream.
