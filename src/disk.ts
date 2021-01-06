@@ -248,19 +248,6 @@ export class Disk extends ServiceObject {
      */
     this.formattedName = Disk.formatName_(zone, name);
   }
-  createSnapshot(
-    name: string,
-    options?: CreateSnapshotOptions
-  ): Promise<[Metadata]>;
-  createSnapshot(
-    name: string,
-    callback: CreateResourceCallback<Snapshot>
-  ): void;
-  createSnapshot(
-    name: string,
-    options: CreateSnapshotOptions,
-    callback: CreateResourceCallback<Snapshot>
-  ): void;
   /**
    * Create a snapshot of a disk.
    *
@@ -305,6 +292,19 @@ export class Disk extends ServiceObject {
    */
   createSnapshot(
     name: string,
+    options: CreateSnapshotOptions,
+    callback: CreateResourceCallback<Snapshot>
+  ): void;
+  createSnapshot(
+    name: string,
+    callback: CreateResourceCallback<Snapshot>
+  ): void;
+  createSnapshot(
+    name: string,
+    options?: CreateSnapshotOptions
+  ): Promise<[Metadata]>;
+  createSnapshot(
+    name: string,
     options?: CreateSnapshotOptions | CreateResourceCallback<Snapshot>,
     callback?: CreateResourceCallback<Snapshot>
   ): void | Promise<[Metadata]> {
@@ -330,8 +330,6 @@ export class Disk extends ServiceObject {
       }
     );
   }
-  delete(): Promise<[Metadata]>;
-  delete(callback: OperationCallback): void;
   /**
    * Delete the disk.
    *
@@ -362,6 +360,8 @@ export class Disk extends ServiceObject {
    *   const apiResponse = data[1];
    * });
    */
+  delete(callback: OperationCallback): void;
+  delete(): Promise<[Metadata]>;
   delete(callback?: OperationCallback): void | Promise<[Metadata]> {
     callback = callback || util.noop;
     this.request({method: 'DELETE', uri: ''}, (err, resp) => {

@@ -308,16 +308,6 @@ export class Region extends ServiceObject {
   address(name: string): Address {
     return new Address(this, name);
   }
-  createAddress(
-    name: string,
-    options?: CreateAddressOptions
-  ): CreateResourcePromise<Address>;
-  createAddress(name: string, callback: CreateResourceCallback<Address>): void;
-  createAddress(
-    name: string,
-    options: CreateAddressOptions,
-    callback: CreateResourceCallback<Address>
-  ): void;
   /**
    * Create an address in this region.
    *
@@ -361,6 +351,16 @@ export class Region extends ServiceObject {
    */
   createAddress(
     name: string,
+    options: CreateAddressOptions,
+    callback: CreateResourceCallback<Address>
+  ): void;
+  createAddress(name: string, callback: CreateResourceCallback<Address>): void;
+  createAddress(
+    name: string,
+    options?: CreateAddressOptions
+  ): CreateResourcePromise<Address>;
+  createAddress(
+    name: string,
     options?: CreateAddressOptions | CreateResourceCallback<Address>,
     callback?: CreateResourceCallback<Address>
   ): void | CreateResourcePromise<Address> {
@@ -386,15 +386,6 @@ export class Region extends ServiceObject {
       }
     );
   }
-  createSubnetwork(
-    name: string,
-    config: CreateSubnetworkOptions
-  ): CreateResourcePromise<Subnetwork>;
-  createSubnetwork(
-    name: string,
-    config: CreateSubnetworkOptions,
-    callback: CreateResourceCallback<Subnetwork>
-  ): void;
   /**
    * Create a subnetwork in this region.
    *
@@ -450,6 +441,15 @@ export class Region extends ServiceObject {
   createSubnetwork(
     name: string,
     config: CreateSubnetworkOptions,
+    callback: CreateResourceCallback<Subnetwork>
+  ): void;
+  createSubnetwork(
+    name: string,
+    config: CreateSubnetworkOptions
+  ): CreateResourcePromise<Subnetwork>;
+  createSubnetwork(
+    name: string,
+    config: CreateSubnetworkOptions,
     callback?: CreateResourceCallback<Subnetwork>
   ): void | CreateResourcePromise<Subnetwork> {
     const body = Object.assign({}, config, {name: name});
@@ -474,15 +474,6 @@ export class Region extends ServiceObject {
       }
     );
   }
-  createRule(
-    name: string,
-    config: CreateRuleOptions
-  ): CreateResourcePromise<Rule>;
-  createRule(
-    name: string,
-    config: CreateRuleOptions,
-    callback: CreateResourceCallback<Rule>
-  ): void;
   /**
    * Create a forwarding rule in this region.
    *
@@ -547,16 +538,19 @@ export class Region extends ServiceObject {
   createRule(
     name: string,
     config: CreateRuleOptions,
+    callback: CreateResourceCallback<Rule>
+  ): void;
+  createRule(
+    name: string,
+    config: CreateRuleOptions
+  ): CreateResourcePromise<Rule>;
+  createRule(
+    name: string,
+    config: CreateRuleOptions,
     callback?: CreateResourceCallback<Rule>
   ): void | CreateResourcePromise<Rule> {
     (this.parent as Compute).createRule.call(this, name, config, callback!);
   }
-  getAddresses(options?: GetResourcesOptions): GetResourcesPromise<Address>;
-  getAddresses(callback: GetResourcesCallback<Address>): void;
-  getAddresses(
-    options: GetResourcesOptions,
-    callback: GetResourcesCallback<Address>
-  ): void;
   /**
    * Get a list of addresses in this region.
    *
@@ -615,6 +609,12 @@ export class Region extends ServiceObject {
    * });
    */
   getAddresses(
+    options: GetResourcesOptions,
+    callback: GetResourcesCallback<Address>
+  ): void;
+  getAddresses(callback: GetResourcesCallback<Address>): void;
+  getAddresses(options?: GetResourcesOptions): GetResourcesPromise<Address>;
+  getAddresses(
     options?: GetResourcesOptions | GetResourcesCallback<Address>,
     callback?: GetResourcesCallback<Address>
   ): void | GetResourcesPromise<Address> {
@@ -639,12 +639,6 @@ export class Region extends ServiceObject {
       cb(null, addresses, nextQuery, resp);
     });
   }
-  getOperations(options?: GetResourcesOptions): GetResourcesPromise<Operation>;
-  getOperations(callback: GetResourcesCallback<Operation>): void;
-  getOperations(
-    options: GetResourcesOptions,
-    callback: GetResourcesCallback<Operation>
-  ): void;
   /**
    * Get a list of operations for this region.
    *
@@ -703,6 +697,12 @@ export class Region extends ServiceObject {
    * });
    */
   getOperations(
+    options: GetResourcesOptions,
+    callback: GetResourcesCallback<Operation>
+  ): void;
+  getOperations(callback: GetResourcesCallback<Operation>): void;
+  getOperations(options?: GetResourcesOptions): GetResourcesPromise<Operation>;
+  getOperations(
     options?: GetResourcesOptions | GetResourcesCallback<Operation>,
     callback?: GetResourcesCallback<Operation>
   ): void | GetResourcesPromise<Operation> {
@@ -727,12 +727,6 @@ export class Region extends ServiceObject {
       cb(null, operations, nextQuery, resp);
     });
   }
-  getRules(options?: GetResourcesOptions): GetResourcesPromise<Rule>;
-  getRules(callback: GetResourcesCallback<Rule>): void;
-  getRules(
-    options: GetResourcesOptions,
-    callback: GetResourcesCallback<Rule>
-  ): void;
   /**
    * Get a list of forwading rules in this region.
    *
@@ -790,6 +784,12 @@ export class Region extends ServiceObject {
    * });
    */
   getRules(
+    options: GetResourcesOptions,
+    callback: GetResourcesCallback<Rule>
+  ): void;
+  getRules(callback: GetResourcesCallback<Rule>): void;
+  getRules(options?: GetResourcesOptions): GetResourcesPromise<Rule>;
+  getRules(
     options?: GetResourcesOptions | GetResourcesCallback<Rule>,
     callback?: GetResourcesCallback<Rule>
   ): void | GetResourcesPromise<Rule> {
@@ -814,14 +814,6 @@ export class Region extends ServiceObject {
       cb(null, rules, nextQuery, resp);
     });
   }
-  getSubnetworks(
-    options?: GetResourcesOptions
-  ): GetResourcesPromise<Subnetwork>;
-  getSubnetworks(callback: GetResourcesCallback<Subnetwork>): void;
-  getSubnetworks(
-    options: GetResourcesOptions,
-    callback: GetResourcesCallback<Subnetwork>
-  ): void;
   /**
    * Get a list of subnetworks in this region.
    *
@@ -879,6 +871,14 @@ export class Region extends ServiceObject {
    *   const subnetworks = data[0];
    * });
    */
+  getSubnetworks(
+    options: GetResourcesOptions,
+    callback: GetResourcesCallback<Subnetwork>
+  ): void;
+  getSubnetworks(callback: GetResourcesCallback<Subnetwork>): void;
+  getSubnetworks(
+    options?: GetResourcesOptions
+  ): GetResourcesPromise<Subnetwork>;
   getSubnetworks(
     options?: GetResourcesOptions | GetResourcesCallback<Subnetwork>,
     callback?: GetResourcesCallback<Subnetwork>

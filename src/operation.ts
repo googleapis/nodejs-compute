@@ -204,8 +204,6 @@ export class Operation extends common.Operation {
      */
     this.name = name;
   }
-  getMetadata(): Promise<common.Metadata>;
-  getMetadata(callback: common.MetadataCallback): void;
   /**
    * Get the operation's metadata. For a detailed description of metadata see
    * [Operation resource](https://goo.gl/sWm1rt).
@@ -236,6 +234,8 @@ export class Operation extends common.Operation {
    *   const apiResponse = data[1];
    * });
    */
+  getMetadata(callback: common.MetadataCallback): void;
+  getMetadata(): Promise<common.Metadata>;
   getMetadata(
     callback?: common.MetadataCallback
   ): void | Promise<common.Metadata> {

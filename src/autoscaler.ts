@@ -223,8 +223,6 @@ export class Autoscaler extends ServiceObject {
      */
     this.zone = zone;
   }
-  delete(): Promise<[Metadata]>;
-  delete(callback: OperationCallback): void;
   /**
    * Delete the autoscaler.
    *
@@ -255,6 +253,8 @@ export class Autoscaler extends ServiceObject {
    *   const apiResponse = data[1];
    * });
    */
+  delete(callback: OperationCallback): void;
+  delete(): Promise<[Metadata]>;
   delete(callback?: OperationCallback): void | Promise<[Metadata]> {
     callback = callback || util.noop;
     this.request({method: 'DELETE', uri: ''}, (err, resp) => {
@@ -267,11 +267,6 @@ export class Autoscaler extends ServiceObject {
       callback!(null, operation, resp);
     });
   }
-  setMetadata(metadata?: Metadata): Promise<[Metadata]>;
-  setMetadata(
-    metadata: Metadata | undefined,
-    callback: OperationCallback
-  ): void;
   /**
    * Set the autoscaler's metadata.
    *
@@ -308,6 +303,11 @@ export class Autoscaler extends ServiceObject {
    *   const apiResponse = data[1];
    * });
    */
+  setMetadata(
+    metadata: Metadata | undefined,
+    callback: OperationCallback
+  ): void;
+  setMetadata(metadata?: Metadata): Promise<[Metadata]>;
   setMetadata(
     metadata?: Metadata,
     callback?: OperationCallback

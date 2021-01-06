@@ -231,8 +231,6 @@ export class Rule extends ServiceObject {
      */
     this.scope = scope;
   }
-  delete(): Promise<[Metadata]>;
-  delete(callback: OperationCallback): void;
   /**
    * Delete the rule.
    *
@@ -263,6 +261,8 @@ export class Rule extends ServiceObject {
    *   const apiResponse = data[1];
    * });
    */
+  delete(callback: OperationCallback): void;
+  delete(): Promise<[Metadata]>;
   delete(callback?: OperationCallback): void | Promise<[Metadata]> {
     callback = callback || util.noop;
     const scope = this.scope;
@@ -276,8 +276,6 @@ export class Rule extends ServiceObject {
       callback?.(null, operation, resp);
     });
   }
-  setTarget(target: string): OperationPromise;
-  setTarget(target: string, callback: OperationCallback): void;
   /**
    * Set the target for this forwarding rule.
    *
@@ -311,6 +309,8 @@ export class Rule extends ServiceObject {
    *   const apiResponse = data[1];
    * });
    */
+  setTarget(target: string, callback: OperationCallback): void;
+  setTarget(target: string): OperationPromise;
   setTarget(
     target: string,
     callback?: OperationCallback

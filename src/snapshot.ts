@@ -187,8 +187,6 @@ export class Snapshot extends ServiceObject {
      */
     this.name = name;
   }
-  delete(): Promise<[Metadata]>;
-  delete(callback: OperationCallback): void;
   /**
    * Delete the snapshot.
    *
@@ -218,6 +216,8 @@ export class Snapshot extends ServiceObject {
    *   const apiResponse = data[1];
    * });
    */
+  delete(callback: OperationCallback): void;
+  delete(): Promise<[Metadata]>;
   delete(callback?: OperationCallback): void | Promise<[Metadata]> {
     callback = callback || util.noop;
     this.request({method: 'DELETE', uri: ''}, (err, resp) => {

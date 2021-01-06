@@ -214,8 +214,6 @@ export class Firewall extends ServiceObject {
      */
     this.metadata.network = 'global/networks/default';
   }
-  delete(): Promise<[Metadata]>;
-  delete(callback: OperationCallback): void;
   /**
    * Delete the firewall.
    *
@@ -245,6 +243,8 @@ export class Firewall extends ServiceObject {
    *   const apiResponse = data[1];
    * });
    */
+  delete(callback: OperationCallback): void;
+  delete(): Promise<[Metadata]>;
   delete(callback?: OperationCallback): void | Promise<[Metadata]> {
     callback = callback || util.noop;
     this.request({method: 'DELETE', uri: ''}, (err, resp) => {
@@ -257,11 +257,6 @@ export class Firewall extends ServiceObject {
       callback!(null, operation, resp);
     });
   }
-  setMetadata(metadata?: Metadata): Promise<[Metadata]>;
-  setMetadata(
-    metadata: Metadata | undefined,
-    callback: OperationCallback
-  ): void;
   /**
    * Set the firewall's metadata.
    *
@@ -297,6 +292,11 @@ export class Firewall extends ServiceObject {
    *   const apiResponse = data[1];
    * });
    */
+  setMetadata(
+    metadata: Metadata | undefined,
+    callback: OperationCallback
+  ): void;
+  setMetadata(metadata?: Metadata): Promise<[Metadata]>;
   setMetadata(
     metadata?: Metadata,
     callback?: OperationCallback

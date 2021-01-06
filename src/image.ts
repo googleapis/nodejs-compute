@@ -207,8 +207,6 @@ export class Image extends ServiceObject {
       pollIntervalMs: compute.pollIntervalMs,
     });
   }
-  delete(): Promise<[Metadata]>;
-  delete(callback: OperationCallback): void;
   /**
    * Delete the image.
    *
@@ -238,6 +236,8 @@ export class Image extends ServiceObject {
    *   const apiResponse = data[1];
    * });
    */
+  delete(callback: OperationCallback): void;
+  delete(): Promise<[Metadata]>;
   delete(callback?: OperationCallback): void | Promise<[Metadata]> {
     callback = callback || util.noop;
     this.request({method: 'DELETE', uri: ''}, (err, resp) => {

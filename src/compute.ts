@@ -647,15 +647,6 @@ export class Compute extends common.Service {
     this.getVMsStream = paginator.streamify('getVMs');
     this.getZonesStream = paginator.streamify('getZones');
   }
-  createFirewall(
-    name: string,
-    config: CreateFirewallOptions
-  ): CreateResourcePromise<Firewall>;
-  createFirewall(
-    name: string,
-    config: CreateFirewallOptions,
-    callback: CreateResourceCallback<Firewall>
-  ): void;
   /**
    * Create a firewall.
    *
@@ -717,6 +708,15 @@ export class Compute extends common.Service {
   createFirewall(
     name: string,
     config: CreateFirewallOptions,
+    callback: CreateResourceCallback<Firewall>
+  ): void;
+  createFirewall(
+    name: string,
+    config: CreateFirewallOptions
+  ): CreateResourcePromise<Firewall>;
+  createFirewall(
+    name: string,
+    config: CreateFirewallOptions,
     callback?: CreateResourceCallback<Firewall>
   ): void | CreateResourcePromise<Firewall> {
     if (!is.string(name)) {
@@ -764,19 +764,6 @@ export class Compute extends common.Service {
       }
     );
   }
-  createHealthCheck(
-    name: string,
-    options?: CreateHealthCheckOptions
-  ): CreateResourcePromise<HealthCheck>;
-  createHealthCheck(
-    name: string,
-    callback: CreateResourceCallback<HealthCheck>
-  ): void;
-  createHealthCheck(
-    name: string,
-    options: CreateHealthCheckOptions,
-    callback: CreateResourceCallback<HealthCheck>
-  ): void;
   /**
    * Create an HTTP or HTTPS health check.
    *
@@ -826,6 +813,19 @@ export class Compute extends common.Service {
    */
   createHealthCheck(
     name: string,
+    options: CreateHealthCheckOptions,
+    callback: CreateResourceCallback<HealthCheck>
+  ): void;
+  createHealthCheck(
+    name: string,
+    callback: CreateResourceCallback<HealthCheck>
+  ): void;
+  createHealthCheck(
+    name: string,
+    options?: CreateHealthCheckOptions
+  ): CreateResourcePromise<HealthCheck>;
+  createHealthCheck(
+    name: string,
     options?: CreateHealthCheckOptions | CreateResourceCallback<HealthCheck>,
     callback?: CreateResourceCallback<HealthCheck>
   ): void | CreateResourcePromise<HealthCheck> {
@@ -867,22 +867,6 @@ export class Compute extends common.Service {
       }
     );
   }
-  createImage(
-    name: string,
-    disk: Disk,
-    options?: CreateImageOptions
-  ): CreateResourcePromise<Image>;
-  createImage(
-    name: string,
-    disk: Disk,
-    callback: CreateResourceCallback<Image>
-  ): void;
-  createImage(
-    name: string,
-    disk: Disk,
-    options: CreateImageOptions,
-    callback: CreateResourceCallback<Image>
-  ): void;
   /**
    * Create an image from a disk.
    *
@@ -920,6 +904,22 @@ export class Compute extends common.Service {
   createImage(
     name: string,
     disk: Disk,
+    options: CreateImageOptions,
+    callback: CreateResourceCallback<Image>
+  ): void;
+  createImage(
+    name: string,
+    disk: Disk,
+    callback: CreateResourceCallback<Image>
+  ): void;
+  createImage(
+    name: string,
+    disk: Disk,
+    options?: CreateImageOptions
+  ): CreateResourcePromise<Image>;
+  createImage(
+    name: string,
+    disk: Disk,
     options?: CreateImageOptions | CreateResourceCallback<Image>,
     callback?: CreateResourceCallback<Image>
   ): void | CreateResourcePromise<Image> {
@@ -948,15 +948,6 @@ export class Compute extends common.Service {
       }
     );
   }
-  createNetwork(
-    name: string,
-    config: CreateNetworkOptions
-  ): CreateResourcePromise<Network>;
-  createNetwork(
-    name: string,
-    config: CreateNetworkOptions,
-    callback: CreateResourceCallback<Network>
-  ): void;
   /**
    * Create a network.
    *
@@ -1006,6 +997,15 @@ export class Compute extends common.Service {
   createNetwork(
     name: string,
     config: CreateNetworkOptions,
+    callback: CreateResourceCallback<Network>
+  ): void;
+  createNetwork(
+    name: string,
+    config: CreateNetworkOptions
+  ): CreateResourcePromise<Network>;
+  createNetwork(
+    name: string,
+    config: CreateNetworkOptions,
     callback?: CreateResourceCallback<Network>
   ): void | CreateResourcePromise<Network> {
     const body = Object.assign({}, config, {name: name});
@@ -1031,15 +1031,6 @@ export class Compute extends common.Service {
       }
     );
   }
-  createRule(
-    name: string,
-    config: CreateRuleOptions
-  ): CreateResourcePromise<Rule>;
-  createRule(
-    name: string,
-    config: CreateRuleOptions,
-    callback: CreateResourceCallback<Rule>
-  ): void;
   /**
    * Create a global forwarding rule.
    *
@@ -1100,6 +1091,15 @@ export class Compute extends common.Service {
    */
   createRule(
     name: string,
+    config: CreateRuleOptions
+  ): CreateResourcePromise<Rule>;
+  createRule(
+    name: string,
+    config: CreateRuleOptions,
+    callback: CreateResourceCallback<Rule>
+  ): void;
+  createRule(
+    name: string,
     config: CreateRuleOptions,
     callback?: CreateResourceCallback<Rule>
   ): void | CreateResourcePromise<Rule> {
@@ -1130,15 +1130,6 @@ export class Compute extends common.Service {
       }
     );
   }
-  createService(
-    name: string,
-    config: CreateServiceOptions
-  ): CreateResourcePromise<Service>;
-  createService(
-    name: string,
-    config: CreateServiceOptions,
-    callback: CreateResourceCallback<Service>
-  ): void;
   /**
    * Create a backend service.
    *
@@ -1189,6 +1180,15 @@ export class Compute extends common.Service {
   createService(
     name: string,
     config: CreateServiceOptions,
+    callback: CreateResourceCallback<Service>
+  ): void;
+  createService(
+    name: string,
+    config: CreateServiceOptions
+  ): CreateResourcePromise<Service>;
+  createService(
+    name: string,
+    config: CreateServiceOptions,
     callback?: CreateResourceCallback<Service>
   ): void | CreateResourcePromise<Service> {
     const body = Object.assign({}, config, {name: name});
@@ -1223,12 +1223,6 @@ export class Compute extends common.Service {
   firewall(name: string): Firewall {
     return new Firewall(this, name);
   }
-  getAddresses(options?: GetResourcesOptions): GetResourcesPromise<Address>;
-  getAddresses(callback: GetResourcesCallback<Address>): void;
-  getAddresses(
-    options: GetResourcesOptions,
-    callback: GetResourcesCallback<Address>
-  ): void;
   /**
    * Get a list of addresses. For a detailed description of method's options see
    * [API reference](https://goo.gl/r9XmXJ).
@@ -1284,6 +1278,12 @@ export class Compute extends common.Service {
    * });
    */
   getAddresses(
+    options: GetResourcesOptions,
+    callback: GetResourcesCallback<Address>
+  ): void;
+  getAddresses(callback: GetResourcesCallback<Address>): void;
+  getAddresses(options?: GetResourcesOptions): GetResourcesPromise<Address>;
+  getAddresses(
     options?: GetResourcesOptions | GetResourcesCallback<Address>,
     callback?: GetResourcesCallback<Address>
   ): void | GetResourcesPromise<Address> {
@@ -1318,14 +1318,6 @@ export class Compute extends common.Service {
       cb(null, addresses, nextQuery, resp);
     });
   }
-  getAutoscalers(
-    options?: GetResourcesOptions
-  ): GetResourcesPromise<Autoscaler>;
-  getAutoscalers(callback: GetResourcesCallback<Autoscaler>): void;
-  getAutoscalers(
-    options: GetResourcesOptions,
-    callback: GetResourcesCallback<Autoscaler>
-  ): void;
   /**
    * Get a list of autoscalers. For a detailed description of this method's
    * options, see the [API reference](https://cloud.google.com/compute/docs/reference/v1/autoscalers/aggregatedList).
@@ -1382,6 +1374,14 @@ export class Compute extends common.Service {
    * });
    */
   getAutoscalers(
+    options: GetResourcesOptions,
+    callback: GetResourcesCallback<Autoscaler>
+  ): void;
+  getAutoscalers(callback: GetResourcesCallback<Autoscaler>): void;
+  getAutoscalers(
+    options?: GetResourcesOptions
+  ): GetResourcesPromise<Autoscaler>;
+  getAutoscalers(
     options?: GetResourcesOptions | GetResourcesCallback<Autoscaler>,
     callback?: GetResourcesCallback<Autoscaler>
   ): void | GetResourcesPromise<Autoscaler> {
@@ -1419,12 +1419,6 @@ export class Compute extends common.Service {
       cb(null, autoscalers, nextQuery, resp);
     });
   }
-  getDisks(options?: GetResourcesOptions): GetResourcesPromise<Disk>;
-  getDisks(callback: GetResourcesCallback<Disk>): void;
-  getDisks(
-    options: GetResourcesOptions,
-    callback: GetResourcesCallback<Disk>
-  ): void;
   /**
    * Get a list of disks.
    *
@@ -1479,6 +1473,12 @@ export class Compute extends common.Service {
    * });
    */
   getDisks(
+    options: GetResourcesOptions,
+    callback: GetResourcesCallback<Disk>
+  ): void;
+  getDisks(callback: GetResourcesCallback<Disk>): void;
+  getDisks(options?: GetResourcesOptions): GetResourcesPromise<Disk>;
+  getDisks(
     options?: GetResourcesOptions | GetResourcesCallback<Disk>,
     callback?: GetResourcesCallback<Disk>
   ): void | GetResourcesPromise<Disk> {
@@ -1509,14 +1509,6 @@ export class Compute extends common.Service {
       cb(null, disks, nextQuery, resp);
     });
   }
-  getInstanceGroups(
-    options?: GetResourcesOptions
-  ): GetResourcesPromise<InstanceGroup>;
-  getInstanceGroups(callback: GetResourcesCallback<InstanceGroup>): void;
-  getInstanceGroups(
-    options: GetResourcesOptions,
-    callback: GetResourcesCallback<InstanceGroup>
-  ): void;
   /**
    * Get a list of instance groups.
    *
@@ -1572,6 +1564,14 @@ export class Compute extends common.Service {
    * });
    */
   getInstanceGroups(
+    options: GetResourcesOptions,
+    callback: GetResourcesCallback<InstanceGroup>
+  ): void;
+  getInstanceGroups(callback: GetResourcesCallback<InstanceGroup>): void;
+  getInstanceGroups(
+    options?: GetResourcesOptions
+  ): GetResourcesPromise<InstanceGroup>;
+  getInstanceGroups(
     options?: GetResourcesOptions | GetResourcesCallback<InstanceGroup>,
     callback?: GetResourcesCallback<InstanceGroup>
   ): void | GetResourcesPromise<InstanceGroup> {
@@ -1606,12 +1606,6 @@ export class Compute extends common.Service {
       cb(null, instanceGroups, nextQuery, resp);
     });
   }
-  getFirewalls(options?: GetResourcesOptions): GetResourcesPromise<Firewall>;
-  getFirewalls(callback: GetResourcesCallback<Firewall>): void;
-  getFirewalls(
-    options: GetResourcesOptions,
-    callback: GetResourcesCallback<Firewall>
-  ): void;
   /**
    * Get a list of firewalls.
    *
@@ -1663,6 +1657,12 @@ export class Compute extends common.Service {
    * });
    */
   getFirewalls(
+    options: GetResourcesOptions,
+    callback: GetResourcesCallback<Firewall>
+  ): void;
+  getFirewalls(callback: GetResourcesCallback<Firewall>): void;
+  getFirewalls(options?: GetResourcesOptions): GetResourcesPromise<Firewall>;
+  getFirewalls(
     options?: GetResourcesOptions | GetResourcesCallback<Firewall>,
     callback?: GetResourcesCallback<Firewall>
   ): void | GetResourcesPromise<Firewall> {
@@ -1689,14 +1689,6 @@ export class Compute extends common.Service {
       cb(null, firewalls, nextQuery, resp);
     });
   }
-  getHealthChecks(
-    options?: GetHealthChecksOptions
-  ): GetResourcesPromise<HealthCheck>;
-  getHealthChecks(callback: GetResourcesCallback<HealthCheck>): void;
-  getHealthChecks(
-    options: GetHealthChecksOptions,
-    callback: GetResourcesCallback<HealthCheck>
-  ): void;
   /**
    * Get a list of health checks.
    *
@@ -1751,6 +1743,14 @@ export class Compute extends common.Service {
    * });
    */
   getHealthChecks(
+    options: GetHealthChecksOptions,
+    callback: GetResourcesCallback<HealthCheck>
+  ): void;
+  getHealthChecks(callback: GetResourcesCallback<HealthCheck>): void;
+  getHealthChecks(
+    options?: GetHealthChecksOptions
+  ): GetResourcesPromise<HealthCheck>;
+  getHealthChecks(
     options?: GetHealthChecksOptions | GetResourcesCallback<HealthCheck>,
     callback?: GetResourcesCallback<HealthCheck>
   ): void | GetResourcesPromise<HealthCheck> {
@@ -1788,12 +1788,6 @@ export class Compute extends common.Service {
       }
     );
   }
-  getImages(options?: GetResourcesOptions): GetResourcesPromise<Image>;
-  getImages(callback: GetResourcesCallback<Image>): void;
-  getImages(
-    options: GetResourcesOptions,
-    callback: GetResourcesCallback<Image>
-  ): void;
   /**
    * Get a list of images.
    *
@@ -1844,6 +1838,12 @@ export class Compute extends common.Service {
    * });
    */
   getImages(
+    options: GetResourcesOptions,
+    callback: GetResourcesCallback<Image>
+  ): void;
+  getImages(callback: GetResourcesCallback<Image>): void;
+  getImages(options?: GetResourcesOptions): GetResourcesPromise<Image>;
+  getImages(
     options?: GetResourcesOptions | GetResourcesCallback<Image>,
     callback?: GetResourcesCallback<Image>
   ): void | GetResourcesPromise<Image> {
@@ -1868,14 +1868,6 @@ export class Compute extends common.Service {
       cb(null, images, nextQuery, resp);
     });
   }
-  getMachineTypes(
-    options?: GetResourcesOptions
-  ): GetResourcesPromise<MachineType>;
-  getMachineTypes(callback: GetResourcesCallback<MachineType>): void;
-  getMachineTypes(
-    options: GetResourcesOptions,
-    callback: GetResourcesCallback<MachineType>
-  ): void;
   /**
    * Get a list of machine types in this project.
    *
@@ -1932,6 +1924,14 @@ export class Compute extends common.Service {
    * });
    */
   getMachineTypes(
+    options: GetResourcesOptions,
+    callback: GetResourcesCallback<MachineType>
+  ): void;
+  getMachineTypes(callback: GetResourcesCallback<MachineType>): void;
+  getMachineTypes(
+    options?: GetResourcesOptions
+  ): GetResourcesPromise<MachineType>;
+  getMachineTypes(
     options?: GetResourcesOptions | GetResourcesCallback<MachineType>,
     callback?: GetResourcesCallback<MachineType>
   ): void | GetResourcesPromise<MachineType> {
@@ -1968,12 +1968,6 @@ export class Compute extends common.Service {
       cb(null, machineTypes, nextQuery, resp);
     });
   }
-  getNetworks(options?: GetResourcesOptions): GetResourcesPromise<Network>;
-  getNetworks(callback: GetResourcesCallback<Network>): void;
-  getNetworks(
-    options: GetResourcesOptions,
-    callback: GetResourcesCallback<Network>
-  ): void;
   /**
    * Get a list of networks.
    *
@@ -2028,6 +2022,12 @@ export class Compute extends common.Service {
    * });
    */
   getNetworks(
+    options: GetResourcesOptions,
+    callback: GetResourcesCallback<Network>
+  ): void;
+  getNetworks(callback: GetResourcesCallback<Network>): void;
+  getNetworks(options?: GetResourcesOptions): GetResourcesPromise<Network>;
+  getNetworks(
     options?: GetResourcesOptions | GetResourcesCallback<Network>,
     callback?: GetResourcesCallback<Network>
   ): void | GetResourcesPromise<Network> {
@@ -2054,12 +2054,6 @@ export class Compute extends common.Service {
       cb(null, networks, nextQuery, resp);
     });
   }
-  getOperations(options?: GetResourcesOptions): GetResourcesPromise<Operation>;
-  getOperations(callback: GetResourcesCallback<Operation>): void;
-  getOperations(
-    options: GetResourcesOptions,
-    callback: GetResourcesCallback<Operation>
-  ): void;
   /**
    * Get a list of global operations.
    *
@@ -2114,6 +2108,12 @@ export class Compute extends common.Service {
    * });
    */
   getOperations(
+    options: GetResourcesOptions,
+    callback: GetResourcesCallback<Operation>
+  ): void;
+  getOperations(callback: GetResourcesCallback<Operation>): void;
+  getOperations(options?: GetResourcesOptions): GetResourcesPromise<Operation>;
+  getOperations(
     options?: GetResourcesOptions | GetResourcesCallback<Operation>,
     callback?: GetResourcesCallback<Operation>
   ): void | GetResourcesPromise<Operation> {
@@ -2140,12 +2140,6 @@ export class Compute extends common.Service {
       cb(null, operations, nextQuery, resp);
     });
   }
-  getRegions(options?: GetResourcesOptions): GetResourcesPromise<Region>;
-  getRegions(callback: GetResourcesCallback<Region>): void;
-  getRegions(
-    options: GetResourcesOptions,
-    callback: GetResourcesCallback<Region>
-  ): void;
   /**
    * Return the regions available to your project.
    *
@@ -2200,6 +2194,12 @@ export class Compute extends common.Service {
    * });
    */
   getRegions(
+    options: GetResourcesOptions,
+    callback: GetResourcesCallback<Region>
+  ): void;
+  getRegions(callback: GetResourcesCallback<Region>): void;
+  getRegions(options?: GetResourcesOptions): GetResourcesPromise<Region>;
+  getRegions(
     options?: GetResourcesOptions | GetResourcesCallback<Region>,
     callback?: GetResourcesCallback<Region>
   ): void | GetResourcesPromise<Region> {
@@ -2224,12 +2224,6 @@ export class Compute extends common.Service {
       cb(null, regions, nextQuery, resp);
     });
   }
-  getRules(options?: GetResourcesOptions): GetResourcesPromise<Rule>;
-  getRules(callback: GetResourcesCallback<Rule>): void;
-  getRules(
-    options: GetResourcesOptions,
-    callback: GetResourcesCallback<Rule>
-  ): void;
   /**
    * Get a list of forwarding rules.
    *
@@ -2283,6 +2277,12 @@ export class Compute extends common.Service {
    * });
    */
   getRules(
+    options: GetResourcesOptions,
+    callback: GetResourcesCallback<Rule>
+  ): void;
+  getRules(callback: GetResourcesCallback<Rule>): void;
+  getRules(options?: GetResourcesOptions): GetResourcesPromise<Rule>;
+  getRules(
     options?: GetResourcesOptions | GetResourcesCallback<Rule>,
     callback?: GetResourcesCallback<Rule>
   ): void | GetResourcesPromise<Rule> {
@@ -2307,12 +2307,6 @@ export class Compute extends common.Service {
       cb(null, rules, nextQuery, resp);
     });
   }
-  getServices(options?: GetResourcesOptions): GetResourcesPromise<Service>;
-  getServices(callback: GetResourcesCallback<Service>): void;
-  getServices(
-    options: GetResourcesOptions,
-    callback: GetResourcesCallback<Service>
-  ): void;
   /**
    * Get a list of backend services.
    *
@@ -2367,6 +2361,12 @@ export class Compute extends common.Service {
    * });
    */
   getServices(
+    options: GetResourcesOptions,
+    callback: GetResourcesCallback<Service>
+  ): void;
+  getServices(callback: GetResourcesCallback<Service>): void;
+  getServices(options?: GetResourcesOptions): GetResourcesPromise<Service>;
+  getServices(
     options?: GetResourcesOptions | GetResourcesCallback<Service>,
     callback?: GetResourcesCallback<Service>
   ): void | GetResourcesPromise<Service> {
@@ -2393,12 +2393,6 @@ export class Compute extends common.Service {
       cb(null, services, nextQuery, resp);
     });
   }
-  getSnapshots(options?: GetResourcesOptions): GetResourcesPromise<Snapshot>;
-  getSnapshots(callback: GetResourcesCallback<Snapshot>): void;
-  getSnapshots(
-    options: GetResourcesOptions,
-    callback: GetResourcesCallback<Snapshot>
-  ): void;
   /**
    * Get a list of snapshots.
    *
@@ -2453,6 +2447,12 @@ export class Compute extends common.Service {
    * });
    */
   getSnapshots(
+    options: GetResourcesOptions,
+    callback: GetResourcesCallback<Snapshot>
+  ): void;
+  getSnapshots(callback: GetResourcesCallback<Snapshot>): void;
+  getSnapshots(options?: GetResourcesOptions): GetResourcesPromise<Snapshot>;
+  getSnapshots(
     options?: GetResourcesOptions | GetResourcesCallback<Snapshot>,
     callback?: GetResourcesCallback<Snapshot>
   ): void | GetResourcesPromise<Snapshot> {
@@ -2479,14 +2479,6 @@ export class Compute extends common.Service {
       cb(null, snapshots, nextQuery, resp);
     });
   }
-  getSubnetworks(
-    options?: GetResourcesOptions
-  ): GetResourcesPromise<Subnetwork>;
-  getSubnetworks(callback: GetResourcesCallback<Subnetwork>): void;
-  getSubnetworks(
-    options: GetResourcesOptions,
-    callback: GetResourcesCallback<Subnetwork>
-  ): void;
   /**
    * Get a list of subnetworks in this project.
    *
@@ -2541,6 +2533,14 @@ export class Compute extends common.Service {
    * });
    */
   getSubnetworks(
+    options: GetResourcesOptions,
+    callback: GetResourcesCallback<Subnetwork>
+  ): void;
+  getSubnetworks(callback: GetResourcesCallback<Subnetwork>): void;
+  getSubnetworks(
+    options?: GetResourcesOptions
+  ): GetResourcesPromise<Subnetwork>;
+  getSubnetworks(
     options?: GetResourcesOptions | GetResourcesCallback<Subnetwork>,
     callback?: GetResourcesCallback<Subnetwork>
   ): void | GetResourcesPromise<Subnetwork> {
@@ -2575,12 +2575,6 @@ export class Compute extends common.Service {
       cb(null, subnetworks, nextQuery, resp);
     });
   }
-  getVMs(options?: GetResourcesOptions): GetResourcesPromise<VM>;
-  getVMs(callback: GetResourcesCallback<VM>): void;
-  getVMs(
-    options: GetResourcesOptions,
-    callback: GetResourcesCallback<VM>
-  ): void;
   /**
    * Get a list of virtual machine instances.
    *
@@ -2634,6 +2628,12 @@ export class Compute extends common.Service {
    * });
    */
   getVMs(
+    options: GetResourcesOptions,
+    callback: GetResourcesCallback<VM>
+  ): void;
+  getVMs(callback: GetResourcesCallback<VM>): void;
+  getVMs(options?: GetResourcesOptions): GetResourcesPromise<VM>;
+  getVMs(
     options?: GetResourcesOptions | GetResourcesCallback<VM>,
     callback?: GetResourcesCallback<VM>
   ): void | GetResourcesPromise<VM> {
@@ -2664,12 +2664,6 @@ export class Compute extends common.Service {
       cb(null, vms, nextQuery, resp);
     });
   }
-  getZones(options?: GetResourcesOptions): GetResourcesPromise<Zone>;
-  getZones(callback: GetResourcesCallback<Zone>): void;
-  getZones(
-    options: GetResourcesOptions,
-    callback: GetResourcesCallback<Zone>
-  ): void;
   /**
    * Return the zones available to your project.
    *
@@ -2723,6 +2717,12 @@ export class Compute extends common.Service {
    *   var zones = data[0];
    * });
    */
+  getZones(
+    options: GetResourcesOptions,
+    callback: GetResourcesCallback<Zone>
+  ): void;
+  getZones(callback: GetResourcesCallback<Zone>): void;
+  getZones(options?: GetResourcesOptions): GetResourcesPromise<Zone>;
   getZones(
     options?: GetResourcesOptions | GetResourcesCallback<Zone>,
     callback?: GetResourcesCallback<Zone>

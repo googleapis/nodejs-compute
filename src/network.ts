@@ -215,15 +215,6 @@ export class Network extends ServiceObject {
      */
     this.name = name;
   }
-  createFirewall(
-    name: string,
-    config: CreateFirewallOptions
-  ): CreateResourcePromise<Firewall>;
-  createFirewall(
-    name: string,
-    config: CreateFirewallOptions,
-    callback: CreateResourceCallback<Firewall>
-  ): void;
   /**
    * Create a firewall for this network.
    *
@@ -283,20 +274,20 @@ export class Network extends ServiceObject {
   createFirewall(
     name: string,
     config: CreateFirewallOptions,
+    callback: CreateResourceCallback<Firewall>
+  ): void;
+  createFirewall(
+    name: string,
+    config: CreateFirewallOptions
+  ): CreateResourcePromise<Firewall>;
+  createFirewall(
+    name: string,
+    config: CreateFirewallOptions,
     callback?: CreateResourceCallback<Firewall>
   ): void | CreateResourcePromise<Firewall> {
     config = Object.assign({}, config, {network: this.formattedName});
     this.compute.createFirewall(name, config, callback!);
   }
-  createSubnetwork(
-    name: string,
-    config: CreateSubnetworkOptions
-  ): CreateResourcePromise<Subnetwork>;
-  createSubnetwork(
-    name: string,
-    config: CreateSubnetworkOptions,
-    callback: CreateResourceCallback<Subnetwork>
-  ): void;
   /**
    * Create a subnetwork in this network.
    *
@@ -353,6 +344,15 @@ export class Network extends ServiceObject {
   createSubnetwork(
     name: string,
     config: CreateSubnetworkOptions,
+    callback: CreateResourceCallback<Subnetwork>
+  ): void;
+  createSubnetwork(
+    name: string,
+    config: CreateSubnetworkOptions
+  ): CreateResourcePromise<Subnetwork>;
+  createSubnetwork(
+    name: string,
+    config: CreateSubnetworkOptions,
     callback?: CreateResourceCallback<Subnetwork>
   ): void | CreateResourcePromise<Subnetwork> {
     config = Object.assign({}, config, {network: this.formattedName});
@@ -363,14 +363,6 @@ export class Network extends ServiceObject {
     delete config.region;
     (region as Region).createSubnetwork(name, config, callback!);
   }
-  getSubnetworks(
-    options?: GetResourcesOptions
-  ): GetResourcesPromise<Subnetwork>;
-  getSubnetworks(callback: GetResourcesCallback<Subnetwork>): void;
-  getSubnetworks(
-    options: GetResourcesOptions,
-    callback: GetResourcesCallback<Subnetwork>
-  ): void;
   /**
    * Get a list of subnetworks in this network.
    *
@@ -429,6 +421,14 @@ export class Network extends ServiceObject {
    * });
    */
   getSubnetworks(
+    options: GetResourcesOptions,
+    callback: GetResourcesCallback<Subnetwork>
+  ): void;
+  getSubnetworks(callback: GetResourcesCallback<Subnetwork>): void;
+  getSubnetworks(
+    options?: GetResourcesOptions
+  ): GetResourcesPromise<Subnetwork>;
+  getSubnetworks(
     options?: GetResourcesOptions | GetResourcesCallback<Subnetwork>,
     callback?: GetResourcesCallback<Subnetwork>
   ): void | GetResourcesPromise<Subnetwork> {
@@ -480,8 +480,6 @@ export class Network extends ServiceObject {
     });
     return this.compute.getSubnetworksStream(options);
   }
-  delete(): Promise<[Metadata]>;
-  delete(callback: OperationCallback): void;
   /**
    * Delete the network.
    *
@@ -511,6 +509,8 @@ export class Network extends ServiceObject {
    *   const apiResponse = data[1];
    * });
    */
+  delete(callback: OperationCallback): void;
+  delete(): Promise<[Metadata]>;
   delete(callback?: OperationCallback): void | Promise<[Metadata]> {
     callback = callback || util.noop;
     this.request({method: 'DELETE', uri: ''}, (err, resp) => {
@@ -541,12 +541,6 @@ export class Network extends ServiceObject {
     firewall.metadata = {network: this.formattedName};
     return firewall;
   }
-  getFirewalls(options?: GetResourcesOptions): GetResourcesPromise<Firewall>;
-  getFirewalls(callback: GetResourcesCallback<Firewall>): void;
-  getFirewalls(
-    options: GetResourcesOptions,
-    callback: GetResourcesCallback<Firewall>
-  ): void;
   /**
    * Get a list of firewalls for this network.
    *
@@ -597,6 +591,12 @@ export class Network extends ServiceObject {
    *   const firewalls = data[0];
    * });
    */
+  getFirewalls(
+    options: GetResourcesOptions,
+    callback: GetResourcesCallback<Firewall>
+  ): void;
+  getFirewalls(callback: GetResourcesCallback<Firewall>): void;
+  getFirewalls(options?: GetResourcesOptions): GetResourcesPromise<Firewall>;
   getFirewalls(
     options?: GetResourcesOptions | GetResourcesCallback<Firewall>,
     callback?: GetResourcesCallback<Firewall>

@@ -237,8 +237,6 @@ export class InstanceGroup extends ServiceObject {
     this.name = name;
     this.getVMsStream = paginator.streamify('getVMs');
   }
-  add(vms: VM | VM[]): OperationPromise;
-  add(vms: VM | VM[], callback: OperationCallback): void;
   /**
    * Add one or more VMs to this instance group.
    *
@@ -276,6 +274,8 @@ export class InstanceGroup extends ServiceObject {
    *   const apiResponse = data[1];
    * });
    */
+  add(vms: VM | VM[], callback: OperationCallback): void;
+  add(vms: VM | VM[]): OperationPromise;
   add(vms: VM | VM[], callback?: OperationCallback): void | OperationPromise {
     this.request(
       {
@@ -294,8 +294,6 @@ export class InstanceGroup extends ServiceObject {
       }
     );
   }
-  delete(): Promise<[Metadata]>;
-  delete(callback: OperationCallback): void;
   /**
    * Delete the instance group.
    *
@@ -326,6 +324,8 @@ export class InstanceGroup extends ServiceObject {
    *   const apiResponse = data[1];
    * });
    */
+  delete(callback: OperationCallback): void;
+  delete(): Promise<[Metadata]>;
   delete(callback?: OperationCallback): void | Promise<[Metadata]> {
     callback = callback || util.noop;
     this.request({method: 'DELETE', uri: ''}, (err, resp) => {
@@ -338,9 +338,6 @@ export class InstanceGroup extends ServiceObject {
       callback!(null, operation, resp);
     });
   }
-  getVMs(options?: GetVMsOptions): GetResourcesPromise<VM>;
-  getVMs(callback: GetResourcesCallback<VM>): void;
-  getVMs(options: GetVMsOptions, callback: GetResourcesCallback<VM>): void;
   /**
    * Get a list of VM instances in this instance group.
    *
@@ -399,6 +396,9 @@ export class InstanceGroup extends ServiceObject {
    *   const vms = data[0];
    * });
    */
+  getVMs(options: GetVMsOptions, callback: GetResourcesCallback<VM>): void;
+  getVMs(callback: GetResourcesCallback<VM>): void;
+  getVMs(options?: GetVMsOptions): GetResourcesPromise<VM>;
   getVMs(
     options?: GetVMsOptions | GetResourcesCallback<VM>,
     callback?: GetResourcesCallback<VM>
@@ -431,8 +431,6 @@ export class InstanceGroup extends ServiceObject {
       }
     );
   }
-  remove(vms: VM | VM[]): OperationPromise;
-  remove(vms: VM | VM[], callback: OperationCallback): void;
   /**
    * Remove one or more VMs from this instance group.
    *
@@ -470,6 +468,8 @@ export class InstanceGroup extends ServiceObject {
    *   const apiResponse = data[1];
    * });
    */
+  remove(vms: VM | VM[], callback: OperationCallback): void;
+  remove(vms: VM | VM[]): OperationPromise;
   remove(
     vms: VM | VM[],
     callback?: OperationCallback
@@ -491,8 +491,6 @@ export class InstanceGroup extends ServiceObject {
       }
     );
   }
-  setPorts(ports: Record<string, number>): OperationPromise;
-  setPorts(ports: Record<string, number>, callback: OperationCallback): void;
   /**
    * Set the named ports for this instance group.
    *
@@ -530,6 +528,8 @@ export class InstanceGroup extends ServiceObject {
    *   const apiResponse = data[1];
    * });
    */
+  setPorts(ports: Record<string, number>, callback: OperationCallback): void;
+  setPorts(ports: Record<string, number>): OperationPromise;
   setPorts(
     ports: Record<string, number>,
     callback?: OperationCallback

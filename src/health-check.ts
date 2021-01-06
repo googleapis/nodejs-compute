@@ -214,8 +214,6 @@ export class HealthCheck extends ServiceObject {
      */
     this.compute = compute;
   }
-  delete(): Promise<[Metadata]>;
-  delete(callback: OperationCallback): void;
   /**
    * Delete the health check.
    *
@@ -246,6 +244,8 @@ export class HealthCheck extends ServiceObject {
    *   const apiResponse = data[1];
    * });
    */
+  delete(callback: OperationCallback): void;
+  delete(): Promise<[Metadata]>;
   delete(callback?: OperationCallback): void | Promise<[Metadata]> {
     callback = callback || util.noop;
     this.request({method: 'DELETE', uri: ''}, (err, resp) => {
@@ -258,11 +258,6 @@ export class HealthCheck extends ServiceObject {
       callback!(null, operation, resp);
     });
   }
-  setMetadata(metadata?: Metadata): Promise<[Metadata]>;
-  setMetadata(
-    metadata: Metadata | undefined,
-    callback: OperationCallback
-  ): void;
   /**
    * Set the health check's metadata.
    *
@@ -300,6 +295,11 @@ export class HealthCheck extends ServiceObject {
    *   const apiResponse = data[1];
    * });
    */
+  setMetadata(
+    metadata: Metadata | undefined,
+    callback: OperationCallback
+  ): void;
+  setMetadata(metadata?: Metadata): Promise<[Metadata]>;
   setMetadata(
     metadata?: Metadata,
     callback?: OperationCallback

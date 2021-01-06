@@ -162,8 +162,6 @@ export class InstanceGroupManager extends ServiceObject {
      */
     this.name = name;
   }
-  abandonInstances(vms: VM | VM[]): OperationPromise;
-  abandonInstances(vms: VM | VM[], callback: OperationCallback): void;
   /**
    * Flags the specified instances to be removed from the managed instance group.
    * @see [InstanceGroupManagers: abandonInstances API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/instanceGroupManagers/abandonInstances}
@@ -199,6 +197,8 @@ export class InstanceGroupManager extends ServiceObject {
    *   const apiResponse = data[1];
    * });
    */
+  abandonInstances(vms: VM | VM[], callback: OperationCallback): void;
+  abandonInstances(vms: VM | VM[]): OperationPromise;
   abandonInstances(
     vms: VM | VM[],
     callback?: OperationCallback
@@ -220,8 +220,6 @@ export class InstanceGroupManager extends ServiceObject {
       }
     );
   }
-  deleteInstances(vms: VM | VM[]): OperationPromise;
-  deleteInstances(vms: VM | VM[], callback: OperationCallback): void;
   /**
    * Flags the specified instances in the managed instance group for immediate deletion.
    * @see [InstanceGroupManagers: deleteInstances API Documentation]{@link https://cloud.google.com/compute/docs/reference/v1/instanceGroupManagers/deleteInstances}
@@ -257,6 +255,8 @@ export class InstanceGroupManager extends ServiceObject {
    *   const apiResponse = data[1];
    * });
    */
+  deleteInstances(vms: VM | VM[], callback: OperationCallback): void;
+  deleteInstances(vms: VM | VM[]): OperationPromise;
   deleteInstances(
     vms: VM | VM[],
     callback?: OperationCallback
@@ -278,12 +278,6 @@ export class InstanceGroupManager extends ServiceObject {
       }
     );
   }
-  getManagedInstances(options?: GetResourcesOptions): GetResourcesPromise<VM>;
-  getManagedInstances(callback: GetResourcesCallback<VM>): void;
-  getManagedInstances(
-    options: GetResourcesOptions,
-    callback: GetResourcesCallback<VM>
-  ): void;
   /**
    * Get a list of managed VM instances in this instance group manager.
    *
@@ -342,6 +336,12 @@ export class InstanceGroupManager extends ServiceObject {
    * });
    */
   getManagedInstances(
+    options: GetResourcesOptions,
+    callback: GetResourcesCallback<VM>
+  ): void;
+  getManagedInstances(callback: GetResourcesCallback<VM>): void;
+  getManagedInstances(options?: GetResourcesOptions): GetResourcesPromise<VM>;
+  getManagedInstances(
     options?: GetResourcesOptions | GetResourcesCallback<VM>,
     callback?: GetResourcesCallback<VM>
   ): void | GetResourcesPromise<VM> {
@@ -369,8 +369,6 @@ export class InstanceGroupManager extends ServiceObject {
       }
     );
   }
-  resize(size: number): OperationPromise;
-  resize(size: number, callback: OperationCallback): void;
   /**
    * Resizes the managed instance group.
    *
@@ -402,6 +400,8 @@ export class InstanceGroupManager extends ServiceObject {
    *   const apiResponse = data[1];
    * });
    */
+  resize(size: number, callback: OperationCallback): void;
+  resize(size: number): OperationPromise;
   resize(size: number, callback?: OperationCallback): void | OperationPromise {
     this.request(
       {method: 'POST', uri: '/resize', qs: {size: size}},

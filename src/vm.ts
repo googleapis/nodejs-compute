@@ -380,16 +380,6 @@ export class VM extends ServiceObject {
     this.waiters = [];
     this.url = `https://www.googleapis.com/compute/v1/projects/${zone.compute.projectId}/zones/${zone.name}/instances/${name}`;
   }
-  attachDisk(
-    disk: Disk,
-    options?: CreateDiskOptions & {readOnly?: boolean}
-  ): OperationPromise;
-  attachDisk(disk: Disk, callback: OperationCallback): void;
-  attachDisk(
-    disk: Disk,
-    options: CreateDiskOptions & {readOnly?: boolean},
-    callback: OperationCallback
-  ): void;
   /**
    * Attach a disk to the instance.
    *
@@ -446,6 +436,16 @@ export class VM extends ServiceObject {
    */
   attachDisk(
     disk: Disk,
+    options: CreateDiskOptions & {readOnly?: boolean},
+    callback: OperationCallback
+  ): void;
+  attachDisk(disk: Disk, callback: OperationCallback): void;
+  attachDisk(
+    disk: Disk,
+    options?: CreateDiskOptions & {readOnly?: boolean}
+  ): OperationPromise;
+  attachDisk(
+    disk: Disk,
     options?: (CreateDiskOptions & {readOnly?: boolean}) | OperationCallback,
     callback?: OperationCallback
   ): void | OperationPromise {
@@ -468,8 +468,6 @@ export class VM extends ServiceObject {
     }
     this.request({method: 'POST', uri: '/attachDisk', json: body}, callback!);
   }
-  delete(): Promise<[Metadata]>;
-  delete(callback: OperationCallback): void;
   /**
    * Delete the instance.
    *
@@ -500,11 +498,11 @@ export class VM extends ServiceObject {
    *   const apiResponse = data[1];
    * });
    */
+  delete(callback: OperationCallback): void;
+  delete(): Promise<[Metadata]>;
   delete(callback?: OperationCallback): void | Promise<[Metadata]> {
     this.request({method: 'DELETE', uri: ''}, callback || util.noop);
   }
-  detachDisk(disk: Disk): OperationPromise;
-  detachDisk(disk: Disk, callback: OperationCallback): void;
   /**
    * Detach a disk from the instance.
    *
@@ -540,6 +538,8 @@ export class VM extends ServiceObject {
    *   const apiResponse = data[1];
    * });
    */
+  detachDisk(disk: Disk, callback: OperationCallback): void;
+  detachDisk(disk: Disk): OperationPromise;
   detachDisk(
     disk: Disk,
     callback?: OperationCallback
@@ -585,10 +585,6 @@ export class VM extends ServiceObject {
       });
     });
   }
-  getLabels(): FingerprintedItemsPromise<Record<string, string>>;
-  getLabels(
-    callback: GetFingerprintedItemsCallback<Record<string, string>>
-  ): void;
   /**
    * Get the instance's labels and their fingerprint.
    *
@@ -619,6 +615,10 @@ export class VM extends ServiceObject {
    * });
    */
   getLabels(
+    callback: GetFingerprintedItemsCallback<Record<string, string>>
+  ): void;
+  getLabels(): FingerprintedItemsPromise<Record<string, string>>;
+  getLabels(
     callback?: GetFingerprintedItemsCallback<Record<string, string>>
   ): void | FingerprintedItemsPromise<Record<string, string>> {
     this.getMetadata(
@@ -640,23 +640,6 @@ export class VM extends ServiceObject {
       }
     );
   }
-  getSerialPortOutput(
-    options?: GetSerialPortOptions
-  ): Promise<[SerialPortOutput, Metadata]>;
-  getSerialPortOutput(
-    port: number,
-    options?: GetSerialPortOptions
-  ): Promise<[SerialPortOutput, Metadata]>;
-  getSerialPortOutput(callback: GetSerialPortOutputCallback): void;
-  getSerialPortOutput(
-    port: number | GetSerialPortOptions,
-    callback: GetSerialPortOutputCallback
-  ): void;
-  getSerialPortOutput(
-    port: number,
-    options: GetSerialPortOptions,
-    callback: GetSerialPortOutputCallback
-  ): void;
   /**
    * Returns the serial port output for the instance.
    *
@@ -689,6 +672,23 @@ export class VM extends ServiceObject {
    * });
    */
   getSerialPortOutput(
+    port: number,
+    options: GetSerialPortOptions,
+    callback: GetSerialPortOutputCallback
+  ): void;
+  getSerialPortOutput(
+    port: number | GetSerialPortOptions,
+    callback: GetSerialPortOutputCallback
+  ): void;
+  getSerialPortOutput(callback: GetSerialPortOutputCallback): void;
+  getSerialPortOutput(
+    port: number,
+    options?: GetSerialPortOptions
+  ): Promise<[SerialPortOutput, Metadata]>;
+  getSerialPortOutput(
+    options?: GetSerialPortOptions
+  ): Promise<[SerialPortOutput, Metadata]>;
+  getSerialPortOutput(
     port?: number | GetSerialPortOptions | GetSerialPortOutputCallback,
     options?: GetSerialPortOptions | GetSerialPortOutputCallback,
     callback?: GetSerialPortOutputCallback
@@ -718,8 +718,6 @@ export class VM extends ServiceObject {
       cb(null, resp.contents, resp);
     });
   }
-  getTags(): FingerprintedItemsPromise<string[]>;
-  getTags(callback: GetFingerprintedItemsCallback<string[]>): void;
   /**
    * Get the instance's tags and their fingerprint.
    *
@@ -749,6 +747,8 @@ export class VM extends ServiceObject {
    *   const apiResponse = data[2];
    * });
    */
+  getTags(callback: GetFingerprintedItemsCallback<string[]>): void;
+  getTags(): FingerprintedItemsPromise<string[]>;
   getTags(
     callback?: GetFingerprintedItemsCallback<string[]>
   ): void | FingerprintedItemsPromise<string[]> {
@@ -771,8 +771,6 @@ export class VM extends ServiceObject {
       }
     );
   }
-  reset(): OperationPromise;
-  reset(callback: OperationCallback): void;
   /**
    * Reset the instance.
    *
@@ -803,16 +801,11 @@ export class VM extends ServiceObject {
    *   const apiResponse = data[1];
    * });
    */
+  reset(callback: OperationCallback): void;
+  reset(): OperationPromise;
   reset(callback?: OperationCallback): void | OperationPromise {
     this.request({method: 'POST', uri: '/reset'}, callback || util.noop);
   }
-  resize(machineType: string, options?: ResizeOptions): Promise<[Metadata]>;
-  resize(machineType: string, callback: OperationCallback): void;
-  resize(
-    machineType: string,
-    options: ResizeOptions,
-    callback: OperationCallback
-  ): void;
   /**
    * Set the machine type for this instance, **stopping and restarting the VM as
    * necessary**.
@@ -874,6 +867,13 @@ export class VM extends ServiceObject {
    */
   resize(
     machineType: string,
+    options: ResizeOptions,
+    callback: OperationCallback
+  ): void;
+  resize(machineType: string, callback: OperationCallback): void;
+  resize(machineType: string, options?: ResizeOptions): Promise<[Metadata]>;
+  resize(
+    machineType: string,
     options?: ResizeOptions | OperationCallback,
     callback?: OperationCallback
   ): void | Promise<[Metadata]> {
@@ -924,15 +924,6 @@ export class VM extends ServiceObject {
       )
     );
   }
-  setLabels(
-    labels: Record<string, string | null>,
-    labelFingerprint: string
-  ): OperationPromise;
-  setLabels(
-    labels: Record<string, string | null>,
-    labelFingerprint: string,
-    callback: OperationCallback
-  ): void;
   /**
    * Set labels for this instance.
    *
@@ -974,6 +965,15 @@ export class VM extends ServiceObject {
   setLabels(
     labels: Record<string, string | null>,
     labelFingerprint: string,
+    callback: OperationCallback
+  ): void;
+  setLabels(
+    labels: Record<string, string | null>,
+    labelFingerprint: string
+  ): OperationPromise;
+  setLabels(
+    labels: Record<string, string | null>,
+    labelFingerprint: string,
     callback?: OperationCallback
   ): void | OperationPromise {
     const body = {labels: labels, labelFingerprint: labelFingerprint};
@@ -982,11 +982,6 @@ export class VM extends ServiceObject {
       callback || util.noop
     );
   }
-  setMetadata(metadata?: Metadata): Promise<[Metadata]>;
-  setMetadata(
-    metadata: Metadata | undefined,
-    callback: OperationCallback
-  ): void;
   /**
    * Set the custom metadata for this instance.
    *
@@ -1027,6 +1022,11 @@ export class VM extends ServiceObject {
    *   const apiResponse = data[1];
    * });
    */
+  setMetadata(
+    metadata: Metadata | undefined,
+    callback: OperationCallback
+  ): void;
+  setMetadata(metadata?: Metadata): Promise<[Metadata]>;
   setMetadata(
     metadata?: Metadata,
     callback?: OperationCallback
@@ -1073,12 +1073,6 @@ export class VM extends ServiceObject {
       }
     );
   }
-  setTags(tags: string[], fingerprint: string): OperationPromise;
-  setTags(
-    tags: string[],
-    fingerprint: string,
-    callback: OperationCallback
-  ): void;
   /**
    * Set the instance's tags.
    *
@@ -1126,6 +1120,12 @@ export class VM extends ServiceObject {
   setTags(
     tags: string[],
     fingerprint: string,
+    callback: OperationCallback
+  ): void;
+  setTags(tags: string[], fingerprint: string): OperationPromise;
+  setTags(
+    tags: string[],
+    fingerprint: string,
     callback?: OperationCallback
   ): void | OperationPromise {
     const body = {items: tags, fingerprint: fingerprint};
@@ -1134,8 +1134,6 @@ export class VM extends ServiceObject {
       callback || util.noop
     );
   }
-  start(): OperationPromise;
-  start(callback: OperationCallback): void;
   /**
    * Start the instance.
    *
@@ -1166,11 +1164,11 @@ export class VM extends ServiceObject {
    *   const apiResponse = data[1];
    * });
    */
+  start(callback: OperationCallback): void;
+  start(): OperationPromise;
   start(callback?: OperationCallback): void | OperationPromise {
     this.request({method: 'POST', uri: '/start'}, callback || util.noop);
   }
-  stop(): OperationPromise;
-  stop(callback: OperationCallback): void;
   /**
    * Stop the instance.
    *
@@ -1201,11 +1199,11 @@ export class VM extends ServiceObject {
    *   const apiResponse = data[1];
    * });
    */
+  stop(callback: OperationCallback): void;
+  stop(): OperationPromise;
   stop(callback?: OperationCallback): void | OperationPromise {
     this.request({method: 'POST', uri: '/stop'}, callback || util.noop);
   }
-  update(metadata?: Metadata): OperationPromise;
-  update(metadata: Metadata | undefined, callback: OperationCallback): void;
   /**
    * Update the instance.
    *
@@ -1245,6 +1243,8 @@ export class VM extends ServiceObject {
    *   const apiResponse = data[1];
    * });
    */
+  update(metadata: Metadata | undefined, callback: OperationCallback): void;
+  update(metadata?: Metadata): OperationPromise;
   update(
     metadata?: Metadata,
     callback?: OperationCallback
@@ -1269,9 +1269,6 @@ export class VM extends ServiceObject {
       }
     );
   }
-  waitFor(status: string, options?: WaitForOptions): Promise<[Metadata]>;
-  waitFor(status: string, callback: Callback): void;
-  waitFor(status: string, options: WaitForOptions, callback: Callback): void;
   /**
    * This function will callback when the VM is in the specified state.
    *
@@ -1328,6 +1325,9 @@ export class VM extends ServiceObject {
    *   const metadata = data[0];
    * });
    */
+  waitFor(status: string, options: WaitForOptions, callback: Callback): void;
+  waitFor(status: string, callback: Callback): void;
+  waitFor(status: string, options?: WaitForOptions): Promise<[Metadata]>;
   waitFor(
     status: string,
     options?: WaitForOptions | Callback,
@@ -1403,8 +1403,6 @@ export class VM extends ServiceObject {
       }
     });
   }
-  request(reqOpts: DecorateRequestOptions): OperationPromise;
-  request(reqOpts: DecorateRequestOptions, callback: OperationCallback): void;
   /**
    * Make a new request object from the provided arguments and wrap the callback
    * to intercept non-successful responses.
@@ -1422,6 +1420,8 @@ export class VM extends ServiceObject {
    * @param {*} body - Request body contents.
    * @param {function} callback - The callback function.
    */
+  request(reqOpts: DecorateRequestOptions, callback: OperationCallback): void;
+  request(reqOpts: DecorateRequestOptions): OperationPromise;
   request(
     reqOpts: DecorateRequestOptions,
     callback?: OperationCallback

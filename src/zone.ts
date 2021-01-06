@@ -386,15 +386,6 @@ export class Zone extends ServiceObject {
   autoscaler(name: string): Autoscaler {
     return new Autoscaler(this, name);
   }
-  createAutoscaler(
-    name: string,
-    config: CreateAutoscalerOptions
-  ): CreateResourcePromise<Autoscaler>;
-  createAutoscaler(
-    name: string,
-    config: CreateAutoscalerOptions,
-    callback: CreateResourceCallback<Autoscaler>
-  ): void;
   /**
    * Create an autoscaler in this zone.
    *
@@ -467,6 +458,15 @@ export class Zone extends ServiceObject {
   createAutoscaler(
     name: string,
     config: CreateAutoscalerOptions,
+    callback: CreateResourceCallback<Autoscaler>
+  ): void;
+  createAutoscaler(
+    name: string,
+    config: CreateAutoscalerOptions
+  ): CreateResourcePromise<Autoscaler>;
+  createAutoscaler(
+    name: string,
+    config: CreateAutoscalerOptions,
     callback?: CreateResourceCallback<Autoscaler>
   ): void | CreateResourcePromise<Autoscaler> {
     if (!config.target) {
@@ -521,15 +521,6 @@ export class Zone extends ServiceObject {
       }
     );
   }
-  createDisk(
-    name: string,
-    config: CreateDiskConfig
-  ): CreateResourcePromise<Disk>;
-  createDisk(
-    name: string,
-    config: CreateDiskConfig,
-    callback: CreateResourceCallback<Disk>
-  ): void;
   /**
    * Create a persistent disk in this zone.
    *
@@ -591,6 +582,15 @@ export class Zone extends ServiceObject {
   createDisk(
     name: string,
     config: CreateDiskConfig,
+    callback: CreateResourceCallback<Disk>
+  ): void;
+  createDisk(
+    name: string,
+    config: CreateDiskConfig
+  ): CreateResourcePromise<Disk>;
+  createDisk(
+    name: string,
+    config: CreateDiskConfig,
     callback?: CreateResourceCallback<Disk>
   ): void | CreateResourcePromise<Disk> {
     const query: Record<string, string> = {};
@@ -606,7 +606,7 @@ export class Zone extends ServiceObject {
           return;
         }
         delete body.os;
-        body.sourceImage = image?.selfLink;
+        body.sourceImage = image!.selfLink;
         this.createDisk(name, body, callback!);
       });
       return;
@@ -625,19 +625,6 @@ export class Zone extends ServiceObject {
       }
     );
   }
-  createInstanceGroup(
-    name: string,
-    options?: CreateInstanceGroupOptions
-  ): CreateResourcePromise<InstanceGroup>;
-  createInstanceGroup(
-    name: string,
-    callback: CreateResourceCallback<InstanceGroup>
-  ): void;
-  createInstanceGroup(
-    name: string,
-    options: CreateInstanceGroupOptions,
-    callback: CreateResourceCallback<InstanceGroup>
-  ): void;
   /**
    * Create an instance group in this zone.
    *
@@ -682,6 +669,19 @@ export class Zone extends ServiceObject {
    */
   createInstanceGroup(
     name: string,
+    options: CreateInstanceGroupOptions,
+    callback: CreateResourceCallback<InstanceGroup>
+  ): void;
+  createInstanceGroup(
+    name: string,
+    callback: CreateResourceCallback<InstanceGroup>
+  ): void;
+  createInstanceGroup(
+    name: string,
+    options?: CreateInstanceGroupOptions
+  ): CreateResourcePromise<InstanceGroup>;
+  createInstanceGroup(
+    name: string,
     options?:
       | CreateInstanceGroupOptions
       | CreateResourceCallback<InstanceGroup>,
@@ -710,12 +710,6 @@ export class Zone extends ServiceObject {
       }
     );
   }
-  createVM(name: string, config: CreateVMOptions): CreateResourcePromise<VM>;
-  createVM(
-    name: string,
-    config: CreateVMOptions,
-    callback: CreateResourceCallback<VM>
-  ): void;
   /**
    * Create a virtual machine in this zone.
    *
@@ -825,6 +819,12 @@ export class Zone extends ServiceObject {
   createVM(
     name: string,
     config: CreateVMOptions,
+    callback: CreateResourceCallback<VM>
+  ): void;
+  createVM(name: string, config: CreateVMOptions): CreateResourcePromise<VM>;
+  createVM(
+    name: string,
+    config: CreateVMOptions,
     callback?: CreateResourceCallback<VM>
   ): void | CreateResourcePromise<VM> {
     const query: Record<string, string> = {};
@@ -928,14 +928,6 @@ export class Zone extends ServiceObject {
   disk(name: string): Disk {
     return new Disk(this, name);
   }
-  getAutoscalers(
-    options?: GetResourcesOptions
-  ): GetResourcesPromise<Autoscaler>;
-  getAutoscalers(callback: GetResourcesCallback<Autoscaler>): void;
-  getAutoscalers(
-    options: GetResourcesOptions,
-    callback: GetResourcesCallback<Autoscaler>
-  ): void;
   /**
    * Get a list of autoscalers from this zone.
    *
@@ -995,6 +987,14 @@ export class Zone extends ServiceObject {
    * });
    */
   getAutoscalers(
+    options: GetResourcesOptions,
+    callback: GetResourcesCallback<Autoscaler>
+  ): void;
+  getAutoscalers(callback: GetResourcesCallback<Autoscaler>): void;
+  getAutoscalers(
+    options?: GetResourcesOptions
+  ): GetResourcesPromise<Autoscaler>;
+  getAutoscalers(
     options?: GetResourcesOptions | GetResourcesCallback<Autoscaler>,
     callback?: GetResourcesCallback<Autoscaler>
   ): void | GetResourcesPromise<Autoscaler> {
@@ -1019,12 +1019,6 @@ export class Zone extends ServiceObject {
       cb(null, autoscalers, nextQuery, resp);
     });
   }
-  getDisks(options?: GetResourcesOptions): GetResourcesPromise<Disk>;
-  getDisks(callback: GetResourcesCallback<Disk>): void;
-  getDisks(
-    options: GetResourcesOptions,
-    callback: GetResourcesCallback<Disk>
-  ): void;
   /**
    *  Get a list of disks in this zone.
    *
@@ -1082,6 +1076,12 @@ export class Zone extends ServiceObject {
    * });
    */
   getDisks(
+    options: GetResourcesOptions,
+    callback: GetResourcesCallback<Disk>
+  ): void;
+  getDisks(callback: GetResourcesCallback<Disk>): void;
+  getDisks(options?: GetResourcesOptions): GetResourcesPromise<Disk>;
+  getDisks(
     options?: GetResourcesOptions | GetResourcesCallback<Disk>,
     callback?: GetResourcesCallback<Disk>
   ): void | GetResourcesPromise<Disk> {
@@ -1106,14 +1106,6 @@ export class Zone extends ServiceObject {
       cb(null, disks, nextQuery, resp);
     });
   }
-  getInstanceGroups(
-    options?: GetResourcesOptions
-  ): GetResourcesPromise<InstanceGroup>;
-  getInstanceGroups(callback: GetResourcesCallback<InstanceGroup>): void;
-  getInstanceGroups(
-    options: GetResourcesOptions,
-    callback: GetResourcesCallback<InstanceGroup>
-  ): void;
   /**
    * Get a list of instance groups for this zone.
    *
@@ -1173,6 +1165,14 @@ export class Zone extends ServiceObject {
    * });
    */
   getInstanceGroups(
+    options: GetResourcesOptions,
+    callback: GetResourcesCallback<InstanceGroup>
+  ): void;
+  getInstanceGroups(callback: GetResourcesCallback<InstanceGroup>): void;
+  getInstanceGroups(
+    options?: GetResourcesOptions
+  ): GetResourcesPromise<InstanceGroup>;
+  getInstanceGroups(
     options?: GetResourcesOptions | GetResourcesCallback<InstanceGroup>,
     callback?: GetResourcesCallback<InstanceGroup>
   ): void | GetResourcesPromise<InstanceGroup> {
@@ -1199,16 +1199,6 @@ export class Zone extends ServiceObject {
       cb(null, instanceGroups, nextQuery, resp);
     });
   }
-  getInstanceGroupManagers(
-    options?: GetResourcesOptions
-  ): GetResourcesPromise<InstanceGroupManager>;
-  getInstanceGroupManagers(
-    callback: GetResourcesCallback<InstanceGroupManager>
-  ): void;
-  getInstanceGroupManagers(
-    options: GetResourcesOptions,
-    callback: GetResourcesCallback<InstanceGroupManager>
-  ): void;
   /**
    * Get a list of instance group managers for this zone.
    *
@@ -1268,6 +1258,16 @@ export class Zone extends ServiceObject {
    * });
    */
   getInstanceGroupManagers(
+    options: GetResourcesOptions,
+    callback: GetResourcesCallback<InstanceGroupManager>
+  ): void;
+  getInstanceGroupManagers(
+    callback: GetResourcesCallback<InstanceGroupManager>
+  ): void;
+  getInstanceGroupManagers(
+    options?: GetResourcesOptions
+  ): GetResourcesPromise<InstanceGroupManager>;
+  getInstanceGroupManagers(
     options?: GetResourcesOptions | GetResourcesCallback<InstanceGroupManager>,
     callback?: GetResourcesCallback<InstanceGroupManager>
   ): void | GetResourcesPromise<InstanceGroupManager> {
@@ -1296,14 +1296,6 @@ export class Zone extends ServiceObject {
       cb(null, instanceGroupManagers, nextQuery, resp);
     });
   }
-  getMachineTypes(
-    options?: GetResourcesOptions
-  ): GetResourcesPromise<MachineType>;
-  getMachineTypes(callback: GetResourcesCallback<MachineType>): void;
-  getMachineTypes(
-    options: GetResourcesOptions,
-    callback: GetResourcesCallback<MachineType>
-  ): void;
   /**
    * Get a list of machine types for this zone.
    *
@@ -1357,6 +1349,14 @@ export class Zone extends ServiceObject {
    * });
    */
   getMachineTypes(
+    options: GetResourcesOptions,
+    callback: GetResourcesCallback<MachineType>
+  ): void;
+  getMachineTypes(callback: GetResourcesCallback<MachineType>): void;
+  getMachineTypes(
+    options?: GetResourcesOptions
+  ): GetResourcesPromise<MachineType>;
+  getMachineTypes(
     options?: GetResourcesOptions | GetResourcesCallback<MachineType>,
     callback?: GetResourcesCallback<MachineType>
   ): void | GetResourcesPromise<MachineType> {
@@ -1371,12 +1371,6 @@ export class Zone extends ServiceObject {
       cb
     );
   }
-  getOperations(options?: GetResourcesOptions): GetResourcesPromise<Operation>;
-  getOperations(callback: GetResourcesCallback<Operation>): void;
-  getOperations(
-    options: GetResourcesOptions,
-    callback: GetResourcesCallback<Operation>
-  ): void;
   /**
    * Get a list of operations for this zone.
    *
@@ -1435,6 +1429,12 @@ export class Zone extends ServiceObject {
    * });
    */
   getOperations(
+    options: GetResourcesOptions,
+    callback: GetResourcesCallback<Operation>
+  ): void;
+  getOperations(callback: GetResourcesCallback<Operation>): void;
+  getOperations(options?: GetResourcesOptions): GetResourcesPromise<Operation>;
+  getOperations(
     options?: GetResourcesOptions | GetResourcesCallback<Operation>,
     callback?: GetResourcesCallback<Operation>
   ): void | GetResourcesPromise<Operation> {
@@ -1459,12 +1459,6 @@ export class Zone extends ServiceObject {
       cb(null, operations, nextQuery, resp);
     });
   }
-  getVMs(options?: GetResourcesOptions): GetResourcesPromise<VM>;
-  getVMs(callback: GetResourcesCallback<VM>): void;
-  getVMs(
-    options: GetResourcesOptions,
-    callback: GetResourcesCallback<VM>
-  ): void;
   /**
    * Get a list of VM instances in this zone.
    *
@@ -1519,6 +1513,12 @@ export class Zone extends ServiceObject {
    *   const vms = data[0];
    * });
    */
+  getVMs(
+    options: GetResourcesOptions,
+    callback: GetResourcesCallback<VM>
+  ): void;
+  getVMs(callback: GetResourcesCallback<VM>): void;
+  getVMs(options?: GetResourcesOptions): GetResourcesPromise<VM>;
   getVMs(
     options?: GetResourcesOptions | GetResourcesCallback<VM>,
     callback?: GetResourcesCallback<VM>

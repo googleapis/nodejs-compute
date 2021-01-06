@@ -305,8 +305,6 @@ export class Service extends ServiceObject {
      */
     this.name = name;
   }
-  delete(): Promise<[Metadata]>;
-  delete(callback: OperationCallback): void;
   /**
    * Delete the backend service.
    *
@@ -336,6 +334,8 @@ export class Service extends ServiceObject {
    *   const apiResponse = data[1];
    * });
    */
+  delete(callback: OperationCallback): void;
+  delete(): Promise<[Metadata]>;
   delete(callback?: OperationCallback): void | Promise<[Metadata]> {
     callback = callback || util.noop;
     this.request({method: 'DELETE', uri: ''}, (err, resp) => {
@@ -348,11 +348,6 @@ export class Service extends ServiceObject {
       callback!(null, operation, resp);
     });
   }
-  getHealth(group: string | GetHealthOptions): GetHealthPromise;
-  getHealth(
-    group: string | GetHealthOptions,
-    callback: GetHealthCallback
-  ): void;
   /**
    * Get the most recent health check results.
    *
@@ -402,6 +397,11 @@ export class Service extends ServiceObject {
    */
   getHealth(
     group: string | GetHealthOptions,
+    callback: GetHealthCallback
+  ): void;
+  getHealth(group: string | GetHealthOptions): GetHealthPromise;
+  getHealth(
+    group: string | GetHealthOptions,
     callback?: GetHealthCallback
   ): void | GetHealthPromise {
     if (!is.string(group)) {
@@ -424,11 +424,6 @@ export class Service extends ServiceObject {
       }
     );
   }
-  setMetadata(metadata?: Metadata): Promise<[Metadata]>;
-  setMetadata(
-    metadata: Metadata | undefined,
-    callback: OperationCallback
-  ): void;
   /**
    * Set the backend service's metadata.
    *
@@ -464,6 +459,11 @@ export class Service extends ServiceObject {
    *   const apiResponse = data[1];
    * });
    */
+  setMetadata(
+    metadata: Metadata | undefined,
+    callback: OperationCallback
+  ): void;
+  setMetadata(metadata?: Metadata): Promise<[Metadata]>;
   setMetadata(
     metadata?: Metadata,
     callback?: OperationCallback
