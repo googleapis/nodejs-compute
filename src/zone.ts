@@ -851,7 +851,7 @@ export class Zone extends ServiceObject {
       // https-server), and create the appropriate firewall rules to allow
       // connections on the necessary ports to these tags.
       const createFirewallMethods = [];
-      body.networkInterfaces![0].accessConfigs = [{type: 'ONE_TO_ONE_NAT'}]; // TODO
+      body.networkInterfaces![0].accessConfigs = [{type: 'ONE_TO_ONE_NAT'}];
       body.tags = (body.tags as {items?: string[]}) || {};
       body.tags.items = body.tags.items || [];
       if (body.http) {

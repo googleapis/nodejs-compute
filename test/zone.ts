@@ -885,7 +885,7 @@ describe('Zone', () => {
       });
 
       it('should not set default value for machineType', done => {
-        zone.request = function (reqOpts) {
+        zone.request = function (reqOpts: DecorateRequestOptions): any {
           assert.strictEqual(typeof reqOpts.json.machineType, 'undefined');
           done();
         };
@@ -894,7 +894,7 @@ describe('Zone', () => {
       });
 
       it('should not set default value for network', done => {
-        zone.request = function (reqOpts) {
+        zone.request = function (reqOpts: DecorateRequestOptions): any {
           assert.strictEqual(
             typeof reqOpts.json.networkInterfaces,
             'undefined'
