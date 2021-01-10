@@ -828,19 +828,18 @@ export class Zone extends ServiceObject {
     callback?: CreateResourceCallback<VM>
   ): void | CreateResourcePromise<VM> {
     const query: Record<string, string> = {};
-    const body = Object.assign(
-      {
-        name: name,
-        machineType: 'n1-standard-1',
-        networkInterfaces: [{network: 'global/networks/default'}],
-      },
-      config
-    );
+    const body = Object.assign({name}, config);
     if (body.template) {
       query.sourceInstanceTemplate = body.template;
       delete body.template;
     }
-    if (body.machineType.indexOf('/') === -1) {
+    if (!is.defined(query.sourceInstanceTemplate)) {
+      body.machineType = body.machineType || 'n1-standard-1';
+      body.networkInterfaces = body.networkInterfaces || [
+        {network: 'global/networks/default'},
+      ];
+    }
+    if (body.machineType && body.machineType.indexOf('/') === -1) {
       // The specified machineType is only a partial name, e.g. 'n1-standard-1'.
       body.machineType = `zones/${this.name}/machineTypes/${body.machineType}`;
     }
@@ -852,7 +851,7 @@ export class Zone extends ServiceObject {
       // https-server), and create the appropriate firewall rules to allow
       // connections on the necessary ports to these tags.
       const createFirewallMethods = [];
-      body.networkInterfaces[0].accessConfigs = [{type: 'ONE_TO_ONE_NAT'}];
+      body.networkInterfaces![0].accessConfigs = [{type: 'ONE_TO_ONE_NAT'}]; // TODO
       body.tags = (body.tags as {items?: string[]}) || {};
       body.tags.items = body.tags.items || [];
       if (body.http) {
