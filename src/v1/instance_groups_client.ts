@@ -333,6 +333,7 @@ export class InstanceGroupsClient {
    * @param {string} request.instanceGroup
    *   The name of the instance group where you are adding instances.
    * @param {google.cloud.compute.v1.InstanceGroupsAddInstancesRequest} request.instanceGroupsAddInstancesRequestResource
+   *   The body resource for this request
    * @param {string} request.project
    *   Project ID for this request.
    * @param {string} request.requestId
@@ -757,6 +758,7 @@ export class InstanceGroupsClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {google.cloud.compute.v1.InstanceGroup} request.instanceGroupResource
+   *   The body resource for this request
    * @param {string} request.project
    *   Project ID for this request.
    * @param {string} request.requestId
@@ -987,6 +989,7 @@ export class InstanceGroupsClient {
    * @param {string} request.instanceGroup
    *   The name of the instance group from which you want to generate a list of included instances.
    * @param {google.cloud.compute.v1.InstanceGroupsListInstancesRequest} request.instanceGroupsListInstancesRequestResource
+   *   The body resource for this request
    * @param {number} request.maxResults
    *   The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)
    * @param {string} request.orderBy
@@ -1104,6 +1107,7 @@ export class InstanceGroupsClient {
    * @param {string} request.instanceGroup
    *   The name of the instance group where the specified instances will be removed.
    * @param {google.cloud.compute.v1.InstanceGroupsRemoveInstancesRequest} request.instanceGroupsRemoveInstancesRequestResource
+   *   The body resource for this request
    * @param {string} request.project
    *   Project ID for this request.
    * @param {string} request.requestId
@@ -1213,6 +1217,7 @@ export class InstanceGroupsClient {
    * @param {string} request.instanceGroup
    *   The name of the instance group where the named ports are updated.
    * @param {google.cloud.compute.v1.InstanceGroupsSetNamedPortsRequest} request.instanceGroupsSetNamedPortsRequestResource
+   *   The body resource for this request
    * @param {string} request.project
    *   Project ID for this request.
    * @param {string} request.requestId

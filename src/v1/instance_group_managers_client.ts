@@ -349,6 +349,7 @@ export class InstanceGroupManagersClient {
    * @param {string} request.instanceGroupManager
    *   The name of the managed instance group.
    * @param {google.cloud.compute.v1.InstanceGroupManagersAbandonInstancesRequest} request.instanceGroupManagersAbandonInstancesRequestResource
+   *   The body resource for this request
    * @param {string} request.project
    *   Project ID for this request.
    * @param {string} request.requestId
@@ -578,6 +579,7 @@ export class InstanceGroupManagersClient {
    * @param {string} request.instanceGroupManager
    *   The name of the managed instance group, should conform to RFC1035.
    * @param {google.cloud.compute.v1.InstanceGroupManagersApplyUpdatesRequest} request.instanceGroupManagersApplyUpdatesRequestResource
+   *   The body resource for this request
    * @param {string} request.project
    *   Project ID for this request.
    * @param {string} request.zone
@@ -685,6 +687,7 @@ export class InstanceGroupManagersClient {
    * @param {string} request.instanceGroupManager
    *   The name of the managed instance group. It should conform to RFC1035.
    * @param {google.cloud.compute.v1.InstanceGroupManagersCreateInstancesRequest} request.instanceGroupManagersCreateInstancesRequestResource
+   *   The body resource for this request
    * @param {string} request.project
    *   Project ID for this request.
    * @param {string} request.requestId
@@ -906,6 +909,7 @@ export class InstanceGroupManagersClient {
    * @param {string} request.instanceGroupManager
    *   The name of the managed instance group.
    * @param {google.cloud.compute.v1.InstanceGroupManagersDeleteInstancesRequest} request.instanceGroupManagersDeleteInstancesRequestResource
+   *   The body resource for this request
    * @param {string} request.project
    *   Project ID for this request.
    * @param {string} request.requestId
@@ -1015,6 +1019,7 @@ export class InstanceGroupManagersClient {
    * @param {string} request.instanceGroupManager
    *   The name of the managed instance group. It should conform to RFC1035.
    * @param {google.cloud.compute.v1.InstanceGroupManagersDeletePerInstanceConfigsReq} request.instanceGroupManagersDeletePerInstanceConfigsReqResource
+   *   The body resource for this request
    * @param {string} request.project
    *   Project ID for this request.
    * @param {string} request.zone
@@ -1224,6 +1229,7 @@ export class InstanceGroupManagersClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {google.cloud.compute.v1.InstanceGroupManager} request.instanceGroupManagerResource
+   *   The body resource for this request
    * @param {string} request.project
    *   Project ID for this request.
    * @param {string} request.requestId
@@ -1823,6 +1829,7 @@ export class InstanceGroupManagersClient {
    * @param {string} request.instanceGroupManager
    *   The name of the instance group manager.
    * @param {google.cloud.compute.v1.InstanceGroupManager} request.instanceGroupManagerResource
+   *   The body resource for this request
    * @param {string} request.project
    *   Project ID for this request.
    * @param {string} request.requestId
@@ -1932,6 +1939,7 @@ export class InstanceGroupManagersClient {
    * @param {string} request.instanceGroupManager
    *   The name of the managed instance group. It should conform to RFC1035.
    * @param {google.cloud.compute.v1.InstanceGroupManagersPatchPerInstanceConfigsReq} request.instanceGroupManagersPatchPerInstanceConfigsReqResource
+   *   The body resource for this request
    * @param {string} request.project
    *   Project ID for this request.
    * @param {string} request.requestId
@@ -2049,6 +2057,7 @@ export class InstanceGroupManagersClient {
    * @param {string} request.instanceGroupManager
    *   The name of the managed instance group.
    * @param {google.cloud.compute.v1.InstanceGroupManagersRecreateInstancesRequest} request.instanceGroupManagersRecreateInstancesRequestResource
+   *   The body resource for this request
    * @param {string} request.project
    *   Project ID for this request.
    * @param {string} request.requestId
@@ -2276,6 +2285,7 @@ export class InstanceGroupManagersClient {
    * @param {string} request.instanceGroupManager
    *   The name of the managed instance group.
    * @param {google.cloud.compute.v1.InstanceGroupManagersSetInstanceTemplateRequest} request.instanceGroupManagersSetInstanceTemplateRequestResource
+   *   The body resource for this request
    * @param {string} request.project
    *   Project ID for this request.
    * @param {string} request.requestId
@@ -2385,6 +2395,7 @@ export class InstanceGroupManagersClient {
    * @param {string} request.instanceGroupManager
    *   The name of the managed instance group.
    * @param {google.cloud.compute.v1.InstanceGroupManagersSetTargetPoolsRequest} request.instanceGroupManagersSetTargetPoolsRequestResource
+   *   The body resource for this request
    * @param {string} request.project
    *   Project ID for this request.
    * @param {string} request.requestId
@@ -2494,6 +2505,7 @@ export class InstanceGroupManagersClient {
    * @param {string} request.instanceGroupManager
    *   The name of the managed instance group. It should conform to RFC1035.
    * @param {google.cloud.compute.v1.InstanceGroupManagersUpdatePerInstanceConfigsReq} request.instanceGroupManagersUpdatePerInstanceConfigsReqResource
+   *   The body resource for this request
    * @param {string} request.project
    *   Project ID for this request.
    * @param {string} request.requestId

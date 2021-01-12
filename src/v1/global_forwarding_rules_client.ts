@@ -535,6 +535,7 @@ export class GlobalForwardingRulesClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {google.cloud.compute.v1.ForwardingRule} request.forwardingRuleResource
+   *   The body resource for this request
    * @param {string} request.project
    *   Project ID for this request.
    * @param {string} request.requestId
@@ -760,6 +761,7 @@ export class GlobalForwardingRulesClient {
    * @param {string} request.forwardingRule
    *   Name of the ForwardingRule resource to patch.
    * @param {google.cloud.compute.v1.ForwardingRule} request.forwardingRuleResource
+   *   The body resource for this request
    * @param {string} request.project
    *   Project ID for this request.
    * @param {string} request.requestId
@@ -875,6 +877,7 @@ export class GlobalForwardingRulesClient {
    *
    *   The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
    * @param {google.cloud.compute.v1.TargetReference} request.targetReferenceResource
+   *   The body resource for this request
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.

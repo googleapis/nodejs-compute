@@ -353,6 +353,7 @@ export class RegionInstanceGroupManagersClient {
    * @param {string} request.region
    *   Name of the region scoping this request.
    * @param {google.cloud.compute.v1.RegionInstanceGroupManagersAbandonInstancesRequest} request.regionInstanceGroupManagersAbandonInstancesRequestResource
+   *   The body resource for this request
    * @param {string} request.requestId
    *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
    *
@@ -462,6 +463,7 @@ export class RegionInstanceGroupManagersClient {
    * @param {string} request.region
    *   Name of the region scoping this request, should conform to RFC1035.
    * @param {google.cloud.compute.v1.RegionInstanceGroupManagersApplyUpdatesRequest} request.regionInstanceGroupManagersApplyUpdatesRequestResource
+   *   The body resource for this request
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -569,6 +571,7 @@ export class RegionInstanceGroupManagersClient {
    * @param {string} request.region
    *   The name of the region where the managed instance group is located. It should conform to RFC1035.
    * @param {google.cloud.compute.v1.RegionInstanceGroupManagersCreateInstancesRequest} request.regionInstanceGroupManagersCreateInstancesRequestResource
+   *   The body resource for this request
    * @param {string} request.requestId
    *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
    *
@@ -790,6 +793,7 @@ export class RegionInstanceGroupManagersClient {
    * @param {string} request.region
    *   Name of the region scoping this request.
    * @param {google.cloud.compute.v1.RegionInstanceGroupManagersDeleteInstancesRequest} request.regionInstanceGroupManagersDeleteInstancesRequestResource
+   *   The body resource for this request
    * @param {string} request.requestId
    *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
    *
@@ -899,6 +903,7 @@ export class RegionInstanceGroupManagersClient {
    * @param {string} request.region
    *   Name of the region scoping this request, should conform to RFC1035.
    * @param {google.cloud.compute.v1.RegionInstanceGroupManagerDeleteInstanceConfigReq} request.regionInstanceGroupManagerDeleteInstanceConfigReqResource
+   *   The body resource for this request
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1104,6 +1109,7 @@ export class RegionInstanceGroupManagersClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {google.cloud.compute.v1.InstanceGroupManager} request.instanceGroupManagerResource
+   *   The body resource for this request
    * @param {string} request.project
    *   Project ID for this request.
    * @param {string} request.region
@@ -1703,6 +1709,7 @@ export class RegionInstanceGroupManagersClient {
    * @param {string} request.instanceGroupManager
    *   The name of the instance group manager.
    * @param {google.cloud.compute.v1.InstanceGroupManager} request.instanceGroupManagerResource
+   *   The body resource for this request
    * @param {string} request.project
    *   Project ID for this request.
    * @param {string} request.region
@@ -1816,6 +1823,7 @@ export class RegionInstanceGroupManagersClient {
    * @param {string} request.region
    *   Name of the region scoping this request, should conform to RFC1035.
    * @param {google.cloud.compute.v1.RegionInstanceGroupManagerPatchInstanceConfigReq} request.regionInstanceGroupManagerPatchInstanceConfigReqResource
+   *   The body resource for this request
    * @param {string} request.requestId
    *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
    *
@@ -1933,6 +1941,7 @@ export class RegionInstanceGroupManagersClient {
    * @param {string} request.region
    *   Name of the region scoping this request.
    * @param {google.cloud.compute.v1.RegionInstanceGroupManagersRecreateRequest} request.regionInstanceGroupManagersRecreateRequestResource
+   *   The body resource for this request
    * @param {string} request.requestId
    *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
    *
@@ -2156,6 +2165,7 @@ export class RegionInstanceGroupManagersClient {
    * @param {string} request.region
    *   Name of the region scoping this request.
    * @param {google.cloud.compute.v1.RegionInstanceGroupManagersSetTemplateRequest} request.regionInstanceGroupManagersSetTemplateRequestResource
+   *   The body resource for this request
    * @param {string} request.requestId
    *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
    *
@@ -2265,6 +2275,7 @@ export class RegionInstanceGroupManagersClient {
    * @param {string} request.region
    *   Name of the region scoping this request.
    * @param {google.cloud.compute.v1.RegionInstanceGroupManagersSetTargetPoolsRequest} request.regionInstanceGroupManagersSetTargetPoolsRequestResource
+   *   The body resource for this request
    * @param {string} request.requestId
    *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
    *
@@ -2374,6 +2385,7 @@ export class RegionInstanceGroupManagersClient {
    * @param {string} request.region
    *   Name of the region scoping this request, should conform to RFC1035.
    * @param {google.cloud.compute.v1.RegionInstanceGroupManagerUpdateInstanceConfigReq} request.regionInstanceGroupManagerUpdateInstanceConfigReqResource
+   *   The body resource for this request
    * @param {string} request.requestId
    *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
    *

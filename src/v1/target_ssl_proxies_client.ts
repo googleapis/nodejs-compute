@@ -529,6 +529,7 @@ export class TargetSslProxiesClient {
    *
    *   The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
    * @param {google.cloud.compute.v1.TargetSslProxy} request.targetSslProxyResource
+   *   The body resource for this request
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -743,6 +744,7 @@ export class TargetSslProxiesClient {
    *
    *   The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
    * @param {google.cloud.compute.v1.TargetSslProxiesSetBackendServiceRequest} request.targetSslProxiesSetBackendServiceRequestResource
+   *   The body resource for this request
    * @param {string} request.targetSslProxy
    *   Name of the TargetSslProxy resource whose BackendService resource is to be set.
    * @param {object} [options]
@@ -850,6 +852,7 @@ export class TargetSslProxiesClient {
    *
    *   The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
    * @param {google.cloud.compute.v1.TargetSslProxiesSetProxyHeaderRequest} request.targetSslProxiesSetProxyHeaderRequestResource
+   *   The body resource for this request
    * @param {string} request.targetSslProxy
    *   Name of the TargetSslProxy resource whose ProxyHeader is to be set.
    * @param {object} [options]
@@ -957,6 +960,7 @@ export class TargetSslProxiesClient {
    *
    *   The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
    * @param {google.cloud.compute.v1.TargetSslProxiesSetSslCertificatesRequest} request.targetSslProxiesSetSslCertificatesRequestResource
+   *   The body resource for this request
    * @param {string} request.targetSslProxy
    *   Name of the TargetSslProxy resource whose SslCertificate resource is to be set.
    * @param {object} [options]
@@ -1064,6 +1068,7 @@ export class TargetSslProxiesClient {
    *
    *   The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
    * @param {google.cloud.compute.v1.SslPolicyReference} request.sslPolicyReferenceResource
+   *   The body resource for this request
    * @param {string} request.targetSslProxy
    *   Name of the TargetSslProxy resource whose SSL policy is to be set. The name must be 1-63 characters long, and comply with RFC1035.
    * @param {object} [options]

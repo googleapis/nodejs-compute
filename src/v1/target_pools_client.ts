@@ -345,6 +345,7 @@ export class TargetPoolsClient {
    * @param {string} request.targetPool
    *   Name of the target pool to add a health check to.
    * @param {google.cloud.compute.v1.TargetPoolsAddHealthCheckRequest} request.targetPoolsAddHealthCheckRequestResource
+   *   The body resource for this request
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -451,6 +452,7 @@ export class TargetPoolsClient {
    * @param {string} request.targetPool
    *   Name of the TargetPool resource to add instances to.
    * @param {google.cloud.compute.v1.TargetPoolsAddInstanceRequest} request.targetPoolsAddInstanceRequestResource
+   *   The body resource for this request
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -854,6 +856,7 @@ export class TargetPoolsClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {google.cloud.compute.v1.InstanceReference} request.instanceReferenceResource
+   *   The body resource for this request
    * @param {string} request.project
    *   Project ID for this request.
    * @param {string} request.region
@@ -961,6 +964,7 @@ export class TargetPoolsClient {
    *
    *   The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
    * @param {google.cloud.compute.v1.TargetPool} request.targetPoolResource
+   *   The body resource for this request
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1175,6 +1179,7 @@ export class TargetPoolsClient {
    * @param {string} request.targetPool
    *   Name of the target pool to remove health checks from.
    * @param {google.cloud.compute.v1.TargetPoolsRemoveHealthCheckRequest} request.targetPoolsRemoveHealthCheckRequestResource
+   *   The body resource for this request
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1284,6 +1289,7 @@ export class TargetPoolsClient {
    * @param {string} request.targetPool
    *   Name of the TargetPool resource to remove instances from.
    * @param {google.cloud.compute.v1.TargetPoolsRemoveInstanceRequest} request.targetPoolsRemoveInstanceRequestResource
+   *   The body resource for this request
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1392,6 +1398,7 @@ export class TargetPoolsClient {
    * @param {string} request.targetPool
    *   Name of the TargetPool resource to set a backup pool for.
    * @param {google.cloud.compute.v1.TargetReference} request.targetReferenceResource
+   *   The body resource for this request
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.

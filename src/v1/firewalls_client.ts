@@ -501,6 +501,7 @@ export class FirewallsClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {google.cloud.compute.v1.Firewall} request.firewallResource
+   *   The body resource for this request
    * @param {string} request.project
    *   Project ID for this request.
    * @param {string} request.requestId
@@ -702,6 +703,7 @@ export class FirewallsClient {
    * @param {string} request.firewall
    *   Name of the firewall rule to patch.
    * @param {google.cloud.compute.v1.Firewall} request.firewallResource
+   *   The body resource for this request
    * @param {string} request.project
    *   Project ID for this request.
    * @param {string} request.requestId
@@ -797,6 +799,7 @@ export class FirewallsClient {
    * @param {string} request.firewall
    *   Name of the firewall rule to update.
    * @param {google.cloud.compute.v1.Firewall} request.firewallResource
+   *   The body resource for this request
    * @param {string} request.project
    *   Project ID for this request.
    * @param {string} request.requestId

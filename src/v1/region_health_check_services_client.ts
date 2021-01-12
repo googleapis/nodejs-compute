@@ -539,6 +539,7 @@ export class RegionHealthCheckServicesClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {google.cloud.compute.v1.HealthCheckService} request.healthCheckServiceResource
+   *   The body resource for this request
    * @param {string} request.project
    *   Project ID for this request.
    * @param {string} request.region
@@ -768,6 +769,7 @@ export class RegionHealthCheckServicesClient {
    * @param {string} request.healthCheckService
    *   Name of the HealthCheckService to update. The name must be 1-63 characters long, and comply with RFC1035.
    * @param {google.cloud.compute.v1.HealthCheckService} request.healthCheckServiceResource
+   *   The body resource for this request
    * @param {string} request.project
    *   Project ID for this request.
    * @param {string} request.region

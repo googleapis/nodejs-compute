@@ -659,6 +659,7 @@ export class InterconnectAttachmentsClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {google.cloud.compute.v1.InterconnectAttachment} request.interconnectAttachmentResource
+   *   The body resource for this request
    * @param {string} request.project
    *   Project ID for this request.
    * @param {string} request.region
@@ -890,6 +891,7 @@ export class InterconnectAttachmentsClient {
    * @param {string} request.interconnectAttachment
    *   Name of the interconnect attachment to patch.
    * @param {google.cloud.compute.v1.InterconnectAttachment} request.interconnectAttachmentResource
+   *   The body resource for this request
    * @param {string} request.project
    *   Project ID for this request.
    * @param {string} request.region

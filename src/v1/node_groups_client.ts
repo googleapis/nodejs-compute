@@ -334,6 +334,7 @@ export class NodeGroupsClient {
    * @param {string} request.nodeGroup
    *   Name of the NodeGroup resource.
    * @param {google.cloud.compute.v1.NodeGroupsAddNodesRequest} request.nodeGroupsAddNodesRequestResource
+   *   The body resource for this request
    * @param {string} request.project
    *   Project ID for this request.
    * @param {string} request.requestId
@@ -653,6 +654,7 @@ export class NodeGroupsClient {
    * @param {string} request.nodeGroup
    *   Name of the NodeGroup resource whose nodes will be deleted.
    * @param {google.cloud.compute.v1.NodeGroupsDeleteNodesRequest} request.nodeGroupsDeleteNodesRequestResource
+   *   The body resource for this request
    * @param {string} request.project
    *   Project ID for this request.
    * @param {string} request.requestId
@@ -940,6 +942,7 @@ export class NodeGroupsClient {
    * @param {number} request.initialNodeCount
    *   Initial count of nodes in the node group.
    * @param {google.cloud.compute.v1.NodeGroup} request.nodeGroupResource
+   *   The body resource for this request
    * @param {string} request.project
    *   Project ID for this request.
    * @param {string} request.requestId
@@ -1261,6 +1264,7 @@ export class NodeGroupsClient {
    * @param {string} request.nodeGroup
    *   Name of the NodeGroup resource to update.
    * @param {google.cloud.compute.v1.NodeGroup} request.nodeGroupResource
+   *   The body resource for this request
    * @param {string} request.project
    *   Project ID for this request.
    * @param {string} request.requestId
@@ -1366,6 +1370,7 @@ export class NodeGroupsClient {
    * @param {string} request.zone
    *   The name of the zone for this request.
    * @param {google.cloud.compute.v1.ZoneSetPolicyRequest} request.zoneSetPolicyRequestResource
+   *   The body resource for this request
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1462,6 +1467,7 @@ export class NodeGroupsClient {
    * @param {string} request.nodeGroup
    *   Name of the NodeGroup resource to update.
    * @param {google.cloud.compute.v1.NodeGroupsSetNodeTemplateRequest} request.nodeGroupsSetNodeTemplateRequestResource
+   *   The body resource for this request
    * @param {string} request.project
    *   Project ID for this request.
    * @param {string} request.requestId
@@ -1573,6 +1579,7 @@ export class NodeGroupsClient {
    * @param {string} request.resource
    *   Name or id of the resource for this request.
    * @param {google.cloud.compute.v1.TestPermissionsRequest} request.testPermissionsRequestResource
+   *   The body resource for this request
    * @param {string} request.zone
    *   The name of the zone for this request.
    * @param {object} [options]

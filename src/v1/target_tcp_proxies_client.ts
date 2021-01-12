@@ -527,6 +527,7 @@ export class TargetTcpProxiesClient {
    *
    *   The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
    * @param {google.cloud.compute.v1.TargetTcpProxy} request.targetTcpProxyResource
+   *   The body resource for this request
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -741,6 +742,7 @@ export class TargetTcpProxiesClient {
    *
    *   The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
    * @param {google.cloud.compute.v1.TargetTcpProxiesSetBackendServiceRequest} request.targetTcpProxiesSetBackendServiceRequestResource
+   *   The body resource for this request
    * @param {string} request.targetTcpProxy
    *   Name of the TargetTcpProxy resource whose BackendService resource is to be set.
    * @param {object} [options]
@@ -848,6 +850,7 @@ export class TargetTcpProxiesClient {
    *
    *   The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
    * @param {google.cloud.compute.v1.TargetTcpProxiesSetProxyHeaderRequest} request.targetTcpProxiesSetProxyHeaderRequestResource
+   *   The body resource for this request
    * @param {string} request.targetTcpProxy
    *   Name of the TargetTcpProxy resource whose ProxyHeader is to be set.
    * @param {object} [options]

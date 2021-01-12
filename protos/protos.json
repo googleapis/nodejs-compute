@@ -14468,7 +14468,10 @@
                       "fields": {
                         "addressResource": {
                           "type": "Address",
-                          "id": 215452665
+                          "id": 215452665,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "project": {
                           "type": "string",
@@ -14621,7 +14624,10 @@
                       "fields": {
                         "autoscalerResource": {
                           "type": "Autoscaler",
-                          "id": 207616118
+                          "id": 207616118,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "project": {
                           "type": "string",
@@ -14689,7 +14695,10 @@
                         },
                         "autoscalerResource": {
                           "type": "Autoscaler",
-                          "id": 207616118
+                          "id": 207616118,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "project": {
                           "type": "string",
@@ -14719,7 +14728,10 @@
                         },
                         "autoscalerResource": {
                           "type": "Autoscaler",
-                          "id": 207616118
+                          "id": 207616118,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "project": {
                           "type": "string",
@@ -14763,7 +14775,10 @@
                         },
                         "signedUrlKeyResource": {
                           "type": "SignedUrlKey",
-                          "id": 189190529
+                          "id": 189190529,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
                       }
                     },
@@ -14840,7 +14855,10 @@
                       "fields": {
                         "backendBucketResource": {
                           "type": "BackendBucket",
-                          "id": 112322328
+                          "id": 112322328,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "project": {
                           "type": "string",
@@ -14897,7 +14915,10 @@
                         },
                         "backendBucketResource": {
                           "type": "BackendBucket",
-                          "id": 112322328
+                          "id": 112322328,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "project": {
                           "type": "string",
@@ -14923,7 +14944,10 @@
                         },
                         "backendBucketResource": {
                           "type": "BackendBucket",
-                          "id": 112322328
+                          "id": 112322328,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "project": {
                           "type": "string",
@@ -14960,7 +14984,10 @@
                         },
                         "signedUrlKeyResource": {
                           "type": "SignedUrlKey",
-                          "id": 189190529
+                          "id": 189190529,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
                       }
                     },
@@ -15086,7 +15113,10 @@
                         },
                         "resourceGroupReferenceResource": {
                           "type": "ResourceGroupReference",
-                          "id": 112951123
+                          "id": 112951123,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
                       }
                     },
@@ -15094,7 +15124,10 @@
                       "fields": {
                         "backendServiceResource": {
                           "type": "BackendService",
-                          "id": 79151267
+                          "id": 79151267,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "project": {
                           "type": "string",
@@ -15151,7 +15184,10 @@
                         },
                         "backendServiceResource": {
                           "type": "BackendService",
-                          "id": 79151267
+                          "id": 79151267,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "project": {
                           "type": "string",
@@ -15188,7 +15224,10 @@
                         },
                         "securityPolicyReferenceResource": {
                           "type": "SecurityPolicyReference",
-                          "id": 204135024
+                          "id": 204135024,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
                       }
                     },
@@ -15203,7 +15242,10 @@
                         },
                         "backendServiceResource": {
                           "type": "BackendService",
-                          "id": 79151267
+                          "id": 79151267,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "project": {
                           "type": "string",
@@ -15327,7 +15369,10 @@
                         },
                         "disksAddResourcePoliciesRequestResource": {
                           "type": "DisksAddResourcePoliciesRequest",
-                          "id": 228047907
+                          "id": 228047907,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "project": {
                           "type": "string",
@@ -15410,7 +15455,10 @@
                         },
                         "snapshotResource": {
                           "type": "Snapshot",
-                          "id": 212884521
+                          "id": 212884521,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "zone": {
                           "type": "string",
@@ -15508,7 +15556,10 @@
                       "fields": {
                         "diskResource": {
                           "type": "Disk",
-                          "id": 25880688
+                          "id": 25880688,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "project": {
                           "type": "string",
@@ -15583,7 +15634,10 @@
                         },
                         "disksRemoveResourcePoliciesRequestResource": {
                           "type": "DisksRemoveResourcePoliciesRequest",
-                          "id": 168321262
+                          "id": 168321262,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "project": {
                           "type": "string",
@@ -15616,7 +15670,10 @@
                         },
                         "disksResizeRequestResource": {
                           "type": "DisksResizeRequest",
-                          "id": 78307616
+                          "id": 78307616,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "project": {
                           "type": "string",
@@ -15663,7 +15720,10 @@
                         },
                         "zoneSetPolicyRequestResource": {
                           "type": "ZoneSetPolicyRequest",
-                          "id": 113646651
+                          "id": 113646651,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
                       }
                     },
@@ -15696,7 +15756,10 @@
                         },
                         "zoneSetLabelsRequestResource": {
                           "type": "ZoneSetLabelsRequest",
-                          "id": 96515342
+                          "id": 96515342,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
                       }
                     },
@@ -15718,7 +15781,10 @@
                         },
                         "testPermissionsRequestResource": {
                           "type": "TestPermissionsRequest",
-                          "id": 170779302
+                          "id": 170779302,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "zone": {
                           "type": "string",
@@ -15773,7 +15839,10 @@
                       "fields": {
                         "externalVpnGatewayResource": {
                           "type": "ExternalVpnGateway",
-                          "id": 218378120
+                          "id": 218378120,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "project": {
                           "type": "string",
@@ -15823,7 +15892,10 @@
                       "fields": {
                         "globalSetLabelsRequestResource": {
                           "type": "GlobalSetLabelsRequest",
-                          "id": 51481733
+                          "id": 51481733,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "project": {
                           "type": "string",
@@ -15859,7 +15931,10 @@
                         },
                         "testPermissionsRequestResource": {
                           "type": "TestPermissionsRequest",
-                          "id": 170779302
+                          "id": 170779302,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
                       }
                     },
@@ -15907,7 +15982,10 @@
                       "fields": {
                         "firewallResource": {
                           "type": "Firewall",
-                          "id": 41425005
+                          "id": 41425005,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "project": {
                           "type": "string",
@@ -15964,7 +16042,10 @@
                         },
                         "firewallResource": {
                           "type": "Firewall",
-                          "id": 41425005
+                          "id": 41425005,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "project": {
                           "type": "string",
@@ -15990,7 +16071,10 @@
                         },
                         "firewallResource": {
                           "type": "Firewall",
-                          "id": 41425005
+                          "id": 41425005,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "project": {
                           "type": "string",
@@ -16098,7 +16182,10 @@
                       "fields": {
                         "forwardingRuleResource": {
                           "type": "ForwardingRule",
-                          "id": 32776239
+                          "id": 32776239,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "project": {
                           "type": "string",
@@ -16169,7 +16256,10 @@
                         },
                         "forwardingRuleResource": {
                           "type": "ForwardingRule",
-                          "id": 32776239
+                          "id": 32776239,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "project": {
                           "type": "string",
@@ -16220,7 +16310,10 @@
                         },
                         "targetReferenceResource": {
                           "type": "TargetReference",
-                          "id": 255286256
+                          "id": 255286256,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
                       }
                     },
@@ -16268,7 +16361,10 @@
                       "fields": {
                         "addressResource": {
                           "type": "Address",
-                          "id": 215452665
+                          "id": 215452665,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "project": {
                           "type": "string",
@@ -16358,7 +16454,10 @@
                       "fields": {
                         "forwardingRuleResource": {
                           "type": "ForwardingRule",
-                          "id": 32776239
+                          "id": 32776239,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "project": {
                           "type": "string",
@@ -16415,7 +16514,10 @@
                         },
                         "forwardingRuleResource": {
                           "type": "ForwardingRule",
-                          "id": 32776239
+                          "id": 32776239,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "project": {
                           "type": "string",
@@ -16452,7 +16554,10 @@
                         },
                         "targetReferenceResource": {
                           "type": "TargetReference",
-                          "id": 255286256
+                          "id": 255286256,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
                       }
                     },
@@ -16460,7 +16565,10 @@
                       "fields": {
                         "globalNetworkEndpointGroupsAttachEndpointsRequestResource": {
                           "type": "GlobalNetworkEndpointGroupsAttachEndpointsRequest",
-                          "id": 30691563
+                          "id": 30691563,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "networkEndpointGroup": {
                           "type": "string",
@@ -16508,7 +16616,10 @@
                       "fields": {
                         "globalNetworkEndpointGroupsDetachEndpointsRequestResource": {
                           "type": "GlobalNetworkEndpointGroupsDetachEndpointsRequest",
-                          "id": 8898269
+                          "id": 8898269,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "networkEndpointGroup": {
                           "type": "string",
@@ -16552,7 +16663,10 @@
                       "fields": {
                         "networkEndpointGroupResource": {
                           "type": "NetworkEndpointGroup",
-                          "id": 257353383
+                          "id": 257353383,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "project": {
                           "type": "string",
@@ -16899,7 +17013,10 @@
                       "fields": {
                         "healthCheckResource": {
                           "type": "HealthCheck",
-                          "id": 201925032
+                          "id": 201925032,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "project": {
                           "type": "string",
@@ -16956,7 +17073,10 @@
                         },
                         "healthCheckResource": {
                           "type": "HealthCheck",
-                          "id": 201925032
+                          "id": 201925032,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "project": {
                           "type": "string",
@@ -16982,7 +17102,10 @@
                         },
                         "healthCheckResource": {
                           "type": "HealthCheck",
-                          "id": 201925032
+                          "id": 201925032,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "project": {
                           "type": "string",
@@ -17023,7 +17146,10 @@
                       "fields": {
                         "deprecationStatusResource": {
                           "type": "DeprecationStatus",
-                          "id": 64570608
+                          "id": 64570608,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "image": {
                           "type": "string",
@@ -17111,7 +17237,10 @@
                         },
                         "imageResource": {
                           "type": "Image",
-                          "id": 102736498
+                          "id": 102736498,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "project": {
                           "type": "string",
@@ -17168,7 +17297,10 @@
                         },
                         "imageResource": {
                           "type": "Image",
-                          "id": 102736498
+                          "id": 102736498,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "project": {
                           "type": "string",
@@ -17187,7 +17319,10 @@
                       "fields": {
                         "globalSetPolicyRequestResource": {
                           "type": "GlobalSetPolicyRequest",
-                          "id": 68613042
+                          "id": 68613042,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "project": {
                           "type": "string",
@@ -17209,7 +17344,10 @@
                       "fields": {
                         "globalSetLabelsRequestResource": {
                           "type": "GlobalSetLabelsRequest",
-                          "id": 51481733
+                          "id": 51481733,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "project": {
                           "type": "string",
@@ -17245,7 +17383,10 @@
                         },
                         "testPermissionsRequestResource": {
                           "type": "TestPermissionsRequest",
-                          "id": 170779302
+                          "id": 170779302,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
                       }
                     },
@@ -17260,7 +17401,10 @@
                         },
                         "instanceGroupManagersAbandonInstancesRequestResource": {
                           "type": "InstanceGroupManagersAbandonInstancesRequest",
-                          "id": 52493560
+                          "id": 52493560,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "project": {
                           "type": "string",
@@ -17328,7 +17472,10 @@
                         },
                         "instanceGroupManagersApplyUpdatesRequestResource": {
                           "type": "InstanceGroupManagersApplyUpdatesRequest",
-                          "id": 259242835
+                          "id": 259242835,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "project": {
                           "type": "string",
@@ -17357,7 +17504,10 @@
                         },
                         "instanceGroupManagersCreateInstancesRequestResource": {
                           "type": "InstanceGroupManagersCreateInstancesRequest",
-                          "id": 24558867
+                          "id": 24558867,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "project": {
                           "type": "string",
@@ -17419,7 +17569,10 @@
                         },
                         "instanceGroupManagersDeleteInstancesRequestResource": {
                           "type": "InstanceGroupManagersDeleteInstancesRequest",
-                          "id": 166421252
+                          "id": 166421252,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "project": {
                           "type": "string",
@@ -17452,7 +17605,10 @@
                         },
                         "instanceGroupManagersDeletePerInstanceConfigsReqResource": {
                           "type": "InstanceGroupManagersDeletePerInstanceConfigsReq",
-                          "id": 93992224
+                          "id": 93992224,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "project": {
                           "type": "string",
@@ -17499,7 +17655,10 @@
                       "fields": {
                         "instanceGroupManagerResource": {
                           "type": "InstanceGroupManager",
-                          "id": 261063946
+                          "id": 261063946,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "project": {
                           "type": "string",
@@ -17705,7 +17864,10 @@
                         },
                         "instanceGroupManagerResource": {
                           "type": "InstanceGroupManager",
-                          "id": 261063946
+                          "id": 261063946,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "project": {
                           "type": "string",
@@ -17738,7 +17900,10 @@
                         },
                         "instanceGroupManagersPatchPerInstanceConfigsReqResource": {
                           "type": "InstanceGroupManagersPatchPerInstanceConfigsReq",
-                          "id": 88215039
+                          "id": 88215039,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "project": {
                           "type": "string",
@@ -17771,7 +17936,10 @@
                         },
                         "instanceGroupManagersRecreateInstancesRequestResource": {
                           "type": "InstanceGroupManagersRecreateInstancesRequest",
-                          "id": 21405952
+                          "id": 21405952,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "project": {
                           "type": "string",
@@ -17840,7 +18008,10 @@
                         },
                         "instanceGroupManagersSetInstanceTemplateRequestResource": {
                           "type": "InstanceGroupManagersSetInstanceTemplateRequest",
-                          "id": 9809093
+                          "id": 9809093,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "project": {
                           "type": "string",
@@ -17873,7 +18044,10 @@
                         },
                         "instanceGroupManagersSetTargetPoolsRequestResource": {
                           "type": "InstanceGroupManagersSetTargetPoolsRequest",
-                          "id": 12714760
+                          "id": 12714760,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "project": {
                           "type": "string",
@@ -17906,7 +18080,10 @@
                         },
                         "instanceGroupManagersUpdatePerInstanceConfigsReqResource": {
                           "type": "InstanceGroupManagersUpdatePerInstanceConfigsReq",
-                          "id": 141402302
+                          "id": 141402302,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "project": {
                           "type": "string",
@@ -17939,7 +18116,10 @@
                         },
                         "instanceGroupsAddInstancesRequestResource": {
                           "type": "InstanceGroupsAddInstancesRequest",
-                          "id": 185277790
+                          "id": 185277790,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "project": {
                           "type": "string",
@@ -18054,7 +18234,10 @@
                       "fields": {
                         "instanceGroupResource": {
                           "type": "InstanceGroup",
-                          "id": 18176696
+                          "id": 18176696,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "project": {
                           "type": "string",
@@ -18129,7 +18312,10 @@
                         },
                         "instanceGroupsListInstancesRequestResource": {
                           "type": "InstanceGroupsListInstancesRequest",
-                          "id": 207819807
+                          "id": 207819807,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "maxResults": {
                           "type": "uint32",
@@ -18174,7 +18360,10 @@
                         },
                         "instanceGroupsRemoveInstancesRequestResource": {
                           "type": "InstanceGroupsRemoveInstancesRequest",
-                          "id": 122546361
+                          "id": 122546361,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "project": {
                           "type": "string",
@@ -18207,7 +18396,10 @@
                         },
                         "instanceGroupsSetNamedPortsRequestResource": {
                           "type": "InstanceGroupsSetNamedPortsRequest",
-                          "id": 116716079
+                          "id": 116716079,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "project": {
                           "type": "string",
@@ -18295,7 +18487,10 @@
                       "fields": {
                         "instanceTemplateResource": {
                           "type": "InstanceTemplate",
-                          "id": 10679561
+                          "id": 10679561,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "project": {
                           "type": "string",
@@ -18345,7 +18540,10 @@
                       "fields": {
                         "globalSetPolicyRequestResource": {
                           "type": "GlobalSetPolicyRequest",
-                          "id": 68613042
+                          "id": 68613042,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "project": {
                           "type": "string",
@@ -18381,7 +18579,10 @@
                         },
                         "testPermissionsRequestResource": {
                           "type": "TestPermissionsRequest",
-                          "id": 170779302
+                          "id": 170779302,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
                       }
                     },
@@ -18389,7 +18590,10 @@
                       "fields": {
                         "accessConfigResource": {
                           "type": "AccessConfig",
-                          "id": 119390096
+                          "id": 119390096,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "instance": {
                           "type": "string",
@@ -18436,7 +18640,10 @@
                         },
                         "instancesAddResourcePoliciesRequestResource": {
                           "type": "InstancesAddResourcePoliciesRequest",
-                          "id": 220916507
+                          "id": 220916507,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "project": {
                           "type": "string",
@@ -18497,7 +18704,10 @@
                       "fields": {
                         "attachedDiskResource": {
                           "type": "AttachedDisk",
-                          "id": 90605845
+                          "id": 90605845,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "forceAttach": {
                           "type": "bool",
@@ -18812,7 +19022,10 @@
                       "fields": {
                         "instanceResource": {
                           "type": "Instance",
-                          "id": 215988344
+                          "id": 215988344,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "project": {
                           "type": "string",
@@ -18932,7 +19145,10 @@
                         },
                         "instancesRemoveResourcePoliciesRequestResource": {
                           "type": "InstancesRemoveResourcePoliciesRequest",
-                          "id": 49229558
+                          "id": 49229558,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "project": {
                           "type": "string",
@@ -19084,7 +19300,10 @@
                         },
                         "zoneSetPolicyRequestResource": {
                           "type": "ZoneSetPolicyRequest",
-                          "id": 113646651
+                          "id": 113646651,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
                       }
                     },
@@ -19099,7 +19318,10 @@
                         },
                         "instancesSetLabelsRequestResource": {
                           "type": "InstancesSetLabelsRequest",
-                          "id": 207749344
+                          "id": 207749344,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "project": {
                           "type": "string",
@@ -19132,7 +19354,10 @@
                         },
                         "instancesSetMachineResourcesRequestResource": {
                           "type": "InstancesSetMachineResourcesRequest",
-                          "id": 196286318
+                          "id": 196286318,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "project": {
                           "type": "string",
@@ -19165,7 +19390,10 @@
                         },
                         "instancesSetMachineTypeRequestResource": {
                           "type": "InstancesSetMachineTypeRequest",
-                          "id": 254157709
+                          "id": 254157709,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "project": {
                           "type": "string",
@@ -19198,7 +19426,10 @@
                         },
                         "metadataResource": {
                           "type": "Metadata",
-                          "id": 22650654
+                          "id": 22650654,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "project": {
                           "type": "string",
@@ -19231,7 +19462,10 @@
                         },
                         "instancesSetMinCpuPlatformRequestResource": {
                           "type": "InstancesSetMinCpuPlatformRequest",
-                          "id": 148459368
+                          "id": 148459368,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "project": {
                           "type": "string",
@@ -19275,7 +19509,10 @@
                         },
                         "schedulingResource": {
                           "type": "Scheduling",
-                          "id": 194745945
+                          "id": 194745945,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "zone": {
                           "type": "string",
@@ -19297,7 +19534,10 @@
                         },
                         "instancesSetServiceAccountRequestResource": {
                           "type": "InstancesSetServiceAccountRequest",
-                          "id": 7114552
+                          "id": 7114552,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "project": {
                           "type": "string",
@@ -19341,7 +19581,10 @@
                         },
                         "shieldedInstanceIntegrityPolicyResource": {
                           "type": "ShieldedInstanceIntegrityPolicy",
-                          "id": 140734006
+                          "id": 140734006,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "zone": {
                           "type": "string",
@@ -19374,7 +19617,10 @@
                         },
                         "tagsResource": {
                           "type": "Tags",
-                          "id": 62999924
+                          "id": 62999924,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "zone": {
                           "type": "string",
@@ -19450,7 +19696,10 @@
                         },
                         "instancesStartWithEncryptionKeyRequestResource": {
                           "type": "InstancesStartWithEncryptionKeyRequest",
-                          "id": 173277055
+                          "id": 173277055,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "project": {
                           "type": "string",
@@ -19519,7 +19768,10 @@
                         },
                         "testPermissionsRequestResource": {
                           "type": "TestPermissionsRequest",
-                          "id": 170779302
+                          "id": 170779302,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "zone": {
                           "type": "string",
@@ -19541,7 +19793,10 @@
                         },
                         "instanceResource": {
                           "type": "Instance",
-                          "id": 215988344
+                          "id": 215988344,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "minimalAction": {
                           "type": "string",
@@ -19575,7 +19830,10 @@
                       "fields": {
                         "accessConfigResource": {
                           "type": "AccessConfig",
-                          "id": 119390096
+                          "id": 119390096,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "instance": {
                           "type": "string",
@@ -19615,7 +19873,10 @@
                       "fields": {
                         "displayDeviceResource": {
                           "type": "DisplayDevice",
-                          "id": 21250650
+                          "id": 21250650,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "instance": {
                           "type": "string",
@@ -19662,7 +19923,10 @@
                         },
                         "networkInterfaceResource": {
                           "type": "NetworkInterface",
-                          "id": 57379333
+                          "id": 57379333,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "project": {
                           "type": "string",
@@ -19706,7 +19970,10 @@
                         },
                         "shieldedInstanceConfigResource": {
                           "type": "ShieldedInstanceConfig",
-                          "id": 3623768
+                          "id": 3623768,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "zone": {
                           "type": "string",
@@ -19810,7 +20077,10 @@
                       "fields": {
                         "interconnectAttachmentResource": {
                           "type": "InterconnectAttachment",
-                          "id": 212341369
+                          "id": 212341369,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "project": {
                           "type": "string",
@@ -19885,7 +20155,10 @@
                         },
                         "interconnectAttachmentResource": {
                           "type": "InterconnectAttachment",
-                          "id": 212341369
+                          "id": 212341369,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "project": {
                           "type": "string",
@@ -20018,7 +20291,10 @@
                       "fields": {
                         "interconnectResource": {
                           "type": "Interconnect",
-                          "id": 129175711
+                          "id": 129175711,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "project": {
                           "type": "string",
@@ -20075,7 +20351,10 @@
                         },
                         "interconnectResource": {
                           "type": "Interconnect",
-                          "id": 129175711
+                          "id": 129175711,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "project": {
                           "type": "string",
@@ -20126,7 +20405,10 @@
                         },
                         "testPermissionsRequestResource": {
                           "type": "TestPermissionsRequest",
-                          "id": 170779302
+                          "id": 170779302,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
                       }
                     },
@@ -20196,7 +20478,10 @@
                       "fields": {
                         "licenseResource": {
                           "type": "License",
-                          "id": 169519692
+                          "id": 169519692,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "project": {
                           "type": "string",
@@ -20246,7 +20531,10 @@
                       "fields": {
                         "globalSetPolicyRequestResource": {
                           "type": "GlobalSetPolicyRequest",
-                          "id": 68613042
+                          "id": 68613042,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "project": {
                           "type": "string",
@@ -20282,7 +20570,10 @@
                         },
                         "testPermissionsRequestResource": {
                           "type": "TestPermissionsRequest",
-                          "id": 170779302
+                          "id": 170779302,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
                       }
                     },
@@ -20430,7 +20721,10 @@
                         },
                         "networkEndpointGroupsAttachEndpointsRequestResource": {
                           "type": "NetworkEndpointGroupsAttachEndpointsRequest",
-                          "id": 531079
+                          "id": 531079,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "project": {
                           "type": "string",
@@ -20492,7 +20786,10 @@
                         },
                         "networkEndpointGroupsDetachEndpointsRequestResource": {
                           "type": "NetworkEndpointGroupsDetachEndpointsRequest",
-                          "id": 247173241
+                          "id": 247173241,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "project": {
                           "type": "string",
@@ -20543,7 +20840,10 @@
                       "fields": {
                         "networkEndpointGroupResource": {
                           "type": "NetworkEndpointGroup",
-                          "id": 257353383
+                          "id": 257353383,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "project": {
                           "type": "string",
@@ -20622,7 +20922,10 @@
                         },
                         "networkEndpointGroupsListEndpointsRequestResource": {
                           "type": "NetworkEndpointGroupsListEndpointsRequest",
-                          "id": 59493390
+                          "id": 59493390,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "orderBy": {
                           "type": "string",
@@ -20670,7 +20973,10 @@
                         },
                         "testPermissionsRequestResource": {
                           "type": "TestPermissionsRequest",
-                          "id": 170779302
+                          "id": 170779302,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "zone": {
                           "type": "string",
@@ -20692,7 +20998,10 @@
                         },
                         "networksAddPeeringRequestResource": {
                           "type": "NetworksAddPeeringRequest",
-                          "id": 120374965
+                          "id": 120374965,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "project": {
                           "type": "string",
@@ -20751,7 +21060,10 @@
                       "fields": {
                         "networkResource": {
                           "type": "Network",
-                          "id": 122105599
+                          "id": 122105599,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "project": {
                           "type": "string",
@@ -20867,7 +21179,10 @@
                         },
                         "networkResource": {
                           "type": "Network",
-                          "id": 122105599
+                          "id": 122105599,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "project": {
                           "type": "string",
@@ -20893,7 +21208,10 @@
                         },
                         "networksRemovePeeringRequestResource": {
                           "type": "NetworksRemovePeeringRequest",
-                          "id": 152727038
+                          "id": 152727038,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "project": {
                           "type": "string",
@@ -20941,7 +21259,10 @@
                         },
                         "networksUpdatePeeringRequestResource": {
                           "type": "NetworksUpdatePeeringRequest",
-                          "id": 224433497
+                          "id": 224433497,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "project": {
                           "type": "string",
@@ -20967,7 +21288,10 @@
                         },
                         "nodeGroupsAddNodesRequestResource": {
                           "type": "NodeGroupsAddNodesRequest",
-                          "id": 131263288
+                          "id": 131263288,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "project": {
                           "type": "string",
@@ -21064,7 +21388,10 @@
                         },
                         "nodeGroupsDeleteNodesRequestResource": {
                           "type": "NodeGroupsDeleteNodesRequest",
-                          "id": 183298962
+                          "id": 183298962,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "project": {
                           "type": "string",
@@ -21151,7 +21478,10 @@
                         },
                         "nodeGroupResource": {
                           "type": "NodeGroup",
-                          "id": 236886443
+                          "id": 236886443,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "project": {
                           "type": "string",
@@ -21267,7 +21597,10 @@
                         },
                         "nodeGroupResource": {
                           "type": "NodeGroup",
-                          "id": 236886443
+                          "id": 236886443,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "project": {
                           "type": "string",
@@ -21314,7 +21647,10 @@
                         },
                         "zoneSetPolicyRequestResource": {
                           "type": "ZoneSetPolicyRequest",
-                          "id": 113646651
+                          "id": 113646651,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
                       }
                     },
@@ -21329,7 +21665,10 @@
                         },
                         "nodeGroupsSetNodeTemplateRequestResource": {
                           "type": "NodeGroupsSetNodeTemplateRequest",
-                          "id": 117382321
+                          "id": 117382321,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "project": {
                           "type": "string",
@@ -21369,7 +21708,10 @@
                         },
                         "testPermissionsRequestResource": {
                           "type": "TestPermissionsRequest",
-                          "id": 170779302
+                          "id": 170779302,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "zone": {
                           "type": "string",
@@ -21502,7 +21844,10 @@
                       "fields": {
                         "nodeTemplateResource": {
                           "type": "NodeTemplate",
-                          "id": 127364406
+                          "id": 127364406,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "project": {
                           "type": "string",
@@ -21580,7 +21925,10 @@
                         },
                         "regionSetPolicyRequestResource": {
                           "type": "RegionSetPolicyRequest",
-                          "id": 8053635
+                          "id": 8053635,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "resource": {
                           "type": "string",
@@ -21616,7 +21964,10 @@
                         },
                         "testPermissionsRequestResource": {
                           "type": "TestPermissionsRequest",
-                          "id": 170779302
+                          "id": 170779302,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
                       }
                     },
@@ -21811,7 +22162,10 @@
                       "fields": {
                         "packetMirroringResource": {
                           "type": "PacketMirroring",
-                          "id": 225066529
+                          "id": 225066529,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "project": {
                           "type": "string",
@@ -21882,7 +22236,10 @@
                         },
                         "packetMirroringResource": {
                           "type": "PacketMirroring",
-                          "id": 225066529
+                          "id": 225066529,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "project": {
                           "type": "string",
@@ -21929,7 +22286,10 @@
                         },
                         "testPermissionsRequestResource": {
                           "type": "TestPermissionsRequest",
-                          "id": 170779302
+                          "id": 170779302,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
                       }
                     },
@@ -21959,7 +22319,10 @@
                         },
                         "projectsDisableXpnResourceRequestResource": {
                           "type": "ProjectsDisableXpnResourceRequest",
-                          "id": 209136170
+                          "id": 209136170,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "requestId": {
                           "type": "string",
@@ -21993,7 +22356,10 @@
                         },
                         "projectsEnableXpnResourceRequestResource": {
                           "type": "ProjectsEnableXpnResourceRequest",
-                          "id": 153544751
+                          "id": 153544751,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "requestId": {
                           "type": "string",
@@ -22081,7 +22447,10 @@
                         },
                         "projectsListXpnHostsRequestResource": {
                           "type": "ProjectsListXpnHostsRequest",
-                          "id": 238266391
+                          "id": 238266391,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "returnPartialSuccess": {
                           "type": "bool",
@@ -22093,7 +22462,10 @@
                       "fields": {
                         "diskMoveRequestResource": {
                           "type": "DiskMoveRequest",
-                          "id": 44573002
+                          "id": 44573002,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "project": {
                           "type": "string",
@@ -22112,7 +22484,10 @@
                       "fields": {
                         "instanceMoveRequestResource": {
                           "type": "InstanceMoveRequest",
-                          "id": 43228738
+                          "id": 43228738,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "project": {
                           "type": "string",
@@ -22131,7 +22506,10 @@
                       "fields": {
                         "metadataResource": {
                           "type": "Metadata",
-                          "id": 22650654
+                          "id": 22650654,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "project": {
                           "type": "string",
@@ -22157,7 +22535,10 @@
                         },
                         "projectsSetDefaultNetworkTierRequestResource": {
                           "type": "ProjectsSetDefaultNetworkTierRequest",
-                          "id": 126410762
+                          "id": 126410762,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "requestId": {
                           "type": "string",
@@ -22180,7 +22561,10 @@
                         },
                         "usageExportLocationResource": {
                           "type": "UsageExportLocation",
-                          "id": 20260459
+                          "id": 20260459,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
                       }
                     },
@@ -22242,7 +22626,10 @@
                       "fields": {
                         "autoscalerResource": {
                           "type": "Autoscaler",
-                          "id": 207616118
+                          "id": 207616118,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "project": {
                           "type": "string",
@@ -22310,7 +22697,10 @@
                         },
                         "autoscalerResource": {
                           "type": "Autoscaler",
-                          "id": 207616118
+                          "id": 207616118,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "project": {
                           "type": "string",
@@ -22340,7 +22730,10 @@
                         },
                         "autoscalerResource": {
                           "type": "Autoscaler",
-                          "id": 207616118
+                          "id": 207616118,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "project": {
                           "type": "string",
@@ -22441,7 +22834,10 @@
                         },
                         "resourceGroupReferenceResource": {
                           "type": "ResourceGroupReference",
-                          "id": 112951123
+                          "id": 112951123,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
                       }
                     },
@@ -22449,7 +22845,10 @@
                       "fields": {
                         "backendServiceResource": {
                           "type": "BackendService",
-                          "id": 79151267
+                          "id": 79151267,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "project": {
                           "type": "string",
@@ -22520,7 +22919,10 @@
                         },
                         "backendServiceResource": {
                           "type": "BackendService",
-                          "id": 79151267
+                          "id": 79151267,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "project": {
                           "type": "string",
@@ -22553,7 +22955,10 @@
                         },
                         "backendServiceResource": {
                           "type": "BackendService",
-                          "id": 79151267
+                          "id": 79151267,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "project": {
                           "type": "string",
@@ -22639,7 +23044,10 @@
                       "fields": {
                         "commitmentResource": {
                           "type": "Commitment",
-                          "id": 244240888
+                          "id": 244240888,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "project": {
                           "type": "string",
@@ -22787,7 +23195,10 @@
                         },
                         "regionDisksAddResourcePoliciesRequestResource": {
                           "type": "RegionDisksAddResourcePoliciesRequest",
-                          "id": 15761294
+                          "id": 15761294,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "requestId": {
                           "type": "string",
@@ -22824,7 +23235,10 @@
                         },
                         "snapshotResource": {
                           "type": "Snapshot",
-                          "id": 212884521
+                          "id": 212884521,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
                       }
                     },
@@ -22915,7 +23329,10 @@
                       "fields": {
                         "diskResource": {
                           "type": "Disk",
-                          "id": 25880688
+                          "id": 25880688,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "project": {
                           "type": "string",
@@ -23004,7 +23421,10 @@
                         },
                         "regionDisksRemoveResourcePoliciesRequestResource": {
                           "type": "RegionDisksRemoveResourcePoliciesRequest",
-                          "id": 8741283
+                          "id": 8741283,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "requestId": {
                           "type": "string",
@@ -23037,7 +23457,10 @@
                         },
                         "regionDisksResizeRequestResource": {
                           "type": "RegionDisksResizeRequest",
-                          "id": 178197781
+                          "id": 178197781,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "requestId": {
                           "type": "string",
@@ -23063,7 +23486,10 @@
                         },
                         "regionSetPolicyRequestResource": {
                           "type": "RegionSetPolicyRequest",
-                          "id": 8053635
+                          "id": 8053635,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "resource": {
                           "type": "string",
@@ -23092,7 +23518,10 @@
                         },
                         "regionSetLabelsRequestResource": {
                           "type": "RegionSetLabelsRequest",
-                          "id": 259357782
+                          "id": 259357782,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "requestId": {
                           "type": "string",
@@ -23132,7 +23561,10 @@
                         },
                         "testPermissionsRequestResource": {
                           "type": "TestPermissionsRequest",
-                          "id": 170779302
+                          "id": 170779302,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
                       }
                     },
@@ -23194,7 +23626,10 @@
                       "fields": {
                         "healthCheckServiceResource": {
                           "type": "HealthCheckService",
-                          "id": 208932338
+                          "id": 208932338,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "project": {
                           "type": "string",
@@ -23265,7 +23700,10 @@
                         },
                         "healthCheckServiceResource": {
                           "type": "HealthCheckService",
-                          "id": 208932338
+                          "id": 208932338,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "project": {
                           "type": "string",
@@ -23345,7 +23783,10 @@
                       "fields": {
                         "healthCheckResource": {
                           "type": "HealthCheck",
-                          "id": 201925032
+                          "id": 201925032,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "project": {
                           "type": "string",
@@ -23416,7 +23857,10 @@
                         },
                         "healthCheckResource": {
                           "type": "HealthCheck",
-                          "id": 201925032
+                          "id": 201925032,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "project": {
                           "type": "string",
@@ -23449,7 +23893,10 @@
                         },
                         "healthCheckResource": {
                           "type": "HealthCheck",
-                          "id": 201925032
+                          "id": 201925032,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "project": {
                           "type": "string",
@@ -23496,7 +23943,10 @@
                         },
                         "regionInstanceGroupManagersAbandonInstancesRequestResource": {
                           "type": "RegionInstanceGroupManagersAbandonInstancesRequest",
-                          "id": 220064035
+                          "id": 220064035,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "requestId": {
                           "type": "string",
@@ -23529,7 +23979,10 @@
                         },
                         "regionInstanceGroupManagersApplyUpdatesRequestResource": {
                           "type": "RegionInstanceGroupManagersApplyUpdatesRequest",
-                          "id": 76248318
+                          "id": 76248318,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
                       }
                     },
@@ -23558,7 +24011,10 @@
                         },
                         "regionInstanceGroupManagersCreateInstancesRequestResource": {
                           "type": "RegionInstanceGroupManagersCreateInstancesRequest",
-                          "id": 90578824
+                          "id": 90578824,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "requestId": {
                           "type": "string",
@@ -23620,7 +24076,10 @@
                         },
                         "regionInstanceGroupManagersDeleteInstancesRequestResource": {
                           "type": "RegionInstanceGroupManagersDeleteInstancesRequest",
-                          "id": 232441209
+                          "id": 232441209,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "requestId": {
                           "type": "string",
@@ -23653,7 +24112,10 @@
                         },
                         "regionInstanceGroupManagerDeleteInstanceConfigReqResource": {
                           "type": "RegionInstanceGroupManagerDeleteInstanceConfigReq",
-                          "id": 740741
+                          "id": 740741,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
                       }
                     },
@@ -23686,7 +24148,10 @@
                       "fields": {
                         "instanceGroupManagerResource": {
                           "type": "InstanceGroupManager",
-                          "id": 261063946
+                          "id": 261063946,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "project": {
                           "type": "string",
@@ -23892,7 +24357,10 @@
                         },
                         "instanceGroupManagerResource": {
                           "type": "InstanceGroupManager",
-                          "id": 261063946
+                          "id": 261063946,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "project": {
                           "type": "string",
@@ -23939,7 +24407,10 @@
                         },
                         "regionInstanceGroupManagerPatchInstanceConfigReqResource": {
                           "type": "RegionInstanceGroupManagerPatchInstanceConfigReq",
-                          "id": 197682890
+                          "id": 197682890,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "requestId": {
                           "type": "string",
@@ -23972,7 +24443,10 @@
                         },
                         "regionInstanceGroupManagersRecreateRequestResource": {
                           "type": "RegionInstanceGroupManagersRecreateRequest",
-                          "id": 170999316
+                          "id": 170999316,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "requestId": {
                           "type": "string",
@@ -24041,7 +24515,10 @@
                         },
                         "regionInstanceGroupManagersSetTemplateRequestResource": {
                           "type": "RegionInstanceGroupManagersSetTemplateRequest",
-                          "id": 187310412
+                          "id": 187310412,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "requestId": {
                           "type": "string",
@@ -24074,7 +24551,10 @@
                         },
                         "regionInstanceGroupManagersSetTargetPoolsRequestResource": {
                           "type": "RegionInstanceGroupManagersSetTargetPoolsRequest",
-                          "id": 78734717
+                          "id": 78734717,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "requestId": {
                           "type": "string",
@@ -24107,7 +24587,10 @@
                         },
                         "regionInstanceGroupManagerUpdateInstanceConfigReqResource": {
                           "type": "RegionInstanceGroupManagerUpdateInstanceConfigReq",
-                          "id": 89036583
+                          "id": 89036583,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "requestId": {
                           "type": "string",
@@ -24219,7 +24702,10 @@
                         },
                         "regionInstanceGroupsListInstancesRequestResource": {
                           "type": "RegionInstanceGroupsListInstancesRequest",
-                          "id": 48239828
+                          "id": 48239828,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "returnPartialSuccess": {
                           "type": "bool",
@@ -24252,7 +24738,10 @@
                         },
                         "regionInstanceGroupsSetNamedPortsRequestResource": {
                           "type": "RegionInstanceGroupsSetNamedPortsRequest",
-                          "id": 1574938
+                          "id": 1574938,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "requestId": {
                           "type": "string",
@@ -24318,7 +24807,10 @@
                       "fields": {
                         "networkEndpointGroupResource": {
                           "type": "NetworkEndpointGroup",
-                          "id": 257353383
+                          "id": 257353383,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "project": {
                           "type": "string",
@@ -24436,7 +24928,10 @@
                       "fields": {
                         "notificationEndpointResource": {
                           "type": "NotificationEndpoint",
-                          "id": 70024484
+                          "id": 70024484,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "project": {
                           "type": "string",
@@ -24688,7 +25183,10 @@
                         },
                         "sslCertificateResource": {
                           "type": "SslCertificate",
-                          "id": 180709897
+                          "id": 180709897,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
                       }
                     },
@@ -24806,7 +25304,10 @@
                         },
                         "targetHttpProxyResource": {
                           "type": "TargetHttpProxy",
-                          "id": 24696744
+                          "id": 24696744,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
                       }
                     },
@@ -24877,7 +25378,10 @@
                         },
                         "urlMapReferenceResource": {
                           "type": "UrlMapReference",
-                          "id": 130265877
+                          "id": 130265877,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
                       }
                     },
@@ -24957,7 +25461,10 @@
                         },
                         "targetHttpsProxyResource": {
                           "type": "TargetHttpsProxy",
-                          "id": 165222017
+                          "id": 165222017,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
                       }
                     },
@@ -25017,7 +25524,10 @@
                         },
                         "regionTargetHttpsProxiesSetSslCertificatesRequestResource": {
                           "type": "RegionTargetHttpsProxiesSetSslCertificatesRequest",
-                          "id": 122257927
+                          "id": 122257927,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "requestId": {
                           "type": "string",
@@ -25061,7 +25571,10 @@
                         },
                         "urlMapReferenceResource": {
                           "type": "UrlMapReference",
-                          "id": 130265877
+                          "id": 130265877,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
                       }
                     },
@@ -25141,7 +25654,10 @@
                         },
                         "urlMapResource": {
                           "type": "UrlMap",
-                          "id": 168675425
+                          "id": 168675425,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
                       }
                     },
@@ -25212,7 +25728,10 @@
                         },
                         "urlMapResource": {
                           "type": "UrlMap",
-                          "id": 168675425
+                          "id": 168675425,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
                       }
                     },
@@ -25245,7 +25764,10 @@
                         },
                         "urlMapResource": {
                           "type": "UrlMap",
-                          "id": 168675425
+                          "id": 168675425,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
                       }
                     },
@@ -25267,7 +25789,10 @@
                         },
                         "regionUrlMapsValidateRequestResource": {
                           "type": "RegionUrlMapsValidateRequest",
-                          "id": 56632858
+                          "id": 56632858,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "urlMap": {
                           "type": "string",
@@ -25460,7 +25985,10 @@
                         },
                         "reservationResource": {
                           "type": "Reservation",
-                          "id": 16594721
+                          "id": 16594721,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "zone": {
                           "type": "string",
@@ -25531,7 +26059,10 @@
                         },
                         "reservationsResizeRequestResource": {
                           "type": "ReservationsResizeRequest",
-                          "id": 120827345
+                          "id": 120827345,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "zone": {
                           "type": "string",
@@ -25567,7 +26098,10 @@
                         },
                         "zoneSetPolicyRequestResource": {
                           "type": "ZoneSetPolicyRequest",
-                          "id": 113646651
+                          "id": 113646651,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
                       }
                     },
@@ -25589,7 +26123,10 @@
                         },
                         "testPermissionsRequestResource": {
                           "type": "TestPermissionsRequest",
-                          "id": 170779302
+                          "id": 170779302,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "zone": {
                           "type": "string",
@@ -25740,7 +26277,10 @@
                         },
                         "resourcePolicyResource": {
                           "type": "ResourcePolicy",
-                          "id": 76826186
+                          "id": 76826186,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
                       }
                     },
@@ -25800,7 +26340,10 @@
                         },
                         "regionSetPolicyRequestResource": {
                           "type": "RegionSetPolicyRequest",
-                          "id": 8053635
+                          "id": 8053635,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "resource": {
                           "type": "string",
@@ -25836,7 +26379,10 @@
                         },
                         "testPermissionsRequestResource": {
                           "type": "TestPermissionsRequest",
-                          "id": 170779302
+                          "id": 170779302,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
                       }
                     },
@@ -26021,7 +26567,10 @@
                         },
                         "routerResource": {
                           "type": "Router",
-                          "id": 155222084
+                          "id": 155222084,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
                       }
                     },
@@ -26092,7 +26641,10 @@
                         },
                         "routerResource": {
                           "type": "Router",
-                          "id": 155222084
+                          "id": 155222084,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
                       }
                     },
@@ -26121,7 +26673,10 @@
                         },
                         "routerResource": {
                           "type": "Router",
-                          "id": 155222084
+                          "id": 155222084,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
                       }
                     },
@@ -26154,7 +26709,10 @@
                         },
                         "routerResource": {
                           "type": "Router",
-                          "id": 155222084
+                          "id": 155222084,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
                       }
                     },
@@ -26213,7 +26771,10 @@
                         },
                         "routeResource": {
                           "type": "Route",
-                          "id": 225428804
+                          "id": 225428804,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
                       }
                     },
@@ -26266,7 +26827,10 @@
                         },
                         "securityPolicyRuleResource": {
                           "type": "SecurityPolicyRule",
-                          "id": 134257987
+                          "id": 134257987,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
                       }
                     },
@@ -26347,7 +26911,10 @@
                         },
                         "securityPolicyResource": {
                           "type": "SecurityPolicy",
-                          "id": 216159612
+                          "id": 216159612,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
                       }
                     },
@@ -26435,7 +27002,10 @@
                         },
                         "securityPolicyResource": {
                           "type": "SecurityPolicy",
-                          "id": 216159612
+                          "id": 216159612,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
                       }
                     },
@@ -26461,7 +27031,10 @@
                         },
                         "securityPolicyRuleResource": {
                           "type": "SecurityPolicyRule",
-                          "id": 134257987
+                          "id": 134257987,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
                       }
                     },
@@ -26584,7 +27157,10 @@
                       "fields": {
                         "globalSetPolicyRequestResource": {
                           "type": "GlobalSetPolicyRequest",
-                          "id": 68613042
+                          "id": 68613042,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "project": {
                           "type": "string",
@@ -26606,7 +27182,10 @@
                       "fields": {
                         "globalSetLabelsRequestResource": {
                           "type": "GlobalSetLabelsRequest",
-                          "id": 51481733
+                          "id": 51481733,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "project": {
                           "type": "string",
@@ -26642,7 +27221,10 @@
                         },
                         "testPermissionsRequestResource": {
                           "type": "TestPermissionsRequest",
-                          "id": 170779302
+                          "id": 170779302,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
                       }
                     },
@@ -26736,7 +27318,10 @@
                         },
                         "sslCertificateResource": {
                           "type": "SslCertificate",
-                          "id": 180709897
+                          "id": 180709897,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
                       }
                     },
@@ -26826,7 +27411,10 @@
                         },
                         "sslPolicyResource": {
                           "type": "SslPolicy",
-                          "id": 6456392
+                          "id": 6456392,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
                       }
                     },
@@ -26914,7 +27502,10 @@
                         },
                         "sslPolicyResource": {
                           "type": "SslPolicy",
-                          "id": 6456392
+                          "id": 6456392,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
                       }
                     },
@@ -27011,7 +27602,10 @@
                         },
                         "subnetworksExpandIpCidrRangeRequestResource": {
                           "type": "SubnetworksExpandIpCidrRangeRequest",
-                          "id": 208578654
+                          "id": 208578654,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
                       }
                     },
@@ -27091,7 +27685,10 @@
                         },
                         "subnetworkResource": {
                           "type": "Subnetwork",
-                          "id": 42233151
+                          "id": 42233151,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
                       }
                     },
@@ -27197,7 +27794,10 @@
                         },
                         "subnetworkResource": {
                           "type": "Subnetwork",
-                          "id": 42233151
+                          "id": 42233151,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
                       }
                     },
@@ -27219,7 +27819,10 @@
                         },
                         "regionSetPolicyRequestResource": {
                           "type": "RegionSetPolicyRequest",
-                          "id": 8053635
+                          "id": 8053635,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "resource": {
                           "type": "string",
@@ -27259,7 +27862,10 @@
                         },
                         "subnetworksSetPrivateIpGoogleAccessRequestResource": {
                           "type": "SubnetworksSetPrivateIpGoogleAccessRequest",
-                          "id": 485240
+                          "id": 485240,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
                       }
                     },
@@ -27288,7 +27894,10 @@
                         },
                         "testPermissionsRequestResource": {
                           "type": "TestPermissionsRequest",
-                          "id": 170779302
+                          "id": 170779302,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
                       }
                     },
@@ -27347,7 +27956,10 @@
                         },
                         "targetGrpcProxyResource": {
                           "type": "TargetGrpcProxy",
-                          "id": 60486994
+                          "id": 60486994,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
                       }
                     },
@@ -27404,7 +28016,10 @@
                         },
                         "targetGrpcProxyResource": {
                           "type": "TargetGrpcProxy",
-                          "id": 60486994
+                          "id": 60486994,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
                       }
                     },
@@ -27498,7 +28113,10 @@
                         },
                         "targetHttpProxyResource": {
                           "type": "TargetHttpProxy",
-                          "id": 24696744
+                          "id": 24696744,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
                       }
                     },
@@ -27555,7 +28173,10 @@
                         },
                         "targetHttpProxyResource": {
                           "type": "TargetHttpProxy",
-                          "id": 24696744
+                          "id": 24696744,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
                       }
                     },
@@ -27581,7 +28202,10 @@
                         },
                         "urlMapReferenceResource": {
                           "type": "UrlMapReference",
-                          "id": 130265877
+                          "id": 130265877,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
                       }
                     },
@@ -27675,7 +28299,10 @@
                         },
                         "targetHttpsProxyResource": {
                           "type": "TargetHttpsProxy",
-                          "id": 165222017
+                          "id": 165222017,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
                       }
                     },
@@ -27725,7 +28352,10 @@
                         },
                         "targetHttpsProxiesSetQuicOverrideRequestResource": {
                           "type": "TargetHttpsProxiesSetQuicOverrideRequest",
-                          "id": 72940258
+                          "id": 72940258,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "targetHttpsProxy": {
                           "type": "string",
@@ -27751,7 +28381,10 @@
                         },
                         "targetHttpsProxiesSetSslCertificatesRequestResource": {
                           "type": "TargetHttpsProxiesSetSslCertificatesRequest",
-                          "id": 223122908
+                          "id": 223122908,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "targetHttpsProxy": {
                           "type": "string",
@@ -27777,7 +28410,10 @@
                         },
                         "sslPolicyReferenceResource": {
                           "type": "SslPolicyReference",
-                          "id": 235403836
+                          "id": 235403836,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "targetHttpsProxy": {
                           "type": "string",
@@ -27810,7 +28446,10 @@
                         },
                         "urlMapReferenceResource": {
                           "type": "UrlMapReference",
-                          "id": 130265877
+                          "id": 130265877,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
                       }
                     },
@@ -27918,7 +28557,10 @@
                         },
                         "targetInstanceResource": {
                           "type": "TargetInstance",
-                          "id": 162017610
+                          "id": 162017610,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "zone": {
                           "type": "string",
@@ -27996,7 +28638,10 @@
                         },
                         "targetPoolsAddHealthCheckRequestResource": {
                           "type": "TargetPoolsAddHealthCheckRequest",
-                          "id": 1137956
+                          "id": 1137956,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
                       }
                     },
@@ -28029,7 +28674,10 @@
                         },
                         "targetPoolsAddInstanceRequestResource": {
                           "type": "TargetPoolsAddInstanceRequest",
-                          "id": 160360948
+                          "id": 160360948,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
                       }
                     },
@@ -28126,7 +28774,10 @@
                       "fields": {
                         "instanceReferenceResource": {
                           "type": "InstanceReference",
-                          "id": 24490604
+                          "id": 24490604,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "project": {
                           "type": "string",
@@ -28173,7 +28824,10 @@
                         },
                         "targetPoolResource": {
                           "type": "TargetPool",
-                          "id": 101281443
+                          "id": 101281443,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
                       }
                     },
@@ -28244,7 +28898,10 @@
                         },
                         "targetPoolsRemoveHealthCheckRequestResource": {
                           "type": "TargetPoolsRemoveHealthCheckRequest",
-                          "id": 36549555
+                          "id": 36549555,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
                       }
                     },
@@ -28277,7 +28934,10 @@
                         },
                         "targetPoolsRemoveInstanceRequestResource": {
                           "type": "TargetPoolsRemoveInstanceRequest",
-                          "id": 29548547
+                          "id": 29548547,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
                       }
                     },
@@ -28314,7 +28974,10 @@
                         },
                         "targetReferenceResource": {
                           "type": "TargetReference",
-                          "id": 255286256
+                          "id": 255286256,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
                       }
                     },
@@ -28373,7 +29036,10 @@
                         },
                         "targetSslProxyResource": {
                           "type": "TargetSslProxy",
-                          "id": 142016192
+                          "id": 142016192,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
                       }
                     },
@@ -28423,7 +29089,10 @@
                         },
                         "targetSslProxiesSetBackendServiceRequestResource": {
                           "type": "TargetSslProxiesSetBackendServiceRequest",
-                          "id": 139080868
+                          "id": 139080868,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "targetSslProxy": {
                           "type": "string",
@@ -28449,7 +29118,10 @@
                         },
                         "targetSslProxiesSetProxyHeaderRequestResource": {
                           "type": "TargetSslProxiesSetProxyHeaderRequest",
-                          "id": 205284526
+                          "id": 205284526,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "targetSslProxy": {
                           "type": "string",
@@ -28475,7 +29147,10 @@
                         },
                         "targetSslProxiesSetSslCertificatesRequestResource": {
                           "type": "TargetSslProxiesSetSslCertificatesRequest",
-                          "id": 147940797
+                          "id": 147940797,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "targetSslProxy": {
                           "type": "string",
@@ -28501,7 +29176,10 @@
                         },
                         "sslPolicyReferenceResource": {
                           "type": "SslPolicyReference",
-                          "id": 235403836
+                          "id": 235403836,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "targetSslProxy": {
                           "type": "string",
@@ -28567,7 +29245,10 @@
                         },
                         "targetTcpProxyResource": {
                           "type": "TargetTcpProxy",
-                          "id": 145913931
+                          "id": 145913931,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
                       }
                     },
@@ -28617,7 +29298,10 @@
                         },
                         "targetTcpProxiesSetBackendServiceRequestResource": {
                           "type": "TargetTcpProxiesSetBackendServiceRequest",
-                          "id": 5286127
+                          "id": 5286127,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "targetTcpProxy": {
                           "type": "string",
@@ -28643,7 +29327,10 @@
                         },
                         "targetTcpProxiesSetProxyHeaderRequestResource": {
                           "type": "TargetTcpProxiesSetProxyHeaderRequest",
-                          "id": 219958339
+                          "id": 219958339,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "targetTcpProxy": {
                           "type": "string",
@@ -28765,7 +29452,10 @@
                         },
                         "targetVpnGatewayResource": {
                           "type": "TargetVpnGateway",
-                          "id": 498050
+                          "id": 498050,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
                       }
                     },
@@ -28897,7 +29587,10 @@
                         },
                         "urlMapResource": {
                           "type": "UrlMap",
-                          "id": 168675425
+                          "id": 168675425,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
                       }
                     },
@@ -28905,7 +29598,10 @@
                       "fields": {
                         "cacheInvalidationRuleResource": {
                           "type": "CacheInvalidationRule",
-                          "id": 44360109
+                          "id": 44360109,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "project": {
                           "type": "string",
@@ -28980,7 +29676,10 @@
                         },
                         "urlMapResource": {
                           "type": "UrlMap",
-                          "id": 168675425
+                          "id": 168675425,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
                       }
                     },
@@ -29006,7 +29705,10 @@
                         },
                         "urlMapResource": {
                           "type": "UrlMap",
-                          "id": 168675425
+                          "id": 168675425,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
                       }
                     },
@@ -29028,7 +29730,10 @@
                         },
                         "urlMapsValidateRequestResource": {
                           "type": "UrlMapsValidateRequest",
-                          "id": 127477999
+                          "id": 127477999,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
                       }
                     },
@@ -29168,7 +29873,10 @@
                         },
                         "vpnGatewayResource": {
                           "type": "VpnGateway",
-                          "id": 182688660
+                          "id": 182688660,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
                       }
                     },
@@ -29228,7 +29936,10 @@
                         },
                         "regionSetLabelsRequestResource": {
                           "type": "RegionSetLabelsRequest",
-                          "id": 259357782
+                          "id": 259357782,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         },
                         "requestId": {
                           "type": "string",
@@ -29268,7 +29979,10 @@
                         },
                         "testPermissionsRequestResource": {
                           "type": "TestPermissionsRequest",
-                          "id": 170779302
+                          "id": 170779302,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
                       }
                     },
@@ -29383,7 +30097,10 @@
                         },
                         "vpnTunnelResource": {
                           "type": "VpnTunnel",
-                          "id": 86839482
+                          "id": 86839482,
+                          "options": {
+                            "(google.api.field_behavior)": "REQUIRED"
+                          }
                         }
                       }
                     },

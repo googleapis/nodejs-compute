@@ -598,6 +598,7 @@ export class LicensesClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {google.cloud.compute.v1.License} request.licenseResource
+   *   The body resource for this request
    * @param {string} request.project
    *   Project ID for this request.
    * @param {string} request.requestId
@@ -801,6 +802,7 @@ export class LicensesClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {google.cloud.compute.v1.GlobalSetPolicyRequest} request.globalSetPolicyRequestResource
+   *   The body resource for this request
    * @param {string} request.project
    *   Project ID for this request.
    * @param {string} request.resource
@@ -903,6 +905,7 @@ export class LicensesClient {
    * @param {string} request.resource
    *   Name or id of the resource for this request.
    * @param {google.cloud.compute.v1.TestPermissionsRequest} request.testPermissionsRequestResource
+   *   The body resource for this request
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.

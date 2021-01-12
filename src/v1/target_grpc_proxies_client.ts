@@ -526,6 +526,7 @@ export class TargetGrpcProxiesClient {
    *
    *   The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
    * @param {google.cloud.compute.v1.TargetGrpcProxy} request.targetGrpcProxyResource
+   *   The body resource for this request
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -739,6 +740,7 @@ export class TargetGrpcProxiesClient {
    * @param {string} request.targetGrpcProxy
    *   Name of the TargetGrpcProxy resource to patch.
    * @param {google.cloud.compute.v1.TargetGrpcProxy} request.targetGrpcProxyResource
+   *   The body resource for this request
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.

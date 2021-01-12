@@ -362,6 +362,7 @@ export class InstancesClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {google.cloud.compute.v1.AccessConfig} request.accessConfigResource
+   *   The body resource for this request
    * @param {string} request.instance
    *   The instance name for this request.
    * @param {string} request.networkInterface
@@ -475,6 +476,7 @@ export class InstancesClient {
    * @param {string} request.instance
    *   The instance name for this request.
    * @param {google.cloud.compute.v1.InstancesAddResourcePoliciesRequest} request.instancesAddResourcePoliciesRequestResource
+   *   The body resource for this request
    * @param {string} request.project
    *   Project ID for this request.
    * @param {string} request.requestId
@@ -699,6 +701,7 @@ export class InstancesClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {google.cloud.compute.v1.AttachedDisk} request.attachedDiskResource
+   *   The body resource for this request
    * @param {boolean} request.forceAttach
    *   Whether to force attach the regional disk even if it's currently attached to another instance. If you try to force attach a zonal disk to an instance, you will receive an error.
    * @param {string} request.instance
@@ -1716,6 +1719,7 @@ export class InstancesClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {google.cloud.compute.v1.Instance} request.instanceResource
+   *   The body resource for this request
    * @param {string} request.project
    *   Project ID for this request.
    * @param {string} request.requestId
@@ -2051,6 +2055,7 @@ export class InstancesClient {
    * @param {string} request.instance
    *   The instance name for this request.
    * @param {google.cloud.compute.v1.InstancesRemoveResourcePoliciesRequest} request.instancesRemoveResourcePoliciesRequestResource
+   *   The body resource for this request
    * @param {string} request.project
    *   Project ID for this request.
    * @param {string} request.requestId
@@ -2483,6 +2488,7 @@ export class InstancesClient {
    * @param {string} request.zone
    *   The name of the zone for this request.
    * @param {google.cloud.compute.v1.ZoneSetPolicyRequest} request.zoneSetPolicyRequestResource
+   *   The body resource for this request
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -2576,6 +2582,7 @@ export class InstancesClient {
    * @param {string} request.instance
    *   Name of the instance scoping this request.
    * @param {google.cloud.compute.v1.InstancesSetLabelsRequest} request.instancesSetLabelsRequestResource
+   *   The body resource for this request
    * @param {string} request.project
    *   Project ID for this request.
    * @param {string} request.requestId
@@ -2682,6 +2689,7 @@ export class InstancesClient {
    * @param {string} request.instance
    *   Name of the instance scoping this request.
    * @param {google.cloud.compute.v1.InstancesSetMachineResourcesRequest} request.instancesSetMachineResourcesRequestResource
+   *   The body resource for this request
    * @param {string} request.project
    *   Project ID for this request.
    * @param {string} request.requestId
@@ -2788,6 +2796,7 @@ export class InstancesClient {
    * @param {string} request.instance
    *   Name of the instance scoping this request.
    * @param {google.cloud.compute.v1.InstancesSetMachineTypeRequest} request.instancesSetMachineTypeRequestResource
+   *   The body resource for this request
    * @param {string} request.project
    *   Project ID for this request.
    * @param {string} request.requestId
@@ -2891,6 +2900,7 @@ export class InstancesClient {
    * @param {string} request.instance
    *   Name of the instance scoping this request.
    * @param {google.cloud.compute.v1.Metadata} request.metadataResource
+   *   The body resource for this request
    * @param {string} request.project
    *   Project ID for this request.
    * @param {string} request.requestId
@@ -2997,6 +3007,7 @@ export class InstancesClient {
    * @param {string} request.instance
    *   Name of the instance scoping this request.
    * @param {google.cloud.compute.v1.InstancesSetMinCpuPlatformRequest} request.instancesSetMinCpuPlatformRequestResource
+   *   The body resource for this request
    * @param {string} request.project
    *   Project ID for this request.
    * @param {string} request.requestId
@@ -3111,6 +3122,7 @@ export class InstancesClient {
    *
    *   The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
    * @param {google.cloud.compute.v1.Scheduling} request.schedulingResource
+   *   The body resource for this request
    * @param {string} request.zone
    *   The name of the zone for this request.
    * @param {object} [options]
@@ -3209,6 +3221,7 @@ export class InstancesClient {
    * @param {string} request.instance
    *   Name of the instance resource to start.
    * @param {google.cloud.compute.v1.InstancesSetServiceAccountRequest} request.instancesSetServiceAccountRequestResource
+   *   The body resource for this request
    * @param {string} request.project
    *   Project ID for this request.
    * @param {string} request.requestId
@@ -3326,6 +3339,7 @@ export class InstancesClient {
    *
    *   The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
    * @param {google.cloud.compute.v1.ShieldedInstanceIntegrityPolicy} request.shieldedInstanceIntegrityPolicyResource
+   *   The body resource for this request
    * @param {string} request.zone
    *   The name of the zone for this request.
    * @param {object} [options]
@@ -3432,6 +3446,7 @@ export class InstancesClient {
    *
    *   The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
    * @param {google.cloud.compute.v1.Tags} request.tagsResource
+   *   The body resource for this request
    * @param {string} request.zone
    *   The name of the zone for this request.
    * @param {object} [options]
@@ -3730,6 +3745,7 @@ export class InstancesClient {
    * @param {string} request.instance
    *   Name of the instance resource to start.
    * @param {google.cloud.compute.v1.InstancesStartWithEncryptionKeyRequest} request.instancesStartWithEncryptionKeyRequestResource
+   *   The body resource for this request
    * @param {string} request.project
    *   Project ID for this request.
    * @param {string} request.requestId
@@ -3941,6 +3957,7 @@ export class InstancesClient {
    * @param {string} request.resource
    *   Name or id of the resource for this request.
    * @param {google.cloud.compute.v1.TestPermissionsRequest} request.testPermissionsRequestResource
+   *   The body resource for this request
    * @param {string} request.zone
    *   The name of the zone for this request.
    * @param {object} [options]
@@ -4035,6 +4052,7 @@ export class InstancesClient {
    * @param {string} request.instance
    *   Name of the instance resource to update.
    * @param {google.cloud.compute.v1.Instance} request.instanceResource
+   *   The body resource for this request
    * @param {string} request.minimalAction
    *   Specifies the action to take when updating an instance even if the updated properties do not require it. If not specified, then Compute Engine acts based on the minimum action that the updated properties require.
    * @param {string} request.mostDisruptiveAllowedAction
@@ -4141,6 +4159,7 @@ export class InstancesClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {google.cloud.compute.v1.AccessConfig} request.accessConfigResource
+   *   The body resource for this request
    * @param {string} request.instance
    *   The instance name for this request.
    * @param {string} request.networkInterface
@@ -4252,6 +4271,7 @@ export class InstancesClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {google.cloud.compute.v1.DisplayDevice} request.displayDeviceResource
+   *   The body resource for this request
    * @param {string} request.instance
    *   Name of the instance scoping this request.
    * @param {string} request.project
@@ -4365,6 +4385,7 @@ export class InstancesClient {
    * @param {string} request.networkInterface
    *   The name of the network interface to update.
    * @param {google.cloud.compute.v1.NetworkInterface} request.networkInterfaceResource
+   *   The body resource for this request
    * @param {string} request.project
    *   Project ID for this request.
    * @param {string} request.requestId
@@ -4486,6 +4507,7 @@ export class InstancesClient {
    *
    *   The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
    * @param {google.cloud.compute.v1.ShieldedInstanceConfig} request.shieldedInstanceConfigResource
+   *   The body resource for this request
    * @param {string} request.zone
    *   The name of the zone for this request.
    * @param {object} [options]

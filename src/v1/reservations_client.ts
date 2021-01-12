@@ -752,6 +752,7 @@ export class ReservationsClient {
    *
    *   The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
    * @param {google.cloud.compute.v1.Reservation} request.reservationResource
+   *   The body resource for this request
    * @param {string} request.zone
    *   Name of the zone for this request.
    * @param {object} [options]
@@ -969,6 +970,7 @@ export class ReservationsClient {
    * @param {string} request.reservation
    *   Name of the reservation to update.
    * @param {google.cloud.compute.v1.ReservationsResizeRequest} request.reservationsResizeRequestResource
+   *   The body resource for this request
    * @param {string} request.zone
    *   Name of the zone for this request.
    * @param {object} [options]
@@ -1071,6 +1073,7 @@ export class ReservationsClient {
    * @param {string} request.zone
    *   The name of the zone for this request.
    * @param {google.cloud.compute.v1.ZoneSetPolicyRequest} request.zoneSetPolicyRequestResource
+   *   The body resource for this request
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1172,6 +1175,7 @@ export class ReservationsClient {
    * @param {string} request.resource
    *   Name or id of the resource for this request.
    * @param {google.cloud.compute.v1.TestPermissionsRequest} request.testPermissionsRequestResource
+   *   The body resource for this request
    * @param {string} request.zone
    *   The name of the zone for this request.
    * @param {object} [options]
