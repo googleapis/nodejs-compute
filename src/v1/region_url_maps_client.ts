@@ -520,6 +520,7 @@ export class RegionUrlMapsClient {
    * @param {string} request.requestId
    *   begin_interface: MixerMutationRequestBuilder Request ID to support idempotency.
    * @param {google.cloud.compute.v1.UrlMap} request.urlMapResource
+   *   The body resource for this request
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -733,6 +734,7 @@ export class RegionUrlMapsClient {
    * @param {string} request.urlMap
    *   Name of the UrlMap resource to patch.
    * @param {google.cloud.compute.v1.UrlMap} request.urlMapResource
+   *   The body resource for this request
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -832,6 +834,7 @@ export class RegionUrlMapsClient {
    * @param {string} request.urlMap
    *   Name of the UrlMap resource to update.
    * @param {google.cloud.compute.v1.UrlMap} request.urlMapResource
+   *   The body resource for this request
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -927,6 +930,7 @@ export class RegionUrlMapsClient {
    * @param {string} request.region
    *   Name of the region scoping this request.
    * @param {google.cloud.compute.v1.RegionUrlMapsValidateRequest} request.regionUrlMapsValidateRequestResource
+   *   The body resource for this request
    * @param {string} request.urlMap
    *   Name of the UrlMap resource to be validated as.
    * @param {object} [options]

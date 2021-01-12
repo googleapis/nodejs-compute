@@ -626,6 +626,7 @@ export class UrlMapsClient {
    *
    *   The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
    * @param {google.cloud.compute.v1.UrlMap} request.urlMapResource
+   *   The body resource for this request
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -712,11 +713,12 @@ export class UrlMapsClient {
   /**
    * Initiates a cache invalidation operation, invalidating the specified path, scoped to the specified UrlMap.
    *
-   * For more information, see [Invalidating cached content](/cdn/docs/invalidating-cached-content).
+   * For more information, see [Invalidating cached content](https://cloud.google.com/cdn/docs/invalidating-cached-content).
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {google.cloud.compute.v1.CacheInvalidationRule} request.cacheInvalidationRuleResource
+   *   The body resource for this request
    * @param {string} request.project
    *   Project ID for this request.
    * @param {string} request.requestId
@@ -928,6 +930,7 @@ export class UrlMapsClient {
    * @param {string} request.urlMap
    *   Name of the UrlMap resource to patch.
    * @param {google.cloud.compute.v1.UrlMap} request.urlMapResource
+   *   The body resource for this request
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1021,6 +1024,7 @@ export class UrlMapsClient {
    * @param {string} request.urlMap
    *   Name of the UrlMap resource to update.
    * @param {google.cloud.compute.v1.UrlMap} request.urlMapResource
+   *   The body resource for this request
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -1110,6 +1114,7 @@ export class UrlMapsClient {
    * @param {string} request.urlMap
    *   Name of the UrlMap resource to be validated as.
    * @param {google.cloud.compute.v1.UrlMapsValidateRequest} request.urlMapsValidateRequestResource
+   *   The body resource for this request
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.

@@ -566,6 +566,7 @@ export class RegionInstanceGroupsClient {
    * @param {string} request.region
    *   Name of the region scoping this request.
    * @param {google.cloud.compute.v1.RegionInstanceGroupsListInstancesRequest} request.regionInstanceGroupsListInstancesRequestResource
+   *   The body resource for this request
    * @param {boolean} request.returnPartialSuccess
    *   Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
    * @param {object} [options]
@@ -671,6 +672,7 @@ export class RegionInstanceGroupsClient {
    * @param {string} request.region
    *   Name of the region scoping this request.
    * @param {google.cloud.compute.v1.RegionInstanceGroupsSetNamedPortsRequest} request.regionInstanceGroupsSetNamedPortsRequestResource
+   *   The body resource for this request
    * @param {string} request.requestId
    *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
    *

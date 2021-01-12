@@ -532,6 +532,7 @@ export class RegionHealthChecksClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {google.cloud.compute.v1.HealthCheck} request.healthCheckResource
+   *   The body resource for this request
    * @param {string} request.project
    *   Project ID for this request.
    * @param {string} request.region
@@ -752,6 +753,7 @@ export class RegionHealthChecksClient {
    * @param {string} request.healthCheck
    *   Name of the HealthCheck resource to patch.
    * @param {google.cloud.compute.v1.HealthCheck} request.healthCheckResource
+   *   The body resource for this request
    * @param {string} request.project
    *   Project ID for this request.
    * @param {string} request.region
@@ -858,6 +860,7 @@ export class RegionHealthChecksClient {
    * @param {string} request.healthCheck
    *   Name of the HealthCheck resource to update.
    * @param {google.cloud.compute.v1.HealthCheck} request.healthCheckResource
+   *   The body resource for this request
    * @param {string} request.project
    *   Project ID for this request.
    * @param {string} request.region

@@ -331,6 +331,7 @@ export class NetworksClient {
    * @param {string} request.network
    *   Name of the network resource to add peering to.
    * @param {google.cloud.compute.v1.NetworksAddPeeringRequest} request.networksAddPeeringRequestResource
+   *   The body resource for this request
    * @param {string} request.project
    *   Project ID for this request.
    * @param {string} request.requestId
@@ -606,6 +607,7 @@ export class NetworksClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {google.cloud.compute.v1.Network} request.networkResource
+   *   The body resource for this request
    * @param {string} request.project
    *   Project ID for this request.
    * @param {string} request.requestId
@@ -933,6 +935,7 @@ export class NetworksClient {
    * @param {string} request.network
    *   Name of the network to update.
    * @param {google.cloud.compute.v1.Network} request.networkResource
+   *   The body resource for this request
    * @param {string} request.project
    *   Project ID for this request.
    * @param {string} request.requestId
@@ -1032,6 +1035,7 @@ export class NetworksClient {
    * @param {string} request.network
    *   Name of the network resource to remove peering from.
    * @param {google.cloud.compute.v1.NetworksRemovePeeringRequest} request.networksRemovePeeringRequestResource
+   *   The body resource for this request
    * @param {string} request.project
    *   Project ID for this request.
    * @param {string} request.requestId
@@ -1239,6 +1243,7 @@ export class NetworksClient {
    * @param {string} request.network
    *   Name of the network resource which the updated peering is belonging to.
    * @param {google.cloud.compute.v1.NetworksUpdatePeeringRequest} request.networksUpdatePeeringRequestResource
+   *   The body resource for this request
    * @param {string} request.project
    *   Project ID for this request.
    * @param {string} request.requestId

@@ -759,6 +759,7 @@ export class ResourcePoliciesClient {
    *
    *   The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
    * @param {google.cloud.compute.v1.ResourcePolicy} request.resourcePolicyResource
+   *   The body resource for this request
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -971,6 +972,7 @@ export class ResourcePoliciesClient {
    * @param {string} request.region
    *   The name of the region for this request.
    * @param {google.cloud.compute.v1.RegionSetPolicyRequest} request.regionSetPolicyRequestResource
+   *   The body resource for this request
    * @param {string} request.resource
    *   Name or id of the resource for this request.
    * @param {object} [options]
@@ -1076,6 +1078,7 @@ export class ResourcePoliciesClient {
    * @param {string} request.resource
    *   Name or id of the resource for this request.
    * @param {google.cloud.compute.v1.TestPermissionsRequest} request.testPermissionsRequestResource
+   *   The body resource for this request
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.

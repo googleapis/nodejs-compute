@@ -545,6 +545,7 @@ export class RegionBackendServicesClient {
    * @param {string} request.region
    *   Name of the region scoping this request.
    * @param {google.cloud.compute.v1.ResourceGroupReference} request.resourceGroupReferenceResource
+   *   The body resource for this request
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -642,6 +643,7 @@ export class RegionBackendServicesClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {google.cloud.compute.v1.BackendService} request.backendServiceResource
+   *   The body resource for this request
    * @param {string} request.project
    *   Project ID for this request.
    * @param {string} request.region
@@ -871,6 +873,7 @@ export class RegionBackendServicesClient {
    * @param {string} request.backendService
    *   Name of the BackendService resource to patch.
    * @param {google.cloud.compute.v1.BackendService} request.backendServiceResource
+   *   The body resource for this request
    * @param {string} request.project
    *   Project ID for this request.
    * @param {string} request.region
@@ -980,6 +983,7 @@ export class RegionBackendServicesClient {
    * @param {string} request.backendService
    *   Name of the BackendService resource to update.
    * @param {google.cloud.compute.v1.BackendService} request.backendServiceResource
+   *   The body resource for this request
    * @param {string} request.project
    *   Project ID for this request.
    * @param {string} request.region

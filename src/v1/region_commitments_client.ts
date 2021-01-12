@@ -539,6 +539,7 @@ export class RegionCommitmentsClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {google.cloud.compute.v1.Commitment} request.commitmentResource
+   *   The body resource for this request
    * @param {string} request.project
    *   Project ID for this request.
    * @param {string} request.region

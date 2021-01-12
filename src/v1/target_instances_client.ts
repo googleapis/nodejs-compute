@@ -650,6 +650,7 @@ export class TargetInstancesClient {
    *
    *   The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
    * @param {google.cloud.compute.v1.TargetInstance} request.targetInstanceResource
+   *   The body resource for this request
    * @param {string} request.zone
    *   Name of the zone scoping this request.
    * @param {object} [options]

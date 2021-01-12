@@ -650,6 +650,7 @@ export class TargetHttpsProxiesClient {
    *
    *   The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
    * @param {google.cloud.compute.v1.TargetHttpsProxy} request.targetHttpsProxyResource
+   *   The body resource for this request
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -864,6 +865,7 @@ export class TargetHttpsProxiesClient {
    *
    *   The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
    * @param {google.cloud.compute.v1.TargetHttpsProxiesSetQuicOverrideRequest} request.targetHttpsProxiesSetQuicOverrideRequestResource
+   *   The body resource for this request
    * @param {string} request.targetHttpsProxy
    *   Name of the TargetHttpsProxy resource to set the QUIC override policy for. The name should conform to RFC1035.
    * @param {object} [options]
@@ -971,6 +973,7 @@ export class TargetHttpsProxiesClient {
    *
    *   The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
    * @param {google.cloud.compute.v1.TargetHttpsProxiesSetSslCertificatesRequest} request.targetHttpsProxiesSetSslCertificatesRequestResource
+   *   The body resource for this request
    * @param {string} request.targetHttpsProxy
    *   Name of the TargetHttpsProxy resource to set an SslCertificates resource for.
    * @param {object} [options]
@@ -1078,6 +1081,7 @@ export class TargetHttpsProxiesClient {
    *
    *   The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
    * @param {google.cloud.compute.v1.SslPolicyReference} request.sslPolicyReferenceResource
+   *   The body resource for this request
    * @param {string} request.targetHttpsProxy
    *   Name of the TargetHttpsProxy resource whose SSL policy is to be set. The name must be 1-63 characters long, and comply with RFC1035.
    * @param {object} [options]
@@ -1187,6 +1191,7 @@ export class TargetHttpsProxiesClient {
    * @param {string} request.targetHttpsProxy
    *   Name of the TargetHttpsProxy resource whose URL map is to be set.
    * @param {google.cloud.compute.v1.UrlMapReference} request.urlMapReferenceResource
+   *   The body resource for this request
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.

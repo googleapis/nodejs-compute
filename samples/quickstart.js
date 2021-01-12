@@ -1,17 +1,31 @@
-const compute = require('@google-cloud/compute');
+// Copyright 2021 Google LLC
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
 
-function sleep(timeoutMs) {
-  return new Promise(resolve => {
-    setTimeout(resolve, timeoutMs);
-  });
-}
-
-// point GOOGLE_APPLICATION_CREDENTIALS environment variable to
-// the JSON service account key file
+'use strict';
 
 async function main() {
+  // [START compute_quickstart]
+  const compute = require('@google-cloud/compute');
+
+  function sleep(timeoutMs) {
+    return new Promise(resolve => {
+      setTimeout(resolve, timeoutMs);
+    });
+  }
+
   const client = new compute.AddressesClient({fallback: 'rest'});
-  const project = 'PROJECT-NAME';
+  const project = await client.getProjectId();
   const region = 'us-east1';
 
   const addressResource = {
@@ -47,6 +61,8 @@ async function main() {
     region,
   });
   console.log(listResponse2);
+  console.log('Quickstart sample completed');
+  // [END compute_quickstart]
 }
 
-main();
+main().catch(console.error);

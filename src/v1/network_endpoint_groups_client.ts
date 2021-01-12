@@ -454,6 +454,7 @@ export class NetworkEndpointGroupsClient {
    * @param {string} request.networkEndpointGroup
    *   The name of the network endpoint group where you are attaching network endpoints to. It should comply with RFC1035.
    * @param {google.cloud.compute.v1.NetworkEndpointGroupsAttachEndpointsRequest} request.networkEndpointGroupsAttachEndpointsRequestResource
+   *   The body resource for this request
    * @param {string} request.project
    *   Project ID for this request.
    * @param {string} request.requestId
@@ -675,6 +676,7 @@ export class NetworkEndpointGroupsClient {
    * @param {string} request.networkEndpointGroup
    *   The name of the network endpoint group where you are removing network endpoints. It should comply with RFC1035.
    * @param {google.cloud.compute.v1.NetworkEndpointGroupsDetachEndpointsRequest} request.networkEndpointGroupsDetachEndpointsRequestResource
+   *   The body resource for this request
    * @param {string} request.project
    *   Project ID for this request.
    * @param {string} request.requestId
@@ -888,6 +890,7 @@ export class NetworkEndpointGroupsClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {google.cloud.compute.v1.NetworkEndpointGroup} request.networkEndpointGroupResource
+   *   The body resource for this request
    * @param {string} request.project
    *   Project ID for this request.
    * @param {string} request.requestId
@@ -1127,6 +1130,7 @@ export class NetworkEndpointGroupsClient {
    * @param {string} request.networkEndpointGroup
    *   The name of the network endpoint group from which you want to generate a list of included network endpoints. It should comply with RFC1035.
    * @param {google.cloud.compute.v1.NetworkEndpointGroupsListEndpointsRequest} request.networkEndpointGroupsListEndpointsRequestResource
+   *   The body resource for this request
    * @param {string} request.orderBy
    *   Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name.
    *
@@ -1242,6 +1246,7 @@ export class NetworkEndpointGroupsClient {
    * @param {string} request.resource
    *   Name or id of the resource for this request.
    * @param {google.cloud.compute.v1.TestPermissionsRequest} request.testPermissionsRequestResource
+   *   The body resource for this request
    * @param {string} request.zone
    *   The name of the zone for this request.
    * @param {object} [options]

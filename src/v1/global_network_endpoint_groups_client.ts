@@ -331,6 +331,7 @@ export class GlobalNetworkEndpointGroupsClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {google.cloud.compute.v1.GlobalNetworkEndpointGroupsAttachEndpointsRequest} request.globalNetworkEndpointGroupsAttachEndpointsRequestResource
+   *   The body resource for this request
    * @param {string} request.networkEndpointGroup
    *   The name of the network endpoint group where you are attaching network endpoints to. It should comply with RFC1035.
    * @param {string} request.project
@@ -548,6 +549,7 @@ export class GlobalNetworkEndpointGroupsClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {google.cloud.compute.v1.GlobalNetworkEndpointGroupsDetachEndpointsRequest} request.globalNetworkEndpointGroupsDetachEndpointsRequestResource
+   *   The body resource for this request
    * @param {string} request.networkEndpointGroup
    *   The name of the network endpoint group where you are removing network endpoints. It should comply with RFC1035.
    * @param {string} request.project
@@ -759,6 +761,7 @@ export class GlobalNetworkEndpointGroupsClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {google.cloud.compute.v1.NetworkEndpointGroup} request.networkEndpointGroupResource
+   *   The body resource for this request
    * @param {string} request.project
    *   Project ID for this request.
    * @param {string} request.requestId

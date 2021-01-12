@@ -538,6 +538,7 @@ export class RegionNotificationEndpointsClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {google.cloud.compute.v1.NotificationEndpoint} request.notificationEndpointResource
+   *   The body resource for this request
    * @param {string} request.project
    *   Project ID for this request.
    * @param {string} request.region

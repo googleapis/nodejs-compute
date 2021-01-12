@@ -638,6 +638,7 @@ export class AutoscalersClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {google.cloud.compute.v1.Autoscaler} request.autoscalerResource
+   *   The body resource for this request
    * @param {string} request.project
    *   Project ID for this request.
    * @param {string} request.requestId
@@ -845,6 +846,7 @@ export class AutoscalersClient {
    * @param {string} request.autoscaler
    *   Name of the autoscaler to patch.
    * @param {google.cloud.compute.v1.Autoscaler} request.autoscalerResource
+   *   The body resource for this request
    * @param {string} request.project
    *   Project ID for this request.
    * @param {string} request.requestId
@@ -946,6 +948,7 @@ export class AutoscalersClient {
    * @param {string} request.autoscaler
    *   Name of the autoscaler to update.
    * @param {google.cloud.compute.v1.Autoscaler} request.autoscalerResource
+   *   The body resource for this request
    * @param {string} request.project
    *   Project ID for this request.
    * @param {string} request.requestId

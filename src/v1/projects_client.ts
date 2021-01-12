@@ -435,6 +435,7 @@ export class ProjectsClient {
    * @param {string} request.project
    *   Project ID for this request.
    * @param {google.cloud.compute.v1.ProjectsDisableXpnResourceRequest} request.projectsDisableXpnResourceRequestResource
+   *   The body resource for this request
    * @param {string} request.requestId
    *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
    *
@@ -638,6 +639,7 @@ export class ProjectsClient {
    * @param {string} request.project
    *   Project ID for this request.
    * @param {google.cloud.compute.v1.ProjectsEnableXpnResourceRequest} request.projectsEnableXpnResourceRequestResource
+   *   The body resource for this request
    * @param {string} request.requestId
    *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
    *
@@ -1052,6 +1054,7 @@ export class ProjectsClient {
    * @param {string} request.project
    *   Project ID for this request.
    * @param {google.cloud.compute.v1.ProjectsListXpnHostsRequest} request.projectsListXpnHostsRequestResource
+   *   The body resource for this request
    * @param {boolean} request.returnPartialSuccess
    *   Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
    * @param {object} [options]
@@ -1141,6 +1144,7 @@ export class ProjectsClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {google.cloud.compute.v1.DiskMoveRequest} request.diskMoveRequestResource
+   *   The body resource for this request
    * @param {string} request.project
    *   Project ID for this request.
    * @param {string} request.requestId
@@ -1238,6 +1242,7 @@ export class ProjectsClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {google.cloud.compute.v1.InstanceMoveRequest} request.instanceMoveRequestResource
+   *   The body resource for this request
    * @param {string} request.project
    *   Project ID for this request.
    * @param {string} request.requestId
@@ -1340,6 +1345,7 @@ export class ProjectsClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {google.cloud.compute.v1.Metadata} request.metadataResource
+   *   The body resource for this request
    * @param {string} request.project
    *   Project ID for this request.
    * @param {string} request.requestId
@@ -1451,6 +1457,7 @@ export class ProjectsClient {
    * @param {string} request.project
    *   Project ID for this request.
    * @param {google.cloud.compute.v1.ProjectsSetDefaultNetworkTierRequest} request.projectsSetDefaultNetworkTierRequestResource
+   *   The body resource for this request
    * @param {string} request.requestId
    *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
    *
@@ -1562,6 +1569,7 @@ export class ProjectsClient {
    *
    *   The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
    * @param {google.cloud.compute.v1.UsageExportLocation} request.usageExportLocationResource
+   *   The body resource for this request
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.

@@ -511,6 +511,7 @@ export class SslPoliciesClient {
    *
    *   The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
    * @param {google.cloud.compute.v1.SslPolicy} request.sslPolicyResource
+   *   The body resource for this request
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -830,6 +831,7 @@ export class SslPoliciesClient {
    * @param {string} request.sslPolicy
    *   Name of the SSL policy to update. The name must be 1-63 characters long, and comply with RFC1035.
    * @param {google.cloud.compute.v1.SslPolicy} request.sslPolicyResource
+   *   The body resource for this request
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.

@@ -613,6 +613,7 @@ export class InterconnectsClient {
    * @param {Object} request
    *   The request object that will be sent.
    * @param {google.cloud.compute.v1.Interconnect} request.interconnectResource
+   *   The body resource for this request
    * @param {string} request.project
    *   Project ID for this request.
    * @param {string} request.requestId
@@ -826,6 +827,7 @@ export class InterconnectsClient {
    * @param {string} request.interconnect
    *   Name of the interconnect to update.
    * @param {google.cloud.compute.v1.Interconnect} request.interconnectResource
+   *   The body resource for this request
    * @param {string} request.project
    *   Project ID for this request.
    * @param {string} request.requestId
