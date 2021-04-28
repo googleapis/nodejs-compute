@@ -18,6 +18,9 @@ const assert = require('assert');
 const uuid = require('uuid');
 const compute = require('../');
 
+const Status = compute.protos.google.cloud.compute.v1.Operation.Status;
+const DiskType = compute.protos.google.cloud.compute.v1.AttachedDisk.Type;
+
 describe('Compute', () => {
   const region = 'us-central1';
   const zone = 'us-central1-a';
@@ -146,7 +149,7 @@ describe('Compute', () => {
                 'projects/debian-cloud/global/images/family/debian-10',
             },
             autoDelete: true,
-            type: 192248471, // should be ENUM
+            type: DiskType.PERSISTENT,
           },
         ],
         networkInterfaces: [
@@ -248,7 +251,7 @@ describe('Compute', () => {
                   'projects/debian-cloud/global/images/family/debian-10',
               },
               autoDelete: true,
-              type: 192248471, // should be ENUM
+              type: DiskType.PERSISTENT,
             },
           ],
           networkInterfaces: [
@@ -301,7 +304,7 @@ describe('Compute', () => {
         zone,
         operation: operation.name,
       });
-      if (getResp.status === 2104194) {
+      if (getResp.status === Status.DONE) {
         break;
       } else {
         await new Promise(resolve => setTimeout(resolve, 4000));
@@ -316,7 +319,7 @@ describe('Compute', () => {
         project,
         operation: operation.name,
       });
-      if (getResp.status === 2104194) {
+      if (getResp.status === Status.DONE) {
         break;
       } else {
         await new Promise(resolve => setTimeout(resolve, 4000));
