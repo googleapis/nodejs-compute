@@ -127,7 +127,7 @@ describe('Compute', () => {
       INSTANCE_NAME = generateName('instance');
     });
 
-    after(async function() {
+    after(async function () {
       this.timeout(10 * 60 * 1000);
       if (dirty) {
         await client.delete({
@@ -138,7 +138,7 @@ describe('Compute', () => {
       }
     });
 
-    it('instance create and fetch', async function() {
+    it('instance create and fetch', async function () {
       this.timeout(10 * 60 * 1000);
       const instanceResource = {
         name: INSTANCE_NAME,
@@ -183,7 +183,7 @@ describe('Compute', () => {
       );
     });
 
-    it('instances patch', async function() {
+    it('instances patch', async function () {
       this.timeout(10 * 60 * 1000);
       const [stopResponse] = await client.stop({
         project,
@@ -228,7 +228,7 @@ describe('Compute', () => {
       instanceTemplateName = generateName('instance-group');
     });
 
-    after(async function() {
+    after(async function () {
       this.timeout(10 * 60 * 1000);
       const [deleteIgm] = await clientInstanceGroups.delete({
         project,
@@ -243,7 +243,7 @@ describe('Compute', () => {
       });
     });
 
-    it('test instance group manager resize to 0', async function() {
+    it('test instance group manager resize to 0', async function () {
       this.timeout(10 * 60 * 1000);
       const instanceTemplate = {
         name: instanceTemplateName,
