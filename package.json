@@ -98,7 +98,7 @@
   "scripts": {
     "test": "c8 node build/test/run.js",
     "samples-test": "cd samples/ && npm link ../ && npm install && npm test && cd ../",
-    "system-test": "mocha build/system-test",
+    "system-test": "mocha build/system-test system-test/*.js",
     "lint": "gts check",
     "fix": "gts fix",
     "docs": "jsdoc -c .jsdoc.js",
