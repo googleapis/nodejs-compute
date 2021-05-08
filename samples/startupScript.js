@@ -72,7 +72,7 @@ async function main(name = 'start-script-example') {
     console.log('Operation complete. Waiting for IP');
     await pingVM(ip);
 
-    console.log(`\n${name} created succesfully`);
+    console.log(`\n${name} created successfully`);
   }
 
   /**
