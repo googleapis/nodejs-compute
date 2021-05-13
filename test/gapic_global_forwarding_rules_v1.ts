@@ -26,10 +26,9 @@ import * as globalforwardingrulesModule from '../src';
 import {protobuf} from 'google-gax';
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (instance.constructor as typeof protobuf.Message).toObject(
-    instance as protobuf.Message<T>,
-    {defaults: true}
-  );
+  const filledObject = (
+    instance.constructor as typeof protobuf.Message
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject
   ) as T;
@@ -71,49 +70,46 @@ describe('v1.GlobalForwardingRulesClient', () => {
   });
 
   it('should create a client with no option', () => {
-    const client = new globalforwardingrulesModule.v1.GlobalForwardingRulesClient();
+    const client =
+      new globalforwardingrulesModule.v1.GlobalForwardingRulesClient();
     assert(client);
   });
 
   it('should create a client with gRPC fallback', () => {
-    const client = new globalforwardingrulesModule.v1.GlobalForwardingRulesClient(
-      {
+    const client =
+      new globalforwardingrulesModule.v1.GlobalForwardingRulesClient({
         fallback: true,
-      }
-    );
+      });
     assert(client);
   });
 
   it('has initialize method and supports deferred initialization', async () => {
-    const client = new globalforwardingrulesModule.v1.GlobalForwardingRulesClient(
-      {
+    const client =
+      new globalforwardingrulesModule.v1.GlobalForwardingRulesClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
-      }
-    );
+      });
     assert.strictEqual(client.globalForwardingRulesStub, undefined);
     await client.initialize();
     assert(client.globalForwardingRulesStub);
   });
 
   it('has close method', () => {
-    const client = new globalforwardingrulesModule.v1.GlobalForwardingRulesClient(
-      {
+    const client =
+      new globalforwardingrulesModule.v1.GlobalForwardingRulesClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
-      }
-    );
+      });
     client.close();
   });
 
   it('has getProjectId method', async () => {
     const fakeProjectId = 'fake-project-id';
-    const client = new globalforwardingrulesModule.v1.GlobalForwardingRulesClient(
-      {
+    const client =
+      new globalforwardingrulesModule.v1.GlobalForwardingRulesClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
-      }
-    );
+      });
     client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
     const result = await client.getProjectId();
     assert.strictEqual(result, fakeProjectId);
@@ -122,12 +118,11 @@ describe('v1.GlobalForwardingRulesClient', () => {
 
   it('has getProjectId method with callback', async () => {
     const fakeProjectId = 'fake-project-id';
-    const client = new globalforwardingrulesModule.v1.GlobalForwardingRulesClient(
-      {
+    const client =
+      new globalforwardingrulesModule.v1.GlobalForwardingRulesClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
-      }
-    );
+      });
     client.auth.getProjectId = sinon
       .stub()
       .callsArgWith(0, null, fakeProjectId);
@@ -146,12 +141,11 @@ describe('v1.GlobalForwardingRulesClient', () => {
 
   describe('delete', () => {
     it('invokes delete without error', async () => {
-      const client = new globalforwardingrulesModule.v1.GlobalForwardingRulesClient(
-        {
+      const client =
+        new globalforwardingrulesModule.v1.GlobalForwardingRulesClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteGlobalForwardingRuleRequest()
@@ -179,12 +173,11 @@ describe('v1.GlobalForwardingRulesClient', () => {
     });
 
     it('invokes delete without error using callback', async () => {
-      const client = new globalforwardingrulesModule.v1.GlobalForwardingRulesClient(
-        {
+      const client =
+        new globalforwardingrulesModule.v1.GlobalForwardingRulesClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteGlobalForwardingRuleRequest()
@@ -201,9 +194,8 @@ describe('v1.GlobalForwardingRulesClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
-      client.innerApiCalls.delete = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.delete =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.delete(
           request,
@@ -229,12 +221,11 @@ describe('v1.GlobalForwardingRulesClient', () => {
     });
 
     it('invokes delete with error', async () => {
-      const client = new globalforwardingrulesModule.v1.GlobalForwardingRulesClient(
-        {
+      const client =
+        new globalforwardingrulesModule.v1.GlobalForwardingRulesClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteGlobalForwardingRuleRequest()
@@ -261,12 +252,11 @@ describe('v1.GlobalForwardingRulesClient', () => {
 
   describe('get', () => {
     it('invokes get without error', async () => {
-      const client = new globalforwardingrulesModule.v1.GlobalForwardingRulesClient(
-        {
+      const client =
+        new globalforwardingrulesModule.v1.GlobalForwardingRulesClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetGlobalForwardingRuleRequest()
@@ -294,12 +284,11 @@ describe('v1.GlobalForwardingRulesClient', () => {
     });
 
     it('invokes get without error using callback', async () => {
-      const client = new globalforwardingrulesModule.v1.GlobalForwardingRulesClient(
-        {
+      const client =
+        new globalforwardingrulesModule.v1.GlobalForwardingRulesClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetGlobalForwardingRuleRequest()
@@ -342,12 +331,11 @@ describe('v1.GlobalForwardingRulesClient', () => {
     });
 
     it('invokes get with error', async () => {
-      const client = new globalforwardingrulesModule.v1.GlobalForwardingRulesClient(
-        {
+      const client =
+        new globalforwardingrulesModule.v1.GlobalForwardingRulesClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetGlobalForwardingRuleRequest()
@@ -374,12 +362,11 @@ describe('v1.GlobalForwardingRulesClient', () => {
 
   describe('insert', () => {
     it('invokes insert without error', async () => {
-      const client = new globalforwardingrulesModule.v1.GlobalForwardingRulesClient(
-        {
+      const client =
+        new globalforwardingrulesModule.v1.GlobalForwardingRulesClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertGlobalForwardingRuleRequest()
@@ -407,12 +394,11 @@ describe('v1.GlobalForwardingRulesClient', () => {
     });
 
     it('invokes insert without error using callback', async () => {
-      const client = new globalforwardingrulesModule.v1.GlobalForwardingRulesClient(
-        {
+      const client =
+        new globalforwardingrulesModule.v1.GlobalForwardingRulesClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertGlobalForwardingRuleRequest()
@@ -429,9 +415,8 @@ describe('v1.GlobalForwardingRulesClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
-      client.innerApiCalls.insert = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.insert =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.insert(
           request,
@@ -457,12 +442,11 @@ describe('v1.GlobalForwardingRulesClient', () => {
     });
 
     it('invokes insert with error', async () => {
-      const client = new globalforwardingrulesModule.v1.GlobalForwardingRulesClient(
-        {
+      const client =
+        new globalforwardingrulesModule.v1.GlobalForwardingRulesClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertGlobalForwardingRuleRequest()
@@ -489,12 +473,11 @@ describe('v1.GlobalForwardingRulesClient', () => {
 
   describe('list', () => {
     it('invokes list without error', async () => {
-      const client = new globalforwardingrulesModule.v1.GlobalForwardingRulesClient(
-        {
+      const client =
+        new globalforwardingrulesModule.v1.GlobalForwardingRulesClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListGlobalForwardingRulesRequest()
@@ -522,12 +505,11 @@ describe('v1.GlobalForwardingRulesClient', () => {
     });
 
     it('invokes list without error using callback', async () => {
-      const client = new globalforwardingrulesModule.v1.GlobalForwardingRulesClient(
-        {
+      const client =
+        new globalforwardingrulesModule.v1.GlobalForwardingRulesClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListGlobalForwardingRulesRequest()
@@ -570,12 +552,11 @@ describe('v1.GlobalForwardingRulesClient', () => {
     });
 
     it('invokes list with error', async () => {
-      const client = new globalforwardingrulesModule.v1.GlobalForwardingRulesClient(
-        {
+      const client =
+        new globalforwardingrulesModule.v1.GlobalForwardingRulesClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListGlobalForwardingRulesRequest()
@@ -602,12 +583,11 @@ describe('v1.GlobalForwardingRulesClient', () => {
 
   describe('patch', () => {
     it('invokes patch without error', async () => {
-      const client = new globalforwardingrulesModule.v1.GlobalForwardingRulesClient(
-        {
+      const client =
+        new globalforwardingrulesModule.v1.GlobalForwardingRulesClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchGlobalForwardingRuleRequest()
@@ -635,12 +615,11 @@ describe('v1.GlobalForwardingRulesClient', () => {
     });
 
     it('invokes patch without error using callback', async () => {
-      const client = new globalforwardingrulesModule.v1.GlobalForwardingRulesClient(
-        {
+      const client =
+        new globalforwardingrulesModule.v1.GlobalForwardingRulesClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchGlobalForwardingRuleRequest()
@@ -683,12 +662,11 @@ describe('v1.GlobalForwardingRulesClient', () => {
     });
 
     it('invokes patch with error', async () => {
-      const client = new globalforwardingrulesModule.v1.GlobalForwardingRulesClient(
-        {
+      const client =
+        new globalforwardingrulesModule.v1.GlobalForwardingRulesClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchGlobalForwardingRuleRequest()
@@ -715,12 +693,11 @@ describe('v1.GlobalForwardingRulesClient', () => {
 
   describe('setTarget', () => {
     it('invokes setTarget without error', async () => {
-      const client = new globalforwardingrulesModule.v1.GlobalForwardingRulesClient(
-        {
+      const client =
+        new globalforwardingrulesModule.v1.GlobalForwardingRulesClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetTargetGlobalForwardingRuleRequest()
@@ -748,12 +725,11 @@ describe('v1.GlobalForwardingRulesClient', () => {
     });
 
     it('invokes setTarget without error using callback', async () => {
-      const client = new globalforwardingrulesModule.v1.GlobalForwardingRulesClient(
-        {
+      const client =
+        new globalforwardingrulesModule.v1.GlobalForwardingRulesClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetTargetGlobalForwardingRuleRequest()
@@ -770,9 +746,8 @@ describe('v1.GlobalForwardingRulesClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
-      client.innerApiCalls.setTarget = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.setTarget =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.setTarget(
           request,
@@ -798,12 +773,11 @@ describe('v1.GlobalForwardingRulesClient', () => {
     });
 
     it('invokes setTarget with error', async () => {
-      const client = new globalforwardingrulesModule.v1.GlobalForwardingRulesClient(
-        {
+      const client =
+        new globalforwardingrulesModule.v1.GlobalForwardingRulesClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
-        }
-      );
+        });
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetTargetGlobalForwardingRuleRequest()

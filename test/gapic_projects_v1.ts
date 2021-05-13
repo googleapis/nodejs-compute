@@ -26,10 +26,9 @@ import * as projectsModule from '../src';
 import {protobuf} from 'google-gax';
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (instance.constructor as typeof protobuf.Message).toObject(
-    instance as protobuf.Message<T>,
-    {defaults: true}
-  );
+  const filledObject = (
+    instance.constructor as typeof protobuf.Message
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject
   ) as T;
@@ -184,9 +183,8 @@ describe('v1.ProjectsClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
-      client.innerApiCalls.disableXpnHost = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.disableXpnHost =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.disableXpnHost(
           request,
@@ -265,9 +263,8 @@ describe('v1.ProjectsClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
-      client.innerApiCalls.disableXpnResource = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.disableXpnResource =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.disableXpnResource(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -298,9 +295,8 @@ describe('v1.ProjectsClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
-      client.innerApiCalls.disableXpnResource = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.disableXpnResource =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.disableXpnResource(
           request,
@@ -410,9 +406,8 @@ describe('v1.ProjectsClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
-      client.innerApiCalls.enableXpnHost = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.enableXpnHost =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.enableXpnHost(
           request,
@@ -522,9 +517,8 @@ describe('v1.ProjectsClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
-      client.innerApiCalls.enableXpnResource = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.enableXpnResource =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.enableXpnResource(
           request,
@@ -741,9 +735,8 @@ describe('v1.ProjectsClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Project()
       );
-      client.innerApiCalls.getXpnHost = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.getXpnHost =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.getXpnHost(
           request,
@@ -853,9 +846,8 @@ describe('v1.ProjectsClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.ProjectsGetXpnResources()
       );
-      client.innerApiCalls.getXpnResources = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.getXpnResources =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.getXpnResources(
           request,
@@ -965,9 +957,8 @@ describe('v1.ProjectsClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.XpnHostList()
       );
-      client.innerApiCalls.listXpnHosts = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.listXpnHosts =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.listXpnHosts(
           request,
@@ -1077,9 +1068,8 @@ describe('v1.ProjectsClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
-      client.innerApiCalls.moveDisk = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.moveDisk =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.moveDisk(
           request,
@@ -1186,9 +1176,8 @@ describe('v1.ProjectsClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
-      client.innerApiCalls.moveInstance = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.moveInstance =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.moveInstance(
           request,
@@ -1267,9 +1256,8 @@ describe('v1.ProjectsClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
-      client.innerApiCalls.setCommonInstanceMetadata = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.setCommonInstanceMetadata =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.setCommonInstanceMetadata(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -1300,9 +1288,8 @@ describe('v1.ProjectsClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
-      client.innerApiCalls.setCommonInstanceMetadata = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.setCommonInstanceMetadata =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.setCommonInstanceMetadata(
           request,
@@ -1384,9 +1371,8 @@ describe('v1.ProjectsClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
-      client.innerApiCalls.setDefaultNetworkTier = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.setDefaultNetworkTier =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.setDefaultNetworkTier(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -1417,9 +1403,8 @@ describe('v1.ProjectsClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
-      client.innerApiCalls.setDefaultNetworkTier = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.setDefaultNetworkTier =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.setDefaultNetworkTier(
           request,
@@ -1501,9 +1486,8 @@ describe('v1.ProjectsClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
-      client.innerApiCalls.setUsageExportBucket = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.setUsageExportBucket =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.setUsageExportBucket(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -1534,9 +1518,8 @@ describe('v1.ProjectsClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
-      client.innerApiCalls.setUsageExportBucket = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.setUsageExportBucket =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.setUsageExportBucket(
           request,

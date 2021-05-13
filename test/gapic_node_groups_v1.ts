@@ -26,10 +26,9 @@ import * as nodegroupsModule from '../src';
 import {protobuf} from 'google-gax';
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (instance.constructor as typeof protobuf.Message).toObject(
-    instance as protobuf.Message<T>,
-    {defaults: true}
-  );
+  const filledObject = (
+    instance.constructor as typeof protobuf.Message
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject
   ) as T;
@@ -184,9 +183,8 @@ describe('v1.NodeGroupsClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
-      client.innerApiCalls.addNodes = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.addNodes =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.addNodes(
           request,
@@ -293,9 +291,8 @@ describe('v1.NodeGroupsClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.NodeGroupAggregatedList()
       );
-      client.innerApiCalls.aggregatedList = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.aggregatedList =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.aggregatedList(
           request,
@@ -405,9 +402,8 @@ describe('v1.NodeGroupsClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
-      client.innerApiCalls.delete = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.delete =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.delete(
           request,
@@ -514,9 +510,8 @@ describe('v1.NodeGroupsClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
-      client.innerApiCalls.deleteNodes = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.deleteNodes =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.deleteNodes(
           request,
@@ -733,9 +728,8 @@ describe('v1.NodeGroupsClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Policy()
       );
-      client.innerApiCalls.getIamPolicy = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.getIamPolicy =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.getIamPolicy(
           request,
@@ -845,9 +839,8 @@ describe('v1.NodeGroupsClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
-      client.innerApiCalls.insert = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.insert =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.insert(
           request,
@@ -1061,9 +1054,8 @@ describe('v1.NodeGroupsClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.NodeGroupsListNodes()
       );
-      client.innerApiCalls.listNodes = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.listNodes =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.listNodes(
           request,
@@ -1277,9 +1269,8 @@ describe('v1.NodeGroupsClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Policy()
       );
-      client.innerApiCalls.setIamPolicy = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.setIamPolicy =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.setIamPolicy(
           request,
@@ -1389,9 +1380,8 @@ describe('v1.NodeGroupsClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
-      client.innerApiCalls.setNodeTemplate = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.setNodeTemplate =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.setNodeTemplate(
           request,
@@ -1470,9 +1460,8 @@ describe('v1.NodeGroupsClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.TestPermissionsResponse()
       );
-      client.innerApiCalls.testIamPermissions = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.testIamPermissions =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.testIamPermissions(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -1503,9 +1492,8 @@ describe('v1.NodeGroupsClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.TestPermissionsResponse()
       );
-      client.innerApiCalls.testIamPermissions = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.testIamPermissions =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.testIamPermissions(
           request,

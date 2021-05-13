@@ -26,10 +26,9 @@ import * as targethttpsproxiesModule from '../src';
 import {protobuf} from 'google-gax';
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (instance.constructor as typeof protobuf.Message).toObject(
-    instance as protobuf.Message<T>,
-    {defaults: true}
-  );
+  const filledObject = (
+    instance.constructor as typeof protobuf.Message
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject
   ) as T;
@@ -186,9 +185,8 @@ describe('v1.TargetHttpsProxiesClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.TargetHttpsProxyAggregatedList()
       );
-      client.innerApiCalls.aggregatedList = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.aggregatedList =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.aggregatedList(
           request,
@@ -298,9 +296,8 @@ describe('v1.TargetHttpsProxiesClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
-      client.innerApiCalls.delete = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.delete =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.delete(
           request,
@@ -514,9 +511,8 @@ describe('v1.TargetHttpsProxiesClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
-      client.innerApiCalls.insert = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.insert =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.insert(
           request,
@@ -730,9 +726,8 @@ describe('v1.TargetHttpsProxiesClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
-      client.innerApiCalls.setQuicOverride = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.setQuicOverride =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.setQuicOverride(
           request,
@@ -811,9 +806,8 @@ describe('v1.TargetHttpsProxiesClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
-      client.innerApiCalls.setSslCertificates = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.setSslCertificates =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.setSslCertificates(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -844,9 +838,8 @@ describe('v1.TargetHttpsProxiesClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
-      client.innerApiCalls.setSslCertificates = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.setSslCertificates =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.setSslCertificates(
           request,
@@ -956,9 +949,8 @@ describe('v1.TargetHttpsProxiesClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
-      client.innerApiCalls.setSslPolicy = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.setSslPolicy =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.setSslPolicy(
           request,
@@ -1068,9 +1060,8 @@ describe('v1.TargetHttpsProxiesClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
-      client.innerApiCalls.setUrlMap = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.setUrlMap =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.setUrlMap(
           request,

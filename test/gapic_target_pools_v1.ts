@@ -26,10 +26,9 @@ import * as targetpoolsModule from '../src';
 import {protobuf} from 'google-gax';
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (instance.constructor as typeof protobuf.Message).toObject(
-    instance as protobuf.Message<T>,
-    {defaults: true}
-  );
+  const filledObject = (
+    instance.constructor as typeof protobuf.Message
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject
   ) as T;
@@ -184,9 +183,8 @@ describe('v1.TargetPoolsClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
-      client.innerApiCalls.addHealthCheck = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.addHealthCheck =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.addHealthCheck(
           request,
@@ -296,9 +294,8 @@ describe('v1.TargetPoolsClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
-      client.innerApiCalls.addInstance = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.addInstance =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.addInstance(
           request,
@@ -408,9 +405,8 @@ describe('v1.TargetPoolsClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.TargetPoolAggregatedList()
       );
-      client.innerApiCalls.aggregatedList = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.aggregatedList =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.aggregatedList(
           request,
@@ -520,9 +516,8 @@ describe('v1.TargetPoolsClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
-      client.innerApiCalls.delete = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.delete =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.delete(
           request,
@@ -736,9 +731,8 @@ describe('v1.TargetPoolsClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.TargetPoolInstanceHealth()
       );
-      client.innerApiCalls.getHealth = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.getHealth =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.getHealth(
           request,
@@ -845,9 +839,8 @@ describe('v1.TargetPoolsClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
-      client.innerApiCalls.insert = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.insert =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.insert(
           request,
@@ -1061,9 +1054,8 @@ describe('v1.TargetPoolsClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
-      client.innerApiCalls.removeHealthCheck = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.removeHealthCheck =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.removeHealthCheck(
           request,
@@ -1173,9 +1165,8 @@ describe('v1.TargetPoolsClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
-      client.innerApiCalls.removeInstance = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.removeInstance =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.removeInstance(
           request,
@@ -1285,9 +1276,8 @@ describe('v1.TargetPoolsClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
-      client.innerApiCalls.setBackup = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.setBackup =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.setBackup(
           request,

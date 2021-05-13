@@ -26,10 +26,9 @@ import * as subnetworksModule from '../src';
 import {protobuf} from 'google-gax';
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (instance.constructor as typeof protobuf.Message).toObject(
-    instance as protobuf.Message<T>,
-    {defaults: true}
-  );
+  const filledObject = (
+    instance.constructor as typeof protobuf.Message
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject
   ) as T;
@@ -184,9 +183,8 @@ describe('v1.SubnetworksClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.SubnetworkAggregatedList()
       );
-      client.innerApiCalls.aggregatedList = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.aggregatedList =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.aggregatedList(
           request,
@@ -296,9 +294,8 @@ describe('v1.SubnetworksClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
-      client.innerApiCalls.delete = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.delete =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.delete(
           request,
@@ -405,9 +402,8 @@ describe('v1.SubnetworksClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
-      client.innerApiCalls.expandIpCidrRange = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.expandIpCidrRange =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.expandIpCidrRange(
           request,
@@ -624,9 +620,8 @@ describe('v1.SubnetworksClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Policy()
       );
-      client.innerApiCalls.getIamPolicy = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.getIamPolicy =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.getIamPolicy(
           request,
@@ -736,9 +731,8 @@ describe('v1.SubnetworksClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
-      client.innerApiCalls.insert = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.insert =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.insert(
           request,
@@ -952,9 +946,8 @@ describe('v1.SubnetworksClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.UsableSubnetworksAggregatedList()
       );
-      client.innerApiCalls.listUsable = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.listUsable =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.listUsable(
           request,
@@ -1171,9 +1164,8 @@ describe('v1.SubnetworksClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Policy()
       );
-      client.innerApiCalls.setIamPolicy = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.setIamPolicy =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.setIamPolicy(
           request,
@@ -1252,9 +1244,8 @@ describe('v1.SubnetworksClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
-      client.innerApiCalls.setPrivateIpGoogleAccess = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.setPrivateIpGoogleAccess =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.setPrivateIpGoogleAccess(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -1285,9 +1276,8 @@ describe('v1.SubnetworksClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
-      client.innerApiCalls.setPrivateIpGoogleAccess = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.setPrivateIpGoogleAccess =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.setPrivateIpGoogleAccess(
           request,
@@ -1369,9 +1359,8 @@ describe('v1.SubnetworksClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.TestPermissionsResponse()
       );
-      client.innerApiCalls.testIamPermissions = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.testIamPermissions =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.testIamPermissions(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -1402,9 +1391,8 @@ describe('v1.SubnetworksClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.TestPermissionsResponse()
       );
-      client.innerApiCalls.testIamPermissions = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.testIamPermissions =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.testIamPermissions(
           request,

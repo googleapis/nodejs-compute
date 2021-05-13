@@ -26,10 +26,9 @@ import * as securitypoliciesModule from '../src';
 import {protobuf} from 'google-gax';
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (instance.constructor as typeof protobuf.Message).toObject(
-    instance as protobuf.Message<T>,
-    {defaults: true}
-  );
+  const filledObject = (
+    instance.constructor as typeof protobuf.Message
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject
   ) as T;
@@ -186,9 +185,8 @@ describe('v1.SecurityPoliciesClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
-      client.innerApiCalls.addRule = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.addRule =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.addRule(
           request,
@@ -295,9 +293,8 @@ describe('v1.SecurityPoliciesClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
-      client.innerApiCalls.delete = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.delete =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.delete(
           request,
@@ -511,9 +508,8 @@ describe('v1.SecurityPoliciesClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.SecurityPolicyRule()
       );
-      client.innerApiCalls.getRule = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.getRule =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.getRule(
           request,
@@ -620,9 +616,8 @@ describe('v1.SecurityPoliciesClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
-      client.innerApiCalls.insert = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.insert =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.insert(
           request,
@@ -805,9 +800,8 @@ describe('v1.SecurityPoliciesClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.SecurityPoliciesListPreconfiguredExpressionSetsResponse()
       );
-      client.innerApiCalls.listPreconfiguredExpressionSets = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.listPreconfiguredExpressionSets =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.listPreconfiguredExpressionSets(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -838,9 +832,8 @@ describe('v1.SecurityPoliciesClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.SecurityPoliciesListPreconfiguredExpressionSetsResponse()
       );
-      client.innerApiCalls.listPreconfiguredExpressionSets = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.listPreconfiguredExpressionSets =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.listPreconfiguredExpressionSets(
           request,
@@ -1060,9 +1053,8 @@ describe('v1.SecurityPoliciesClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
-      client.innerApiCalls.patchRule = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.patchRule =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.patchRule(
           request,
@@ -1169,9 +1161,8 @@ describe('v1.SecurityPoliciesClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
-      client.innerApiCalls.removeRule = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.removeRule =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.removeRule(
           request,

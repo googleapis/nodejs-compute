@@ -19,9 +19,9 @@
 /* global window */
 import * as gax from 'google-gax';
 import {Callback, CallOptions, Descriptors, ClientOptions} from 'google-gax';
-import * as path from 'path';
 
 import * as protos from '../../protos/protos';
+import jsonProtos = require('../../protos/protos.json');
 /**
  * Client JSON configuration object, loaded from
  * `src/v1/region_disks_client_config.json`.
@@ -135,22 +135,7 @@ export class RegionDisksClient {
       clientHeader.push(`${opts.libName}/${opts.libVersion}`);
     }
     // Load the applicable protos.
-    // For Node.js, pass the path to JSON proto file.
-    // For browsers, pass the JSON content.
-
-    const nodejsProtoPath = path.join(
-      __dirname,
-      '..',
-      '..',
-      'protos',
-      'protos.json'
-    );
-    this._protos = this._gaxGrpc.loadProto(
-      opts.fallback
-        ? // eslint-disable-next-line @typescript-eslint/no-var-requires
-          require('../../protos/protos.json')
-        : nodejsProtoPath
-    );
+    this._protos = this._gaxGrpc.loadProtoJSON(jsonProtos);
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
@@ -213,13 +198,14 @@ export class RegionDisksClient {
     ];
     for (const methodName of regionDisksStubMethods) {
       const callPromise = this.regionDisksStub.then(
-        stub => (...args: Array<{}>) => {
-          if (this._terminated) {
-            return Promise.reject('The client has already been closed.');
-          }
-          const func = stub[methodName];
-          return func.apply(stub, args);
-        },
+        stub =>
+          (...args: Array<{}>) => {
+            if (this._terminated) {
+              return Promise.reject('The client has already been closed.');
+            }
+            const func = stub[methodName];
+            return func.apply(stub, args);
+          },
         (err: Error | null | undefined) => () => {
           throw err;
         }
@@ -396,11 +382,10 @@ export class RegionDisksClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      project: request.project || '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        project: request.project || '',
+      });
     this.initialize();
     return this.innerApiCalls.addResourcePolicies(request, options, callback);
   }
@@ -506,11 +491,10 @@ export class RegionDisksClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      project: request.project || '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        project: request.project || '',
+      });
     this.initialize();
     return this.innerApiCalls.createSnapshot(request, options, callback);
   }
@@ -608,11 +592,10 @@ export class RegionDisksClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      project: request.project || '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        project: request.project || '',
+      });
     this.initialize();
     return this.innerApiCalls.delete(request, options, callback);
   }
@@ -698,11 +681,10 @@ export class RegionDisksClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      project: request.project || '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        project: request.project || '',
+      });
     this.initialize();
     return this.innerApiCalls.get(request, options, callback);
   }
@@ -796,11 +778,10 @@ export class RegionDisksClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      project: request.project || '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        project: request.project || '',
+      });
     this.initialize();
     return this.innerApiCalls.getIamPolicy(request, options, callback);
   }
@@ -900,11 +881,10 @@ export class RegionDisksClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      project: request.project || '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        project: request.project || '',
+      });
     this.initialize();
     return this.innerApiCalls.insert(request, options, callback);
   }
@@ -1008,11 +988,10 @@ export class RegionDisksClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      project: request.project || '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        project: request.project || '',
+      });
     this.initialize();
     return this.innerApiCalls.list(request, options, callback);
   }
@@ -1118,11 +1097,10 @@ export class RegionDisksClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      project: request.project || '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        project: request.project || '',
+      });
     this.initialize();
     return this.innerApiCalls.removeResourcePolicies(
       request,
@@ -1226,11 +1204,10 @@ export class RegionDisksClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      project: request.project || '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        project: request.project || '',
+      });
     this.initialize();
     return this.innerApiCalls.resize(request, options, callback);
   }
@@ -1324,11 +1301,10 @@ export class RegionDisksClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      project: request.project || '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        project: request.project || '',
+      });
     this.initialize();
     return this.innerApiCalls.setIamPolicy(request, options, callback);
   }
@@ -1428,11 +1404,10 @@ export class RegionDisksClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      project: request.project || '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        project: request.project || '',
+      });
     this.initialize();
     return this.innerApiCalls.setLabels(request, options, callback);
   }
@@ -1532,11 +1507,10 @@ export class RegionDisksClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      project: request.project || '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        project: request.project || '',
+      });
     this.initialize();
     return this.innerApiCalls.testIamPermissions(request, options, callback);
   }

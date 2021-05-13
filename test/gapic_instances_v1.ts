@@ -26,10 +26,9 @@ import * as instancesModule from '../src';
 import {protobuf} from 'google-gax';
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (instance.constructor as typeof protobuf.Message).toObject(
-    instance as protobuf.Message<T>,
-    {defaults: true}
-  );
+  const filledObject = (
+    instance.constructor as typeof protobuf.Message
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject
   ) as T;
@@ -184,9 +183,8 @@ describe('v1.InstancesClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
-      client.innerApiCalls.addAccessConfig = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.addAccessConfig =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.addAccessConfig(
           request,
@@ -265,9 +263,8 @@ describe('v1.InstancesClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
-      client.innerApiCalls.addResourcePolicies = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.addResourcePolicies =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.addResourcePolicies(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -298,9 +295,8 @@ describe('v1.InstancesClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
-      client.innerApiCalls.addResourcePolicies = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.addResourcePolicies =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.addResourcePolicies(
           request,
@@ -410,9 +406,8 @@ describe('v1.InstancesClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.InstanceAggregatedList()
       );
-      client.innerApiCalls.aggregatedList = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.aggregatedList =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.aggregatedList(
           request,
@@ -522,9 +517,8 @@ describe('v1.InstancesClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
-      client.innerApiCalls.attachDisk = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.attachDisk =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.attachDisk(
           request,
@@ -634,9 +628,8 @@ describe('v1.InstancesClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
-      client.innerApiCalls.delete = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.delete =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.delete(
           request,
@@ -712,9 +705,8 @@ describe('v1.InstancesClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
-      client.innerApiCalls.deleteAccessConfig = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.deleteAccessConfig =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.deleteAccessConfig(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -745,9 +737,8 @@ describe('v1.InstancesClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
-      client.innerApiCalls.deleteAccessConfig = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.deleteAccessConfig =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.deleteAccessConfig(
           request,
@@ -857,9 +848,8 @@ describe('v1.InstancesClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
-      client.innerApiCalls.detachDisk = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.detachDisk =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.detachDisk(
           request,
@@ -1045,9 +1035,8 @@ describe('v1.InstancesClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.GuestAttributes()
       );
-      client.innerApiCalls.getGuestAttributes = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.getGuestAttributes =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.getGuestAttributes(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -1078,9 +1067,8 @@ describe('v1.InstancesClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.GuestAttributes()
       );
-      client.innerApiCalls.getGuestAttributes = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.getGuestAttributes =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.getGuestAttributes(
           request,
@@ -1190,9 +1178,8 @@ describe('v1.InstancesClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Policy()
       );
-      client.innerApiCalls.getIamPolicy = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.getIamPolicy =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.getIamPolicy(
           request,
@@ -1302,9 +1289,8 @@ describe('v1.InstancesClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Screenshot()
       );
-      client.innerApiCalls.getScreenshot = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.getScreenshot =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.getScreenshot(
           request,
@@ -1383,9 +1369,8 @@ describe('v1.InstancesClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.SerialPortOutput()
       );
-      client.innerApiCalls.getSerialPortOutput = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.getSerialPortOutput =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.getSerialPortOutput(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -1416,9 +1401,8 @@ describe('v1.InstancesClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.SerialPortOutput()
       );
-      client.innerApiCalls.getSerialPortOutput = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.getSerialPortOutput =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.getSerialPortOutput(
           request,
@@ -1497,9 +1481,8 @@ describe('v1.InstancesClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.ShieldedInstanceIdentity()
       );
-      client.innerApiCalls.getShieldedInstanceIdentity = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.getShieldedInstanceIdentity =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.getShieldedInstanceIdentity(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -1530,9 +1513,8 @@ describe('v1.InstancesClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.ShieldedInstanceIdentity()
       );
-      client.innerApiCalls.getShieldedInstanceIdentity = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.getShieldedInstanceIdentity =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.getShieldedInstanceIdentity(
           request,
@@ -1645,9 +1627,8 @@ describe('v1.InstancesClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
-      client.innerApiCalls.insert = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.insert =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.insert(
           request,
@@ -1861,9 +1842,8 @@ describe('v1.InstancesClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.InstanceListReferrers()
       );
-      client.innerApiCalls.listReferrers = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.listReferrers =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.listReferrers(
           request,
@@ -1942,9 +1922,8 @@ describe('v1.InstancesClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
-      client.innerApiCalls.removeResourcePolicies = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.removeResourcePolicies =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.removeResourcePolicies(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -1975,9 +1954,8 @@ describe('v1.InstancesClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
-      client.innerApiCalls.removeResourcePolicies = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.removeResourcePolicies =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.removeResourcePolicies(
           request,
@@ -2166,9 +2144,8 @@ describe('v1.InstancesClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
-      client.innerApiCalls.setDeletionProtection = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.setDeletionProtection =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.setDeletionProtection(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -2199,9 +2176,8 @@ describe('v1.InstancesClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
-      client.innerApiCalls.setDeletionProtection = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.setDeletionProtection =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.setDeletionProtection(
           request,
@@ -2314,9 +2290,8 @@ describe('v1.InstancesClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
-      client.innerApiCalls.setDiskAutoDelete = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.setDiskAutoDelete =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.setDiskAutoDelete(
           request,
@@ -2426,9 +2401,8 @@ describe('v1.InstancesClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Policy()
       );
-      client.innerApiCalls.setIamPolicy = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.setIamPolicy =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.setIamPolicy(
           request,
@@ -2538,9 +2512,8 @@ describe('v1.InstancesClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
-      client.innerApiCalls.setLabels = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.setLabels =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.setLabels(
           request,
@@ -2616,9 +2589,8 @@ describe('v1.InstancesClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
-      client.innerApiCalls.setMachineResources = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.setMachineResources =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.setMachineResources(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -2649,9 +2621,8 @@ describe('v1.InstancesClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
-      client.innerApiCalls.setMachineResources = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.setMachineResources =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.setMachineResources(
           request,
@@ -2761,9 +2732,8 @@ describe('v1.InstancesClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
-      client.innerApiCalls.setMachineType = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.setMachineType =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.setMachineType(
           request,
@@ -2873,9 +2843,8 @@ describe('v1.InstancesClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
-      client.innerApiCalls.setMetadata = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.setMetadata =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.setMetadata(
           request,
@@ -2985,9 +2954,8 @@ describe('v1.InstancesClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
-      client.innerApiCalls.setMinCpuPlatform = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.setMinCpuPlatform =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.setMinCpuPlatform(
           request,
@@ -3097,9 +3065,8 @@ describe('v1.InstancesClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
-      client.innerApiCalls.setScheduling = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.setScheduling =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.setScheduling(
           request,
@@ -3209,9 +3176,8 @@ describe('v1.InstancesClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
-      client.innerApiCalls.setServiceAccount = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.setServiceAccount =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.setServiceAccount(
           request,
@@ -3290,9 +3256,8 @@ describe('v1.InstancesClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
-      client.innerApiCalls.setShieldedInstanceIntegrityPolicy = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.setShieldedInstanceIntegrityPolicy =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.setShieldedInstanceIntegrityPolicy(
         request
       );
@@ -3325,9 +3290,8 @@ describe('v1.InstancesClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
-      client.innerApiCalls.setShieldedInstanceIntegrityPolicy = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.setShieldedInstanceIntegrityPolicy =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.setShieldedInstanceIntegrityPolicy(
           request,
@@ -3440,9 +3404,8 @@ describe('v1.InstancesClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
-      client.innerApiCalls.setTags = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.setTags =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.setTags(
           request,
@@ -3518,9 +3481,8 @@ describe('v1.InstancesClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
-      client.innerApiCalls.simulateMaintenanceEvent = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.simulateMaintenanceEvent =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.simulateMaintenanceEvent(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -3551,9 +3513,8 @@ describe('v1.InstancesClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
-      client.innerApiCalls.simulateMaintenanceEvent = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.simulateMaintenanceEvent =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.simulateMaintenanceEvent(
           request,
@@ -3742,9 +3703,8 @@ describe('v1.InstancesClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
-      client.innerApiCalls.startWithEncryptionKey = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.startWithEncryptionKey =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.startWithEncryptionKey(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -3775,9 +3735,8 @@ describe('v1.InstancesClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
-      client.innerApiCalls.startWithEncryptionKey = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.startWithEncryptionKey =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.startWithEncryptionKey(
           request,
@@ -3966,9 +3925,8 @@ describe('v1.InstancesClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.TestPermissionsResponse()
       );
-      client.innerApiCalls.testIamPermissions = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.testIamPermissions =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.testIamPermissions(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -3999,9 +3957,8 @@ describe('v1.InstancesClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.TestPermissionsResponse()
       );
-      client.innerApiCalls.testIamPermissions = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.testIamPermissions =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.testIamPermissions(
           request,
@@ -4111,9 +4068,8 @@ describe('v1.InstancesClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
-      client.innerApiCalls.update = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.update =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.update(
           request,
@@ -4189,9 +4145,8 @@ describe('v1.InstancesClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
-      client.innerApiCalls.updateAccessConfig = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.updateAccessConfig =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.updateAccessConfig(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -4222,9 +4177,8 @@ describe('v1.InstancesClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
-      client.innerApiCalls.updateAccessConfig = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.updateAccessConfig =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.updateAccessConfig(
           request,
@@ -4303,9 +4257,8 @@ describe('v1.InstancesClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
-      client.innerApiCalls.updateDisplayDevice = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.updateDisplayDevice =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.updateDisplayDevice(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -4336,9 +4289,8 @@ describe('v1.InstancesClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
-      client.innerApiCalls.updateDisplayDevice = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.updateDisplayDevice =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.updateDisplayDevice(
           request,
@@ -4417,9 +4369,8 @@ describe('v1.InstancesClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
-      client.innerApiCalls.updateNetworkInterface = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.updateNetworkInterface =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.updateNetworkInterface(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -4450,9 +4401,8 @@ describe('v1.InstancesClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
-      client.innerApiCalls.updateNetworkInterface = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.updateNetworkInterface =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.updateNetworkInterface(
           request,
@@ -4534,9 +4484,8 @@ describe('v1.InstancesClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
-      client.innerApiCalls.updateShieldedInstanceConfig = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.updateShieldedInstanceConfig =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.updateShieldedInstanceConfig(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -4567,9 +4516,8 @@ describe('v1.InstancesClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
-      client.innerApiCalls.updateShieldedInstanceConfig = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.updateShieldedInstanceConfig =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.updateShieldedInstanceConfig(
           request,
