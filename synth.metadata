@@ -4,7 +4,7 @@
       "git": {
         "name": ".",
         "remote": "git@github.com:googleapis/nodejs-compute.git",
-        "sha": "c0679ad3b3b1b9782c85cc2340e5b5828d1699ef"
+        "sha": "ce6bd95b5495858099af2f6a3723869f34c98c0f"
       }
     },
     {

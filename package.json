@@ -114,7 +114,7 @@
     "api-documenter": "api-documenter yaml --input-folder=temp"
   },
   "dependencies": {
-    "google-gax": "^2.10.0"
+    "google-gax": "^2.13.0"
   },
   "devDependencies": {
     "@types/mocha": "^8.2.0",
