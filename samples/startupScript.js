@@ -96,6 +96,7 @@ async function main(name = 'start-script-example') {
   }
 
   createVMWithStartupScript();
+  // [END gce_startup_script]
 }
 
 main(...process.argv.slice(2));
