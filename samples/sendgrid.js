@@ -24,8 +24,7 @@ async function sendgridExample() {
     to: 'to_email@example.com',
     from: 'from_email@example.com',
     subject: 'Sendgrid test email from Node.js on Google Cloud Platform',
-    text:
-      'Well hello! This is a Sendgrid test email from Node.js on Google Cloud Platform.',
+    text: 'Well hello! This is a Sendgrid test email from Node.js on Google Cloud Platform.',
   });
 }
 sendgridExample();
