@@ -385,7 +385,8 @@ function main() {
   const globalForwardingRulesClient = new GlobalForwardingRulesClient();
   doStuffWithGlobalForwardingRulesClient(globalForwardingRulesClient);
   // check that the client instance can be created
-  const globalNetworkEndpointGroupsClient = new GlobalNetworkEndpointGroupsClient();
+  const globalNetworkEndpointGroupsClient =
+    new GlobalNetworkEndpointGroupsClient();
   doStuffWithGlobalNetworkEndpointGroupsClient(
     globalNetworkEndpointGroupsClient
   );
@@ -393,7 +394,8 @@ function main() {
   const globalOperationsClient = new GlobalOperationsClient();
   doStuffWithGlobalOperationsClient(globalOperationsClient);
   // check that the client instance can be created
-  const globalOrganizationOperationsClient = new GlobalOrganizationOperationsClient();
+  const globalOrganizationOperationsClient =
+    new GlobalOrganizationOperationsClient();
   doStuffWithGlobalOrganizationOperationsClient(
     globalOrganizationOperationsClient
   );
@@ -476,7 +478,8 @@ function main() {
   const regionHealthCheckServicesClient = new RegionHealthCheckServicesClient();
   doStuffWithRegionHealthCheckServicesClient(regionHealthCheckServicesClient);
   // check that the client instance can be created
-  const regionInstanceGroupManagersClient = new RegionInstanceGroupManagersClient();
+  const regionInstanceGroupManagersClient =
+    new RegionInstanceGroupManagersClient();
   doStuffWithRegionInstanceGroupManagersClient(
     regionInstanceGroupManagersClient
   );
@@ -484,12 +487,14 @@ function main() {
   const regionInstanceGroupsClient = new RegionInstanceGroupsClient();
   doStuffWithRegionInstanceGroupsClient(regionInstanceGroupsClient);
   // check that the client instance can be created
-  const regionNetworkEndpointGroupsClient = new RegionNetworkEndpointGroupsClient();
+  const regionNetworkEndpointGroupsClient =
+    new RegionNetworkEndpointGroupsClient();
   doStuffWithRegionNetworkEndpointGroupsClient(
     regionNetworkEndpointGroupsClient
   );
   // check that the client instance can be created
-  const regionNotificationEndpointsClient = new RegionNotificationEndpointsClient();
+  const regionNotificationEndpointsClient =
+    new RegionNotificationEndpointsClient();
   doStuffWithRegionNotificationEndpointsClient(
     regionNotificationEndpointsClient
   );

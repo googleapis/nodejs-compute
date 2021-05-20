@@ -1,7 +1,7 @@
 {
   "name": "@google-cloud/compute",
-  "description": "Google Compute Engine Client Library for Node.js",
-  "version": "3.0.0-alpha.1",
+  "description": "Compute client for Node.js",
+  "version": "3.0.0-alpha.2",
   "repository": "googleapis/nodejs-compute",
   "license": "Apache-2.0",
   "author": "Google LLC",
@@ -98,7 +98,7 @@
   "scripts": {
     "test": "c8 node build/test/run.js",
     "samples-test": "cd samples/ && npm link ../ && npm install && npm test && cd ../",
-    "system-test": "mocha build/system-test",
+    "system-test": "mocha build/system-test system-test/*.js",
     "lint": "gts check",
     "fix": "gts fix",
     "docs": "jsdoc -c .jsdoc.js",
@@ -114,7 +114,7 @@
     "api-documenter": "api-documenter yaml --input-folder=temp"
   },
   "dependencies": {
-    "google-gax": "^2.10.0"
+    "google-gax": "^2.13.0"
   },
   "devDependencies": {
     "@types/mocha": "^8.2.0",

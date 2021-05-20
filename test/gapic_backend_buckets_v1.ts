@@ -26,10 +26,9 @@ import * as backendbucketsModule from '../src';
 import {protobuf} from 'google-gax';
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (instance.constructor as typeof protobuf.Message).toObject(
-    instance as protobuf.Message<T>,
-    {defaults: true}
-  );
+  const filledObject = (
+    instance.constructor as typeof protobuf.Message
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject
   ) as T;
@@ -186,9 +185,8 @@ describe('v1.BackendBucketsClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
-      client.innerApiCalls.addSignedUrlKey = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.addSignedUrlKey =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.addSignedUrlKey(
           request,
@@ -298,9 +296,8 @@ describe('v1.BackendBucketsClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
-      client.innerApiCalls.delete = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.delete =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.delete(
           request,
@@ -376,9 +373,8 @@ describe('v1.BackendBucketsClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
-      client.innerApiCalls.deleteSignedUrlKey = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.deleteSignedUrlKey =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.deleteSignedUrlKey(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -409,9 +405,8 @@ describe('v1.BackendBucketsClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
-      client.innerApiCalls.deleteSignedUrlKey = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.deleteSignedUrlKey =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.deleteSignedUrlKey(
           request,
@@ -628,9 +623,8 @@ describe('v1.BackendBucketsClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
-      client.innerApiCalls.insert = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.insert =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.insert(
           request,
@@ -951,9 +945,8 @@ describe('v1.BackendBucketsClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
-      client.innerApiCalls.update = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.update =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.update(
           request,

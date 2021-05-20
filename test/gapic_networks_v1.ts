@@ -26,10 +26,9 @@ import * as networksModule from '../src';
 import {protobuf} from 'google-gax';
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (instance.constructor as typeof protobuf.Message).toObject(
-    instance as protobuf.Message<T>,
-    {defaults: true}
-  );
+  const filledObject = (
+    instance.constructor as typeof protobuf.Message
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject
   ) as T;
@@ -184,9 +183,8 @@ describe('v1.NetworksClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
-      client.innerApiCalls.addPeering = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.addPeering =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.addPeering(
           request,
@@ -296,9 +294,8 @@ describe('v1.NetworksClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
-      client.innerApiCalls.delete = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.delete =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.delete(
           request,
@@ -512,9 +509,8 @@ describe('v1.NetworksClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
-      client.innerApiCalls.insert = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.insert =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.insert(
           request,
@@ -728,9 +724,8 @@ describe('v1.NetworksClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.ExchangedPeeringRoutesList()
       );
-      client.innerApiCalls.listPeeringRoutes = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.listPeeringRoutes =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.listPeeringRoutes(
           request,
@@ -947,9 +942,8 @@ describe('v1.NetworksClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
-      client.innerApiCalls.removePeering = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.removePeering =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.removePeering(
           request,
@@ -1028,9 +1022,8 @@ describe('v1.NetworksClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
-      client.innerApiCalls.switchToCustomMode = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.switchToCustomMode =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.switchToCustomMode(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -1061,9 +1054,8 @@ describe('v1.NetworksClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
-      client.innerApiCalls.switchToCustomMode = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.switchToCustomMode =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.switchToCustomMode(
           request,
@@ -1173,9 +1165,8 @@ describe('v1.NetworksClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
-      client.innerApiCalls.updatePeering = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.updatePeering =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.updatePeering(
           request,

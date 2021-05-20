@@ -26,10 +26,9 @@ import * as instancegroupsModule from '../src';
 import {protobuf} from 'google-gax';
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (instance.constructor as typeof protobuf.Message).toObject(
-    instance as protobuf.Message<T>,
-    {defaults: true}
-  );
+  const filledObject = (
+    instance.constructor as typeof protobuf.Message
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject
   ) as T;
@@ -186,9 +185,8 @@ describe('v1.InstanceGroupsClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
-      client.innerApiCalls.addInstances = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.addInstances =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.addInstances(
           request,
@@ -298,9 +296,8 @@ describe('v1.InstanceGroupsClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.InstanceGroupAggregatedList()
       );
-      client.innerApiCalls.aggregatedList = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.aggregatedList =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.aggregatedList(
           request,
@@ -410,9 +407,8 @@ describe('v1.InstanceGroupsClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
-      client.innerApiCalls.delete = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.delete =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.delete(
           request,
@@ -626,9 +622,8 @@ describe('v1.InstanceGroupsClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
-      client.innerApiCalls.insert = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.insert =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.insert(
           request,
@@ -842,9 +837,8 @@ describe('v1.InstanceGroupsClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.InstanceGroupsListInstances()
       );
-      client.innerApiCalls.listInstances = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.listInstances =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.listInstances(
           request,
@@ -954,9 +948,8 @@ describe('v1.InstanceGroupsClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
-      client.innerApiCalls.removeInstances = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.removeInstances =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.removeInstances(
           request,
@@ -1066,9 +1059,8 @@ describe('v1.InstanceGroupsClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
-      client.innerApiCalls.setNamedPorts = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.setNamedPorts =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.setNamedPorts(
           request,

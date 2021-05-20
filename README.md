@@ -11,7 +11,7 @@
 
 
 
-Google Compute Engine Client Library for Node.js
+Compute client for Node.js
 
 
 A comprehensive list of changes in each version may be found in

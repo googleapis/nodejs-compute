@@ -4,21 +4,14 @@
       "git": {
         "name": ".",
         "remote": "git@github.com:googleapis/nodejs-compute.git",
-        "sha": "e63a4ce1d2f851acb2f15fae912c37d6abd46231"
-      }
-    },
-    {
-      "git": {
-        "name": "googleapis-discovery",
-        "remote": "https://github.com/googleapis/googleapis-discovery.git",
-        "sha": "ed8fe29ede4a8c5117c955bf0972e6b751800e41"
+        "sha": "ce6bd95b5495858099af2f6a3723869f34c98c0f"
       }
     },
     {
       "git": {
         "name": "synthtool",
         "remote": "https://github.com/googleapis/synthtool.git",
-        "sha": "16ec872dd898d7de6e1822badfac32484b5d9031"
+        "sha": "4f4b1b9b8d8b52f1e9e4a76165896debce5ab7f1"
       }
     }
   ],

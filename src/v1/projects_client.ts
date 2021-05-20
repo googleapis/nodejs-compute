@@ -19,9 +19,9 @@
 /* global window */
 import * as gax from 'google-gax';
 import {Callback, CallOptions, Descriptors, ClientOptions} from 'google-gax';
-import * as path from 'path';
 
 import * as protos from '../../protos/protos';
+import jsonProtos = require('../../protos/protos.json');
 /**
  * Client JSON configuration object, loaded from
  * `src/v1/projects_client_config.json`.
@@ -135,22 +135,7 @@ export class ProjectsClient {
       clientHeader.push(`${opts.libName}/${opts.libVersion}`);
     }
     // Load the applicable protos.
-    // For Node.js, pass the path to JSON proto file.
-    // For browsers, pass the JSON content.
-
-    const nodejsProtoPath = path.join(
-      __dirname,
-      '..',
-      '..',
-      'protos',
-      'protos.json'
-    );
-    this._protos = this._gaxGrpc.loadProto(
-      opts.fallback
-        ? // eslint-disable-next-line @typescript-eslint/no-var-requires
-          require('../../protos/protos.json')
-        : nodejsProtoPath
-    );
+    this._protos = this._gaxGrpc.loadProtoJSON(jsonProtos);
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
@@ -214,13 +199,14 @@ export class ProjectsClient {
     ];
     for (const methodName of projectsStubMethods) {
       const callPromise = this.projectsStub.then(
-        stub => (...args: Array<{}>) => {
-          if (this._terminated) {
-            return Promise.reject('The client has already been closed.');
-          }
-          const func = stub[methodName];
-          return func.apply(stub, args);
-        },
+        stub =>
+          (...args: Array<{}>) => {
+            if (this._terminated) {
+              return Promise.reject('The client has already been closed.');
+            }
+            const func = stub[methodName];
+            return func.apply(stub, args);
+          },
         (err: Error | null | undefined) => () => {
           throw err;
         }
@@ -385,11 +371,10 @@ export class ProjectsClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      project: request.project || '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        project: request.project || '',
+      });
     this.initialize();
     return this.innerApiCalls.disableXpnHost(request, options, callback);
   }
@@ -491,11 +476,10 @@ export class ProjectsClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      project: request.project || '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        project: request.project || '',
+      });
     this.initialize();
     return this.innerApiCalls.disableXpnResource(request, options, callback);
   }
@@ -589,11 +573,10 @@ export class ProjectsClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      project: request.project || '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        project: request.project || '',
+      });
     this.initialize();
     return this.innerApiCalls.enableXpnHost(request, options, callback);
   }
@@ -695,11 +678,10 @@ export class ProjectsClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      project: request.project || '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        project: request.project || '',
+      });
     this.initialize();
     return this.innerApiCalls.enableXpnResource(request, options, callback);
   }
@@ -779,11 +761,10 @@ export class ProjectsClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      project: request.project || '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        project: request.project || '',
+      });
     this.initialize();
     return this.innerApiCalls.get(request, options, callback);
   }
@@ -871,11 +852,10 @@ export class ProjectsClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      project: request.project || '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        project: request.project || '',
+      });
     this.initialize();
     return this.innerApiCalls.getXpnHost(request, options, callback);
   }
@@ -989,11 +969,10 @@ export class ProjectsClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      project: request.project || '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        project: request.project || '',
+      });
     this.initialize();
     return this.innerApiCalls.getXpnResources(request, options, callback);
   }
@@ -1103,11 +1082,10 @@ export class ProjectsClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      project: request.project || '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        project: request.project || '',
+      });
     this.initialize();
     return this.innerApiCalls.listXpnHosts(request, options, callback);
   }
@@ -1197,11 +1175,10 @@ export class ProjectsClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      project: request.project || '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        project: request.project || '',
+      });
     this.initialize();
     return this.innerApiCalls.moveDisk(request, options, callback);
   }
@@ -1297,11 +1274,10 @@ export class ProjectsClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      project: request.project || '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        project: request.project || '',
+      });
     this.initialize();
     return this.innerApiCalls.moveInstance(request, options, callback);
   }
@@ -1403,11 +1379,10 @@ export class ProjectsClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      project: request.project || '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        project: request.project || '',
+      });
     this.initialize();
     return this.innerApiCalls.setCommonInstanceMetadata(
       request,
@@ -1513,11 +1488,10 @@ export class ProjectsClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      project: request.project || '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        project: request.project || '',
+      });
     this.initialize();
     return this.innerApiCalls.setDefaultNetworkTier(request, options, callback);
   }
@@ -1619,11 +1593,10 @@ export class ProjectsClient {
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      project: request.project || '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        project: request.project || '',
+      });
     this.initialize();
     return this.innerApiCalls.setUsageExportBucket(request, options, callback);
   }

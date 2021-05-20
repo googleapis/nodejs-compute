@@ -26,10 +26,9 @@ import * as regionnetworkendpointgroupsModule from '../src';
 import {protobuf} from 'google-gax';
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (instance.constructor as typeof protobuf.Message).toObject(
-    instance as protobuf.Message<T>,
-    {defaults: true}
-  );
+  const filledObject = (
+    instance.constructor as typeof protobuf.Message
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject
   ) as T;
@@ -74,49 +73,54 @@ describe('v1.RegionNetworkEndpointGroupsClient', () => {
   });
 
   it('should create a client with no option', () => {
-    const client = new regionnetworkendpointgroupsModule.v1.RegionNetworkEndpointGroupsClient();
+    const client =
+      new regionnetworkendpointgroupsModule.v1.RegionNetworkEndpointGroupsClient();
     assert(client);
   });
 
   it('should create a client with gRPC fallback', () => {
-    const client = new regionnetworkendpointgroupsModule.v1.RegionNetworkEndpointGroupsClient(
-      {
-        fallback: true,
-      }
-    );
+    const client =
+      new regionnetworkendpointgroupsModule.v1.RegionNetworkEndpointGroupsClient(
+        {
+          fallback: true,
+        }
+      );
     assert(client);
   });
 
   it('has initialize method and supports deferred initialization', async () => {
-    const client = new regionnetworkendpointgroupsModule.v1.RegionNetworkEndpointGroupsClient(
-      {
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      }
-    );
+    const client =
+      new regionnetworkendpointgroupsModule.v1.RegionNetworkEndpointGroupsClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
     assert.strictEqual(client.regionNetworkEndpointGroupsStub, undefined);
     await client.initialize();
     assert(client.regionNetworkEndpointGroupsStub);
   });
 
   it('has close method', () => {
-    const client = new regionnetworkendpointgroupsModule.v1.RegionNetworkEndpointGroupsClient(
-      {
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      }
-    );
+    const client =
+      new regionnetworkendpointgroupsModule.v1.RegionNetworkEndpointGroupsClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
     client.close();
   });
 
   it('has getProjectId method', async () => {
     const fakeProjectId = 'fake-project-id';
-    const client = new regionnetworkendpointgroupsModule.v1.RegionNetworkEndpointGroupsClient(
-      {
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      }
-    );
+    const client =
+      new regionnetworkendpointgroupsModule.v1.RegionNetworkEndpointGroupsClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
     client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
     const result = await client.getProjectId();
     assert.strictEqual(result, fakeProjectId);
@@ -125,12 +129,13 @@ describe('v1.RegionNetworkEndpointGroupsClient', () => {
 
   it('has getProjectId method with callback', async () => {
     const fakeProjectId = 'fake-project-id';
-    const client = new regionnetworkendpointgroupsModule.v1.RegionNetworkEndpointGroupsClient(
-      {
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      }
-    );
+    const client =
+      new regionnetworkendpointgroupsModule.v1.RegionNetworkEndpointGroupsClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
     client.auth.getProjectId = sinon
       .stub()
       .callsArgWith(0, null, fakeProjectId);
@@ -149,12 +154,13 @@ describe('v1.RegionNetworkEndpointGroupsClient', () => {
 
   describe('delete', () => {
     it('invokes delete without error', async () => {
-      const client = new regionnetworkendpointgroupsModule.v1.RegionNetworkEndpointGroupsClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new regionnetworkendpointgroupsModule.v1.RegionNetworkEndpointGroupsClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteRegionNetworkEndpointGroupRequest()
@@ -182,12 +188,13 @@ describe('v1.RegionNetworkEndpointGroupsClient', () => {
     });
 
     it('invokes delete without error using callback', async () => {
-      const client = new regionnetworkendpointgroupsModule.v1.RegionNetworkEndpointGroupsClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new regionnetworkendpointgroupsModule.v1.RegionNetworkEndpointGroupsClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteRegionNetworkEndpointGroupRequest()
@@ -204,9 +211,8 @@ describe('v1.RegionNetworkEndpointGroupsClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
-      client.innerApiCalls.delete = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.delete =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.delete(
           request,
@@ -232,12 +238,13 @@ describe('v1.RegionNetworkEndpointGroupsClient', () => {
     });
 
     it('invokes delete with error', async () => {
-      const client = new regionnetworkendpointgroupsModule.v1.RegionNetworkEndpointGroupsClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new regionnetworkendpointgroupsModule.v1.RegionNetworkEndpointGroupsClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteRegionNetworkEndpointGroupRequest()
@@ -264,12 +271,13 @@ describe('v1.RegionNetworkEndpointGroupsClient', () => {
 
   describe('get', () => {
     it('invokes get without error', async () => {
-      const client = new regionnetworkendpointgroupsModule.v1.RegionNetworkEndpointGroupsClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new regionnetworkendpointgroupsModule.v1.RegionNetworkEndpointGroupsClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetRegionNetworkEndpointGroupRequest()
@@ -297,12 +305,13 @@ describe('v1.RegionNetworkEndpointGroupsClient', () => {
     });
 
     it('invokes get without error using callback', async () => {
-      const client = new regionnetworkendpointgroupsModule.v1.RegionNetworkEndpointGroupsClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new regionnetworkendpointgroupsModule.v1.RegionNetworkEndpointGroupsClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetRegionNetworkEndpointGroupRequest()
@@ -345,12 +354,13 @@ describe('v1.RegionNetworkEndpointGroupsClient', () => {
     });
 
     it('invokes get with error', async () => {
-      const client = new regionnetworkendpointgroupsModule.v1.RegionNetworkEndpointGroupsClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new regionnetworkendpointgroupsModule.v1.RegionNetworkEndpointGroupsClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetRegionNetworkEndpointGroupRequest()
@@ -377,12 +387,13 @@ describe('v1.RegionNetworkEndpointGroupsClient', () => {
 
   describe('insert', () => {
     it('invokes insert without error', async () => {
-      const client = new regionnetworkendpointgroupsModule.v1.RegionNetworkEndpointGroupsClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new regionnetworkendpointgroupsModule.v1.RegionNetworkEndpointGroupsClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertRegionNetworkEndpointGroupRequest()
@@ -410,12 +421,13 @@ describe('v1.RegionNetworkEndpointGroupsClient', () => {
     });
 
     it('invokes insert without error using callback', async () => {
-      const client = new regionnetworkendpointgroupsModule.v1.RegionNetworkEndpointGroupsClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new regionnetworkendpointgroupsModule.v1.RegionNetworkEndpointGroupsClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertRegionNetworkEndpointGroupRequest()
@@ -432,9 +444,8 @@ describe('v1.RegionNetworkEndpointGroupsClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
-      client.innerApiCalls.insert = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.insert =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.insert(
           request,
@@ -460,12 +471,13 @@ describe('v1.RegionNetworkEndpointGroupsClient', () => {
     });
 
     it('invokes insert with error', async () => {
-      const client = new regionnetworkendpointgroupsModule.v1.RegionNetworkEndpointGroupsClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new regionnetworkendpointgroupsModule.v1.RegionNetworkEndpointGroupsClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertRegionNetworkEndpointGroupRequest()
@@ -492,12 +504,13 @@ describe('v1.RegionNetworkEndpointGroupsClient', () => {
 
   describe('list', () => {
     it('invokes list without error', async () => {
-      const client = new regionnetworkendpointgroupsModule.v1.RegionNetworkEndpointGroupsClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new regionnetworkendpointgroupsModule.v1.RegionNetworkEndpointGroupsClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListRegionNetworkEndpointGroupsRequest()
@@ -525,12 +538,13 @@ describe('v1.RegionNetworkEndpointGroupsClient', () => {
     });
 
     it('invokes list without error using callback', async () => {
-      const client = new regionnetworkendpointgroupsModule.v1.RegionNetworkEndpointGroupsClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new regionnetworkendpointgroupsModule.v1.RegionNetworkEndpointGroupsClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListRegionNetworkEndpointGroupsRequest()
@@ -573,12 +587,13 @@ describe('v1.RegionNetworkEndpointGroupsClient', () => {
     });
 
     it('invokes list with error', async () => {
-      const client = new regionnetworkendpointgroupsModule.v1.RegionNetworkEndpointGroupsClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new regionnetworkendpointgroupsModule.v1.RegionNetworkEndpointGroupsClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListRegionNetworkEndpointGroupsRequest()

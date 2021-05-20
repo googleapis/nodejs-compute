@@ -32,16 +32,19 @@ function main() {
   const forwardingRulesClient = new compute.ForwardingRulesClient();
   const globalAddressesClient = new compute.GlobalAddressesClient();
   const globalForwardingRulesClient = new compute.GlobalForwardingRulesClient();
-  const globalNetworkEndpointGroupsClient = new compute.GlobalNetworkEndpointGroupsClient();
+  const globalNetworkEndpointGroupsClient =
+    new compute.GlobalNetworkEndpointGroupsClient();
   const globalOperationsClient = new compute.GlobalOperationsClient();
-  const globalOrganizationOperationsClient = new compute.GlobalOrganizationOperationsClient();
+  const globalOrganizationOperationsClient =
+    new compute.GlobalOrganizationOperationsClient();
   const healthChecksClient = new compute.HealthChecksClient();
   const imagesClient = new compute.ImagesClient();
   const instanceGroupManagersClient = new compute.InstanceGroupManagersClient();
   const instanceGroupsClient = new compute.InstanceGroupsClient();
   const instancesClient = new compute.InstancesClient();
   const instanceTemplatesClient = new compute.InstanceTemplatesClient();
-  const interconnectAttachmentsClient = new compute.InterconnectAttachmentsClient();
+  const interconnectAttachmentsClient =
+    new compute.InterconnectAttachmentsClient();
   const interconnectLocationsClient = new compute.InterconnectLocationsClient();
   const interconnectsClient = new compute.InterconnectsClient();
   const licenseCodesClient = new compute.LicenseCodesClient();
@@ -60,16 +63,22 @@ function main() {
   const regionDisksClient = new compute.RegionDisksClient();
   const regionDiskTypesClient = new compute.RegionDiskTypesClient();
   const regionHealthChecksClient = new compute.RegionHealthChecksClient();
-  const regionHealthCheckServicesClient = new compute.RegionHealthCheckServicesClient();
-  const regionInstanceGroupManagersClient = new compute.RegionInstanceGroupManagersClient();
+  const regionHealthCheckServicesClient =
+    new compute.RegionHealthCheckServicesClient();
+  const regionInstanceGroupManagersClient =
+    new compute.RegionInstanceGroupManagersClient();
   const regionInstanceGroupsClient = new compute.RegionInstanceGroupsClient();
-  const regionNetworkEndpointGroupsClient = new compute.RegionNetworkEndpointGroupsClient();
-  const regionNotificationEndpointsClient = new compute.RegionNotificationEndpointsClient();
+  const regionNetworkEndpointGroupsClient =
+    new compute.RegionNetworkEndpointGroupsClient();
+  const regionNotificationEndpointsClient =
+    new compute.RegionNotificationEndpointsClient();
   const regionOperationsClient = new compute.RegionOperationsClient();
   const regionsClient = new compute.RegionsClient();
   const regionSslCertificatesClient = new compute.RegionSslCertificatesClient();
-  const regionTargetHttpProxiesClient = new compute.RegionTargetHttpProxiesClient();
-  const regionTargetHttpsProxiesClient = new compute.RegionTargetHttpsProxiesClient();
+  const regionTargetHttpProxiesClient =
+    new compute.RegionTargetHttpProxiesClient();
+  const regionTargetHttpsProxiesClient =
+    new compute.RegionTargetHttpsProxiesClient();
   const regionUrlMapsClient = new compute.RegionUrlMapsClient();
   const reservationsClient = new compute.ReservationsClient();
   const resourcePoliciesClient = new compute.ResourcePoliciesClient();

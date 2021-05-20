@@ -26,10 +26,9 @@ import * as regioninstancegroupmanagersModule from '../src';
 import {protobuf} from 'google-gax';
 
 function generateSampleMessage<T extends object>(instance: T) {
-  const filledObject = (instance.constructor as typeof protobuf.Message).toObject(
-    instance as protobuf.Message<T>,
-    {defaults: true}
-  );
+  const filledObject = (
+    instance.constructor as typeof protobuf.Message
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
   return (instance.constructor as typeof protobuf.Message).fromObject(
     filledObject
   ) as T;
@@ -74,49 +73,54 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
   });
 
   it('should create a client with no option', () => {
-    const client = new regioninstancegroupmanagersModule.v1.RegionInstanceGroupManagersClient();
+    const client =
+      new regioninstancegroupmanagersModule.v1.RegionInstanceGroupManagersClient();
     assert(client);
   });
 
   it('should create a client with gRPC fallback', () => {
-    const client = new regioninstancegroupmanagersModule.v1.RegionInstanceGroupManagersClient(
-      {
-        fallback: true,
-      }
-    );
+    const client =
+      new regioninstancegroupmanagersModule.v1.RegionInstanceGroupManagersClient(
+        {
+          fallback: true,
+        }
+      );
     assert(client);
   });
 
   it('has initialize method and supports deferred initialization', async () => {
-    const client = new regioninstancegroupmanagersModule.v1.RegionInstanceGroupManagersClient(
-      {
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      }
-    );
+    const client =
+      new regioninstancegroupmanagersModule.v1.RegionInstanceGroupManagersClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
     assert.strictEqual(client.regionInstanceGroupManagersStub, undefined);
     await client.initialize();
     assert(client.regionInstanceGroupManagersStub);
   });
 
   it('has close method', () => {
-    const client = new regioninstancegroupmanagersModule.v1.RegionInstanceGroupManagersClient(
-      {
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      }
-    );
+    const client =
+      new regioninstancegroupmanagersModule.v1.RegionInstanceGroupManagersClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
     client.close();
   });
 
   it('has getProjectId method', async () => {
     const fakeProjectId = 'fake-project-id';
-    const client = new regioninstancegroupmanagersModule.v1.RegionInstanceGroupManagersClient(
-      {
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      }
-    );
+    const client =
+      new regioninstancegroupmanagersModule.v1.RegionInstanceGroupManagersClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
     client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
     const result = await client.getProjectId();
     assert.strictEqual(result, fakeProjectId);
@@ -125,12 +129,13 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
 
   it('has getProjectId method with callback', async () => {
     const fakeProjectId = 'fake-project-id';
-    const client = new regioninstancegroupmanagersModule.v1.RegionInstanceGroupManagersClient(
-      {
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      }
-    );
+    const client =
+      new regioninstancegroupmanagersModule.v1.RegionInstanceGroupManagersClient(
+        {
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        }
+      );
     client.auth.getProjectId = sinon
       .stub()
       .callsArgWith(0, null, fakeProjectId);
@@ -149,12 +154,13 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
 
   describe('abandonInstances', () => {
     it('invokes abandonInstances without error', async () => {
-      const client = new regioninstancegroupmanagersModule.v1.RegionInstanceGroupManagersClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new regioninstancegroupmanagersModule.v1.RegionInstanceGroupManagersClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.AbandonInstancesRegionInstanceGroupManagerRequest()
@@ -182,12 +188,13 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
     });
 
     it('invokes abandonInstances without error using callback', async () => {
-      const client = new regioninstancegroupmanagersModule.v1.RegionInstanceGroupManagersClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new regioninstancegroupmanagersModule.v1.RegionInstanceGroupManagersClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.AbandonInstancesRegionInstanceGroupManagerRequest()
@@ -204,9 +211,8 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
-      client.innerApiCalls.abandonInstances = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.abandonInstances =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.abandonInstances(
           request,
@@ -232,12 +238,13 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
     });
 
     it('invokes abandonInstances with error', async () => {
-      const client = new regioninstancegroupmanagersModule.v1.RegionInstanceGroupManagersClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new regioninstancegroupmanagersModule.v1.RegionInstanceGroupManagersClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.AbandonInstancesRegionInstanceGroupManagerRequest()
@@ -267,12 +274,13 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
 
   describe('applyUpdatesToInstances', () => {
     it('invokes applyUpdatesToInstances without error', async () => {
-      const client = new regioninstancegroupmanagersModule.v1.RegionInstanceGroupManagersClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new regioninstancegroupmanagersModule.v1.RegionInstanceGroupManagersClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ApplyUpdatesToInstancesRegionInstanceGroupManagerRequest()
@@ -289,9 +297,8 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
-      client.innerApiCalls.applyUpdatesToInstances = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.applyUpdatesToInstances =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.applyUpdatesToInstances(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -302,12 +309,13 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
     });
 
     it('invokes applyUpdatesToInstances without error using callback', async () => {
-      const client = new regioninstancegroupmanagersModule.v1.RegionInstanceGroupManagersClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new regioninstancegroupmanagersModule.v1.RegionInstanceGroupManagersClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ApplyUpdatesToInstancesRegionInstanceGroupManagerRequest()
@@ -324,9 +332,8 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
-      client.innerApiCalls.applyUpdatesToInstances = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.applyUpdatesToInstances =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.applyUpdatesToInstances(
           request,
@@ -352,12 +359,13 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
     });
 
     it('invokes applyUpdatesToInstances with error', async () => {
-      const client = new regioninstancegroupmanagersModule.v1.RegionInstanceGroupManagersClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new regioninstancegroupmanagersModule.v1.RegionInstanceGroupManagersClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ApplyUpdatesToInstancesRegionInstanceGroupManagerRequest()
@@ -390,12 +398,13 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
 
   describe('createInstances', () => {
     it('invokes createInstances without error', async () => {
-      const client = new regioninstancegroupmanagersModule.v1.RegionInstanceGroupManagersClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new regioninstancegroupmanagersModule.v1.RegionInstanceGroupManagersClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.CreateInstancesRegionInstanceGroupManagerRequest()
@@ -423,12 +432,13 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
     });
 
     it('invokes createInstances without error using callback', async () => {
-      const client = new regioninstancegroupmanagersModule.v1.RegionInstanceGroupManagersClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new regioninstancegroupmanagersModule.v1.RegionInstanceGroupManagersClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.CreateInstancesRegionInstanceGroupManagerRequest()
@@ -445,9 +455,8 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
-      client.innerApiCalls.createInstances = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.createInstances =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.createInstances(
           request,
@@ -473,12 +482,13 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
     });
 
     it('invokes createInstances with error', async () => {
-      const client = new regioninstancegroupmanagersModule.v1.RegionInstanceGroupManagersClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new regioninstancegroupmanagersModule.v1.RegionInstanceGroupManagersClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.CreateInstancesRegionInstanceGroupManagerRequest()
@@ -508,12 +518,13 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
 
   describe('delete', () => {
     it('invokes delete without error', async () => {
-      const client = new regioninstancegroupmanagersModule.v1.RegionInstanceGroupManagersClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new regioninstancegroupmanagersModule.v1.RegionInstanceGroupManagersClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteRegionInstanceGroupManagerRequest()
@@ -541,12 +552,13 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
     });
 
     it('invokes delete without error using callback', async () => {
-      const client = new regioninstancegroupmanagersModule.v1.RegionInstanceGroupManagersClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new regioninstancegroupmanagersModule.v1.RegionInstanceGroupManagersClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteRegionInstanceGroupManagerRequest()
@@ -563,9 +575,8 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
-      client.innerApiCalls.delete = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.delete =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.delete(
           request,
@@ -591,12 +602,13 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
     });
 
     it('invokes delete with error', async () => {
-      const client = new regioninstancegroupmanagersModule.v1.RegionInstanceGroupManagersClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new regioninstancegroupmanagersModule.v1.RegionInstanceGroupManagersClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteRegionInstanceGroupManagerRequest()
@@ -623,12 +635,13 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
 
   describe('deleteInstances', () => {
     it('invokes deleteInstances without error', async () => {
-      const client = new regioninstancegroupmanagersModule.v1.RegionInstanceGroupManagersClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new regioninstancegroupmanagersModule.v1.RegionInstanceGroupManagersClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteInstancesRegionInstanceGroupManagerRequest()
@@ -656,12 +669,13 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
     });
 
     it('invokes deleteInstances without error using callback', async () => {
-      const client = new regioninstancegroupmanagersModule.v1.RegionInstanceGroupManagersClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new regioninstancegroupmanagersModule.v1.RegionInstanceGroupManagersClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteInstancesRegionInstanceGroupManagerRequest()
@@ -678,9 +692,8 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
-      client.innerApiCalls.deleteInstances = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.deleteInstances =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.deleteInstances(
           request,
@@ -706,12 +719,13 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
     });
 
     it('invokes deleteInstances with error', async () => {
-      const client = new regioninstancegroupmanagersModule.v1.RegionInstanceGroupManagersClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new regioninstancegroupmanagersModule.v1.RegionInstanceGroupManagersClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteInstancesRegionInstanceGroupManagerRequest()
@@ -741,12 +755,13 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
 
   describe('deletePerInstanceConfigs', () => {
     it('invokes deletePerInstanceConfigs without error', async () => {
-      const client = new regioninstancegroupmanagersModule.v1.RegionInstanceGroupManagersClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new regioninstancegroupmanagersModule.v1.RegionInstanceGroupManagersClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeletePerInstanceConfigsRegionInstanceGroupManagerRequest()
@@ -763,9 +778,8 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
-      client.innerApiCalls.deletePerInstanceConfigs = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.deletePerInstanceConfigs =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.deletePerInstanceConfigs(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -776,12 +790,13 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
     });
 
     it('invokes deletePerInstanceConfigs without error using callback', async () => {
-      const client = new regioninstancegroupmanagersModule.v1.RegionInstanceGroupManagersClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new regioninstancegroupmanagersModule.v1.RegionInstanceGroupManagersClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeletePerInstanceConfigsRegionInstanceGroupManagerRequest()
@@ -798,9 +813,8 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
-      client.innerApiCalls.deletePerInstanceConfigs = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.deletePerInstanceConfigs =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.deletePerInstanceConfigs(
           request,
@@ -826,12 +840,13 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
     });
 
     it('invokes deletePerInstanceConfigs with error', async () => {
-      const client = new regioninstancegroupmanagersModule.v1.RegionInstanceGroupManagersClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new regioninstancegroupmanagersModule.v1.RegionInstanceGroupManagersClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeletePerInstanceConfigsRegionInstanceGroupManagerRequest()
@@ -864,12 +879,13 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
 
   describe('get', () => {
     it('invokes get without error', async () => {
-      const client = new regioninstancegroupmanagersModule.v1.RegionInstanceGroupManagersClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new regioninstancegroupmanagersModule.v1.RegionInstanceGroupManagersClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetRegionInstanceGroupManagerRequest()
@@ -897,12 +913,13 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
     });
 
     it('invokes get without error using callback', async () => {
-      const client = new regioninstancegroupmanagersModule.v1.RegionInstanceGroupManagersClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new regioninstancegroupmanagersModule.v1.RegionInstanceGroupManagersClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetRegionInstanceGroupManagerRequest()
@@ -945,12 +962,13 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
     });
 
     it('invokes get with error', async () => {
-      const client = new regioninstancegroupmanagersModule.v1.RegionInstanceGroupManagersClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new regioninstancegroupmanagersModule.v1.RegionInstanceGroupManagersClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetRegionInstanceGroupManagerRequest()
@@ -977,12 +995,13 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
 
   describe('insert', () => {
     it('invokes insert without error', async () => {
-      const client = new regioninstancegroupmanagersModule.v1.RegionInstanceGroupManagersClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new regioninstancegroupmanagersModule.v1.RegionInstanceGroupManagersClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertRegionInstanceGroupManagerRequest()
@@ -1010,12 +1029,13 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
     });
 
     it('invokes insert without error using callback', async () => {
-      const client = new regioninstancegroupmanagersModule.v1.RegionInstanceGroupManagersClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new regioninstancegroupmanagersModule.v1.RegionInstanceGroupManagersClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertRegionInstanceGroupManagerRequest()
@@ -1032,9 +1052,8 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
-      client.innerApiCalls.insert = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.insert =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.insert(
           request,
@@ -1060,12 +1079,13 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
     });
 
     it('invokes insert with error', async () => {
-      const client = new regioninstancegroupmanagersModule.v1.RegionInstanceGroupManagersClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new regioninstancegroupmanagersModule.v1.RegionInstanceGroupManagersClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertRegionInstanceGroupManagerRequest()
@@ -1092,12 +1112,13 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
 
   describe('list', () => {
     it('invokes list without error', async () => {
-      const client = new regioninstancegroupmanagersModule.v1.RegionInstanceGroupManagersClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new regioninstancegroupmanagersModule.v1.RegionInstanceGroupManagersClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListRegionInstanceGroupManagersRequest()
@@ -1125,12 +1146,13 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
     });
 
     it('invokes list without error using callback', async () => {
-      const client = new regioninstancegroupmanagersModule.v1.RegionInstanceGroupManagersClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new regioninstancegroupmanagersModule.v1.RegionInstanceGroupManagersClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListRegionInstanceGroupManagersRequest()
@@ -1173,12 +1195,13 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
     });
 
     it('invokes list with error', async () => {
-      const client = new regioninstancegroupmanagersModule.v1.RegionInstanceGroupManagersClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new regioninstancegroupmanagersModule.v1.RegionInstanceGroupManagersClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListRegionInstanceGroupManagersRequest()
@@ -1205,12 +1228,13 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
 
   describe('listErrors', () => {
     it('invokes listErrors without error', async () => {
-      const client = new regioninstancegroupmanagersModule.v1.RegionInstanceGroupManagersClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new regioninstancegroupmanagersModule.v1.RegionInstanceGroupManagersClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListErrorsRegionInstanceGroupManagersRequest()
@@ -1238,12 +1262,13 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
     });
 
     it('invokes listErrors without error using callback', async () => {
-      const client = new regioninstancegroupmanagersModule.v1.RegionInstanceGroupManagersClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new regioninstancegroupmanagersModule.v1.RegionInstanceGroupManagersClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListErrorsRegionInstanceGroupManagersRequest()
@@ -1260,9 +1285,8 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.RegionInstanceGroupManagersListErrorsResponse()
       );
-      client.innerApiCalls.listErrors = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.listErrors =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.listErrors(
           request,
@@ -1288,12 +1312,13 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
     });
 
     it('invokes listErrors with error', async () => {
-      const client = new regioninstancegroupmanagersModule.v1.RegionInstanceGroupManagersClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new regioninstancegroupmanagersModule.v1.RegionInstanceGroupManagersClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListErrorsRegionInstanceGroupManagersRequest()
@@ -1323,12 +1348,13 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
 
   describe('listManagedInstances', () => {
     it('invokes listManagedInstances without error', async () => {
-      const client = new regioninstancegroupmanagersModule.v1.RegionInstanceGroupManagersClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new regioninstancegroupmanagersModule.v1.RegionInstanceGroupManagersClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListManagedInstancesRegionInstanceGroupManagersRequest()
@@ -1345,9 +1371,8 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.RegionInstanceGroupManagersListInstancesResponse()
       );
-      client.innerApiCalls.listManagedInstances = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.listManagedInstances =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.listManagedInstances(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -1358,12 +1383,13 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
     });
 
     it('invokes listManagedInstances without error using callback', async () => {
-      const client = new regioninstancegroupmanagersModule.v1.RegionInstanceGroupManagersClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new regioninstancegroupmanagersModule.v1.RegionInstanceGroupManagersClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListManagedInstancesRegionInstanceGroupManagersRequest()
@@ -1380,9 +1406,8 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.RegionInstanceGroupManagersListInstancesResponse()
       );
-      client.innerApiCalls.listManagedInstances = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.listManagedInstances =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.listManagedInstances(
           request,
@@ -1408,12 +1433,13 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
     });
 
     it('invokes listManagedInstances with error', async () => {
-      const client = new regioninstancegroupmanagersModule.v1.RegionInstanceGroupManagersClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new regioninstancegroupmanagersModule.v1.RegionInstanceGroupManagersClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListManagedInstancesRegionInstanceGroupManagersRequest()
@@ -1443,12 +1469,13 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
 
   describe('listPerInstanceConfigs', () => {
     it('invokes listPerInstanceConfigs without error', async () => {
-      const client = new regioninstancegroupmanagersModule.v1.RegionInstanceGroupManagersClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new regioninstancegroupmanagersModule.v1.RegionInstanceGroupManagersClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListPerInstanceConfigsRegionInstanceGroupManagersRequest()
@@ -1465,9 +1492,8 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.RegionInstanceGroupManagersListInstanceConfigsResp()
       );
-      client.innerApiCalls.listPerInstanceConfigs = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.listPerInstanceConfigs =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.listPerInstanceConfigs(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -1478,12 +1504,13 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
     });
 
     it('invokes listPerInstanceConfigs without error using callback', async () => {
-      const client = new regioninstancegroupmanagersModule.v1.RegionInstanceGroupManagersClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new regioninstancegroupmanagersModule.v1.RegionInstanceGroupManagersClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListPerInstanceConfigsRegionInstanceGroupManagersRequest()
@@ -1500,9 +1527,8 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.RegionInstanceGroupManagersListInstanceConfigsResp()
       );
-      client.innerApiCalls.listPerInstanceConfigs = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.listPerInstanceConfigs =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.listPerInstanceConfigs(
           request,
@@ -1528,12 +1554,13 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
     });
 
     it('invokes listPerInstanceConfigs with error', async () => {
-      const client = new regioninstancegroupmanagersModule.v1.RegionInstanceGroupManagersClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new regioninstancegroupmanagersModule.v1.RegionInstanceGroupManagersClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListPerInstanceConfigsRegionInstanceGroupManagersRequest()
@@ -1566,12 +1593,13 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
 
   describe('patch', () => {
     it('invokes patch without error', async () => {
-      const client = new regioninstancegroupmanagersModule.v1.RegionInstanceGroupManagersClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new regioninstancegroupmanagersModule.v1.RegionInstanceGroupManagersClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchRegionInstanceGroupManagerRequest()
@@ -1599,12 +1627,13 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
     });
 
     it('invokes patch without error using callback', async () => {
-      const client = new regioninstancegroupmanagersModule.v1.RegionInstanceGroupManagersClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new regioninstancegroupmanagersModule.v1.RegionInstanceGroupManagersClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchRegionInstanceGroupManagerRequest()
@@ -1647,12 +1676,13 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
     });
 
     it('invokes patch with error', async () => {
-      const client = new regioninstancegroupmanagersModule.v1.RegionInstanceGroupManagersClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new regioninstancegroupmanagersModule.v1.RegionInstanceGroupManagersClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchRegionInstanceGroupManagerRequest()
@@ -1679,12 +1709,13 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
 
   describe('patchPerInstanceConfigs', () => {
     it('invokes patchPerInstanceConfigs without error', async () => {
-      const client = new regioninstancegroupmanagersModule.v1.RegionInstanceGroupManagersClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new regioninstancegroupmanagersModule.v1.RegionInstanceGroupManagersClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchPerInstanceConfigsRegionInstanceGroupManagerRequest()
@@ -1701,9 +1732,8 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
-      client.innerApiCalls.patchPerInstanceConfigs = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.patchPerInstanceConfigs =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.patchPerInstanceConfigs(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -1714,12 +1744,13 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
     });
 
     it('invokes patchPerInstanceConfigs without error using callback', async () => {
-      const client = new regioninstancegroupmanagersModule.v1.RegionInstanceGroupManagersClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new regioninstancegroupmanagersModule.v1.RegionInstanceGroupManagersClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchPerInstanceConfigsRegionInstanceGroupManagerRequest()
@@ -1736,9 +1767,8 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
-      client.innerApiCalls.patchPerInstanceConfigs = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.patchPerInstanceConfigs =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.patchPerInstanceConfigs(
           request,
@@ -1764,12 +1794,13 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
     });
 
     it('invokes patchPerInstanceConfigs with error', async () => {
-      const client = new regioninstancegroupmanagersModule.v1.RegionInstanceGroupManagersClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new regioninstancegroupmanagersModule.v1.RegionInstanceGroupManagersClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchPerInstanceConfigsRegionInstanceGroupManagerRequest()
@@ -1802,12 +1833,13 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
 
   describe('recreateInstances', () => {
     it('invokes recreateInstances without error', async () => {
-      const client = new regioninstancegroupmanagersModule.v1.RegionInstanceGroupManagersClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new regioninstancegroupmanagersModule.v1.RegionInstanceGroupManagersClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.RecreateInstancesRegionInstanceGroupManagerRequest()
@@ -1835,12 +1867,13 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
     });
 
     it('invokes recreateInstances without error using callback', async () => {
-      const client = new regioninstancegroupmanagersModule.v1.RegionInstanceGroupManagersClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new regioninstancegroupmanagersModule.v1.RegionInstanceGroupManagersClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.RecreateInstancesRegionInstanceGroupManagerRequest()
@@ -1857,9 +1890,8 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
-      client.innerApiCalls.recreateInstances = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.recreateInstances =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.recreateInstances(
           request,
@@ -1885,12 +1917,13 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
     });
 
     it('invokes recreateInstances with error', async () => {
-      const client = new regioninstancegroupmanagersModule.v1.RegionInstanceGroupManagersClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new regioninstancegroupmanagersModule.v1.RegionInstanceGroupManagersClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.RecreateInstancesRegionInstanceGroupManagerRequest()
@@ -1920,12 +1953,13 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
 
   describe('resize', () => {
     it('invokes resize without error', async () => {
-      const client = new regioninstancegroupmanagersModule.v1.RegionInstanceGroupManagersClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new regioninstancegroupmanagersModule.v1.RegionInstanceGroupManagersClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ResizeRegionInstanceGroupManagerRequest()
@@ -1953,12 +1987,13 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
     });
 
     it('invokes resize without error using callback', async () => {
-      const client = new regioninstancegroupmanagersModule.v1.RegionInstanceGroupManagersClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new regioninstancegroupmanagersModule.v1.RegionInstanceGroupManagersClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ResizeRegionInstanceGroupManagerRequest()
@@ -1975,9 +2010,8 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
-      client.innerApiCalls.resize = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.resize =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.resize(
           request,
@@ -2003,12 +2037,13 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
     });
 
     it('invokes resize with error', async () => {
-      const client = new regioninstancegroupmanagersModule.v1.RegionInstanceGroupManagersClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new regioninstancegroupmanagersModule.v1.RegionInstanceGroupManagersClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ResizeRegionInstanceGroupManagerRequest()
@@ -2035,12 +2070,13 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
 
   describe('setInstanceTemplate', () => {
     it('invokes setInstanceTemplate without error', async () => {
-      const client = new regioninstancegroupmanagersModule.v1.RegionInstanceGroupManagersClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new regioninstancegroupmanagersModule.v1.RegionInstanceGroupManagersClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetInstanceTemplateRegionInstanceGroupManagerRequest()
@@ -2057,9 +2093,8 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
-      client.innerApiCalls.setInstanceTemplate = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.setInstanceTemplate =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.setInstanceTemplate(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -2070,12 +2105,13 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
     });
 
     it('invokes setInstanceTemplate without error using callback', async () => {
-      const client = new regioninstancegroupmanagersModule.v1.RegionInstanceGroupManagersClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new regioninstancegroupmanagersModule.v1.RegionInstanceGroupManagersClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetInstanceTemplateRegionInstanceGroupManagerRequest()
@@ -2092,9 +2128,8 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
-      client.innerApiCalls.setInstanceTemplate = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.setInstanceTemplate =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.setInstanceTemplate(
           request,
@@ -2120,12 +2155,13 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
     });
 
     it('invokes setInstanceTemplate with error', async () => {
-      const client = new regioninstancegroupmanagersModule.v1.RegionInstanceGroupManagersClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new regioninstancegroupmanagersModule.v1.RegionInstanceGroupManagersClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetInstanceTemplateRegionInstanceGroupManagerRequest()
@@ -2155,12 +2191,13 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
 
   describe('setTargetPools', () => {
     it('invokes setTargetPools without error', async () => {
-      const client = new regioninstancegroupmanagersModule.v1.RegionInstanceGroupManagersClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new regioninstancegroupmanagersModule.v1.RegionInstanceGroupManagersClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetTargetPoolsRegionInstanceGroupManagerRequest()
@@ -2188,12 +2225,13 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
     });
 
     it('invokes setTargetPools without error using callback', async () => {
-      const client = new regioninstancegroupmanagersModule.v1.RegionInstanceGroupManagersClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new regioninstancegroupmanagersModule.v1.RegionInstanceGroupManagersClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetTargetPoolsRegionInstanceGroupManagerRequest()
@@ -2210,9 +2248,8 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
-      client.innerApiCalls.setTargetPools = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.setTargetPools =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.setTargetPools(
           request,
@@ -2238,12 +2275,13 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
     });
 
     it('invokes setTargetPools with error', async () => {
-      const client = new regioninstancegroupmanagersModule.v1.RegionInstanceGroupManagersClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new regioninstancegroupmanagersModule.v1.RegionInstanceGroupManagersClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetTargetPoolsRegionInstanceGroupManagerRequest()
@@ -2273,12 +2311,13 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
 
   describe('updatePerInstanceConfigs', () => {
     it('invokes updatePerInstanceConfigs without error', async () => {
-      const client = new regioninstancegroupmanagersModule.v1.RegionInstanceGroupManagersClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new regioninstancegroupmanagersModule.v1.RegionInstanceGroupManagersClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.UpdatePerInstanceConfigsRegionInstanceGroupManagerRequest()
@@ -2295,9 +2334,8 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
-      client.innerApiCalls.updatePerInstanceConfigs = stubSimpleCall(
-        expectedResponse
-      );
+      client.innerApiCalls.updatePerInstanceConfigs =
+        stubSimpleCall(expectedResponse);
       const [response] = await client.updatePerInstanceConfigs(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
@@ -2308,12 +2346,13 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
     });
 
     it('invokes updatePerInstanceConfigs without error using callback', async () => {
-      const client = new regioninstancegroupmanagersModule.v1.RegionInstanceGroupManagersClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new regioninstancegroupmanagersModule.v1.RegionInstanceGroupManagersClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.UpdatePerInstanceConfigsRegionInstanceGroupManagerRequest()
@@ -2330,9 +2369,8 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
-      client.innerApiCalls.updatePerInstanceConfigs = stubSimpleCallWithCallback(
-        expectedResponse
-      );
+      client.innerApiCalls.updatePerInstanceConfigs =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.updatePerInstanceConfigs(
           request,
@@ -2358,12 +2396,13 @@ describe('v1.RegionInstanceGroupManagersClient', () => {
     });
 
     it('invokes updatePerInstanceConfigs with error', async () => {
-      const client = new regioninstancegroupmanagersModule.v1.RegionInstanceGroupManagersClient(
-        {
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        }
-      );
+      const client =
+        new regioninstancegroupmanagersModule.v1.RegionInstanceGroupManagersClient(
+          {
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
+            projectId: 'bogus',
+          }
+        );
       client.initialize();
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.UpdatePerInstanceConfigsRegionInstanceGroupManagerRequest()
