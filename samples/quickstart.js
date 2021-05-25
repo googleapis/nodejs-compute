@@ -156,18 +156,7 @@ async function createInstance(
     zone,
   });
 
-  // Waiting the operation
-  if (operation[0].status === compute_protos.Operation.Status.RUNNING) {
-    const operationClient = new compute.ZoneOperationsClient({
-      fallback: 'rest',
-    });
-
-    await operationClient.wait({
-      operation: operation[0].name,
-      project: projectId,
-      zone,
-    });
-  }
+  await waitForOperation(operation, projectId);
 
   console.log(`Instance ${instanceName} created.`);
 
@@ -195,6 +184,22 @@ async function deleteInstance(projectId, zone, machineName) {
     instance: machineName,
   });
 
+  await waitForOperation(operation, projectId);
+
+  console.log(`Instance ${machineName} deleted.`);
+}
+
+// [END compute_instances_delete]
+
+// [START compute_instances_operation_check]
+
+/**
+ * This method waits for an operation to be completed. Calling this function will block until the operation is finished.
+ *
+ * @param {Operation} operation - Operation instance you want to wait.
+ * @param {string} projectId - ID or number of the project you want to use.
+ */
+async function waitForOperation(operation, projectId) {
   if (operation[0].status === compute_protos.Operation.Status.RUNNING) {
     const operationClient = new compute.ZoneOperationsClient({
       fallback: 'rest',
@@ -203,14 +208,12 @@ async function deleteInstance(projectId, zone, machineName) {
     await operationClient.wait({
       operation: operation[0].name,
       project: projectId,
-      zone,
+      zone: operation[0].zone.split('/').pop(),
     });
   }
-
-  console.log(`Instance ${machineName} deleted.`);
 }
 
-// [END compute_instances_delete]
+// [END compute_instances_operation_check]
 
 async function main(projectId, zone, instanceName) {
   await createInstance(projectId, zone, instanceName);
