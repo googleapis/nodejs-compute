@@ -1540,8 +1540,9 @@ Zone.prototype.getDisksStream = paginator.streamify('getDisks');
  *     this.end();
  *   });
  */
-Zone.prototype.getInstanceGroupsStream =
-  paginator.streamify('getInstanceGroups');
+Zone.prototype.getInstanceGroupsStream = paginator.streamify(
+  'getInstanceGroups'
+);
 
 /**
  * Get a list of {@link MachineType} objects for this zone as a
