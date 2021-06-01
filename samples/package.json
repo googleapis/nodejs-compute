@@ -11,12 +11,14 @@
     "*.js"
   ],
   "scripts": {
-    "test": "mocha system-test --timeout 1200000"
+    "test": "mocha test --timeout 1200000"
   },
   "dependencies": {
     "@google-cloud/compute": "3.0.0-alpha.1"
   },
   "devDependencies": {
-    "mocha": "^8.0.0"
+    "mocha": "^8.0.0",
+    "chai": "^4.2.0",
+    "uuid": "^8.0.0"
   }
 }
