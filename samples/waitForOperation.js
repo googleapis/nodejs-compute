@@ -29,7 +29,7 @@ function main(projectId, operation) {
   const compute_protos = compute.protos.google.cloud.compute.v1;
 
   async function waitForOperation() {
-    if (operation[0].status === compute_protos.Operation.Status.RUNNING) {
+    if (operation[0].status === 'RUNNING') {
       const operationClient = new compute.ZoneOperationsClient({
         fallback: 'rest',
       });
