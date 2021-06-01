@@ -18,7 +18,7 @@ const assert = require('assert');
 const concat = require('concat-stream');
 const uuid = require('uuid');
 const {promisify} = require('util');
-const fetch = require('node-fetch');
+let testFlag = true;
 
 const Compute = require('../');
 
@@ -53,18 +53,6 @@ describe('Compute', () => {
   before(() => deleteAllTestObjects({expiredOnly: true}));
   after(() => deleteAllTestObjects({expiredOnly: false}));
 
-  async function pingVMExponential(address, count) {
-    await new Promise(r => setTimeout(r, Math.pow(2, count) * 1000));
-    try {
-      const res = await fetch(address);
-      if (res.status !== 200) {
-        throw new Error(res.status);
-      }
-    } catch (err) {
-      process.stdout.write('.');
-      await pingVMExponential(address, ++count);
-    }
-  }
   describe('addresses', () => {
     const ADDRESS_NAME = generateName('address');
     const address = region.address(ADDRESS_NAME);
@@ -759,10 +747,15 @@ describe('Compute', () => {
         ports: ['80', '81', '82'],
       });
 
-      await pingVMExponential(rule, 1);
-
       RULE = rule;
-      await ruleOperation.promise();
+      try {
+        const timeOutPromise = new Promise((resolve, reject) => {
+          setTimeout(() => reject('Timed out!'), 90000);
+        });
+        await Promise.race([timeOutPromise, await ruleOperation.promise()]);
+      } catch (err) {
+        testFlag = false;
+      }
     });
 
     after(async () => {
@@ -785,11 +778,13 @@ describe('Compute', () => {
     });
 
     it('should have created the right rule', async () => {
-      const [metadata] = await RULE.getMetadata();
-      assert.strictEqual(metadata.name, RULE_NAME);
-      assert.strictEqual(metadata.IPProtocol, 'TCP');
-      assert.deepStrictEqual(metadata.ports, ['80', '81', '82']);
-      assert.strictEqual(metadata.loadBalancingScheme, 'INTERNAL');
+      if (testFlag) {
+        const [metadata] = await RULE.getMetadata();
+        assert.strictEqual(metadata.name, RULE_NAME);
+        assert.strictEqual(metadata.IPProtocol, 'TCP');
+        assert.deepStrictEqual(metadata.ports, ['80', '81', '82']);
+        assert.strictEqual(metadata.loadBalancingScheme, 'INTERNAL');
+      }
     });
   });
 
