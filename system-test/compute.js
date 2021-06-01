@@ -750,7 +750,7 @@ describe('Compute', () => {
       RULE = rule;
       try {
         const timeOutPromise = new Promise((resolve, reject) => {
-          setTimeout(() => reject('Timed out!'), 90000);
+          setTimeout(() => reject('Timed out!'), 1100000);
         });
         await Promise.race([timeOutPromise, await ruleOperation.promise()]);
       } catch (err) {
@@ -766,12 +766,14 @@ describe('Compute', () => {
       for (const firewall of firewallsToDelete) {
         await firewall.delete();
       }
-      const [ruleOperation] = await RULE.delete();
-      await ruleOperation.promise();
-      await computeRequest({
-        method: 'DELETE',
-        uri: 'regions/us-central1/backendServices/' + BACKEND_SERVICE_NAME,
-      });
+      if (testFlag) {
+        const [ruleOperation] = await RULE.delete();
+        await ruleOperation.promise();
+        await computeRequest({
+          method: 'DELETE',
+          uri: 'regions/us-central1/backendServices/' + BACKEND_SERVICE_NAME,
+        });
+      }
 
       const [subnetworkOperation] = await SUBNETWORK.delete();
       await subnetworkOperation.promise();
