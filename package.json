@@ -63,7 +63,6 @@
     "jsdoc-region-tag": "^1.0.2",
     "linkinator": "^2.0.0",
     "mocha": "^8.0.0",
-    "node-fetch": "^2.6.1",
     "proxyquire": "^2.0.1",
     "typescript": "^3.8.3",
     "uuid": "^8.0.0"
