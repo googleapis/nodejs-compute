@@ -15,8 +15,8 @@
 'use strict';
 
 const compute = require('@google-cloud/compute');
-const {describe, it} = require('mocha');
 
+const {describe, it} = require('mocha');
 const uuid = require('uuid');
 const cp = require('child_process');
 const {assert} = require('chai');
@@ -55,5 +55,26 @@ describe('samples', () => {
       `node deleteInstance ${projectId} ${zone} ${machineName}`
     );
     assert.match(output, /Instance deleted./);
+  });
+
+  it('should wait for operation', async () => {
+    const projectId = await client.getProjectId();
+
+    const newMachineName = `gcloud-test-intance-${uuid.v4().split('-')[0]}`;
+
+    execSync(`node createInstance ${projectId} ${zone} ${newMachineName}`);
+
+    const operation = await client.delete({
+      project: projectId,
+      zone,
+      instance: newMachineName,
+    });
+
+    const operationString = JSON.stringify(operation);
+
+    const output = execSync(
+      `node waitForOperation ${projectId} '${operationString}'`
+    );
+    assert.match(output, /Operation finished./);
   });
 });

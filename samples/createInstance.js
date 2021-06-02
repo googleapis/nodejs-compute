@@ -86,6 +86,9 @@ function main(
       zone,
     });
 
+    console.log(operation);
+    console.log(JSON.stringify(operation));
+
     if (operation[0].status === 'RUNNING') {
       const operationClient = new compute.ZoneOperationsClient({
         fallback: 'rest',

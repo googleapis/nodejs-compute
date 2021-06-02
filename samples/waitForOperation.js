@@ -15,17 +15,19 @@
 /**
  * Waits for an operation to be completed. Calling this function will block until the operation is finished.
  * @param {string} projectId - ID or number of the project you want to use.
- * @param {Operation} operation - Operation instance you want to wait.
+ * @param {string} operationString - Operation instance you want to wait in string format.
  */
-function main(projectId, operation) {
+function main(projectId, operationString) {
   // [START compute_instances_operation_check]
   /**
    * TODO(developer): Uncomment these variables before running the sample.
    */
   // const projectId = 'YOUR_PROJECT_ID';
-  // const operation = { ... }
+  // const operationString = 'YOUR_OPERATION_STRING'
 
   const compute = require('@google-cloud/compute');
+
+  const operation = JSON.parse(operationString);
 
   async function waitForOperation() {
     if (operation[0].status === 'RUNNING') {
@@ -39,6 +41,8 @@ function main(projectId, operation) {
         zone: operation[0].zone.split('/').pop(),
       });
     }
+
+    console.log('Operation finished.');
   }
 
   waitForOperation();
