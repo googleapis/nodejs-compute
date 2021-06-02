@@ -26,7 +26,6 @@ function main(projectId, operation) {
   // const operation = { ... }
 
   const compute = require('@google-cloud/compute');
-  const compute_protos = compute.protos.google.cloud.compute.v1;
 
   async function waitForOperation() {
     if (operation[0].status === 'RUNNING') {
