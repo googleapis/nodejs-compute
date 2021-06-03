@@ -14,7 +14,7 @@
 
 'use strict';
 
-// [START send]
+// [START compute_send]
 // This sample is based off of:
 // https://github.com/sendgrid/sendgrid-nodejs/tree/master/packages/mail
 const sendgrid = require('@sendgrid/mail');
@@ -29,4 +29,4 @@ async function sendgridExample() {
   });
 }
 sendgridExample();
-// [END send]
+// [END compute_send]

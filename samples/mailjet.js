@@ -18,7 +18,7 @@
 
 'use strict';
 
-// [START send]
+// [START compute_send]
 const mailer = require('nodemailer');
 const smtp = require('nodemailer-smtp-transport');
 
@@ -43,4 +43,4 @@ async function mailjet() {
   console.log(json);
 }
 mailjet();
-// [END send]
+// [END compute_send]
