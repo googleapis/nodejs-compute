@@ -12,7 +12,13 @@
 
 * [Before you begin](#before-you-begin)
 * [Samples](#samples)
-  * [Quickstart](#quickstart)
+  * [Create instance](#create-instance)
+  * [Delete instance](#delete-instance)
+  * [List instances](#list-instances)
+  * [List all instances](#list-all-instancs)
+  * [Wait for operation](#wait-for-operation)
+  * [Mailjet](#mailjet)
+  * [Sendgrid](#sendgrid)
 
 ## Before you begin
 
@@ -29,16 +35,95 @@ Before running the samples, make sure you've followed the steps outlined in
 
 
 
-### Quickstart
+### Create instance
 
-View the [source code](https://github.com/googleapis/nodejs-compute/blob/master/samples/quickstart.js).
+View the [source code](https://github.com/googleapis/nodejs-compute/blob/master/samples/createInstance.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-compute&page=editor&open_in_editor=samples/quickstart.js,samples/README.md)
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-compute&page=editor&open_in_editor=samples/createInstance.js,samples/README.md)
 
 __Usage:__
 
 
-`node samples/quickstart.js`
+`node samples/createInstance.js`
+
+
+
+### Delete instance
+
+View the [source code](https://github.com/googleapis/nodejs-compute/blob/master/samples/deleteInstance.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-compute&page=editor&open_in_editor=samples/deleteInstance.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/deleteInstance.js`
+
+
+
+### List instances
+
+View the [source code](https://github.com/googleapis/nodejs-compute/blob/master/samples/listInstances.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-compute&page=editor&open_in_editor=samples/listInstances.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/listInstances.js`
+
+
+
+### List all instances
+
+View the [source code](https://github.com/googleapis/nodejs-compute/blob/master/samples/listAllInstances.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-compute&page=editor&open_in_editor=samples/listAllInstances.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/listAllInstances.js`
+
+
+
+### Wait for operation
+
+View the [source code](https://github.com/googleapis/nodejs-compute/blob/master/samples/waitForOperation.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-compute&page=editor&open_in_editor=samples/waitForOperation.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/waitForOperation.js`
+
+
+
+### Mailjet
+
+View the [source code](https://github.com/googleapis/nodejs-compute/blob/master/samples/mailjet.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-compute&page=editor&open_in_editor=samples/mailjet.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/mailjet.js`
+
+
+
+### Sendgrid
+
+View the [source code](https://github.com/googleapis/nodejs-compute/blob/master/samples/sendgrid.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-compute&page=editor&open_in_editor=samples/sendgrid.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/sendgrid.js`
+
 
 
 
