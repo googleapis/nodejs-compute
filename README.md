@@ -58,52 +58,30 @@ npm install @google-cloud/compute
 ### Using the client library
 
 ```javascript
+/**
+ * TODO(developer): Uncomment these variables before running the sample.
+ */
+// const projectId = 'YOUR_PROJECT_ID';
+// const zone = 'europe-central2-b'
+
 const compute = require('@google-cloud/compute');
 
-function sleep(timeoutMs) {
-  return new Promise(resolve => {
-    setTimeout(resolve, timeoutMs);
+async function listInstances() {
+  const client = new compute.InstancesClient({fallback: 'rest'});
+
+  const [instanceList] = await client.list({
+    project: projectId,
+    zone,
   });
+
+  console.log(`Instances found in zone ${zone}:`);
+
+  for (const instance of instanceList.items) {
+    console.log(` - ${instance.name} (${instance.machineType})`);
+  }
 }
 
-const client = new compute.AddressesClient({fallback: 'rest'});
-const project = await client.getProjectId();
-const region = 'us-east1';
-
-const addressResource = {
-  name: 'test-address-123',
-};
-
-const [insertResponse] = await client.insert({
-  project,
-  region,
-  addressResource,
-});
-console.log(insertResponse);
-
-await sleep(5000);
-
-const [listResponse1] = await client.list({
-  project,
-  region,
-});
-console.log(listResponse1);
-
-const [deleteResponse] = await client.delete({
-  project,
-  region,
-  address: addressResource.name,
-});
-console.log(deleteResponse);
-
-await sleep(5000);
-
-const [listResponse2] = await client.list({
-  project,
-  region,
-});
-console.log(listResponse2);
-console.log('Quickstart sample completed');
+listInstances();
 
 ```
 
@@ -115,8 +93,13 @@ Samples are in the [`samples/`](https://github.com/googleapis/nodejs-compute/tre
 
 | Sample                      | Source Code                       | Try it |
 | --------------------------- | --------------------------------- | ------ |
-| Quickstart | [source code](https://github.com/googleapis/nodejs-compute/blob/master/samples/quickstart.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-compute&page=editor&open_in_editor=samples/quickstart.js,samples/README.md) |
-
+| Create instance | [source code](https://github.com/googleapis/nodejs-compute/blob/master/samples/createInstance.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-compute&page=editor&open_in_editor=samples/createInstance.js,samples/README.md) |
+| Delete instance | [source code](https://github.com/googleapis/nodejs-compute/blob/master/samples/deleteInstance.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-compute&page=editor&open_in_editor=samples/deleteInstance.js,samples/README.md) |
+| List instances | [source code](https://github.com/googleapis/nodejs-compute/blob/master/samples/listInstances.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-compute&page=editor&open_in_editor=samples/listInstances.js,samples/README.md) |
+| List all instances | [source code](https://github.com/googleapis/nodejs-compute/blob/master/samples/listAllInstances.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-compute&page=editor&open_in_editor=samples/listAllInstancs.js,samples/README.md) |
+| Wait for operation | [source code](https://github.com/googleapis/nodejs-compute/blob/master/samples/waitForOperation.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-compute&page=editor&open_in_editor=samples/waitForOperation.js,samples/README.md) |
+| Mailjet | [source code](https://github.com/googleapis/nodejs-compute/blob/master/samples/mailjet.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-compute&page=editor&open_in_editor=samples/mailjet.js,samples/README.md) |
+| Sendgrid | [source code](https://github.com/googleapis/nodejs-compute/blob/master/samples/sendgrid.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-compute&page=editor&open_in_editor=samples/sendgrid.js,samples/README.md) |
 
 
 The [Google Compute Engine Node.js Client API Reference][client-docs] documentation
