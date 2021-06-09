@@ -20,12 +20,13 @@
 function main(projectId) {
   // [START compute_instances_list_all]
   /**
-   * TODO(developer): Uncomment these variables before running the sample.
+   * TODO(developer): Uncomment and replace these variables before running the sample.
    */
   // const projectId = 'YOUR_PROJECT_ID';
 
   const compute = require('@google-cloud/compute');
 
+  // List all instances in the specified project.
   async function listAllInstances() {
     const client = new compute.InstancesClient({fallback: 'rest'});
     const aggListRequest = await client.aggregatedList({

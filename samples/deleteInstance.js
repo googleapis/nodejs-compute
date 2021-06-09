@@ -17,28 +17,29 @@
  *
  * @param {string} projectId - ID or number of the project you want to use.
  * @param {string} zone - Name of the zone you want to check, for example: us-west3-b
- * @param {string} machineName - Name of the machine you want to delete.
+ * @param {string} instanceName - Name of the instance you want to delete.
  */
-function main(projectId, zone, machineName) {
+function main(projectId, zone, instanceName) {
   // [START compute_instances_delete]
   /**
    * TODO(developer): Uncomment these variables before running the sample.
    */
   // const projectId = 'YOUR_PROJECT_ID';
   // const zone = 'europe-central2-b'
-  // const machineName = 'YOUR_MACHINE_NAME';
+  // const instanceName = 'YOUR_MACHINE_NAME';
 
   const compute = require('@google-cloud/compute');
 
+  // Delete the instance specified by `instanceName` if it's present in the given project and zone.
   async function deleteInstance() {
     const client = new compute.InstancesClient({fallback: 'rest'});
 
-    console.log(`Deleting ${machineName} from ${zone}...`);
+    console.log(`Deleting ${instanceName} from ${zone}...`);
 
     const operation = await client.delete({
       project: projectId,
       zone,
-      instance: machineName,
+      instance: instanceName,
     });
 
     if (operation[0].status === 'RUNNING') {

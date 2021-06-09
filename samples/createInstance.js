@@ -42,7 +42,7 @@ function main(
 ) {
   // [START compute_instances_create]
   /**
-   * TODO(developer): Uncomment these variables before running the sample.
+   * TODO(developer): Uncomment and replace these variables before running the sample.
    */
   // const zone = 'europe-central2-b'
   // const instanceName = 'YOUR_INSTANCE_NAME'
@@ -54,9 +54,11 @@ function main(
   const compute = require('@google-cloud/compute');
   const compute_protos = compute.protos.google.cloud.compute.v1;
 
+  // Create a new instance with the values provided above in the specified project and zone.
   async function createInstance() {
     const instancesClient = new compute.InstancesClient({fallback: 'rest'});
 
+    // Describe the size and source image of the boot disk to attach to the instance.
     const attachedDisk = new compute_protos.AttachedDisk();
     const initializeParams = new compute_protos.AttachedDiskInitializeParams();
 
@@ -68,10 +70,11 @@ function main(
     attachedDisk.boot = true;
     attachedDisk.type = compute_protos.AttachedDisk.Type.PERSISTENT;
 
+    // Use the `default` network interface, which is created automatically for each project.
     const networkInterface = new compute_protos.NetworkInterface();
     networkInterface.name = networkName;
 
-    // Collecting all the information into the Instance object
+    // Collect all the information into the Instance object
     const instance = new compute_protos.Instance();
     instance.name = instanceName;
     instance.disks = [attachedDisk];
@@ -80,6 +83,7 @@ function main(
 
     console.log(`Creating the ${instanceName} instance in ${zone}...`);
 
+    // Wait for the create operation to complete.
     const operation = await instancesClient.insert({
       instanceResource: instance,
       project: projectId,
