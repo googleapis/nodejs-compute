@@ -59,7 +59,7 @@ npm install @google-cloud/compute
 
 ```javascript
 /**
- * TODO(developer): Uncomment these variables before running the sample.
+ * TODO(developer): Uncomment and replace these variables before running the sample.
  */
 // const projectId = 'YOUR_PROJECT_ID';
 // const zone = 'europe-central2-b'

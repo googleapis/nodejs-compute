@@ -26,13 +26,13 @@ const client = new compute.InstancesClient({fallback: 'rest'});
 const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
 
 describe('samples', () => {
-  const machineName = `gcloud-test-intance-${uuid.v4().split('-')[0]}`;
+  const instanceName = `gcloud-test-intance-${uuid.v4().split('-')[0]}`;
   const zone = 'europe-central2-b';
 
   it('should create instance', async () => {
     const projectId = await client.getProjectId();
     const output = execSync(
-      `node createInstance ${projectId} ${zone} ${machineName}`
+      `node createInstance ${projectId} ${zone} ${instanceName}`
     );
     assert.match(output, /Instance created./);
   });
@@ -52,7 +52,7 @@ describe('samples', () => {
   it('should delete instance', async () => {
     const projectId = await client.getProjectId();
     const output = execSync(
-      `node deleteInstance ${projectId} ${zone} ${machineName}`
+      `node deleteInstance ${projectId} ${zone} ${instanceName}`
     );
     assert.match(output, /Instance deleted./);
   });
@@ -60,14 +60,14 @@ describe('samples', () => {
   it('should wait for operation', async () => {
     const projectId = await client.getProjectId();
 
-    const newMachineName = `gcloud-test-intance-${uuid.v4().split('-')[0]}`;
+    const newinstanceName = `gcloud-test-intance-${uuid.v4().split('-')[0]}`;
 
-    execSync(`node createInstance ${projectId} ${zone} ${newMachineName}`);
+    execSync(`node createInstance ${projectId} ${zone} ${newinstanceName}`);
 
     const operation = await client.delete({
       project: projectId,
       zone,
-      instance: newMachineName,
+      instance: newinstanceName,
     });
 
     const operationString = JSON.stringify(operation);

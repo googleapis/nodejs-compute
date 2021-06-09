@@ -20,7 +20,7 @@
 function main(projectId, operationString) {
   // [START compute_instances_operation_check]
   /**
-   * TODO(developer): Uncomment these variables before running the sample.
+   * TODO(developer): Uncomment and replace these variables before running the sample.
    */
   // const projectId = 'YOUR_PROJECT_ID';
   // const operationString = 'YOUR_OPERATION_STRING'

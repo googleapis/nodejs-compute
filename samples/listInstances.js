@@ -21,13 +21,14 @@
 function main(projectId, zone) {
   // [START compute_instances_list]
   /**
-   * TODO(developer): Uncomment these variables before running the sample.
+   * TODO(developer): Uncomment and replace these variables before running the sample.
    */
   // const projectId = 'YOUR_PROJECT_ID';
   // const zone = 'europe-central2-b'
 
   const compute = require('@google-cloud/compute');
 
+  // List all instances in the given zone in the specified project.
   async function listInstances() {
     const client = new compute.InstancesClient({fallback: 'rest'});
 
