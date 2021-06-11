@@ -26,7 +26,7 @@ function main(projectId, zone, instanceName) {
    */
   // const projectId = 'YOUR_PROJECT_ID';
   // const zone = 'europe-central2-b'
-  // const instanceName = 'YOUR_MACHINE_NAME';
+  // const instanceName = 'YOUR_INSTANCE_NAME';
 
   const compute = require('@google-cloud/compute');
 
@@ -36,6 +36,7 @@ function main(projectId, zone, instanceName) {
 
     console.log(`Deleting ${instanceName} from ${zone}...`);
 
+    // Wait for the delete operation to complete.
     const operation = await client.delete({
       project: projectId,
       zone,

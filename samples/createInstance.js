@@ -44,9 +44,9 @@ function main(
   /**
    * TODO(developer): Uncomment and replace these variables before running the sample.
    */
+  // const projectId = 'YOUR_PROJECT_ID';
   // const zone = 'europe-central2-b'
   // const instanceName = 'YOUR_INSTANCE_NAME'
-  // const projectId = 'YOUR_PROJECT_ID';
   // const machineType = 'n1-standard-1';
   // const sourceImage = 'projects/debian-cloud/global/images/family/debian-10';
   // const networkName = 'global/networks/default';
@@ -70,11 +70,11 @@ function main(
     attachedDisk.boot = true;
     attachedDisk.type = compute_protos.AttachedDisk.Type.PERSISTENT;
 
-    // Use the `default` network interface, which is created automatically for each project.
+    // Use the network interface provided in the networkName argument
     const networkInterface = new compute_protos.NetworkInterface();
     networkInterface.name = networkName;
 
-    // Collect all the information into the Instance object
+    // Collect information into the Instance object
     const instance = new compute_protos.Instance();
     instance.name = instanceName;
     instance.disks = [attachedDisk];
@@ -83,15 +83,12 @@ function main(
 
     console.log(`Creating the ${instanceName} instance in ${zone}...`);
 
-    // Wait for the create operation to complete.
+    // Wait for the create operation to complete
     const operation = await instancesClient.insert({
       instanceResource: instance,
       project: projectId,
       zone,
     });
-
-    console.log(operation);
-    console.log(JSON.stringify(operation));
 
     if (operation[0].status === 'RUNNING') {
       const operationClient = new compute.ZoneOperationsClient({
