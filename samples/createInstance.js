@@ -70,11 +70,11 @@ function main(
     attachedDisk.boot = true;
     attachedDisk.type = compute_protos.AttachedDisk.Type.PERSISTENT;
 
-    // Use the network interface provided in the networkName argument
+    // Use the network interface provided in the networkName argument.
     const networkInterface = new compute_protos.NetworkInterface();
     networkInterface.name = networkName;
 
-    // Collect information into the Instance object
+    // Collect information into the Instance object.
     const instance = new compute_protos.Instance();
     instance.name = instanceName;
     instance.disks = [attachedDisk];
@@ -83,7 +83,7 @@ function main(
 
     console.log(`Creating the ${instanceName} instance in ${zone}...`);
 
-    // Wait for the create operation to complete
+    // Wait for the create operation to complete.
     const operation = await instancesClient.insert({
       instanceResource: instance,
       project: projectId,
