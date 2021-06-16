@@ -83,15 +83,20 @@ describe('samples', () => {
   it('should return empty default value', async () => {
     const projectId = await instancesClient.getProjectId();
     const bucketName = `test-bucket-name-${uuid.v4().split('-')[0]}`;
-    
+
     const storage = new Storage();
     await storage.createBucket(bucketName);
 
-    const output = execSync(
-      `node defaultValues ${projectId} ${bucketName}`
+    const output = execSync(`node defaultValues ${projectId} ${bucketName}`);
+    assert.match(
+      output,
+      /Setting reportNamePrefix to empty value will cause the report to have the default prefix of `usage_gce`./
     );
-    assert.match(output, /Report name prefix: ./);
-    
+    assert.match(
+      output,
+      /Report name prefix not set, replacing with default value of `usage_gce`./
+    );
+
     await projectsClient.setUsageExportBucket({
       project: projectId,
       usageExportLocationResource: {},
