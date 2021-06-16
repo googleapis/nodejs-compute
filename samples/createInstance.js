@@ -91,11 +91,11 @@ function main(
     });
 
     if (operation[0].status === 'RUNNING') {
-      const operationClient = new compute.ZoneOperationsClient({
+      const operationsClient = new compute.ZoneOperationsClient({
         fallback: 'rest',
       });
 
-      await operationClient.wait({
+      await operationsClient.wait({
         operation: operation[0].name,
         project: projectId,
         zone: operation[0].zone.split('/').pop(),
