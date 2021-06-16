@@ -109,14 +109,20 @@
     "predocs-test": "npm run docs",
     "prepare": "npm run compile-protos && npm run compile",
     "prelint": "cd samples; npm link ../; npm install",
+<<<<<<< HEAD
     "precompile": "gts clean",
     "api-extractor": "api-extractor run --local",
     "api-documenter": "api-documenter yaml --input-folder=temp"
+=======
+    "clean": "gts clean",
+    "precompile": "gts clean"
+>>>>>>> master
   },
   "dependencies": {
     "google-gax": "^2.13.0"
   },
   "devDependencies": {
+<<<<<<< HEAD
     "@types/mocha": "^8.2.0",
     "@types/node": "^14.14.13",
     "@types/sinon": "^9.0.9",
@@ -138,5 +144,19 @@
   },
   "engines": {
     "node": ">=10"
+=======
+    "c8": "^7.0.0",
+    "codecov": "^3.0.2",
+    "concat-stream": "^2.0.0",
+    "gts": "^2.0.2",
+    "jsdoc": "^3.6.2",
+    "jsdoc-fresh": "^1.0.1",
+    "jsdoc-region-tag": "^1.0.2",
+    "linkinator": "^2.0.0",
+    "mocha": "^8.0.0",
+    "proxyquire": "^2.0.1",
+    "typescript": "^3.8.3",
+    "uuid": "^8.0.0"
+>>>>>>> master
   }
 }
