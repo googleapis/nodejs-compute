@@ -12,13 +12,13 @@
 
 * [Before you begin](#before-you-begin)
 * [Samples](#samples)
-  * [Create instance](#create-instance)
-  * [Delete instance](#delete-instance)
-  * [List instances](#list-instances)
-  * [List all instances](#list-all-instancs)
-  * [Wait for operation](#wait-for-operation)
+  * [Create Instance](#create-instance)
+  * [Delete Instance](#delete-instance)
+  * [List All Instances](#list-all-instances)
+  * [List Instances](#list-instances)
   * [Mailjet](#mailjet)
   * [Sendgrid](#sendgrid)
+  * [Wait For Operation](#wait-for-operation)
 
 ## Before you begin
 
@@ -35,7 +35,7 @@ Before running the samples, make sure you've followed the steps outlined in
 
 
 
-### Create instance
+### Create Instance
 
 View the [source code](https://github.com/googleapis/nodejs-compute/blob/master/samples/createInstance.js).
 
@@ -47,8 +47,12 @@ __Usage:__
 `node samples/createInstance.js`
 
 
+-----
 
-### Delete instance
+
+
+
+### Delete Instance
 
 View the [source code](https://github.com/googleapis/nodejs-compute/blob/master/samples/deleteInstance.js).
 
@@ -60,21 +64,12 @@ __Usage:__
 `node samples/deleteInstance.js`
 
 
-
-### List instances
-
-View the [source code](https://github.com/googleapis/nodejs-compute/blob/master/samples/listInstances.js).
-
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-compute&page=editor&open_in_editor=samples/listInstances.js,samples/README.md)
-
-__Usage:__
-
-
-`node samples/listInstances.js`
+-----
 
 
 
-### List all instances
+
+### List All Instances
 
 View the [source code](https://github.com/googleapis/nodejs-compute/blob/master/samples/listAllInstances.js).
 
@@ -86,17 +81,25 @@ __Usage:__
 `node samples/listAllInstances.js`
 
 
+-----
 
-### Wait for operation
 
-View the [source code](https://github.com/googleapis/nodejs-compute/blob/master/samples/waitForOperation.js).
 
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-compute&page=editor&open_in_editor=samples/waitForOperation.js,samples/README.md)
+
+### List Instances
+
+View the [source code](https://github.com/googleapis/nodejs-compute/blob/master/samples/listInstances.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-compute&page=editor&open_in_editor=samples/listInstances.js,samples/README.md)
 
 __Usage:__
 
 
-`node samples/waitForOperation.js`
+`node samples/listInstances.js`
+
+
+-----
+
 
 
 
@@ -109,7 +112,11 @@ View the [source code](https://github.com/googleapis/nodejs-compute/blob/master/
 __Usage:__
 
 
-`node samples/mailjet.js`
+`node mailjet`
+
+
+-----
+
 
 
 
@@ -124,6 +131,22 @@ __Usage:__
 
 `node samples/sendgrid.js`
 
+
+-----
+
+
+
+
+### Wait For Operation
+
+View the [source code](https://github.com/googleapis/nodejs-compute/blob/master/samples/waitForOperation.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-compute&page=editor&open_in_editor=samples/waitForOperation.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/waitForOperation.js`
 
 
 
