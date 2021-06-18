@@ -110,9 +110,9 @@ function main(projectId, bucketName, reportNamePrefix = '') {
       );
       usageExportLocation.reportNamePrefix = 'usage_gce';
     }
-
-    return usageExportLocation;
+    
     // [END compute_usage_report_get]
+    return usageExportLocation;
   }
 
   // [END compute_instances_verify_default_value]
