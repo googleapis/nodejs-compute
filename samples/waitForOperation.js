@@ -27,7 +27,7 @@ function main(projectId, operationString) {
 
   const compute = require('@google-cloud/compute');
 
-  // Parse stringified operation to the object instance
+  // Parse stringified operation to the object instance.
   const operation = JSON.parse(operationString);
 
   async function waitForOperation() {
