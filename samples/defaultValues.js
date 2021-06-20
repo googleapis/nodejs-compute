@@ -27,29 +27,22 @@ function main(projectId, bucketName, reportNamePrefix = '') {
   // const projectId = 'YOUR_PROJECT_ID';
   // const bucketName = 'YOUR_BUCKET_NAME';
 
-  // [END compute_instances_verify_default_value]
   /**
    * Set Compute Engine usage export bucket for the Cloud Project. This sample presents how to interpret the default value for the report name prefix parameter.
-   *
-   * @param {string} projectId - project ID or project number of the project to update.
-   * @param {string} bucketName - Google Cloud Storage Bucket used to store Compute Engine usage reports. An existing Google Cloud Storage bucket is required.
-   * @param {string} reportNamePrefix - Report Name Prefix which defaults to an empty string to showcase default values behaviour.
    */
-  // [START compute_instances_verify_default_value]
   async function setUsageExportBucket(
     projectId,
     bucketName,
     reportNamePrefix = ''
   ) {
-  // [END compute_instances_verify_default_value]
+    // [END compute_instances_verify_default_value]
     // [START compute_usage_report_set]
     /**
      * TODO(developer): Uncomment and replace these variables before running the sample.
      */
     // const projectId = 'YOUR_PROJECT_ID';
     // const bucketName = 'YOUR_BUCKET_NAME';
-
-  // [START compute_instances_verify_default_value]
+    // [START compute_instances_verify_default_value]
     const compute = require('@google-cloud/compute');
     const compute_protos = compute.protos.google.cloud.compute.v1;
 
@@ -73,22 +66,18 @@ function main(projectId, bucketName, reportNamePrefix = '') {
 
     // [END compute_usage_report_set]
   }
-  // [END compute_instances_verify_default_value]
+
   /**
    * Retrieve Compute Engine usage export bucket for the Cloud Project. Replaces the empty value returned by the API with the default value used to generate report file names.
-   *
-   * @param {string} projectId - project ID or project number of the project to update.
-   * @returns {usageExportLocation} - object describing the current usage export settings for project projectId.
    */
-  // [START compute_instances_verify_default_value]
   async function getUsageExportBucket(projectId) {
-  // [END compute_instances_verify_default_value]
+    // [END compute_instances_verify_default_value]
     // [START compute_usage_report_get]
     /**
      * TODO(developer): Uncomment and replace these variables before running the sample.
      */
     // const projectId = 'YOUR_PROJECT_ID';
-  // [START compute_instances_verify_default_value]
+    // [START compute_instances_verify_default_value]
     const compute = require('@google-cloud/compute');
 
     const projectsClient = new compute.ProjectsClient({fallback: 'rest'});
@@ -110,7 +99,7 @@ function main(projectId, bucketName, reportNamePrefix = '') {
       );
       usageExportLocation.reportNamePrefix = 'usage_gce';
     }
-    
+
     // [END compute_usage_report_get]
     return usageExportLocation;
   }
@@ -119,8 +108,6 @@ function main(projectId, bucketName, reportNamePrefix = '') {
 
   /**
    * Disable Compute Engine usage export bucket for the Cloud Project.
-   *
-   * @param {string} projectId - project ID or project number of the project to update.
    */
   async function disableUsageExport(projectId) {
     // [START compute_usage_report_disable]
@@ -129,19 +116,13 @@ function main(projectId, bucketName, reportNamePrefix = '') {
      */
     // const projectId = 'YOUR_PROJECT_ID';
     const compute = require('@google-cloud/compute');
-    const compute_protos = compute.protos.google.cloud.compute.v1;
 
     const projectsClient = new compute.ProjectsClient({fallback: 'rest'});
 
-    const usageExportLocationResource =
-      new compute_protos.UsageExportLocation();
-    usageExportLocationResource.bucketName = '';
-    usageExportLocationResource.reportNamePrefix = '';
-
-    // Updating the setting with empty bucket name will disable the usage report generation.
+    // Updating the setting with empty usageExportLocationResource will disable the usage report generation.
     projectsClient.setUsageExportBucket({
       project: projectId,
-      usageExportLocationResource,
+      usageExportLocationResource: {},
     });
     // [END compute_usage_report_disable]
   }

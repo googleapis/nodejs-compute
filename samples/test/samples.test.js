@@ -90,7 +90,7 @@ describe('samples', () => {
     const output = execSync(`node defaultValues ${projectId} ${bucketName}`);
     assert.match(
       output,
-      /Setting reportNamePrefix to empty value will cause the report to have the default prefix of `usage_gce`./
+      /Setting reportNamePrefix to empty value causes the report to have the default prefix value `usage_gce`./
     );
     assert.match(
       output,
