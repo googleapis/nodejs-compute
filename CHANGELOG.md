@@ -4,6 +4,20 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/compute?activeTab=versions
 
+### [2.5.1](https://www.github.com/googleapis/nodejs-compute/compare/v2.5.0...v2.5.1) (2021-06-10)
+
+
+### Bug Fixes
+
+* flaky test ([#563](https://www.github.com/googleapis/nodejs-compute/issues/563)) ([827a333](https://www.github.com/googleapis/nodejs-compute/commit/827a333443d6716b232fd21e00cc61a4df16aff0))
+
+## [2.5.0](https://www.github.com/googleapis/nodejs-compute/compare/v2.4.4...v2.5.0) (2021-05-25)
+
+
+### Features
+
+* add `gcf-owl-bot[bot]` to `ignoreAuthors` ([#557](https://www.github.com/googleapis/nodejs-compute/issues/557)) ([1e354f7](https://www.github.com/googleapis/nodejs-compute/commit/1e354f71dd6b053cac4e9b56ff48f5b8ca937968))
+
 ### [2.4.4](https://www.github.com/googleapis/nodejs-compute/compare/v2.4.3...v2.4.4) (2021-05-04)
 
 
