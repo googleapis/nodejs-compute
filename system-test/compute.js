@@ -15,6 +15,7 @@
 'use strict';
 
 const assert = require('assert');
+const expect = require('chai').expect;
 const uuid = require('uuid');
 const compute = require('../');
 
@@ -142,6 +143,7 @@ describe('Compute', () => {
       this.timeout(10 * 60 * 1000);
       const instanceResource = {
         name: INSTANCE_NAME,
+        description: 'test',
         machineType: `zones/${zone}/machineTypes/n1-standard-1`,
         disks: [
           {
@@ -160,7 +162,6 @@ describe('Compute', () => {
           },
         ],
       };
-
       const [insertResponse] = await client.insert({
         project,
         zone,
@@ -211,6 +212,46 @@ describe('Compute', () => {
       });
       assert.strictEqual(fetched.shieldedInstanceConfig.enableSecureBoot, true);
     });
+
+    it('API errors propagated', async () => {
+      let error = null;
+      try {
+        await client.get({
+          project,
+          zone,
+          instance: 'notexist555',
+        });
+      } catch (err) {
+        error = err;
+      }
+      expect(error).to.be.an('Error');
+      expect(error.message).to.contain('was not found');
+      expect(error.code).to.equal(404);
+    });
+
+    it('instances update desc to an empty string', async function () {
+      this.timeout(10 * 60 * 1000);
+      const [instance] = await client.get({
+        project,
+        zone,
+        instance: INSTANCE_NAME,
+      });
+      assert.strictEqual(instance.description, 'test');
+      instance.description = "";
+      const [updateOp] = await client.update({
+        project: project,
+        zone: zone,
+        instance: INSTANCE_NAME,
+        instanceResource: instance,
+      });
+      await waitZonalOperation(updateOp);
+      const [fetched] = await client.get({
+        project,
+        zone,
+        instance: INSTANCE_NAME,
+      });
+      assert.strictEqual(fetched.description, "");
+    });
   });
 
   describe('InstancesGroup Manager', () => {
@@ -243,7 +284,8 @@ describe('Compute', () => {
       });
     });
 
-    it('test instance group manager resize to 0', async function () {
+    it('create instance group manager with size 0', async function () {
+      //  we want to test that body field can be set to 0
       this.timeout(10 * 60 * 1000);
       const instanceTemplate = {
         name: instanceTemplateName,
@@ -276,7 +318,7 @@ describe('Compute', () => {
         baseInstanceName: 'tsgapic',
         instanceTemplate: insertOp.targetLink,
         name: instanceGroupName,
-        targetSize: 1,
+        targetSize: 0,
       };
       const [insertGroup] = await clientInstanceGroups.insert({
         project,
@@ -285,11 +327,22 @@ describe('Compute', () => {
       });
       await waitZonalOperation(insertGroup);
 
+      const [fetch] = await clientInstanceGroups.get({
+        project,
+        zone,
+        instanceGroupManager: instanceGroupName,
+      });
+      assert.strictEqual(fetch.targetSize, 0);
+    });
+
+    it('Resize group to 1 and then back to 0.', async function () {
+      //  we want to test that query param field can be set to 0
+      this.timeout(10 * 60 * 1000);
       const [resize] = await clientInstanceGroups.resize({
         project,
         zone,
         instanceGroupManager: instanceGroupName,
-        size: 0,
+        size: 1,
       });
       await waitZonalOperation(resize);
 
@@ -298,18 +351,33 @@ describe('Compute', () => {
         zone,
         instanceGroupManager: instanceGroupName,
       });
-      assert.strictEqual(fetch.targetSize, 0);
+      assert.strictEqual(fetch.targetSize, 1);
+
+      const [resizeBack] = await clientInstanceGroups.resize({
+        project,
+        zone,
+        instanceGroupManager: instanceGroupName,
+        size: 0,
+      });
+      await waitZonalOperation(resizeBack);
+
+      const [resized] = await clientInstanceGroups.get({
+        project,
+        zone,
+        instanceGroupManager: instanceGroupName,
+      });
+      assert.strictEqual(resized.targetSize, 0);
     });
   });
 
   async function waitZonalOperation(operation) {
     for (;;) {
-      const [getResp] = await operationsClient.get({
+      const [getResp] = await operationsClient.wait({
         project,
         zone,
         operation: operation.name,
       });
-      if (getResp.status === Status.DONE) {
+      if (getResp.status === "DONE") {   //  b/191191972
         break;
       } else {
         await new Promise(resolve => setTimeout(resolve, 4000));
@@ -324,7 +392,7 @@ describe('Compute', () => {
         project,
         operation: operation.name,
       });
-      if (getResp.status === Status.DONE) {
+      if (getResp.status === "DONE") {  //  b/191191972
         break;
       } else {
         await new Promise(resolve => setTimeout(resolve, 4000));
