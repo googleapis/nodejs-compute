@@ -19,7 +19,6 @@ const expect = require('chai').expect;
 const uuid = require('uuid');
 const compute = require('../');
 
-const Status = compute.protos.google.cloud.compute.v1.Operation.Status;
 const DiskType = compute.protos.google.cloud.compute.v1.AttachedDisk.Type;
 
 describe('Compute', () => {
@@ -237,7 +236,7 @@ describe('Compute', () => {
         instance: INSTANCE_NAME,
       });
       assert.strictEqual(instance.description, 'test');
-      instance.description = "";
+      instance.description = '';
       const [updateOp] = await client.update({
         project: project,
         zone: zone,
@@ -250,7 +249,7 @@ describe('Compute', () => {
         zone,
         instance: INSTANCE_NAME,
       });
-      assert.strictEqual(fetched.description, "");
+      assert.strictEqual(fetched.description, '');
     });
   });
 
@@ -377,7 +376,8 @@ describe('Compute', () => {
         zone,
         operation: operation.name,
       });
-      if (getResp.status === "DONE") {   //  b/191191972
+      if (getResp.status === 'DONE') {
+        //  b/191191972
         break;
       } else {
         await new Promise(resolve => setTimeout(resolve, 4000));
@@ -392,7 +392,8 @@ describe('Compute', () => {
         project,
         operation: operation.name,
       });
-      if (getResp.status === "DONE") {  //  b/191191972
+      if (getResp.status === 'DONE') {
+        //  b/191191972
         break;
       } else {
         await new Promise(resolve => setTimeout(resolve, 4000));
