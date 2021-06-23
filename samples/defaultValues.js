@@ -28,7 +28,7 @@ function main(projectId, bucketName, reportNamePrefix = '') {
   // const bucketName = 'YOUR_BUCKET_NAME';
 
   /**
-   * Set Compute Engine usage export bucket for the Cloud Project. This sample presents how to interpret the default value for the report name prefix parameter.
+   * Set Compute Engine usage export bucket for the Cloud project. This sample presents how to interpret the default value for the report name prefix parameter.
    */
   async function setUsageExportBucket(
     projectId,
@@ -52,12 +52,13 @@ function main(projectId, bucketName, reportNamePrefix = '') {
     usageExportLocationResource.reportNamePrefix = reportNamePrefix;
 
     if (!reportNamePrefix) {
-      // Sending an empty value for reportNamePrefix, results in the next usage report being generated with the default prefix value "usage_gce". (see: https://cloud.google.com/compute/docs/reference/rest/v1/projects/get)
+      // Sending an empty value for reportNamePrefix results in the next usage report being generated with the default prefix value "usage_gce". (see: https://cloud.google.com/compute/docs/reference/rest/v1/projects/get)
       console.log(
         'Setting reportNamePrefix to empty value causes the report to have the default prefix value `usage_gce`.'
       );
     }
 
+    // Set the usage export location.
     const projectsClient = new compute.ProjectsClient({fallback: 'rest'});
     projectsClient.setUsageExportBucket({
       project: projectId,
@@ -68,7 +69,7 @@ function main(projectId, bucketName, reportNamePrefix = '') {
   }
 
   /**
-   * Retrieve Compute Engine usage export bucket for the Cloud Project. Replaces the empty value returned by the API with the default value used to generate report file names.
+   * Retrieve Compute Engine usage export bucket for the Cloud project. Replaces the empty value returned by the API with the default value used to generate report file names.
    */
   async function getUsageExportBucket(projectId) {
     // [END compute_instances_verify_default_value]
@@ -80,6 +81,7 @@ function main(projectId, bucketName, reportNamePrefix = '') {
     // [START compute_instances_verify_default_value]
     const compute = require('@google-cloud/compute');
 
+    // Get the usage export location for the project from the server.
     const projectsClient = new compute.ProjectsClient({fallback: 'rest'});
     const project = await projectsClient.get({
       project: projectId,
@@ -87,13 +89,13 @@ function main(projectId, bucketName, reportNamePrefix = '') {
 
     const usageExportLocation = project[0].usageExportLocation;
 
-    if (!usageExportLocation.bucketName) {
+    if (!usageExportLocation || !usageExportLocation.bucketName) {
       // The usage reports are disabled.
-      return usageExportLocation;
+      return;
     }
 
     if (!usageExportLocation.reportNamePrefix) {
-      // Although the server sent the empty value, the next usage report generated with these settings still has the default prefix value `usage_gce`. (see: https://cloud.google.com/compute/docs/reference/rest/v1/projects/get)
+      // Although the server explicitly sent the empty string value, the next usage report generated with these settings still has the default prefix value `usage_gce`. (see https://cloud.google.com/compute/docs/reference/rest/v1/projects/get)
       console.log(
         'Report name prefix not set, replacing with default value of `usage_gce`.'
       );
