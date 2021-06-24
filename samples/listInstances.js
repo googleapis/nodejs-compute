@@ -30,9 +30,9 @@ function main(projectId, zone) {
 
   // List all instances in the given zone in the specified project.
   async function listInstances() {
-    const client = new compute.InstancesClient({fallback: 'rest'});
+    const instancesClient = new compute.InstancesClient({fallback: 'rest'});
 
-    const [instanceList] = await client.list({
+    const [instanceList] = await instancesClient.list({
       project: projectId,
       zone,
     });
