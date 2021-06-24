@@ -13,6 +13,7 @@
 * [Before you begin](#before-you-begin)
 * [Samples](#samples)
   * [Create Instance](#create-instance)
+  * [Default Values](#default-values)
   * [Delete Instance](#delete-instance)
   * [List All Instances](#list-all-instances)
   * [List Instances](#list-instances)
@@ -45,6 +46,23 @@ __Usage:__
 
 
 `node samples/createInstance.js`
+
+
+-----
+
+
+
+
+### Default Values
+
+View the [source code](https://github.com/googleapis/nodejs-compute/blob/master/samples/defaultValues.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-compute&page=editor&open_in_editor=samples/defaultValues.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/defaultValues.js`
 
 
 -----
