@@ -29,10 +29,10 @@ function main(projectId) {
   // List all instances in the specified project.
   async function listAllInstances() {
     const instancesClient = new compute.InstancesClient({fallback: 'rest'});
-    const aggListRequest = await instancesClient.aggregatedList({
+    const [aggListRequest] = await instancesClient.aggregatedList({
       project: projectId,
     });
-    const aggList = aggListRequest[0].items;
+    const aggList = aggListRequest.items;
 
     console.log('Instances found:');
 
