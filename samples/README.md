@@ -13,12 +13,14 @@
 * [Before you begin](#before-you-begin)
 * [Samples](#samples)
   * [Create Instance](#create-instance)
-  * [Default Values](#default-values)
   * [Delete Instance](#delete-instance)
+  * [Disable Usage Export](#disable-usage-export)
+  * [Get Usage Export Bucket](#get-usage-export-bucket)
   * [List All Instances](#list-all-instances)
   * [List Instances](#list-instances)
   * [Mailjet](#mailjet)
   * [Sendgrid](#sendgrid)
+  * [Set Usage Export Bucket](#set-usage-export-bucket)
   * [Wait For Operation](#wait-for-operation)
 
 ## Before you begin
@@ -53,23 +55,6 @@ __Usage:__
 
 
 
-### Default Values
-
-View the [source code](https://github.com/googleapis/nodejs-compute/blob/master/samples/defaultValues.js).
-
-[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-compute&page=editor&open_in_editor=samples/defaultValues.js,samples/README.md)
-
-__Usage:__
-
-
-`node samples/defaultValues.js`
-
-
------
-
-
-
-
 ### Delete Instance
 
 View the [source code](https://github.com/googleapis/nodejs-compute/blob/master/samples/deleteInstance.js).
@@ -80,6 +65,40 @@ __Usage:__
 
 
 `node samples/deleteInstance.js`
+
+
+-----
+
+
+
+
+### Disable Usage Export
+
+View the [source code](https://github.com/googleapis/nodejs-compute/blob/master/samples/disableUsageExport.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-compute&page=editor&open_in_editor=samples/disableUsageExport.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/disableUsageExport.js`
+
+
+-----
+
+
+
+
+### Get Usage Export Bucket
+
+View the [source code](https://github.com/googleapis/nodejs-compute/blob/master/samples/getUsageExportBucket.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-compute&page=editor&open_in_editor=samples/getUsageExportBucket.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/getUsageExportBucket.js`
 
 
 -----
@@ -148,6 +167,23 @@ __Usage:__
 
 
 `node samples/sendgrid.js`
+
+
+-----
+
+
+
+
+### Set Usage Export Bucket
+
+View the [source code](https://github.com/googleapis/nodejs-compute/blob/master/samples/setUsageExportBucket.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-compute&page=editor&open_in_editor=samples/setUsageExportBucket.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/setUsageExportBucket.js`
 
 
 -----
