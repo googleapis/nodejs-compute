@@ -13,41 +13,31 @@
 // limitations under the License.
 
 /**
- * Waits for an operation to be completed. Calling this function will block until the operation is finished.
+ * Disable Compute Engine usage export bucket for the Cloud Project.
+ *
  * @param {string} projectId - ID or number of the project you want to use.
- * @param {string} operationString - Operation instance you want to wait in string format.
  */
-function main(projectId, operationString) {
-  // [START compute_instances_operation_check]
+function main(projectId) {
+  // [START compute_usage_report_disable]
   /**
    * TODO(developer): Uncomment and replace these variables before running the sample.
    */
   // const projectId = 'YOUR_PROJECT_ID';
-  // const operationString = 'YOUR_OPERATION_STRING'
 
   const compute = require('@google-cloud/compute');
 
-  // Parse stringified operation to the object instance.
-  const operation = JSON.parse(operationString);
+  async function disableUsageExport() {
+    const projectsClient = new compute.ProjectsClient({fallback: 'rest'});
 
-  async function waitForOperation() {
-    if (operation.status === 'RUNNING') {
-      const operationsClient = new compute.ZoneOperationsClient({
-        fallback: 'rest',
-      });
-
-      await operationsClient.wait({
-        operation: operation.name,
-        project: projectId,
-        zone: operation.zone.split('/').pop(),
-      });
-    }
-
-    console.log('Operation finished.');
+    // Updating the setting with empty usageExportLocationResource will disable the usage report generation.
+    projectsClient.setUsageExportBucket({
+      project: projectId,
+      usageExportLocationResource: {},
+    });
   }
 
-  waitForOperation();
-  // [END compute_instances_operation_check]
+  disableUsageExport();
+  // [END compute_usage_report_disable]
 }
 
 main(...process.argv.slice(2));

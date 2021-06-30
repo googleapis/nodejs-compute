@@ -37,21 +37,21 @@ function main(projectId, zone, instanceName) {
     console.log(`Deleting ${instanceName} from ${zone}...`);
 
     // Wait for the delete operation to complete.
-    const operation = await instancesClient.delete({
+    const [operation] = await instancesClient.delete({
       project: projectId,
       zone,
       instance: instanceName,
     });
 
-    if (operation[0].status === 'RUNNING') {
+    if (operation.status === 'RUNNING') {
       const operationsClient = new compute.ZoneOperationsClient({
         fallback: 'rest',
       });
 
       await operationsClient.wait({
-        operation: operation[0].name,
+        operation: operation.name,
         project: projectId,
-        zone: operation[0].zone.split('/').pop(),
+        zone: operation.zone.split('/').pop(),
       });
     }
 

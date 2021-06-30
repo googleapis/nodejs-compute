@@ -30,6 +30,9 @@ const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
 describe('samples', () => {
   const instanceName = `gcloud-test-intance-${uuid.v4().split('-')[0]}`;
   const zone = 'europe-central2-b';
+  const bucketName = `test-bucket-name-${uuid.v4().split('-')[0]}`;
+
+  const storage = new Storage();
 
   it('should create instance', async () => {
     const projectId = await instancesClient.getProjectId();
@@ -66,7 +69,7 @@ describe('samples', () => {
 
     execSync(`node createInstance ${projectId} ${zone} ${newinstanceName}`);
 
-    const operation = await instancesClient.delete({
+    const [operation] = await instancesClient.delete({
       project: projectId,
       zone,
       instance: newinstanceName,
@@ -80,27 +83,73 @@ describe('samples', () => {
     assert.match(output, /Operation finished./);
   });
 
-  it('should return empty default value', async () => {
-    const projectId = await instancesClient.getProjectId();
-    const bucketName = `test-bucket-name-${uuid.v4().split('-')[0]}`;
-
-    const storage = new Storage();
-    await storage.createBucket(bucketName);
-
-    const output = execSync(`node defaultValues ${projectId} ${bucketName}`);
-    assert.match(
-      output,
-      /Setting reportNamePrefix to empty value causes the report to have the default prefix value `usage_gce`./
-    );
-    assert.match(
-      output,
-      /Report name prefix not set, replacing with default value of `usage_gce`./
-    );
-
-    await projectsClient.setUsageExportBucket({
-      project: projectId,
-      usageExportLocationResource: {},
+  describe('usage export', () => {
+    before(async () => {
+      await storage.createBucket(bucketName);
     });
-    await storage.bucket(bucketName).delete();
+
+    after(async () => {
+      const projectId = await instancesClient.getProjectId();
+
+      await projectsClient.setUsageExportBucket({
+        project: projectId,
+        usageExportLocationResource: {},
+      });
+
+      await storage.bucket(bucketName).delete();
+    });
+
+    it('should set empty default value in reportNamePrefix', async () => {
+      const projectId = await instancesClient.getProjectId();
+
+      const output = execSync(
+        `node setUsageExportBucket ${projectId} ${bucketName}`
+      );
+      await new Promise(resolve => setTimeout(resolve, 5000));
+
+      assert.match(
+        output,
+        /Setting reportNamePrefix to empty value causes the report to have the default prefix value `usage_gce`./
+      );
+
+      const [project] = await projectsClient.get({
+        project: projectId,
+      });
+
+      const usageExportLocation = project.usageExportLocation;
+
+      assert.equal(usageExportLocation.bucketName, bucketName);
+      assert.equal(usageExportLocation.reportNamePrefix, '');
+    });
+
+    it('should get current default value in reportNamePrefix', async () => {
+      const projectId = await instancesClient.getProjectId();
+
+      execSync(`node setUsageExportBucket ${projectId} ${bucketName}`);
+      await new Promise(resolve => setTimeout(resolve, 5000));
+      const output = execSync(`node getUsageExportBucket ${projectId}`);
+
+      assert.match(
+        output,
+        /Report name prefix not set, replacing with default value of `usage_gce`./
+      );
+
+      assert.match(output, /Returned reportNamePrefix: usage_gce/);
+    });
+
+    it('should disable usage export', async () => {
+      const projectId = await instancesClient.getProjectId();
+
+      execSync(`node setUsageExportBucket ${projectId} ${bucketName}`);
+      await new Promise(resolve => setTimeout(resolve, 5000));
+      execSync(`node disableUsageExport ${projectId}`);
+      await new Promise(resolve => setTimeout(resolve, 5000));
+
+      const [project] = await projectsClient.get({
+        project: projectId,
+      });
+
+      assert.isUndefined(project.usageExportLocation);
+    });
   });
 });
