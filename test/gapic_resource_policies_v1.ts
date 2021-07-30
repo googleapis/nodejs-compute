@@ -20,10 +20,12 @@ import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
 import {SinonStub} from 'sinon';
-import {describe, it} from 'mocha';
+import {describe, it, beforeEach, afterEach} from 'mocha';
 import * as resourcepoliciesModule from '../src';
 
-import {protobuf} from 'google-gax';
+import {PassThrough} from 'stream';
+
+import {GoogleAuth, protobuf} from 'google-gax';
 
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
@@ -49,7 +51,81 @@ function stubSimpleCallWithCallback<ResponseType>(
     : sinon.stub().callsArgWith(2, null, response);
 }
 
+function stubPageStreamingCall<ResponseType>(
+  responses?: ResponseType[],
+  error?: Error
+) {
+  const pagingStub = sinon.stub();
+  if (responses) {
+    for (let i = 0; i < responses.length; ++i) {
+      pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
+    }
+  }
+  const transformStub = error
+    ? sinon.stub().callsArgWith(2, error)
+    : pagingStub;
+  const mockStream = new PassThrough({
+    objectMode: true,
+    transform: transformStub,
+  });
+  // trigger as many responses as needed
+  if (responses) {
+    for (let i = 0; i < responses.length; ++i) {
+      setImmediate(() => {
+        mockStream.write({});
+      });
+    }
+    setImmediate(() => {
+      mockStream.end();
+    });
+  } else {
+    setImmediate(() => {
+      mockStream.write({});
+    });
+    setImmediate(() => {
+      mockStream.end();
+    });
+  }
+  return sinon.stub().returns(mockStream);
+}
+
+function stubAsyncIterationCall<ResponseType>(
+  responses?: ResponseType[],
+  error?: Error
+) {
+  let counter = 0;
+  const asyncIterable = {
+    [Symbol.asyncIterator]() {
+      return {
+        async next() {
+          if (error) {
+            return Promise.reject(error);
+          }
+          if (counter >= responses!.length) {
+            return Promise.resolve({done: true, value: undefined});
+          }
+          return Promise.resolve({done: false, value: responses![counter++]});
+        },
+      };
+    },
+  };
+  return sinon.stub().returns(asyncIterable);
+}
+
 describe('v1.ResourcePoliciesClient', () => {
+  let googleAuth: GoogleAuth;
+  beforeEach(() => {
+    googleAuth = {
+      getClient: sinon.stub().resolves({
+        getRequestHeaders: sinon
+          .stub()
+          .resolves({Authorization: 'Bearer SOME_TOKEN'}),
+      }),
+    } as unknown as GoogleAuth;
+  });
+  afterEach(() => {
+    sinon.restore();
+  });
   it('has servicePath', () => {
     const servicePath =
       resourcepoliciesModule.v1.ResourcePoliciesClient.servicePath;
@@ -82,7 +158,7 @@ describe('v1.ResourcePoliciesClient', () => {
 
   it('has initialize method and supports deferred initialization', async () => {
     const client = new resourcepoliciesModule.v1.ResourcePoliciesClient({
-      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      auth: googleAuth,
       projectId: 'bogus',
     });
     assert.strictEqual(client.resourcePoliciesStub, undefined);
@@ -92,7 +168,7 @@ describe('v1.ResourcePoliciesClient', () => {
 
   it('has close method', () => {
     const client = new resourcepoliciesModule.v1.ResourcePoliciesClient({
-      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      auth: googleAuth,
       projectId: 'bogus',
     });
     client.close();
@@ -101,7 +177,7 @@ describe('v1.ResourcePoliciesClient', () => {
   it('has getProjectId method', async () => {
     const fakeProjectId = 'fake-project-id';
     const client = new resourcepoliciesModule.v1.ResourcePoliciesClient({
-      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      auth: googleAuth,
       projectId: 'bogus',
     });
     client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -113,7 +189,7 @@ describe('v1.ResourcePoliciesClient', () => {
   it('has getProjectId method with callback', async () => {
     const fakeProjectId = 'fake-project-id';
     const client = new resourcepoliciesModule.v1.ResourcePoliciesClient({
-      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      auth: googleAuth,
       projectId: 'bogus',
     });
     client.auth.getProjectId = sinon
@@ -132,121 +208,10 @@ describe('v1.ResourcePoliciesClient', () => {
     assert.strictEqual(result, fakeProjectId);
   });
 
-  describe('aggregatedList', () => {
-    it('invokes aggregatedList without error', async () => {
-      const client = new resourcepoliciesModule.v1.ResourcePoliciesClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.compute.v1.AggregatedListResourcePoliciesRequest()
-      );
-      request.project = '';
-      const expectedHeaderRequestParams = 'project=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.compute.v1.ResourcePolicyAggregatedList()
-      );
-      client.innerApiCalls.aggregatedList = stubSimpleCall(expectedResponse);
-      const [response] = await client.aggregatedList(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.aggregatedList as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
-    });
-
-    it('invokes aggregatedList without error using callback', async () => {
-      const client = new resourcepoliciesModule.v1.ResourcePoliciesClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.compute.v1.AggregatedListResourcePoliciesRequest()
-      );
-      request.project = '';
-      const expectedHeaderRequestParams = 'project=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.compute.v1.ResourcePolicyAggregatedList()
-      );
-      client.innerApiCalls.aggregatedList =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.aggregatedList(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.compute.v1.IResourcePolicyAggregatedList | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.aggregatedList as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
-    });
-
-    it('invokes aggregatedList with error', async () => {
-      const client = new resourcepoliciesModule.v1.ResourcePoliciesClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.compute.v1.AggregatedListResourcePoliciesRequest()
-      );
-      request.project = '';
-      const expectedHeaderRequestParams = 'project=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedError = new Error('expected');
-      client.innerApiCalls.aggregatedList = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.aggregatedList(request), expectedError);
-      assert(
-        (client.innerApiCalls.aggregatedList as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
-    });
-  });
-
   describe('delete', () => {
     it('invokes delete without error', async () => {
       const client = new resourcepoliciesModule.v1.ResourcePoliciesClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        auth: googleAuth,
         projectId: 'bogus',
       });
       client.initialize();
@@ -277,7 +242,7 @@ describe('v1.ResourcePoliciesClient', () => {
 
     it('invokes delete without error using callback', async () => {
       const client = new resourcepoliciesModule.v1.ResourcePoliciesClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        auth: googleAuth,
         projectId: 'bogus',
       });
       client.initialize();
@@ -324,7 +289,7 @@ describe('v1.ResourcePoliciesClient', () => {
 
     it('invokes delete with error', async () => {
       const client = new resourcepoliciesModule.v1.ResourcePoliciesClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        auth: googleAuth,
         projectId: 'bogus',
       });
       client.initialize();
@@ -354,7 +319,7 @@ describe('v1.ResourcePoliciesClient', () => {
   describe('get', () => {
     it('invokes get without error', async () => {
       const client = new resourcepoliciesModule.v1.ResourcePoliciesClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        auth: googleAuth,
         projectId: 'bogus',
       });
       client.initialize();
@@ -385,7 +350,7 @@ describe('v1.ResourcePoliciesClient', () => {
 
     it('invokes get without error using callback', async () => {
       const client = new resourcepoliciesModule.v1.ResourcePoliciesClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        auth: googleAuth,
         projectId: 'bogus',
       });
       client.initialize();
@@ -431,7 +396,7 @@ describe('v1.ResourcePoliciesClient', () => {
 
     it('invokes get with error', async () => {
       const client = new resourcepoliciesModule.v1.ResourcePoliciesClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        auth: googleAuth,
         projectId: 'bogus',
       });
       client.initialize();
@@ -461,7 +426,7 @@ describe('v1.ResourcePoliciesClient', () => {
   describe('getIamPolicy', () => {
     it('invokes getIamPolicy without error', async () => {
       const client = new resourcepoliciesModule.v1.ResourcePoliciesClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        auth: googleAuth,
         projectId: 'bogus',
       });
       client.initialize();
@@ -492,7 +457,7 @@ describe('v1.ResourcePoliciesClient', () => {
 
     it('invokes getIamPolicy without error using callback', async () => {
       const client = new resourcepoliciesModule.v1.ResourcePoliciesClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        auth: googleAuth,
         projectId: 'bogus',
       });
       client.initialize();
@@ -539,7 +504,7 @@ describe('v1.ResourcePoliciesClient', () => {
 
     it('invokes getIamPolicy with error', async () => {
       const client = new resourcepoliciesModule.v1.ResourcePoliciesClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        auth: googleAuth,
         projectId: 'bogus',
       });
       client.initialize();
@@ -572,7 +537,7 @@ describe('v1.ResourcePoliciesClient', () => {
   describe('insert', () => {
     it('invokes insert without error', async () => {
       const client = new resourcepoliciesModule.v1.ResourcePoliciesClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        auth: googleAuth,
         projectId: 'bogus',
       });
       client.initialize();
@@ -603,7 +568,7 @@ describe('v1.ResourcePoliciesClient', () => {
 
     it('invokes insert without error using callback', async () => {
       const client = new resourcepoliciesModule.v1.ResourcePoliciesClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        auth: googleAuth,
         projectId: 'bogus',
       });
       client.initialize();
@@ -650,7 +615,7 @@ describe('v1.ResourcePoliciesClient', () => {
 
     it('invokes insert with error', async () => {
       const client = new resourcepoliciesModule.v1.ResourcePoliciesClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        auth: googleAuth,
         projectId: 'bogus',
       });
       client.initialize();
@@ -677,117 +642,10 @@ describe('v1.ResourcePoliciesClient', () => {
     });
   });
 
-  describe('list', () => {
-    it('invokes list without error', async () => {
-      const client = new resourcepoliciesModule.v1.ResourcePoliciesClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.compute.v1.ListResourcePoliciesRequest()
-      );
-      request.project = '';
-      const expectedHeaderRequestParams = 'project=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.compute.v1.ResourcePolicyList()
-      );
-      client.innerApiCalls.list = stubSimpleCall(expectedResponse);
-      const [response] = await client.list(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.list as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
-    });
-
-    it('invokes list without error using callback', async () => {
-      const client = new resourcepoliciesModule.v1.ResourcePoliciesClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.compute.v1.ListResourcePoliciesRequest()
-      );
-      request.project = '';
-      const expectedHeaderRequestParams = 'project=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.compute.v1.ResourcePolicyList()
-      );
-      client.innerApiCalls.list = stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.list(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.compute.v1.IResourcePolicyList | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.list as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
-    });
-
-    it('invokes list with error', async () => {
-      const client = new resourcepoliciesModule.v1.ResourcePoliciesClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.compute.v1.ListResourcePoliciesRequest()
-      );
-      request.project = '';
-      const expectedHeaderRequestParams = 'project=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedError = new Error('expected');
-      client.innerApiCalls.list = stubSimpleCall(undefined, expectedError);
-      await assert.rejects(client.list(request), expectedError);
-      assert(
-        (client.innerApiCalls.list as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
-    });
-  });
-
   describe('setIamPolicy', () => {
     it('invokes setIamPolicy without error', async () => {
       const client = new resourcepoliciesModule.v1.ResourcePoliciesClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        auth: googleAuth,
         projectId: 'bogus',
       });
       client.initialize();
@@ -818,7 +676,7 @@ describe('v1.ResourcePoliciesClient', () => {
 
     it('invokes setIamPolicy without error using callback', async () => {
       const client = new resourcepoliciesModule.v1.ResourcePoliciesClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        auth: googleAuth,
         projectId: 'bogus',
       });
       client.initialize();
@@ -865,7 +723,7 @@ describe('v1.ResourcePoliciesClient', () => {
 
     it('invokes setIamPolicy with error', async () => {
       const client = new resourcepoliciesModule.v1.ResourcePoliciesClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        auth: googleAuth,
         projectId: 'bogus',
       });
       client.initialize();
@@ -898,7 +756,7 @@ describe('v1.ResourcePoliciesClient', () => {
   describe('testIamPermissions', () => {
     it('invokes testIamPermissions without error', async () => {
       const client = new resourcepoliciesModule.v1.ResourcePoliciesClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        auth: googleAuth,
         projectId: 'bogus',
       });
       client.initialize();
@@ -930,7 +788,7 @@ describe('v1.ResourcePoliciesClient', () => {
 
     it('invokes testIamPermissions without error using callback', async () => {
       const client = new resourcepoliciesModule.v1.ResourcePoliciesClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        auth: googleAuth,
         projectId: 'bogus',
       });
       client.initialize();
@@ -977,7 +835,7 @@ describe('v1.ResourcePoliciesClient', () => {
 
     it('invokes testIamPermissions with error', async () => {
       const client = new resourcepoliciesModule.v1.ResourcePoliciesClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        auth: googleAuth,
         projectId: 'bogus',
       });
       client.initialize();
@@ -1003,6 +861,399 @@ describe('v1.ResourcePoliciesClient', () => {
         (client.innerApiCalls.testIamPermissions as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
+      );
+    });
+  });
+
+  describe('aggregatedList', () => {
+    it('uses async iteration with aggregatedList without error', async () => {
+      const client = new resourcepoliciesModule.v1.ResourcePoliciesClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.AggregatedListResourcePoliciesRequest()
+      );
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
+      const expectedResponse = [
+        [
+          'tuple_key_1',
+          generateSampleMessage(
+            new protos.google.cloud.compute.v1.ResourcePoliciesScopedList()
+          ),
+        ],
+        [
+          'tuple_key_2',
+          generateSampleMessage(
+            new protos.google.cloud.compute.v1.ResourcePoliciesScopedList()
+          ),
+        ],
+        [
+          'tuple_key_3',
+          generateSampleMessage(
+            new protos.google.cloud.compute.v1.ResourcePoliciesScopedList()
+          ),
+        ],
+      ];
+      client.descriptors.page.aggregatedList.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: Array<
+        [string, protos.google.cloud.compute.v1.IResourcePoliciesScopedList]
+      > = [];
+      const iterable = client.aggregatedListAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.aggregatedList.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert.strictEqual(
+        (
+          client.descriptors.page.aggregatedList.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
+        expectedHeaderRequestParams
+      );
+    });
+
+    it('uses async iteration with aggregatedList with error', async () => {
+      const client = new resourcepoliciesModule.v1.ResourcePoliciesClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.AggregatedListResourcePoliciesRequest()
+      );
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
+      const expectedError = new Error('expected');
+      client.descriptors.page.aggregatedList.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.aggregatedListAsync(request);
+      await assert.rejects(async () => {
+        const responses: Array<
+          [string, protos.google.cloud.compute.v1.IResourcePoliciesScopedList]
+        > = [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.aggregatedList.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert.strictEqual(
+        (
+          client.descriptors.page.aggregatedList.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
+        expectedHeaderRequestParams
+      );
+    });
+  });
+
+  describe('list', () => {
+    it('invokes list without error', async () => {
+      const client = new resourcepoliciesModule.v1.ResourcePoliciesClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.ListResourcePoliciesRequest()
+      );
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.compute.v1.ResourcePolicy()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.compute.v1.ResourcePolicy()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.compute.v1.ResourcePolicy()
+        ),
+      ];
+      client.innerApiCalls.list = stubSimpleCall(expectedResponse);
+      const [response] = await client.list(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.list as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes list without error using callback', async () => {
+      const client = new resourcepoliciesModule.v1.ResourcePoliciesClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.ListResourcePoliciesRequest()
+      );
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.compute.v1.ResourcePolicy()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.compute.v1.ResourcePolicy()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.compute.v1.ResourcePolicy()
+        ),
+      ];
+      client.innerApiCalls.list = stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.list(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.compute.v1.IResourcePolicy[] | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.list as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes list with error', async () => {
+      const client = new resourcepoliciesModule.v1.ResourcePoliciesClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.ListResourcePoliciesRequest()
+      );
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.list = stubSimpleCall(undefined, expectedError);
+      await assert.rejects(client.list(request), expectedError);
+      assert(
+        (client.innerApiCalls.list as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes listStream without error', async () => {
+      const client = new resourcepoliciesModule.v1.ResourcePoliciesClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.ListResourcePoliciesRequest()
+      );
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.compute.v1.ResourcePolicy()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.compute.v1.ResourcePolicy()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.compute.v1.ResourcePolicy()
+        ),
+      ];
+      client.descriptors.page.list.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.listStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.compute.v1.ResourcePolicy[] = [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.compute.v1.ResourcePolicy) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (client.descriptors.page.list.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.list, request)
+      );
+      assert.strictEqual(
+        (client.descriptors.page.list.createStream as SinonStub).getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'],
+        expectedHeaderRequestParams
+      );
+    });
+
+    it('invokes listStream with error', async () => {
+      const client = new resourcepoliciesModule.v1.ResourcePoliciesClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.ListResourcePoliciesRequest()
+      );
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
+      const expectedError = new Error('expected');
+      client.descriptors.page.list.createStream = stubPageStreamingCall(
+        undefined,
+        expectedError
+      );
+      const stream = client.listStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.compute.v1.ResourcePolicy[] = [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.compute.v1.ResourcePolicy) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (client.descriptors.page.list.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.list, request)
+      );
+      assert.strictEqual(
+        (client.descriptors.page.list.createStream as SinonStub).getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'],
+        expectedHeaderRequestParams
+      );
+    });
+
+    it('uses async iteration with list without error', async () => {
+      const client = new resourcepoliciesModule.v1.ResourcePoliciesClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.ListResourcePoliciesRequest()
+      );
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.compute.v1.ResourcePolicy()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.compute.v1.ResourcePolicy()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.compute.v1.ResourcePolicy()
+        ),
+      ];
+      client.descriptors.page.list.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.compute.v1.IResourcePolicy[] = [];
+      const iterable = client.listAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (client.descriptors.page.list.asyncIterate as SinonStub).getCall(0)
+          .args[1],
+        request
+      );
+      assert.strictEqual(
+        (client.descriptors.page.list.asyncIterate as SinonStub).getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'],
+        expectedHeaderRequestParams
+      );
+    });
+
+    it('uses async iteration with list with error', async () => {
+      const client = new resourcepoliciesModule.v1.ResourcePoliciesClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.ListResourcePoliciesRequest()
+      );
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
+      const expectedError = new Error('expected');
+      client.descriptors.page.list.asyncIterate = stubAsyncIterationCall(
+        undefined,
+        expectedError
+      );
+      const iterable = client.listAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.cloud.compute.v1.IResourcePolicy[] = [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (client.descriptors.page.list.asyncIterate as SinonStub).getCall(0)
+          .args[1],
+        request
+      );
+      assert.strictEqual(
+        (client.descriptors.page.list.asyncIterate as SinonStub).getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'],
+        expectedHeaderRequestParams
       );
     });
   });
