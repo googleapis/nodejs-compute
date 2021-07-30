@@ -92,11 +92,16 @@ export class BackendBucketsClient {
   constructor(opts?: ClientOptions) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof BackendBucketsClient;
-    const servicePath = opts?.servicePath || opts?.apiEndpoint || staticMembers.servicePath;
-    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
+    const servicePath =
+      opts?.servicePath || opts?.apiEndpoint || staticMembers.servicePath;
+    this._providedCustomServicePath = !!(
+      opts?.servicePath || opts?.apiEndpoint
+    );
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    const fallback =
+      opts?.fallback ??
+      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // If scopes are unset in options and we're connecting to a non-default endpoint, set scopes just in case.
@@ -114,7 +119,7 @@ export class BackendBucketsClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
+    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
 
     // Set the default scopes in auth client if needed.
     if (servicePath === staticMembers.servicePath) {
@@ -122,10 +127,7 @@ export class BackendBucketsClient {
     }
 
     // Determine the client header string.
-    const clientHeader = [
-      `gax/${this._gaxModule.version}`,
-      `gapic/${version}`,
-    ];
+    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
     if (typeof process !== 'undefined' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -133,7 +135,7 @@ export class BackendBucketsClient {
     }
     if (!opts.fallback) {
       clientHeader.push(`grpc/${this._gaxGrpc.grpcVersion}`);
-    } else if (opts.fallback === 'rest' ) {
+    } else if (opts.fallback === 'rest') {
       clientHeader.push(`rest/${this._gaxGrpc.grpcVersion}`);
     }
     if (opts.libName && opts.libVersion) {
@@ -144,8 +146,11 @@ export class BackendBucketsClient {
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-        'google.cloud.compute.v1.BackendBuckets', gapicConfig as gax.ClientConfig,
-        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
+      'google.cloud.compute.v1.BackendBuckets',
+      gapicConfig as gax.ClientConfig,
+      opts.clientConfig || {},
+      {'x-goog-api-client': clientHeader.join(' ')}
+    );
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -176,31 +181,44 @@ export class BackendBucketsClient {
     // Put together the "service stub" for
     // google.cloud.compute.v1.BackendBuckets.
     this.backendBucketsStub = this._gaxGrpc.createStub(
-        this._opts.fallback ?
-          (this._protos as protobuf.Root).lookupService('google.cloud.compute.v1.BackendBuckets') :
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      this._opts.fallback
+        ? (this._protos as protobuf.Root).lookupService(
+            'google.cloud.compute.v1.BackendBuckets'
+          )
+        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.cloud.compute.v1.BackendBuckets,
-        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
+      this._opts,
+      this._providedCustomServicePath
+    ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const backendBucketsStubMethods =
-        ['addSignedUrlKey', 'delete', 'deleteSignedUrlKey', 'get', 'insert', 'list', 'patch', 'update'];
+    const backendBucketsStubMethods = [
+      'addSignedUrlKey',
+      'delete',
+      'deleteSignedUrlKey',
+      'get',
+      'insert',
+      'list',
+      'patch',
+      'update',
+    ];
     for (const methodName of backendBucketsStubMethods) {
       const callPromise = this.backendBucketsStub.then(
-        stub => (...args: Array<{}>) => {
-          if (this._terminated) {
-            return Promise.reject('The client has already been closed.');
-          }
-          const func = stub[methodName];
-          return func.apply(stub, args);
-        },
-        (err: Error|null|undefined) => () => {
+        stub =>
+          (...args: Array<{}>) => {
+            if (this._terminated) {
+              return Promise.reject('The client has already been closed.');
+            }
+            const func = stub[methodName];
+            return func.apply(stub, args);
+          },
+        (err: Error | null | undefined) => () => {
           throw err;
-        });
+        }
+      );
 
-      const descriptor =
-        undefined;
+      const descriptor = undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
@@ -246,7 +264,7 @@ export class BackendBucketsClient {
   static get scopes() {
     return [
       'https://www.googleapis.com/auth/compute',
-      'https://www.googleapis.com/auth/cloud-platform'
+      'https://www.googleapis.com/auth/cloud-platform',
     ];
   }
 
@@ -256,8 +274,9 @@ export class BackendBucketsClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(callback?: Callback<string, undefined, undefined>):
-      Promise<string>|void {
+  getProjectId(
+    callback?: Callback<string, undefined, undefined>
+  ): Promise<string> | void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -269,652 +288,823 @@ export class BackendBucketsClient {
   // -- Service calls --
   // -------------------
   addSignedUrlKey(
-      request?: protos.google.cloud.compute.v1.IAddSignedUrlKeyBackendBucketRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.compute.v1.IOperation,
-        protos.google.cloud.compute.v1.IAddSignedUrlKeyBackendBucketRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.compute.v1.IAddSignedUrlKeyBackendBucketRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.compute.v1.IOperation,
+      (
+        | protos.google.cloud.compute.v1.IAddSignedUrlKeyBackendBucketRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
   addSignedUrlKey(
-      request: protos.google.cloud.compute.v1.IAddSignedUrlKeyBackendBucketRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IAddSignedUrlKeyBackendBucketRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.compute.v1.IAddSignedUrlKeyBackendBucketRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.compute.v1.IOperation,
+      | protos.google.cloud.compute.v1.IAddSignedUrlKeyBackendBucketRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
   addSignedUrlKey(
-      request: protos.google.cloud.compute.v1.IAddSignedUrlKeyBackendBucketRequest,
-      callback: Callback<
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IAddSignedUrlKeyBackendBucketRequest|null|undefined,
-          {}|null|undefined>): void;
-/**
- * Adds a key for validating requests with signed URLs for this backend bucket.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.backendBucket
- *   Name of the BackendBucket resource to which the Signed URL Key should be added. The name should conform to RFC1035.
- * @param {string} request.project
- *   Project ID for this request.
- * @param {string} request.requestId
- *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
- *
- *   For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
- *
- *   The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
- * @param {google.cloud.compute.v1.SignedUrlKey} request.signedUrlKeyResource
- *   The body resource for this request
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing [Operation]{@link google.cloud.compute.v1.Operation}.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
- *   for more details and examples.
- * @example
- * const [response] = await client.addSignedUrlKey(request);
- */
+    request: protos.google.cloud.compute.v1.IAddSignedUrlKeyBackendBucketRequest,
+    callback: Callback<
+      protos.google.cloud.compute.v1.IOperation,
+      | protos.google.cloud.compute.v1.IAddSignedUrlKeyBackendBucketRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  /**
+   * Adds a key for validating requests with signed URLs for this backend bucket.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.backendBucket
+   *   Name of the BackendBucket resource to which the Signed URL Key should be added. The name should conform to RFC1035.
+   * @param {string} request.project
+   *   Project ID for this request.
+   * @param {string} request.requestId
+   *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
+   *
+   *   For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+   * @param {google.cloud.compute.v1.SignedUrlKey} request.signedUrlKeyResource
+   *   The body resource for this request
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Operation]{@link google.cloud.compute.v1.Operation}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example
+   * const [response] = await client.addSignedUrlKey(request);
+   */
   addSignedUrlKey(
-      request?: protos.google.cloud.compute.v1.IAddSignedUrlKeyBackendBucketRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.compute.v1.IAddSignedUrlKeyBackendBucketRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IAddSignedUrlKeyBackendBucketRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IAddSignedUrlKeyBackendBucketRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.compute.v1.IOperation,
-        protos.google.cloud.compute.v1.IAddSignedUrlKeyBackendBucketRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.compute.v1.IAddSignedUrlKeyBackendBucketRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.compute.v1.IOperation,
+      | protos.google.cloud.compute.v1.IAddSignedUrlKeyBackendBucketRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.compute.v1.IOperation,
+      (
+        | protos.google.cloud.compute.v1.IAddSignedUrlKeyBackendBucketRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      'project': request.project || '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        project: request.project || '',
+      });
     this.initialize();
     return this.innerApiCalls.addSignedUrlKey(request, options, callback);
   }
   delete(
-      request?: protos.google.cloud.compute.v1.IDeleteBackendBucketRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.compute.v1.IOperation,
-        protos.google.cloud.compute.v1.IDeleteBackendBucketRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.compute.v1.IDeleteBackendBucketRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.compute.v1.IOperation,
+      protos.google.cloud.compute.v1.IDeleteBackendBucketRequest | undefined,
+      {} | undefined
+    ]
+  >;
   delete(
-      request: protos.google.cloud.compute.v1.IDeleteBackendBucketRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IDeleteBackendBucketRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.compute.v1.IDeleteBackendBucketRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.compute.v1.IOperation,
+      | protos.google.cloud.compute.v1.IDeleteBackendBucketRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
   delete(
-      request: protos.google.cloud.compute.v1.IDeleteBackendBucketRequest,
-      callback: Callback<
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IDeleteBackendBucketRequest|null|undefined,
-          {}|null|undefined>): void;
-/**
- * Deletes the specified BackendBucket resource.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.backendBucket
- *   Name of the BackendBucket resource to delete.
- * @param {string} request.project
- *   Project ID for this request.
- * @param {string} request.requestId
- *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
- *
- *   For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
- *
- *   The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing [Operation]{@link google.cloud.compute.v1.Operation}.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
- *   for more details and examples.
- * @example
- * const [response] = await client.delete(request);
- */
+    request: protos.google.cloud.compute.v1.IDeleteBackendBucketRequest,
+    callback: Callback<
+      protos.google.cloud.compute.v1.IOperation,
+      | protos.google.cloud.compute.v1.IDeleteBackendBucketRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  /**
+   * Deletes the specified BackendBucket resource.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.backendBucket
+   *   Name of the BackendBucket resource to delete.
+   * @param {string} request.project
+   *   Project ID for this request.
+   * @param {string} request.requestId
+   *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
+   *
+   *   For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Operation]{@link google.cloud.compute.v1.Operation}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example
+   * const [response] = await client.delete(request);
+   */
   delete(
-      request?: protos.google.cloud.compute.v1.IDeleteBackendBucketRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.compute.v1.IDeleteBackendBucketRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IDeleteBackendBucketRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IDeleteBackendBucketRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.compute.v1.IOperation,
-        protos.google.cloud.compute.v1.IDeleteBackendBucketRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.compute.v1.IDeleteBackendBucketRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.compute.v1.IOperation,
+      | protos.google.cloud.compute.v1.IDeleteBackendBucketRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.compute.v1.IOperation,
+      protos.google.cloud.compute.v1.IDeleteBackendBucketRequest | undefined,
+      {} | undefined
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      'project': request.project || '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        project: request.project || '',
+      });
     this.initialize();
     return this.innerApiCalls.delete(request, options, callback);
   }
   deleteSignedUrlKey(
-      request?: protos.google.cloud.compute.v1.IDeleteSignedUrlKeyBackendBucketRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.compute.v1.IOperation,
-        protos.google.cloud.compute.v1.IDeleteSignedUrlKeyBackendBucketRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.compute.v1.IDeleteSignedUrlKeyBackendBucketRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.compute.v1.IOperation,
+      (
+        | protos.google.cloud.compute.v1.IDeleteSignedUrlKeyBackendBucketRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
   deleteSignedUrlKey(
-      request: protos.google.cloud.compute.v1.IDeleteSignedUrlKeyBackendBucketRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IDeleteSignedUrlKeyBackendBucketRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.compute.v1.IDeleteSignedUrlKeyBackendBucketRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.compute.v1.IOperation,
+      | protos.google.cloud.compute.v1.IDeleteSignedUrlKeyBackendBucketRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
   deleteSignedUrlKey(
-      request: protos.google.cloud.compute.v1.IDeleteSignedUrlKeyBackendBucketRequest,
-      callback: Callback<
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IDeleteSignedUrlKeyBackendBucketRequest|null|undefined,
-          {}|null|undefined>): void;
-/**
- * Deletes a key for validating requests with signed URLs for this backend bucket.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.backendBucket
- *   Name of the BackendBucket resource to which the Signed URL Key should be added. The name should conform to RFC1035.
- * @param {string} request.keyName
- *   The name of the Signed URL Key to delete.
- * @param {string} request.project
- *   Project ID for this request.
- * @param {string} request.requestId
- *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
- *
- *   For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
- *
- *   The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing [Operation]{@link google.cloud.compute.v1.Operation}.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
- *   for more details and examples.
- * @example
- * const [response] = await client.deleteSignedUrlKey(request);
- */
+    request: protos.google.cloud.compute.v1.IDeleteSignedUrlKeyBackendBucketRequest,
+    callback: Callback<
+      protos.google.cloud.compute.v1.IOperation,
+      | protos.google.cloud.compute.v1.IDeleteSignedUrlKeyBackendBucketRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  /**
+   * Deletes a key for validating requests with signed URLs for this backend bucket.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.backendBucket
+   *   Name of the BackendBucket resource to which the Signed URL Key should be added. The name should conform to RFC1035.
+   * @param {string} request.keyName
+   *   The name of the Signed URL Key to delete.
+   * @param {string} request.project
+   *   Project ID for this request.
+   * @param {string} request.requestId
+   *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
+   *
+   *   For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Operation]{@link google.cloud.compute.v1.Operation}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example
+   * const [response] = await client.deleteSignedUrlKey(request);
+   */
   deleteSignedUrlKey(
-      request?: protos.google.cloud.compute.v1.IDeleteSignedUrlKeyBackendBucketRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.compute.v1.IDeleteSignedUrlKeyBackendBucketRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IDeleteSignedUrlKeyBackendBucketRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IDeleteSignedUrlKeyBackendBucketRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.compute.v1.IOperation,
-        protos.google.cloud.compute.v1.IDeleteSignedUrlKeyBackendBucketRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.compute.v1.IDeleteSignedUrlKeyBackendBucketRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.compute.v1.IOperation,
+      | protos.google.cloud.compute.v1.IDeleteSignedUrlKeyBackendBucketRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.compute.v1.IOperation,
+      (
+        | protos.google.cloud.compute.v1.IDeleteSignedUrlKeyBackendBucketRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      'project': request.project || '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        project: request.project || '',
+      });
     this.initialize();
     return this.innerApiCalls.deleteSignedUrlKey(request, options, callback);
   }
   get(
-      request?: protos.google.cloud.compute.v1.IGetBackendBucketRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.compute.v1.IBackendBucket,
-        protos.google.cloud.compute.v1.IGetBackendBucketRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.compute.v1.IGetBackendBucketRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.compute.v1.IBackendBucket,
+      protos.google.cloud.compute.v1.IGetBackendBucketRequest | undefined,
+      {} | undefined
+    ]
+  >;
   get(
-      request: protos.google.cloud.compute.v1.IGetBackendBucketRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.compute.v1.IBackendBucket,
-          protos.google.cloud.compute.v1.IGetBackendBucketRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.compute.v1.IGetBackendBucketRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.compute.v1.IBackendBucket,
+      | protos.google.cloud.compute.v1.IGetBackendBucketRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
   get(
-      request: protos.google.cloud.compute.v1.IGetBackendBucketRequest,
-      callback: Callback<
-          protos.google.cloud.compute.v1.IBackendBucket,
-          protos.google.cloud.compute.v1.IGetBackendBucketRequest|null|undefined,
-          {}|null|undefined>): void;
-/**
- * Returns the specified BackendBucket resource. Gets a list of available backend buckets by making a list() request.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.backendBucket
- *   Name of the BackendBucket resource to return.
- * @param {string} request.project
- *   Project ID for this request.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing [BackendBucket]{@link google.cloud.compute.v1.BackendBucket}.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
- *   for more details and examples.
- * @example
- * const [response] = await client.get(request);
- */
+    request: protos.google.cloud.compute.v1.IGetBackendBucketRequest,
+    callback: Callback<
+      protos.google.cloud.compute.v1.IBackendBucket,
+      | protos.google.cloud.compute.v1.IGetBackendBucketRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  /**
+   * Returns the specified BackendBucket resource. Gets a list of available backend buckets by making a list() request.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.backendBucket
+   *   Name of the BackendBucket resource to return.
+   * @param {string} request.project
+   *   Project ID for this request.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [BackendBucket]{@link google.cloud.compute.v1.BackendBucket}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example
+   * const [response] = await client.get(request);
+   */
   get(
-      request?: protos.google.cloud.compute.v1.IGetBackendBucketRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.compute.v1.IGetBackendBucketRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.compute.v1.IBackendBucket,
-          protos.google.cloud.compute.v1.IGetBackendBucketRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.compute.v1.IBackendBucket,
-          protos.google.cloud.compute.v1.IGetBackendBucketRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.compute.v1.IBackendBucket,
-        protos.google.cloud.compute.v1.IGetBackendBucketRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.compute.v1.IGetBackendBucketRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.compute.v1.IBackendBucket,
+      | protos.google.cloud.compute.v1.IGetBackendBucketRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.compute.v1.IBackendBucket,
+      protos.google.cloud.compute.v1.IGetBackendBucketRequest | undefined,
+      {} | undefined
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      'project': request.project || '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        project: request.project || '',
+      });
     this.initialize();
     return this.innerApiCalls.get(request, options, callback);
   }
   insert(
-      request?: protos.google.cloud.compute.v1.IInsertBackendBucketRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.compute.v1.IOperation,
-        protos.google.cloud.compute.v1.IInsertBackendBucketRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.compute.v1.IInsertBackendBucketRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.compute.v1.IOperation,
+      protos.google.cloud.compute.v1.IInsertBackendBucketRequest | undefined,
+      {} | undefined
+    ]
+  >;
   insert(
-      request: protos.google.cloud.compute.v1.IInsertBackendBucketRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IInsertBackendBucketRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.compute.v1.IInsertBackendBucketRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.compute.v1.IOperation,
+      | protos.google.cloud.compute.v1.IInsertBackendBucketRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
   insert(
-      request: protos.google.cloud.compute.v1.IInsertBackendBucketRequest,
-      callback: Callback<
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IInsertBackendBucketRequest|null|undefined,
-          {}|null|undefined>): void;
-/**
- * Creates a BackendBucket resource in the specified project using the data included in the request.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {google.cloud.compute.v1.BackendBucket} request.backendBucketResource
- *   The body resource for this request
- * @param {string} request.project
- *   Project ID for this request.
- * @param {string} request.requestId
- *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
- *
- *   For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
- *
- *   The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing [Operation]{@link google.cloud.compute.v1.Operation}.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
- *   for more details and examples.
- * @example
- * const [response] = await client.insert(request);
- */
+    request: protos.google.cloud.compute.v1.IInsertBackendBucketRequest,
+    callback: Callback<
+      protos.google.cloud.compute.v1.IOperation,
+      | protos.google.cloud.compute.v1.IInsertBackendBucketRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  /**
+   * Creates a BackendBucket resource in the specified project using the data included in the request.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.compute.v1.BackendBucket} request.backendBucketResource
+   *   The body resource for this request
+   * @param {string} request.project
+   *   Project ID for this request.
+   * @param {string} request.requestId
+   *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
+   *
+   *   For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Operation]{@link google.cloud.compute.v1.Operation}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example
+   * const [response] = await client.insert(request);
+   */
   insert(
-      request?: protos.google.cloud.compute.v1.IInsertBackendBucketRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.compute.v1.IInsertBackendBucketRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IInsertBackendBucketRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IInsertBackendBucketRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.compute.v1.IOperation,
-        protos.google.cloud.compute.v1.IInsertBackendBucketRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.compute.v1.IInsertBackendBucketRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.compute.v1.IOperation,
+      | protos.google.cloud.compute.v1.IInsertBackendBucketRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.compute.v1.IOperation,
+      protos.google.cloud.compute.v1.IInsertBackendBucketRequest | undefined,
+      {} | undefined
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      'project': request.project || '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        project: request.project || '',
+      });
     this.initialize();
     return this.innerApiCalls.insert(request, options, callback);
   }
   list(
-      request?: protos.google.cloud.compute.v1.IListBackendBucketsRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.compute.v1.IBackendBucketList,
-        protos.google.cloud.compute.v1.IListBackendBucketsRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.compute.v1.IListBackendBucketsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.compute.v1.IBackendBucketList,
+      protos.google.cloud.compute.v1.IListBackendBucketsRequest | undefined,
+      {} | undefined
+    ]
+  >;
   list(
-      request: protos.google.cloud.compute.v1.IListBackendBucketsRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.compute.v1.IBackendBucketList,
-          protos.google.cloud.compute.v1.IListBackendBucketsRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.compute.v1.IListBackendBucketsRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.compute.v1.IBackendBucketList,
+      | protos.google.cloud.compute.v1.IListBackendBucketsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
   list(
-      request: protos.google.cloud.compute.v1.IListBackendBucketsRequest,
-      callback: Callback<
-          protos.google.cloud.compute.v1.IBackendBucketList,
-          protos.google.cloud.compute.v1.IListBackendBucketsRequest|null|undefined,
-          {}|null|undefined>): void;
-/**
- * Retrieves the list of BackendBucket resources available to the specified project.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.filter
- *   A filter expression that filters resources listed in the response. The expression must specify the field name, a comparison operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The comparison operator must be either `=`, `!=`, `>`, or `<`.
- *
- *   For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`.
- *
- *   You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels.
- *
- *   To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ```
- * @param {number} request.maxResults
- *   The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)
- * @param {string} request.orderBy
- *   Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name.
- *
- *   You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first.
- *
- *   Currently, only sorting by `name` or `creationTimestamp desc` is supported.
- * @param {string} request.pageToken
- *   Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
- * @param {string} request.project
- *   Project ID for this request.
- * @param {boolean} request.returnPartialSuccess
- *   Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing [BackendBucketList]{@link google.cloud.compute.v1.BackendBucketList}.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
- *   for more details and examples.
- * @example
- * const [response] = await client.list(request);
- */
+    request: protos.google.cloud.compute.v1.IListBackendBucketsRequest,
+    callback: Callback<
+      protos.google.cloud.compute.v1.IBackendBucketList,
+      | protos.google.cloud.compute.v1.IListBackendBucketsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  /**
+   * Retrieves the list of BackendBucket resources available to the specified project.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.filter
+   *   A filter expression that filters resources listed in the response. The expression must specify the field name, a comparison operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The comparison operator must be either `=`, `!=`, `>`, or `<`.
+   *
+   *   For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`.
+   *
+   *   You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels.
+   *
+   *   To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ```
+   * @param {number} request.maxResults
+   *   The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)
+   * @param {string} request.orderBy
+   *   Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name.
+   *
+   *   You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first.
+   *
+   *   Currently, only sorting by `name` or `creationTimestamp desc` is supported.
+   * @param {string} request.pageToken
+   *   Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
+   * @param {string} request.project
+   *   Project ID for this request.
+   * @param {boolean} request.returnPartialSuccess
+   *   Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [BackendBucketList]{@link google.cloud.compute.v1.BackendBucketList}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example
+   * const [response] = await client.list(request);
+   */
   list(
-      request?: protos.google.cloud.compute.v1.IListBackendBucketsRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.compute.v1.IListBackendBucketsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.compute.v1.IBackendBucketList,
-          protos.google.cloud.compute.v1.IListBackendBucketsRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.compute.v1.IBackendBucketList,
-          protos.google.cloud.compute.v1.IListBackendBucketsRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.compute.v1.IBackendBucketList,
-        protos.google.cloud.compute.v1.IListBackendBucketsRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.compute.v1.IListBackendBucketsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.compute.v1.IBackendBucketList,
+      | protos.google.cloud.compute.v1.IListBackendBucketsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.compute.v1.IBackendBucketList,
+      protos.google.cloud.compute.v1.IListBackendBucketsRequest | undefined,
+      {} | undefined
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      'project': request.project || '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        project: request.project || '',
+      });
     this.initialize();
     return this.innerApiCalls.list(request, options, callback);
   }
   patch(
-      request?: protos.google.cloud.compute.v1.IPatchBackendBucketRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.compute.v1.IOperation,
-        protos.google.cloud.compute.v1.IPatchBackendBucketRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.compute.v1.IPatchBackendBucketRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.compute.v1.IOperation,
+      protos.google.cloud.compute.v1.IPatchBackendBucketRequest | undefined,
+      {} | undefined
+    ]
+  >;
   patch(
-      request: protos.google.cloud.compute.v1.IPatchBackendBucketRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IPatchBackendBucketRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.compute.v1.IPatchBackendBucketRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.compute.v1.IOperation,
+      | protos.google.cloud.compute.v1.IPatchBackendBucketRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
   patch(
-      request: protos.google.cloud.compute.v1.IPatchBackendBucketRequest,
-      callback: Callback<
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IPatchBackendBucketRequest|null|undefined,
-          {}|null|undefined>): void;
-/**
- * Updates the specified BackendBucket resource with the data included in the request. This method supports PATCH semantics and uses the JSON merge patch format and processing rules.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.backendBucket
- *   Name of the BackendBucket resource to patch.
- * @param {google.cloud.compute.v1.BackendBucket} request.backendBucketResource
- *   The body resource for this request
- * @param {string} request.project
- *   Project ID for this request.
- * @param {string} request.requestId
- *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
- *
- *   For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
- *
- *   The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing [Operation]{@link google.cloud.compute.v1.Operation}.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
- *   for more details and examples.
- * @example
- * const [response] = await client.patch(request);
- */
+    request: protos.google.cloud.compute.v1.IPatchBackendBucketRequest,
+    callback: Callback<
+      protos.google.cloud.compute.v1.IOperation,
+      | protos.google.cloud.compute.v1.IPatchBackendBucketRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  /**
+   * Updates the specified BackendBucket resource with the data included in the request. This method supports PATCH semantics and uses the JSON merge patch format and processing rules.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.backendBucket
+   *   Name of the BackendBucket resource to patch.
+   * @param {google.cloud.compute.v1.BackendBucket} request.backendBucketResource
+   *   The body resource for this request
+   * @param {string} request.project
+   *   Project ID for this request.
+   * @param {string} request.requestId
+   *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
+   *
+   *   For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Operation]{@link google.cloud.compute.v1.Operation}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example
+   * const [response] = await client.patch(request);
+   */
   patch(
-      request?: protos.google.cloud.compute.v1.IPatchBackendBucketRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.compute.v1.IPatchBackendBucketRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IPatchBackendBucketRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IPatchBackendBucketRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.compute.v1.IOperation,
-        protos.google.cloud.compute.v1.IPatchBackendBucketRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.compute.v1.IPatchBackendBucketRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.compute.v1.IOperation,
+      | protos.google.cloud.compute.v1.IPatchBackendBucketRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.compute.v1.IOperation,
+      protos.google.cloud.compute.v1.IPatchBackendBucketRequest | undefined,
+      {} | undefined
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      'project': request.project || '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        project: request.project || '',
+      });
     this.initialize();
     return this.innerApiCalls.patch(request, options, callback);
   }
   update(
-      request?: protos.google.cloud.compute.v1.IUpdateBackendBucketRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.compute.v1.IOperation,
-        protos.google.cloud.compute.v1.IUpdateBackendBucketRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.compute.v1.IUpdateBackendBucketRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.compute.v1.IOperation,
+      protos.google.cloud.compute.v1.IUpdateBackendBucketRequest | undefined,
+      {} | undefined
+    ]
+  >;
   update(
-      request: protos.google.cloud.compute.v1.IUpdateBackendBucketRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IUpdateBackendBucketRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.compute.v1.IUpdateBackendBucketRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.compute.v1.IOperation,
+      | protos.google.cloud.compute.v1.IUpdateBackendBucketRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
   update(
-      request: protos.google.cloud.compute.v1.IUpdateBackendBucketRequest,
-      callback: Callback<
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IUpdateBackendBucketRequest|null|undefined,
-          {}|null|undefined>): void;
-/**
- * Updates the specified BackendBucket resource with the data included in the request.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.backendBucket
- *   Name of the BackendBucket resource to update.
- * @param {google.cloud.compute.v1.BackendBucket} request.backendBucketResource
- *   The body resource for this request
- * @param {string} request.project
- *   Project ID for this request.
- * @param {string} request.requestId
- *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
- *
- *   For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
- *
- *   The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing [Operation]{@link google.cloud.compute.v1.Operation}.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
- *   for more details and examples.
- * @example
- * const [response] = await client.update(request);
- */
+    request: protos.google.cloud.compute.v1.IUpdateBackendBucketRequest,
+    callback: Callback<
+      protos.google.cloud.compute.v1.IOperation,
+      | protos.google.cloud.compute.v1.IUpdateBackendBucketRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  /**
+   * Updates the specified BackendBucket resource with the data included in the request.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.backendBucket
+   *   Name of the BackendBucket resource to update.
+   * @param {google.cloud.compute.v1.BackendBucket} request.backendBucketResource
+   *   The body resource for this request
+   * @param {string} request.project
+   *   Project ID for this request.
+   * @param {string} request.requestId
+   *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
+   *
+   *   For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Operation]{@link google.cloud.compute.v1.Operation}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example
+   * const [response] = await client.update(request);
+   */
   update(
-      request?: protos.google.cloud.compute.v1.IUpdateBackendBucketRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.compute.v1.IUpdateBackendBucketRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IUpdateBackendBucketRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IUpdateBackendBucketRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.compute.v1.IOperation,
-        protos.google.cloud.compute.v1.IUpdateBackendBucketRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.compute.v1.IUpdateBackendBucketRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.compute.v1.IOperation,
+      | protos.google.cloud.compute.v1.IUpdateBackendBucketRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.compute.v1.IOperation,
+      protos.google.cloud.compute.v1.IUpdateBackendBucketRequest | undefined,
+      {} | undefined
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      'project': request.project || '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        project: request.project || '',
+      });
     this.initialize();
     return this.innerApiCalls.update(request, options, callback);
   }
-
 
   /**
    * Terminate the gRPC channel and close the client.

@@ -92,11 +92,16 @@ export class RegionInstancesClient {
   constructor(opts?: ClientOptions) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof RegionInstancesClient;
-    const servicePath = opts?.servicePath || opts?.apiEndpoint || staticMembers.servicePath;
-    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
+    const servicePath =
+      opts?.servicePath || opts?.apiEndpoint || staticMembers.servicePath;
+    this._providedCustomServicePath = !!(
+      opts?.servicePath || opts?.apiEndpoint
+    );
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    const fallback =
+      opts?.fallback ??
+      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // If scopes are unset in options and we're connecting to a non-default endpoint, set scopes just in case.
@@ -114,7 +119,7 @@ export class RegionInstancesClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
+    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
 
     // Set the default scopes in auth client if needed.
     if (servicePath === staticMembers.servicePath) {
@@ -122,10 +127,7 @@ export class RegionInstancesClient {
     }
 
     // Determine the client header string.
-    const clientHeader = [
-      `gax/${this._gaxModule.version}`,
-      `gapic/${version}`,
-    ];
+    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
     if (typeof process !== 'undefined' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -133,7 +135,7 @@ export class RegionInstancesClient {
     }
     if (!opts.fallback) {
       clientHeader.push(`grpc/${this._gaxGrpc.grpcVersion}`);
-    } else if (opts.fallback === 'rest' ) {
+    } else if (opts.fallback === 'rest') {
       clientHeader.push(`rest/${this._gaxGrpc.grpcVersion}`);
     }
     if (opts.libName && opts.libVersion) {
@@ -144,8 +146,11 @@ export class RegionInstancesClient {
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-        'google.cloud.compute.v1.RegionInstances', gapicConfig as gax.ClientConfig,
-        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
+      'google.cloud.compute.v1.RegionInstances',
+      gapicConfig as gax.ClientConfig,
+      opts.clientConfig || {},
+      {'x-goog-api-client': clientHeader.join(' ')}
+    );
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -176,31 +181,35 @@ export class RegionInstancesClient {
     // Put together the "service stub" for
     // google.cloud.compute.v1.RegionInstances.
     this.regionInstancesStub = this._gaxGrpc.createStub(
-        this._opts.fallback ?
-          (this._protos as protobuf.Root).lookupService('google.cloud.compute.v1.RegionInstances') :
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      this._opts.fallback
+        ? (this._protos as protobuf.Root).lookupService(
+            'google.cloud.compute.v1.RegionInstances'
+          )
+        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.cloud.compute.v1.RegionInstances,
-        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
+      this._opts,
+      this._providedCustomServicePath
+    ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const regionInstancesStubMethods =
-        ['bulkInsert'];
+    const regionInstancesStubMethods = ['bulkInsert'];
     for (const methodName of regionInstancesStubMethods) {
       const callPromise = this.regionInstancesStub.then(
-        stub => (...args: Array<{}>) => {
-          if (this._terminated) {
-            return Promise.reject('The client has already been closed.');
-          }
-          const func = stub[methodName];
-          return func.apply(stub, args);
-        },
-        (err: Error|null|undefined) => () => {
+        stub =>
+          (...args: Array<{}>) => {
+            if (this._terminated) {
+              return Promise.reject('The client has already been closed.');
+            }
+            const func = stub[methodName];
+            return func.apply(stub, args);
+          },
+        (err: Error | null | undefined) => () => {
           throw err;
-        });
+        }
+      );
 
-      const descriptor =
-        undefined;
+      const descriptor = undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
@@ -246,7 +255,7 @@ export class RegionInstancesClient {
   static get scopes() {
     return [
       'https://www.googleapis.com/auth/compute',
-      'https://www.googleapis.com/auth/cloud-platform'
+      'https://www.googleapis.com/auth/cloud-platform',
     ];
   }
 
@@ -256,8 +265,9 @@ export class RegionInstancesClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(callback?: Callback<string, undefined, undefined>):
-      Promise<string>|void {
+  getProjectId(
+    callback?: Callback<string, undefined, undefined>
+  ): Promise<string> | void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -269,87 +279,112 @@ export class RegionInstancesClient {
   // -- Service calls --
   // -------------------
   bulkInsert(
-      request?: protos.google.cloud.compute.v1.IBulkInsertRegionInstanceRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.compute.v1.IOperation,
-        protos.google.cloud.compute.v1.IBulkInsertRegionInstanceRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.compute.v1.IBulkInsertRegionInstanceRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.compute.v1.IOperation,
+      (
+        | protos.google.cloud.compute.v1.IBulkInsertRegionInstanceRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
   bulkInsert(
-      request: protos.google.cloud.compute.v1.IBulkInsertRegionInstanceRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IBulkInsertRegionInstanceRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.compute.v1.IBulkInsertRegionInstanceRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.compute.v1.IOperation,
+      | protos.google.cloud.compute.v1.IBulkInsertRegionInstanceRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
   bulkInsert(
-      request: protos.google.cloud.compute.v1.IBulkInsertRegionInstanceRequest,
-      callback: Callback<
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IBulkInsertRegionInstanceRequest|null|undefined,
-          {}|null|undefined>): void;
-/**
- * Creates multiple instances in a given region. Count specifies the number of instances to create.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {google.cloud.compute.v1.BulkInsertInstanceResource} request.bulkInsertInstanceResourceResource
- *   The body resource for this request
- * @param {string} request.project
- *   Project ID for this request.
- * @param {string} request.region
- *   The name of the region for this request.
- * @param {string} request.requestId
- *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
- *
- *   For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
- *
- *   The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing [Operation]{@link google.cloud.compute.v1.Operation}.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
- *   for more details and examples.
- * @example
- * const [response] = await client.bulkInsert(request);
- */
+    request: protos.google.cloud.compute.v1.IBulkInsertRegionInstanceRequest,
+    callback: Callback<
+      protos.google.cloud.compute.v1.IOperation,
+      | protos.google.cloud.compute.v1.IBulkInsertRegionInstanceRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  /**
+   * Creates multiple instances in a given region. Count specifies the number of instances to create.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.compute.v1.BulkInsertInstanceResource} request.bulkInsertInstanceResourceResource
+   *   The body resource for this request
+   * @param {string} request.project
+   *   Project ID for this request.
+   * @param {string} request.region
+   *   The name of the region for this request.
+   * @param {string} request.requestId
+   *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
+   *
+   *   For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Operation]{@link google.cloud.compute.v1.Operation}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example
+   * const [response] = await client.bulkInsert(request);
+   */
   bulkInsert(
-      request?: protos.google.cloud.compute.v1.IBulkInsertRegionInstanceRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.compute.v1.IBulkInsertRegionInstanceRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IBulkInsertRegionInstanceRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IBulkInsertRegionInstanceRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.compute.v1.IOperation,
-        protos.google.cloud.compute.v1.IBulkInsertRegionInstanceRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.compute.v1.IBulkInsertRegionInstanceRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.compute.v1.IOperation,
+      | protos.google.cloud.compute.v1.IBulkInsertRegionInstanceRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.compute.v1.IOperation,
+      (
+        | protos.google.cloud.compute.v1.IBulkInsertRegionInstanceRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      'project': request.project || '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        project: request.project || '',
+      });
     this.initialize();
     return this.innerApiCalls.bulkInsert(request, options, callback);
   }
-
 
   /**
    * Terminate the gRPC channel and close the client.

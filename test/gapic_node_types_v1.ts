@@ -20,353 +20,438 @@ import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
 import {SinonStub} from 'sinon';
-import { describe, it } from 'mocha';
+import {describe, it} from 'mocha';
 import * as nodetypesModule from '../src';
 
 import {protobuf} from 'google-gax';
 
 function generateSampleMessage<T extends object>(instance: T) {
-    const filledObject = (instance.constructor as typeof protobuf.Message)
-        .toObject(instance as protobuf.Message<T>, {defaults: true});
-    return (instance.constructor as typeof protobuf.Message).fromObject(filledObject) as T;
+  const filledObject = (
+    instance.constructor as typeof protobuf.Message
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
+  return (instance.constructor as typeof protobuf.Message).fromObject(
+    filledObject
+  ) as T;
 }
 
 function stubSimpleCall<ResponseType>(response?: ResponseType, error?: Error) {
-    return error ? sinon.stub().rejects(error) : sinon.stub().resolves([response]);
+  return error
+    ? sinon.stub().rejects(error)
+    : sinon.stub().resolves([response]);
 }
 
-function stubSimpleCallWithCallback<ResponseType>(response?: ResponseType, error?: Error) {
-    return error ? sinon.stub().callsArgWith(2, error) : sinon.stub().callsArgWith(2, null, response);
+function stubSimpleCallWithCallback<ResponseType>(
+  response?: ResponseType,
+  error?: Error
+) {
+  return error
+    ? sinon.stub().callsArgWith(2, error)
+    : sinon.stub().callsArgWith(2, null, response);
 }
 
 describe('v1.NodeTypesClient', () => {
-    it('has servicePath', () => {
-        const servicePath = nodetypesModule.v1.NodeTypesClient.servicePath;
-        assert(servicePath);
+  it('has servicePath', () => {
+    const servicePath = nodetypesModule.v1.NodeTypesClient.servicePath;
+    assert(servicePath);
+  });
+
+  it('has apiEndpoint', () => {
+    const apiEndpoint = nodetypesModule.v1.NodeTypesClient.apiEndpoint;
+    assert(apiEndpoint);
+  });
+
+  it('has port', () => {
+    const port = nodetypesModule.v1.NodeTypesClient.port;
+    assert(port);
+    assert(typeof port === 'number');
+  });
+
+  it('should create a client with no option', () => {
+    const client = new nodetypesModule.v1.NodeTypesClient();
+    assert(client);
+  });
+
+  it('should create a client with gRPC fallback', () => {
+    const client = new nodetypesModule.v1.NodeTypesClient({
+      fallback: true,
+    });
+    assert(client);
+  });
+
+  it('has initialize method and supports deferred initialization', async () => {
+    const client = new nodetypesModule.v1.NodeTypesClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    assert.strictEqual(client.nodeTypesStub, undefined);
+    await client.initialize();
+    assert(client.nodeTypesStub);
+  });
+
+  it('has close method', () => {
+    const client = new nodetypesModule.v1.NodeTypesClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    client.close();
+  });
+
+  it('has getProjectId method', async () => {
+    const fakeProjectId = 'fake-project-id';
+    const client = new nodetypesModule.v1.NodeTypesClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
+    const result = await client.getProjectId();
+    assert.strictEqual(result, fakeProjectId);
+    assert((client.auth.getProjectId as SinonStub).calledWithExactly());
+  });
+
+  it('has getProjectId method with callback', async () => {
+    const fakeProjectId = 'fake-project-id';
+    const client = new nodetypesModule.v1.NodeTypesClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    client.auth.getProjectId = sinon
+      .stub()
+      .callsArgWith(0, null, fakeProjectId);
+    const promise = new Promise((resolve, reject) => {
+      client.getProjectId((err?: Error | null, projectId?: string | null) => {
+        if (err) {
+          reject(err);
+        } else {
+          resolve(projectId);
+        }
+      });
+    });
+    const result = await promise;
+    assert.strictEqual(result, fakeProjectId);
+  });
+
+  describe('aggregatedList', () => {
+    it('invokes aggregatedList without error', async () => {
+      const client = new nodetypesModule.v1.NodeTypesClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.AggregatedListNodeTypesRequest()
+      );
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.compute.v1.NodeTypeAggregatedList()
+      );
+      client.innerApiCalls.aggregatedList = stubSimpleCall(expectedResponse);
+      const [response] = await client.aggregatedList(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.aggregatedList as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
     });
 
-    it('has apiEndpoint', () => {
-        const apiEndpoint = nodetypesModule.v1.NodeTypesClient.apiEndpoint;
-        assert(apiEndpoint);
+    it('invokes aggregatedList without error using callback', async () => {
+      const client = new nodetypesModule.v1.NodeTypesClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.AggregatedListNodeTypesRequest()
+      );
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.compute.v1.NodeTypeAggregatedList()
+      );
+      client.innerApiCalls.aggregatedList =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.aggregatedList(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.compute.v1.INodeTypeAggregatedList | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.aggregatedList as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
     });
 
-    it('has port', () => {
-        const port = nodetypesModule.v1.NodeTypesClient.port;
-        assert(port);
-        assert(typeof port === 'number');
+    it('invokes aggregatedList with error', async () => {
+      const client = new nodetypesModule.v1.NodeTypesClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.AggregatedListNodeTypesRequest()
+      );
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.aggregatedList = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.aggregatedList(request), expectedError);
+      assert(
+        (client.innerApiCalls.aggregatedList as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+  });
+
+  describe('get', () => {
+    it('invokes get without error', async () => {
+      const client = new nodetypesModule.v1.NodeTypesClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.GetNodeTypeRequest()
+      );
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.compute.v1.NodeType()
+      );
+      client.innerApiCalls.get = stubSimpleCall(expectedResponse);
+      const [response] = await client.get(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.get as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
     });
 
-    it('should create a client with no option', () => {
-        const client = new nodetypesModule.v1.NodeTypesClient();
-        assert(client);
+    it('invokes get without error using callback', async () => {
+      const client = new nodetypesModule.v1.NodeTypesClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.GetNodeTypeRequest()
+      );
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.compute.v1.NodeType()
+      );
+      client.innerApiCalls.get = stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.get(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.compute.v1.INodeType | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.get as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
     });
 
-    it('should create a client with gRPC fallback', () => {
-        const client = new nodetypesModule.v1.NodeTypesClient({
-            fallback: true,
-        });
-        assert(client);
+    it('invokes get with error', async () => {
+      const client = new nodetypesModule.v1.NodeTypesClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.GetNodeTypeRequest()
+      );
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.get = stubSimpleCall(undefined, expectedError);
+      await assert.rejects(client.get(request), expectedError);
+      assert(
+        (client.innerApiCalls.get as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+  });
+
+  describe('list', () => {
+    it('invokes list without error', async () => {
+      const client = new nodetypesModule.v1.NodeTypesClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.ListNodeTypesRequest()
+      );
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.compute.v1.NodeTypeList()
+      );
+      client.innerApiCalls.list = stubSimpleCall(expectedResponse);
+      const [response] = await client.list(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.list as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
     });
 
-    it('has initialize method and supports deferred initialization', async () => {
-        const client = new nodetypesModule.v1.NodeTypesClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-        });
-        assert.strictEqual(client.nodeTypesStub, undefined);
-        await client.initialize();
-        assert(client.nodeTypesStub);
+    it('invokes list without error using callback', async () => {
+      const client = new nodetypesModule.v1.NodeTypesClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.ListNodeTypesRequest()
+      );
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.compute.v1.NodeTypeList()
+      );
+      client.innerApiCalls.list = stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.list(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.compute.v1.INodeTypeList | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.list as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
     });
 
-    it('has close method', () => {
-        const client = new nodetypesModule.v1.NodeTypesClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-        });
-        client.close();
+    it('invokes list with error', async () => {
+      const client = new nodetypesModule.v1.NodeTypesClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.ListNodeTypesRequest()
+      );
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.list = stubSimpleCall(undefined, expectedError);
+      await assert.rejects(client.list(request), expectedError);
+      assert(
+        (client.innerApiCalls.list as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
     });
-
-    it('has getProjectId method', async () => {
-        const fakeProjectId = 'fake-project-id';
-        const client = new nodetypesModule.v1.NodeTypesClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-        });
-        client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
-        const result = await client.getProjectId();
-        assert.strictEqual(result, fakeProjectId);
-        assert((client.auth.getProjectId as SinonStub).calledWithExactly());
-    });
-
-    it('has getProjectId method with callback', async () => {
-        const fakeProjectId = 'fake-project-id';
-        const client = new nodetypesModule.v1.NodeTypesClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-        });
-        client.auth.getProjectId = sinon.stub().callsArgWith(0, null, fakeProjectId);
-        const promise = new Promise((resolve, reject) => {
-            client.getProjectId((err?: Error|null, projectId?: string|null) => {
-                if (err) {
-                    reject(err);
-                } else {
-                    resolve(projectId);
-                }
-            });
-        });
-        const result = await promise;
-        assert.strictEqual(result, fakeProjectId);
-    });
-
-    describe('aggregatedList', () => {
-        it('invokes aggregatedList without error', async () => {
-            const client = new nodetypesModule.v1.NodeTypesClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-        });
-            client.initialize();
-            const request = generateSampleMessage(new protos.google.cloud.compute.v1.AggregatedListNodeTypesRequest());
-            request.project = '';
-            const expectedHeaderRequestParams = "project=";
-            const expectedOptions = {
-                otherArgs: {
-                    headers: {
-                        'x-goog-request-params': expectedHeaderRequestParams,
-                    },
-                },
-            };
-            const expectedResponse = generateSampleMessage(new protos.google.cloud.compute.v1.NodeTypeAggregatedList());
-            client.innerApiCalls.aggregatedList = stubSimpleCall(expectedResponse);
-            const [response] = await client.aggregatedList(request);
-            assert.deepStrictEqual(response, expectedResponse);
-            assert((client.innerApiCalls.aggregatedList as SinonStub)
-                .getCall(0).calledWith(request, expectedOptions, undefined));
-        });
-
-        it('invokes aggregatedList without error using callback', async () => {
-            const client = new nodetypesModule.v1.NodeTypesClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-        });
-            client.initialize();
-            const request = generateSampleMessage(new protos.google.cloud.compute.v1.AggregatedListNodeTypesRequest());
-            request.project = '';
-            const expectedHeaderRequestParams = "project=";
-            const expectedOptions = {
-                otherArgs: {
-                    headers: {
-                        'x-goog-request-params': expectedHeaderRequestParams,
-                    },
-                },
-            };
-            const expectedResponse = generateSampleMessage(new protos.google.cloud.compute.v1.NodeTypeAggregatedList());
-            client.innerApiCalls.aggregatedList = stubSimpleCallWithCallback(expectedResponse);
-            const promise = new Promise((resolve, reject) => {
-                 client.aggregatedList(
-                    request,
-                    (err?: Error|null, result?: protos.google.cloud.compute.v1.INodeTypeAggregatedList|null) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(result);
-                        }
-                    });
-            });
-            const response = await promise;
-            assert.deepStrictEqual(response, expectedResponse);
-            assert((client.innerApiCalls.aggregatedList as SinonStub)
-                .getCall(0).calledWith(request, expectedOptions /*, callback defined above */));
-        });
-
-        it('invokes aggregatedList with error', async () => {
-            const client = new nodetypesModule.v1.NodeTypesClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-        });
-            client.initialize();
-            const request = generateSampleMessage(new protos.google.cloud.compute.v1.AggregatedListNodeTypesRequest());
-            request.project = '';
-            const expectedHeaderRequestParams = "project=";
-            const expectedOptions = {
-                otherArgs: {
-                    headers: {
-                        'x-goog-request-params': expectedHeaderRequestParams,
-                    },
-                },
-            };
-            const expectedError = new Error('expected');
-            client.innerApiCalls.aggregatedList = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(client.aggregatedList(request), expectedError);
-            assert((client.innerApiCalls.aggregatedList as SinonStub)
-                .getCall(0).calledWith(request, expectedOptions, undefined));
-        });
-    });
-
-    describe('get', () => {
-        it('invokes get without error', async () => {
-            const client = new nodetypesModule.v1.NodeTypesClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-        });
-            client.initialize();
-            const request = generateSampleMessage(new protos.google.cloud.compute.v1.GetNodeTypeRequest());
-            request.project = '';
-            const expectedHeaderRequestParams = "project=";
-            const expectedOptions = {
-                otherArgs: {
-                    headers: {
-                        'x-goog-request-params': expectedHeaderRequestParams,
-                    },
-                },
-            };
-            const expectedResponse = generateSampleMessage(new protos.google.cloud.compute.v1.NodeType());
-            client.innerApiCalls.get = stubSimpleCall(expectedResponse);
-            const [response] = await client.get(request);
-            assert.deepStrictEqual(response, expectedResponse);
-            assert((client.innerApiCalls.get as SinonStub)
-                .getCall(0).calledWith(request, expectedOptions, undefined));
-        });
-
-        it('invokes get without error using callback', async () => {
-            const client = new nodetypesModule.v1.NodeTypesClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-        });
-            client.initialize();
-            const request = generateSampleMessage(new protos.google.cloud.compute.v1.GetNodeTypeRequest());
-            request.project = '';
-            const expectedHeaderRequestParams = "project=";
-            const expectedOptions = {
-                otherArgs: {
-                    headers: {
-                        'x-goog-request-params': expectedHeaderRequestParams,
-                    },
-                },
-            };
-            const expectedResponse = generateSampleMessage(new protos.google.cloud.compute.v1.NodeType());
-            client.innerApiCalls.get = stubSimpleCallWithCallback(expectedResponse);
-            const promise = new Promise((resolve, reject) => {
-                 client.get(
-                    request,
-                    (err?: Error|null, result?: protos.google.cloud.compute.v1.INodeType|null) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(result);
-                        }
-                    });
-            });
-            const response = await promise;
-            assert.deepStrictEqual(response, expectedResponse);
-            assert((client.innerApiCalls.get as SinonStub)
-                .getCall(0).calledWith(request, expectedOptions /*, callback defined above */));
-        });
-
-        it('invokes get with error', async () => {
-            const client = new nodetypesModule.v1.NodeTypesClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-        });
-            client.initialize();
-            const request = generateSampleMessage(new protos.google.cloud.compute.v1.GetNodeTypeRequest());
-            request.project = '';
-            const expectedHeaderRequestParams = "project=";
-            const expectedOptions = {
-                otherArgs: {
-                    headers: {
-                        'x-goog-request-params': expectedHeaderRequestParams,
-                    },
-                },
-            };
-            const expectedError = new Error('expected');
-            client.innerApiCalls.get = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(client.get(request), expectedError);
-            assert((client.innerApiCalls.get as SinonStub)
-                .getCall(0).calledWith(request, expectedOptions, undefined));
-        });
-    });
-
-    describe('list', () => {
-        it('invokes list without error', async () => {
-            const client = new nodetypesModule.v1.NodeTypesClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-        });
-            client.initialize();
-            const request = generateSampleMessage(new protos.google.cloud.compute.v1.ListNodeTypesRequest());
-            request.project = '';
-            const expectedHeaderRequestParams = "project=";
-            const expectedOptions = {
-                otherArgs: {
-                    headers: {
-                        'x-goog-request-params': expectedHeaderRequestParams,
-                    },
-                },
-            };
-            const expectedResponse = generateSampleMessage(new protos.google.cloud.compute.v1.NodeTypeList());
-            client.innerApiCalls.list = stubSimpleCall(expectedResponse);
-            const [response] = await client.list(request);
-            assert.deepStrictEqual(response, expectedResponse);
-            assert((client.innerApiCalls.list as SinonStub)
-                .getCall(0).calledWith(request, expectedOptions, undefined));
-        });
-
-        it('invokes list without error using callback', async () => {
-            const client = new nodetypesModule.v1.NodeTypesClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-        });
-            client.initialize();
-            const request = generateSampleMessage(new protos.google.cloud.compute.v1.ListNodeTypesRequest());
-            request.project = '';
-            const expectedHeaderRequestParams = "project=";
-            const expectedOptions = {
-                otherArgs: {
-                    headers: {
-                        'x-goog-request-params': expectedHeaderRequestParams,
-                    },
-                },
-            };
-            const expectedResponse = generateSampleMessage(new protos.google.cloud.compute.v1.NodeTypeList());
-            client.innerApiCalls.list = stubSimpleCallWithCallback(expectedResponse);
-            const promise = new Promise((resolve, reject) => {
-                 client.list(
-                    request,
-                    (err?: Error|null, result?: protos.google.cloud.compute.v1.INodeTypeList|null) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(result);
-                        }
-                    });
-            });
-            const response = await promise;
-            assert.deepStrictEqual(response, expectedResponse);
-            assert((client.innerApiCalls.list as SinonStub)
-                .getCall(0).calledWith(request, expectedOptions /*, callback defined above */));
-        });
-
-        it('invokes list with error', async () => {
-            const client = new nodetypesModule.v1.NodeTypesClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-        });
-            client.initialize();
-            const request = generateSampleMessage(new protos.google.cloud.compute.v1.ListNodeTypesRequest());
-            request.project = '';
-            const expectedHeaderRequestParams = "project=";
-            const expectedOptions = {
-                otherArgs: {
-                    headers: {
-                        'x-goog-request-params': expectedHeaderRequestParams,
-                    },
-                },
-            };
-            const expectedError = new Error('expected');
-            client.innerApiCalls.list = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(client.list(request), expectedError);
-            assert((client.innerApiCalls.list as SinonStub)
-                .getCall(0).calledWith(request, expectedOptions, undefined));
-        });
-    });
+  });
 });

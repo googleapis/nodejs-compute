@@ -92,11 +92,16 @@ export class MachineTypesClient {
   constructor(opts?: ClientOptions) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof MachineTypesClient;
-    const servicePath = opts?.servicePath || opts?.apiEndpoint || staticMembers.servicePath;
-    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
+    const servicePath =
+      opts?.servicePath || opts?.apiEndpoint || staticMembers.servicePath;
+    this._providedCustomServicePath = !!(
+      opts?.servicePath || opts?.apiEndpoint
+    );
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    const fallback =
+      opts?.fallback ??
+      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // If scopes are unset in options and we're connecting to a non-default endpoint, set scopes just in case.
@@ -114,7 +119,7 @@ export class MachineTypesClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
+    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
 
     // Set the default scopes in auth client if needed.
     if (servicePath === staticMembers.servicePath) {
@@ -122,10 +127,7 @@ export class MachineTypesClient {
     }
 
     // Determine the client header string.
-    const clientHeader = [
-      `gax/${this._gaxModule.version}`,
-      `gapic/${version}`,
-    ];
+    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
     if (typeof process !== 'undefined' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -133,7 +135,7 @@ export class MachineTypesClient {
     }
     if (!opts.fallback) {
       clientHeader.push(`grpc/${this._gaxGrpc.grpcVersion}`);
-    } else if (opts.fallback === 'rest' ) {
+    } else if (opts.fallback === 'rest') {
       clientHeader.push(`rest/${this._gaxGrpc.grpcVersion}`);
     }
     if (opts.libName && opts.libVersion) {
@@ -144,8 +146,11 @@ export class MachineTypesClient {
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-        'google.cloud.compute.v1.MachineTypes', gapicConfig as gax.ClientConfig,
-        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
+      'google.cloud.compute.v1.MachineTypes',
+      gapicConfig as gax.ClientConfig,
+      opts.clientConfig || {},
+      {'x-goog-api-client': clientHeader.join(' ')}
+    );
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -176,31 +181,35 @@ export class MachineTypesClient {
     // Put together the "service stub" for
     // google.cloud.compute.v1.MachineTypes.
     this.machineTypesStub = this._gaxGrpc.createStub(
-        this._opts.fallback ?
-          (this._protos as protobuf.Root).lookupService('google.cloud.compute.v1.MachineTypes') :
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      this._opts.fallback
+        ? (this._protos as protobuf.Root).lookupService(
+            'google.cloud.compute.v1.MachineTypes'
+          )
+        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.cloud.compute.v1.MachineTypes,
-        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
+      this._opts,
+      this._providedCustomServicePath
+    ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const machineTypesStubMethods =
-        ['aggregatedList', 'get', 'list'];
+    const machineTypesStubMethods = ['aggregatedList', 'get', 'list'];
     for (const methodName of machineTypesStubMethods) {
       const callPromise = this.machineTypesStub.then(
-        stub => (...args: Array<{}>) => {
-          if (this._terminated) {
-            return Promise.reject('The client has already been closed.');
-          }
-          const func = stub[methodName];
-          return func.apply(stub, args);
-        },
-        (err: Error|null|undefined) => () => {
+        stub =>
+          (...args: Array<{}>) => {
+            if (this._terminated) {
+              return Promise.reject('The client has already been closed.');
+            }
+            const func = stub[methodName];
+            return func.apply(stub, args);
+          },
+        (err: Error | null | undefined) => () => {
           throw err;
-        });
+        }
+      );
 
-      const descriptor =
-        undefined;
+      const descriptor = undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
@@ -247,7 +256,7 @@ export class MachineTypesClient {
     return [
       'https://www.googleapis.com/auth/compute.readonly',
       'https://www.googleapis.com/auth/compute',
-      'https://www.googleapis.com/auth/cloud-platform'
+      'https://www.googleapis.com/auth/cloud-platform',
     ];
   }
 
@@ -257,8 +266,9 @@ export class MachineTypesClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(callback?: Callback<string, undefined, undefined>):
-      Promise<string>|void {
+  getProjectId(
+    callback?: Callback<string, undefined, undefined>
+  ): Promise<string> | void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -270,267 +280,326 @@ export class MachineTypesClient {
   // -- Service calls --
   // -------------------
   aggregatedList(
-      request?: protos.google.cloud.compute.v1.IAggregatedListMachineTypesRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.compute.v1.IMachineTypeAggregatedList,
-        protos.google.cloud.compute.v1.IAggregatedListMachineTypesRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.compute.v1.IAggregatedListMachineTypesRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.compute.v1.IMachineTypeAggregatedList,
+      (
+        | protos.google.cloud.compute.v1.IAggregatedListMachineTypesRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
   aggregatedList(
-      request: protos.google.cloud.compute.v1.IAggregatedListMachineTypesRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.compute.v1.IMachineTypeAggregatedList,
-          protos.google.cloud.compute.v1.IAggregatedListMachineTypesRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.compute.v1.IAggregatedListMachineTypesRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.compute.v1.IMachineTypeAggregatedList,
+      | protos.google.cloud.compute.v1.IAggregatedListMachineTypesRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
   aggregatedList(
-      request: protos.google.cloud.compute.v1.IAggregatedListMachineTypesRequest,
-      callback: Callback<
-          protos.google.cloud.compute.v1.IMachineTypeAggregatedList,
-          protos.google.cloud.compute.v1.IAggregatedListMachineTypesRequest|null|undefined,
-          {}|null|undefined>): void;
-/**
- * Retrieves an aggregated list of machine types.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.filter
- *   A filter expression that filters resources listed in the response. The expression must specify the field name, a comparison operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The comparison operator must be either `=`, `!=`, `>`, or `<`.
- *
- *   For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`.
- *
- *   You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels.
- *
- *   To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ```
- * @param {boolean} request.includeAllScopes
- *   Indicates whether every visible scope for each scope type (zone, region, global) should be included in the response. For new resource types added after this field, the flag has no effect as new resource types will always include every visible scope for each scope type in response. For resource types which predate this field, if this flag is omitted or false, only scopes of the scope types where the resource type is expected to be found will be included.
- * @param {number} request.maxResults
- *   The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)
- * @param {string} request.orderBy
- *   Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name.
- *
- *   You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first.
- *
- *   Currently, only sorting by `name` or `creationTimestamp desc` is supported.
- * @param {string} request.pageToken
- *   Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
- * @param {string} request.project
- *   Project ID for this request.
- * @param {boolean} request.returnPartialSuccess
- *   Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing [MachineTypeAggregatedList]{@link google.cloud.compute.v1.MachineTypeAggregatedList}.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
- *   for more details and examples.
- * @example
- * const [response] = await client.aggregatedList(request);
- */
+    request: protos.google.cloud.compute.v1.IAggregatedListMachineTypesRequest,
+    callback: Callback<
+      protos.google.cloud.compute.v1.IMachineTypeAggregatedList,
+      | protos.google.cloud.compute.v1.IAggregatedListMachineTypesRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  /**
+   * Retrieves an aggregated list of machine types.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.filter
+   *   A filter expression that filters resources listed in the response. The expression must specify the field name, a comparison operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The comparison operator must be either `=`, `!=`, `>`, or `<`.
+   *
+   *   For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`.
+   *
+   *   You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels.
+   *
+   *   To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ```
+   * @param {boolean} request.includeAllScopes
+   *   Indicates whether every visible scope for each scope type (zone, region, global) should be included in the response. For new resource types added after this field, the flag has no effect as new resource types will always include every visible scope for each scope type in response. For resource types which predate this field, if this flag is omitted or false, only scopes of the scope types where the resource type is expected to be found will be included.
+   * @param {number} request.maxResults
+   *   The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)
+   * @param {string} request.orderBy
+   *   Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name.
+   *
+   *   You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first.
+   *
+   *   Currently, only sorting by `name` or `creationTimestamp desc` is supported.
+   * @param {string} request.pageToken
+   *   Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
+   * @param {string} request.project
+   *   Project ID for this request.
+   * @param {boolean} request.returnPartialSuccess
+   *   Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [MachineTypeAggregatedList]{@link google.cloud.compute.v1.MachineTypeAggregatedList}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example
+   * const [response] = await client.aggregatedList(request);
+   */
   aggregatedList(
-      request?: protos.google.cloud.compute.v1.IAggregatedListMachineTypesRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.compute.v1.IAggregatedListMachineTypesRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.compute.v1.IMachineTypeAggregatedList,
-          protos.google.cloud.compute.v1.IAggregatedListMachineTypesRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.compute.v1.IMachineTypeAggregatedList,
-          protos.google.cloud.compute.v1.IAggregatedListMachineTypesRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.compute.v1.IMachineTypeAggregatedList,
-        protos.google.cloud.compute.v1.IAggregatedListMachineTypesRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.compute.v1.IAggregatedListMachineTypesRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.compute.v1.IMachineTypeAggregatedList,
+      | protos.google.cloud.compute.v1.IAggregatedListMachineTypesRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.compute.v1.IMachineTypeAggregatedList,
+      (
+        | protos.google.cloud.compute.v1.IAggregatedListMachineTypesRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      'project': request.project || '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        project: request.project || '',
+      });
     this.initialize();
     return this.innerApiCalls.aggregatedList(request, options, callback);
   }
   get(
-      request?: protos.google.cloud.compute.v1.IGetMachineTypeRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.compute.v1.IMachineType,
-        protos.google.cloud.compute.v1.IGetMachineTypeRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.compute.v1.IGetMachineTypeRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.compute.v1.IMachineType,
+      protos.google.cloud.compute.v1.IGetMachineTypeRequest | undefined,
+      {} | undefined
+    ]
+  >;
   get(
-      request: protos.google.cloud.compute.v1.IGetMachineTypeRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.compute.v1.IMachineType,
-          protos.google.cloud.compute.v1.IGetMachineTypeRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.compute.v1.IGetMachineTypeRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.compute.v1.IMachineType,
+      protos.google.cloud.compute.v1.IGetMachineTypeRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
   get(
-      request: protos.google.cloud.compute.v1.IGetMachineTypeRequest,
-      callback: Callback<
-          protos.google.cloud.compute.v1.IMachineType,
-          protos.google.cloud.compute.v1.IGetMachineTypeRequest|null|undefined,
-          {}|null|undefined>): void;
-/**
- * Returns the specified machine type. Gets a list of available machine types by making a list() request.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.machineType
- *   Name of the machine type to return.
- * @param {string} request.project
- *   Project ID for this request.
- * @param {string} request.zone
- *   The name of the zone for this request.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing [MachineType]{@link google.cloud.compute.v1.MachineType}.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
- *   for more details and examples.
- * @example
- * const [response] = await client.get(request);
- */
+    request: protos.google.cloud.compute.v1.IGetMachineTypeRequest,
+    callback: Callback<
+      protos.google.cloud.compute.v1.IMachineType,
+      protos.google.cloud.compute.v1.IGetMachineTypeRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  /**
+   * Returns the specified machine type. Gets a list of available machine types by making a list() request.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.machineType
+   *   Name of the machine type to return.
+   * @param {string} request.project
+   *   Project ID for this request.
+   * @param {string} request.zone
+   *   The name of the zone for this request.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [MachineType]{@link google.cloud.compute.v1.MachineType}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example
+   * const [response] = await client.get(request);
+   */
   get(
-      request?: protos.google.cloud.compute.v1.IGetMachineTypeRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.compute.v1.IGetMachineTypeRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.compute.v1.IMachineType,
-          protos.google.cloud.compute.v1.IGetMachineTypeRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.compute.v1.IMachineType,
-          protos.google.cloud.compute.v1.IGetMachineTypeRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.compute.v1.IMachineType,
-        protos.google.cloud.compute.v1.IGetMachineTypeRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.compute.v1.IGetMachineTypeRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.compute.v1.IMachineType,
+      protos.google.cloud.compute.v1.IGetMachineTypeRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.compute.v1.IMachineType,
+      protos.google.cloud.compute.v1.IGetMachineTypeRequest | undefined,
+      {} | undefined
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      'project': request.project || '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        project: request.project || '',
+      });
     this.initialize();
     return this.innerApiCalls.get(request, options, callback);
   }
   list(
-      request?: protos.google.cloud.compute.v1.IListMachineTypesRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.compute.v1.IMachineTypeList,
-        protos.google.cloud.compute.v1.IListMachineTypesRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.compute.v1.IListMachineTypesRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.compute.v1.IMachineTypeList,
+      protos.google.cloud.compute.v1.IListMachineTypesRequest | undefined,
+      {} | undefined
+    ]
+  >;
   list(
-      request: protos.google.cloud.compute.v1.IListMachineTypesRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.compute.v1.IMachineTypeList,
-          protos.google.cloud.compute.v1.IListMachineTypesRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.compute.v1.IListMachineTypesRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.compute.v1.IMachineTypeList,
+      | protos.google.cloud.compute.v1.IListMachineTypesRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
   list(
-      request: protos.google.cloud.compute.v1.IListMachineTypesRequest,
-      callback: Callback<
-          protos.google.cloud.compute.v1.IMachineTypeList,
-          protos.google.cloud.compute.v1.IListMachineTypesRequest|null|undefined,
-          {}|null|undefined>): void;
-/**
- * Retrieves a list of machine types available to the specified project.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.filter
- *   A filter expression that filters resources listed in the response. The expression must specify the field name, a comparison operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The comparison operator must be either `=`, `!=`, `>`, or `<`.
- *
- *   For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`.
- *
- *   You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels.
- *
- *   To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ```
- * @param {number} request.maxResults
- *   The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)
- * @param {string} request.orderBy
- *   Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name.
- *
- *   You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first.
- *
- *   Currently, only sorting by `name` or `creationTimestamp desc` is supported.
- * @param {string} request.pageToken
- *   Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
- * @param {string} request.project
- *   Project ID for this request.
- * @param {boolean} request.returnPartialSuccess
- *   Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
- * @param {string} request.zone
- *   The name of the zone for this request.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing [MachineTypeList]{@link google.cloud.compute.v1.MachineTypeList}.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
- *   for more details and examples.
- * @example
- * const [response] = await client.list(request);
- */
+    request: protos.google.cloud.compute.v1.IListMachineTypesRequest,
+    callback: Callback<
+      protos.google.cloud.compute.v1.IMachineTypeList,
+      | protos.google.cloud.compute.v1.IListMachineTypesRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  /**
+   * Retrieves a list of machine types available to the specified project.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.filter
+   *   A filter expression that filters resources listed in the response. The expression must specify the field name, a comparison operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The comparison operator must be either `=`, `!=`, `>`, or `<`.
+   *
+   *   For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`.
+   *
+   *   You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels.
+   *
+   *   To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ```
+   * @param {number} request.maxResults
+   *   The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)
+   * @param {string} request.orderBy
+   *   Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name.
+   *
+   *   You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first.
+   *
+   *   Currently, only sorting by `name` or `creationTimestamp desc` is supported.
+   * @param {string} request.pageToken
+   *   Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
+   * @param {string} request.project
+   *   Project ID for this request.
+   * @param {boolean} request.returnPartialSuccess
+   *   Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+   * @param {string} request.zone
+   *   The name of the zone for this request.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [MachineTypeList]{@link google.cloud.compute.v1.MachineTypeList}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example
+   * const [response] = await client.list(request);
+   */
   list(
-      request?: protos.google.cloud.compute.v1.IListMachineTypesRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.compute.v1.IListMachineTypesRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.compute.v1.IMachineTypeList,
-          protos.google.cloud.compute.v1.IListMachineTypesRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.compute.v1.IMachineTypeList,
-          protos.google.cloud.compute.v1.IListMachineTypesRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.compute.v1.IMachineTypeList,
-        protos.google.cloud.compute.v1.IListMachineTypesRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.compute.v1.IListMachineTypesRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.compute.v1.IMachineTypeList,
+      | protos.google.cloud.compute.v1.IListMachineTypesRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.compute.v1.IMachineTypeList,
+      protos.google.cloud.compute.v1.IListMachineTypesRequest | undefined,
+      {} | undefined
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      'project': request.project || '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        project: request.project || '',
+      });
     this.initialize();
     return this.innerApiCalls.list(request, options, callback);
   }
-
 
   /**
    * Terminate the gRPC channel and close the client.

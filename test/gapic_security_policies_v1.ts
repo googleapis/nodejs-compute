@@ -20,941 +20,1202 @@ import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
 import {SinonStub} from 'sinon';
-import { describe, it } from 'mocha';
+import {describe, it} from 'mocha';
 import * as securitypoliciesModule from '../src';
 
 import {protobuf} from 'google-gax';
 
 function generateSampleMessage<T extends object>(instance: T) {
-    const filledObject = (instance.constructor as typeof protobuf.Message)
-        .toObject(instance as protobuf.Message<T>, {defaults: true});
-    return (instance.constructor as typeof protobuf.Message).fromObject(filledObject) as T;
+  const filledObject = (
+    instance.constructor as typeof protobuf.Message
+  ).toObject(instance as protobuf.Message<T>, {defaults: true});
+  return (instance.constructor as typeof protobuf.Message).fromObject(
+    filledObject
+  ) as T;
 }
 
 function stubSimpleCall<ResponseType>(response?: ResponseType, error?: Error) {
-    return error ? sinon.stub().rejects(error) : sinon.stub().resolves([response]);
+  return error
+    ? sinon.stub().rejects(error)
+    : sinon.stub().resolves([response]);
 }
 
-function stubSimpleCallWithCallback<ResponseType>(response?: ResponseType, error?: Error) {
-    return error ? sinon.stub().callsArgWith(2, error) : sinon.stub().callsArgWith(2, null, response);
+function stubSimpleCallWithCallback<ResponseType>(
+  response?: ResponseType,
+  error?: Error
+) {
+  return error
+    ? sinon.stub().callsArgWith(2, error)
+    : sinon.stub().callsArgWith(2, null, response);
 }
 
 describe('v1.SecurityPoliciesClient', () => {
-    it('has servicePath', () => {
-        const servicePath = securitypoliciesModule.v1.SecurityPoliciesClient.servicePath;
-        assert(servicePath);
+  it('has servicePath', () => {
+    const servicePath =
+      securitypoliciesModule.v1.SecurityPoliciesClient.servicePath;
+    assert(servicePath);
+  });
+
+  it('has apiEndpoint', () => {
+    const apiEndpoint =
+      securitypoliciesModule.v1.SecurityPoliciesClient.apiEndpoint;
+    assert(apiEndpoint);
+  });
+
+  it('has port', () => {
+    const port = securitypoliciesModule.v1.SecurityPoliciesClient.port;
+    assert(port);
+    assert(typeof port === 'number');
+  });
+
+  it('should create a client with no option', () => {
+    const client = new securitypoliciesModule.v1.SecurityPoliciesClient();
+    assert(client);
+  });
+
+  it('should create a client with gRPC fallback', () => {
+    const client = new securitypoliciesModule.v1.SecurityPoliciesClient({
+      fallback: true,
+    });
+    assert(client);
+  });
+
+  it('has initialize method and supports deferred initialization', async () => {
+    const client = new securitypoliciesModule.v1.SecurityPoliciesClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    assert.strictEqual(client.securityPoliciesStub, undefined);
+    await client.initialize();
+    assert(client.securityPoliciesStub);
+  });
+
+  it('has close method', () => {
+    const client = new securitypoliciesModule.v1.SecurityPoliciesClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    client.close();
+  });
+
+  it('has getProjectId method', async () => {
+    const fakeProjectId = 'fake-project-id';
+    const client = new securitypoliciesModule.v1.SecurityPoliciesClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
+    const result = await client.getProjectId();
+    assert.strictEqual(result, fakeProjectId);
+    assert((client.auth.getProjectId as SinonStub).calledWithExactly());
+  });
+
+  it('has getProjectId method with callback', async () => {
+    const fakeProjectId = 'fake-project-id';
+    const client = new securitypoliciesModule.v1.SecurityPoliciesClient({
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      projectId: 'bogus',
+    });
+    client.auth.getProjectId = sinon
+      .stub()
+      .callsArgWith(0, null, fakeProjectId);
+    const promise = new Promise((resolve, reject) => {
+      client.getProjectId((err?: Error | null, projectId?: string | null) => {
+        if (err) {
+          reject(err);
+        } else {
+          resolve(projectId);
+        }
+      });
+    });
+    const result = await promise;
+    assert.strictEqual(result, fakeProjectId);
+  });
+
+  describe('addRule', () => {
+    it('invokes addRule without error', async () => {
+      const client = new securitypoliciesModule.v1.SecurityPoliciesClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.AddRuleSecurityPolicyRequest()
+      );
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.compute.v1.Operation()
+      );
+      client.innerApiCalls.addRule = stubSimpleCall(expectedResponse);
+      const [response] = await client.addRule(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.addRule as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
     });
 
-    it('has apiEndpoint', () => {
-        const apiEndpoint = securitypoliciesModule.v1.SecurityPoliciesClient.apiEndpoint;
-        assert(apiEndpoint);
+    it('invokes addRule without error using callback', async () => {
+      const client = new securitypoliciesModule.v1.SecurityPoliciesClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.AddRuleSecurityPolicyRequest()
+      );
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.compute.v1.Operation()
+      );
+      client.innerApiCalls.addRule =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.addRule(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.compute.v1.IOperation | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.addRule as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
     });
 
-    it('has port', () => {
-        const port = securitypoliciesModule.v1.SecurityPoliciesClient.port;
-        assert(port);
-        assert(typeof port === 'number');
+    it('invokes addRule with error', async () => {
+      const client = new securitypoliciesModule.v1.SecurityPoliciesClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.AddRuleSecurityPolicyRequest()
+      );
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.addRule = stubSimpleCall(undefined, expectedError);
+      await assert.rejects(client.addRule(request), expectedError);
+      assert(
+        (client.innerApiCalls.addRule as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+  });
+
+  describe('delete', () => {
+    it('invokes delete without error', async () => {
+      const client = new securitypoliciesModule.v1.SecurityPoliciesClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.DeleteSecurityPolicyRequest()
+      );
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.compute.v1.Operation()
+      );
+      client.innerApiCalls.delete = stubSimpleCall(expectedResponse);
+      const [response] = await client.delete(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.delete as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
     });
 
-    it('should create a client with no option', () => {
-        const client = new securitypoliciesModule.v1.SecurityPoliciesClient();
-        assert(client);
+    it('invokes delete without error using callback', async () => {
+      const client = new securitypoliciesModule.v1.SecurityPoliciesClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.DeleteSecurityPolicyRequest()
+      );
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.compute.v1.Operation()
+      );
+      client.innerApiCalls.delete =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.delete(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.compute.v1.IOperation | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.delete as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
     });
 
-    it('should create a client with gRPC fallback', () => {
-        const client = new securitypoliciesModule.v1.SecurityPoliciesClient({
-            fallback: true,
-        });
-        assert(client);
+    it('invokes delete with error', async () => {
+      const client = new securitypoliciesModule.v1.SecurityPoliciesClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.DeleteSecurityPolicyRequest()
+      );
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.delete = stubSimpleCall(undefined, expectedError);
+      await assert.rejects(client.delete(request), expectedError);
+      assert(
+        (client.innerApiCalls.delete as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+  });
+
+  describe('get', () => {
+    it('invokes get without error', async () => {
+      const client = new securitypoliciesModule.v1.SecurityPoliciesClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.GetSecurityPolicyRequest()
+      );
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.compute.v1.SecurityPolicy()
+      );
+      client.innerApiCalls.get = stubSimpleCall(expectedResponse);
+      const [response] = await client.get(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.get as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
     });
 
-    it('has initialize method and supports deferred initialization', async () => {
-        const client = new securitypoliciesModule.v1.SecurityPoliciesClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-        });
-        assert.strictEqual(client.securityPoliciesStub, undefined);
-        await client.initialize();
-        assert(client.securityPoliciesStub);
+    it('invokes get without error using callback', async () => {
+      const client = new securitypoliciesModule.v1.SecurityPoliciesClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.GetSecurityPolicyRequest()
+      );
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.compute.v1.SecurityPolicy()
+      );
+      client.innerApiCalls.get = stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.get(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.compute.v1.ISecurityPolicy | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.get as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
     });
 
-    it('has close method', () => {
-        const client = new securitypoliciesModule.v1.SecurityPoliciesClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-        });
-        client.close();
+    it('invokes get with error', async () => {
+      const client = new securitypoliciesModule.v1.SecurityPoliciesClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.GetSecurityPolicyRequest()
+      );
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.get = stubSimpleCall(undefined, expectedError);
+      await assert.rejects(client.get(request), expectedError);
+      assert(
+        (client.innerApiCalls.get as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+  });
+
+  describe('getRule', () => {
+    it('invokes getRule without error', async () => {
+      const client = new securitypoliciesModule.v1.SecurityPoliciesClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.GetRuleSecurityPolicyRequest()
+      );
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.compute.v1.SecurityPolicyRule()
+      );
+      client.innerApiCalls.getRule = stubSimpleCall(expectedResponse);
+      const [response] = await client.getRule(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.getRule as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
     });
 
-    it('has getProjectId method', async () => {
-        const fakeProjectId = 'fake-project-id';
-        const client = new securitypoliciesModule.v1.SecurityPoliciesClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-        });
-        client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
-        const result = await client.getProjectId();
-        assert.strictEqual(result, fakeProjectId);
-        assert((client.auth.getProjectId as SinonStub).calledWithExactly());
+    it('invokes getRule without error using callback', async () => {
+      const client = new securitypoliciesModule.v1.SecurityPoliciesClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.GetRuleSecurityPolicyRequest()
+      );
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.compute.v1.SecurityPolicyRule()
+      );
+      client.innerApiCalls.getRule =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.getRule(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.compute.v1.ISecurityPolicyRule | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.getRule as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
     });
 
-    it('has getProjectId method with callback', async () => {
-        const fakeProjectId = 'fake-project-id';
-        const client = new securitypoliciesModule.v1.SecurityPoliciesClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-        });
-        client.auth.getProjectId = sinon.stub().callsArgWith(0, null, fakeProjectId);
-        const promise = new Promise((resolve, reject) => {
-            client.getProjectId((err?: Error|null, projectId?: string|null) => {
-                if (err) {
-                    reject(err);
-                } else {
-                    resolve(projectId);
-                }
-            });
-        });
-        const result = await promise;
-        assert.strictEqual(result, fakeProjectId);
+    it('invokes getRule with error', async () => {
+      const client = new securitypoliciesModule.v1.SecurityPoliciesClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.GetRuleSecurityPolicyRequest()
+      );
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.getRule = stubSimpleCall(undefined, expectedError);
+      await assert.rejects(client.getRule(request), expectedError);
+      assert(
+        (client.innerApiCalls.getRule as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+  });
+
+  describe('insert', () => {
+    it('invokes insert without error', async () => {
+      const client = new securitypoliciesModule.v1.SecurityPoliciesClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.InsertSecurityPolicyRequest()
+      );
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.compute.v1.Operation()
+      );
+      client.innerApiCalls.insert = stubSimpleCall(expectedResponse);
+      const [response] = await client.insert(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.insert as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
     });
 
-    describe('addRule', () => {
-        it('invokes addRule without error', async () => {
-            const client = new securitypoliciesModule.v1.SecurityPoliciesClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-        });
-            client.initialize();
-            const request = generateSampleMessage(new protos.google.cloud.compute.v1.AddRuleSecurityPolicyRequest());
-            request.project = '';
-            const expectedHeaderRequestParams = "project=";
-            const expectedOptions = {
-                otherArgs: {
-                    headers: {
-                        'x-goog-request-params': expectedHeaderRequestParams,
-                    },
-                },
-            };
-            const expectedResponse = generateSampleMessage(new protos.google.cloud.compute.v1.Operation());
-            client.innerApiCalls.addRule = stubSimpleCall(expectedResponse);
-            const [response] = await client.addRule(request);
-            assert.deepStrictEqual(response, expectedResponse);
-            assert((client.innerApiCalls.addRule as SinonStub)
-                .getCall(0).calledWith(request, expectedOptions, undefined));
-        });
-
-        it('invokes addRule without error using callback', async () => {
-            const client = new securitypoliciesModule.v1.SecurityPoliciesClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-        });
-            client.initialize();
-            const request = generateSampleMessage(new protos.google.cloud.compute.v1.AddRuleSecurityPolicyRequest());
-            request.project = '';
-            const expectedHeaderRequestParams = "project=";
-            const expectedOptions = {
-                otherArgs: {
-                    headers: {
-                        'x-goog-request-params': expectedHeaderRequestParams,
-                    },
-                },
-            };
-            const expectedResponse = generateSampleMessage(new protos.google.cloud.compute.v1.Operation());
-            client.innerApiCalls.addRule = stubSimpleCallWithCallback(expectedResponse);
-            const promise = new Promise((resolve, reject) => {
-                 client.addRule(
-                    request,
-                    (err?: Error|null, result?: protos.google.cloud.compute.v1.IOperation|null) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(result);
-                        }
-                    });
-            });
-            const response = await promise;
-            assert.deepStrictEqual(response, expectedResponse);
-            assert((client.innerApiCalls.addRule as SinonStub)
-                .getCall(0).calledWith(request, expectedOptions /*, callback defined above */));
-        });
-
-        it('invokes addRule with error', async () => {
-            const client = new securitypoliciesModule.v1.SecurityPoliciesClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-        });
-            client.initialize();
-            const request = generateSampleMessage(new protos.google.cloud.compute.v1.AddRuleSecurityPolicyRequest());
-            request.project = '';
-            const expectedHeaderRequestParams = "project=";
-            const expectedOptions = {
-                otherArgs: {
-                    headers: {
-                        'x-goog-request-params': expectedHeaderRequestParams,
-                    },
-                },
-            };
-            const expectedError = new Error('expected');
-            client.innerApiCalls.addRule = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(client.addRule(request), expectedError);
-            assert((client.innerApiCalls.addRule as SinonStub)
-                .getCall(0).calledWith(request, expectedOptions, undefined));
-        });
+    it('invokes insert without error using callback', async () => {
+      const client = new securitypoliciesModule.v1.SecurityPoliciesClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.InsertSecurityPolicyRequest()
+      );
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.compute.v1.Operation()
+      );
+      client.innerApiCalls.insert =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.insert(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.compute.v1.IOperation | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.insert as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
     });
 
-    describe('delete', () => {
-        it('invokes delete without error', async () => {
-            const client = new securitypoliciesModule.v1.SecurityPoliciesClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-        });
-            client.initialize();
-            const request = generateSampleMessage(new protos.google.cloud.compute.v1.DeleteSecurityPolicyRequest());
-            request.project = '';
-            const expectedHeaderRequestParams = "project=";
-            const expectedOptions = {
-                otherArgs: {
-                    headers: {
-                        'x-goog-request-params': expectedHeaderRequestParams,
-                    },
-                },
-            };
-            const expectedResponse = generateSampleMessage(new protos.google.cloud.compute.v1.Operation());
-            client.innerApiCalls.delete = stubSimpleCall(expectedResponse);
-            const [response] = await client.delete(request);
-            assert.deepStrictEqual(response, expectedResponse);
-            assert((client.innerApiCalls.delete as SinonStub)
-                .getCall(0).calledWith(request, expectedOptions, undefined));
-        });
+    it('invokes insert with error', async () => {
+      const client = new securitypoliciesModule.v1.SecurityPoliciesClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.InsertSecurityPolicyRequest()
+      );
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.insert = stubSimpleCall(undefined, expectedError);
+      await assert.rejects(client.insert(request), expectedError);
+      assert(
+        (client.innerApiCalls.insert as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+  });
 
-        it('invokes delete without error using callback', async () => {
-            const client = new securitypoliciesModule.v1.SecurityPoliciesClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-        });
-            client.initialize();
-            const request = generateSampleMessage(new protos.google.cloud.compute.v1.DeleteSecurityPolicyRequest());
-            request.project = '';
-            const expectedHeaderRequestParams = "project=";
-            const expectedOptions = {
-                otherArgs: {
-                    headers: {
-                        'x-goog-request-params': expectedHeaderRequestParams,
-                    },
-                },
-            };
-            const expectedResponse = generateSampleMessage(new protos.google.cloud.compute.v1.Operation());
-            client.innerApiCalls.delete = stubSimpleCallWithCallback(expectedResponse);
-            const promise = new Promise((resolve, reject) => {
-                 client.delete(
-                    request,
-                    (err?: Error|null, result?: protos.google.cloud.compute.v1.IOperation|null) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(result);
-                        }
-                    });
-            });
-            const response = await promise;
-            assert.deepStrictEqual(response, expectedResponse);
-            assert((client.innerApiCalls.delete as SinonStub)
-                .getCall(0).calledWith(request, expectedOptions /*, callback defined above */));
-        });
-
-        it('invokes delete with error', async () => {
-            const client = new securitypoliciesModule.v1.SecurityPoliciesClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-        });
-            client.initialize();
-            const request = generateSampleMessage(new protos.google.cloud.compute.v1.DeleteSecurityPolicyRequest());
-            request.project = '';
-            const expectedHeaderRequestParams = "project=";
-            const expectedOptions = {
-                otherArgs: {
-                    headers: {
-                        'x-goog-request-params': expectedHeaderRequestParams,
-                    },
-                },
-            };
-            const expectedError = new Error('expected');
-            client.innerApiCalls.delete = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(client.delete(request), expectedError);
-            assert((client.innerApiCalls.delete as SinonStub)
-                .getCall(0).calledWith(request, expectedOptions, undefined));
-        });
+  describe('list', () => {
+    it('invokes list without error', async () => {
+      const client = new securitypoliciesModule.v1.SecurityPoliciesClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.ListSecurityPoliciesRequest()
+      );
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.compute.v1.SecurityPolicyList()
+      );
+      client.innerApiCalls.list = stubSimpleCall(expectedResponse);
+      const [response] = await client.list(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.list as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
     });
 
-    describe('get', () => {
-        it('invokes get without error', async () => {
-            const client = new securitypoliciesModule.v1.SecurityPoliciesClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-        });
-            client.initialize();
-            const request = generateSampleMessage(new protos.google.cloud.compute.v1.GetSecurityPolicyRequest());
-            request.project = '';
-            const expectedHeaderRequestParams = "project=";
-            const expectedOptions = {
-                otherArgs: {
-                    headers: {
-                        'x-goog-request-params': expectedHeaderRequestParams,
-                    },
-                },
-            };
-            const expectedResponse = generateSampleMessage(new protos.google.cloud.compute.v1.SecurityPolicy());
-            client.innerApiCalls.get = stubSimpleCall(expectedResponse);
-            const [response] = await client.get(request);
-            assert.deepStrictEqual(response, expectedResponse);
-            assert((client.innerApiCalls.get as SinonStub)
-                .getCall(0).calledWith(request, expectedOptions, undefined));
-        });
-
-        it('invokes get without error using callback', async () => {
-            const client = new securitypoliciesModule.v1.SecurityPoliciesClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-        });
-            client.initialize();
-            const request = generateSampleMessage(new protos.google.cloud.compute.v1.GetSecurityPolicyRequest());
-            request.project = '';
-            const expectedHeaderRequestParams = "project=";
-            const expectedOptions = {
-                otherArgs: {
-                    headers: {
-                        'x-goog-request-params': expectedHeaderRequestParams,
-                    },
-                },
-            };
-            const expectedResponse = generateSampleMessage(new protos.google.cloud.compute.v1.SecurityPolicy());
-            client.innerApiCalls.get = stubSimpleCallWithCallback(expectedResponse);
-            const promise = new Promise((resolve, reject) => {
-                 client.get(
-                    request,
-                    (err?: Error|null, result?: protos.google.cloud.compute.v1.ISecurityPolicy|null) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(result);
-                        }
-                    });
-            });
-            const response = await promise;
-            assert.deepStrictEqual(response, expectedResponse);
-            assert((client.innerApiCalls.get as SinonStub)
-                .getCall(0).calledWith(request, expectedOptions /*, callback defined above */));
-        });
-
-        it('invokes get with error', async () => {
-            const client = new securitypoliciesModule.v1.SecurityPoliciesClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-        });
-            client.initialize();
-            const request = generateSampleMessage(new protos.google.cloud.compute.v1.GetSecurityPolicyRequest());
-            request.project = '';
-            const expectedHeaderRequestParams = "project=";
-            const expectedOptions = {
-                otherArgs: {
-                    headers: {
-                        'x-goog-request-params': expectedHeaderRequestParams,
-                    },
-                },
-            };
-            const expectedError = new Error('expected');
-            client.innerApiCalls.get = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(client.get(request), expectedError);
-            assert((client.innerApiCalls.get as SinonStub)
-                .getCall(0).calledWith(request, expectedOptions, undefined));
-        });
+    it('invokes list without error using callback', async () => {
+      const client = new securitypoliciesModule.v1.SecurityPoliciesClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.ListSecurityPoliciesRequest()
+      );
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.compute.v1.SecurityPolicyList()
+      );
+      client.innerApiCalls.list = stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.list(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.compute.v1.ISecurityPolicyList | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.list as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
     });
 
-    describe('getRule', () => {
-        it('invokes getRule without error', async () => {
-            const client = new securitypoliciesModule.v1.SecurityPoliciesClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-        });
-            client.initialize();
-            const request = generateSampleMessage(new protos.google.cloud.compute.v1.GetRuleSecurityPolicyRequest());
-            request.project = '';
-            const expectedHeaderRequestParams = "project=";
-            const expectedOptions = {
-                otherArgs: {
-                    headers: {
-                        'x-goog-request-params': expectedHeaderRequestParams,
-                    },
-                },
-            };
-            const expectedResponse = generateSampleMessage(new protos.google.cloud.compute.v1.SecurityPolicyRule());
-            client.innerApiCalls.getRule = stubSimpleCall(expectedResponse);
-            const [response] = await client.getRule(request);
-            assert.deepStrictEqual(response, expectedResponse);
-            assert((client.innerApiCalls.getRule as SinonStub)
-                .getCall(0).calledWith(request, expectedOptions, undefined));
-        });
+    it('invokes list with error', async () => {
+      const client = new securitypoliciesModule.v1.SecurityPoliciesClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.ListSecurityPoliciesRequest()
+      );
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.list = stubSimpleCall(undefined, expectedError);
+      await assert.rejects(client.list(request), expectedError);
+      assert(
+        (client.innerApiCalls.list as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+  });
 
-        it('invokes getRule without error using callback', async () => {
-            const client = new securitypoliciesModule.v1.SecurityPoliciesClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-        });
-            client.initialize();
-            const request = generateSampleMessage(new protos.google.cloud.compute.v1.GetRuleSecurityPolicyRequest());
-            request.project = '';
-            const expectedHeaderRequestParams = "project=";
-            const expectedOptions = {
-                otherArgs: {
-                    headers: {
-                        'x-goog-request-params': expectedHeaderRequestParams,
-                    },
-                },
-            };
-            const expectedResponse = generateSampleMessage(new protos.google.cloud.compute.v1.SecurityPolicyRule());
-            client.innerApiCalls.getRule = stubSimpleCallWithCallback(expectedResponse);
-            const promise = new Promise((resolve, reject) => {
-                 client.getRule(
-                    request,
-                    (err?: Error|null, result?: protos.google.cloud.compute.v1.ISecurityPolicyRule|null) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(result);
-                        }
-                    });
-            });
-            const response = await promise;
-            assert.deepStrictEqual(response, expectedResponse);
-            assert((client.innerApiCalls.getRule as SinonStub)
-                .getCall(0).calledWith(request, expectedOptions /*, callback defined above */));
-        });
-
-        it('invokes getRule with error', async () => {
-            const client = new securitypoliciesModule.v1.SecurityPoliciesClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-        });
-            client.initialize();
-            const request = generateSampleMessage(new protos.google.cloud.compute.v1.GetRuleSecurityPolicyRequest());
-            request.project = '';
-            const expectedHeaderRequestParams = "project=";
-            const expectedOptions = {
-                otherArgs: {
-                    headers: {
-                        'x-goog-request-params': expectedHeaderRequestParams,
-                    },
-                },
-            };
-            const expectedError = new Error('expected');
-            client.innerApiCalls.getRule = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(client.getRule(request), expectedError);
-            assert((client.innerApiCalls.getRule as SinonStub)
-                .getCall(0).calledWith(request, expectedOptions, undefined));
-        });
+  describe('listPreconfiguredExpressionSets', () => {
+    it('invokes listPreconfiguredExpressionSets without error', async () => {
+      const client = new securitypoliciesModule.v1.SecurityPoliciesClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.ListPreconfiguredExpressionSetsSecurityPoliciesRequest()
+      );
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.compute.v1.SecurityPoliciesListPreconfiguredExpressionSetsResponse()
+      );
+      client.innerApiCalls.listPreconfiguredExpressionSets =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.listPreconfiguredExpressionSets(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.listPreconfiguredExpressionSets as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
     });
 
-    describe('insert', () => {
-        it('invokes insert without error', async () => {
-            const client = new securitypoliciesModule.v1.SecurityPoliciesClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-        });
-            client.initialize();
-            const request = generateSampleMessage(new protos.google.cloud.compute.v1.InsertSecurityPolicyRequest());
-            request.project = '';
-            const expectedHeaderRequestParams = "project=";
-            const expectedOptions = {
-                otherArgs: {
-                    headers: {
-                        'x-goog-request-params': expectedHeaderRequestParams,
-                    },
-                },
-            };
-            const expectedResponse = generateSampleMessage(new protos.google.cloud.compute.v1.Operation());
-            client.innerApiCalls.insert = stubSimpleCall(expectedResponse);
-            const [response] = await client.insert(request);
-            assert.deepStrictEqual(response, expectedResponse);
-            assert((client.innerApiCalls.insert as SinonStub)
-                .getCall(0).calledWith(request, expectedOptions, undefined));
-        });
-
-        it('invokes insert without error using callback', async () => {
-            const client = new securitypoliciesModule.v1.SecurityPoliciesClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-        });
-            client.initialize();
-            const request = generateSampleMessage(new protos.google.cloud.compute.v1.InsertSecurityPolicyRequest());
-            request.project = '';
-            const expectedHeaderRequestParams = "project=";
-            const expectedOptions = {
-                otherArgs: {
-                    headers: {
-                        'x-goog-request-params': expectedHeaderRequestParams,
-                    },
-                },
-            };
-            const expectedResponse = generateSampleMessage(new protos.google.cloud.compute.v1.Operation());
-            client.innerApiCalls.insert = stubSimpleCallWithCallback(expectedResponse);
-            const promise = new Promise((resolve, reject) => {
-                 client.insert(
-                    request,
-                    (err?: Error|null, result?: protos.google.cloud.compute.v1.IOperation|null) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(result);
-                        }
-                    });
-            });
-            const response = await promise;
-            assert.deepStrictEqual(response, expectedResponse);
-            assert((client.innerApiCalls.insert as SinonStub)
-                .getCall(0).calledWith(request, expectedOptions /*, callback defined above */));
-        });
-
-        it('invokes insert with error', async () => {
-            const client = new securitypoliciesModule.v1.SecurityPoliciesClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-        });
-            client.initialize();
-            const request = generateSampleMessage(new protos.google.cloud.compute.v1.InsertSecurityPolicyRequest());
-            request.project = '';
-            const expectedHeaderRequestParams = "project=";
-            const expectedOptions = {
-                otherArgs: {
-                    headers: {
-                        'x-goog-request-params': expectedHeaderRequestParams,
-                    },
-                },
-            };
-            const expectedError = new Error('expected');
-            client.innerApiCalls.insert = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(client.insert(request), expectedError);
-            assert((client.innerApiCalls.insert as SinonStub)
-                .getCall(0).calledWith(request, expectedOptions, undefined));
-        });
+    it('invokes listPreconfiguredExpressionSets without error using callback', async () => {
+      const client = new securitypoliciesModule.v1.SecurityPoliciesClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.ListPreconfiguredExpressionSetsSecurityPoliciesRequest()
+      );
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.compute.v1.SecurityPoliciesListPreconfiguredExpressionSetsResponse()
+      );
+      client.innerApiCalls.listPreconfiguredExpressionSets =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.listPreconfiguredExpressionSets(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.compute.v1.ISecurityPoliciesListPreconfiguredExpressionSetsResponse | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.listPreconfiguredExpressionSets as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
     });
 
-    describe('list', () => {
-        it('invokes list without error', async () => {
-            const client = new securitypoliciesModule.v1.SecurityPoliciesClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-        });
-            client.initialize();
-            const request = generateSampleMessage(new protos.google.cloud.compute.v1.ListSecurityPoliciesRequest());
-            request.project = '';
-            const expectedHeaderRequestParams = "project=";
-            const expectedOptions = {
-                otherArgs: {
-                    headers: {
-                        'x-goog-request-params': expectedHeaderRequestParams,
-                    },
-                },
-            };
-            const expectedResponse = generateSampleMessage(new protos.google.cloud.compute.v1.SecurityPolicyList());
-            client.innerApiCalls.list = stubSimpleCall(expectedResponse);
-            const [response] = await client.list(request);
-            assert.deepStrictEqual(response, expectedResponse);
-            assert((client.innerApiCalls.list as SinonStub)
-                .getCall(0).calledWith(request, expectedOptions, undefined));
-        });
+    it('invokes listPreconfiguredExpressionSets with error', async () => {
+      const client = new securitypoliciesModule.v1.SecurityPoliciesClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.ListPreconfiguredExpressionSetsSecurityPoliciesRequest()
+      );
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.listPreconfiguredExpressionSets = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.listPreconfiguredExpressionSets(request),
+        expectedError
+      );
+      assert(
+        (client.innerApiCalls.listPreconfiguredExpressionSets as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+  });
 
-        it('invokes list without error using callback', async () => {
-            const client = new securitypoliciesModule.v1.SecurityPoliciesClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-        });
-            client.initialize();
-            const request = generateSampleMessage(new protos.google.cloud.compute.v1.ListSecurityPoliciesRequest());
-            request.project = '';
-            const expectedHeaderRequestParams = "project=";
-            const expectedOptions = {
-                otherArgs: {
-                    headers: {
-                        'x-goog-request-params': expectedHeaderRequestParams,
-                    },
-                },
-            };
-            const expectedResponse = generateSampleMessage(new protos.google.cloud.compute.v1.SecurityPolicyList());
-            client.innerApiCalls.list = stubSimpleCallWithCallback(expectedResponse);
-            const promise = new Promise((resolve, reject) => {
-                 client.list(
-                    request,
-                    (err?: Error|null, result?: protos.google.cloud.compute.v1.ISecurityPolicyList|null) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(result);
-                        }
-                    });
-            });
-            const response = await promise;
-            assert.deepStrictEqual(response, expectedResponse);
-            assert((client.innerApiCalls.list as SinonStub)
-                .getCall(0).calledWith(request, expectedOptions /*, callback defined above */));
-        });
-
-        it('invokes list with error', async () => {
-            const client = new securitypoliciesModule.v1.SecurityPoliciesClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-        });
-            client.initialize();
-            const request = generateSampleMessage(new protos.google.cloud.compute.v1.ListSecurityPoliciesRequest());
-            request.project = '';
-            const expectedHeaderRequestParams = "project=";
-            const expectedOptions = {
-                otherArgs: {
-                    headers: {
-                        'x-goog-request-params': expectedHeaderRequestParams,
-                    },
-                },
-            };
-            const expectedError = new Error('expected');
-            client.innerApiCalls.list = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(client.list(request), expectedError);
-            assert((client.innerApiCalls.list as SinonStub)
-                .getCall(0).calledWith(request, expectedOptions, undefined));
-        });
+  describe('patch', () => {
+    it('invokes patch without error', async () => {
+      const client = new securitypoliciesModule.v1.SecurityPoliciesClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.PatchSecurityPolicyRequest()
+      );
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.compute.v1.Operation()
+      );
+      client.innerApiCalls.patch = stubSimpleCall(expectedResponse);
+      const [response] = await client.patch(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.patch as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
     });
 
-    describe('listPreconfiguredExpressionSets', () => {
-        it('invokes listPreconfiguredExpressionSets without error', async () => {
-            const client = new securitypoliciesModule.v1.SecurityPoliciesClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-        });
-            client.initialize();
-            const request = generateSampleMessage(new protos.google.cloud.compute.v1.ListPreconfiguredExpressionSetsSecurityPoliciesRequest());
-            request.project = '';
-            const expectedHeaderRequestParams = "project=";
-            const expectedOptions = {
-                otherArgs: {
-                    headers: {
-                        'x-goog-request-params': expectedHeaderRequestParams,
-                    },
-                },
-            };
-            const expectedResponse = generateSampleMessage(new protos.google.cloud.compute.v1.SecurityPoliciesListPreconfiguredExpressionSetsResponse());
-            client.innerApiCalls.listPreconfiguredExpressionSets = stubSimpleCall(expectedResponse);
-            const [response] = await client.listPreconfiguredExpressionSets(request);
-            assert.deepStrictEqual(response, expectedResponse);
-            assert((client.innerApiCalls.listPreconfiguredExpressionSets as SinonStub)
-                .getCall(0).calledWith(request, expectedOptions, undefined));
-        });
-
-        it('invokes listPreconfiguredExpressionSets without error using callback', async () => {
-            const client = new securitypoliciesModule.v1.SecurityPoliciesClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-        });
-            client.initialize();
-            const request = generateSampleMessage(new protos.google.cloud.compute.v1.ListPreconfiguredExpressionSetsSecurityPoliciesRequest());
-            request.project = '';
-            const expectedHeaderRequestParams = "project=";
-            const expectedOptions = {
-                otherArgs: {
-                    headers: {
-                        'x-goog-request-params': expectedHeaderRequestParams,
-                    },
-                },
-            };
-            const expectedResponse = generateSampleMessage(new protos.google.cloud.compute.v1.SecurityPoliciesListPreconfiguredExpressionSetsResponse());
-            client.innerApiCalls.listPreconfiguredExpressionSets = stubSimpleCallWithCallback(expectedResponse);
-            const promise = new Promise((resolve, reject) => {
-                 client.listPreconfiguredExpressionSets(
-                    request,
-                    (err?: Error|null, result?: protos.google.cloud.compute.v1.ISecurityPoliciesListPreconfiguredExpressionSetsResponse|null) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(result);
-                        }
-                    });
-            });
-            const response = await promise;
-            assert.deepStrictEqual(response, expectedResponse);
-            assert((client.innerApiCalls.listPreconfiguredExpressionSets as SinonStub)
-                .getCall(0).calledWith(request, expectedOptions /*, callback defined above */));
-        });
-
-        it('invokes listPreconfiguredExpressionSets with error', async () => {
-            const client = new securitypoliciesModule.v1.SecurityPoliciesClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-        });
-            client.initialize();
-            const request = generateSampleMessage(new protos.google.cloud.compute.v1.ListPreconfiguredExpressionSetsSecurityPoliciesRequest());
-            request.project = '';
-            const expectedHeaderRequestParams = "project=";
-            const expectedOptions = {
-                otherArgs: {
-                    headers: {
-                        'x-goog-request-params': expectedHeaderRequestParams,
-                    },
-                },
-            };
-            const expectedError = new Error('expected');
-            client.innerApiCalls.listPreconfiguredExpressionSets = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(client.listPreconfiguredExpressionSets(request), expectedError);
-            assert((client.innerApiCalls.listPreconfiguredExpressionSets as SinonStub)
-                .getCall(0).calledWith(request, expectedOptions, undefined));
-        });
+    it('invokes patch without error using callback', async () => {
+      const client = new securitypoliciesModule.v1.SecurityPoliciesClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.PatchSecurityPolicyRequest()
+      );
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.compute.v1.Operation()
+      );
+      client.innerApiCalls.patch = stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.patch(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.compute.v1.IOperation | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.patch as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
     });
 
-    describe('patch', () => {
-        it('invokes patch without error', async () => {
-            const client = new securitypoliciesModule.v1.SecurityPoliciesClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-        });
-            client.initialize();
-            const request = generateSampleMessage(new protos.google.cloud.compute.v1.PatchSecurityPolicyRequest());
-            request.project = '';
-            const expectedHeaderRequestParams = "project=";
-            const expectedOptions = {
-                otherArgs: {
-                    headers: {
-                        'x-goog-request-params': expectedHeaderRequestParams,
-                    },
-                },
-            };
-            const expectedResponse = generateSampleMessage(new protos.google.cloud.compute.v1.Operation());
-            client.innerApiCalls.patch = stubSimpleCall(expectedResponse);
-            const [response] = await client.patch(request);
-            assert.deepStrictEqual(response, expectedResponse);
-            assert((client.innerApiCalls.patch as SinonStub)
-                .getCall(0).calledWith(request, expectedOptions, undefined));
-        });
+    it('invokes patch with error', async () => {
+      const client = new securitypoliciesModule.v1.SecurityPoliciesClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.PatchSecurityPolicyRequest()
+      );
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.patch = stubSimpleCall(undefined, expectedError);
+      await assert.rejects(client.patch(request), expectedError);
+      assert(
+        (client.innerApiCalls.patch as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+  });
 
-        it('invokes patch without error using callback', async () => {
-            const client = new securitypoliciesModule.v1.SecurityPoliciesClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-        });
-            client.initialize();
-            const request = generateSampleMessage(new protos.google.cloud.compute.v1.PatchSecurityPolicyRequest());
-            request.project = '';
-            const expectedHeaderRequestParams = "project=";
-            const expectedOptions = {
-                otherArgs: {
-                    headers: {
-                        'x-goog-request-params': expectedHeaderRequestParams,
-                    },
-                },
-            };
-            const expectedResponse = generateSampleMessage(new protos.google.cloud.compute.v1.Operation());
-            client.innerApiCalls.patch = stubSimpleCallWithCallback(expectedResponse);
-            const promise = new Promise((resolve, reject) => {
-                 client.patch(
-                    request,
-                    (err?: Error|null, result?: protos.google.cloud.compute.v1.IOperation|null) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(result);
-                        }
-                    });
-            });
-            const response = await promise;
-            assert.deepStrictEqual(response, expectedResponse);
-            assert((client.innerApiCalls.patch as SinonStub)
-                .getCall(0).calledWith(request, expectedOptions /*, callback defined above */));
-        });
-
-        it('invokes patch with error', async () => {
-            const client = new securitypoliciesModule.v1.SecurityPoliciesClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-        });
-            client.initialize();
-            const request = generateSampleMessage(new protos.google.cloud.compute.v1.PatchSecurityPolicyRequest());
-            request.project = '';
-            const expectedHeaderRequestParams = "project=";
-            const expectedOptions = {
-                otherArgs: {
-                    headers: {
-                        'x-goog-request-params': expectedHeaderRequestParams,
-                    },
-                },
-            };
-            const expectedError = new Error('expected');
-            client.innerApiCalls.patch = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(client.patch(request), expectedError);
-            assert((client.innerApiCalls.patch as SinonStub)
-                .getCall(0).calledWith(request, expectedOptions, undefined));
-        });
+  describe('patchRule', () => {
+    it('invokes patchRule without error', async () => {
+      const client = new securitypoliciesModule.v1.SecurityPoliciesClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.PatchRuleSecurityPolicyRequest()
+      );
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.compute.v1.Operation()
+      );
+      client.innerApiCalls.patchRule = stubSimpleCall(expectedResponse);
+      const [response] = await client.patchRule(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.patchRule as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
     });
 
-    describe('patchRule', () => {
-        it('invokes patchRule without error', async () => {
-            const client = new securitypoliciesModule.v1.SecurityPoliciesClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-        });
-            client.initialize();
-            const request = generateSampleMessage(new protos.google.cloud.compute.v1.PatchRuleSecurityPolicyRequest());
-            request.project = '';
-            const expectedHeaderRequestParams = "project=";
-            const expectedOptions = {
-                otherArgs: {
-                    headers: {
-                        'x-goog-request-params': expectedHeaderRequestParams,
-                    },
-                },
-            };
-            const expectedResponse = generateSampleMessage(new protos.google.cloud.compute.v1.Operation());
-            client.innerApiCalls.patchRule = stubSimpleCall(expectedResponse);
-            const [response] = await client.patchRule(request);
-            assert.deepStrictEqual(response, expectedResponse);
-            assert((client.innerApiCalls.patchRule as SinonStub)
-                .getCall(0).calledWith(request, expectedOptions, undefined));
-        });
-
-        it('invokes patchRule without error using callback', async () => {
-            const client = new securitypoliciesModule.v1.SecurityPoliciesClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-        });
-            client.initialize();
-            const request = generateSampleMessage(new protos.google.cloud.compute.v1.PatchRuleSecurityPolicyRequest());
-            request.project = '';
-            const expectedHeaderRequestParams = "project=";
-            const expectedOptions = {
-                otherArgs: {
-                    headers: {
-                        'x-goog-request-params': expectedHeaderRequestParams,
-                    },
-                },
-            };
-            const expectedResponse = generateSampleMessage(new protos.google.cloud.compute.v1.Operation());
-            client.innerApiCalls.patchRule = stubSimpleCallWithCallback(expectedResponse);
-            const promise = new Promise((resolve, reject) => {
-                 client.patchRule(
-                    request,
-                    (err?: Error|null, result?: protos.google.cloud.compute.v1.IOperation|null) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(result);
-                        }
-                    });
-            });
-            const response = await promise;
-            assert.deepStrictEqual(response, expectedResponse);
-            assert((client.innerApiCalls.patchRule as SinonStub)
-                .getCall(0).calledWith(request, expectedOptions /*, callback defined above */));
-        });
-
-        it('invokes patchRule with error', async () => {
-            const client = new securitypoliciesModule.v1.SecurityPoliciesClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-        });
-            client.initialize();
-            const request = generateSampleMessage(new protos.google.cloud.compute.v1.PatchRuleSecurityPolicyRequest());
-            request.project = '';
-            const expectedHeaderRequestParams = "project=";
-            const expectedOptions = {
-                otherArgs: {
-                    headers: {
-                        'x-goog-request-params': expectedHeaderRequestParams,
-                    },
-                },
-            };
-            const expectedError = new Error('expected');
-            client.innerApiCalls.patchRule = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(client.patchRule(request), expectedError);
-            assert((client.innerApiCalls.patchRule as SinonStub)
-                .getCall(0).calledWith(request, expectedOptions, undefined));
-        });
+    it('invokes patchRule without error using callback', async () => {
+      const client = new securitypoliciesModule.v1.SecurityPoliciesClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.PatchRuleSecurityPolicyRequest()
+      );
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.compute.v1.Operation()
+      );
+      client.innerApiCalls.patchRule =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.patchRule(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.compute.v1.IOperation | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.patchRule as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
     });
 
-    describe('removeRule', () => {
-        it('invokes removeRule without error', async () => {
-            const client = new securitypoliciesModule.v1.SecurityPoliciesClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-        });
-            client.initialize();
-            const request = generateSampleMessage(new protos.google.cloud.compute.v1.RemoveRuleSecurityPolicyRequest());
-            request.project = '';
-            const expectedHeaderRequestParams = "project=";
-            const expectedOptions = {
-                otherArgs: {
-                    headers: {
-                        'x-goog-request-params': expectedHeaderRequestParams,
-                    },
-                },
-            };
-            const expectedResponse = generateSampleMessage(new protos.google.cloud.compute.v1.Operation());
-            client.innerApiCalls.removeRule = stubSimpleCall(expectedResponse);
-            const [response] = await client.removeRule(request);
-            assert.deepStrictEqual(response, expectedResponse);
-            assert((client.innerApiCalls.removeRule as SinonStub)
-                .getCall(0).calledWith(request, expectedOptions, undefined));
-        });
-
-        it('invokes removeRule without error using callback', async () => {
-            const client = new securitypoliciesModule.v1.SecurityPoliciesClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-        });
-            client.initialize();
-            const request = generateSampleMessage(new protos.google.cloud.compute.v1.RemoveRuleSecurityPolicyRequest());
-            request.project = '';
-            const expectedHeaderRequestParams = "project=";
-            const expectedOptions = {
-                otherArgs: {
-                    headers: {
-                        'x-goog-request-params': expectedHeaderRequestParams,
-                    },
-                },
-            };
-            const expectedResponse = generateSampleMessage(new protos.google.cloud.compute.v1.Operation());
-            client.innerApiCalls.removeRule = stubSimpleCallWithCallback(expectedResponse);
-            const promise = new Promise((resolve, reject) => {
-                 client.removeRule(
-                    request,
-                    (err?: Error|null, result?: protos.google.cloud.compute.v1.IOperation|null) => {
-                        if (err) {
-                            reject(err);
-                        } else {
-                            resolve(result);
-                        }
-                    });
-            });
-            const response = await promise;
-            assert.deepStrictEqual(response, expectedResponse);
-            assert((client.innerApiCalls.removeRule as SinonStub)
-                .getCall(0).calledWith(request, expectedOptions /*, callback defined above */));
-        });
-
-        it('invokes removeRule with error', async () => {
-            const client = new securitypoliciesModule.v1.SecurityPoliciesClient({
-              credentials: {client_email: 'bogus', private_key: 'bogus'},
-              projectId: 'bogus',
-        });
-            client.initialize();
-            const request = generateSampleMessage(new protos.google.cloud.compute.v1.RemoveRuleSecurityPolicyRequest());
-            request.project = '';
-            const expectedHeaderRequestParams = "project=";
-            const expectedOptions = {
-                otherArgs: {
-                    headers: {
-                        'x-goog-request-params': expectedHeaderRequestParams,
-                    },
-                },
-            };
-            const expectedError = new Error('expected');
-            client.innerApiCalls.removeRule = stubSimpleCall(undefined, expectedError);
-            await assert.rejects(client.removeRule(request), expectedError);
-            assert((client.innerApiCalls.removeRule as SinonStub)
-                .getCall(0).calledWith(request, expectedOptions, undefined));
-        });
+    it('invokes patchRule with error', async () => {
+      const client = new securitypoliciesModule.v1.SecurityPoliciesClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.PatchRuleSecurityPolicyRequest()
+      );
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.patchRule = stubSimpleCall(undefined, expectedError);
+      await assert.rejects(client.patchRule(request), expectedError);
+      assert(
+        (client.innerApiCalls.patchRule as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
     });
+  });
+
+  describe('removeRule', () => {
+    it('invokes removeRule without error', async () => {
+      const client = new securitypoliciesModule.v1.SecurityPoliciesClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.RemoveRuleSecurityPolicyRequest()
+      );
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.compute.v1.Operation()
+      );
+      client.innerApiCalls.removeRule = stubSimpleCall(expectedResponse);
+      const [response] = await client.removeRule(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.removeRule as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes removeRule without error using callback', async () => {
+      const client = new securitypoliciesModule.v1.SecurityPoliciesClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.RemoveRuleSecurityPolicyRequest()
+      );
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.compute.v1.Operation()
+      );
+      client.innerApiCalls.removeRule =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.removeRule(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.compute.v1.IOperation | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.removeRule as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes removeRule with error', async () => {
+      const client = new securitypoliciesModule.v1.SecurityPoliciesClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.RemoveRuleSecurityPolicyRequest()
+      );
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.removeRule = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.removeRule(request), expectedError);
+      assert(
+        (client.innerApiCalls.removeRule as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+  });
 });

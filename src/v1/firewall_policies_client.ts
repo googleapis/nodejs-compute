@@ -92,11 +92,16 @@ export class FirewallPoliciesClient {
   constructor(opts?: ClientOptions) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof FirewallPoliciesClient;
-    const servicePath = opts?.servicePath || opts?.apiEndpoint || staticMembers.servicePath;
-    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
+    const servicePath =
+      opts?.servicePath || opts?.apiEndpoint || staticMembers.servicePath;
+    this._providedCustomServicePath = !!(
+      opts?.servicePath || opts?.apiEndpoint
+    );
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    const fallback =
+      opts?.fallback ??
+      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // If scopes are unset in options and we're connecting to a non-default endpoint, set scopes just in case.
@@ -114,7 +119,7 @@ export class FirewallPoliciesClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
+    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
 
     // Set the default scopes in auth client if needed.
     if (servicePath === staticMembers.servicePath) {
@@ -122,10 +127,7 @@ export class FirewallPoliciesClient {
     }
 
     // Determine the client header string.
-    const clientHeader = [
-      `gax/${this._gaxModule.version}`,
-      `gapic/${version}`,
-    ];
+    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
     if (typeof process !== 'undefined' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -133,7 +135,7 @@ export class FirewallPoliciesClient {
     }
     if (!opts.fallback) {
       clientHeader.push(`grpc/${this._gaxGrpc.grpcVersion}`);
-    } else if (opts.fallback === 'rest' ) {
+    } else if (opts.fallback === 'rest') {
       clientHeader.push(`rest/${this._gaxGrpc.grpcVersion}`);
     }
     if (opts.libName && opts.libVersion) {
@@ -144,8 +146,11 @@ export class FirewallPoliciesClient {
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-        'google.cloud.compute.v1.FirewallPolicies', gapicConfig as gax.ClientConfig,
-        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
+      'google.cloud.compute.v1.FirewallPolicies',
+      gapicConfig as gax.ClientConfig,
+      opts.clientConfig || {},
+      {'x-goog-api-client': clientHeader.join(' ')}
+    );
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -176,31 +181,54 @@ export class FirewallPoliciesClient {
     // Put together the "service stub" for
     // google.cloud.compute.v1.FirewallPolicies.
     this.firewallPoliciesStub = this._gaxGrpc.createStub(
-        this._opts.fallback ?
-          (this._protos as protobuf.Root).lookupService('google.cloud.compute.v1.FirewallPolicies') :
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      this._opts.fallback
+        ? (this._protos as protobuf.Root).lookupService(
+            'google.cloud.compute.v1.FirewallPolicies'
+          )
+        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.cloud.compute.v1.FirewallPolicies,
-        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
+      this._opts,
+      this._providedCustomServicePath
+    ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const firewallPoliciesStubMethods =
-        ['addAssociation', 'addRule', 'cloneRules', 'delete', 'get', 'getAssociation', 'getIamPolicy', 'getRule', 'insert', 'list', 'listAssociations', 'move', 'patch', 'patchRule', 'removeAssociation', 'removeRule', 'setIamPolicy', 'testIamPermissions'];
+    const firewallPoliciesStubMethods = [
+      'addAssociation',
+      'addRule',
+      'cloneRules',
+      'delete',
+      'get',
+      'getAssociation',
+      'getIamPolicy',
+      'getRule',
+      'insert',
+      'list',
+      'listAssociations',
+      'move',
+      'patch',
+      'patchRule',
+      'removeAssociation',
+      'removeRule',
+      'setIamPolicy',
+      'testIamPermissions',
+    ];
     for (const methodName of firewallPoliciesStubMethods) {
       const callPromise = this.firewallPoliciesStub.then(
-        stub => (...args: Array<{}>) => {
-          if (this._terminated) {
-            return Promise.reject('The client has already been closed.');
-          }
-          const func = stub[methodName];
-          return func.apply(stub, args);
-        },
-        (err: Error|null|undefined) => () => {
+        stub =>
+          (...args: Array<{}>) => {
+            if (this._terminated) {
+              return Promise.reject('The client has already been closed.');
+            }
+            const func = stub[methodName];
+            return func.apply(stub, args);
+          },
+        (err: Error | null | undefined) => () => {
           throw err;
-        });
+        }
+      );
 
-      const descriptor =
-        undefined;
+      const descriptor = undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
@@ -246,7 +274,7 @@ export class FirewallPoliciesClient {
   static get scopes() {
     return [
       'https://www.googleapis.com/auth/compute',
-      'https://www.googleapis.com/auth/cloud-platform'
+      'https://www.googleapis.com/auth/cloud-platform',
     ];
   }
 
@@ -256,8 +284,9 @@ export class FirewallPoliciesClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(callback?: Callback<string, undefined, undefined>):
-      Promise<string>|void {
+  getProjectId(
+    callback?: Callback<string, undefined, undefined>
+  ): Promise<string> | void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -269,677 +298,882 @@ export class FirewallPoliciesClient {
   // -- Service calls --
   // -------------------
   addAssociation(
-      request?: protos.google.cloud.compute.v1.IAddAssociationFirewallPolicyRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.compute.v1.IOperation,
-        protos.google.cloud.compute.v1.IAddAssociationFirewallPolicyRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.compute.v1.IAddAssociationFirewallPolicyRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.compute.v1.IOperation,
+      (
+        | protos.google.cloud.compute.v1.IAddAssociationFirewallPolicyRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
   addAssociation(
-      request: protos.google.cloud.compute.v1.IAddAssociationFirewallPolicyRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IAddAssociationFirewallPolicyRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.compute.v1.IAddAssociationFirewallPolicyRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.compute.v1.IOperation,
+      | protos.google.cloud.compute.v1.IAddAssociationFirewallPolicyRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
   addAssociation(
-      request: protos.google.cloud.compute.v1.IAddAssociationFirewallPolicyRequest,
-      callback: Callback<
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IAddAssociationFirewallPolicyRequest|null|undefined,
-          {}|null|undefined>): void;
-/**
- * Inserts an association for the specified firewall policy.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.firewallPolicy
- *   Name of the firewall policy to update.
- * @param {google.cloud.compute.v1.FirewallPolicyAssociation} request.firewallPolicyAssociationResource
- *   The body resource for this request
- * @param {boolean} request.replaceExistingAssociation
- *   Indicates whether or not to replace it if an association of the attachment already exists. This is false by default, in which case an error will be returned if an association already exists.
- * @param {string} request.requestId
- *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
- *
- *   For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
- *
- *   The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing [Operation]{@link google.cloud.compute.v1.Operation}.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
- *   for more details and examples.
- * @example
- * const [response] = await client.addAssociation(request);
- */
+    request: protos.google.cloud.compute.v1.IAddAssociationFirewallPolicyRequest,
+    callback: Callback<
+      protos.google.cloud.compute.v1.IOperation,
+      | protos.google.cloud.compute.v1.IAddAssociationFirewallPolicyRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  /**
+   * Inserts an association for the specified firewall policy.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.firewallPolicy
+   *   Name of the firewall policy to update.
+   * @param {google.cloud.compute.v1.FirewallPolicyAssociation} request.firewallPolicyAssociationResource
+   *   The body resource for this request
+   * @param {boolean} request.replaceExistingAssociation
+   *   Indicates whether or not to replace it if an association of the attachment already exists. This is false by default, in which case an error will be returned if an association already exists.
+   * @param {string} request.requestId
+   *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
+   *
+   *   For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Operation]{@link google.cloud.compute.v1.Operation}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example
+   * const [response] = await client.addAssociation(request);
+   */
   addAssociation(
-      request?: protos.google.cloud.compute.v1.IAddAssociationFirewallPolicyRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.compute.v1.IAddAssociationFirewallPolicyRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IAddAssociationFirewallPolicyRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IAddAssociationFirewallPolicyRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.compute.v1.IOperation,
-        protos.google.cloud.compute.v1.IAddAssociationFirewallPolicyRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.compute.v1.IAddAssociationFirewallPolicyRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.compute.v1.IOperation,
+      | protos.google.cloud.compute.v1.IAddAssociationFirewallPolicyRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.compute.v1.IOperation,
+      (
+        | protos.google.cloud.compute.v1.IAddAssociationFirewallPolicyRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      'firewall_policy': request.firewallPolicy || '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        firewall_policy: request.firewallPolicy || '',
+      });
     this.initialize();
     return this.innerApiCalls.addAssociation(request, options, callback);
   }
   addRule(
-      request?: protos.google.cloud.compute.v1.IAddRuleFirewallPolicyRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.compute.v1.IOperation,
-        protos.google.cloud.compute.v1.IAddRuleFirewallPolicyRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.compute.v1.IAddRuleFirewallPolicyRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.compute.v1.IOperation,
+      protos.google.cloud.compute.v1.IAddRuleFirewallPolicyRequest | undefined,
+      {} | undefined
+    ]
+  >;
   addRule(
-      request: protos.google.cloud.compute.v1.IAddRuleFirewallPolicyRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IAddRuleFirewallPolicyRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.compute.v1.IAddRuleFirewallPolicyRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.compute.v1.IOperation,
+      | protos.google.cloud.compute.v1.IAddRuleFirewallPolicyRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
   addRule(
-      request: protos.google.cloud.compute.v1.IAddRuleFirewallPolicyRequest,
-      callback: Callback<
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IAddRuleFirewallPolicyRequest|null|undefined,
-          {}|null|undefined>): void;
-/**
- * Inserts a rule into a firewall policy.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.firewallPolicy
- *   Name of the firewall policy to update.
- * @param {google.cloud.compute.v1.FirewallPolicyRule} request.firewallPolicyRuleResource
- *   The body resource for this request
- * @param {string} request.requestId
- *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
- *
- *   For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
- *
- *   The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing [Operation]{@link google.cloud.compute.v1.Operation}.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
- *   for more details and examples.
- * @example
- * const [response] = await client.addRule(request);
- */
+    request: protos.google.cloud.compute.v1.IAddRuleFirewallPolicyRequest,
+    callback: Callback<
+      protos.google.cloud.compute.v1.IOperation,
+      | protos.google.cloud.compute.v1.IAddRuleFirewallPolicyRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  /**
+   * Inserts a rule into a firewall policy.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.firewallPolicy
+   *   Name of the firewall policy to update.
+   * @param {google.cloud.compute.v1.FirewallPolicyRule} request.firewallPolicyRuleResource
+   *   The body resource for this request
+   * @param {string} request.requestId
+   *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
+   *
+   *   For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Operation]{@link google.cloud.compute.v1.Operation}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example
+   * const [response] = await client.addRule(request);
+   */
   addRule(
-      request?: protos.google.cloud.compute.v1.IAddRuleFirewallPolicyRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.compute.v1.IAddRuleFirewallPolicyRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IAddRuleFirewallPolicyRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IAddRuleFirewallPolicyRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.compute.v1.IOperation,
-        protos.google.cloud.compute.v1.IAddRuleFirewallPolicyRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.compute.v1.IAddRuleFirewallPolicyRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.compute.v1.IOperation,
+      | protos.google.cloud.compute.v1.IAddRuleFirewallPolicyRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.compute.v1.IOperation,
+      protos.google.cloud.compute.v1.IAddRuleFirewallPolicyRequest | undefined,
+      {} | undefined
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      'firewall_policy': request.firewallPolicy || '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        firewall_policy: request.firewallPolicy || '',
+      });
     this.initialize();
     return this.innerApiCalls.addRule(request, options, callback);
   }
   cloneRules(
-      request?: protos.google.cloud.compute.v1.ICloneRulesFirewallPolicyRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.compute.v1.IOperation,
-        protos.google.cloud.compute.v1.ICloneRulesFirewallPolicyRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.compute.v1.ICloneRulesFirewallPolicyRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.compute.v1.IOperation,
+      (
+        | protos.google.cloud.compute.v1.ICloneRulesFirewallPolicyRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
   cloneRules(
-      request: protos.google.cloud.compute.v1.ICloneRulesFirewallPolicyRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.ICloneRulesFirewallPolicyRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.compute.v1.ICloneRulesFirewallPolicyRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.compute.v1.IOperation,
+      | protos.google.cloud.compute.v1.ICloneRulesFirewallPolicyRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
   cloneRules(
-      request: protos.google.cloud.compute.v1.ICloneRulesFirewallPolicyRequest,
-      callback: Callback<
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.ICloneRulesFirewallPolicyRequest|null|undefined,
-          {}|null|undefined>): void;
-/**
- * Copies rules to the specified firewall policy.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.firewallPolicy
- *   Name of the firewall policy to update.
- * @param {string} request.requestId
- *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
- *
- *   For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
- *
- *   The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
- * @param {string} request.sourceFirewallPolicy
- *   The firewall policy from which to copy rules.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing [Operation]{@link google.cloud.compute.v1.Operation}.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
- *   for more details and examples.
- * @example
- * const [response] = await client.cloneRules(request);
- */
+    request: protos.google.cloud.compute.v1.ICloneRulesFirewallPolicyRequest,
+    callback: Callback<
+      protos.google.cloud.compute.v1.IOperation,
+      | protos.google.cloud.compute.v1.ICloneRulesFirewallPolicyRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  /**
+   * Copies rules to the specified firewall policy.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.firewallPolicy
+   *   Name of the firewall policy to update.
+   * @param {string} request.requestId
+   *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
+   *
+   *   For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+   * @param {string} request.sourceFirewallPolicy
+   *   The firewall policy from which to copy rules.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Operation]{@link google.cloud.compute.v1.Operation}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example
+   * const [response] = await client.cloneRules(request);
+   */
   cloneRules(
-      request?: protos.google.cloud.compute.v1.ICloneRulesFirewallPolicyRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.compute.v1.ICloneRulesFirewallPolicyRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.ICloneRulesFirewallPolicyRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.ICloneRulesFirewallPolicyRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.compute.v1.IOperation,
-        protos.google.cloud.compute.v1.ICloneRulesFirewallPolicyRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.compute.v1.ICloneRulesFirewallPolicyRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.compute.v1.IOperation,
+      | protos.google.cloud.compute.v1.ICloneRulesFirewallPolicyRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.compute.v1.IOperation,
+      (
+        | protos.google.cloud.compute.v1.ICloneRulesFirewallPolicyRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      'firewall_policy': request.firewallPolicy || '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        firewall_policy: request.firewallPolicy || '',
+      });
     this.initialize();
     return this.innerApiCalls.cloneRules(request, options, callback);
   }
   delete(
-      request?: protos.google.cloud.compute.v1.IDeleteFirewallPolicyRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.compute.v1.IOperation,
-        protos.google.cloud.compute.v1.IDeleteFirewallPolicyRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.compute.v1.IDeleteFirewallPolicyRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.compute.v1.IOperation,
+      protos.google.cloud.compute.v1.IDeleteFirewallPolicyRequest | undefined,
+      {} | undefined
+    ]
+  >;
   delete(
-      request: protos.google.cloud.compute.v1.IDeleteFirewallPolicyRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IDeleteFirewallPolicyRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.compute.v1.IDeleteFirewallPolicyRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.compute.v1.IOperation,
+      | protos.google.cloud.compute.v1.IDeleteFirewallPolicyRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
   delete(
-      request: protos.google.cloud.compute.v1.IDeleteFirewallPolicyRequest,
-      callback: Callback<
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IDeleteFirewallPolicyRequest|null|undefined,
-          {}|null|undefined>): void;
-/**
- * Deletes the specified policy.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.firewallPolicy
- *   Name of the firewall policy to delete.
- * @param {string} request.requestId
- *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
- *
- *   For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
- *
- *   The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing [Operation]{@link google.cloud.compute.v1.Operation}.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
- *   for more details and examples.
- * @example
- * const [response] = await client.delete(request);
- */
+    request: protos.google.cloud.compute.v1.IDeleteFirewallPolicyRequest,
+    callback: Callback<
+      protos.google.cloud.compute.v1.IOperation,
+      | protos.google.cloud.compute.v1.IDeleteFirewallPolicyRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  /**
+   * Deletes the specified policy.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.firewallPolicy
+   *   Name of the firewall policy to delete.
+   * @param {string} request.requestId
+   *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
+   *
+   *   For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Operation]{@link google.cloud.compute.v1.Operation}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example
+   * const [response] = await client.delete(request);
+   */
   delete(
-      request?: protos.google.cloud.compute.v1.IDeleteFirewallPolicyRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.compute.v1.IDeleteFirewallPolicyRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IDeleteFirewallPolicyRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IDeleteFirewallPolicyRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.compute.v1.IOperation,
-        protos.google.cloud.compute.v1.IDeleteFirewallPolicyRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.compute.v1.IDeleteFirewallPolicyRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.compute.v1.IOperation,
+      | protos.google.cloud.compute.v1.IDeleteFirewallPolicyRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.compute.v1.IOperation,
+      protos.google.cloud.compute.v1.IDeleteFirewallPolicyRequest | undefined,
+      {} | undefined
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      'firewall_policy': request.firewallPolicy || '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        firewall_policy: request.firewallPolicy || '',
+      });
     this.initialize();
     return this.innerApiCalls.delete(request, options, callback);
   }
   get(
-      request?: protos.google.cloud.compute.v1.IGetFirewallPolicyRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.compute.v1.IFirewallPolicy,
-        protos.google.cloud.compute.v1.IGetFirewallPolicyRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.compute.v1.IGetFirewallPolicyRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.compute.v1.IFirewallPolicy,
+      protos.google.cloud.compute.v1.IGetFirewallPolicyRequest | undefined,
+      {} | undefined
+    ]
+  >;
   get(
-      request: protos.google.cloud.compute.v1.IGetFirewallPolicyRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.compute.v1.IFirewallPolicy,
-          protos.google.cloud.compute.v1.IGetFirewallPolicyRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.compute.v1.IGetFirewallPolicyRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.compute.v1.IFirewallPolicy,
+      | protos.google.cloud.compute.v1.IGetFirewallPolicyRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
   get(
-      request: protos.google.cloud.compute.v1.IGetFirewallPolicyRequest,
-      callback: Callback<
-          protos.google.cloud.compute.v1.IFirewallPolicy,
-          protos.google.cloud.compute.v1.IGetFirewallPolicyRequest|null|undefined,
-          {}|null|undefined>): void;
-/**
- * Returns the specified firewall policy.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.firewallPolicy
- *   Name of the firewall policy to get.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing [FirewallPolicy]{@link google.cloud.compute.v1.FirewallPolicy}.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
- *   for more details and examples.
- * @example
- * const [response] = await client.get(request);
- */
+    request: protos.google.cloud.compute.v1.IGetFirewallPolicyRequest,
+    callback: Callback<
+      protos.google.cloud.compute.v1.IFirewallPolicy,
+      | protos.google.cloud.compute.v1.IGetFirewallPolicyRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  /**
+   * Returns the specified firewall policy.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.firewallPolicy
+   *   Name of the firewall policy to get.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [FirewallPolicy]{@link google.cloud.compute.v1.FirewallPolicy}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example
+   * const [response] = await client.get(request);
+   */
   get(
-      request?: protos.google.cloud.compute.v1.IGetFirewallPolicyRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.compute.v1.IGetFirewallPolicyRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.compute.v1.IFirewallPolicy,
-          protos.google.cloud.compute.v1.IGetFirewallPolicyRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.compute.v1.IFirewallPolicy,
-          protos.google.cloud.compute.v1.IGetFirewallPolicyRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.compute.v1.IFirewallPolicy,
-        protos.google.cloud.compute.v1.IGetFirewallPolicyRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.compute.v1.IGetFirewallPolicyRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.compute.v1.IFirewallPolicy,
+      | protos.google.cloud.compute.v1.IGetFirewallPolicyRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.compute.v1.IFirewallPolicy,
+      protos.google.cloud.compute.v1.IGetFirewallPolicyRequest | undefined,
+      {} | undefined
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      'firewall_policy': request.firewallPolicy || '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        firewall_policy: request.firewallPolicy || '',
+      });
     this.initialize();
     return this.innerApiCalls.get(request, options, callback);
   }
   getAssociation(
-      request?: protos.google.cloud.compute.v1.IGetAssociationFirewallPolicyRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.compute.v1.IFirewallPolicyAssociation,
-        protos.google.cloud.compute.v1.IGetAssociationFirewallPolicyRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.compute.v1.IGetAssociationFirewallPolicyRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.compute.v1.IFirewallPolicyAssociation,
+      (
+        | protos.google.cloud.compute.v1.IGetAssociationFirewallPolicyRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
   getAssociation(
-      request: protos.google.cloud.compute.v1.IGetAssociationFirewallPolicyRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.compute.v1.IFirewallPolicyAssociation,
-          protos.google.cloud.compute.v1.IGetAssociationFirewallPolicyRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.compute.v1.IGetAssociationFirewallPolicyRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.compute.v1.IFirewallPolicyAssociation,
+      | protos.google.cloud.compute.v1.IGetAssociationFirewallPolicyRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
   getAssociation(
-      request: protos.google.cloud.compute.v1.IGetAssociationFirewallPolicyRequest,
-      callback: Callback<
-          protos.google.cloud.compute.v1.IFirewallPolicyAssociation,
-          protos.google.cloud.compute.v1.IGetAssociationFirewallPolicyRequest|null|undefined,
-          {}|null|undefined>): void;
-/**
- * Gets an association with the specified name.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.firewallPolicy
- *   Name of the firewall policy to which the queried rule belongs.
- * @param {string} request.name
- *   The name of the association to get from the firewall policy.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing [FirewallPolicyAssociation]{@link google.cloud.compute.v1.FirewallPolicyAssociation}.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
- *   for more details and examples.
- * @example
- * const [response] = await client.getAssociation(request);
- */
+    request: protos.google.cloud.compute.v1.IGetAssociationFirewallPolicyRequest,
+    callback: Callback<
+      protos.google.cloud.compute.v1.IFirewallPolicyAssociation,
+      | protos.google.cloud.compute.v1.IGetAssociationFirewallPolicyRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  /**
+   * Gets an association with the specified name.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.firewallPolicy
+   *   Name of the firewall policy to which the queried rule belongs.
+   * @param {string} request.name
+   *   The name of the association to get from the firewall policy.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [FirewallPolicyAssociation]{@link google.cloud.compute.v1.FirewallPolicyAssociation}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example
+   * const [response] = await client.getAssociation(request);
+   */
   getAssociation(
-      request?: protos.google.cloud.compute.v1.IGetAssociationFirewallPolicyRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.compute.v1.IGetAssociationFirewallPolicyRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.compute.v1.IFirewallPolicyAssociation,
-          protos.google.cloud.compute.v1.IGetAssociationFirewallPolicyRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.compute.v1.IFirewallPolicyAssociation,
-          protos.google.cloud.compute.v1.IGetAssociationFirewallPolicyRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.compute.v1.IFirewallPolicyAssociation,
-        protos.google.cloud.compute.v1.IGetAssociationFirewallPolicyRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.compute.v1.IGetAssociationFirewallPolicyRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.compute.v1.IFirewallPolicyAssociation,
+      | protos.google.cloud.compute.v1.IGetAssociationFirewallPolicyRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.compute.v1.IFirewallPolicyAssociation,
+      (
+        | protos.google.cloud.compute.v1.IGetAssociationFirewallPolicyRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      'firewall_policy': request.firewallPolicy || '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        firewall_policy: request.firewallPolicy || '',
+      });
     this.initialize();
     return this.innerApiCalls.getAssociation(request, options, callback);
   }
   getIamPolicy(
-      request?: protos.google.cloud.compute.v1.IGetIamPolicyFirewallPolicyRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.compute.v1.IPolicy,
-        protos.google.cloud.compute.v1.IGetIamPolicyFirewallPolicyRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.compute.v1.IGetIamPolicyFirewallPolicyRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.compute.v1.IPolicy,
+      (
+        | protos.google.cloud.compute.v1.IGetIamPolicyFirewallPolicyRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
   getIamPolicy(
-      request: protos.google.cloud.compute.v1.IGetIamPolicyFirewallPolicyRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.compute.v1.IPolicy,
-          protos.google.cloud.compute.v1.IGetIamPolicyFirewallPolicyRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.compute.v1.IGetIamPolicyFirewallPolicyRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.compute.v1.IPolicy,
+      | protos.google.cloud.compute.v1.IGetIamPolicyFirewallPolicyRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
   getIamPolicy(
-      request: protos.google.cloud.compute.v1.IGetIamPolicyFirewallPolicyRequest,
-      callback: Callback<
-          protos.google.cloud.compute.v1.IPolicy,
-          protos.google.cloud.compute.v1.IGetIamPolicyFirewallPolicyRequest|null|undefined,
-          {}|null|undefined>): void;
-/**
- * Gets the access control policy for a resource. May be empty if no such policy or resource exists.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {number} request.optionsRequestedPolicyVersion
- *   Requested IAM Policy version.
- * @param {string} request.resource
- *   Name or id of the resource for this request.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing [Policy]{@link google.cloud.compute.v1.Policy}.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
- *   for more details and examples.
- * @example
- * const [response] = await client.getIamPolicy(request);
- */
+    request: protos.google.cloud.compute.v1.IGetIamPolicyFirewallPolicyRequest,
+    callback: Callback<
+      protos.google.cloud.compute.v1.IPolicy,
+      | protos.google.cloud.compute.v1.IGetIamPolicyFirewallPolicyRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  /**
+   * Gets the access control policy for a resource. May be empty if no such policy or resource exists.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {number} request.optionsRequestedPolicyVersion
+   *   Requested IAM Policy version.
+   * @param {string} request.resource
+   *   Name or id of the resource for this request.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Policy]{@link google.cloud.compute.v1.Policy}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example
+   * const [response] = await client.getIamPolicy(request);
+   */
   getIamPolicy(
-      request?: protos.google.cloud.compute.v1.IGetIamPolicyFirewallPolicyRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.compute.v1.IGetIamPolicyFirewallPolicyRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.compute.v1.IPolicy,
-          protos.google.cloud.compute.v1.IGetIamPolicyFirewallPolicyRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.compute.v1.IPolicy,
-          protos.google.cloud.compute.v1.IGetIamPolicyFirewallPolicyRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.compute.v1.IPolicy,
-        protos.google.cloud.compute.v1.IGetIamPolicyFirewallPolicyRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.compute.v1.IGetIamPolicyFirewallPolicyRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.compute.v1.IPolicy,
+      | protos.google.cloud.compute.v1.IGetIamPolicyFirewallPolicyRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.compute.v1.IPolicy,
+      (
+        | protos.google.cloud.compute.v1.IGetIamPolicyFirewallPolicyRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      'resource': request.resource || '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        resource: request.resource || '',
+      });
     this.initialize();
     return this.innerApiCalls.getIamPolicy(request, options, callback);
   }
   getRule(
-      request?: protos.google.cloud.compute.v1.IGetRuleFirewallPolicyRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.compute.v1.IFirewallPolicyRule,
-        protos.google.cloud.compute.v1.IGetRuleFirewallPolicyRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.compute.v1.IGetRuleFirewallPolicyRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.compute.v1.IFirewallPolicyRule,
+      protos.google.cloud.compute.v1.IGetRuleFirewallPolicyRequest | undefined,
+      {} | undefined
+    ]
+  >;
   getRule(
-      request: protos.google.cloud.compute.v1.IGetRuleFirewallPolicyRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.compute.v1.IFirewallPolicyRule,
-          protos.google.cloud.compute.v1.IGetRuleFirewallPolicyRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.compute.v1.IGetRuleFirewallPolicyRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.compute.v1.IFirewallPolicyRule,
+      | protos.google.cloud.compute.v1.IGetRuleFirewallPolicyRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
   getRule(
-      request: protos.google.cloud.compute.v1.IGetRuleFirewallPolicyRequest,
-      callback: Callback<
-          protos.google.cloud.compute.v1.IFirewallPolicyRule,
-          protos.google.cloud.compute.v1.IGetRuleFirewallPolicyRequest|null|undefined,
-          {}|null|undefined>): void;
-/**
- * Gets a rule of the specified priority.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.firewallPolicy
- *   Name of the firewall policy to which the queried rule belongs.
- * @param {number} request.priority
- *   The priority of the rule to get from the firewall policy.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing [FirewallPolicyRule]{@link google.cloud.compute.v1.FirewallPolicyRule}.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
- *   for more details and examples.
- * @example
- * const [response] = await client.getRule(request);
- */
+    request: protos.google.cloud.compute.v1.IGetRuleFirewallPolicyRequest,
+    callback: Callback<
+      protos.google.cloud.compute.v1.IFirewallPolicyRule,
+      | protos.google.cloud.compute.v1.IGetRuleFirewallPolicyRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  /**
+   * Gets a rule of the specified priority.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.firewallPolicy
+   *   Name of the firewall policy to which the queried rule belongs.
+   * @param {number} request.priority
+   *   The priority of the rule to get from the firewall policy.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [FirewallPolicyRule]{@link google.cloud.compute.v1.FirewallPolicyRule}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example
+   * const [response] = await client.getRule(request);
+   */
   getRule(
-      request?: protos.google.cloud.compute.v1.IGetRuleFirewallPolicyRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.compute.v1.IGetRuleFirewallPolicyRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.compute.v1.IFirewallPolicyRule,
-          protos.google.cloud.compute.v1.IGetRuleFirewallPolicyRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.compute.v1.IFirewallPolicyRule,
-          protos.google.cloud.compute.v1.IGetRuleFirewallPolicyRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.compute.v1.IFirewallPolicyRule,
-        protos.google.cloud.compute.v1.IGetRuleFirewallPolicyRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.compute.v1.IGetRuleFirewallPolicyRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.compute.v1.IFirewallPolicyRule,
+      | protos.google.cloud.compute.v1.IGetRuleFirewallPolicyRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.compute.v1.IFirewallPolicyRule,
+      protos.google.cloud.compute.v1.IGetRuleFirewallPolicyRequest | undefined,
+      {} | undefined
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      'firewall_policy': request.firewallPolicy || '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        firewall_policy: request.firewallPolicy || '',
+      });
     this.initialize();
     return this.innerApiCalls.getRule(request, options, callback);
   }
   insert(
-      request?: protos.google.cloud.compute.v1.IInsertFirewallPolicyRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.compute.v1.IOperation,
-        protos.google.cloud.compute.v1.IInsertFirewallPolicyRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.compute.v1.IInsertFirewallPolicyRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.compute.v1.IOperation,
+      protos.google.cloud.compute.v1.IInsertFirewallPolicyRequest | undefined,
+      {} | undefined
+    ]
+  >;
   insert(
-      request: protos.google.cloud.compute.v1.IInsertFirewallPolicyRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IInsertFirewallPolicyRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.compute.v1.IInsertFirewallPolicyRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.compute.v1.IOperation,
+      | protos.google.cloud.compute.v1.IInsertFirewallPolicyRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
   insert(
-      request: protos.google.cloud.compute.v1.IInsertFirewallPolicyRequest,
-      callback: Callback<
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IInsertFirewallPolicyRequest|null|undefined,
-          {}|null|undefined>): void;
-/**
- * Creates a new policy in the specified project using the data included in the request.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {google.cloud.compute.v1.FirewallPolicy} request.firewallPolicyResource
- *   The body resource for this request
- * @param {string} request.parentId
- *   Parent ID for this request. The ID can be either be "folders/[FOLDER_ID]" if the parent is a folder or "organizations/[ORGANIZATION_ID]" if the parent is an organization.
- * @param {string} request.requestId
- *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
- *
- *   For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
- *
- *   The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing [Operation]{@link google.cloud.compute.v1.Operation}.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
- *   for more details and examples.
- * @example
- * const [response] = await client.insert(request);
- */
+    request: protos.google.cloud.compute.v1.IInsertFirewallPolicyRequest,
+    callback: Callback<
+      protos.google.cloud.compute.v1.IOperation,
+      | protos.google.cloud.compute.v1.IInsertFirewallPolicyRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  /**
+   * Creates a new policy in the specified project using the data included in the request.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.compute.v1.FirewallPolicy} request.firewallPolicyResource
+   *   The body resource for this request
+   * @param {string} request.parentId
+   *   Parent ID for this request. The ID can be either be "folders/[FOLDER_ID]" if the parent is a folder or "organizations/[ORGANIZATION_ID]" if the parent is an organization.
+   * @param {string} request.requestId
+   *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
+   *
+   *   For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Operation]{@link google.cloud.compute.v1.Operation}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example
+   * const [response] = await client.insert(request);
+   */
   insert(
-      request?: protos.google.cloud.compute.v1.IInsertFirewallPolicyRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.compute.v1.IInsertFirewallPolicyRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IInsertFirewallPolicyRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IInsertFirewallPolicyRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.compute.v1.IOperation,
-        protos.google.cloud.compute.v1.IInsertFirewallPolicyRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.compute.v1.IInsertFirewallPolicyRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.compute.v1.IOperation,
+      | protos.google.cloud.compute.v1.IInsertFirewallPolicyRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.compute.v1.IOperation,
+      protos.google.cloud.compute.v1.IInsertFirewallPolicyRequest | undefined,
+      {} | undefined
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
@@ -947,83 +1181,104 @@ export class FirewallPoliciesClient {
     return this.innerApiCalls.insert(request, options, callback);
   }
   list(
-      request?: protos.google.cloud.compute.v1.IListFirewallPoliciesRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.compute.v1.IFirewallPolicyList,
-        protos.google.cloud.compute.v1.IListFirewallPoliciesRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.compute.v1.IListFirewallPoliciesRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.compute.v1.IFirewallPolicyList,
+      protos.google.cloud.compute.v1.IListFirewallPoliciesRequest | undefined,
+      {} | undefined
+    ]
+  >;
   list(
-      request: protos.google.cloud.compute.v1.IListFirewallPoliciesRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.compute.v1.IFirewallPolicyList,
-          protos.google.cloud.compute.v1.IListFirewallPoliciesRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.compute.v1.IListFirewallPoliciesRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.compute.v1.IFirewallPolicyList,
+      | protos.google.cloud.compute.v1.IListFirewallPoliciesRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
   list(
-      request: protos.google.cloud.compute.v1.IListFirewallPoliciesRequest,
-      callback: Callback<
-          protos.google.cloud.compute.v1.IFirewallPolicyList,
-          protos.google.cloud.compute.v1.IListFirewallPoliciesRequest|null|undefined,
-          {}|null|undefined>): void;
-/**
- * Lists all the policies that have been configured for the specified project.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.filter
- *   A filter expression that filters resources listed in the response. The expression must specify the field name, a comparison operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The comparison operator must be either `=`, `!=`, `>`, or `<`.
- *
- *   For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`.
- *
- *   You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels.
- *
- *   To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ```
- * @param {number} request.maxResults
- *   The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)
- * @param {string} request.orderBy
- *   Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name.
- *
- *   You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first.
- *
- *   Currently, only sorting by `name` or `creationTimestamp desc` is supported.
- * @param {string} request.pageToken
- *   Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
- * @param {string} request.parentId
- *   Parent ID for this request.
- * @param {boolean} request.returnPartialSuccess
- *   Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing [FirewallPolicyList]{@link google.cloud.compute.v1.FirewallPolicyList}.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
- *   for more details and examples.
- * @example
- * const [response] = await client.list(request);
- */
+    request: protos.google.cloud.compute.v1.IListFirewallPoliciesRequest,
+    callback: Callback<
+      protos.google.cloud.compute.v1.IFirewallPolicyList,
+      | protos.google.cloud.compute.v1.IListFirewallPoliciesRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  /**
+   * Lists all the policies that have been configured for the specified project.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.filter
+   *   A filter expression that filters resources listed in the response. The expression must specify the field name, a comparison operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The comparison operator must be either `=`, `!=`, `>`, or `<`.
+   *
+   *   For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`.
+   *
+   *   You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels.
+   *
+   *   To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ```
+   * @param {number} request.maxResults
+   *   The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)
+   * @param {string} request.orderBy
+   *   Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name.
+   *
+   *   You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first.
+   *
+   *   Currently, only sorting by `name` or `creationTimestamp desc` is supported.
+   * @param {string} request.pageToken
+   *   Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
+   * @param {string} request.parentId
+   *   Parent ID for this request.
+   * @param {boolean} request.returnPartialSuccess
+   *   Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [FirewallPolicyList]{@link google.cloud.compute.v1.FirewallPolicyList}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example
+   * const [response] = await client.list(request);
+   */
   list(
-      request?: protos.google.cloud.compute.v1.IListFirewallPoliciesRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.compute.v1.IListFirewallPoliciesRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.compute.v1.IFirewallPolicyList,
-          protos.google.cloud.compute.v1.IListFirewallPoliciesRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.compute.v1.IFirewallPolicyList,
-          protos.google.cloud.compute.v1.IListFirewallPoliciesRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.compute.v1.IFirewallPolicyList,
-        protos.google.cloud.compute.v1.IListFirewallPoliciesRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.compute.v1.IListFirewallPoliciesRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.compute.v1.IFirewallPolicyList,
+      | protos.google.cloud.compute.v1.IListFirewallPoliciesRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.compute.v1.IFirewallPolicyList,
+      protos.google.cloud.compute.v1.IListFirewallPoliciesRequest | undefined,
+      {} | undefined
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
@@ -1031,63 +1286,90 @@ export class FirewallPoliciesClient {
     return this.innerApiCalls.list(request, options, callback);
   }
   listAssociations(
-      request?: protos.google.cloud.compute.v1.IListAssociationsFirewallPolicyRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.compute.v1.IFirewallPoliciesListAssociationsResponse,
-        protos.google.cloud.compute.v1.IListAssociationsFirewallPolicyRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.compute.v1.IListAssociationsFirewallPolicyRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.compute.v1.IFirewallPoliciesListAssociationsResponse,
+      (
+        | protos.google.cloud.compute.v1.IListAssociationsFirewallPolicyRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
   listAssociations(
-      request: protos.google.cloud.compute.v1.IListAssociationsFirewallPolicyRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.compute.v1.IFirewallPoliciesListAssociationsResponse,
-          protos.google.cloud.compute.v1.IListAssociationsFirewallPolicyRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.compute.v1.IListAssociationsFirewallPolicyRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.compute.v1.IFirewallPoliciesListAssociationsResponse,
+      | protos.google.cloud.compute.v1.IListAssociationsFirewallPolicyRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
   listAssociations(
-      request: protos.google.cloud.compute.v1.IListAssociationsFirewallPolicyRequest,
-      callback: Callback<
-          protos.google.cloud.compute.v1.IFirewallPoliciesListAssociationsResponse,
-          protos.google.cloud.compute.v1.IListAssociationsFirewallPolicyRequest|null|undefined,
-          {}|null|undefined>): void;
-/**
- * Lists associations of a specified target, i.e., organization or folder.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.targetResource
- *   The target resource to list associations. It is an organization, or a folder.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing [FirewallPoliciesListAssociationsResponse]{@link google.cloud.compute.v1.FirewallPoliciesListAssociationsResponse}.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
- *   for more details and examples.
- * @example
- * const [response] = await client.listAssociations(request);
- */
+    request: protos.google.cloud.compute.v1.IListAssociationsFirewallPolicyRequest,
+    callback: Callback<
+      protos.google.cloud.compute.v1.IFirewallPoliciesListAssociationsResponse,
+      | protos.google.cloud.compute.v1.IListAssociationsFirewallPolicyRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  /**
+   * Lists associations of a specified target, i.e., organization or folder.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.targetResource
+   *   The target resource to list associations. It is an organization, or a folder.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [FirewallPoliciesListAssociationsResponse]{@link google.cloud.compute.v1.FirewallPoliciesListAssociationsResponse}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example
+   * const [response] = await client.listAssociations(request);
+   */
   listAssociations(
-      request?: protos.google.cloud.compute.v1.IListAssociationsFirewallPolicyRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.compute.v1.IListAssociationsFirewallPolicyRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.compute.v1.IFirewallPoliciesListAssociationsResponse,
-          protos.google.cloud.compute.v1.IListAssociationsFirewallPolicyRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.compute.v1.IFirewallPoliciesListAssociationsResponse,
-          protos.google.cloud.compute.v1.IListAssociationsFirewallPolicyRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.compute.v1.IFirewallPoliciesListAssociationsResponse,
-        protos.google.cloud.compute.v1.IListAssociationsFirewallPolicyRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.compute.v1.IListAssociationsFirewallPolicyRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.compute.v1.IFirewallPoliciesListAssociationsResponse,
+      | protos.google.cloud.compute.v1.IListAssociationsFirewallPolicyRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.compute.v1.IFirewallPoliciesListAssociationsResponse,
+      (
+        | protos.google.cloud.compute.v1.IListAssociationsFirewallPolicyRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
@@ -1095,549 +1377,718 @@ export class FirewallPoliciesClient {
     return this.innerApiCalls.listAssociations(request, options, callback);
   }
   move(
-      request?: protos.google.cloud.compute.v1.IMoveFirewallPolicyRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.compute.v1.IOperation,
-        protos.google.cloud.compute.v1.IMoveFirewallPolicyRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.compute.v1.IMoveFirewallPolicyRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.compute.v1.IOperation,
+      protos.google.cloud.compute.v1.IMoveFirewallPolicyRequest | undefined,
+      {} | undefined
+    ]
+  >;
   move(
-      request: protos.google.cloud.compute.v1.IMoveFirewallPolicyRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IMoveFirewallPolicyRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.compute.v1.IMoveFirewallPolicyRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.compute.v1.IOperation,
+      | protos.google.cloud.compute.v1.IMoveFirewallPolicyRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
   move(
-      request: protos.google.cloud.compute.v1.IMoveFirewallPolicyRequest,
-      callback: Callback<
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IMoveFirewallPolicyRequest|null|undefined,
-          {}|null|undefined>): void;
-/**
- * Moves the specified firewall policy.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.firewallPolicy
- *   Name of the firewall policy to update.
- * @param {string} request.parentId
- *   The new parent of the firewall policy.
- * @param {string} request.requestId
- *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
- *
- *   For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
- *
- *   The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing [Operation]{@link google.cloud.compute.v1.Operation}.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
- *   for more details and examples.
- * @example
- * const [response] = await client.move(request);
- */
+    request: protos.google.cloud.compute.v1.IMoveFirewallPolicyRequest,
+    callback: Callback<
+      protos.google.cloud.compute.v1.IOperation,
+      | protos.google.cloud.compute.v1.IMoveFirewallPolicyRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  /**
+   * Moves the specified firewall policy.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.firewallPolicy
+   *   Name of the firewall policy to update.
+   * @param {string} request.parentId
+   *   The new parent of the firewall policy.
+   * @param {string} request.requestId
+   *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
+   *
+   *   For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Operation]{@link google.cloud.compute.v1.Operation}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example
+   * const [response] = await client.move(request);
+   */
   move(
-      request?: protos.google.cloud.compute.v1.IMoveFirewallPolicyRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.compute.v1.IMoveFirewallPolicyRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IMoveFirewallPolicyRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IMoveFirewallPolicyRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.compute.v1.IOperation,
-        protos.google.cloud.compute.v1.IMoveFirewallPolicyRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.compute.v1.IMoveFirewallPolicyRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.compute.v1.IOperation,
+      | protos.google.cloud.compute.v1.IMoveFirewallPolicyRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.compute.v1.IOperation,
+      protos.google.cloud.compute.v1.IMoveFirewallPolicyRequest | undefined,
+      {} | undefined
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      'firewall_policy': request.firewallPolicy || '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        firewall_policy: request.firewallPolicy || '',
+      });
     this.initialize();
     return this.innerApiCalls.move(request, options, callback);
   }
   patch(
-      request?: protos.google.cloud.compute.v1.IPatchFirewallPolicyRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.compute.v1.IOperation,
-        protos.google.cloud.compute.v1.IPatchFirewallPolicyRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.compute.v1.IPatchFirewallPolicyRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.compute.v1.IOperation,
+      protos.google.cloud.compute.v1.IPatchFirewallPolicyRequest | undefined,
+      {} | undefined
+    ]
+  >;
   patch(
-      request: protos.google.cloud.compute.v1.IPatchFirewallPolicyRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IPatchFirewallPolicyRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.compute.v1.IPatchFirewallPolicyRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.compute.v1.IOperation,
+      | protos.google.cloud.compute.v1.IPatchFirewallPolicyRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
   patch(
-      request: protos.google.cloud.compute.v1.IPatchFirewallPolicyRequest,
-      callback: Callback<
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IPatchFirewallPolicyRequest|null|undefined,
-          {}|null|undefined>): void;
-/**
- * Patches the specified policy with the data included in the request.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.firewallPolicy
- *   Name of the firewall policy to update.
- * @param {google.cloud.compute.v1.FirewallPolicy} request.firewallPolicyResource
- *   The body resource for this request
- * @param {string} request.requestId
- *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
- *
- *   For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
- *
- *   The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing [Operation]{@link google.cloud.compute.v1.Operation}.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
- *   for more details and examples.
- * @example
- * const [response] = await client.patch(request);
- */
+    request: protos.google.cloud.compute.v1.IPatchFirewallPolicyRequest,
+    callback: Callback<
+      protos.google.cloud.compute.v1.IOperation,
+      | protos.google.cloud.compute.v1.IPatchFirewallPolicyRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  /**
+   * Patches the specified policy with the data included in the request.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.firewallPolicy
+   *   Name of the firewall policy to update.
+   * @param {google.cloud.compute.v1.FirewallPolicy} request.firewallPolicyResource
+   *   The body resource for this request
+   * @param {string} request.requestId
+   *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
+   *
+   *   For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Operation]{@link google.cloud.compute.v1.Operation}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example
+   * const [response] = await client.patch(request);
+   */
   patch(
-      request?: protos.google.cloud.compute.v1.IPatchFirewallPolicyRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.compute.v1.IPatchFirewallPolicyRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IPatchFirewallPolicyRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IPatchFirewallPolicyRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.compute.v1.IOperation,
-        protos.google.cloud.compute.v1.IPatchFirewallPolicyRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.compute.v1.IPatchFirewallPolicyRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.compute.v1.IOperation,
+      | protos.google.cloud.compute.v1.IPatchFirewallPolicyRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.compute.v1.IOperation,
+      protos.google.cloud.compute.v1.IPatchFirewallPolicyRequest | undefined,
+      {} | undefined
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      'firewall_policy': request.firewallPolicy || '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        firewall_policy: request.firewallPolicy || '',
+      });
     this.initialize();
     return this.innerApiCalls.patch(request, options, callback);
   }
   patchRule(
-      request?: protos.google.cloud.compute.v1.IPatchRuleFirewallPolicyRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.compute.v1.IOperation,
-        protos.google.cloud.compute.v1.IPatchRuleFirewallPolicyRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.compute.v1.IPatchRuleFirewallPolicyRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.compute.v1.IOperation,
+      (
+        | protos.google.cloud.compute.v1.IPatchRuleFirewallPolicyRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
   patchRule(
-      request: protos.google.cloud.compute.v1.IPatchRuleFirewallPolicyRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IPatchRuleFirewallPolicyRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.compute.v1.IPatchRuleFirewallPolicyRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.compute.v1.IOperation,
+      | protos.google.cloud.compute.v1.IPatchRuleFirewallPolicyRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
   patchRule(
-      request: protos.google.cloud.compute.v1.IPatchRuleFirewallPolicyRequest,
-      callback: Callback<
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IPatchRuleFirewallPolicyRequest|null|undefined,
-          {}|null|undefined>): void;
-/**
- * Patches a rule of the specified priority.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.firewallPolicy
- *   Name of the firewall policy to update.
- * @param {google.cloud.compute.v1.FirewallPolicyRule} request.firewallPolicyRuleResource
- *   The body resource for this request
- * @param {number} request.priority
- *   The priority of the rule to patch.
- * @param {string} request.requestId
- *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
- *
- *   For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
- *
- *   The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing [Operation]{@link google.cloud.compute.v1.Operation}.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
- *   for more details and examples.
- * @example
- * const [response] = await client.patchRule(request);
- */
+    request: protos.google.cloud.compute.v1.IPatchRuleFirewallPolicyRequest,
+    callback: Callback<
+      protos.google.cloud.compute.v1.IOperation,
+      | protos.google.cloud.compute.v1.IPatchRuleFirewallPolicyRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  /**
+   * Patches a rule of the specified priority.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.firewallPolicy
+   *   Name of the firewall policy to update.
+   * @param {google.cloud.compute.v1.FirewallPolicyRule} request.firewallPolicyRuleResource
+   *   The body resource for this request
+   * @param {number} request.priority
+   *   The priority of the rule to patch.
+   * @param {string} request.requestId
+   *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
+   *
+   *   For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Operation]{@link google.cloud.compute.v1.Operation}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example
+   * const [response] = await client.patchRule(request);
+   */
   patchRule(
-      request?: protos.google.cloud.compute.v1.IPatchRuleFirewallPolicyRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.compute.v1.IPatchRuleFirewallPolicyRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IPatchRuleFirewallPolicyRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IPatchRuleFirewallPolicyRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.compute.v1.IOperation,
-        protos.google.cloud.compute.v1.IPatchRuleFirewallPolicyRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.compute.v1.IPatchRuleFirewallPolicyRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.compute.v1.IOperation,
+      | protos.google.cloud.compute.v1.IPatchRuleFirewallPolicyRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.compute.v1.IOperation,
+      (
+        | protos.google.cloud.compute.v1.IPatchRuleFirewallPolicyRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      'firewall_policy': request.firewallPolicy || '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        firewall_policy: request.firewallPolicy || '',
+      });
     this.initialize();
     return this.innerApiCalls.patchRule(request, options, callback);
   }
   removeAssociation(
-      request?: protos.google.cloud.compute.v1.IRemoveAssociationFirewallPolicyRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.compute.v1.IOperation,
-        protos.google.cloud.compute.v1.IRemoveAssociationFirewallPolicyRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.compute.v1.IRemoveAssociationFirewallPolicyRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.compute.v1.IOperation,
+      (
+        | protos.google.cloud.compute.v1.IRemoveAssociationFirewallPolicyRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
   removeAssociation(
-      request: protos.google.cloud.compute.v1.IRemoveAssociationFirewallPolicyRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IRemoveAssociationFirewallPolicyRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.compute.v1.IRemoveAssociationFirewallPolicyRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.compute.v1.IOperation,
+      | protos.google.cloud.compute.v1.IRemoveAssociationFirewallPolicyRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
   removeAssociation(
-      request: protos.google.cloud.compute.v1.IRemoveAssociationFirewallPolicyRequest,
-      callback: Callback<
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IRemoveAssociationFirewallPolicyRequest|null|undefined,
-          {}|null|undefined>): void;
-/**
- * Removes an association for the specified firewall policy.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.firewallPolicy
- *   Name of the firewall policy to update.
- * @param {string} request.name
- *   Name for the attachment that will be removed.
- * @param {string} request.requestId
- *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
- *
- *   For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
- *
- *   The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing [Operation]{@link google.cloud.compute.v1.Operation}.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
- *   for more details and examples.
- * @example
- * const [response] = await client.removeAssociation(request);
- */
+    request: protos.google.cloud.compute.v1.IRemoveAssociationFirewallPolicyRequest,
+    callback: Callback<
+      protos.google.cloud.compute.v1.IOperation,
+      | protos.google.cloud.compute.v1.IRemoveAssociationFirewallPolicyRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  /**
+   * Removes an association for the specified firewall policy.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.firewallPolicy
+   *   Name of the firewall policy to update.
+   * @param {string} request.name
+   *   Name for the attachment that will be removed.
+   * @param {string} request.requestId
+   *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
+   *
+   *   For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Operation]{@link google.cloud.compute.v1.Operation}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example
+   * const [response] = await client.removeAssociation(request);
+   */
   removeAssociation(
-      request?: protos.google.cloud.compute.v1.IRemoveAssociationFirewallPolicyRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.compute.v1.IRemoveAssociationFirewallPolicyRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IRemoveAssociationFirewallPolicyRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IRemoveAssociationFirewallPolicyRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.compute.v1.IOperation,
-        protos.google.cloud.compute.v1.IRemoveAssociationFirewallPolicyRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.compute.v1.IRemoveAssociationFirewallPolicyRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.compute.v1.IOperation,
+      | protos.google.cloud.compute.v1.IRemoveAssociationFirewallPolicyRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.compute.v1.IOperation,
+      (
+        | protos.google.cloud.compute.v1.IRemoveAssociationFirewallPolicyRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      'firewall_policy': request.firewallPolicy || '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        firewall_policy: request.firewallPolicy || '',
+      });
     this.initialize();
     return this.innerApiCalls.removeAssociation(request, options, callback);
   }
   removeRule(
-      request?: protos.google.cloud.compute.v1.IRemoveRuleFirewallPolicyRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.compute.v1.IOperation,
-        protos.google.cloud.compute.v1.IRemoveRuleFirewallPolicyRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.compute.v1.IRemoveRuleFirewallPolicyRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.compute.v1.IOperation,
+      (
+        | protos.google.cloud.compute.v1.IRemoveRuleFirewallPolicyRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
   removeRule(
-      request: protos.google.cloud.compute.v1.IRemoveRuleFirewallPolicyRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IRemoveRuleFirewallPolicyRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.compute.v1.IRemoveRuleFirewallPolicyRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.compute.v1.IOperation,
+      | protos.google.cloud.compute.v1.IRemoveRuleFirewallPolicyRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
   removeRule(
-      request: protos.google.cloud.compute.v1.IRemoveRuleFirewallPolicyRequest,
-      callback: Callback<
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IRemoveRuleFirewallPolicyRequest|null|undefined,
-          {}|null|undefined>): void;
-/**
- * Deletes a rule of the specified priority.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.firewallPolicy
- *   Name of the firewall policy to update.
- * @param {number} request.priority
- *   The priority of the rule to remove from the firewall policy.
- * @param {string} request.requestId
- *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
- *
- *   For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
- *
- *   The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing [Operation]{@link google.cloud.compute.v1.Operation}.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
- *   for more details and examples.
- * @example
- * const [response] = await client.removeRule(request);
- */
+    request: protos.google.cloud.compute.v1.IRemoveRuleFirewallPolicyRequest,
+    callback: Callback<
+      protos.google.cloud.compute.v1.IOperation,
+      | protos.google.cloud.compute.v1.IRemoveRuleFirewallPolicyRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  /**
+   * Deletes a rule of the specified priority.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.firewallPolicy
+   *   Name of the firewall policy to update.
+   * @param {number} request.priority
+   *   The priority of the rule to remove from the firewall policy.
+   * @param {string} request.requestId
+   *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
+   *
+   *   For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Operation]{@link google.cloud.compute.v1.Operation}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example
+   * const [response] = await client.removeRule(request);
+   */
   removeRule(
-      request?: protos.google.cloud.compute.v1.IRemoveRuleFirewallPolicyRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.compute.v1.IRemoveRuleFirewallPolicyRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IRemoveRuleFirewallPolicyRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IRemoveRuleFirewallPolicyRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.compute.v1.IOperation,
-        protos.google.cloud.compute.v1.IRemoveRuleFirewallPolicyRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.compute.v1.IRemoveRuleFirewallPolicyRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.compute.v1.IOperation,
+      | protos.google.cloud.compute.v1.IRemoveRuleFirewallPolicyRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.compute.v1.IOperation,
+      (
+        | protos.google.cloud.compute.v1.IRemoveRuleFirewallPolicyRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      'firewall_policy': request.firewallPolicy || '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        firewall_policy: request.firewallPolicy || '',
+      });
     this.initialize();
     return this.innerApiCalls.removeRule(request, options, callback);
   }
   setIamPolicy(
-      request?: protos.google.cloud.compute.v1.ISetIamPolicyFirewallPolicyRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.compute.v1.IPolicy,
-        protos.google.cloud.compute.v1.ISetIamPolicyFirewallPolicyRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.compute.v1.ISetIamPolicyFirewallPolicyRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.compute.v1.IPolicy,
+      (
+        | protos.google.cloud.compute.v1.ISetIamPolicyFirewallPolicyRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
   setIamPolicy(
-      request: protos.google.cloud.compute.v1.ISetIamPolicyFirewallPolicyRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.compute.v1.IPolicy,
-          protos.google.cloud.compute.v1.ISetIamPolicyFirewallPolicyRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.compute.v1.ISetIamPolicyFirewallPolicyRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.compute.v1.IPolicy,
+      | protos.google.cloud.compute.v1.ISetIamPolicyFirewallPolicyRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
   setIamPolicy(
-      request: protos.google.cloud.compute.v1.ISetIamPolicyFirewallPolicyRequest,
-      callback: Callback<
-          protos.google.cloud.compute.v1.IPolicy,
-          protos.google.cloud.compute.v1.ISetIamPolicyFirewallPolicyRequest|null|undefined,
-          {}|null|undefined>): void;
-/**
- * Sets the access control policy on the specified resource. Replaces any existing policy.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {google.cloud.compute.v1.GlobalOrganizationSetPolicyRequest} request.globalOrganizationSetPolicyRequestResource
- *   The body resource for this request
- * @param {string} request.resource
- *   Name or id of the resource for this request.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing [Policy]{@link google.cloud.compute.v1.Policy}.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
- *   for more details and examples.
- * @example
- * const [response] = await client.setIamPolicy(request);
- */
+    request: protos.google.cloud.compute.v1.ISetIamPolicyFirewallPolicyRequest,
+    callback: Callback<
+      protos.google.cloud.compute.v1.IPolicy,
+      | protos.google.cloud.compute.v1.ISetIamPolicyFirewallPolicyRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  /**
+   * Sets the access control policy on the specified resource. Replaces any existing policy.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.compute.v1.GlobalOrganizationSetPolicyRequest} request.globalOrganizationSetPolicyRequestResource
+   *   The body resource for this request
+   * @param {string} request.resource
+   *   Name or id of the resource for this request.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Policy]{@link google.cloud.compute.v1.Policy}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example
+   * const [response] = await client.setIamPolicy(request);
+   */
   setIamPolicy(
-      request?: protos.google.cloud.compute.v1.ISetIamPolicyFirewallPolicyRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.compute.v1.ISetIamPolicyFirewallPolicyRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.compute.v1.IPolicy,
-          protos.google.cloud.compute.v1.ISetIamPolicyFirewallPolicyRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.compute.v1.IPolicy,
-          protos.google.cloud.compute.v1.ISetIamPolicyFirewallPolicyRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.compute.v1.IPolicy,
-        protos.google.cloud.compute.v1.ISetIamPolicyFirewallPolicyRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.compute.v1.ISetIamPolicyFirewallPolicyRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.compute.v1.IPolicy,
+      | protos.google.cloud.compute.v1.ISetIamPolicyFirewallPolicyRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.compute.v1.IPolicy,
+      (
+        | protos.google.cloud.compute.v1.ISetIamPolicyFirewallPolicyRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      'resource': request.resource || '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        resource: request.resource || '',
+      });
     this.initialize();
     return this.innerApiCalls.setIamPolicy(request, options, callback);
   }
   testIamPermissions(
-      request?: protos.google.cloud.compute.v1.ITestIamPermissionsFirewallPolicyRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.compute.v1.ITestPermissionsResponse,
-        protos.google.cloud.compute.v1.ITestIamPermissionsFirewallPolicyRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.compute.v1.ITestIamPermissionsFirewallPolicyRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.compute.v1.ITestPermissionsResponse,
+      (
+        | protos.google.cloud.compute.v1.ITestIamPermissionsFirewallPolicyRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
   testIamPermissions(
-      request: protos.google.cloud.compute.v1.ITestIamPermissionsFirewallPolicyRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.compute.v1.ITestPermissionsResponse,
-          protos.google.cloud.compute.v1.ITestIamPermissionsFirewallPolicyRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.compute.v1.ITestIamPermissionsFirewallPolicyRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.compute.v1.ITestPermissionsResponse,
+      | protos.google.cloud.compute.v1.ITestIamPermissionsFirewallPolicyRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
   testIamPermissions(
-      request: protos.google.cloud.compute.v1.ITestIamPermissionsFirewallPolicyRequest,
-      callback: Callback<
-          protos.google.cloud.compute.v1.ITestPermissionsResponse,
-          protos.google.cloud.compute.v1.ITestIamPermissionsFirewallPolicyRequest|null|undefined,
-          {}|null|undefined>): void;
-/**
- * Returns permissions that a caller has on the specified resource.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.resource
- *   Name or id of the resource for this request.
- * @param {google.cloud.compute.v1.TestPermissionsRequest} request.testPermissionsRequestResource
- *   The body resource for this request
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing [TestPermissionsResponse]{@link google.cloud.compute.v1.TestPermissionsResponse}.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
- *   for more details and examples.
- * @example
- * const [response] = await client.testIamPermissions(request);
- */
+    request: protos.google.cloud.compute.v1.ITestIamPermissionsFirewallPolicyRequest,
+    callback: Callback<
+      protos.google.cloud.compute.v1.ITestPermissionsResponse,
+      | protos.google.cloud.compute.v1.ITestIamPermissionsFirewallPolicyRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  /**
+   * Returns permissions that a caller has on the specified resource.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.resource
+   *   Name or id of the resource for this request.
+   * @param {google.cloud.compute.v1.TestPermissionsRequest} request.testPermissionsRequestResource
+   *   The body resource for this request
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [TestPermissionsResponse]{@link google.cloud.compute.v1.TestPermissionsResponse}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example
+   * const [response] = await client.testIamPermissions(request);
+   */
   testIamPermissions(
-      request?: protos.google.cloud.compute.v1.ITestIamPermissionsFirewallPolicyRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.compute.v1.ITestIamPermissionsFirewallPolicyRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.compute.v1.ITestPermissionsResponse,
-          protos.google.cloud.compute.v1.ITestIamPermissionsFirewallPolicyRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.compute.v1.ITestPermissionsResponse,
-          protos.google.cloud.compute.v1.ITestIamPermissionsFirewallPolicyRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.compute.v1.ITestPermissionsResponse,
-        protos.google.cloud.compute.v1.ITestIamPermissionsFirewallPolicyRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.compute.v1.ITestIamPermissionsFirewallPolicyRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.compute.v1.ITestPermissionsResponse,
+      | protos.google.cloud.compute.v1.ITestIamPermissionsFirewallPolicyRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.compute.v1.ITestPermissionsResponse,
+      (
+        | protos.google.cloud.compute.v1.ITestIamPermissionsFirewallPolicyRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      'resource': request.resource || '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        resource: request.resource || '',
+      });
     this.initialize();
     return this.innerApiCalls.testIamPermissions(request, options, callback);
   }
-
 
   /**
    * Terminate the gRPC channel and close the client.

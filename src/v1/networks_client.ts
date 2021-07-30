@@ -92,11 +92,16 @@ export class NetworksClient {
   constructor(opts?: ClientOptions) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof NetworksClient;
-    const servicePath = opts?.servicePath || opts?.apiEndpoint || staticMembers.servicePath;
-    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
+    const servicePath =
+      opts?.servicePath || opts?.apiEndpoint || staticMembers.servicePath;
+    this._providedCustomServicePath = !!(
+      opts?.servicePath || opts?.apiEndpoint
+    );
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    const fallback =
+      opts?.fallback ??
+      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // If scopes are unset in options and we're connecting to a non-default endpoint, set scopes just in case.
@@ -114,7 +119,7 @@ export class NetworksClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
+    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
 
     // Set the default scopes in auth client if needed.
     if (servicePath === staticMembers.servicePath) {
@@ -122,10 +127,7 @@ export class NetworksClient {
     }
 
     // Determine the client header string.
-    const clientHeader = [
-      `gax/${this._gaxModule.version}`,
-      `gapic/${version}`,
-    ];
+    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
     if (typeof process !== 'undefined' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -133,7 +135,7 @@ export class NetworksClient {
     }
     if (!opts.fallback) {
       clientHeader.push(`grpc/${this._gaxGrpc.grpcVersion}`);
-    } else if (opts.fallback === 'rest' ) {
+    } else if (opts.fallback === 'rest') {
       clientHeader.push(`rest/${this._gaxGrpc.grpcVersion}`);
     }
     if (opts.libName && opts.libVersion) {
@@ -144,8 +146,11 @@ export class NetworksClient {
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-        'google.cloud.compute.v1.Networks', gapicConfig as gax.ClientConfig,
-        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
+      'google.cloud.compute.v1.Networks',
+      gapicConfig as gax.ClientConfig,
+      opts.clientConfig || {},
+      {'x-goog-api-client': clientHeader.join(' ')}
+    );
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
@@ -176,31 +181,47 @@ export class NetworksClient {
     // Put together the "service stub" for
     // google.cloud.compute.v1.Networks.
     this.networksStub = this._gaxGrpc.createStub(
-        this._opts.fallback ?
-          (this._protos as protobuf.Root).lookupService('google.cloud.compute.v1.Networks') :
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      this._opts.fallback
+        ? (this._protos as protobuf.Root).lookupService(
+            'google.cloud.compute.v1.Networks'
+          )
+        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.cloud.compute.v1.Networks,
-        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
+      this._opts,
+      this._providedCustomServicePath
+    ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const networksStubMethods =
-        ['addPeering', 'delete', 'get', 'getEffectiveFirewalls', 'insert', 'list', 'listPeeringRoutes', 'patch', 'removePeering', 'switchToCustomMode', 'updatePeering'];
+    const networksStubMethods = [
+      'addPeering',
+      'delete',
+      'get',
+      'getEffectiveFirewalls',
+      'insert',
+      'list',
+      'listPeeringRoutes',
+      'patch',
+      'removePeering',
+      'switchToCustomMode',
+      'updatePeering',
+    ];
     for (const methodName of networksStubMethods) {
       const callPromise = this.networksStub.then(
-        stub => (...args: Array<{}>) => {
-          if (this._terminated) {
-            return Promise.reject('The client has already been closed.');
-          }
-          const func = stub[methodName];
-          return func.apply(stub, args);
-        },
-        (err: Error|null|undefined) => () => {
+        stub =>
+          (...args: Array<{}>) => {
+            if (this._terminated) {
+              return Promise.reject('The client has already been closed.');
+            }
+            const func = stub[methodName];
+            return func.apply(stub, args);
+          },
+        (err: Error | null | undefined) => () => {
           throw err;
-        });
+        }
+      );
 
-      const descriptor =
-        undefined;
+      const descriptor = undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
@@ -246,7 +267,7 @@ export class NetworksClient {
   static get scopes() {
     return [
       'https://www.googleapis.com/auth/compute',
-      'https://www.googleapis.com/auth/cloud-platform'
+      'https://www.googleapis.com/auth/cloud-platform',
     ];
   }
 
@@ -256,8 +277,9 @@ export class NetworksClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(callback?: Callback<string, undefined, undefined>):
-      Promise<string>|void {
+  getProjectId(
+    callback?: Callback<string, undefined, undefined>
+  ): Promise<string> | void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -269,903 +291,1108 @@ export class NetworksClient {
   // -- Service calls --
   // -------------------
   addPeering(
-      request?: protos.google.cloud.compute.v1.IAddPeeringNetworkRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.compute.v1.IOperation,
-        protos.google.cloud.compute.v1.IAddPeeringNetworkRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.compute.v1.IAddPeeringNetworkRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.compute.v1.IOperation,
+      protos.google.cloud.compute.v1.IAddPeeringNetworkRequest | undefined,
+      {} | undefined
+    ]
+  >;
   addPeering(
-      request: protos.google.cloud.compute.v1.IAddPeeringNetworkRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IAddPeeringNetworkRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.compute.v1.IAddPeeringNetworkRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.compute.v1.IOperation,
+      | protos.google.cloud.compute.v1.IAddPeeringNetworkRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
   addPeering(
-      request: protos.google.cloud.compute.v1.IAddPeeringNetworkRequest,
-      callback: Callback<
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IAddPeeringNetworkRequest|null|undefined,
-          {}|null|undefined>): void;
-/**
- * Adds a peering to the specified network.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.network
- *   Name of the network resource to add peering to.
- * @param {google.cloud.compute.v1.NetworksAddPeeringRequest} request.networksAddPeeringRequestResource
- *   The body resource for this request
- * @param {string} request.project
- *   Project ID for this request.
- * @param {string} request.requestId
- *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
- *
- *   For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
- *
- *   The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing [Operation]{@link google.cloud.compute.v1.Operation}.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
- *   for more details and examples.
- * @example
- * const [response] = await client.addPeering(request);
- */
+    request: protos.google.cloud.compute.v1.IAddPeeringNetworkRequest,
+    callback: Callback<
+      protos.google.cloud.compute.v1.IOperation,
+      | protos.google.cloud.compute.v1.IAddPeeringNetworkRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  /**
+   * Adds a peering to the specified network.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.network
+   *   Name of the network resource to add peering to.
+   * @param {google.cloud.compute.v1.NetworksAddPeeringRequest} request.networksAddPeeringRequestResource
+   *   The body resource for this request
+   * @param {string} request.project
+   *   Project ID for this request.
+   * @param {string} request.requestId
+   *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
+   *
+   *   For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Operation]{@link google.cloud.compute.v1.Operation}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example
+   * const [response] = await client.addPeering(request);
+   */
   addPeering(
-      request?: protos.google.cloud.compute.v1.IAddPeeringNetworkRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.compute.v1.IAddPeeringNetworkRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IAddPeeringNetworkRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IAddPeeringNetworkRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.compute.v1.IOperation,
-        protos.google.cloud.compute.v1.IAddPeeringNetworkRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.compute.v1.IAddPeeringNetworkRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.compute.v1.IOperation,
+      | protos.google.cloud.compute.v1.IAddPeeringNetworkRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.compute.v1.IOperation,
+      protos.google.cloud.compute.v1.IAddPeeringNetworkRequest | undefined,
+      {} | undefined
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      'project': request.project || '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        project: request.project || '',
+      });
     this.initialize();
     return this.innerApiCalls.addPeering(request, options, callback);
   }
   delete(
-      request?: protos.google.cloud.compute.v1.IDeleteNetworkRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.compute.v1.IOperation,
-        protos.google.cloud.compute.v1.IDeleteNetworkRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.compute.v1.IDeleteNetworkRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.compute.v1.IOperation,
+      protos.google.cloud.compute.v1.IDeleteNetworkRequest | undefined,
+      {} | undefined
+    ]
+  >;
   delete(
-      request: protos.google.cloud.compute.v1.IDeleteNetworkRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IDeleteNetworkRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.compute.v1.IDeleteNetworkRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.compute.v1.IOperation,
+      protos.google.cloud.compute.v1.IDeleteNetworkRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
   delete(
-      request: protos.google.cloud.compute.v1.IDeleteNetworkRequest,
-      callback: Callback<
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IDeleteNetworkRequest|null|undefined,
-          {}|null|undefined>): void;
-/**
- * Deletes the specified network.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.network
- *   Name of the network to delete.
- * @param {string} request.project
- *   Project ID for this request.
- * @param {string} request.requestId
- *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
- *
- *   For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
- *
- *   The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing [Operation]{@link google.cloud.compute.v1.Operation}.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
- *   for more details and examples.
- * @example
- * const [response] = await client.delete(request);
- */
+    request: protos.google.cloud.compute.v1.IDeleteNetworkRequest,
+    callback: Callback<
+      protos.google.cloud.compute.v1.IOperation,
+      protos.google.cloud.compute.v1.IDeleteNetworkRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  /**
+   * Deletes the specified network.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.network
+   *   Name of the network to delete.
+   * @param {string} request.project
+   *   Project ID for this request.
+   * @param {string} request.requestId
+   *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
+   *
+   *   For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Operation]{@link google.cloud.compute.v1.Operation}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example
+   * const [response] = await client.delete(request);
+   */
   delete(
-      request?: protos.google.cloud.compute.v1.IDeleteNetworkRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.compute.v1.IDeleteNetworkRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IDeleteNetworkRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IDeleteNetworkRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.compute.v1.IOperation,
-        protos.google.cloud.compute.v1.IDeleteNetworkRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.compute.v1.IDeleteNetworkRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.compute.v1.IOperation,
+      protos.google.cloud.compute.v1.IDeleteNetworkRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.compute.v1.IOperation,
+      protos.google.cloud.compute.v1.IDeleteNetworkRequest | undefined,
+      {} | undefined
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      'project': request.project || '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        project: request.project || '',
+      });
     this.initialize();
     return this.innerApiCalls.delete(request, options, callback);
   }
   get(
-      request?: protos.google.cloud.compute.v1.IGetNetworkRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.compute.v1.INetwork,
-        protos.google.cloud.compute.v1.IGetNetworkRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.compute.v1.IGetNetworkRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.compute.v1.INetwork,
+      protos.google.cloud.compute.v1.IGetNetworkRequest | undefined,
+      {} | undefined
+    ]
+  >;
   get(
-      request: protos.google.cloud.compute.v1.IGetNetworkRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.compute.v1.INetwork,
-          protos.google.cloud.compute.v1.IGetNetworkRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.compute.v1.IGetNetworkRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.compute.v1.INetwork,
+      protos.google.cloud.compute.v1.IGetNetworkRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
   get(
-      request: protos.google.cloud.compute.v1.IGetNetworkRequest,
-      callback: Callback<
-          protos.google.cloud.compute.v1.INetwork,
-          protos.google.cloud.compute.v1.IGetNetworkRequest|null|undefined,
-          {}|null|undefined>): void;
-/**
- * Returns the specified network. Gets a list of available networks by making a list() request.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.network
- *   Name of the network to return.
- * @param {string} request.project
- *   Project ID for this request.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing [Network]{@link google.cloud.compute.v1.Network}.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
- *   for more details and examples.
- * @example
- * const [response] = await client.get(request);
- */
+    request: protos.google.cloud.compute.v1.IGetNetworkRequest,
+    callback: Callback<
+      protos.google.cloud.compute.v1.INetwork,
+      protos.google.cloud.compute.v1.IGetNetworkRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  /**
+   * Returns the specified network. Gets a list of available networks by making a list() request.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.network
+   *   Name of the network to return.
+   * @param {string} request.project
+   *   Project ID for this request.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Network]{@link google.cloud.compute.v1.Network}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example
+   * const [response] = await client.get(request);
+   */
   get(
-      request?: protos.google.cloud.compute.v1.IGetNetworkRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.compute.v1.IGetNetworkRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.compute.v1.INetwork,
-          protos.google.cloud.compute.v1.IGetNetworkRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.compute.v1.INetwork,
-          protos.google.cloud.compute.v1.IGetNetworkRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.compute.v1.INetwork,
-        protos.google.cloud.compute.v1.IGetNetworkRequest|undefined, {}|undefined
-      ]>|void {
+          protos.google.cloud.compute.v1.IGetNetworkRequest | null | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.compute.v1.INetwork,
+      protos.google.cloud.compute.v1.IGetNetworkRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.compute.v1.INetwork,
+      protos.google.cloud.compute.v1.IGetNetworkRequest | undefined,
+      {} | undefined
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      'project': request.project || '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        project: request.project || '',
+      });
     this.initialize();
     return this.innerApiCalls.get(request, options, callback);
   }
   getEffectiveFirewalls(
-      request?: protos.google.cloud.compute.v1.IGetEffectiveFirewallsNetworkRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.compute.v1.INetworksGetEffectiveFirewallsResponse,
-        protos.google.cloud.compute.v1.IGetEffectiveFirewallsNetworkRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.compute.v1.IGetEffectiveFirewallsNetworkRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.compute.v1.INetworksGetEffectiveFirewallsResponse,
+      (
+        | protos.google.cloud.compute.v1.IGetEffectiveFirewallsNetworkRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
   getEffectiveFirewalls(
-      request: protos.google.cloud.compute.v1.IGetEffectiveFirewallsNetworkRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.compute.v1.INetworksGetEffectiveFirewallsResponse,
-          protos.google.cloud.compute.v1.IGetEffectiveFirewallsNetworkRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.compute.v1.IGetEffectiveFirewallsNetworkRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.compute.v1.INetworksGetEffectiveFirewallsResponse,
+      | protos.google.cloud.compute.v1.IGetEffectiveFirewallsNetworkRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
   getEffectiveFirewalls(
-      request: protos.google.cloud.compute.v1.IGetEffectiveFirewallsNetworkRequest,
-      callback: Callback<
-          protos.google.cloud.compute.v1.INetworksGetEffectiveFirewallsResponse,
-          protos.google.cloud.compute.v1.IGetEffectiveFirewallsNetworkRequest|null|undefined,
-          {}|null|undefined>): void;
-/**
- * Returns the effective firewalls on a given network.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.network
- *   Name of the network for this request.
- * @param {string} request.project
- *   Project ID for this request.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing [NetworksGetEffectiveFirewallsResponse]{@link google.cloud.compute.v1.NetworksGetEffectiveFirewallsResponse}.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
- *   for more details and examples.
- * @example
- * const [response] = await client.getEffectiveFirewalls(request);
- */
+    request: protos.google.cloud.compute.v1.IGetEffectiveFirewallsNetworkRequest,
+    callback: Callback<
+      protos.google.cloud.compute.v1.INetworksGetEffectiveFirewallsResponse,
+      | protos.google.cloud.compute.v1.IGetEffectiveFirewallsNetworkRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  /**
+   * Returns the effective firewalls on a given network.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.network
+   *   Name of the network for this request.
+   * @param {string} request.project
+   *   Project ID for this request.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [NetworksGetEffectiveFirewallsResponse]{@link google.cloud.compute.v1.NetworksGetEffectiveFirewallsResponse}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example
+   * const [response] = await client.getEffectiveFirewalls(request);
+   */
   getEffectiveFirewalls(
-      request?: protos.google.cloud.compute.v1.IGetEffectiveFirewallsNetworkRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.compute.v1.IGetEffectiveFirewallsNetworkRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.compute.v1.INetworksGetEffectiveFirewallsResponse,
-          protos.google.cloud.compute.v1.IGetEffectiveFirewallsNetworkRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.compute.v1.INetworksGetEffectiveFirewallsResponse,
-          protos.google.cloud.compute.v1.IGetEffectiveFirewallsNetworkRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.compute.v1.INetworksGetEffectiveFirewallsResponse,
-        protos.google.cloud.compute.v1.IGetEffectiveFirewallsNetworkRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.compute.v1.IGetEffectiveFirewallsNetworkRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.compute.v1.INetworksGetEffectiveFirewallsResponse,
+      | protos.google.cloud.compute.v1.IGetEffectiveFirewallsNetworkRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.compute.v1.INetworksGetEffectiveFirewallsResponse,
+      (
+        | protos.google.cloud.compute.v1.IGetEffectiveFirewallsNetworkRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      'project': request.project || '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        project: request.project || '',
+      });
     this.initialize();
     return this.innerApiCalls.getEffectiveFirewalls(request, options, callback);
   }
   insert(
-      request?: protos.google.cloud.compute.v1.IInsertNetworkRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.compute.v1.IOperation,
-        protos.google.cloud.compute.v1.IInsertNetworkRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.compute.v1.IInsertNetworkRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.compute.v1.IOperation,
+      protos.google.cloud.compute.v1.IInsertNetworkRequest | undefined,
+      {} | undefined
+    ]
+  >;
   insert(
-      request: protos.google.cloud.compute.v1.IInsertNetworkRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IInsertNetworkRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.compute.v1.IInsertNetworkRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.compute.v1.IOperation,
+      protos.google.cloud.compute.v1.IInsertNetworkRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
   insert(
-      request: protos.google.cloud.compute.v1.IInsertNetworkRequest,
-      callback: Callback<
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IInsertNetworkRequest|null|undefined,
-          {}|null|undefined>): void;
-/**
- * Creates a network in the specified project using the data included in the request.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {google.cloud.compute.v1.Network} request.networkResource
- *   The body resource for this request
- * @param {string} request.project
- *   Project ID for this request.
- * @param {string} request.requestId
- *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
- *
- *   For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
- *
- *   The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing [Operation]{@link google.cloud.compute.v1.Operation}.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
- *   for more details and examples.
- * @example
- * const [response] = await client.insert(request);
- */
+    request: protos.google.cloud.compute.v1.IInsertNetworkRequest,
+    callback: Callback<
+      protos.google.cloud.compute.v1.IOperation,
+      protos.google.cloud.compute.v1.IInsertNetworkRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  /**
+   * Creates a network in the specified project using the data included in the request.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.compute.v1.Network} request.networkResource
+   *   The body resource for this request
+   * @param {string} request.project
+   *   Project ID for this request.
+   * @param {string} request.requestId
+   *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
+   *
+   *   For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Operation]{@link google.cloud.compute.v1.Operation}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example
+   * const [response] = await client.insert(request);
+   */
   insert(
-      request?: protos.google.cloud.compute.v1.IInsertNetworkRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.compute.v1.IInsertNetworkRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IInsertNetworkRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IInsertNetworkRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.compute.v1.IOperation,
-        protos.google.cloud.compute.v1.IInsertNetworkRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.compute.v1.IInsertNetworkRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.compute.v1.IOperation,
+      protos.google.cloud.compute.v1.IInsertNetworkRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.compute.v1.IOperation,
+      protos.google.cloud.compute.v1.IInsertNetworkRequest | undefined,
+      {} | undefined
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      'project': request.project || '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        project: request.project || '',
+      });
     this.initialize();
     return this.innerApiCalls.insert(request, options, callback);
   }
   list(
-      request?: protos.google.cloud.compute.v1.IListNetworksRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.compute.v1.INetworkList,
-        protos.google.cloud.compute.v1.IListNetworksRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.compute.v1.IListNetworksRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.compute.v1.INetworkList,
+      protos.google.cloud.compute.v1.IListNetworksRequest | undefined,
+      {} | undefined
+    ]
+  >;
   list(
-      request: protos.google.cloud.compute.v1.IListNetworksRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.compute.v1.INetworkList,
-          protos.google.cloud.compute.v1.IListNetworksRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.compute.v1.IListNetworksRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.compute.v1.INetworkList,
+      protos.google.cloud.compute.v1.IListNetworksRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
   list(
-      request: protos.google.cloud.compute.v1.IListNetworksRequest,
-      callback: Callback<
-          protos.google.cloud.compute.v1.INetworkList,
-          protos.google.cloud.compute.v1.IListNetworksRequest|null|undefined,
-          {}|null|undefined>): void;
-/**
- * Retrieves the list of networks available to the specified project.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.filter
- *   A filter expression that filters resources listed in the response. The expression must specify the field name, a comparison operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The comparison operator must be either `=`, `!=`, `>`, or `<`.
- *
- *   For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`.
- *
- *   You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels.
- *
- *   To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ```
- * @param {number} request.maxResults
- *   The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)
- * @param {string} request.orderBy
- *   Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name.
- *
- *   You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first.
- *
- *   Currently, only sorting by `name` or `creationTimestamp desc` is supported.
- * @param {string} request.pageToken
- *   Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
- * @param {string} request.project
- *   Project ID for this request.
- * @param {boolean} request.returnPartialSuccess
- *   Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing [NetworkList]{@link google.cloud.compute.v1.NetworkList}.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
- *   for more details and examples.
- * @example
- * const [response] = await client.list(request);
- */
+    request: protos.google.cloud.compute.v1.IListNetworksRequest,
+    callback: Callback<
+      protos.google.cloud.compute.v1.INetworkList,
+      protos.google.cloud.compute.v1.IListNetworksRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  /**
+   * Retrieves the list of networks available to the specified project.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.filter
+   *   A filter expression that filters resources listed in the response. The expression must specify the field name, a comparison operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The comparison operator must be either `=`, `!=`, `>`, or `<`.
+   *
+   *   For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`.
+   *
+   *   You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels.
+   *
+   *   To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ```
+   * @param {number} request.maxResults
+   *   The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)
+   * @param {string} request.orderBy
+   *   Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name.
+   *
+   *   You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first.
+   *
+   *   Currently, only sorting by `name` or `creationTimestamp desc` is supported.
+   * @param {string} request.pageToken
+   *   Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
+   * @param {string} request.project
+   *   Project ID for this request.
+   * @param {boolean} request.returnPartialSuccess
+   *   Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [NetworkList]{@link google.cloud.compute.v1.NetworkList}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example
+   * const [response] = await client.list(request);
+   */
   list(
-      request?: protos.google.cloud.compute.v1.IListNetworksRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.compute.v1.IListNetworksRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.compute.v1.INetworkList,
-          protos.google.cloud.compute.v1.IListNetworksRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.compute.v1.INetworkList,
-          protos.google.cloud.compute.v1.IListNetworksRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.compute.v1.INetworkList,
-        protos.google.cloud.compute.v1.IListNetworksRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.compute.v1.IListNetworksRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.compute.v1.INetworkList,
+      protos.google.cloud.compute.v1.IListNetworksRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.compute.v1.INetworkList,
+      protos.google.cloud.compute.v1.IListNetworksRequest | undefined,
+      {} | undefined
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      'project': request.project || '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        project: request.project || '',
+      });
     this.initialize();
     return this.innerApiCalls.list(request, options, callback);
   }
   listPeeringRoutes(
-      request?: protos.google.cloud.compute.v1.IListPeeringRoutesNetworksRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.compute.v1.IExchangedPeeringRoutesList,
-        protos.google.cloud.compute.v1.IListPeeringRoutesNetworksRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.compute.v1.IListPeeringRoutesNetworksRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.compute.v1.IExchangedPeeringRoutesList,
+      (
+        | protos.google.cloud.compute.v1.IListPeeringRoutesNetworksRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
   listPeeringRoutes(
-      request: protos.google.cloud.compute.v1.IListPeeringRoutesNetworksRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.compute.v1.IExchangedPeeringRoutesList,
-          protos.google.cloud.compute.v1.IListPeeringRoutesNetworksRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.compute.v1.IListPeeringRoutesNetworksRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.compute.v1.IExchangedPeeringRoutesList,
+      | protos.google.cloud.compute.v1.IListPeeringRoutesNetworksRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
   listPeeringRoutes(
-      request: protos.google.cloud.compute.v1.IListPeeringRoutesNetworksRequest,
-      callback: Callback<
-          protos.google.cloud.compute.v1.IExchangedPeeringRoutesList,
-          protos.google.cloud.compute.v1.IListPeeringRoutesNetworksRequest|null|undefined,
-          {}|null|undefined>): void;
-/**
- * Lists the peering routes exchanged over peering connection.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {google.cloud.compute.v1.ListPeeringRoutesNetworksRequest.Direction} request.direction
- *   The direction of the exchanged routes.
- * @param {string} request.filter
- *   A filter expression that filters resources listed in the response. The expression must specify the field name, a comparison operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The comparison operator must be either `=`, `!=`, `>`, or `<`.
- *
- *   For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`.
- *
- *   You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels.
- *
- *   To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ```
- * @param {number} request.maxResults
- *   The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)
- * @param {string} request.network
- *   Name of the network for this request.
- * @param {string} request.orderBy
- *   Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name.
- *
- *   You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first.
- *
- *   Currently, only sorting by `name` or `creationTimestamp desc` is supported.
- * @param {string} request.pageToken
- *   Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
- * @param {string} request.peeringName
- *   The response will show routes exchanged over the given peering connection.
- * @param {string} request.project
- *   Project ID for this request.
- * @param {string} request.region
- *   The region of the request. The response will include all subnet routes, static routes and dynamic routes in the region.
- * @param {boolean} request.returnPartialSuccess
- *   Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing [ExchangedPeeringRoutesList]{@link google.cloud.compute.v1.ExchangedPeeringRoutesList}.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
- *   for more details and examples.
- * @example
- * const [response] = await client.listPeeringRoutes(request);
- */
+    request: protos.google.cloud.compute.v1.IListPeeringRoutesNetworksRequest,
+    callback: Callback<
+      protos.google.cloud.compute.v1.IExchangedPeeringRoutesList,
+      | protos.google.cloud.compute.v1.IListPeeringRoutesNetworksRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  /**
+   * Lists the peering routes exchanged over peering connection.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.compute.v1.ListPeeringRoutesNetworksRequest.Direction} request.direction
+   *   The direction of the exchanged routes.
+   * @param {string} request.filter
+   *   A filter expression that filters resources listed in the response. The expression must specify the field name, a comparison operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The comparison operator must be either `=`, `!=`, `>`, or `<`.
+   *
+   *   For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`.
+   *
+   *   You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels.
+   *
+   *   To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ```
+   * @param {number} request.maxResults
+   *   The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)
+   * @param {string} request.network
+   *   Name of the network for this request.
+   * @param {string} request.orderBy
+   *   Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name.
+   *
+   *   You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first.
+   *
+   *   Currently, only sorting by `name` or `creationTimestamp desc` is supported.
+   * @param {string} request.pageToken
+   *   Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
+   * @param {string} request.peeringName
+   *   The response will show routes exchanged over the given peering connection.
+   * @param {string} request.project
+   *   Project ID for this request.
+   * @param {string} request.region
+   *   The region of the request. The response will include all subnet routes, static routes and dynamic routes in the region.
+   * @param {boolean} request.returnPartialSuccess
+   *   Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [ExchangedPeeringRoutesList]{@link google.cloud.compute.v1.ExchangedPeeringRoutesList}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example
+   * const [response] = await client.listPeeringRoutes(request);
+   */
   listPeeringRoutes(
-      request?: protos.google.cloud.compute.v1.IListPeeringRoutesNetworksRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.compute.v1.IListPeeringRoutesNetworksRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.compute.v1.IExchangedPeeringRoutesList,
-          protos.google.cloud.compute.v1.IListPeeringRoutesNetworksRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.compute.v1.IExchangedPeeringRoutesList,
-          protos.google.cloud.compute.v1.IListPeeringRoutesNetworksRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.compute.v1.IExchangedPeeringRoutesList,
-        protos.google.cloud.compute.v1.IListPeeringRoutesNetworksRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.compute.v1.IListPeeringRoutesNetworksRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.compute.v1.IExchangedPeeringRoutesList,
+      | protos.google.cloud.compute.v1.IListPeeringRoutesNetworksRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.compute.v1.IExchangedPeeringRoutesList,
+      (
+        | protos.google.cloud.compute.v1.IListPeeringRoutesNetworksRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      'project': request.project || '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        project: request.project || '',
+      });
     this.initialize();
     return this.innerApiCalls.listPeeringRoutes(request, options, callback);
   }
   patch(
-      request?: protos.google.cloud.compute.v1.IPatchNetworkRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.compute.v1.IOperation,
-        protos.google.cloud.compute.v1.IPatchNetworkRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.compute.v1.IPatchNetworkRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.compute.v1.IOperation,
+      protos.google.cloud.compute.v1.IPatchNetworkRequest | undefined,
+      {} | undefined
+    ]
+  >;
   patch(
-      request: protos.google.cloud.compute.v1.IPatchNetworkRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IPatchNetworkRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.compute.v1.IPatchNetworkRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.compute.v1.IOperation,
+      protos.google.cloud.compute.v1.IPatchNetworkRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
   patch(
-      request: protos.google.cloud.compute.v1.IPatchNetworkRequest,
-      callback: Callback<
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IPatchNetworkRequest|null|undefined,
-          {}|null|undefined>): void;
-/**
- * Patches the specified network with the data included in the request. Only the following fields can be modified: routingConfig.routingMode.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.network
- *   Name of the network to update.
- * @param {google.cloud.compute.v1.Network} request.networkResource
- *   The body resource for this request
- * @param {string} request.project
- *   Project ID for this request.
- * @param {string} request.requestId
- *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
- *
- *   For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
- *
- *   The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing [Operation]{@link google.cloud.compute.v1.Operation}.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
- *   for more details and examples.
- * @example
- * const [response] = await client.patch(request);
- */
+    request: protos.google.cloud.compute.v1.IPatchNetworkRequest,
+    callback: Callback<
+      protos.google.cloud.compute.v1.IOperation,
+      protos.google.cloud.compute.v1.IPatchNetworkRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  /**
+   * Patches the specified network with the data included in the request. Only the following fields can be modified: routingConfig.routingMode.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.network
+   *   Name of the network to update.
+   * @param {google.cloud.compute.v1.Network} request.networkResource
+   *   The body resource for this request
+   * @param {string} request.project
+   *   Project ID for this request.
+   * @param {string} request.requestId
+   *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
+   *
+   *   For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Operation]{@link google.cloud.compute.v1.Operation}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example
+   * const [response] = await client.patch(request);
+   */
   patch(
-      request?: protos.google.cloud.compute.v1.IPatchNetworkRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.compute.v1.IPatchNetworkRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IPatchNetworkRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IPatchNetworkRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.compute.v1.IOperation,
-        protos.google.cloud.compute.v1.IPatchNetworkRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.compute.v1.IPatchNetworkRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.compute.v1.IOperation,
+      protos.google.cloud.compute.v1.IPatchNetworkRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.compute.v1.IOperation,
+      protos.google.cloud.compute.v1.IPatchNetworkRequest | undefined,
+      {} | undefined
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      'project': request.project || '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        project: request.project || '',
+      });
     this.initialize();
     return this.innerApiCalls.patch(request, options, callback);
   }
   removePeering(
-      request?: protos.google.cloud.compute.v1.IRemovePeeringNetworkRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.compute.v1.IOperation,
-        protos.google.cloud.compute.v1.IRemovePeeringNetworkRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.compute.v1.IRemovePeeringNetworkRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.compute.v1.IOperation,
+      protos.google.cloud.compute.v1.IRemovePeeringNetworkRequest | undefined,
+      {} | undefined
+    ]
+  >;
   removePeering(
-      request: protos.google.cloud.compute.v1.IRemovePeeringNetworkRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IRemovePeeringNetworkRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.compute.v1.IRemovePeeringNetworkRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.compute.v1.IOperation,
+      | protos.google.cloud.compute.v1.IRemovePeeringNetworkRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
   removePeering(
-      request: protos.google.cloud.compute.v1.IRemovePeeringNetworkRequest,
-      callback: Callback<
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IRemovePeeringNetworkRequest|null|undefined,
-          {}|null|undefined>): void;
-/**
- * Removes a peering from the specified network.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.network
- *   Name of the network resource to remove peering from.
- * @param {google.cloud.compute.v1.NetworksRemovePeeringRequest} request.networksRemovePeeringRequestResource
- *   The body resource for this request
- * @param {string} request.project
- *   Project ID for this request.
- * @param {string} request.requestId
- *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
- *
- *   For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
- *
- *   The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing [Operation]{@link google.cloud.compute.v1.Operation}.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
- *   for more details and examples.
- * @example
- * const [response] = await client.removePeering(request);
- */
+    request: protos.google.cloud.compute.v1.IRemovePeeringNetworkRequest,
+    callback: Callback<
+      protos.google.cloud.compute.v1.IOperation,
+      | protos.google.cloud.compute.v1.IRemovePeeringNetworkRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  /**
+   * Removes a peering from the specified network.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.network
+   *   Name of the network resource to remove peering from.
+   * @param {google.cloud.compute.v1.NetworksRemovePeeringRequest} request.networksRemovePeeringRequestResource
+   *   The body resource for this request
+   * @param {string} request.project
+   *   Project ID for this request.
+   * @param {string} request.requestId
+   *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
+   *
+   *   For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Operation]{@link google.cloud.compute.v1.Operation}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example
+   * const [response] = await client.removePeering(request);
+   */
   removePeering(
-      request?: protos.google.cloud.compute.v1.IRemovePeeringNetworkRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.compute.v1.IRemovePeeringNetworkRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IRemovePeeringNetworkRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IRemovePeeringNetworkRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.compute.v1.IOperation,
-        protos.google.cloud.compute.v1.IRemovePeeringNetworkRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.compute.v1.IRemovePeeringNetworkRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.compute.v1.IOperation,
+      | protos.google.cloud.compute.v1.IRemovePeeringNetworkRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.compute.v1.IOperation,
+      protos.google.cloud.compute.v1.IRemovePeeringNetworkRequest | undefined,
+      {} | undefined
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      'project': request.project || '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        project: request.project || '',
+      });
     this.initialize();
     return this.innerApiCalls.removePeering(request, options, callback);
   }
   switchToCustomMode(
-      request?: protos.google.cloud.compute.v1.ISwitchToCustomModeNetworkRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.compute.v1.IOperation,
-        protos.google.cloud.compute.v1.ISwitchToCustomModeNetworkRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.compute.v1.ISwitchToCustomModeNetworkRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.compute.v1.IOperation,
+      (
+        | protos.google.cloud.compute.v1.ISwitchToCustomModeNetworkRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
   switchToCustomMode(
-      request: protos.google.cloud.compute.v1.ISwitchToCustomModeNetworkRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.ISwitchToCustomModeNetworkRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.compute.v1.ISwitchToCustomModeNetworkRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.compute.v1.IOperation,
+      | protos.google.cloud.compute.v1.ISwitchToCustomModeNetworkRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
   switchToCustomMode(
-      request: protos.google.cloud.compute.v1.ISwitchToCustomModeNetworkRequest,
-      callback: Callback<
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.ISwitchToCustomModeNetworkRequest|null|undefined,
-          {}|null|undefined>): void;
-/**
- * Switches the network mode from auto subnet mode to custom subnet mode.
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.network
- *   Name of the network to be updated.
- * @param {string} request.project
- *   Project ID for this request.
- * @param {string} request.requestId
- *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
- *
- *   For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
- *
- *   The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing [Operation]{@link google.cloud.compute.v1.Operation}.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
- *   for more details and examples.
- * @example
- * const [response] = await client.switchToCustomMode(request);
- */
+    request: protos.google.cloud.compute.v1.ISwitchToCustomModeNetworkRequest,
+    callback: Callback<
+      protos.google.cloud.compute.v1.IOperation,
+      | protos.google.cloud.compute.v1.ISwitchToCustomModeNetworkRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  /**
+   * Switches the network mode from auto subnet mode to custom subnet mode.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.network
+   *   Name of the network to be updated.
+   * @param {string} request.project
+   *   Project ID for this request.
+   * @param {string} request.requestId
+   *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
+   *
+   *   For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Operation]{@link google.cloud.compute.v1.Operation}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example
+   * const [response] = await client.switchToCustomMode(request);
+   */
   switchToCustomMode(
-      request?: protos.google.cloud.compute.v1.ISwitchToCustomModeNetworkRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.compute.v1.ISwitchToCustomModeNetworkRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.ISwitchToCustomModeNetworkRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.ISwitchToCustomModeNetworkRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.compute.v1.IOperation,
-        protos.google.cloud.compute.v1.ISwitchToCustomModeNetworkRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.compute.v1.ISwitchToCustomModeNetworkRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.compute.v1.IOperation,
+      | protos.google.cloud.compute.v1.ISwitchToCustomModeNetworkRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.compute.v1.IOperation,
+      (
+        | protos.google.cloud.compute.v1.ISwitchToCustomModeNetworkRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      'project': request.project || '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        project: request.project || '',
+      });
     this.initialize();
     return this.innerApiCalls.switchToCustomMode(request, options, callback);
   }
   updatePeering(
-      request?: protos.google.cloud.compute.v1.IUpdatePeeringNetworkRequest,
-      options?: CallOptions):
-      Promise<[
-        protos.google.cloud.compute.v1.IOperation,
-        protos.google.cloud.compute.v1.IUpdatePeeringNetworkRequest|undefined, {}|undefined
-      ]>;
+    request?: protos.google.cloud.compute.v1.IUpdatePeeringNetworkRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.compute.v1.IOperation,
+      protos.google.cloud.compute.v1.IUpdatePeeringNetworkRequest | undefined,
+      {} | undefined
+    ]
+  >;
   updatePeering(
-      request: protos.google.cloud.compute.v1.IUpdatePeeringNetworkRequest,
-      options: CallOptions,
-      callback: Callback<
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IUpdatePeeringNetworkRequest|null|undefined,
-          {}|null|undefined>): void;
+    request: protos.google.cloud.compute.v1.IUpdatePeeringNetworkRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.compute.v1.IOperation,
+      | protos.google.cloud.compute.v1.IUpdatePeeringNetworkRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
   updatePeering(
-      request: protos.google.cloud.compute.v1.IUpdatePeeringNetworkRequest,
-      callback: Callback<
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IUpdatePeeringNetworkRequest|null|undefined,
-          {}|null|undefined>): void;
-/**
- * Updates the specified network peering with the data included in the request Only the following fields can be modified: NetworkPeering.export_custom_routes, and NetworkPeering.import_custom_routes
- *
- * @param {Object} request
- *   The request object that will be sent.
- * @param {string} request.network
- *   Name of the network resource which the updated peering is belonging to.
- * @param {google.cloud.compute.v1.NetworksUpdatePeeringRequest} request.networksUpdatePeeringRequestResource
- *   The body resource for this request
- * @param {string} request.project
- *   Project ID for this request.
- * @param {string} request.requestId
- *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
- *
- *   For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
- *
- *   The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
- * @param {object} [options]
- *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
- * @returns {Promise} - The promise which resolves to an array.
- *   The first element of the array is an object representing [Operation]{@link google.cloud.compute.v1.Operation}.
- *   Please see the
- *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
- *   for more details and examples.
- * @example
- * const [response] = await client.updatePeering(request);
- */
+    request: protos.google.cloud.compute.v1.IUpdatePeeringNetworkRequest,
+    callback: Callback<
+      protos.google.cloud.compute.v1.IOperation,
+      | protos.google.cloud.compute.v1.IUpdatePeeringNetworkRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  /**
+   * Updates the specified network peering with the data included in the request Only the following fields can be modified: NetworkPeering.export_custom_routes, and NetworkPeering.import_custom_routes
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.network
+   *   Name of the network resource which the updated peering is belonging to.
+   * @param {google.cloud.compute.v1.NetworksUpdatePeeringRequest} request.networksUpdatePeeringRequestResource
+   *   The body resource for this request
+   * @param {string} request.project
+   *   Project ID for this request.
+   * @param {string} request.requestId
+   *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
+   *
+   *   For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Operation]{@link google.cloud.compute.v1.Operation}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example
+   * const [response] = await client.updatePeering(request);
+   */
   updatePeering(
-      request?: protos.google.cloud.compute.v1.IUpdatePeeringNetworkRequest,
-      optionsOrCallback?: CallOptions|Callback<
+    request?: protos.google.cloud.compute.v1.IUpdatePeeringNetworkRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
           protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IUpdatePeeringNetworkRequest|null|undefined,
-          {}|null|undefined>,
-      callback?: Callback<
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IUpdatePeeringNetworkRequest|null|undefined,
-          {}|null|undefined>):
-      Promise<[
-        protos.google.cloud.compute.v1.IOperation,
-        protos.google.cloud.compute.v1.IUpdatePeeringNetworkRequest|undefined, {}|undefined
-      ]>|void {
+          | protos.google.cloud.compute.v1.IUpdatePeeringNetworkRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.compute.v1.IOperation,
+      | protos.google.cloud.compute.v1.IUpdatePeeringNetworkRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.compute.v1.IOperation,
+      protos.google.cloud.compute.v1.IUpdatePeeringNetworkRequest | undefined,
+      {} | undefined
+    ]
+  > | void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    }
-    else {
+    } else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers[
-      'x-goog-request-params'
-    ] = gax.routingHeader.fromParams({
-      'project': request.project || '',
-    });
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        project: request.project || '',
+      });
     this.initialize();
     return this.innerApiCalls.updatePeering(request, options, callback);
   }
-
 
   /**
    * Terminate the gRPC channel and close the client.
