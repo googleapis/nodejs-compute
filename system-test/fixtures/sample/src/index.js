@@ -28,6 +28,7 @@ function main() {
   const disksClient = new compute.DisksClient();
   const diskTypesClient = new compute.DiskTypesClient();
   const externalVpnGatewaysClient = new compute.ExternalVpnGatewaysClient();
+  const firewallPoliciesClient = new compute.FirewallPoliciesClient();
   const firewallsClient = new compute.FirewallsClient();
   const forwardingRulesClient = new compute.ForwardingRulesClient();
   const globalAddressesClient = new compute.GlobalAddressesClient();
@@ -37,6 +38,8 @@ function main() {
   const globalOperationsClient = new compute.GlobalOperationsClient();
   const globalOrganizationOperationsClient =
     new compute.GlobalOrganizationOperationsClient();
+  const globalPublicDelegatedPrefixesClient =
+    new compute.GlobalPublicDelegatedPrefixesClient();
   const healthChecksClient = new compute.HealthChecksClient();
   const imagesClient = new compute.ImagesClient();
   const instanceGroupManagersClient = new compute.InstanceGroupManagersClient();
@@ -57,6 +60,10 @@ function main() {
   const nodeTypesClient = new compute.NodeTypesClient();
   const packetMirroringsClient = new compute.PacketMirroringsClient();
   const projectsClient = new compute.ProjectsClient();
+  const publicAdvertisedPrefixesClient =
+    new compute.PublicAdvertisedPrefixesClient();
+  const publicDelegatedPrefixesClient =
+    new compute.PublicDelegatedPrefixesClient();
   const regionAutoscalersClient = new compute.RegionAutoscalersClient();
   const regionBackendServicesClient = new compute.RegionBackendServicesClient();
   const regionCommitmentsClient = new compute.RegionCommitmentsClient();
@@ -68,6 +75,7 @@ function main() {
   const regionInstanceGroupManagersClient =
     new compute.RegionInstanceGroupManagersClient();
   const regionInstanceGroupsClient = new compute.RegionInstanceGroupsClient();
+  const regionInstancesClient = new compute.RegionInstancesClient();
   const regionNetworkEndpointGroupsClient =
     new compute.RegionNetworkEndpointGroupsClient();
   const regionNotificationEndpointsClient =

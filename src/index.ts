@@ -33,6 +33,8 @@ const DiskTypesClient = v1.DiskTypesClient;
 type DiskTypesClient = v1.DiskTypesClient;
 const ExternalVpnGatewaysClient = v1.ExternalVpnGatewaysClient;
 type ExternalVpnGatewaysClient = v1.ExternalVpnGatewaysClient;
+const FirewallPoliciesClient = v1.FirewallPoliciesClient;
+type FirewallPoliciesClient = v1.FirewallPoliciesClient;
 const FirewallsClient = v1.FirewallsClient;
 type FirewallsClient = v1.FirewallsClient;
 const ForwardingRulesClient = v1.ForwardingRulesClient;
@@ -48,6 +50,10 @@ type GlobalOperationsClient = v1.GlobalOperationsClient;
 const GlobalOrganizationOperationsClient =
   v1.GlobalOrganizationOperationsClient;
 type GlobalOrganizationOperationsClient = v1.GlobalOrganizationOperationsClient;
+const GlobalPublicDelegatedPrefixesClient =
+  v1.GlobalPublicDelegatedPrefixesClient;
+type GlobalPublicDelegatedPrefixesClient =
+  v1.GlobalPublicDelegatedPrefixesClient;
 const HealthChecksClient = v1.HealthChecksClient;
 type HealthChecksClient = v1.HealthChecksClient;
 const ImagesClient = v1.ImagesClient;
@@ -86,6 +92,10 @@ const PacketMirroringsClient = v1.PacketMirroringsClient;
 type PacketMirroringsClient = v1.PacketMirroringsClient;
 const ProjectsClient = v1.ProjectsClient;
 type ProjectsClient = v1.ProjectsClient;
+const PublicAdvertisedPrefixesClient = v1.PublicAdvertisedPrefixesClient;
+type PublicAdvertisedPrefixesClient = v1.PublicAdvertisedPrefixesClient;
+const PublicDelegatedPrefixesClient = v1.PublicDelegatedPrefixesClient;
+type PublicDelegatedPrefixesClient = v1.PublicDelegatedPrefixesClient;
 const RegionAutoscalersClient = v1.RegionAutoscalersClient;
 type RegionAutoscalersClient = v1.RegionAutoscalersClient;
 const RegionBackendServicesClient = v1.RegionBackendServicesClient;
@@ -104,6 +114,8 @@ const RegionInstanceGroupManagersClient = v1.RegionInstanceGroupManagersClient;
 type RegionInstanceGroupManagersClient = v1.RegionInstanceGroupManagersClient;
 const RegionInstanceGroupsClient = v1.RegionInstanceGroupsClient;
 type RegionInstanceGroupsClient = v1.RegionInstanceGroupsClient;
+const RegionInstancesClient = v1.RegionInstancesClient;
+type RegionInstancesClient = v1.RegionInstancesClient;
 const RegionNetworkEndpointGroupsClient = v1.RegionNetworkEndpointGroupsClient;
 type RegionNetworkEndpointGroupsClient = v1.RegionNetworkEndpointGroupsClient;
 const RegionNotificationEndpointsClient = v1.RegionNotificationEndpointsClient;
@@ -174,6 +186,7 @@ export {
   DisksClient,
   DiskTypesClient,
   ExternalVpnGatewaysClient,
+  FirewallPoliciesClient,
   FirewallsClient,
   ForwardingRulesClient,
   GlobalAddressesClient,
@@ -181,6 +194,7 @@ export {
   GlobalNetworkEndpointGroupsClient,
   GlobalOperationsClient,
   GlobalOrganizationOperationsClient,
+  GlobalPublicDelegatedPrefixesClient,
   HealthChecksClient,
   ImagesClient,
   InstanceGroupManagersClient,
@@ -200,6 +214,8 @@ export {
   NodeTypesClient,
   PacketMirroringsClient,
   ProjectsClient,
+  PublicAdvertisedPrefixesClient,
+  PublicDelegatedPrefixesClient,
   RegionAutoscalersClient,
   RegionBackendServicesClient,
   RegionCommitmentsClient,
@@ -209,6 +225,7 @@ export {
   RegionHealthCheckServicesClient,
   RegionInstanceGroupManagersClient,
   RegionInstanceGroupsClient,
+  RegionInstancesClient,
   RegionNetworkEndpointGroupsClient,
   RegionNotificationEndpointsClient,
   RegionOperationsClient,
@@ -250,6 +267,7 @@ export default {
   DisksClient,
   DiskTypesClient,
   ExternalVpnGatewaysClient,
+  FirewallPoliciesClient,
   FirewallsClient,
   ForwardingRulesClient,
   GlobalAddressesClient,
@@ -257,6 +275,7 @@ export default {
   GlobalNetworkEndpointGroupsClient,
   GlobalOperationsClient,
   GlobalOrganizationOperationsClient,
+  GlobalPublicDelegatedPrefixesClient,
   HealthChecksClient,
   ImagesClient,
   InstanceGroupManagersClient,
@@ -276,6 +295,8 @@ export default {
   NodeTypesClient,
   PacketMirroringsClient,
   ProjectsClient,
+  PublicAdvertisedPrefixesClient,
+  PublicDelegatedPrefixesClient,
   RegionAutoscalersClient,
   RegionBackendServicesClient,
   RegionCommitmentsClient,
@@ -285,6 +306,7 @@ export default {
   RegionHealthCheckServicesClient,
   RegionInstanceGroupManagersClient,
   RegionInstanceGroupsClient,
+  RegionInstancesClient,
   RegionNetworkEndpointGroupsClient,
   RegionNotificationEndpointsClient,
   RegionOperationsClient,

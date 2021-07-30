@@ -39,6 +39,7 @@ const version = require('../../../package.json').version;
 export class LicenseCodesClient {
   private _terminated = false;
   private _opts: ClientOptions;
+  private _providedCustomServicePath: boolean;
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
@@ -50,6 +51,7 @@ export class LicenseCodesClient {
     longrunning: {},
     batching: {},
   };
+  warn: (code: string, message: string, warnType?: string) => void;
   innerApiCalls: {[name: string]: Function};
   licenseCodesStub?: Promise<{[name: string]: Function}>;
 
@@ -92,8 +94,17 @@ export class LicenseCodesClient {
     const staticMembers = this.constructor as typeof LicenseCodesClient;
     const servicePath =
       opts?.servicePath || opts?.apiEndpoint || staticMembers.servicePath;
+    this._providedCustomServicePath = !!(
+      opts?.servicePath || opts?.apiEndpoint
+    );
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
+    // Implicitely set 'rest' value for the apis use rest as transport (eg. googleapis-discovery apis).
+    if (!opts) {
+      opts = {fallback: 'rest'};
+    } else {
+      opts.fallback = opts.fallback ?? 'rest';
+    }
     const fallback =
       opts?.fallback ??
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
@@ -130,6 +141,8 @@ export class LicenseCodesClient {
     }
     if (!opts.fallback) {
       clientHeader.push(`grpc/${this._gaxGrpc.grpcVersion}`);
+    } else if (opts.fallback === 'rest') {
+      clientHeader.push(`rest/${this._gaxGrpc.grpcVersion}`);
     }
     if (opts.libName && opts.libVersion) {
       clientHeader.push(`${opts.libName}/${opts.libVersion}`);
@@ -149,6 +162,9 @@ export class LicenseCodesClient {
     // of calling the API is handled in `google-gax`, with this code
     // merely providing the destination and request information.
     this.innerApiCalls = {};
+
+    // Add a warn function to the client constructor so it can be easily tested.
+    this.warn = gax.warn;
   }
 
   /**
@@ -177,7 +193,8 @@ export class LicenseCodesClient {
           )
         : // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.cloud.compute.v1.LicenseCodes,
-      this._opts
+      this._opts,
+      this._providedCustomServicePath
     ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
@@ -269,7 +286,7 @@ export class LicenseCodesClient {
   // -- Service calls --
   // -------------------
   get(
-    request: protos.google.cloud.compute.v1.IGetLicenseCodeRequest,
+    request?: protos.google.cloud.compute.v1.IGetLicenseCodeRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -315,7 +332,7 @@ export class LicenseCodesClient {
    * const [response] = await client.get(request);
    */
   get(
-    request: protos.google.cloud.compute.v1.IGetLicenseCodeRequest,
+    request?: protos.google.cloud.compute.v1.IGetLicenseCodeRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -356,7 +373,7 @@ export class LicenseCodesClient {
     return this.innerApiCalls.get(request, options, callback);
   }
   testIamPermissions(
-    request: protos.google.cloud.compute.v1.ITestIamPermissionsLicenseCodeRequest,
+    request?: protos.google.cloud.compute.v1.ITestIamPermissionsLicenseCodeRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -411,7 +428,7 @@ export class LicenseCodesClient {
    * const [response] = await client.testIamPermissions(request);
    */
   testIamPermissions(
-    request: protos.google.cloud.compute.v1.ITestIamPermissionsLicenseCodeRequest,
+    request?: protos.google.cloud.compute.v1.ITestIamPermissionsLicenseCodeRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<

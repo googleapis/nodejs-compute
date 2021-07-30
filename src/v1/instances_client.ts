@@ -18,8 +18,17 @@
 
 /* global window */
 import * as gax from 'google-gax';
-import {Callback, CallOptions, Descriptors, ClientOptions} from 'google-gax';
+import {
+  Callback,
+  CallOptions,
+  Descriptors,
+  ClientOptions,
+  PaginationCallback,
+  GaxCall,
+} from 'google-gax';
 
+import {Transform} from 'stream';
+import {RequestType} from 'google-gax/build/src/apitypes';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
 /**
@@ -39,6 +48,7 @@ const version = require('../../../package.json').version;
 export class InstancesClient {
   private _terminated = false;
   private _opts: ClientOptions;
+  private _providedCustomServicePath: boolean;
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
@@ -50,6 +60,7 @@ export class InstancesClient {
     longrunning: {},
     batching: {},
   };
+  warn: (code: string, message: string, warnType?: string) => void;
   innerApiCalls: {[name: string]: Function};
   instancesStub?: Promise<{[name: string]: Function}>;
 
@@ -92,8 +103,17 @@ export class InstancesClient {
     const staticMembers = this.constructor as typeof InstancesClient;
     const servicePath =
       opts?.servicePath || opts?.apiEndpoint || staticMembers.servicePath;
+    this._providedCustomServicePath = !!(
+      opts?.servicePath || opts?.apiEndpoint
+    );
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
+    // Implicitely set 'rest' value for the apis use rest as transport (eg. googleapis-discovery apis).
+    if (!opts) {
+      opts = {fallback: 'rest'};
+    } else {
+      opts.fallback = opts.fallback ?? 'rest';
+    }
     const fallback =
       opts?.fallback ??
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
@@ -130,12 +150,35 @@ export class InstancesClient {
     }
     if (!opts.fallback) {
       clientHeader.push(`grpc/${this._gaxGrpc.grpcVersion}`);
+    } else if (opts.fallback === 'rest') {
+      clientHeader.push(`rest/${this._gaxGrpc.grpcVersion}`);
     }
     if (opts.libName && opts.libVersion) {
       clientHeader.push(`${opts.libName}/${opts.libVersion}`);
     }
     // Load the applicable protos.
     this._protos = this._gaxGrpc.loadProtoJSON(jsonProtos);
+
+    // Some of the methods on this service return "paged" results,
+    // (e.g. 50 results at a time, with tokens to get subsequent
+    // pages). Denote the keys used for pagination and results.
+    this.descriptors.page = {
+      aggregatedList: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'items'
+      ),
+      list: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'items'
+      ),
+      listReferrers: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'items'
+      ),
+    };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
@@ -149,6 +192,9 @@ export class InstancesClient {
     // of calling the API is handled in `google-gax`, with this code
     // merely providing the destination and request information.
     this.innerApiCalls = {};
+
+    // Add a warn function to the client constructor so it can be easily tested.
+    this.warn = gax.warn;
   }
 
   /**
@@ -177,7 +223,8 @@ export class InstancesClient {
           )
         : // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.cloud.compute.v1.Instances,
-      this._opts
+      this._opts,
+      this._providedCustomServicePath
     ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
@@ -187,10 +234,12 @@ export class InstancesClient {
       'addResourcePolicies',
       'aggregatedList',
       'attachDisk',
+      'bulkInsert',
       'delete',
       'deleteAccessConfig',
       'detachDisk',
       'get',
+      'getEffectiveFirewalls',
       'getGuestAttributes',
       'getIamPolicy',
       'getScreenshot',
@@ -239,7 +288,7 @@ export class InstancesClient {
         }
       );
 
-      const descriptor = undefined;
+      const descriptor = this.descriptors.page[methodName] || undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
@@ -309,7 +358,7 @@ export class InstancesClient {
   // -- Service calls --
   // -------------------
   addAccessConfig(
-    request: protos.google.cloud.compute.v1.IAddAccessConfigInstanceRequest,
+    request?: protos.google.cloud.compute.v1.IAddAccessConfigInstanceRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -374,7 +423,7 @@ export class InstancesClient {
    * const [response] = await client.addAccessConfig(request);
    */
   addAccessConfig(
-    request: protos.google.cloud.compute.v1.IAddAccessConfigInstanceRequest,
+    request?: protos.google.cloud.compute.v1.IAddAccessConfigInstanceRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -420,7 +469,7 @@ export class InstancesClient {
     return this.innerApiCalls.addAccessConfig(request, options, callback);
   }
   addResourcePolicies(
-    request: protos.google.cloud.compute.v1.IAddResourcePoliciesInstanceRequest,
+    request?: protos.google.cloud.compute.v1.IAddResourcePoliciesInstanceRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -483,7 +532,7 @@ export class InstancesClient {
    * const [response] = await client.addResourcePolicies(request);
    */
   addResourcePolicies(
-    request: protos.google.cloud.compute.v1.IAddResourcePoliciesInstanceRequest,
+    request?: protos.google.cloud.compute.v1.IAddResourcePoliciesInstanceRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -528,127 +577,8 @@ export class InstancesClient {
     this.initialize();
     return this.innerApiCalls.addResourcePolicies(request, options, callback);
   }
-  aggregatedList(
-    request: protos.google.cloud.compute.v1.IAggregatedListInstancesRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.compute.v1.IInstanceAggregatedList,
-      (
-        | protos.google.cloud.compute.v1.IAggregatedListInstancesRequest
-        | undefined
-      ),
-      {} | undefined
-    ]
-  >;
-  aggregatedList(
-    request: protos.google.cloud.compute.v1.IAggregatedListInstancesRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IInstanceAggregatedList,
-      | protos.google.cloud.compute.v1.IAggregatedListInstancesRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  aggregatedList(
-    request: protos.google.cloud.compute.v1.IAggregatedListInstancesRequest,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IInstanceAggregatedList,
-      | protos.google.cloud.compute.v1.IAggregatedListInstancesRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  /**
-   * Retrieves aggregated list of all of the instances in your project across all regions and zones.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.filter
-   *   A filter expression that filters resources listed in the response. The expression must specify the field name, a comparison operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The comparison operator must be either `=`, `!=`, `>`, or `<`.
-   *
-   *   For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`.
-   *
-   *   You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels.
-   *
-   *   To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ```
-   * @param {boolean} request.includeAllScopes
-   *   Indicates whether every visible scope for each scope type (zone, region, global) should be included in the response. For new resource types added after this field, the flag has no effect as new resource types will always include every visible scope for each scope type in response. For resource types which predate this field, if this flag is omitted or false, only scopes of the scope types where the resource type is expected to be found will be included.
-   * @param {number} request.maxResults
-   *   The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)
-   * @param {string} request.orderBy
-   *   Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name.
-   *
-   *   You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first.
-   *
-   *   Currently, only sorting by `name` or `creationTimestamp desc` is supported.
-   * @param {string} request.pageToken
-   *   Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
-   * @param {string} request.project
-   *   Project ID for this request.
-   * @param {boolean} request.returnPartialSuccess
-   *   Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [InstanceAggregatedList]{@link google.cloud.compute.v1.InstanceAggregatedList}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.aggregatedList(request);
-   */
-  aggregatedList(
-    request: protos.google.cloud.compute.v1.IAggregatedListInstancesRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          protos.google.cloud.compute.v1.IInstanceAggregatedList,
-          | protos.google.cloud.compute.v1.IAggregatedListInstancesRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.compute.v1.IInstanceAggregatedList,
-      | protos.google.cloud.compute.v1.IAggregatedListInstancesRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.compute.v1.IInstanceAggregatedList,
-      (
-        | protos.google.cloud.compute.v1.IAggregatedListInstancesRequest
-        | undefined
-      ),
-      {} | undefined
-    ]
-  > | void {
-    request = request || {};
-    let options: CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        project: request.project || '',
-      });
-    this.initialize();
-    return this.innerApiCalls.aggregatedList(request, options, callback);
-  }
   attachDisk(
-    request: protos.google.cloud.compute.v1.IAttachDiskInstanceRequest,
+    request?: protos.google.cloud.compute.v1.IAttachDiskInstanceRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -710,7 +640,7 @@ export class InstancesClient {
    * const [response] = await client.attachDisk(request);
    */
   attachDisk(
-    request: protos.google.cloud.compute.v1.IAttachDiskInstanceRequest,
+    request?: protos.google.cloud.compute.v1.IAttachDiskInstanceRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -752,8 +682,109 @@ export class InstancesClient {
     this.initialize();
     return this.innerApiCalls.attachDisk(request, options, callback);
   }
+  bulkInsert(
+    request?: protos.google.cloud.compute.v1.IBulkInsertInstanceRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.compute.v1.IOperation,
+      protos.google.cloud.compute.v1.IBulkInsertInstanceRequest | undefined,
+      {} | undefined
+    ]
+  >;
+  bulkInsert(
+    request: protos.google.cloud.compute.v1.IBulkInsertInstanceRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.compute.v1.IOperation,
+      | protos.google.cloud.compute.v1.IBulkInsertInstanceRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  bulkInsert(
+    request: protos.google.cloud.compute.v1.IBulkInsertInstanceRequest,
+    callback: Callback<
+      protos.google.cloud.compute.v1.IOperation,
+      | protos.google.cloud.compute.v1.IBulkInsertInstanceRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  /**
+   * Creates multiple instances. Count specifies the number of instances to create.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.compute.v1.BulkInsertInstanceResource} request.bulkInsertInstanceResourceResource
+   *   The body resource for this request
+   * @param {string} request.project
+   *   Project ID for this request.
+   * @param {string} request.requestId
+   *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
+   *
+   *   For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
+   *
+   *   The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+   * @param {string} request.zone
+   *   The name of the zone for this request.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Operation]{@link google.cloud.compute.v1.Operation}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example
+   * const [response] = await client.bulkInsert(request);
+   */
+  bulkInsert(
+    request?: protos.google.cloud.compute.v1.IBulkInsertInstanceRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          | protos.google.cloud.compute.v1.IBulkInsertInstanceRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.compute.v1.IOperation,
+      | protos.google.cloud.compute.v1.IBulkInsertInstanceRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.compute.v1.IOperation,
+      protos.google.cloud.compute.v1.IBulkInsertInstanceRequest | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        project: request.project || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.bulkInsert(request, options, callback);
+  }
   delete(
-    request: protos.google.cloud.compute.v1.IDeleteInstanceRequest,
+    request?: protos.google.cloud.compute.v1.IDeleteInstanceRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -780,7 +811,7 @@ export class InstancesClient {
     >
   ): void;
   /**
-   * Deletes the specified Instance resource. For more information, see Stopping or Deleting an Instance.
+   * Deletes the specified Instance resource. For more information, see Deleting an instance.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -807,7 +838,7 @@ export class InstancesClient {
    * const [response] = await client.delete(request);
    */
   delete(
-    request: protos.google.cloud.compute.v1.IDeleteInstanceRequest,
+    request?: protos.google.cloud.compute.v1.IDeleteInstanceRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -848,7 +879,7 @@ export class InstancesClient {
     return this.innerApiCalls.delete(request, options, callback);
   }
   deleteAccessConfig(
-    request: protos.google.cloud.compute.v1.IDeleteAccessConfigInstanceRequest,
+    request?: protos.google.cloud.compute.v1.IDeleteAccessConfigInstanceRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -913,7 +944,7 @@ export class InstancesClient {
    * const [response] = await client.deleteAccessConfig(request);
    */
   deleteAccessConfig(
-    request: protos.google.cloud.compute.v1.IDeleteAccessConfigInstanceRequest,
+    request?: protos.google.cloud.compute.v1.IDeleteAccessConfigInstanceRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -959,7 +990,7 @@ export class InstancesClient {
     return this.innerApiCalls.deleteAccessConfig(request, options, callback);
   }
   detachDisk(
-    request: protos.google.cloud.compute.v1.IDetachDiskInstanceRequest,
+    request?: protos.google.cloud.compute.v1.IDetachDiskInstanceRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1019,7 +1050,7 @@ export class InstancesClient {
    * const [response] = await client.detachDisk(request);
    */
   detachDisk(
-    request: protos.google.cloud.compute.v1.IDetachDiskInstanceRequest,
+    request?: protos.google.cloud.compute.v1.IDetachDiskInstanceRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -1062,7 +1093,7 @@ export class InstancesClient {
     return this.innerApiCalls.detachDisk(request, options, callback);
   }
   get(
-    request: protos.google.cloud.compute.v1.IGetInstanceRequest,
+    request?: protos.google.cloud.compute.v1.IGetInstanceRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1110,7 +1141,7 @@ export class InstancesClient {
    * const [response] = await client.get(request);
    */
   get(
-    request: protos.google.cloud.compute.v1.IGetInstanceRequest,
+    request?: protos.google.cloud.compute.v1.IGetInstanceRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -1148,8 +1179,111 @@ export class InstancesClient {
     this.initialize();
     return this.innerApiCalls.get(request, options, callback);
   }
+  getEffectiveFirewalls(
+    request?: protos.google.cloud.compute.v1.IGetEffectiveFirewallsInstanceRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.compute.v1.IInstancesGetEffectiveFirewallsResponse,
+      (
+        | protos.google.cloud.compute.v1.IGetEffectiveFirewallsInstanceRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
+  getEffectiveFirewalls(
+    request: protos.google.cloud.compute.v1.IGetEffectiveFirewallsInstanceRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.compute.v1.IInstancesGetEffectiveFirewallsResponse,
+      | protos.google.cloud.compute.v1.IGetEffectiveFirewallsInstanceRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getEffectiveFirewalls(
+    request: protos.google.cloud.compute.v1.IGetEffectiveFirewallsInstanceRequest,
+    callback: Callback<
+      protos.google.cloud.compute.v1.IInstancesGetEffectiveFirewallsResponse,
+      | protos.google.cloud.compute.v1.IGetEffectiveFirewallsInstanceRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  /**
+   * Returns effective firewalls applied to an interface of the instance.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.instance
+   *   Name of the instance scoping this request.
+   * @param {string} request.networkInterface
+   *   The name of the network interface to get the effective firewalls.
+   * @param {string} request.project
+   *   Project ID for this request.
+   * @param {string} request.zone
+   *   The name of the zone for this request.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [InstancesGetEffectiveFirewallsResponse]{@link google.cloud.compute.v1.InstancesGetEffectiveFirewallsResponse}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example
+   * const [response] = await client.getEffectiveFirewalls(request);
+   */
+  getEffectiveFirewalls(
+    request?: protos.google.cloud.compute.v1.IGetEffectiveFirewallsInstanceRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.compute.v1.IInstancesGetEffectiveFirewallsResponse,
+          | protos.google.cloud.compute.v1.IGetEffectiveFirewallsInstanceRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.compute.v1.IInstancesGetEffectiveFirewallsResponse,
+      | protos.google.cloud.compute.v1.IGetEffectiveFirewallsInstanceRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.compute.v1.IInstancesGetEffectiveFirewallsResponse,
+      (
+        | protos.google.cloud.compute.v1.IGetEffectiveFirewallsInstanceRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        project: request.project || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.getEffectiveFirewalls(request, options, callback);
+  }
   getGuestAttributes(
-    request: protos.google.cloud.compute.v1.IGetGuestAttributesInstanceRequest,
+    request?: protos.google.cloud.compute.v1.IGetGuestAttributesInstanceRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1208,7 +1342,7 @@ export class InstancesClient {
    * const [response] = await client.getGuestAttributes(request);
    */
   getGuestAttributes(
-    request: protos.google.cloud.compute.v1.IGetGuestAttributesInstanceRequest,
+    request?: protos.google.cloud.compute.v1.IGetGuestAttributesInstanceRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -1254,7 +1388,7 @@ export class InstancesClient {
     return this.innerApiCalls.getGuestAttributes(request, options, callback);
   }
   getIamPolicy(
-    request: protos.google.cloud.compute.v1.IGetIamPolicyInstanceRequest,
+    request?: protos.google.cloud.compute.v1.IGetIamPolicyInstanceRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1308,7 +1442,7 @@ export class InstancesClient {
    * const [response] = await client.getIamPolicy(request);
    */
   getIamPolicy(
-    request: protos.google.cloud.compute.v1.IGetIamPolicyInstanceRequest,
+    request?: protos.google.cloud.compute.v1.IGetIamPolicyInstanceRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -1351,7 +1485,7 @@ export class InstancesClient {
     return this.innerApiCalls.getIamPolicy(request, options, callback);
   }
   getScreenshot(
-    request: protos.google.cloud.compute.v1.IGetScreenshotInstanceRequest,
+    request?: protos.google.cloud.compute.v1.IGetScreenshotInstanceRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1403,7 +1537,7 @@ export class InstancesClient {
    * const [response] = await client.getScreenshot(request);
    */
   getScreenshot(
-    request: protos.google.cloud.compute.v1.IGetScreenshotInstanceRequest,
+    request?: protos.google.cloud.compute.v1.IGetScreenshotInstanceRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -1446,7 +1580,7 @@ export class InstancesClient {
     return this.innerApiCalls.getScreenshot(request, options, callback);
   }
   getSerialPortOutput(
-    request: protos.google.cloud.compute.v1.IGetSerialPortOutputInstanceRequest,
+    request?: protos.google.cloud.compute.v1.IGetSerialPortOutputInstanceRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1490,7 +1624,7 @@ export class InstancesClient {
    *   Specifies which COM or serial port to retrieve data from.
    * @param {string} request.project
    *   Project ID for this request.
-   * @param {string} request.start
+   * @param {number} request.start
    *   Specifies the starting byte position of the output to return. To start with the first byte of output to the specified port, omit this field or set it to `0`.
    *
    *   If the output for that byte position is available, this field matches the `start` parameter sent with the request. If the amount of serial console output exceeds the size of the buffer (1 MB), the oldest output is discarded and is no longer available. If the requested start position refers to discarded output, the start position is adjusted to the oldest output still available, and the adjusted start position is returned as the `start` property value.
@@ -1509,7 +1643,7 @@ export class InstancesClient {
    * const [response] = await client.getSerialPortOutput(request);
    */
   getSerialPortOutput(
-    request: protos.google.cloud.compute.v1.IGetSerialPortOutputInstanceRequest,
+    request?: protos.google.cloud.compute.v1.IGetSerialPortOutputInstanceRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -1555,7 +1689,7 @@ export class InstancesClient {
     return this.innerApiCalls.getSerialPortOutput(request, options, callback);
   }
   getShieldedInstanceIdentity(
-    request: protos.google.cloud.compute.v1.IGetShieldedInstanceIdentityInstanceRequest,
+    request?: protos.google.cloud.compute.v1.IGetShieldedInstanceIdentityInstanceRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1610,7 +1744,7 @@ export class InstancesClient {
    * const [response] = await client.getShieldedInstanceIdentity(request);
    */
   getShieldedInstanceIdentity(
-    request: protos.google.cloud.compute.v1.IGetShieldedInstanceIdentityInstanceRequest,
+    request?: protos.google.cloud.compute.v1.IGetShieldedInstanceIdentityInstanceRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -1660,7 +1794,7 @@ export class InstancesClient {
     );
   }
   insert(
-    request: protos.google.cloud.compute.v1.IInsertInstanceRequest,
+    request?: protos.google.cloud.compute.v1.IInsertInstanceRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1721,7 +1855,7 @@ export class InstancesClient {
    * const [response] = await client.insert(request);
    */
   insert(
-    request: protos.google.cloud.compute.v1.IInsertInstanceRequest,
+    request?: protos.google.cloud.compute.v1.IInsertInstanceRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -1761,230 +1895,8 @@ export class InstancesClient {
     this.initialize();
     return this.innerApiCalls.insert(request, options, callback);
   }
-  list(
-    request: protos.google.cloud.compute.v1.IListInstancesRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.compute.v1.IInstanceList,
-      protos.google.cloud.compute.v1.IListInstancesRequest | undefined,
-      {} | undefined
-    ]
-  >;
-  list(
-    request: protos.google.cloud.compute.v1.IListInstancesRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IInstanceList,
-      protos.google.cloud.compute.v1.IListInstancesRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  list(
-    request: protos.google.cloud.compute.v1.IListInstancesRequest,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IInstanceList,
-      protos.google.cloud.compute.v1.IListInstancesRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  /**
-   * Retrieves the list of instances contained within the specified zone.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.filter
-   *   A filter expression that filters resources listed in the response. The expression must specify the field name, a comparison operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The comparison operator must be either `=`, `!=`, `>`, or `<`.
-   *
-   *   For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`.
-   *
-   *   You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels.
-   *
-   *   To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ```
-   * @param {number} request.maxResults
-   *   The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)
-   * @param {string} request.orderBy
-   *   Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name.
-   *
-   *   You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first.
-   *
-   *   Currently, only sorting by `name` or `creationTimestamp desc` is supported.
-   * @param {string} request.pageToken
-   *   Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
-   * @param {string} request.project
-   *   Project ID for this request.
-   * @param {boolean} request.returnPartialSuccess
-   *   Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
-   * @param {string} request.zone
-   *   The name of the zone for this request.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [InstanceList]{@link google.cloud.compute.v1.InstanceList}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.list(request);
-   */
-  list(
-    request: protos.google.cloud.compute.v1.IListInstancesRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          protos.google.cloud.compute.v1.IInstanceList,
-          | protos.google.cloud.compute.v1.IListInstancesRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.compute.v1.IInstanceList,
-      protos.google.cloud.compute.v1.IListInstancesRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.compute.v1.IInstanceList,
-      protos.google.cloud.compute.v1.IListInstancesRequest | undefined,
-      {} | undefined
-    ]
-  > | void {
-    request = request || {};
-    let options: CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        project: request.project || '',
-      });
-    this.initialize();
-    return this.innerApiCalls.list(request, options, callback);
-  }
-  listReferrers(
-    request: protos.google.cloud.compute.v1.IListReferrersInstancesRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.compute.v1.IInstanceListReferrers,
-      protos.google.cloud.compute.v1.IListReferrersInstancesRequest | undefined,
-      {} | undefined
-    ]
-  >;
-  listReferrers(
-    request: protos.google.cloud.compute.v1.IListReferrersInstancesRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IInstanceListReferrers,
-      | protos.google.cloud.compute.v1.IListReferrersInstancesRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  listReferrers(
-    request: protos.google.cloud.compute.v1.IListReferrersInstancesRequest,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IInstanceListReferrers,
-      | protos.google.cloud.compute.v1.IListReferrersInstancesRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  /**
-   * Retrieves a list of resources that refer to the VM instance specified in the request. For example, if the VM instance is part of a managed or unmanaged instance group, the referrers list includes the instance group. For more information, read Viewing referrers to VM instances.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.filter
-   *   A filter expression that filters resources listed in the response. The expression must specify the field name, a comparison operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The comparison operator must be either `=`, `!=`, `>`, or `<`.
-   *
-   *   For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`.
-   *
-   *   You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels.
-   *
-   *   To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ```
-   * @param {string} request.instance
-   *   Name of the target instance scoping this request, or '-' if the request should span over all instances in the container.
-   * @param {number} request.maxResults
-   *   The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)
-   * @param {string} request.orderBy
-   *   Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name.
-   *
-   *   You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first.
-   *
-   *   Currently, only sorting by `name` or `creationTimestamp desc` is supported.
-   * @param {string} request.pageToken
-   *   Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
-   * @param {string} request.project
-   *   Project ID for this request.
-   * @param {boolean} request.returnPartialSuccess
-   *   Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
-   * @param {string} request.zone
-   *   The name of the zone for this request.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [InstanceListReferrers]{@link google.cloud.compute.v1.InstanceListReferrers}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.listReferrers(request);
-   */
-  listReferrers(
-    request: protos.google.cloud.compute.v1.IListReferrersInstancesRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          protos.google.cloud.compute.v1.IInstanceListReferrers,
-          | protos.google.cloud.compute.v1.IListReferrersInstancesRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.compute.v1.IInstanceListReferrers,
-      | protos.google.cloud.compute.v1.IListReferrersInstancesRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.compute.v1.IInstanceListReferrers,
-      protos.google.cloud.compute.v1.IListReferrersInstancesRequest | undefined,
-      {} | undefined
-    ]
-  > | void {
-    request = request || {};
-    let options: CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        project: request.project || '',
-      });
-    this.initialize();
-    return this.innerApiCalls.listReferrers(request, options, callback);
-  }
   removeResourcePolicies(
-    request: protos.google.cloud.compute.v1.IRemoveResourcePoliciesInstanceRequest,
+    request?: protos.google.cloud.compute.v1.IRemoveResourcePoliciesInstanceRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -2047,7 +1959,7 @@ export class InstancesClient {
    * const [response] = await client.removeResourcePolicies(request);
    */
   removeResourcePolicies(
-    request: protos.google.cloud.compute.v1.IRemoveResourcePoliciesInstanceRequest,
+    request?: protos.google.cloud.compute.v1.IRemoveResourcePoliciesInstanceRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -2097,7 +2009,7 @@ export class InstancesClient {
     );
   }
   reset(
-    request: protos.google.cloud.compute.v1.IResetInstanceRequest,
+    request?: protos.google.cloud.compute.v1.IResetInstanceRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -2151,7 +2063,7 @@ export class InstancesClient {
    * const [response] = await client.reset(request);
    */
   reset(
-    request: protos.google.cloud.compute.v1.IResetInstanceRequest,
+    request?: protos.google.cloud.compute.v1.IResetInstanceRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -2192,7 +2104,7 @@ export class InstancesClient {
     return this.innerApiCalls.reset(request, options, callback);
   }
   setDeletionProtection(
-    request: protos.google.cloud.compute.v1.ISetDeletionProtectionInstanceRequest,
+    request?: protos.google.cloud.compute.v1.ISetDeletionProtectionInstanceRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -2255,7 +2167,7 @@ export class InstancesClient {
    * const [response] = await client.setDeletionProtection(request);
    */
   setDeletionProtection(
-    request: protos.google.cloud.compute.v1.ISetDeletionProtectionInstanceRequest,
+    request?: protos.google.cloud.compute.v1.ISetDeletionProtectionInstanceRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -2301,7 +2213,7 @@ export class InstancesClient {
     return this.innerApiCalls.setDeletionProtection(request, options, callback);
   }
   setDiskAutoDelete(
-    request: protos.google.cloud.compute.v1.ISetDiskAutoDeleteInstanceRequest,
+    request?: protos.google.cloud.compute.v1.ISetDiskAutoDeleteInstanceRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -2366,7 +2278,7 @@ export class InstancesClient {
    * const [response] = await client.setDiskAutoDelete(request);
    */
   setDiskAutoDelete(
-    request: protos.google.cloud.compute.v1.ISetDiskAutoDeleteInstanceRequest,
+    request?: protos.google.cloud.compute.v1.ISetDiskAutoDeleteInstanceRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -2412,7 +2324,7 @@ export class InstancesClient {
     return this.innerApiCalls.setDiskAutoDelete(request, options, callback);
   }
   setIamPolicy(
-    request: protos.google.cloud.compute.v1.ISetIamPolicyInstanceRequest,
+    request?: protos.google.cloud.compute.v1.ISetIamPolicyInstanceRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -2466,7 +2378,7 @@ export class InstancesClient {
    * const [response] = await client.setIamPolicy(request);
    */
   setIamPolicy(
-    request: protos.google.cloud.compute.v1.ISetIamPolicyInstanceRequest,
+    request?: protos.google.cloud.compute.v1.ISetIamPolicyInstanceRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -2509,7 +2421,7 @@ export class InstancesClient {
     return this.innerApiCalls.setIamPolicy(request, options, callback);
   }
   setLabels(
-    request: protos.google.cloud.compute.v1.ISetLabelsInstanceRequest,
+    request?: protos.google.cloud.compute.v1.ISetLabelsInstanceRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -2569,7 +2481,7 @@ export class InstancesClient {
    * const [response] = await client.setLabels(request);
    */
   setLabels(
-    request: protos.google.cloud.compute.v1.ISetLabelsInstanceRequest,
+    request?: protos.google.cloud.compute.v1.ISetLabelsInstanceRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -2612,7 +2524,7 @@ export class InstancesClient {
     return this.innerApiCalls.setLabels(request, options, callback);
   }
   setMachineResources(
-    request: protos.google.cloud.compute.v1.ISetMachineResourcesInstanceRequest,
+    request?: protos.google.cloud.compute.v1.ISetMachineResourcesInstanceRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -2675,7 +2587,7 @@ export class InstancesClient {
    * const [response] = await client.setMachineResources(request);
    */
   setMachineResources(
-    request: protos.google.cloud.compute.v1.ISetMachineResourcesInstanceRequest,
+    request?: protos.google.cloud.compute.v1.ISetMachineResourcesInstanceRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -2721,7 +2633,7 @@ export class InstancesClient {
     return this.innerApiCalls.setMachineResources(request, options, callback);
   }
   setMachineType(
-    request: protos.google.cloud.compute.v1.ISetMachineTypeInstanceRequest,
+    request?: protos.google.cloud.compute.v1.ISetMachineTypeInstanceRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -2781,7 +2693,7 @@ export class InstancesClient {
    * const [response] = await client.setMachineType(request);
    */
   setMachineType(
-    request: protos.google.cloud.compute.v1.ISetMachineTypeInstanceRequest,
+    request?: protos.google.cloud.compute.v1.ISetMachineTypeInstanceRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -2824,7 +2736,7 @@ export class InstancesClient {
     return this.innerApiCalls.setMachineType(request, options, callback);
   }
   setMetadata(
-    request: protos.google.cloud.compute.v1.ISetMetadataInstanceRequest,
+    request?: protos.google.cloud.compute.v1.ISetMetadataInstanceRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -2884,7 +2796,7 @@ export class InstancesClient {
    * const [response] = await client.setMetadata(request);
    */
   setMetadata(
-    request: protos.google.cloud.compute.v1.ISetMetadataInstanceRequest,
+    request?: protos.google.cloud.compute.v1.ISetMetadataInstanceRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -2927,7 +2839,7 @@ export class InstancesClient {
     return this.innerApiCalls.setMetadata(request, options, callback);
   }
   setMinCpuPlatform(
-    request: protos.google.cloud.compute.v1.ISetMinCpuPlatformInstanceRequest,
+    request?: protos.google.cloud.compute.v1.ISetMinCpuPlatformInstanceRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -2990,7 +2902,7 @@ export class InstancesClient {
    * const [response] = await client.setMinCpuPlatform(request);
    */
   setMinCpuPlatform(
-    request: protos.google.cloud.compute.v1.ISetMinCpuPlatformInstanceRequest,
+    request?: protos.google.cloud.compute.v1.ISetMinCpuPlatformInstanceRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -3036,7 +2948,7 @@ export class InstancesClient {
     return this.innerApiCalls.setMinCpuPlatform(request, options, callback);
   }
   setScheduling(
-    request: protos.google.cloud.compute.v1.ISetSchedulingInstanceRequest,
+    request?: protos.google.cloud.compute.v1.ISetSchedulingInstanceRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -3096,7 +3008,7 @@ export class InstancesClient {
    * const [response] = await client.setScheduling(request);
    */
   setScheduling(
-    request: protos.google.cloud.compute.v1.ISetSchedulingInstanceRequest,
+    request?: protos.google.cloud.compute.v1.ISetSchedulingInstanceRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -3139,7 +3051,7 @@ export class InstancesClient {
     return this.innerApiCalls.setScheduling(request, options, callback);
   }
   setServiceAccount(
-    request: protos.google.cloud.compute.v1.ISetServiceAccountInstanceRequest,
+    request?: protos.google.cloud.compute.v1.ISetServiceAccountInstanceRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -3202,7 +3114,7 @@ export class InstancesClient {
    * const [response] = await client.setServiceAccount(request);
    */
   setServiceAccount(
-    request: protos.google.cloud.compute.v1.ISetServiceAccountInstanceRequest,
+    request?: protos.google.cloud.compute.v1.ISetServiceAccountInstanceRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -3248,7 +3160,7 @@ export class InstancesClient {
     return this.innerApiCalls.setServiceAccount(request, options, callback);
   }
   setShieldedInstanceIntegrityPolicy(
-    request: protos.google.cloud.compute.v1.ISetShieldedInstanceIntegrityPolicyInstanceRequest,
+    request?: protos.google.cloud.compute.v1.ISetShieldedInstanceIntegrityPolicyInstanceRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -3311,7 +3223,7 @@ export class InstancesClient {
    * const [response] = await client.setShieldedInstanceIntegrityPolicy(request);
    */
   setShieldedInstanceIntegrityPolicy(
-    request: protos.google.cloud.compute.v1.ISetShieldedInstanceIntegrityPolicyInstanceRequest,
+    request?: protos.google.cloud.compute.v1.ISetShieldedInstanceIntegrityPolicyInstanceRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -3361,7 +3273,7 @@ export class InstancesClient {
     );
   }
   setTags(
-    request: protos.google.cloud.compute.v1.ISetTagsInstanceRequest,
+    request?: protos.google.cloud.compute.v1.ISetTagsInstanceRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -3417,7 +3329,7 @@ export class InstancesClient {
    * const [response] = await client.setTags(request);
    */
   setTags(
-    request: protos.google.cloud.compute.v1.ISetTagsInstanceRequest,
+    request?: protos.google.cloud.compute.v1.ISetTagsInstanceRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -3458,7 +3370,7 @@ export class InstancesClient {
     return this.innerApiCalls.setTags(request, options, callback);
   }
   simulateMaintenanceEvent(
-    request: protos.google.cloud.compute.v1.ISimulateMaintenanceEventInstanceRequest,
+    request?: protos.google.cloud.compute.v1.ISimulateMaintenanceEventInstanceRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -3513,7 +3425,7 @@ export class InstancesClient {
    * const [response] = await client.simulateMaintenanceEvent(request);
    */
   simulateMaintenanceEvent(
-    request: protos.google.cloud.compute.v1.ISimulateMaintenanceEventInstanceRequest,
+    request?: protos.google.cloud.compute.v1.ISimulateMaintenanceEventInstanceRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -3563,7 +3475,7 @@ export class InstancesClient {
     );
   }
   start(
-    request: protos.google.cloud.compute.v1.IStartInstanceRequest,
+    request?: protos.google.cloud.compute.v1.IStartInstanceRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -3617,7 +3529,7 @@ export class InstancesClient {
    * const [response] = await client.start(request);
    */
   start(
-    request: protos.google.cloud.compute.v1.IStartInstanceRequest,
+    request?: protos.google.cloud.compute.v1.IStartInstanceRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -3658,7 +3570,7 @@ export class InstancesClient {
     return this.innerApiCalls.start(request, options, callback);
   }
   startWithEncryptionKey(
-    request: protos.google.cloud.compute.v1.IStartWithEncryptionKeyInstanceRequest,
+    request?: protos.google.cloud.compute.v1.IStartWithEncryptionKeyInstanceRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -3721,7 +3633,7 @@ export class InstancesClient {
    * const [response] = await client.startWithEncryptionKey(request);
    */
   startWithEncryptionKey(
-    request: protos.google.cloud.compute.v1.IStartWithEncryptionKeyInstanceRequest,
+    request?: protos.google.cloud.compute.v1.IStartWithEncryptionKeyInstanceRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -3771,7 +3683,7 @@ export class InstancesClient {
     );
   }
   stop(
-    request: protos.google.cloud.compute.v1.IStopInstanceRequest,
+    request?: protos.google.cloud.compute.v1.IStopInstanceRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -3825,7 +3737,7 @@ export class InstancesClient {
    * const [response] = await client.stop(request);
    */
   stop(
-    request: protos.google.cloud.compute.v1.IStopInstanceRequest,
+    request?: protos.google.cloud.compute.v1.IStopInstanceRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -3866,7 +3778,7 @@ export class InstancesClient {
     return this.innerApiCalls.stop(request, options, callback);
   }
   testIamPermissions(
-    request: protos.google.cloud.compute.v1.ITestIamPermissionsInstanceRequest,
+    request?: protos.google.cloud.compute.v1.ITestIamPermissionsInstanceRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -3923,7 +3835,7 @@ export class InstancesClient {
    * const [response] = await client.testIamPermissions(request);
    */
   testIamPermissions(
-    request: protos.google.cloud.compute.v1.ITestIamPermissionsInstanceRequest,
+    request?: protos.google.cloud.compute.v1.ITestIamPermissionsInstanceRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -3969,7 +3881,7 @@ export class InstancesClient {
     return this.innerApiCalls.testIamPermissions(request, options, callback);
   }
   update(
-    request: protos.google.cloud.compute.v1.IUpdateInstanceRequest,
+    request?: protos.google.cloud.compute.v1.IUpdateInstanceRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -4029,7 +3941,7 @@ export class InstancesClient {
    * const [response] = await client.update(request);
    */
   update(
-    request: protos.google.cloud.compute.v1.IUpdateInstanceRequest,
+    request?: protos.google.cloud.compute.v1.IUpdateInstanceRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -4070,7 +3982,7 @@ export class InstancesClient {
     return this.innerApiCalls.update(request, options, callback);
   }
   updateAccessConfig(
-    request: protos.google.cloud.compute.v1.IUpdateAccessConfigInstanceRequest,
+    request?: protos.google.cloud.compute.v1.IUpdateAccessConfigInstanceRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -4135,7 +4047,7 @@ export class InstancesClient {
    * const [response] = await client.updateAccessConfig(request);
    */
   updateAccessConfig(
-    request: protos.google.cloud.compute.v1.IUpdateAccessConfigInstanceRequest,
+    request?: protos.google.cloud.compute.v1.IUpdateAccessConfigInstanceRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -4181,7 +4093,7 @@ export class InstancesClient {
     return this.innerApiCalls.updateAccessConfig(request, options, callback);
   }
   updateDisplayDevice(
-    request: protos.google.cloud.compute.v1.IUpdateDisplayDeviceInstanceRequest,
+    request?: protos.google.cloud.compute.v1.IUpdateDisplayDeviceInstanceRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -4244,7 +4156,7 @@ export class InstancesClient {
    * const [response] = await client.updateDisplayDevice(request);
    */
   updateDisplayDevice(
-    request: protos.google.cloud.compute.v1.IUpdateDisplayDeviceInstanceRequest,
+    request?: protos.google.cloud.compute.v1.IUpdateDisplayDeviceInstanceRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -4290,7 +4202,7 @@ export class InstancesClient {
     return this.innerApiCalls.updateDisplayDevice(request, options, callback);
   }
   updateNetworkInterface(
-    request: protos.google.cloud.compute.v1.IUpdateNetworkInterfaceInstanceRequest,
+    request?: protos.google.cloud.compute.v1.IUpdateNetworkInterfaceInstanceRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -4324,7 +4236,7 @@ export class InstancesClient {
     >
   ): void;
   /**
-   * Updates an instance's network interface. This method follows PATCH semantics.
+   * Updates an instance's network interface. This method can only update an interface's alias IP range and attached network. See Modifying alias IP ranges for an existing instance for instructions on changing alias IP ranges. See Migrating a VM between networks for instructions on migrating an interface. This method follows PATCH semantics.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -4355,7 +4267,7 @@ export class InstancesClient {
    * const [response] = await client.updateNetworkInterface(request);
    */
   updateNetworkInterface(
-    request: protos.google.cloud.compute.v1.IUpdateNetworkInterfaceInstanceRequest,
+    request?: protos.google.cloud.compute.v1.IUpdateNetworkInterfaceInstanceRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -4405,7 +4317,7 @@ export class InstancesClient {
     );
   }
   updateShieldedInstanceConfig(
-    request: protos.google.cloud.compute.v1.IUpdateShieldedInstanceConfigInstanceRequest,
+    request?: protos.google.cloud.compute.v1.IUpdateShieldedInstanceConfigInstanceRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -4468,7 +4380,7 @@ export class InstancesClient {
    * const [response] = await client.updateShieldedInstanceConfig(request);
    */
   updateShieldedInstanceConfig(
-    request: protos.google.cloud.compute.v1.IUpdateShieldedInstanceConfigInstanceRequest,
+    request?: protos.google.cloud.compute.v1.IUpdateShieldedInstanceConfigInstanceRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -4516,6 +4428,560 @@ export class InstancesClient {
       options,
       callback
     );
+  }
+
+  /**
+   * Equivalent to `aggregatedList`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.filter
+   *   A filter expression that filters resources listed in the response. The expression must specify the field name, a comparison operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The comparison operator must be either `=`, `!=`, `>`, or `<`.
+   *
+   *   For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`.
+   *
+   *   You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels.
+   *
+   *   To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ```
+   * @param {boolean} request.includeAllScopes
+   *   Indicates whether every visible scope for each scope type (zone, region, global) should be included in the response. For new resource types added after this field, the flag has no effect as new resource types will always include every visible scope for each scope type in response. For resource types which predate this field, if this flag is omitted or false, only scopes of the scope types where the resource type is expected to be found will be included.
+   * @param {number} request.maxResults
+   *   The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)
+   * @param {string} request.orderBy
+   *   Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name.
+   *
+   *   You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first.
+   *
+   *   Currently, only sorting by `name` or `creationTimestamp desc` is supported.
+   * @param {string} request.pageToken
+   *   Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
+   * @param {string} request.project
+   *   Project ID for this request.
+   * @param {boolean} request.returnPartialSuccess
+   *   Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   as tuple [string, [InstancesScopedList]{@link google.cloud.compute.v1.InstancesScopedList}]. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   * @example
+   * const iterable = client.aggregatedListAsync(request);
+   * for await (const [key, value] of iterable) {
+   *   // process response
+   * }
+   */
+  aggregatedListAsync(
+    request?: protos.google.cloud.compute.v1.IAggregatedListInstancesRequest,
+    options?: CallOptions
+  ): AsyncIterable<
+    [string, protos.google.cloud.compute.v1.IInstancesScopedList]
+  > {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        project: request.project || '',
+      });
+    options = options || {};
+    const callSettings = new gax.CallSettings(options);
+    this.initialize();
+    return this.descriptors.page.aggregatedList.asyncIterate(
+      this.innerApiCalls['aggregatedList'] as GaxCall,
+      request as unknown as RequestType,
+      callSettings
+    ) as AsyncIterable<
+      [string, protos.google.cloud.compute.v1.IInstancesScopedList]
+    >;
+  }
+  list(
+    request?: protos.google.cloud.compute.v1.IListInstancesRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.compute.v1.IInstance[],
+      protos.google.cloud.compute.v1.IListInstancesRequest | null,
+      protos.google.cloud.compute.v1.IInstanceList
+    ]
+  >;
+  list(
+    request: protos.google.cloud.compute.v1.IListInstancesRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.compute.v1.IListInstancesRequest,
+      protos.google.cloud.compute.v1.IInstanceList | null | undefined,
+      protos.google.cloud.compute.v1.IInstance
+    >
+  ): void;
+  list(
+    request: protos.google.cloud.compute.v1.IListInstancesRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.compute.v1.IListInstancesRequest,
+      protos.google.cloud.compute.v1.IInstanceList | null | undefined,
+      protos.google.cloud.compute.v1.IInstance
+    >
+  ): void;
+  /**
+   * Retrieves the list of instances contained within the specified zone.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.filter
+   *   A filter expression that filters resources listed in the response. The expression must specify the field name, a comparison operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The comparison operator must be either `=`, `!=`, `>`, or `<`.
+   *
+   *   For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`.
+   *
+   *   You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels.
+   *
+   *   To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ```
+   * @param {number} request.maxResults
+   *   The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)
+   * @param {string} request.orderBy
+   *   Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name.
+   *
+   *   You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first.
+   *
+   *   Currently, only sorting by `name` or `creationTimestamp desc` is supported.
+   * @param {string} request.pageToken
+   *   Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
+   * @param {string} request.project
+   *   Project ID for this request.
+   * @param {boolean} request.returnPartialSuccess
+   *   Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+   * @param {string} request.zone
+   *   The name of the zone for this request.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of [Instance]{@link google.cloud.compute.v1.Instance}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   */
+  list(
+    request?: protos.google.cloud.compute.v1.IListInstancesRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.cloud.compute.v1.IListInstancesRequest,
+          protos.google.cloud.compute.v1.IInstanceList | null | undefined,
+          protos.google.cloud.compute.v1.IInstance
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.compute.v1.IListInstancesRequest,
+      protos.google.cloud.compute.v1.IInstanceList | null | undefined,
+      protos.google.cloud.compute.v1.IInstance
+    >
+  ): Promise<
+    [
+      protos.google.cloud.compute.v1.IInstance[],
+      protos.google.cloud.compute.v1.IListInstancesRequest | null,
+      protos.google.cloud.compute.v1.IInstanceList
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        project: request.project || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.list(request, options, callback);
+  }
+
+  /**
+   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.filter
+   *   A filter expression that filters resources listed in the response. The expression must specify the field name, a comparison operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The comparison operator must be either `=`, `!=`, `>`, or `<`.
+   *
+   *   For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`.
+   *
+   *   You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels.
+   *
+   *   To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ```
+   * @param {number} request.maxResults
+   *   The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)
+   * @param {string} request.orderBy
+   *   Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name.
+   *
+   *   You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first.
+   *
+   *   Currently, only sorting by `name` or `creationTimestamp desc` is supported.
+   * @param {string} request.pageToken
+   *   Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
+   * @param {string} request.project
+   *   Project ID for this request.
+   * @param {boolean} request.returnPartialSuccess
+   *   Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+   * @param {string} request.zone
+   *   The name of the zone for this request.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing [Instance]{@link google.cloud.compute.v1.Instance} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   */
+  listStream(
+    request?: protos.google.cloud.compute.v1.IListInstancesRequest,
+    options?: CallOptions
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        project: request.project || '',
+      });
+    const callSettings = new gax.CallSettings(options);
+    this.initialize();
+    return this.descriptors.page.list.createStream(
+      this.innerApiCalls.list as gax.GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+  /**
+   * Equivalent to `list`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.filter
+   *   A filter expression that filters resources listed in the response. The expression must specify the field name, a comparison operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The comparison operator must be either `=`, `!=`, `>`, or `<`.
+   *
+   *   For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`.
+   *
+   *   You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels.
+   *
+   *   To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ```
+   * @param {number} request.maxResults
+   *   The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)
+   * @param {string} request.orderBy
+   *   Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name.
+   *
+   *   You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first.
+   *
+   *   Currently, only sorting by `name` or `creationTimestamp desc` is supported.
+   * @param {string} request.pageToken
+   *   Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
+   * @param {string} request.project
+   *   Project ID for this request.
+   * @param {boolean} request.returnPartialSuccess
+   *   Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+   * @param {string} request.zone
+   *   The name of the zone for this request.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   [Instance]{@link google.cloud.compute.v1.Instance}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   * @example
+   * const iterable = client.listAsync(request);
+   * for await (const response of iterable) {
+   *   // process response
+   * }
+   */
+  listAsync(
+    request?: protos.google.cloud.compute.v1.IListInstancesRequest,
+    options?: CallOptions
+  ): AsyncIterable<protos.google.cloud.compute.v1.IInstance> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        project: request.project || '',
+      });
+    options = options || {};
+    const callSettings = new gax.CallSettings(options);
+    this.initialize();
+    return this.descriptors.page.list.asyncIterate(
+      this.innerApiCalls['list'] as GaxCall,
+      request as unknown as RequestType,
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.compute.v1.IInstance>;
+  }
+  listReferrers(
+    request?: protos.google.cloud.compute.v1.IListReferrersInstancesRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.compute.v1.IReference[],
+      protos.google.cloud.compute.v1.IListReferrersInstancesRequest | null,
+      protos.google.cloud.compute.v1.IInstanceListReferrers
+    ]
+  >;
+  listReferrers(
+    request: protos.google.cloud.compute.v1.IListReferrersInstancesRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.compute.v1.IListReferrersInstancesRequest,
+      protos.google.cloud.compute.v1.IInstanceListReferrers | null | undefined,
+      protos.google.cloud.compute.v1.IReference
+    >
+  ): void;
+  listReferrers(
+    request: protos.google.cloud.compute.v1.IListReferrersInstancesRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.compute.v1.IListReferrersInstancesRequest,
+      protos.google.cloud.compute.v1.IInstanceListReferrers | null | undefined,
+      protos.google.cloud.compute.v1.IReference
+    >
+  ): void;
+  /**
+   * Retrieves a list of resources that refer to the VM instance specified in the request. For example, if the VM instance is part of a managed or unmanaged instance group, the referrers list includes the instance group. For more information, read Viewing referrers to VM instances.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.filter
+   *   A filter expression that filters resources listed in the response. The expression must specify the field name, a comparison operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The comparison operator must be either `=`, `!=`, `>`, or `<`.
+   *
+   *   For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`.
+   *
+   *   You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels.
+   *
+   *   To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ```
+   * @param {string} request.instance
+   *   Name of the target instance scoping this request, or '-' if the request should span over all instances in the container.
+   * @param {number} request.maxResults
+   *   The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)
+   * @param {string} request.orderBy
+   *   Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name.
+   *
+   *   You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first.
+   *
+   *   Currently, only sorting by `name` or `creationTimestamp desc` is supported.
+   * @param {string} request.pageToken
+   *   Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
+   * @param {string} request.project
+   *   Project ID for this request.
+   * @param {boolean} request.returnPartialSuccess
+   *   Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+   * @param {string} request.zone
+   *   The name of the zone for this request.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of [Reference]{@link google.cloud.compute.v1.Reference}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listReferrersAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   */
+  listReferrers(
+    request?: protos.google.cloud.compute.v1.IListReferrersInstancesRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.cloud.compute.v1.IListReferrersInstancesRequest,
+          | protos.google.cloud.compute.v1.IInstanceListReferrers
+          | null
+          | undefined,
+          protos.google.cloud.compute.v1.IReference
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.compute.v1.IListReferrersInstancesRequest,
+      protos.google.cloud.compute.v1.IInstanceListReferrers | null | undefined,
+      protos.google.cloud.compute.v1.IReference
+    >
+  ): Promise<
+    [
+      protos.google.cloud.compute.v1.IReference[],
+      protos.google.cloud.compute.v1.IListReferrersInstancesRequest | null,
+      protos.google.cloud.compute.v1.IInstanceListReferrers
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        project: request.project || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.listReferrers(request, options, callback);
+  }
+
+  /**
+   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.filter
+   *   A filter expression that filters resources listed in the response. The expression must specify the field name, a comparison operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The comparison operator must be either `=`, `!=`, `>`, or `<`.
+   *
+   *   For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`.
+   *
+   *   You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels.
+   *
+   *   To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ```
+   * @param {string} request.instance
+   *   Name of the target instance scoping this request, or '-' if the request should span over all instances in the container.
+   * @param {number} request.maxResults
+   *   The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)
+   * @param {string} request.orderBy
+   *   Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name.
+   *
+   *   You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first.
+   *
+   *   Currently, only sorting by `name` or `creationTimestamp desc` is supported.
+   * @param {string} request.pageToken
+   *   Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
+   * @param {string} request.project
+   *   Project ID for this request.
+   * @param {boolean} request.returnPartialSuccess
+   *   Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+   * @param {string} request.zone
+   *   The name of the zone for this request.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing [Reference]{@link google.cloud.compute.v1.Reference} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listReferrersAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   */
+  listReferrersStream(
+    request?: protos.google.cloud.compute.v1.IListReferrersInstancesRequest,
+    options?: CallOptions
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        project: request.project || '',
+      });
+    const callSettings = new gax.CallSettings(options);
+    this.initialize();
+    return this.descriptors.page.listReferrers.createStream(
+      this.innerApiCalls.listReferrers as gax.GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+  /**
+   * Equivalent to `listReferrers`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.filter
+   *   A filter expression that filters resources listed in the response. The expression must specify the field name, a comparison operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The comparison operator must be either `=`, `!=`, `>`, or `<`.
+   *
+   *   For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`.
+   *
+   *   You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels.
+   *
+   *   To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ```
+   * @param {string} request.instance
+   *   Name of the target instance scoping this request, or '-' if the request should span over all instances in the container.
+   * @param {number} request.maxResults
+   *   The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)
+   * @param {string} request.orderBy
+   *   Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name.
+   *
+   *   You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first.
+   *
+   *   Currently, only sorting by `name` or `creationTimestamp desc` is supported.
+   * @param {string} request.pageToken
+   *   Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
+   * @param {string} request.project
+   *   Project ID for this request.
+   * @param {boolean} request.returnPartialSuccess
+   *   Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+   * @param {string} request.zone
+   *   The name of the zone for this request.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   [Reference]{@link google.cloud.compute.v1.Reference}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   * @example
+   * const iterable = client.listReferrersAsync(request);
+   * for await (const response of iterable) {
+   *   // process response
+   * }
+   */
+  listReferrersAsync(
+    request?: protos.google.cloud.compute.v1.IListReferrersInstancesRequest,
+    options?: CallOptions
+  ): AsyncIterable<protos.google.cloud.compute.v1.IReference> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        project: request.project || '',
+      });
+    options = options || {};
+    const callSettings = new gax.CallSettings(options);
+    this.initialize();
+    return this.descriptors.page.listReferrers.asyncIterate(
+      this.innerApiCalls['listReferrers'] as GaxCall,
+      request as unknown as RequestType,
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.compute.v1.IReference>;
   }
 
   /**

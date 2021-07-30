@@ -18,8 +18,17 @@
 
 /* global window */
 import * as gax from 'google-gax';
-import {Callback, CallOptions, Descriptors, ClientOptions} from 'google-gax';
+import {
+  Callback,
+  CallOptions,
+  Descriptors,
+  ClientOptions,
+  PaginationCallback,
+  GaxCall,
+} from 'google-gax';
 
+import {Transform} from 'stream';
+import {RequestType} from 'google-gax/build/src/apitypes';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
 /**
@@ -39,6 +48,7 @@ const version = require('../../../package.json').version;
 export class RegionDisksClient {
   private _terminated = false;
   private _opts: ClientOptions;
+  private _providedCustomServicePath: boolean;
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
@@ -50,6 +60,7 @@ export class RegionDisksClient {
     longrunning: {},
     batching: {},
   };
+  warn: (code: string, message: string, warnType?: string) => void;
   innerApiCalls: {[name: string]: Function};
   regionDisksStub?: Promise<{[name: string]: Function}>;
 
@@ -92,8 +103,17 @@ export class RegionDisksClient {
     const staticMembers = this.constructor as typeof RegionDisksClient;
     const servicePath =
       opts?.servicePath || opts?.apiEndpoint || staticMembers.servicePath;
+    this._providedCustomServicePath = !!(
+      opts?.servicePath || opts?.apiEndpoint
+    );
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
+    // Implicitely set 'rest' value for the apis use rest as transport (eg. googleapis-discovery apis).
+    if (!opts) {
+      opts = {fallback: 'rest'};
+    } else {
+      opts.fallback = opts.fallback ?? 'rest';
+    }
     const fallback =
       opts?.fallback ??
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
@@ -130,12 +150,25 @@ export class RegionDisksClient {
     }
     if (!opts.fallback) {
       clientHeader.push(`grpc/${this._gaxGrpc.grpcVersion}`);
+    } else if (opts.fallback === 'rest') {
+      clientHeader.push(`rest/${this._gaxGrpc.grpcVersion}`);
     }
     if (opts.libName && opts.libVersion) {
       clientHeader.push(`${opts.libName}/${opts.libVersion}`);
     }
     // Load the applicable protos.
     this._protos = this._gaxGrpc.loadProtoJSON(jsonProtos);
+
+    // Some of the methods on this service return "paged" results,
+    // (e.g. 50 results at a time, with tokens to get subsequent
+    // pages). Denote the keys used for pagination and results.
+    this.descriptors.page = {
+      list: new this._gaxModule.PageDescriptor(
+        'pageToken',
+        'nextPageToken',
+        'items'
+      ),
+    };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
@@ -149,6 +182,9 @@ export class RegionDisksClient {
     // of calling the API is handled in `google-gax`, with this code
     // merely providing the destination and request information.
     this.innerApiCalls = {};
+
+    // Add a warn function to the client constructor so it can be easily tested.
+    this.warn = gax.warn;
   }
 
   /**
@@ -177,7 +213,8 @@ export class RegionDisksClient {
           )
         : // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.cloud.compute.v1.RegionDisks,
-      this._opts
+      this._opts,
+      this._providedCustomServicePath
     ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
@@ -211,7 +248,7 @@ export class RegionDisksClient {
         }
       );
 
-      const descriptor = undefined;
+      const descriptor = this.descriptors.page[methodName] || undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
@@ -281,7 +318,7 @@ export class RegionDisksClient {
   // -- Service calls --
   // -------------------
   addResourcePolicies(
-    request: protos.google.cloud.compute.v1.IAddResourcePoliciesRegionDiskRequest,
+    request?: protos.google.cloud.compute.v1.IAddResourcePoliciesRegionDiskRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -344,7 +381,7 @@ export class RegionDisksClient {
    * const [response] = await client.addResourcePolicies(request);
    */
   addResourcePolicies(
-    request: protos.google.cloud.compute.v1.IAddResourcePoliciesRegionDiskRequest,
+    request?: protos.google.cloud.compute.v1.IAddResourcePoliciesRegionDiskRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -390,7 +427,7 @@ export class RegionDisksClient {
     return this.innerApiCalls.addResourcePolicies(request, options, callback);
   }
   createSnapshot(
-    request: protos.google.cloud.compute.v1.ICreateSnapshotRegionDiskRequest,
+    request?: protos.google.cloud.compute.v1.ICreateSnapshotRegionDiskRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -453,7 +490,7 @@ export class RegionDisksClient {
    * const [response] = await client.createSnapshot(request);
    */
   createSnapshot(
-    request: protos.google.cloud.compute.v1.ICreateSnapshotRegionDiskRequest,
+    request?: protos.google.cloud.compute.v1.ICreateSnapshotRegionDiskRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -499,7 +536,7 @@ export class RegionDisksClient {
     return this.innerApiCalls.createSnapshot(request, options, callback);
   }
   delete(
-    request: protos.google.cloud.compute.v1.IDeleteRegionDiskRequest,
+    request?: protos.google.cloud.compute.v1.IDeleteRegionDiskRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -557,7 +594,7 @@ export class RegionDisksClient {
    * const [response] = await client.delete(request);
    */
   delete(
-    request: protos.google.cloud.compute.v1.IDeleteRegionDiskRequest,
+    request?: protos.google.cloud.compute.v1.IDeleteRegionDiskRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -600,7 +637,7 @@ export class RegionDisksClient {
     return this.innerApiCalls.delete(request, options, callback);
   }
   get(
-    request: protos.google.cloud.compute.v1.IGetRegionDiskRequest,
+    request?: protos.google.cloud.compute.v1.IGetRegionDiskRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -648,7 +685,7 @@ export class RegionDisksClient {
    * const [response] = await client.get(request);
    */
   get(
-    request: protos.google.cloud.compute.v1.IGetRegionDiskRequest,
+    request?: protos.google.cloud.compute.v1.IGetRegionDiskRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -689,7 +726,7 @@ export class RegionDisksClient {
     return this.innerApiCalls.get(request, options, callback);
   }
   getIamPolicy(
-    request: protos.google.cloud.compute.v1.IGetIamPolicyRegionDiskRequest,
+    request?: protos.google.cloud.compute.v1.IGetIamPolicyRegionDiskRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -743,7 +780,7 @@ export class RegionDisksClient {
    * const [response] = await client.getIamPolicy(request);
    */
   getIamPolicy(
-    request: protos.google.cloud.compute.v1.IGetIamPolicyRegionDiskRequest,
+    request?: protos.google.cloud.compute.v1.IGetIamPolicyRegionDiskRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -786,7 +823,7 @@ export class RegionDisksClient {
     return this.innerApiCalls.getIamPolicy(request, options, callback);
   }
   insert(
-    request: protos.google.cloud.compute.v1.IInsertRegionDiskRequest,
+    request?: protos.google.cloud.compute.v1.IInsertRegionDiskRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -834,7 +871,7 @@ export class RegionDisksClient {
    *
    *   The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
    * @param {string} request.sourceImage
-   *   Optional. Source image to restore onto a disk.
+   *   Source image to restore onto a disk. This field is optional.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -846,7 +883,7 @@ export class RegionDisksClient {
    * const [response] = await client.insert(request);
    */
   insert(
-    request: protos.google.cloud.compute.v1.IInsertRegionDiskRequest,
+    request?: protos.google.cloud.compute.v1.IInsertRegionDiskRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -888,115 +925,8 @@ export class RegionDisksClient {
     this.initialize();
     return this.innerApiCalls.insert(request, options, callback);
   }
-  list(
-    request: protos.google.cloud.compute.v1.IListRegionDisksRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.compute.v1.IDiskList,
-      protos.google.cloud.compute.v1.IListRegionDisksRequest | undefined,
-      {} | undefined
-    ]
-  >;
-  list(
-    request: protos.google.cloud.compute.v1.IListRegionDisksRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IDiskList,
-      protos.google.cloud.compute.v1.IListRegionDisksRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  list(
-    request: protos.google.cloud.compute.v1.IListRegionDisksRequest,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IDiskList,
-      protos.google.cloud.compute.v1.IListRegionDisksRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  /**
-   * Retrieves the list of persistent disks contained within the specified region.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.filter
-   *   A filter expression that filters resources listed in the response. The expression must specify the field name, a comparison operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The comparison operator must be either `=`, `!=`, `>`, or `<`.
-   *
-   *   For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`.
-   *
-   *   You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels.
-   *
-   *   To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ```
-   * @param {number} request.maxResults
-   *   The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)
-   * @param {string} request.orderBy
-   *   Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name.
-   *
-   *   You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first.
-   *
-   *   Currently, only sorting by `name` or `creationTimestamp desc` is supported.
-   * @param {string} request.pageToken
-   *   Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
-   * @param {string} request.project
-   *   Project ID for this request.
-   * @param {string} request.region
-   *   Name of the region for this request.
-   * @param {boolean} request.returnPartialSuccess
-   *   Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [DiskList]{@link google.cloud.compute.v1.DiskList}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.list(request);
-   */
-  list(
-    request: protos.google.cloud.compute.v1.IListRegionDisksRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          protos.google.cloud.compute.v1.IDiskList,
-          | protos.google.cloud.compute.v1.IListRegionDisksRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.compute.v1.IDiskList,
-      protos.google.cloud.compute.v1.IListRegionDisksRequest | null | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.compute.v1.IDiskList,
-      protos.google.cloud.compute.v1.IListRegionDisksRequest | undefined,
-      {} | undefined
-    ]
-  > | void {
-    request = request || {};
-    let options: CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        project: request.project || '',
-      });
-    this.initialize();
-    return this.innerApiCalls.list(request, options, callback);
-  }
   removeResourcePolicies(
-    request: protos.google.cloud.compute.v1.IRemoveResourcePoliciesRegionDiskRequest,
+    request?: protos.google.cloud.compute.v1.IRemoveResourcePoliciesRegionDiskRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1059,7 +989,7 @@ export class RegionDisksClient {
    * const [response] = await client.removeResourcePolicies(request);
    */
   removeResourcePolicies(
-    request: protos.google.cloud.compute.v1.IRemoveResourcePoliciesRegionDiskRequest,
+    request?: protos.google.cloud.compute.v1.IRemoveResourcePoliciesRegionDiskRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -1109,7 +1039,7 @@ export class RegionDisksClient {
     );
   }
   resize(
-    request: protos.google.cloud.compute.v1.IResizeRegionDiskRequest,
+    request?: protos.google.cloud.compute.v1.IResizeRegionDiskRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1169,7 +1099,7 @@ export class RegionDisksClient {
    * const [response] = await client.resize(request);
    */
   resize(
-    request: protos.google.cloud.compute.v1.IResizeRegionDiskRequest,
+    request?: protos.google.cloud.compute.v1.IResizeRegionDiskRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -1212,7 +1142,7 @@ export class RegionDisksClient {
     return this.innerApiCalls.resize(request, options, callback);
   }
   setIamPolicy(
-    request: protos.google.cloud.compute.v1.ISetIamPolicyRegionDiskRequest,
+    request?: protos.google.cloud.compute.v1.ISetIamPolicyRegionDiskRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1266,7 +1196,7 @@ export class RegionDisksClient {
    * const [response] = await client.setIamPolicy(request);
    */
   setIamPolicy(
-    request: protos.google.cloud.compute.v1.ISetIamPolicyRegionDiskRequest,
+    request?: protos.google.cloud.compute.v1.ISetIamPolicyRegionDiskRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -1309,7 +1239,7 @@ export class RegionDisksClient {
     return this.innerApiCalls.setIamPolicy(request, options, callback);
   }
   setLabels(
-    request: protos.google.cloud.compute.v1.ISetLabelsRegionDiskRequest,
+    request?: protos.google.cloud.compute.v1.ISetLabelsRegionDiskRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1369,7 +1299,7 @@ export class RegionDisksClient {
    * const [response] = await client.setLabels(request);
    */
   setLabels(
-    request: protos.google.cloud.compute.v1.ISetLabelsRegionDiskRequest,
+    request?: protos.google.cloud.compute.v1.ISetLabelsRegionDiskRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -1412,7 +1342,7 @@ export class RegionDisksClient {
     return this.innerApiCalls.setLabels(request, options, callback);
   }
   testIamPermissions(
-    request: protos.google.cloud.compute.v1.ITestIamPermissionsRegionDiskRequest,
+    request?: protos.google.cloud.compute.v1.ITestIamPermissionsRegionDiskRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1469,7 +1399,7 @@ export class RegionDisksClient {
    * const [response] = await client.testIamPermissions(request);
    */
   testIamPermissions(
-    request: protos.google.cloud.compute.v1.ITestIamPermissionsRegionDiskRequest,
+    request?: protos.google.cloud.compute.v1.ITestIamPermissionsRegionDiskRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
@@ -1513,6 +1443,244 @@ export class RegionDisksClient {
       });
     this.initialize();
     return this.innerApiCalls.testIamPermissions(request, options, callback);
+  }
+
+  list(
+    request?: protos.google.cloud.compute.v1.IListRegionDisksRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.compute.v1.IDisk[],
+      protos.google.cloud.compute.v1.IListRegionDisksRequest | null,
+      protos.google.cloud.compute.v1.IDiskList
+    ]
+  >;
+  list(
+    request: protos.google.cloud.compute.v1.IListRegionDisksRequest,
+    options: CallOptions,
+    callback: PaginationCallback<
+      protos.google.cloud.compute.v1.IListRegionDisksRequest,
+      protos.google.cloud.compute.v1.IDiskList | null | undefined,
+      protos.google.cloud.compute.v1.IDisk
+    >
+  ): void;
+  list(
+    request: protos.google.cloud.compute.v1.IListRegionDisksRequest,
+    callback: PaginationCallback<
+      protos.google.cloud.compute.v1.IListRegionDisksRequest,
+      protos.google.cloud.compute.v1.IDiskList | null | undefined,
+      protos.google.cloud.compute.v1.IDisk
+    >
+  ): void;
+  /**
+   * Retrieves the list of persistent disks contained within the specified region.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.filter
+   *   A filter expression that filters resources listed in the response. The expression must specify the field name, a comparison operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The comparison operator must be either `=`, `!=`, `>`, or `<`.
+   *
+   *   For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`.
+   *
+   *   You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels.
+   *
+   *   To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ```
+   * @param {number} request.maxResults
+   *   The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)
+   * @param {string} request.orderBy
+   *   Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name.
+   *
+   *   You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first.
+   *
+   *   Currently, only sorting by `name` or `creationTimestamp desc` is supported.
+   * @param {string} request.pageToken
+   *   Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
+   * @param {string} request.project
+   *   Project ID for this request.
+   * @param {string} request.region
+   *   Name of the region for this request.
+   * @param {boolean} request.returnPartialSuccess
+   *   Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is Array of [Disk]{@link google.cloud.compute.v1.Disk}.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed and will merge results from all the pages into this array.
+   *   Note that it can affect your quota.
+   *   We recommend using `listAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   */
+  list(
+    request?: protos.google.cloud.compute.v1.IListRegionDisksRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | PaginationCallback<
+          protos.google.cloud.compute.v1.IListRegionDisksRequest,
+          protos.google.cloud.compute.v1.IDiskList | null | undefined,
+          protos.google.cloud.compute.v1.IDisk
+        >,
+    callback?: PaginationCallback<
+      protos.google.cloud.compute.v1.IListRegionDisksRequest,
+      protos.google.cloud.compute.v1.IDiskList | null | undefined,
+      protos.google.cloud.compute.v1.IDisk
+    >
+  ): Promise<
+    [
+      protos.google.cloud.compute.v1.IDisk[],
+      protos.google.cloud.compute.v1.IListRegionDisksRequest | null,
+      protos.google.cloud.compute.v1.IDiskList
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        project: request.project || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.list(request, options, callback);
+  }
+
+  /**
+   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.filter
+   *   A filter expression that filters resources listed in the response. The expression must specify the field name, a comparison operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The comparison operator must be either `=`, `!=`, `>`, or `<`.
+   *
+   *   For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`.
+   *
+   *   You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels.
+   *
+   *   To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ```
+   * @param {number} request.maxResults
+   *   The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)
+   * @param {string} request.orderBy
+   *   Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name.
+   *
+   *   You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first.
+   *
+   *   Currently, only sorting by `name` or `creationTimestamp desc` is supported.
+   * @param {string} request.pageToken
+   *   Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
+   * @param {string} request.project
+   *   Project ID for this request.
+   * @param {string} request.region
+   *   Name of the region for this request.
+   * @param {boolean} request.returnPartialSuccess
+   *   Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Stream}
+   *   An object stream which emits an object representing [Disk]{@link google.cloud.compute.v1.Disk} on 'data' event.
+   *   The client library will perform auto-pagination by default: it will call the API as many
+   *   times as needed. Note that it can affect your quota.
+   *   We recommend using `listAsync()`
+   *   method described below for async iteration which you can stop as needed.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   */
+  listStream(
+    request?: protos.google.cloud.compute.v1.IListRegionDisksRequest,
+    options?: CallOptions
+  ): Transform {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        project: request.project || '',
+      });
+    const callSettings = new gax.CallSettings(options);
+    this.initialize();
+    return this.descriptors.page.list.createStream(
+      this.innerApiCalls.list as gax.GaxCall,
+      request,
+      callSettings
+    );
+  }
+
+  /**
+   * Equivalent to `list`, but returns an iterable object.
+   *
+   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.filter
+   *   A filter expression that filters resources listed in the response. The expression must specify the field name, a comparison operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The comparison operator must be either `=`, `!=`, `>`, or `<`.
+   *
+   *   For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`.
+   *
+   *   You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels.
+   *
+   *   To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ```
+   * @param {number} request.maxResults
+   *   The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)
+   * @param {string} request.orderBy
+   *   Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name.
+   *
+   *   You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first.
+   *
+   *   Currently, only sorting by `name` or `creationTimestamp desc` is supported.
+   * @param {string} request.pageToken
+   *   Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
+   * @param {string} request.project
+   *   Project ID for this request.
+   * @param {string} request.region
+   *   Name of the region for this request.
+   * @param {boolean} request.returnPartialSuccess
+   *   Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Object}
+   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
+   *   When you iterate the returned iterable, each element will be an object representing
+   *   [Disk]{@link google.cloud.compute.v1.Disk}. The API will be called under the hood as needed, once per the page,
+   *   so you can stop the iteration when you don't need more results.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   for more details and examples.
+   * @example
+   * const iterable = client.listAsync(request);
+   * for await (const response of iterable) {
+   *   // process response
+   * }
+   */
+  listAsync(
+    request?: protos.google.cloud.compute.v1.IListRegionDisksRequest,
+    options?: CallOptions
+  ): AsyncIterable<protos.google.cloud.compute.v1.IDisk> {
+    request = request || {};
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        project: request.project || '',
+      });
+    options = options || {};
+    const callSettings = new gax.CallSettings(options);
+    this.initialize();
+    return this.descriptors.page.list.asyncIterate(
+      this.innerApiCalls['list'] as GaxCall,
+      request as unknown as RequestType,
+      callSettings
+    ) as AsyncIterable<protos.google.cloud.compute.v1.IDisk>;
   }
 
   /**

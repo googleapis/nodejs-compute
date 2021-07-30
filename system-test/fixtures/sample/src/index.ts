@@ -25,6 +25,7 @@ import {
   DisksClient,
   DiskTypesClient,
   ExternalVpnGatewaysClient,
+  FirewallPoliciesClient,
   FirewallsClient,
   ForwardingRulesClient,
   GlobalAddressesClient,
@@ -32,6 +33,7 @@ import {
   GlobalNetworkEndpointGroupsClient,
   GlobalOperationsClient,
   GlobalOrganizationOperationsClient,
+  GlobalPublicDelegatedPrefixesClient,
   HealthChecksClient,
   ImagesClient,
   InstanceGroupManagersClient,
@@ -51,6 +53,8 @@ import {
   NodeTypesClient,
   PacketMirroringsClient,
   ProjectsClient,
+  PublicAdvertisedPrefixesClient,
+  PublicDelegatedPrefixesClient,
   RegionAutoscalersClient,
   RegionBackendServicesClient,
   RegionCommitmentsClient,
@@ -60,6 +64,7 @@ import {
   RegionHealthCheckServicesClient,
   RegionInstanceGroupManagersClient,
   RegionInstanceGroupsClient,
+  RegionInstancesClient,
   RegionNetworkEndpointGroupsClient,
   RegionNotificationEndpointsClient,
   RegionOperationsClient,
@@ -119,6 +124,9 @@ function doStuffWithExternalVpnGatewaysClient(
 ) {
   client.close();
 }
+function doStuffWithFirewallPoliciesClient(client: FirewallPoliciesClient) {
+  client.close();
+}
 function doStuffWithFirewallsClient(client: FirewallsClient) {
   client.close();
 }
@@ -143,6 +151,11 @@ function doStuffWithGlobalOperationsClient(client: GlobalOperationsClient) {
 }
 function doStuffWithGlobalOrganizationOperationsClient(
   client: GlobalOrganizationOperationsClient
+) {
+  client.close();
+}
+function doStuffWithGlobalPublicDelegatedPrefixesClient(
+  client: GlobalPublicDelegatedPrefixesClient
 ) {
   client.close();
 }
@@ -211,6 +224,16 @@ function doStuffWithPacketMirroringsClient(client: PacketMirroringsClient) {
 function doStuffWithProjectsClient(client: ProjectsClient) {
   client.close();
 }
+function doStuffWithPublicAdvertisedPrefixesClient(
+  client: PublicAdvertisedPrefixesClient
+) {
+  client.close();
+}
+function doStuffWithPublicDelegatedPrefixesClient(
+  client: PublicDelegatedPrefixesClient
+) {
+  client.close();
+}
 function doStuffWithRegionAutoscalersClient(client: RegionAutoscalersClient) {
   client.close();
 }
@@ -244,6 +267,9 @@ function doStuffWithRegionInstanceGroupManagersClient(
 function doStuffWithRegionInstanceGroupsClient(
   client: RegionInstanceGroupsClient
 ) {
+  client.close();
+}
+function doStuffWithRegionInstancesClient(client: RegionInstancesClient) {
   client.close();
 }
 function doStuffWithRegionNetworkEndpointGroupsClient(
@@ -373,6 +399,9 @@ function main() {
   const externalVpnGatewaysClient = new ExternalVpnGatewaysClient();
   doStuffWithExternalVpnGatewaysClient(externalVpnGatewaysClient);
   // check that the client instance can be created
+  const firewallPoliciesClient = new FirewallPoliciesClient();
+  doStuffWithFirewallPoliciesClient(firewallPoliciesClient);
+  // check that the client instance can be created
   const firewallsClient = new FirewallsClient();
   doStuffWithFirewallsClient(firewallsClient);
   // check that the client instance can be created
@@ -398,6 +427,12 @@ function main() {
     new GlobalOrganizationOperationsClient();
   doStuffWithGlobalOrganizationOperationsClient(
     globalOrganizationOperationsClient
+  );
+  // check that the client instance can be created
+  const globalPublicDelegatedPrefixesClient =
+    new GlobalPublicDelegatedPrefixesClient();
+  doStuffWithGlobalPublicDelegatedPrefixesClient(
+    globalPublicDelegatedPrefixesClient
   );
   // check that the client instance can be created
   const healthChecksClient = new HealthChecksClient();
@@ -457,6 +492,12 @@ function main() {
   const projectsClient = new ProjectsClient();
   doStuffWithProjectsClient(projectsClient);
   // check that the client instance can be created
+  const publicAdvertisedPrefixesClient = new PublicAdvertisedPrefixesClient();
+  doStuffWithPublicAdvertisedPrefixesClient(publicAdvertisedPrefixesClient);
+  // check that the client instance can be created
+  const publicDelegatedPrefixesClient = new PublicDelegatedPrefixesClient();
+  doStuffWithPublicDelegatedPrefixesClient(publicDelegatedPrefixesClient);
+  // check that the client instance can be created
   const regionAutoscalersClient = new RegionAutoscalersClient();
   doStuffWithRegionAutoscalersClient(regionAutoscalersClient);
   // check that the client instance can be created
@@ -486,6 +527,9 @@ function main() {
   // check that the client instance can be created
   const regionInstanceGroupsClient = new RegionInstanceGroupsClient();
   doStuffWithRegionInstanceGroupsClient(regionInstanceGroupsClient);
+  // check that the client instance can be created
+  const regionInstancesClient = new RegionInstancesClient();
+  doStuffWithRegionInstancesClient(regionInstancesClient);
   // check that the client instance can be created
   const regionNetworkEndpointGroupsClient =
     new RegionNetworkEndpointGroupsClient();

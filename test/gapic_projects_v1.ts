@@ -20,10 +20,12 @@ import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
 import {SinonStub} from 'sinon';
-import {describe, it} from 'mocha';
+import {describe, it, beforeEach, afterEach} from 'mocha';
 import * as projectsModule from '../src';
 
-import {protobuf} from 'google-gax';
+import {PassThrough} from 'stream';
+
+import {GoogleAuth, protobuf} from 'google-gax';
 
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
@@ -49,7 +51,81 @@ function stubSimpleCallWithCallback<ResponseType>(
     : sinon.stub().callsArgWith(2, null, response);
 }
 
+function stubPageStreamingCall<ResponseType>(
+  responses?: ResponseType[],
+  error?: Error
+) {
+  const pagingStub = sinon.stub();
+  if (responses) {
+    for (let i = 0; i < responses.length; ++i) {
+      pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
+    }
+  }
+  const transformStub = error
+    ? sinon.stub().callsArgWith(2, error)
+    : pagingStub;
+  const mockStream = new PassThrough({
+    objectMode: true,
+    transform: transformStub,
+  });
+  // trigger as many responses as needed
+  if (responses) {
+    for (let i = 0; i < responses.length; ++i) {
+      setImmediate(() => {
+        mockStream.write({});
+      });
+    }
+    setImmediate(() => {
+      mockStream.end();
+    });
+  } else {
+    setImmediate(() => {
+      mockStream.write({});
+    });
+    setImmediate(() => {
+      mockStream.end();
+    });
+  }
+  return sinon.stub().returns(mockStream);
+}
+
+function stubAsyncIterationCall<ResponseType>(
+  responses?: ResponseType[],
+  error?: Error
+) {
+  let counter = 0;
+  const asyncIterable = {
+    [Symbol.asyncIterator]() {
+      return {
+        async next() {
+          if (error) {
+            return Promise.reject(error);
+          }
+          if (counter >= responses!.length) {
+            return Promise.resolve({done: true, value: undefined});
+          }
+          return Promise.resolve({done: false, value: responses![counter++]});
+        },
+      };
+    },
+  };
+  return sinon.stub().returns(asyncIterable);
+}
+
 describe('v1.ProjectsClient', () => {
+  let googleAuth: GoogleAuth;
+  beforeEach(() => {
+    googleAuth = {
+      getClient: sinon.stub().resolves({
+        getRequestHeaders: sinon
+          .stub()
+          .resolves({Authorization: 'Bearer SOME_TOKEN'}),
+      }),
+    } as unknown as GoogleAuth;
+  });
+  afterEach(() => {
+    sinon.restore();
+  });
   it('has servicePath', () => {
     const servicePath = projectsModule.v1.ProjectsClient.servicePath;
     assert(servicePath);
@@ -80,7 +156,7 @@ describe('v1.ProjectsClient', () => {
 
   it('has initialize method and supports deferred initialization', async () => {
     const client = new projectsModule.v1.ProjectsClient({
-      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      auth: googleAuth,
       projectId: 'bogus',
     });
     assert.strictEqual(client.projectsStub, undefined);
@@ -90,7 +166,7 @@ describe('v1.ProjectsClient', () => {
 
   it('has close method', () => {
     const client = new projectsModule.v1.ProjectsClient({
-      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      auth: googleAuth,
       projectId: 'bogus',
     });
     client.close();
@@ -99,7 +175,7 @@ describe('v1.ProjectsClient', () => {
   it('has getProjectId method', async () => {
     const fakeProjectId = 'fake-project-id';
     const client = new projectsModule.v1.ProjectsClient({
-      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      auth: googleAuth,
       projectId: 'bogus',
     });
     client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -111,7 +187,7 @@ describe('v1.ProjectsClient', () => {
   it('has getProjectId method with callback', async () => {
     const fakeProjectId = 'fake-project-id';
     const client = new projectsModule.v1.ProjectsClient({
-      credentials: {client_email: 'bogus', private_key: 'bogus'},
+      auth: googleAuth,
       projectId: 'bogus',
     });
     client.auth.getProjectId = sinon
@@ -133,7 +209,7 @@ describe('v1.ProjectsClient', () => {
   describe('disableXpnHost', () => {
     it('invokes disableXpnHost without error', async () => {
       const client = new projectsModule.v1.ProjectsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        auth: googleAuth,
         projectId: 'bogus',
       });
       client.initialize();
@@ -164,7 +240,7 @@ describe('v1.ProjectsClient', () => {
 
     it('invokes disableXpnHost without error using callback', async () => {
       const client = new projectsModule.v1.ProjectsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        auth: googleAuth,
         projectId: 'bogus',
       });
       client.initialize();
@@ -211,7 +287,7 @@ describe('v1.ProjectsClient', () => {
 
     it('invokes disableXpnHost with error', async () => {
       const client = new projectsModule.v1.ProjectsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        auth: googleAuth,
         projectId: 'bogus',
       });
       client.initialize();
@@ -244,7 +320,7 @@ describe('v1.ProjectsClient', () => {
   describe('disableXpnResource', () => {
     it('invokes disableXpnResource without error', async () => {
       const client = new projectsModule.v1.ProjectsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        auth: googleAuth,
         projectId: 'bogus',
       });
       client.initialize();
@@ -276,7 +352,7 @@ describe('v1.ProjectsClient', () => {
 
     it('invokes disableXpnResource without error using callback', async () => {
       const client = new projectsModule.v1.ProjectsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        auth: googleAuth,
         projectId: 'bogus',
       });
       client.initialize();
@@ -323,7 +399,7 @@ describe('v1.ProjectsClient', () => {
 
     it('invokes disableXpnResource with error', async () => {
       const client = new projectsModule.v1.ProjectsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        auth: googleAuth,
         projectId: 'bogus',
       });
       client.initialize();
@@ -356,7 +432,7 @@ describe('v1.ProjectsClient', () => {
   describe('enableXpnHost', () => {
     it('invokes enableXpnHost without error', async () => {
       const client = new projectsModule.v1.ProjectsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        auth: googleAuth,
         projectId: 'bogus',
       });
       client.initialize();
@@ -387,7 +463,7 @@ describe('v1.ProjectsClient', () => {
 
     it('invokes enableXpnHost without error using callback', async () => {
       const client = new projectsModule.v1.ProjectsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        auth: googleAuth,
         projectId: 'bogus',
       });
       client.initialize();
@@ -434,7 +510,7 @@ describe('v1.ProjectsClient', () => {
 
     it('invokes enableXpnHost with error', async () => {
       const client = new projectsModule.v1.ProjectsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        auth: googleAuth,
         projectId: 'bogus',
       });
       client.initialize();
@@ -467,7 +543,7 @@ describe('v1.ProjectsClient', () => {
   describe('enableXpnResource', () => {
     it('invokes enableXpnResource without error', async () => {
       const client = new projectsModule.v1.ProjectsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        auth: googleAuth,
         projectId: 'bogus',
       });
       client.initialize();
@@ -498,7 +574,7 @@ describe('v1.ProjectsClient', () => {
 
     it('invokes enableXpnResource without error using callback', async () => {
       const client = new projectsModule.v1.ProjectsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        auth: googleAuth,
         projectId: 'bogus',
       });
       client.initialize();
@@ -545,7 +621,7 @@ describe('v1.ProjectsClient', () => {
 
     it('invokes enableXpnResource with error', async () => {
       const client = new projectsModule.v1.ProjectsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        auth: googleAuth,
         projectId: 'bogus',
       });
       client.initialize();
@@ -578,7 +654,7 @@ describe('v1.ProjectsClient', () => {
   describe('get', () => {
     it('invokes get without error', async () => {
       const client = new projectsModule.v1.ProjectsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        auth: googleAuth,
         projectId: 'bogus',
       });
       client.initialize();
@@ -609,7 +685,7 @@ describe('v1.ProjectsClient', () => {
 
     it('invokes get without error using callback', async () => {
       const client = new projectsModule.v1.ProjectsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        auth: googleAuth,
         projectId: 'bogus',
       });
       client.initialize();
@@ -655,7 +731,7 @@ describe('v1.ProjectsClient', () => {
 
     it('invokes get with error', async () => {
       const client = new projectsModule.v1.ProjectsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        auth: googleAuth,
         projectId: 'bogus',
       });
       client.initialize();
@@ -685,7 +761,7 @@ describe('v1.ProjectsClient', () => {
   describe('getXpnHost', () => {
     it('invokes getXpnHost without error', async () => {
       const client = new projectsModule.v1.ProjectsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        auth: googleAuth,
         projectId: 'bogus',
       });
       client.initialize();
@@ -716,7 +792,7 @@ describe('v1.ProjectsClient', () => {
 
     it('invokes getXpnHost without error using callback', async () => {
       const client = new projectsModule.v1.ProjectsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        auth: googleAuth,
         projectId: 'bogus',
       });
       client.initialize();
@@ -763,7 +839,7 @@ describe('v1.ProjectsClient', () => {
 
     it('invokes getXpnHost with error', async () => {
       const client = new projectsModule.v1.ProjectsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        auth: googleAuth,
         projectId: 'bogus',
       });
       client.initialize();
@@ -793,6 +869,567 @@ describe('v1.ProjectsClient', () => {
     });
   });
 
+  describe('moveDisk', () => {
+    it('invokes moveDisk without error', async () => {
+      const client = new projectsModule.v1.ProjectsClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.MoveDiskProjectRequest()
+      );
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.compute.v1.Operation()
+      );
+      client.innerApiCalls.moveDisk = stubSimpleCall(expectedResponse);
+      const [response] = await client.moveDisk(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.moveDisk as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes moveDisk without error using callback', async () => {
+      const client = new projectsModule.v1.ProjectsClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.MoveDiskProjectRequest()
+      );
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.compute.v1.Operation()
+      );
+      client.innerApiCalls.moveDisk =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.moveDisk(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.compute.v1.IOperation | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.moveDisk as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes moveDisk with error', async () => {
+      const client = new projectsModule.v1.ProjectsClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.MoveDiskProjectRequest()
+      );
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.moveDisk = stubSimpleCall(undefined, expectedError);
+      await assert.rejects(client.moveDisk(request), expectedError);
+      assert(
+        (client.innerApiCalls.moveDisk as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+  });
+
+  describe('moveInstance', () => {
+    it('invokes moveInstance without error', async () => {
+      const client = new projectsModule.v1.ProjectsClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.MoveInstanceProjectRequest()
+      );
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.compute.v1.Operation()
+      );
+      client.innerApiCalls.moveInstance = stubSimpleCall(expectedResponse);
+      const [response] = await client.moveInstance(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.moveInstance as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes moveInstance without error using callback', async () => {
+      const client = new projectsModule.v1.ProjectsClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.MoveInstanceProjectRequest()
+      );
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.compute.v1.Operation()
+      );
+      client.innerApiCalls.moveInstance =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.moveInstance(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.compute.v1.IOperation | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.moveInstance as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes moveInstance with error', async () => {
+      const client = new projectsModule.v1.ProjectsClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.MoveInstanceProjectRequest()
+      );
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.moveInstance = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.moveInstance(request), expectedError);
+      assert(
+        (client.innerApiCalls.moveInstance as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+  });
+
+  describe('setCommonInstanceMetadata', () => {
+    it('invokes setCommonInstanceMetadata without error', async () => {
+      const client = new projectsModule.v1.ProjectsClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.SetCommonInstanceMetadataProjectRequest()
+      );
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.compute.v1.Operation()
+      );
+      client.innerApiCalls.setCommonInstanceMetadata =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.setCommonInstanceMetadata(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.setCommonInstanceMetadata as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes setCommonInstanceMetadata without error using callback', async () => {
+      const client = new projectsModule.v1.ProjectsClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.SetCommonInstanceMetadataProjectRequest()
+      );
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.compute.v1.Operation()
+      );
+      client.innerApiCalls.setCommonInstanceMetadata =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.setCommonInstanceMetadata(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.compute.v1.IOperation | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.setCommonInstanceMetadata as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes setCommonInstanceMetadata with error', async () => {
+      const client = new projectsModule.v1.ProjectsClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.SetCommonInstanceMetadataProjectRequest()
+      );
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.setCommonInstanceMetadata = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.setCommonInstanceMetadata(request),
+        expectedError
+      );
+      assert(
+        (client.innerApiCalls.setCommonInstanceMetadata as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+  });
+
+  describe('setDefaultNetworkTier', () => {
+    it('invokes setDefaultNetworkTier without error', async () => {
+      const client = new projectsModule.v1.ProjectsClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.SetDefaultNetworkTierProjectRequest()
+      );
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.compute.v1.Operation()
+      );
+      client.innerApiCalls.setDefaultNetworkTier =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.setDefaultNetworkTier(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.setDefaultNetworkTier as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes setDefaultNetworkTier without error using callback', async () => {
+      const client = new projectsModule.v1.ProjectsClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.SetDefaultNetworkTierProjectRequest()
+      );
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.compute.v1.Operation()
+      );
+      client.innerApiCalls.setDefaultNetworkTier =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.setDefaultNetworkTier(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.compute.v1.IOperation | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.setDefaultNetworkTier as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes setDefaultNetworkTier with error', async () => {
+      const client = new projectsModule.v1.ProjectsClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.SetDefaultNetworkTierProjectRequest()
+      );
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.setDefaultNetworkTier = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(
+        client.setDefaultNetworkTier(request),
+        expectedError
+      );
+      assert(
+        (client.innerApiCalls.setDefaultNetworkTier as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+  });
+
+  describe('setUsageExportBucket', () => {
+    it('invokes setUsageExportBucket without error', async () => {
+      const client = new projectsModule.v1.ProjectsClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.SetUsageExportBucketProjectRequest()
+      );
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.compute.v1.Operation()
+      );
+      client.innerApiCalls.setUsageExportBucket =
+        stubSimpleCall(expectedResponse);
+      const [response] = await client.setUsageExportBucket(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.setUsageExportBucket as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes setUsageExportBucket without error using callback', async () => {
+      const client = new projectsModule.v1.ProjectsClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.SetUsageExportBucketProjectRequest()
+      );
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.compute.v1.Operation()
+      );
+      client.innerApiCalls.setUsageExportBucket =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.setUsageExportBucket(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.compute.v1.IOperation | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.setUsageExportBucket as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes setUsageExportBucket with error', async () => {
+      const client = new projectsModule.v1.ProjectsClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.SetUsageExportBucketProjectRequest()
+      );
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.setUsageExportBucket = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.setUsageExportBucket(request), expectedError);
+      assert(
+        (client.innerApiCalls.setUsageExportBucket as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+  });
+
   describe('getXpnResources', () => {
     it('invokes getXpnResources without error', async () => {
       const client = new projectsModule.v1.ProjectsClient({
@@ -812,9 +1449,17 @@ describe('v1.ProjectsClient', () => {
           },
         },
       };
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.compute.v1.ProjectsGetXpnResources()
-      );
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.compute.v1.XpnResourceId()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.compute.v1.XpnResourceId()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.compute.v1.XpnResourceId()
+        ),
+      ];
       client.innerApiCalls.getXpnResources = stubSimpleCall(expectedResponse);
       const [response] = await client.getXpnResources(request);
       assert.deepStrictEqual(response, expectedResponse);
@@ -843,9 +1488,17 @@ describe('v1.ProjectsClient', () => {
           },
         },
       };
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.compute.v1.ProjectsGetXpnResources()
-      );
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.compute.v1.XpnResourceId()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.compute.v1.XpnResourceId()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.compute.v1.XpnResourceId()
+        ),
+      ];
       client.innerApiCalls.getXpnResources =
         stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
@@ -853,7 +1506,7 @@ describe('v1.ProjectsClient', () => {
           request,
           (
             err?: Error | null,
-            result?: protos.google.cloud.compute.v1.IProjectsGetXpnResources | null
+            result?: protos.google.cloud.compute.v1.IXpnResourceId[] | null
           ) => {
             if (err) {
               reject(err);
@@ -902,6 +1555,184 @@ describe('v1.ProjectsClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+
+    it('invokes getXpnResourcesStream without error', async () => {
+      const client = new projectsModule.v1.ProjectsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.GetXpnResourcesProjectsRequest()
+      );
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.compute.v1.XpnResourceId()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.compute.v1.XpnResourceId()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.compute.v1.XpnResourceId()
+        ),
+      ];
+      client.descriptors.page.getXpnResources.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.getXpnResourcesStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.compute.v1.XpnResourceId[] = [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.compute.v1.XpnResourceId) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert(
+        (client.descriptors.page.getXpnResources.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.getXpnResources, request)
+      );
+      assert.strictEqual(
+        (
+          client.descriptors.page.getXpnResources.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
+        expectedHeaderRequestParams
+      );
+    });
+
+    it('invokes getXpnResourcesStream with error', async () => {
+      const client = new projectsModule.v1.ProjectsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.GetXpnResourcesProjectsRequest()
+      );
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
+      const expectedError = new Error('expected');
+      client.descriptors.page.getXpnResources.createStream =
+        stubPageStreamingCall(undefined, expectedError);
+      const stream = client.getXpnResourcesStream(request);
+      const promise = new Promise((resolve, reject) => {
+        const responses: protos.google.cloud.compute.v1.XpnResourceId[] = [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.compute.v1.XpnResourceId) => {
+            responses.push(response);
+          }
+        );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
+      });
+      await assert.rejects(promise, expectedError);
+      assert(
+        (client.descriptors.page.getXpnResources.createStream as SinonStub)
+          .getCall(0)
+          .calledWith(client.innerApiCalls.getXpnResources, request)
+      );
+      assert.strictEqual(
+        (
+          client.descriptors.page.getXpnResources.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
+        expectedHeaderRequestParams
+      );
+    });
+
+    it('uses async iteration with getXpnResources without error', async () => {
+      const client = new projectsModule.v1.ProjectsClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.GetXpnResourcesProjectsRequest()
+      );
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
+      const expectedResponse = [
+        generateSampleMessage(
+          new protos.google.cloud.compute.v1.XpnResourceId()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.compute.v1.XpnResourceId()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.compute.v1.XpnResourceId()
+        ),
+      ];
+      client.descriptors.page.getXpnResources.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.compute.v1.IXpnResourceId[] = [];
+      const iterable = client.getXpnResourcesAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.getXpnResources.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert.strictEqual(
+        (
+          client.descriptors.page.getXpnResources.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
+        expectedHeaderRequestParams
+      );
+    });
+
+    it('uses async iteration with getXpnResources with error', async () => {
+      const client = new projectsModule.v1.ProjectsClient({
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.GetXpnResourcesProjectsRequest()
+      );
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
+      const expectedError = new Error('expected');
+      client.descriptors.page.getXpnResources.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.getXpnResourcesAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.cloud.compute.v1.IXpnResourceId[] = [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
+      });
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.getXpnResources.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert.strictEqual(
+        (
+          client.descriptors.page.getXpnResources.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
+        expectedHeaderRequestParams
+      );
+    });
   });
 
   describe('listXpnHosts', () => {
@@ -923,9 +1754,11 @@ describe('v1.ProjectsClient', () => {
           },
         },
       };
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.compute.v1.XpnHostList()
-      );
+      const expectedResponse = [
+        generateSampleMessage(new protos.google.cloud.compute.v1.Project()),
+        generateSampleMessage(new protos.google.cloud.compute.v1.Project()),
+        generateSampleMessage(new protos.google.cloud.compute.v1.Project()),
+      ];
       client.innerApiCalls.listXpnHosts = stubSimpleCall(expectedResponse);
       const [response] = await client.listXpnHosts(request);
       assert.deepStrictEqual(response, expectedResponse);
@@ -954,9 +1787,11 @@ describe('v1.ProjectsClient', () => {
           },
         },
       };
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.compute.v1.XpnHostList()
-      );
+      const expectedResponse = [
+        generateSampleMessage(new protos.google.cloud.compute.v1.Project()),
+        generateSampleMessage(new protos.google.cloud.compute.v1.Project()),
+        generateSampleMessage(new protos.google.cloud.compute.v1.Project()),
+      ];
       client.innerApiCalls.listXpnHosts =
         stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
@@ -964,7 +1799,7 @@ describe('v1.ProjectsClient', () => {
           request,
           (
             err?: Error | null,
-            result?: protos.google.cloud.compute.v1.IXpnHostList | null
+            result?: protos.google.cloud.compute.v1.IProject[] | null
           ) => {
             if (err) {
               reject(err);
@@ -1013,565 +1848,172 @@ describe('v1.ProjectsClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
-  });
 
-  describe('moveDisk', () => {
-    it('invokes moveDisk without error', async () => {
+    it('invokes listXpnHostsStream without error', async () => {
       const client = new projectsModule.v1.ProjectsClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.compute.v1.MoveDiskProjectRequest()
+        new protos.google.cloud.compute.v1.ListXpnHostsProjectsRequest()
       );
       request.project = '';
       const expectedHeaderRequestParams = 'project=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.compute.v1.Operation()
-      );
-      client.innerApiCalls.moveDisk = stubSimpleCall(expectedResponse);
-      const [response] = await client.moveDisk(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.moveDisk as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
-    });
-
-    it('invokes moveDisk without error using callback', async () => {
-      const client = new projectsModule.v1.ProjectsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.compute.v1.MoveDiskProjectRequest()
-      );
-      request.project = '';
-      const expectedHeaderRequestParams = 'project=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.compute.v1.Operation()
-      );
-      client.innerApiCalls.moveDisk =
-        stubSimpleCallWithCallback(expectedResponse);
+      const expectedResponse = [
+        generateSampleMessage(new protos.google.cloud.compute.v1.Project()),
+        generateSampleMessage(new protos.google.cloud.compute.v1.Project()),
+        generateSampleMessage(new protos.google.cloud.compute.v1.Project()),
+      ];
+      client.descriptors.page.listXpnHosts.createStream =
+        stubPageStreamingCall(expectedResponse);
+      const stream = client.listXpnHostsStream(request);
       const promise = new Promise((resolve, reject) => {
-        client.moveDisk(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.compute.v1.IOperation | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
+        const responses: protos.google.cloud.compute.v1.Project[] = [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.compute.v1.Project) => {
+            responses.push(response);
           }
         );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
       });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
+      const responses = await promise;
+      assert.deepStrictEqual(responses, expectedResponse);
       assert(
-        (client.innerApiCalls.moveDisk as SinonStub)
+        (client.descriptors.page.listXpnHosts.createStream as SinonStub)
           .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
+          .calledWith(client.innerApiCalls.listXpnHosts, request)
+      );
+      assert.strictEqual(
+        (
+          client.descriptors.page.listXpnHosts.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
+        expectedHeaderRequestParams
       );
     });
 
-    it('invokes moveDisk with error', async () => {
+    it('invokes listXpnHostsStream with error', async () => {
       const client = new projectsModule.v1.ProjectsClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.compute.v1.MoveDiskProjectRequest()
+        new protos.google.cloud.compute.v1.ListXpnHostsProjectsRequest()
       );
       request.project = '';
       const expectedHeaderRequestParams = 'project=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
       const expectedError = new Error('expected');
-      client.innerApiCalls.moveDisk = stubSimpleCall(undefined, expectedError);
-      await assert.rejects(client.moveDisk(request), expectedError);
-      assert(
-        (client.innerApiCalls.moveDisk as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
-    });
-  });
-
-  describe('moveInstance', () => {
-    it('invokes moveInstance without error', async () => {
-      const client = new projectsModule.v1.ProjectsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.compute.v1.MoveInstanceProjectRequest()
-      );
-      request.project = '';
-      const expectedHeaderRequestParams = 'project=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.compute.v1.Operation()
-      );
-      client.innerApiCalls.moveInstance = stubSimpleCall(expectedResponse);
-      const [response] = await client.moveInstance(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.moveInstance as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
-    });
-
-    it('invokes moveInstance without error using callback', async () => {
-      const client = new projectsModule.v1.ProjectsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.compute.v1.MoveInstanceProjectRequest()
-      );
-      request.project = '';
-      const expectedHeaderRequestParams = 'project=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.compute.v1.Operation()
-      );
-      client.innerApiCalls.moveInstance =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.moveInstance(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.compute.v1.IOperation | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.moveInstance as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
-    });
-
-    it('invokes moveInstance with error', async () => {
-      const client = new projectsModule.v1.ProjectsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.compute.v1.MoveInstanceProjectRequest()
-      );
-      request.project = '';
-      const expectedHeaderRequestParams = 'project=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedError = new Error('expected');
-      client.innerApiCalls.moveInstance = stubSimpleCall(
+      client.descriptors.page.listXpnHosts.createStream = stubPageStreamingCall(
         undefined,
         expectedError
       );
-      await assert.rejects(client.moveInstance(request), expectedError);
-      assert(
-        (client.innerApiCalls.moveInstance as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
-    });
-  });
-
-  describe('setCommonInstanceMetadata', () => {
-    it('invokes setCommonInstanceMetadata without error', async () => {
-      const client = new projectsModule.v1.ProjectsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.compute.v1.SetCommonInstanceMetadataProjectRequest()
-      );
-      request.project = '';
-      const expectedHeaderRequestParams = 'project=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.compute.v1.Operation()
-      );
-      client.innerApiCalls.setCommonInstanceMetadata =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.setCommonInstanceMetadata(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.setCommonInstanceMetadata as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
-    });
-
-    it('invokes setCommonInstanceMetadata without error using callback', async () => {
-      const client = new projectsModule.v1.ProjectsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.compute.v1.SetCommonInstanceMetadataProjectRequest()
-      );
-      request.project = '';
-      const expectedHeaderRequestParams = 'project=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.compute.v1.Operation()
-      );
-      client.innerApiCalls.setCommonInstanceMetadata =
-        stubSimpleCallWithCallback(expectedResponse);
+      const stream = client.listXpnHostsStream(request);
       const promise = new Promise((resolve, reject) => {
-        client.setCommonInstanceMetadata(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.compute.v1.IOperation | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
+        const responses: protos.google.cloud.compute.v1.Project[] = [];
+        stream.on(
+          'data',
+          (response: protos.google.cloud.compute.v1.Project) => {
+            responses.push(response);
           }
         );
+        stream.on('end', () => {
+          resolve(responses);
+        });
+        stream.on('error', (err: Error) => {
+          reject(err);
+        });
       });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
+      await assert.rejects(promise, expectedError);
       assert(
-        (client.innerApiCalls.setCommonInstanceMetadata as SinonStub)
+        (client.descriptors.page.listXpnHosts.createStream as SinonStub)
           .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
+          .calledWith(client.innerApiCalls.listXpnHosts, request)
+      );
+      assert.strictEqual(
+        (
+          client.descriptors.page.listXpnHosts.createStream as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
+        expectedHeaderRequestParams
       );
     });
 
-    it('invokes setCommonInstanceMetadata with error', async () => {
+    it('uses async iteration with listXpnHosts without error', async () => {
+      const client = new projectsModule.v1.ProjectsClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.ListXpnHostsProjectsRequest()
+      );
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
+      const expectedResponse = [
+        generateSampleMessage(new protos.google.cloud.compute.v1.Project()),
+        generateSampleMessage(new protos.google.cloud.compute.v1.Project()),
+        generateSampleMessage(new protos.google.cloud.compute.v1.Project()),
+      ];
+      client.descriptors.page.listXpnHosts.asyncIterate =
+        stubAsyncIterationCall(expectedResponse);
+      const responses: protos.google.cloud.compute.v1.IProject[] = [];
+      const iterable = client.listXpnHostsAsync(request);
+      for await (const resource of iterable) {
+        responses.push(resource!);
+      }
+      assert.deepStrictEqual(responses, expectedResponse);
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listXpnHosts.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
+      );
+      assert.strictEqual(
+        (
+          client.descriptors.page.listXpnHosts.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
+        expectedHeaderRequestParams
+      );
+    });
+
+    it('uses async iteration with listXpnHosts with error', async () => {
       const client = new projectsModule.v1.ProjectsClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.compute.v1.SetCommonInstanceMetadataProjectRequest()
+        new protos.google.cloud.compute.v1.ListXpnHostsProjectsRequest()
       );
       request.project = '';
       const expectedHeaderRequestParams = 'project=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
       const expectedError = new Error('expected');
-      client.innerApiCalls.setCommonInstanceMetadata = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.setCommonInstanceMetadata(request),
-        expectedError
-      );
-      assert(
-        (client.innerApiCalls.setCommonInstanceMetadata as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
-    });
-  });
-
-  describe('setDefaultNetworkTier', () => {
-    it('invokes setDefaultNetworkTier without error', async () => {
-      const client = new projectsModule.v1.ProjectsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
+      client.descriptors.page.listXpnHosts.asyncIterate =
+        stubAsyncIterationCall(undefined, expectedError);
+      const iterable = client.listXpnHostsAsync(request);
+      await assert.rejects(async () => {
+        const responses: protos.google.cloud.compute.v1.IProject[] = [];
+        for await (const resource of iterable) {
+          responses.push(resource!);
+        }
       });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.compute.v1.SetDefaultNetworkTierProjectRequest()
+      assert.deepStrictEqual(
+        (
+          client.descriptors.page.listXpnHosts.asyncIterate as SinonStub
+        ).getCall(0).args[1],
+        request
       );
-      request.project = '';
-      const expectedHeaderRequestParams = 'project=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.compute.v1.Operation()
-      );
-      client.innerApiCalls.setDefaultNetworkTier =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.setDefaultNetworkTier(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.setDefaultNetworkTier as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
-    });
-
-    it('invokes setDefaultNetworkTier without error using callback', async () => {
-      const client = new projectsModule.v1.ProjectsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.compute.v1.SetDefaultNetworkTierProjectRequest()
-      );
-      request.project = '';
-      const expectedHeaderRequestParams = 'project=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.compute.v1.Operation()
-      );
-      client.innerApiCalls.setDefaultNetworkTier =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.setDefaultNetworkTier(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.compute.v1.IOperation | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.setDefaultNetworkTier as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
-    });
-
-    it('invokes setDefaultNetworkTier with error', async () => {
-      const client = new projectsModule.v1.ProjectsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.compute.v1.SetDefaultNetworkTierProjectRequest()
-      );
-      request.project = '';
-      const expectedHeaderRequestParams = 'project=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedError = new Error('expected');
-      client.innerApiCalls.setDefaultNetworkTier = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.setDefaultNetworkTier(request),
-        expectedError
-      );
-      assert(
-        (client.innerApiCalls.setDefaultNetworkTier as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
-    });
-  });
-
-  describe('setUsageExportBucket', () => {
-    it('invokes setUsageExportBucket without error', async () => {
-      const client = new projectsModule.v1.ProjectsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.compute.v1.SetUsageExportBucketProjectRequest()
-      );
-      request.project = '';
-      const expectedHeaderRequestParams = 'project=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.compute.v1.Operation()
-      );
-      client.innerApiCalls.setUsageExportBucket =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.setUsageExportBucket(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.setUsageExportBucket as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
-    });
-
-    it('invokes setUsageExportBucket without error using callback', async () => {
-      const client = new projectsModule.v1.ProjectsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.compute.v1.SetUsageExportBucketProjectRequest()
-      );
-      request.project = '';
-      const expectedHeaderRequestParams = 'project=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.compute.v1.Operation()
-      );
-      client.innerApiCalls.setUsageExportBucket =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.setUsageExportBucket(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.compute.v1.IOperation | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.setUsageExportBucket as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
-    });
-
-    it('invokes setUsageExportBucket with error', async () => {
-      const client = new projectsModule.v1.ProjectsClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.compute.v1.SetUsageExportBucketProjectRequest()
-      );
-      request.project = '';
-      const expectedHeaderRequestParams = 'project=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedError = new Error('expected');
-      client.innerApiCalls.setUsageExportBucket = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.setUsageExportBucket(request), expectedError);
-      assert(
-        (client.innerApiCalls.setUsageExportBucket as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
+      assert.strictEqual(
+        (
+          client.descriptors.page.listXpnHosts.asyncIterate as SinonStub
+        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
+        expectedHeaderRequestParams
       );
     });
   });
