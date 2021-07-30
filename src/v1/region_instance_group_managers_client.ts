@@ -39,6 +39,7 @@ const version = require('../../../package.json').version;
 export class RegionInstanceGroupManagersClient {
   private _terminated = false;
   private _opts: ClientOptions;
+  private _providedCustomServicePath: boolean;
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
@@ -50,6 +51,7 @@ export class RegionInstanceGroupManagersClient {
     longrunning: {},
     batching: {},
   };
+  warn: (code: string, message: string, warnType?: string) => void;
   innerApiCalls: {[name: string]: Function};
   regionInstanceGroupManagersStub?: Promise<{[name: string]: Function}>;
 
@@ -89,15 +91,12 @@ export class RegionInstanceGroupManagersClient {
    */
   constructor(opts?: ClientOptions) {
     // Ensure that options include all the required fields.
-    const staticMembers = this
-      .constructor as typeof RegionInstanceGroupManagersClient;
-    const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || staticMembers.servicePath;
+    const staticMembers = this.constructor as typeof RegionInstanceGroupManagersClient;
+    const servicePath = opts?.servicePath || opts?.apiEndpoint || staticMembers.servicePath;
+    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback =
-      opts?.fallback ??
-      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // If scopes are unset in options and we're connecting to a non-default endpoint, set scopes just in case.
@@ -115,7 +114,7 @@ export class RegionInstanceGroupManagersClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
 
     // Set the default scopes in auth client if needed.
     if (servicePath === staticMembers.servicePath) {
@@ -123,7 +122,10 @@ export class RegionInstanceGroupManagersClient {
     }
 
     // Determine the client header string.
-    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [
+      `gax/${this._gaxModule.version}`,
+      `gapic/${version}`,
+    ];
     if (typeof process !== 'undefined' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -131,6 +133,8 @@ export class RegionInstanceGroupManagersClient {
     }
     if (!opts.fallback) {
       clientHeader.push(`grpc/${this._gaxGrpc.grpcVersion}`);
+    } else if (opts.fallback === 'rest' ) {
+      clientHeader.push(`rest/${this._gaxGrpc.grpcVersion}`);
     }
     if (opts.libName && opts.libVersion) {
       clientHeader.push(`${opts.libName}/${opts.libVersion}`);
@@ -140,16 +144,16 @@ export class RegionInstanceGroupManagersClient {
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.cloud.compute.v1.RegionInstanceGroupManagers',
-      gapicConfig as gax.ClientConfig,
-      opts.clientConfig || {},
-      {'x-goog-api-client': clientHeader.join(' ')}
-    );
+        'google.cloud.compute.v1.RegionInstanceGroupManagers', gapicConfig as gax.ClientConfig,
+        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
     // merely providing the destination and request information.
     this.innerApiCalls = {};
+
+    // Add a warn function to the client constructor so it can be easily tested.
+    this.warn = gax.warn;
   }
 
   /**
@@ -172,55 +176,31 @@ export class RegionInstanceGroupManagersClient {
     // Put together the "service stub" for
     // google.cloud.compute.v1.RegionInstanceGroupManagers.
     this.regionInstanceGroupManagersStub = this._gaxGrpc.createStub(
-      this._opts.fallback
-        ? (this._protos as protobuf.Root).lookupService(
-            'google.cloud.compute.v1.RegionInstanceGroupManagers'
-          )
-        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          (this._protos as any).google.cloud.compute.v1
-            .RegionInstanceGroupManagers,
-      this._opts
-    ) as Promise<{[method: string]: Function}>;
+        this._opts.fallback ?
+          (this._protos as protobuf.Root).lookupService('google.cloud.compute.v1.RegionInstanceGroupManagers') :
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          (this._protos as any).google.cloud.compute.v1.RegionInstanceGroupManagers,
+        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const regionInstanceGroupManagersStubMethods = [
-      'abandonInstances',
-      'applyUpdatesToInstances',
-      'createInstances',
-      'delete',
-      'deleteInstances',
-      'deletePerInstanceConfigs',
-      'get',
-      'insert',
-      'list',
-      'listErrors',
-      'listManagedInstances',
-      'listPerInstanceConfigs',
-      'patch',
-      'patchPerInstanceConfigs',
-      'recreateInstances',
-      'resize',
-      'setInstanceTemplate',
-      'setTargetPools',
-      'updatePerInstanceConfigs',
-    ];
+    const regionInstanceGroupManagersStubMethods =
+        ['abandonInstances', 'applyUpdatesToInstances', 'createInstances', 'delete', 'deleteInstances', 'deletePerInstanceConfigs', 'get', 'insert', 'list', 'listErrors', 'listManagedInstances', 'listPerInstanceConfigs', 'patch', 'patchPerInstanceConfigs', 'recreateInstances', 'resize', 'setInstanceTemplate', 'setTargetPools', 'updatePerInstanceConfigs'];
     for (const methodName of regionInstanceGroupManagersStubMethods) {
       const callPromise = this.regionInstanceGroupManagersStub.then(
-        stub =>
-          (...args: Array<{}>) => {
-            if (this._terminated) {
-              return Promise.reject('The client has already been closed.');
-            }
-            const func = stub[methodName];
-            return func.apply(stub, args);
-          },
-        (err: Error | null | undefined) => () => {
+        stub => (...args: Array<{}>) => {
+          if (this._terminated) {
+            return Promise.reject('The client has already been closed.');
+          }
+          const func = stub[methodName];
+          return func.apply(stub, args);
+        },
+        (err: Error|null|undefined) => () => {
           throw err;
-        }
-      );
+        });
 
-      const descriptor = undefined;
+      const descriptor =
+        undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
@@ -266,7 +246,7 @@ export class RegionInstanceGroupManagersClient {
   static get scopes() {
     return [
       'https://www.googleapis.com/auth/compute',
-      'https://www.googleapis.com/auth/cloud-platform',
+      'https://www.googleapis.com/auth/cloud-platform'
     ];
   }
 
@@ -276,9 +256,8 @@ export class RegionInstanceGroupManagersClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(
-    callback?: Callback<string, undefined, undefined>
-  ): Promise<string> | void {
+  getProjectId(callback?: Callback<string, undefined, undefined>):
+      Promise<string>|void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -290,2136 +269,1623 @@ export class RegionInstanceGroupManagersClient {
   // -- Service calls --
   // -------------------
   abandonInstances(
-    request: protos.google.cloud.compute.v1.IAbandonInstancesRegionInstanceGroupManagerRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.compute.v1.IOperation,
-      (
-        | protos.google.cloud.compute.v1.IAbandonInstancesRegionInstanceGroupManagerRequest
-        | undefined
-      ),
-      {} | undefined
-    ]
-  >;
+      request?: protos.google.cloud.compute.v1.IAbandonInstancesRegionInstanceGroupManagerRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.compute.v1.IOperation,
+        protos.google.cloud.compute.v1.IAbandonInstancesRegionInstanceGroupManagerRequest|undefined, {}|undefined
+      ]>;
   abandonInstances(
-    request: protos.google.cloud.compute.v1.IAbandonInstancesRegionInstanceGroupManagerRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.IAbandonInstancesRegionInstanceGroupManagerRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  abandonInstances(
-    request: protos.google.cloud.compute.v1.IAbandonInstancesRegionInstanceGroupManagerRequest,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.IAbandonInstancesRegionInstanceGroupManagerRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  /**
-   * Flags the specified instances to be immediately removed from the managed instance group. Abandoning an instance does not delete the instance, but it does remove the instance from any target pools that are applied by the managed instance group. This method reduces the targetSize of the managed instance group by the number of instances that you abandon. This operation is marked as DONE when the action is scheduled even if the instances have not yet been removed from the group. You must separately verify the status of the abandoning action with the listmanagedinstances method.
-   *
-   * If the group is part of a backend service that has enabled connection draining, it can take up to 60 seconds after the connection draining duration has elapsed before the VM instance is removed or deleted.
-   *
-   * You can specify a maximum of 1000 instances with this method per request.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.instanceGroupManager
-   *   Name of the managed instance group.
-   * @param {string} request.project
-   *   Project ID for this request.
-   * @param {string} request.region
-   *   Name of the region scoping this request.
-   * @param {google.cloud.compute.v1.RegionInstanceGroupManagersAbandonInstancesRequest} request.regionInstanceGroupManagersAbandonInstancesRequestResource
-   *   The body resource for this request
-   * @param {string} request.requestId
-   *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
-   *
-   *   For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
-   *
-   *   The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Operation]{@link google.cloud.compute.v1.Operation}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.abandonInstances(request);
-   */
-  abandonInstances(
-    request: protos.google.cloud.compute.v1.IAbandonInstancesRegionInstanceGroupManagerRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.compute.v1.IAbandonInstancesRegionInstanceGroupManagerRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.compute.v1.IOperation,
-          | protos.google.cloud.compute.v1.IAbandonInstancesRegionInstanceGroupManagerRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.IAbandonInstancesRegionInstanceGroupManagerRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.compute.v1.IOperation,
-      (
-        | protos.google.cloud.compute.v1.IAbandonInstancesRegionInstanceGroupManagerRequest
-        | undefined
-      ),
-      {} | undefined
-    ]
-  > | void {
+          protos.google.cloud.compute.v1.IAbandonInstancesRegionInstanceGroupManagerRequest|null|undefined,
+          {}|null|undefined>): void;
+  abandonInstances(
+      request: protos.google.cloud.compute.v1.IAbandonInstancesRegionInstanceGroupManagerRequest,
+      callback: Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IAbandonInstancesRegionInstanceGroupManagerRequest|null|undefined,
+          {}|null|undefined>): void;
+/**
+ * Flags the specified instances to be immediately removed from the managed instance group. Abandoning an instance does not delete the instance, but it does remove the instance from any target pools that are applied by the managed instance group. This method reduces the targetSize of the managed instance group by the number of instances that you abandon. This operation is marked as DONE when the action is scheduled even if the instances have not yet been removed from the group. You must separately verify the status of the abandoning action with the listmanagedinstances method.
+ *
+ * If the group is part of a backend service that has enabled connection draining, it can take up to 60 seconds after the connection draining duration has elapsed before the VM instance is removed or deleted.
+ *
+ * You can specify a maximum of 1000 instances with this method per request.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.instanceGroupManager
+ *   Name of the managed instance group.
+ * @param {string} request.project
+ *   Project ID for this request.
+ * @param {string} request.region
+ *   Name of the region scoping this request.
+ * @param {google.cloud.compute.v1.RegionInstanceGroupManagersAbandonInstancesRequest} request.regionInstanceGroupManagersAbandonInstancesRequestResource
+ *   The body resource for this request
+ * @param {string} request.requestId
+ *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
+ *
+ *   For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
+ *
+ *   The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing [Operation]{@link google.cloud.compute.v1.Operation}.
+ *   Please see the
+ *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+ *   for more details and examples.
+ * @example
+ * const [response] = await client.abandonInstances(request);
+ */
+  abandonInstances(
+      request?: protos.google.cloud.compute.v1.IAbandonInstancesRegionInstanceGroupManagerRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IAbandonInstancesRegionInstanceGroupManagerRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IAbandonInstancesRegionInstanceGroupManagerRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.compute.v1.IOperation,
+        protos.google.cloud.compute.v1.IAbandonInstancesRegionInstanceGroupManagerRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        project: request.project || '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      'project': request.project || '',
+    });
     this.initialize();
     return this.innerApiCalls.abandonInstances(request, options, callback);
   }
   applyUpdatesToInstances(
-    request: protos.google.cloud.compute.v1.IApplyUpdatesToInstancesRegionInstanceGroupManagerRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.compute.v1.IOperation,
-      (
-        | protos.google.cloud.compute.v1.IApplyUpdatesToInstancesRegionInstanceGroupManagerRequest
-        | undefined
-      ),
-      {} | undefined
-    ]
-  >;
+      request?: protos.google.cloud.compute.v1.IApplyUpdatesToInstancesRegionInstanceGroupManagerRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.compute.v1.IOperation,
+        protos.google.cloud.compute.v1.IApplyUpdatesToInstancesRegionInstanceGroupManagerRequest|undefined, {}|undefined
+      ]>;
   applyUpdatesToInstances(
-    request: protos.google.cloud.compute.v1.IApplyUpdatesToInstancesRegionInstanceGroupManagerRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.IApplyUpdatesToInstancesRegionInstanceGroupManagerRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  applyUpdatesToInstances(
-    request: protos.google.cloud.compute.v1.IApplyUpdatesToInstancesRegionInstanceGroupManagerRequest,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.IApplyUpdatesToInstancesRegionInstanceGroupManagerRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  /**
-   * Apply updates to selected instances the managed instance group.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.instanceGroupManager
-   *   The name of the managed instance group, should conform to RFC1035.
-   * @param {string} request.project
-   *   Project ID for this request.
-   * @param {string} request.region
-   *   Name of the region scoping this request, should conform to RFC1035.
-   * @param {google.cloud.compute.v1.RegionInstanceGroupManagersApplyUpdatesRequest} request.regionInstanceGroupManagersApplyUpdatesRequestResource
-   *   The body resource for this request
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Operation]{@link google.cloud.compute.v1.Operation}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.applyUpdatesToInstances(request);
-   */
-  applyUpdatesToInstances(
-    request: protos.google.cloud.compute.v1.IApplyUpdatesToInstancesRegionInstanceGroupManagerRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.compute.v1.IApplyUpdatesToInstancesRegionInstanceGroupManagerRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.compute.v1.IOperation,
-          | protos.google.cloud.compute.v1.IApplyUpdatesToInstancesRegionInstanceGroupManagerRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.IApplyUpdatesToInstancesRegionInstanceGroupManagerRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.compute.v1.IOperation,
-      (
-        | protos.google.cloud.compute.v1.IApplyUpdatesToInstancesRegionInstanceGroupManagerRequest
-        | undefined
-      ),
-      {} | undefined
-    ]
-  > | void {
+          protos.google.cloud.compute.v1.IApplyUpdatesToInstancesRegionInstanceGroupManagerRequest|null|undefined,
+          {}|null|undefined>): void;
+  applyUpdatesToInstances(
+      request: protos.google.cloud.compute.v1.IApplyUpdatesToInstancesRegionInstanceGroupManagerRequest,
+      callback: Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IApplyUpdatesToInstancesRegionInstanceGroupManagerRequest|null|undefined,
+          {}|null|undefined>): void;
+/**
+ * Apply updates to selected instances the managed instance group.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.instanceGroupManager
+ *   The name of the managed instance group, should conform to RFC1035.
+ * @param {string} request.project
+ *   Project ID for this request.
+ * @param {string} request.region
+ *   Name of the region scoping this request, should conform to RFC1035.
+ * @param {google.cloud.compute.v1.RegionInstanceGroupManagersApplyUpdatesRequest} request.regionInstanceGroupManagersApplyUpdatesRequestResource
+ *   The body resource for this request
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing [Operation]{@link google.cloud.compute.v1.Operation}.
+ *   Please see the
+ *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+ *   for more details and examples.
+ * @example
+ * const [response] = await client.applyUpdatesToInstances(request);
+ */
+  applyUpdatesToInstances(
+      request?: protos.google.cloud.compute.v1.IApplyUpdatesToInstancesRegionInstanceGroupManagerRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IApplyUpdatesToInstancesRegionInstanceGroupManagerRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IApplyUpdatesToInstancesRegionInstanceGroupManagerRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.compute.v1.IOperation,
+        protos.google.cloud.compute.v1.IApplyUpdatesToInstancesRegionInstanceGroupManagerRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        project: request.project || '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      'project': request.project || '',
+    });
     this.initialize();
-    return this.innerApiCalls.applyUpdatesToInstances(
-      request,
-      options,
-      callback
-    );
+    return this.innerApiCalls.applyUpdatesToInstances(request, options, callback);
   }
   createInstances(
-    request: protos.google.cloud.compute.v1.ICreateInstancesRegionInstanceGroupManagerRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.compute.v1.IOperation,
-      (
-        | protos.google.cloud.compute.v1.ICreateInstancesRegionInstanceGroupManagerRequest
-        | undefined
-      ),
-      {} | undefined
-    ]
-  >;
+      request?: protos.google.cloud.compute.v1.ICreateInstancesRegionInstanceGroupManagerRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.compute.v1.IOperation,
+        protos.google.cloud.compute.v1.ICreateInstancesRegionInstanceGroupManagerRequest|undefined, {}|undefined
+      ]>;
   createInstances(
-    request: protos.google.cloud.compute.v1.ICreateInstancesRegionInstanceGroupManagerRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.ICreateInstancesRegionInstanceGroupManagerRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  createInstances(
-    request: protos.google.cloud.compute.v1.ICreateInstancesRegionInstanceGroupManagerRequest,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.ICreateInstancesRegionInstanceGroupManagerRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  /**
-   * Creates instances with per-instance configs in this regional managed instance group. Instances are created using the current instance template. The create instances operation is marked DONE if the createInstances request is successful. The underlying actions take additional time. You must separately verify the status of the creating or actions with the listmanagedinstances method.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.instanceGroupManager
-   *   The name of the managed instance group. It should conform to RFC1035.
-   * @param {string} request.project
-   *   Project ID for this request.
-   * @param {string} request.region
-   *   The name of the region where the managed instance group is located. It should conform to RFC1035.
-   * @param {google.cloud.compute.v1.RegionInstanceGroupManagersCreateInstancesRequest} request.regionInstanceGroupManagersCreateInstancesRequestResource
-   *   The body resource for this request
-   * @param {string} request.requestId
-   *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
-   *
-   *   For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request.
-   *
-   *   The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Operation]{@link google.cloud.compute.v1.Operation}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.createInstances(request);
-   */
-  createInstances(
-    request: protos.google.cloud.compute.v1.ICreateInstancesRegionInstanceGroupManagerRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.compute.v1.ICreateInstancesRegionInstanceGroupManagerRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.compute.v1.IOperation,
-          | protos.google.cloud.compute.v1.ICreateInstancesRegionInstanceGroupManagerRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.ICreateInstancesRegionInstanceGroupManagerRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.compute.v1.IOperation,
-      (
-        | protos.google.cloud.compute.v1.ICreateInstancesRegionInstanceGroupManagerRequest
-        | undefined
-      ),
-      {} | undefined
-    ]
-  > | void {
+          protos.google.cloud.compute.v1.ICreateInstancesRegionInstanceGroupManagerRequest|null|undefined,
+          {}|null|undefined>): void;
+  createInstances(
+      request: protos.google.cloud.compute.v1.ICreateInstancesRegionInstanceGroupManagerRequest,
+      callback: Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.ICreateInstancesRegionInstanceGroupManagerRequest|null|undefined,
+          {}|null|undefined>): void;
+/**
+ * Creates instances with per-instance configs in this regional managed instance group. Instances are created using the current instance template. The create instances operation is marked DONE if the createInstances request is successful. The underlying actions take additional time. You must separately verify the status of the creating or actions with the listmanagedinstances method.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.instanceGroupManager
+ *   The name of the managed instance group. It should conform to RFC1035.
+ * @param {string} request.project
+ *   Project ID for this request.
+ * @param {string} request.region
+ *   The name of the region where the managed instance group is located. It should conform to RFC1035.
+ * @param {google.cloud.compute.v1.RegionInstanceGroupManagersCreateInstancesRequest} request.regionInstanceGroupManagersCreateInstancesRequestResource
+ *   The body resource for this request
+ * @param {string} request.requestId
+ *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
+ *
+ *   For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request.
+ *
+ *   The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing [Operation]{@link google.cloud.compute.v1.Operation}.
+ *   Please see the
+ *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+ *   for more details and examples.
+ * @example
+ * const [response] = await client.createInstances(request);
+ */
+  createInstances(
+      request?: protos.google.cloud.compute.v1.ICreateInstancesRegionInstanceGroupManagerRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.ICreateInstancesRegionInstanceGroupManagerRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.ICreateInstancesRegionInstanceGroupManagerRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.compute.v1.IOperation,
+        protos.google.cloud.compute.v1.ICreateInstancesRegionInstanceGroupManagerRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        project: request.project || '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      'project': request.project || '',
+    });
     this.initialize();
     return this.innerApiCalls.createInstances(request, options, callback);
   }
   delete(
-    request: protos.google.cloud.compute.v1.IDeleteRegionInstanceGroupManagerRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.compute.v1.IOperation,
-      (
-        | protos.google.cloud.compute.v1.IDeleteRegionInstanceGroupManagerRequest
-        | undefined
-      ),
-      {} | undefined
-    ]
-  >;
+      request?: protos.google.cloud.compute.v1.IDeleteRegionInstanceGroupManagerRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.compute.v1.IOperation,
+        protos.google.cloud.compute.v1.IDeleteRegionInstanceGroupManagerRequest|undefined, {}|undefined
+      ]>;
   delete(
-    request: protos.google.cloud.compute.v1.IDeleteRegionInstanceGroupManagerRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.IDeleteRegionInstanceGroupManagerRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  delete(
-    request: protos.google.cloud.compute.v1.IDeleteRegionInstanceGroupManagerRequest,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.IDeleteRegionInstanceGroupManagerRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  /**
-   * Deletes the specified managed instance group and all of the instances in that group.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.instanceGroupManager
-   *   Name of the managed instance group to delete.
-   * @param {string} request.project
-   *   Project ID for this request.
-   * @param {string} request.region
-   *   Name of the region scoping this request.
-   * @param {string} request.requestId
-   *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
-   *
-   *   For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
-   *
-   *   The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Operation]{@link google.cloud.compute.v1.Operation}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.delete(request);
-   */
-  delete(
-    request: protos.google.cloud.compute.v1.IDeleteRegionInstanceGroupManagerRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.compute.v1.IDeleteRegionInstanceGroupManagerRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.compute.v1.IOperation,
-          | protos.google.cloud.compute.v1.IDeleteRegionInstanceGroupManagerRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.IDeleteRegionInstanceGroupManagerRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.compute.v1.IOperation,
-      (
-        | protos.google.cloud.compute.v1.IDeleteRegionInstanceGroupManagerRequest
-        | undefined
-      ),
-      {} | undefined
-    ]
-  > | void {
+          protos.google.cloud.compute.v1.IDeleteRegionInstanceGroupManagerRequest|null|undefined,
+          {}|null|undefined>): void;
+  delete(
+      request: protos.google.cloud.compute.v1.IDeleteRegionInstanceGroupManagerRequest,
+      callback: Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IDeleteRegionInstanceGroupManagerRequest|null|undefined,
+          {}|null|undefined>): void;
+/**
+ * Deletes the specified managed instance group and all of the instances in that group.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.instanceGroupManager
+ *   Name of the managed instance group to delete.
+ * @param {string} request.project
+ *   Project ID for this request.
+ * @param {string} request.region
+ *   Name of the region scoping this request.
+ * @param {string} request.requestId
+ *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
+ *
+ *   For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
+ *
+ *   The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing [Operation]{@link google.cloud.compute.v1.Operation}.
+ *   Please see the
+ *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+ *   for more details and examples.
+ * @example
+ * const [response] = await client.delete(request);
+ */
+  delete(
+      request?: protos.google.cloud.compute.v1.IDeleteRegionInstanceGroupManagerRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IDeleteRegionInstanceGroupManagerRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IDeleteRegionInstanceGroupManagerRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.compute.v1.IOperation,
+        protos.google.cloud.compute.v1.IDeleteRegionInstanceGroupManagerRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        project: request.project || '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      'project': request.project || '',
+    });
     this.initialize();
     return this.innerApiCalls.delete(request, options, callback);
   }
   deleteInstances(
-    request: protos.google.cloud.compute.v1.IDeleteInstancesRegionInstanceGroupManagerRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.compute.v1.IOperation,
-      (
-        | protos.google.cloud.compute.v1.IDeleteInstancesRegionInstanceGroupManagerRequest
-        | undefined
-      ),
-      {} | undefined
-    ]
-  >;
+      request?: protos.google.cloud.compute.v1.IDeleteInstancesRegionInstanceGroupManagerRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.compute.v1.IOperation,
+        protos.google.cloud.compute.v1.IDeleteInstancesRegionInstanceGroupManagerRequest|undefined, {}|undefined
+      ]>;
   deleteInstances(
-    request: protos.google.cloud.compute.v1.IDeleteInstancesRegionInstanceGroupManagerRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.IDeleteInstancesRegionInstanceGroupManagerRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deleteInstances(
-    request: protos.google.cloud.compute.v1.IDeleteInstancesRegionInstanceGroupManagerRequest,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.IDeleteInstancesRegionInstanceGroupManagerRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  /**
-   * Flags the specified instances in the managed instance group to be immediately deleted. The instances are also removed from any target pools of which they were a member. This method reduces the targetSize of the managed instance group by the number of instances that you delete. The deleteInstances operation is marked DONE if the deleteInstances request is successful. The underlying actions take additional time. You must separately verify the status of the deleting action with the listmanagedinstances method.
-   *
-   * If the group is part of a backend service that has enabled connection draining, it can take up to 60 seconds after the connection draining duration has elapsed before the VM instance is removed or deleted.
-   *
-   * You can specify a maximum of 1000 instances with this method per request.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.instanceGroupManager
-   *   Name of the managed instance group.
-   * @param {string} request.project
-   *   Project ID for this request.
-   * @param {string} request.region
-   *   Name of the region scoping this request.
-   * @param {google.cloud.compute.v1.RegionInstanceGroupManagersDeleteInstancesRequest} request.regionInstanceGroupManagersDeleteInstancesRequestResource
-   *   The body resource for this request
-   * @param {string} request.requestId
-   *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
-   *
-   *   For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
-   *
-   *   The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Operation]{@link google.cloud.compute.v1.Operation}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.deleteInstances(request);
-   */
-  deleteInstances(
-    request: protos.google.cloud.compute.v1.IDeleteInstancesRegionInstanceGroupManagerRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.compute.v1.IDeleteInstancesRegionInstanceGroupManagerRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.compute.v1.IOperation,
-          | protos.google.cloud.compute.v1.IDeleteInstancesRegionInstanceGroupManagerRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.IDeleteInstancesRegionInstanceGroupManagerRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.compute.v1.IOperation,
-      (
-        | protos.google.cloud.compute.v1.IDeleteInstancesRegionInstanceGroupManagerRequest
-        | undefined
-      ),
-      {} | undefined
-    ]
-  > | void {
+          protos.google.cloud.compute.v1.IDeleteInstancesRegionInstanceGroupManagerRequest|null|undefined,
+          {}|null|undefined>): void;
+  deleteInstances(
+      request: protos.google.cloud.compute.v1.IDeleteInstancesRegionInstanceGroupManagerRequest,
+      callback: Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IDeleteInstancesRegionInstanceGroupManagerRequest|null|undefined,
+          {}|null|undefined>): void;
+/**
+ * Flags the specified instances in the managed instance group to be immediately deleted. The instances are also removed from any target pools of which they were a member. This method reduces the targetSize of the managed instance group by the number of instances that you delete. The deleteInstances operation is marked DONE if the deleteInstances request is successful. The underlying actions take additional time. You must separately verify the status of the deleting action with the listmanagedinstances method.
+ *
+ * If the group is part of a backend service that has enabled connection draining, it can take up to 60 seconds after the connection draining duration has elapsed before the VM instance is removed or deleted.
+ *
+ * You can specify a maximum of 1000 instances with this method per request.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.instanceGroupManager
+ *   Name of the managed instance group.
+ * @param {string} request.project
+ *   Project ID for this request.
+ * @param {string} request.region
+ *   Name of the region scoping this request.
+ * @param {google.cloud.compute.v1.RegionInstanceGroupManagersDeleteInstancesRequest} request.regionInstanceGroupManagersDeleteInstancesRequestResource
+ *   The body resource for this request
+ * @param {string} request.requestId
+ *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
+ *
+ *   For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
+ *
+ *   The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing [Operation]{@link google.cloud.compute.v1.Operation}.
+ *   Please see the
+ *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+ *   for more details and examples.
+ * @example
+ * const [response] = await client.deleteInstances(request);
+ */
+  deleteInstances(
+      request?: protos.google.cloud.compute.v1.IDeleteInstancesRegionInstanceGroupManagerRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IDeleteInstancesRegionInstanceGroupManagerRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IDeleteInstancesRegionInstanceGroupManagerRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.compute.v1.IOperation,
+        protos.google.cloud.compute.v1.IDeleteInstancesRegionInstanceGroupManagerRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        project: request.project || '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      'project': request.project || '',
+    });
     this.initialize();
     return this.innerApiCalls.deleteInstances(request, options, callback);
   }
   deletePerInstanceConfigs(
-    request: protos.google.cloud.compute.v1.IDeletePerInstanceConfigsRegionInstanceGroupManagerRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.compute.v1.IOperation,
-      (
-        | protos.google.cloud.compute.v1.IDeletePerInstanceConfigsRegionInstanceGroupManagerRequest
-        | undefined
-      ),
-      {} | undefined
-    ]
-  >;
+      request?: protos.google.cloud.compute.v1.IDeletePerInstanceConfigsRegionInstanceGroupManagerRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.compute.v1.IOperation,
+        protos.google.cloud.compute.v1.IDeletePerInstanceConfigsRegionInstanceGroupManagerRequest|undefined, {}|undefined
+      ]>;
   deletePerInstanceConfigs(
-    request: protos.google.cloud.compute.v1.IDeletePerInstanceConfigsRegionInstanceGroupManagerRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.IDeletePerInstanceConfigsRegionInstanceGroupManagerRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  deletePerInstanceConfigs(
-    request: protos.google.cloud.compute.v1.IDeletePerInstanceConfigsRegionInstanceGroupManagerRequest,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.IDeletePerInstanceConfigsRegionInstanceGroupManagerRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  /**
-   * Deletes selected per-instance configs for the managed instance group.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.instanceGroupManager
-   *   The name of the managed instance group. It should conform to RFC1035.
-   * @param {string} request.project
-   *   Project ID for this request.
-   * @param {string} request.region
-   *   Name of the region scoping this request, should conform to RFC1035.
-   * @param {google.cloud.compute.v1.RegionInstanceGroupManagerDeleteInstanceConfigReq} request.regionInstanceGroupManagerDeleteInstanceConfigReqResource
-   *   The body resource for this request
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Operation]{@link google.cloud.compute.v1.Operation}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.deletePerInstanceConfigs(request);
-   */
-  deletePerInstanceConfigs(
-    request: protos.google.cloud.compute.v1.IDeletePerInstanceConfigsRegionInstanceGroupManagerRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.compute.v1.IDeletePerInstanceConfigsRegionInstanceGroupManagerRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.compute.v1.IOperation,
-          | protos.google.cloud.compute.v1.IDeletePerInstanceConfigsRegionInstanceGroupManagerRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.IDeletePerInstanceConfigsRegionInstanceGroupManagerRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.compute.v1.IOperation,
-      (
-        | protos.google.cloud.compute.v1.IDeletePerInstanceConfigsRegionInstanceGroupManagerRequest
-        | undefined
-      ),
-      {} | undefined
-    ]
-  > | void {
+          protos.google.cloud.compute.v1.IDeletePerInstanceConfigsRegionInstanceGroupManagerRequest|null|undefined,
+          {}|null|undefined>): void;
+  deletePerInstanceConfigs(
+      request: protos.google.cloud.compute.v1.IDeletePerInstanceConfigsRegionInstanceGroupManagerRequest,
+      callback: Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IDeletePerInstanceConfigsRegionInstanceGroupManagerRequest|null|undefined,
+          {}|null|undefined>): void;
+/**
+ * Deletes selected per-instance configs for the managed instance group.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.instanceGroupManager
+ *   The name of the managed instance group. It should conform to RFC1035.
+ * @param {string} request.project
+ *   Project ID for this request.
+ * @param {string} request.region
+ *   Name of the region scoping this request, should conform to RFC1035.
+ * @param {google.cloud.compute.v1.RegionInstanceGroupManagerDeleteInstanceConfigReq} request.regionInstanceGroupManagerDeleteInstanceConfigReqResource
+ *   The body resource for this request
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing [Operation]{@link google.cloud.compute.v1.Operation}.
+ *   Please see the
+ *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+ *   for more details and examples.
+ * @example
+ * const [response] = await client.deletePerInstanceConfigs(request);
+ */
+  deletePerInstanceConfigs(
+      request?: protos.google.cloud.compute.v1.IDeletePerInstanceConfigsRegionInstanceGroupManagerRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IDeletePerInstanceConfigsRegionInstanceGroupManagerRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IDeletePerInstanceConfigsRegionInstanceGroupManagerRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.compute.v1.IOperation,
+        protos.google.cloud.compute.v1.IDeletePerInstanceConfigsRegionInstanceGroupManagerRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        project: request.project || '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      'project': request.project || '',
+    });
     this.initialize();
-    return this.innerApiCalls.deletePerInstanceConfigs(
-      request,
-      options,
-      callback
-    );
+    return this.innerApiCalls.deletePerInstanceConfigs(request, options, callback);
   }
   get(
-    request: protos.google.cloud.compute.v1.IGetRegionInstanceGroupManagerRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.compute.v1.IInstanceGroupManager,
-      (
-        | protos.google.cloud.compute.v1.IGetRegionInstanceGroupManagerRequest
-        | undefined
-      ),
-      {} | undefined
-    ]
-  >;
+      request?: protos.google.cloud.compute.v1.IGetRegionInstanceGroupManagerRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.compute.v1.IInstanceGroupManager,
+        protos.google.cloud.compute.v1.IGetRegionInstanceGroupManagerRequest|undefined, {}|undefined
+      ]>;
   get(
-    request: protos.google.cloud.compute.v1.IGetRegionInstanceGroupManagerRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IInstanceGroupManager,
-      | protos.google.cloud.compute.v1.IGetRegionInstanceGroupManagerRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  get(
-    request: protos.google.cloud.compute.v1.IGetRegionInstanceGroupManagerRequest,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IInstanceGroupManager,
-      | protos.google.cloud.compute.v1.IGetRegionInstanceGroupManagerRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  /**
-   * Returns all of the details about the specified managed instance group.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.instanceGroupManager
-   *   Name of the managed instance group to return.
-   * @param {string} request.project
-   *   Project ID for this request.
-   * @param {string} request.region
-   *   Name of the region scoping this request.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [InstanceGroupManager]{@link google.cloud.compute.v1.InstanceGroupManager}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.get(request);
-   */
-  get(
-    request: protos.google.cloud.compute.v1.IGetRegionInstanceGroupManagerRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.compute.v1.IGetRegionInstanceGroupManagerRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.compute.v1.IInstanceGroupManager,
-          | protos.google.cloud.compute.v1.IGetRegionInstanceGroupManagerRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.compute.v1.IInstanceGroupManager,
-      | protos.google.cloud.compute.v1.IGetRegionInstanceGroupManagerRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.compute.v1.IInstanceGroupManager,
-      (
-        | protos.google.cloud.compute.v1.IGetRegionInstanceGroupManagerRequest
-        | undefined
-      ),
-      {} | undefined
-    ]
-  > | void {
+          protos.google.cloud.compute.v1.IGetRegionInstanceGroupManagerRequest|null|undefined,
+          {}|null|undefined>): void;
+  get(
+      request: protos.google.cloud.compute.v1.IGetRegionInstanceGroupManagerRequest,
+      callback: Callback<
+          protos.google.cloud.compute.v1.IInstanceGroupManager,
+          protos.google.cloud.compute.v1.IGetRegionInstanceGroupManagerRequest|null|undefined,
+          {}|null|undefined>): void;
+/**
+ * Returns all of the details about the specified managed instance group.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.instanceGroupManager
+ *   Name of the managed instance group to return.
+ * @param {string} request.project
+ *   Project ID for this request.
+ * @param {string} request.region
+ *   Name of the region scoping this request.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing [InstanceGroupManager]{@link google.cloud.compute.v1.InstanceGroupManager}.
+ *   Please see the
+ *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+ *   for more details and examples.
+ * @example
+ * const [response] = await client.get(request);
+ */
+  get(
+      request?: protos.google.cloud.compute.v1.IGetRegionInstanceGroupManagerRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.compute.v1.IInstanceGroupManager,
+          protos.google.cloud.compute.v1.IGetRegionInstanceGroupManagerRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.compute.v1.IInstanceGroupManager,
+          protos.google.cloud.compute.v1.IGetRegionInstanceGroupManagerRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.compute.v1.IInstanceGroupManager,
+        protos.google.cloud.compute.v1.IGetRegionInstanceGroupManagerRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        project: request.project || '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      'project': request.project || '',
+    });
     this.initialize();
     return this.innerApiCalls.get(request, options, callback);
   }
   insert(
-    request: protos.google.cloud.compute.v1.IInsertRegionInstanceGroupManagerRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.compute.v1.IOperation,
-      (
-        | protos.google.cloud.compute.v1.IInsertRegionInstanceGroupManagerRequest
-        | undefined
-      ),
-      {} | undefined
-    ]
-  >;
+      request?: protos.google.cloud.compute.v1.IInsertRegionInstanceGroupManagerRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.compute.v1.IOperation,
+        protos.google.cloud.compute.v1.IInsertRegionInstanceGroupManagerRequest|undefined, {}|undefined
+      ]>;
   insert(
-    request: protos.google.cloud.compute.v1.IInsertRegionInstanceGroupManagerRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.IInsertRegionInstanceGroupManagerRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  insert(
-    request: protos.google.cloud.compute.v1.IInsertRegionInstanceGroupManagerRequest,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.IInsertRegionInstanceGroupManagerRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  /**
-   * Creates a managed instance group using the information that you specify in the request. After the group is created, instances in the group are created using the specified instance template. This operation is marked as DONE when the group is created even if the instances in the group have not yet been created. You must separately verify the status of the individual instances with the listmanagedinstances method.
-   *
-   * A regional managed instance group can contain up to 2000 instances.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.compute.v1.InstanceGroupManager} request.instanceGroupManagerResource
-   *   The body resource for this request
-   * @param {string} request.project
-   *   Project ID for this request.
-   * @param {string} request.region
-   *   Name of the region scoping this request.
-   * @param {string} request.requestId
-   *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
-   *
-   *   For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
-   *
-   *   The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Operation]{@link google.cloud.compute.v1.Operation}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.insert(request);
-   */
-  insert(
-    request: protos.google.cloud.compute.v1.IInsertRegionInstanceGroupManagerRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.compute.v1.IInsertRegionInstanceGroupManagerRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.compute.v1.IOperation,
-          | protos.google.cloud.compute.v1.IInsertRegionInstanceGroupManagerRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.IInsertRegionInstanceGroupManagerRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.compute.v1.IOperation,
-      (
-        | protos.google.cloud.compute.v1.IInsertRegionInstanceGroupManagerRequest
-        | undefined
-      ),
-      {} | undefined
-    ]
-  > | void {
+          protos.google.cloud.compute.v1.IInsertRegionInstanceGroupManagerRequest|null|undefined,
+          {}|null|undefined>): void;
+  insert(
+      request: protos.google.cloud.compute.v1.IInsertRegionInstanceGroupManagerRequest,
+      callback: Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IInsertRegionInstanceGroupManagerRequest|null|undefined,
+          {}|null|undefined>): void;
+/**
+ * Creates a managed instance group using the information that you specify in the request. After the group is created, instances in the group are created using the specified instance template. This operation is marked as DONE when the group is created even if the instances in the group have not yet been created. You must separately verify the status of the individual instances with the listmanagedinstances method.
+ *
+ * A regional managed instance group can contain up to 2000 instances.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.cloud.compute.v1.InstanceGroupManager} request.instanceGroupManagerResource
+ *   The body resource for this request
+ * @param {string} request.project
+ *   Project ID for this request.
+ * @param {string} request.region
+ *   Name of the region scoping this request.
+ * @param {string} request.requestId
+ *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
+ *
+ *   For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
+ *
+ *   The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing [Operation]{@link google.cloud.compute.v1.Operation}.
+ *   Please see the
+ *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+ *   for more details and examples.
+ * @example
+ * const [response] = await client.insert(request);
+ */
+  insert(
+      request?: protos.google.cloud.compute.v1.IInsertRegionInstanceGroupManagerRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IInsertRegionInstanceGroupManagerRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IInsertRegionInstanceGroupManagerRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.compute.v1.IOperation,
+        protos.google.cloud.compute.v1.IInsertRegionInstanceGroupManagerRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        project: request.project || '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      'project': request.project || '',
+    });
     this.initialize();
     return this.innerApiCalls.insert(request, options, callback);
   }
   list(
-    request: protos.google.cloud.compute.v1.IListRegionInstanceGroupManagersRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.compute.v1.IRegionInstanceGroupManagerList,
-      (
-        | protos.google.cloud.compute.v1.IListRegionInstanceGroupManagersRequest
-        | undefined
-      ),
-      {} | undefined
-    ]
-  >;
+      request?: protos.google.cloud.compute.v1.IListRegionInstanceGroupManagersRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.compute.v1.IRegionInstanceGroupManagerList,
+        protos.google.cloud.compute.v1.IListRegionInstanceGroupManagersRequest|undefined, {}|undefined
+      ]>;
   list(
-    request: protos.google.cloud.compute.v1.IListRegionInstanceGroupManagersRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IRegionInstanceGroupManagerList,
-      | protos.google.cloud.compute.v1.IListRegionInstanceGroupManagersRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  list(
-    request: protos.google.cloud.compute.v1.IListRegionInstanceGroupManagersRequest,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IRegionInstanceGroupManagerList,
-      | protos.google.cloud.compute.v1.IListRegionInstanceGroupManagersRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  /**
-   * Retrieves the list of managed instance groups that are contained within the specified region.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.filter
-   *   A filter expression that filters resources listed in the response. The expression must specify the field name, a comparison operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The comparison operator must be either `=`, `!=`, `>`, or `<`.
-   *
-   *   For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`.
-   *
-   *   You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels.
-   *
-   *   To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ```
-   * @param {number} request.maxResults
-   *   The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)
-   * @param {string} request.orderBy
-   *   Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name.
-   *
-   *   You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first.
-   *
-   *   Currently, only sorting by `name` or `creationTimestamp desc` is supported.
-   * @param {string} request.pageToken
-   *   Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
-   * @param {string} request.project
-   *   Project ID for this request.
-   * @param {string} request.region
-   *   Name of the region scoping this request.
-   * @param {boolean} request.returnPartialSuccess
-   *   Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [RegionInstanceGroupManagerList]{@link google.cloud.compute.v1.RegionInstanceGroupManagerList}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.list(request);
-   */
-  list(
-    request: protos.google.cloud.compute.v1.IListRegionInstanceGroupManagersRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.compute.v1.IListRegionInstanceGroupManagersRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.compute.v1.IRegionInstanceGroupManagerList,
-          | protos.google.cloud.compute.v1.IListRegionInstanceGroupManagersRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.compute.v1.IRegionInstanceGroupManagerList,
-      | protos.google.cloud.compute.v1.IListRegionInstanceGroupManagersRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.compute.v1.IRegionInstanceGroupManagerList,
-      (
-        | protos.google.cloud.compute.v1.IListRegionInstanceGroupManagersRequest
-        | undefined
-      ),
-      {} | undefined
-    ]
-  > | void {
+          protos.google.cloud.compute.v1.IListRegionInstanceGroupManagersRequest|null|undefined,
+          {}|null|undefined>): void;
+  list(
+      request: protos.google.cloud.compute.v1.IListRegionInstanceGroupManagersRequest,
+      callback: Callback<
+          protos.google.cloud.compute.v1.IRegionInstanceGroupManagerList,
+          protos.google.cloud.compute.v1.IListRegionInstanceGroupManagersRequest|null|undefined,
+          {}|null|undefined>): void;
+/**
+ * Retrieves the list of managed instance groups that are contained within the specified region.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.filter
+ *   A filter expression that filters resources listed in the response. The expression must specify the field name, a comparison operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The comparison operator must be either `=`, `!=`, `>`, or `<`.
+ *
+ *   For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`.
+ *
+ *   You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels.
+ *
+ *   To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ```
+ * @param {number} request.maxResults
+ *   The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)
+ * @param {string} request.orderBy
+ *   Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name.
+ *
+ *   You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first.
+ *
+ *   Currently, only sorting by `name` or `creationTimestamp desc` is supported.
+ * @param {string} request.pageToken
+ *   Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
+ * @param {string} request.project
+ *   Project ID for this request.
+ * @param {string} request.region
+ *   Name of the region scoping this request.
+ * @param {boolean} request.returnPartialSuccess
+ *   Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing [RegionInstanceGroupManagerList]{@link google.cloud.compute.v1.RegionInstanceGroupManagerList}.
+ *   Please see the
+ *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+ *   for more details and examples.
+ * @example
+ * const [response] = await client.list(request);
+ */
+  list(
+      request?: protos.google.cloud.compute.v1.IListRegionInstanceGroupManagersRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.compute.v1.IRegionInstanceGroupManagerList,
+          protos.google.cloud.compute.v1.IListRegionInstanceGroupManagersRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.compute.v1.IRegionInstanceGroupManagerList,
+          protos.google.cloud.compute.v1.IListRegionInstanceGroupManagersRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.compute.v1.IRegionInstanceGroupManagerList,
+        protos.google.cloud.compute.v1.IListRegionInstanceGroupManagersRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        project: request.project || '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      'project': request.project || '',
+    });
     this.initialize();
     return this.innerApiCalls.list(request, options, callback);
   }
   listErrors(
-    request: protos.google.cloud.compute.v1.IListErrorsRegionInstanceGroupManagersRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.compute.v1.IRegionInstanceGroupManagersListErrorsResponse,
-      (
-        | protos.google.cloud.compute.v1.IListErrorsRegionInstanceGroupManagersRequest
-        | undefined
-      ),
-      {} | undefined
-    ]
-  >;
+      request?: protos.google.cloud.compute.v1.IListErrorsRegionInstanceGroupManagersRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.compute.v1.IRegionInstanceGroupManagersListErrorsResponse,
+        protos.google.cloud.compute.v1.IListErrorsRegionInstanceGroupManagersRequest|undefined, {}|undefined
+      ]>;
   listErrors(
-    request: protos.google.cloud.compute.v1.IListErrorsRegionInstanceGroupManagersRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IRegionInstanceGroupManagersListErrorsResponse,
-      | protos.google.cloud.compute.v1.IListErrorsRegionInstanceGroupManagersRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  listErrors(
-    request: protos.google.cloud.compute.v1.IListErrorsRegionInstanceGroupManagersRequest,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IRegionInstanceGroupManagersListErrorsResponse,
-      | protos.google.cloud.compute.v1.IListErrorsRegionInstanceGroupManagersRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  /**
-   * Lists all errors thrown by actions on instances for a given regional managed instance group. The filter and orderBy query parameters are not supported.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.filter
-   *   A filter expression that filters resources listed in the response. The expression must specify the field name, a comparison operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The comparison operator must be either `=`, `!=`, `>`, or `<`.
-   *
-   *   For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`.
-   *
-   *   You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels.
-   *
-   *   To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ```
-   * @param {string} request.instanceGroupManager
-   *   The name of the managed instance group. It must be a string that meets the requirements in RFC1035, or an unsigned long integer: must match regexp pattern: (?:{@link 0-9|a-z](?:[-a-z0-9]{0,61}[a-z0-9])?)|[1-9}{0,19}.
-   * @param {number} request.maxResults
-   *   The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)
-   * @param {string} request.orderBy
-   *   Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name.
-   *
-   *   You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first.
-   *
-   *   Currently, only sorting by `name` or `creationTimestamp desc` is supported.
-   * @param {string} request.pageToken
-   *   Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
-   * @param {string} request.project
-   *   Project ID for this request.
-   * @param {string} request.region
-   *   Name of the region scoping this request. This should conform to RFC1035.
-   * @param {boolean} request.returnPartialSuccess
-   *   Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [RegionInstanceGroupManagersListErrorsResponse]{@link google.cloud.compute.v1.RegionInstanceGroupManagersListErrorsResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.listErrors(request);
-   */
-  listErrors(
-    request: protos.google.cloud.compute.v1.IListErrorsRegionInstanceGroupManagersRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.compute.v1.IListErrorsRegionInstanceGroupManagersRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.compute.v1.IRegionInstanceGroupManagersListErrorsResponse,
-          | protos.google.cloud.compute.v1.IListErrorsRegionInstanceGroupManagersRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.compute.v1.IRegionInstanceGroupManagersListErrorsResponse,
-      | protos.google.cloud.compute.v1.IListErrorsRegionInstanceGroupManagersRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.compute.v1.IRegionInstanceGroupManagersListErrorsResponse,
-      (
-        | protos.google.cloud.compute.v1.IListErrorsRegionInstanceGroupManagersRequest
-        | undefined
-      ),
-      {} | undefined
-    ]
-  > | void {
+          protos.google.cloud.compute.v1.IListErrorsRegionInstanceGroupManagersRequest|null|undefined,
+          {}|null|undefined>): void;
+  listErrors(
+      request: protos.google.cloud.compute.v1.IListErrorsRegionInstanceGroupManagersRequest,
+      callback: Callback<
+          protos.google.cloud.compute.v1.IRegionInstanceGroupManagersListErrorsResponse,
+          protos.google.cloud.compute.v1.IListErrorsRegionInstanceGroupManagersRequest|null|undefined,
+          {}|null|undefined>): void;
+/**
+ * Lists all errors thrown by actions on instances for a given regional managed instance group. The filter and orderBy query parameters are not supported.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.filter
+ *   A filter expression that filters resources listed in the response. The expression must specify the field name, a comparison operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The comparison operator must be either `=`, `!=`, `>`, or `<`.
+ *
+ *   For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`.
+ *
+ *   You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels.
+ *
+ *   To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ```
+ * @param {string} request.instanceGroupManager
+ *   The name of the managed instance group. It must be a string that meets the requirements in RFC1035, or an unsigned long integer: must match regexp pattern: (?:{@link 0-9|a-z](?:[-a-z0-9]{0,61}[a-z0-9])?)|[1-9}{0,19}.
+ * @param {number} request.maxResults
+ *   The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)
+ * @param {string} request.orderBy
+ *   Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name.
+ *
+ *   You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first.
+ *
+ *   Currently, only sorting by `name` or `creationTimestamp desc` is supported.
+ * @param {string} request.pageToken
+ *   Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
+ * @param {string} request.project
+ *   Project ID for this request.
+ * @param {string} request.region
+ *   Name of the region scoping this request. This should conform to RFC1035.
+ * @param {boolean} request.returnPartialSuccess
+ *   Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing [RegionInstanceGroupManagersListErrorsResponse]{@link google.cloud.compute.v1.RegionInstanceGroupManagersListErrorsResponse}.
+ *   Please see the
+ *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+ *   for more details and examples.
+ * @example
+ * const [response] = await client.listErrors(request);
+ */
+  listErrors(
+      request?: protos.google.cloud.compute.v1.IListErrorsRegionInstanceGroupManagersRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.compute.v1.IRegionInstanceGroupManagersListErrorsResponse,
+          protos.google.cloud.compute.v1.IListErrorsRegionInstanceGroupManagersRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.compute.v1.IRegionInstanceGroupManagersListErrorsResponse,
+          protos.google.cloud.compute.v1.IListErrorsRegionInstanceGroupManagersRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.compute.v1.IRegionInstanceGroupManagersListErrorsResponse,
+        protos.google.cloud.compute.v1.IListErrorsRegionInstanceGroupManagersRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        project: request.project || '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      'project': request.project || '',
+    });
     this.initialize();
     return this.innerApiCalls.listErrors(request, options, callback);
   }
   listManagedInstances(
-    request: protos.google.cloud.compute.v1.IListManagedInstancesRegionInstanceGroupManagersRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.compute.v1.IRegionInstanceGroupManagersListInstancesResponse,
-      (
-        | protos.google.cloud.compute.v1.IListManagedInstancesRegionInstanceGroupManagersRequest
-        | undefined
-      ),
-      {} | undefined
-    ]
-  >;
+      request?: protos.google.cloud.compute.v1.IListManagedInstancesRegionInstanceGroupManagersRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.compute.v1.IRegionInstanceGroupManagersListInstancesResponse,
+        protos.google.cloud.compute.v1.IListManagedInstancesRegionInstanceGroupManagersRequest|undefined, {}|undefined
+      ]>;
   listManagedInstances(
-    request: protos.google.cloud.compute.v1.IListManagedInstancesRegionInstanceGroupManagersRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IRegionInstanceGroupManagersListInstancesResponse,
-      | protos.google.cloud.compute.v1.IListManagedInstancesRegionInstanceGroupManagersRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  listManagedInstances(
-    request: protos.google.cloud.compute.v1.IListManagedInstancesRegionInstanceGroupManagersRequest,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IRegionInstanceGroupManagersListInstancesResponse,
-      | protos.google.cloud.compute.v1.IListManagedInstancesRegionInstanceGroupManagersRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  /**
-   * Lists the instances in the managed instance group and instances that are scheduled to be created. The list includes any current actions that the group has scheduled for its instances. The orderBy query parameter is not supported.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.filter
-   *   A filter expression that filters resources listed in the response. The expression must specify the field name, a comparison operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The comparison operator must be either `=`, `!=`, `>`, or `<`.
-   *
-   *   For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`.
-   *
-   *   You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels.
-   *
-   *   To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ```
-   * @param {string} request.instanceGroupManager
-   *   The name of the managed instance group.
-   * @param {number} request.maxResults
-   *   The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)
-   * @param {string} request.orderBy
-   *   Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name.
-   *
-   *   You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first.
-   *
-   *   Currently, only sorting by `name` or `creationTimestamp desc` is supported.
-   * @param {string} request.pageToken
-   *   Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
-   * @param {string} request.project
-   *   Project ID for this request.
-   * @param {string} request.region
-   *   Name of the region scoping this request.
-   * @param {boolean} request.returnPartialSuccess
-   *   Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [RegionInstanceGroupManagersListInstancesResponse]{@link google.cloud.compute.v1.RegionInstanceGroupManagersListInstancesResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.listManagedInstances(request);
-   */
-  listManagedInstances(
-    request: protos.google.cloud.compute.v1.IListManagedInstancesRegionInstanceGroupManagersRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.compute.v1.IListManagedInstancesRegionInstanceGroupManagersRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.compute.v1.IRegionInstanceGroupManagersListInstancesResponse,
-          | protos.google.cloud.compute.v1.IListManagedInstancesRegionInstanceGroupManagersRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.compute.v1.IRegionInstanceGroupManagersListInstancesResponse,
-      | protos.google.cloud.compute.v1.IListManagedInstancesRegionInstanceGroupManagersRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.compute.v1.IRegionInstanceGroupManagersListInstancesResponse,
-      (
-        | protos.google.cloud.compute.v1.IListManagedInstancesRegionInstanceGroupManagersRequest
-        | undefined
-      ),
-      {} | undefined
-    ]
-  > | void {
+          protos.google.cloud.compute.v1.IListManagedInstancesRegionInstanceGroupManagersRequest|null|undefined,
+          {}|null|undefined>): void;
+  listManagedInstances(
+      request: protos.google.cloud.compute.v1.IListManagedInstancesRegionInstanceGroupManagersRequest,
+      callback: Callback<
+          protos.google.cloud.compute.v1.IRegionInstanceGroupManagersListInstancesResponse,
+          protos.google.cloud.compute.v1.IListManagedInstancesRegionInstanceGroupManagersRequest|null|undefined,
+          {}|null|undefined>): void;
+/**
+ * Lists the instances in the managed instance group and instances that are scheduled to be created. The list includes any current actions that the group has scheduled for its instances. The orderBy query parameter is not supported.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.filter
+ *   A filter expression that filters resources listed in the response. The expression must specify the field name, a comparison operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The comparison operator must be either `=`, `!=`, `>`, or `<`.
+ *
+ *   For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`.
+ *
+ *   You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels.
+ *
+ *   To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ```
+ * @param {string} request.instanceGroupManager
+ *   The name of the managed instance group.
+ * @param {number} request.maxResults
+ *   The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)
+ * @param {string} request.orderBy
+ *   Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name.
+ *
+ *   You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first.
+ *
+ *   Currently, only sorting by `name` or `creationTimestamp desc` is supported.
+ * @param {string} request.pageToken
+ *   Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
+ * @param {string} request.project
+ *   Project ID for this request.
+ * @param {string} request.region
+ *   Name of the region scoping this request.
+ * @param {boolean} request.returnPartialSuccess
+ *   Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing [RegionInstanceGroupManagersListInstancesResponse]{@link google.cloud.compute.v1.RegionInstanceGroupManagersListInstancesResponse}.
+ *   Please see the
+ *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+ *   for more details and examples.
+ * @example
+ * const [response] = await client.listManagedInstances(request);
+ */
+  listManagedInstances(
+      request?: protos.google.cloud.compute.v1.IListManagedInstancesRegionInstanceGroupManagersRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.compute.v1.IRegionInstanceGroupManagersListInstancesResponse,
+          protos.google.cloud.compute.v1.IListManagedInstancesRegionInstanceGroupManagersRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.compute.v1.IRegionInstanceGroupManagersListInstancesResponse,
+          protos.google.cloud.compute.v1.IListManagedInstancesRegionInstanceGroupManagersRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.compute.v1.IRegionInstanceGroupManagersListInstancesResponse,
+        protos.google.cloud.compute.v1.IListManagedInstancesRegionInstanceGroupManagersRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        project: request.project || '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      'project': request.project || '',
+    });
     this.initialize();
     return this.innerApiCalls.listManagedInstances(request, options, callback);
   }
   listPerInstanceConfigs(
-    request: protos.google.cloud.compute.v1.IListPerInstanceConfigsRegionInstanceGroupManagersRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.compute.v1.IRegionInstanceGroupManagersListInstanceConfigsResp,
-      (
-        | protos.google.cloud.compute.v1.IListPerInstanceConfigsRegionInstanceGroupManagersRequest
-        | undefined
-      ),
-      {} | undefined
-    ]
-  >;
+      request?: protos.google.cloud.compute.v1.IListPerInstanceConfigsRegionInstanceGroupManagersRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.compute.v1.IRegionInstanceGroupManagersListInstanceConfigsResp,
+        protos.google.cloud.compute.v1.IListPerInstanceConfigsRegionInstanceGroupManagersRequest|undefined, {}|undefined
+      ]>;
   listPerInstanceConfigs(
-    request: protos.google.cloud.compute.v1.IListPerInstanceConfigsRegionInstanceGroupManagersRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IRegionInstanceGroupManagersListInstanceConfigsResp,
-      | protos.google.cloud.compute.v1.IListPerInstanceConfigsRegionInstanceGroupManagersRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  listPerInstanceConfigs(
-    request: protos.google.cloud.compute.v1.IListPerInstanceConfigsRegionInstanceGroupManagersRequest,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IRegionInstanceGroupManagersListInstanceConfigsResp,
-      | protos.google.cloud.compute.v1.IListPerInstanceConfigsRegionInstanceGroupManagersRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  /**
-   * Lists all of the per-instance configs defined for the managed instance group. The orderBy query parameter is not supported.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.filter
-   *   A filter expression that filters resources listed in the response. The expression must specify the field name, a comparison operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The comparison operator must be either `=`, `!=`, `>`, or `<`.
-   *
-   *   For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`.
-   *
-   *   You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels.
-   *
-   *   To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ```
-   * @param {string} request.instanceGroupManager
-   *   The name of the managed instance group. It should conform to RFC1035.
-   * @param {number} request.maxResults
-   *   The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)
-   * @param {string} request.orderBy
-   *   Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name.
-   *
-   *   You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first.
-   *
-   *   Currently, only sorting by `name` or `creationTimestamp desc` is supported.
-   * @param {string} request.pageToken
-   *   Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
-   * @param {string} request.project
-   *   Project ID for this request.
-   * @param {string} request.region
-   *   Name of the region scoping this request, should conform to RFC1035.
-   * @param {boolean} request.returnPartialSuccess
-   *   Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [RegionInstanceGroupManagersListInstanceConfigsResp]{@link google.cloud.compute.v1.RegionInstanceGroupManagersListInstanceConfigsResp}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.listPerInstanceConfigs(request);
-   */
-  listPerInstanceConfigs(
-    request: protos.google.cloud.compute.v1.IListPerInstanceConfigsRegionInstanceGroupManagersRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.compute.v1.IListPerInstanceConfigsRegionInstanceGroupManagersRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.compute.v1.IRegionInstanceGroupManagersListInstanceConfigsResp,
-          | protos.google.cloud.compute.v1.IListPerInstanceConfigsRegionInstanceGroupManagersRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.compute.v1.IRegionInstanceGroupManagersListInstanceConfigsResp,
-      | protos.google.cloud.compute.v1.IListPerInstanceConfigsRegionInstanceGroupManagersRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.compute.v1.IRegionInstanceGroupManagersListInstanceConfigsResp,
-      (
-        | protos.google.cloud.compute.v1.IListPerInstanceConfigsRegionInstanceGroupManagersRequest
-        | undefined
-      ),
-      {} | undefined
-    ]
-  > | void {
+          protos.google.cloud.compute.v1.IListPerInstanceConfigsRegionInstanceGroupManagersRequest|null|undefined,
+          {}|null|undefined>): void;
+  listPerInstanceConfigs(
+      request: protos.google.cloud.compute.v1.IListPerInstanceConfigsRegionInstanceGroupManagersRequest,
+      callback: Callback<
+          protos.google.cloud.compute.v1.IRegionInstanceGroupManagersListInstanceConfigsResp,
+          protos.google.cloud.compute.v1.IListPerInstanceConfigsRegionInstanceGroupManagersRequest|null|undefined,
+          {}|null|undefined>): void;
+/**
+ * Lists all of the per-instance configs defined for the managed instance group. The orderBy query parameter is not supported.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.filter
+ *   A filter expression that filters resources listed in the response. The expression must specify the field name, a comparison operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The comparison operator must be either `=`, `!=`, `>`, or `<`.
+ *
+ *   For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`.
+ *
+ *   You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels.
+ *
+ *   To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ```
+ * @param {string} request.instanceGroupManager
+ *   The name of the managed instance group. It should conform to RFC1035.
+ * @param {number} request.maxResults
+ *   The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)
+ * @param {string} request.orderBy
+ *   Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name.
+ *
+ *   You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first.
+ *
+ *   Currently, only sorting by `name` or `creationTimestamp desc` is supported.
+ * @param {string} request.pageToken
+ *   Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
+ * @param {string} request.project
+ *   Project ID for this request.
+ * @param {string} request.region
+ *   Name of the region scoping this request, should conform to RFC1035.
+ * @param {boolean} request.returnPartialSuccess
+ *   Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing [RegionInstanceGroupManagersListInstanceConfigsResp]{@link google.cloud.compute.v1.RegionInstanceGroupManagersListInstanceConfigsResp}.
+ *   Please see the
+ *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+ *   for more details and examples.
+ * @example
+ * const [response] = await client.listPerInstanceConfigs(request);
+ */
+  listPerInstanceConfigs(
+      request?: protos.google.cloud.compute.v1.IListPerInstanceConfigsRegionInstanceGroupManagersRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.compute.v1.IRegionInstanceGroupManagersListInstanceConfigsResp,
+          protos.google.cloud.compute.v1.IListPerInstanceConfigsRegionInstanceGroupManagersRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.compute.v1.IRegionInstanceGroupManagersListInstanceConfigsResp,
+          protos.google.cloud.compute.v1.IListPerInstanceConfigsRegionInstanceGroupManagersRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.compute.v1.IRegionInstanceGroupManagersListInstanceConfigsResp,
+        protos.google.cloud.compute.v1.IListPerInstanceConfigsRegionInstanceGroupManagersRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        project: request.project || '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      'project': request.project || '',
+    });
     this.initialize();
-    return this.innerApiCalls.listPerInstanceConfigs(
-      request,
-      options,
-      callback
-    );
+    return this.innerApiCalls.listPerInstanceConfigs(request, options, callback);
   }
   patch(
-    request: protos.google.cloud.compute.v1.IPatchRegionInstanceGroupManagerRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.compute.v1.IOperation,
-      (
-        | protos.google.cloud.compute.v1.IPatchRegionInstanceGroupManagerRequest
-        | undefined
-      ),
-      {} | undefined
-    ]
-  >;
+      request?: protos.google.cloud.compute.v1.IPatchRegionInstanceGroupManagerRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.compute.v1.IOperation,
+        protos.google.cloud.compute.v1.IPatchRegionInstanceGroupManagerRequest|undefined, {}|undefined
+      ]>;
   patch(
-    request: protos.google.cloud.compute.v1.IPatchRegionInstanceGroupManagerRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.IPatchRegionInstanceGroupManagerRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  patch(
-    request: protos.google.cloud.compute.v1.IPatchRegionInstanceGroupManagerRequest,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.IPatchRegionInstanceGroupManagerRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  /**
-   * Updates a managed instance group using the information that you specify in the request. This operation is marked as DONE when the group is patched even if the instances in the group are still in the process of being patched. You must separately verify the status of the individual instances with the listmanagedinstances method. This method supports PATCH semantics and uses the JSON merge patch format and processing rules.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.instanceGroupManager
-   *   The name of the instance group manager.
-   * @param {google.cloud.compute.v1.InstanceGroupManager} request.instanceGroupManagerResource
-   *   The body resource for this request
-   * @param {string} request.project
-   *   Project ID for this request.
-   * @param {string} request.region
-   *   Name of the region scoping this request.
-   * @param {string} request.requestId
-   *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
-   *
-   *   For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
-   *
-   *   The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Operation]{@link google.cloud.compute.v1.Operation}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.patch(request);
-   */
-  patch(
-    request: protos.google.cloud.compute.v1.IPatchRegionInstanceGroupManagerRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.compute.v1.IPatchRegionInstanceGroupManagerRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.compute.v1.IOperation,
-          | protos.google.cloud.compute.v1.IPatchRegionInstanceGroupManagerRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.IPatchRegionInstanceGroupManagerRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.compute.v1.IOperation,
-      (
-        | protos.google.cloud.compute.v1.IPatchRegionInstanceGroupManagerRequest
-        | undefined
-      ),
-      {} | undefined
-    ]
-  > | void {
+          protos.google.cloud.compute.v1.IPatchRegionInstanceGroupManagerRequest|null|undefined,
+          {}|null|undefined>): void;
+  patch(
+      request: protos.google.cloud.compute.v1.IPatchRegionInstanceGroupManagerRequest,
+      callback: Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IPatchRegionInstanceGroupManagerRequest|null|undefined,
+          {}|null|undefined>): void;
+/**
+ * Updates a managed instance group using the information that you specify in the request. This operation is marked as DONE when the group is patched even if the instances in the group are still in the process of being patched. You must separately verify the status of the individual instances with the listmanagedinstances method. This method supports PATCH semantics and uses the JSON merge patch format and processing rules.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.instanceGroupManager
+ *   The name of the instance group manager.
+ * @param {google.cloud.compute.v1.InstanceGroupManager} request.instanceGroupManagerResource
+ *   The body resource for this request
+ * @param {string} request.project
+ *   Project ID for this request.
+ * @param {string} request.region
+ *   Name of the region scoping this request.
+ * @param {string} request.requestId
+ *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
+ *
+ *   For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
+ *
+ *   The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing [Operation]{@link google.cloud.compute.v1.Operation}.
+ *   Please see the
+ *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+ *   for more details and examples.
+ * @example
+ * const [response] = await client.patch(request);
+ */
+  patch(
+      request?: protos.google.cloud.compute.v1.IPatchRegionInstanceGroupManagerRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IPatchRegionInstanceGroupManagerRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IPatchRegionInstanceGroupManagerRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.compute.v1.IOperation,
+        protos.google.cloud.compute.v1.IPatchRegionInstanceGroupManagerRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        project: request.project || '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      'project': request.project || '',
+    });
     this.initialize();
     return this.innerApiCalls.patch(request, options, callback);
   }
   patchPerInstanceConfigs(
-    request: protos.google.cloud.compute.v1.IPatchPerInstanceConfigsRegionInstanceGroupManagerRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.compute.v1.IOperation,
-      (
-        | protos.google.cloud.compute.v1.IPatchPerInstanceConfigsRegionInstanceGroupManagerRequest
-        | undefined
-      ),
-      {} | undefined
-    ]
-  >;
+      request?: protos.google.cloud.compute.v1.IPatchPerInstanceConfigsRegionInstanceGroupManagerRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.compute.v1.IOperation,
+        protos.google.cloud.compute.v1.IPatchPerInstanceConfigsRegionInstanceGroupManagerRequest|undefined, {}|undefined
+      ]>;
   patchPerInstanceConfigs(
-    request: protos.google.cloud.compute.v1.IPatchPerInstanceConfigsRegionInstanceGroupManagerRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.IPatchPerInstanceConfigsRegionInstanceGroupManagerRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  patchPerInstanceConfigs(
-    request: protos.google.cloud.compute.v1.IPatchPerInstanceConfigsRegionInstanceGroupManagerRequest,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.IPatchPerInstanceConfigsRegionInstanceGroupManagerRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  /**
-   * Inserts or patches per-instance configs for the managed instance group. perInstanceConfig.name serves as a key used to distinguish whether to perform insert or patch.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.instanceGroupManager
-   *   The name of the managed instance group. It should conform to RFC1035.
-   * @param {string} request.project
-   *   Project ID for this request.
-   * @param {string} request.region
-   *   Name of the region scoping this request, should conform to RFC1035.
-   * @param {google.cloud.compute.v1.RegionInstanceGroupManagerPatchInstanceConfigReq} request.regionInstanceGroupManagerPatchInstanceConfigReqResource
-   *   The body resource for this request
-   * @param {string} request.requestId
-   *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
-   *
-   *   For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
-   *
-   *   The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Operation]{@link google.cloud.compute.v1.Operation}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.patchPerInstanceConfigs(request);
-   */
-  patchPerInstanceConfigs(
-    request: protos.google.cloud.compute.v1.IPatchPerInstanceConfigsRegionInstanceGroupManagerRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.compute.v1.IPatchPerInstanceConfigsRegionInstanceGroupManagerRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.compute.v1.IOperation,
-          | protos.google.cloud.compute.v1.IPatchPerInstanceConfigsRegionInstanceGroupManagerRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.IPatchPerInstanceConfigsRegionInstanceGroupManagerRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.compute.v1.IOperation,
-      (
-        | protos.google.cloud.compute.v1.IPatchPerInstanceConfigsRegionInstanceGroupManagerRequest
-        | undefined
-      ),
-      {} | undefined
-    ]
-  > | void {
+          protos.google.cloud.compute.v1.IPatchPerInstanceConfigsRegionInstanceGroupManagerRequest|null|undefined,
+          {}|null|undefined>): void;
+  patchPerInstanceConfigs(
+      request: protos.google.cloud.compute.v1.IPatchPerInstanceConfigsRegionInstanceGroupManagerRequest,
+      callback: Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IPatchPerInstanceConfigsRegionInstanceGroupManagerRequest|null|undefined,
+          {}|null|undefined>): void;
+/**
+ * Inserts or patches per-instance configs for the managed instance group. perInstanceConfig.name serves as a key used to distinguish whether to perform insert or patch.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.instanceGroupManager
+ *   The name of the managed instance group. It should conform to RFC1035.
+ * @param {string} request.project
+ *   Project ID for this request.
+ * @param {string} request.region
+ *   Name of the region scoping this request, should conform to RFC1035.
+ * @param {google.cloud.compute.v1.RegionInstanceGroupManagerPatchInstanceConfigReq} request.regionInstanceGroupManagerPatchInstanceConfigReqResource
+ *   The body resource for this request
+ * @param {string} request.requestId
+ *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
+ *
+ *   For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
+ *
+ *   The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing [Operation]{@link google.cloud.compute.v1.Operation}.
+ *   Please see the
+ *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+ *   for more details and examples.
+ * @example
+ * const [response] = await client.patchPerInstanceConfigs(request);
+ */
+  patchPerInstanceConfigs(
+      request?: protos.google.cloud.compute.v1.IPatchPerInstanceConfigsRegionInstanceGroupManagerRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IPatchPerInstanceConfigsRegionInstanceGroupManagerRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IPatchPerInstanceConfigsRegionInstanceGroupManagerRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.compute.v1.IOperation,
+        protos.google.cloud.compute.v1.IPatchPerInstanceConfigsRegionInstanceGroupManagerRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        project: request.project || '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      'project': request.project || '',
+    });
     this.initialize();
-    return this.innerApiCalls.patchPerInstanceConfigs(
-      request,
-      options,
-      callback
-    );
+    return this.innerApiCalls.patchPerInstanceConfigs(request, options, callback);
   }
   recreateInstances(
-    request: protos.google.cloud.compute.v1.IRecreateInstancesRegionInstanceGroupManagerRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.compute.v1.IOperation,
-      (
-        | protos.google.cloud.compute.v1.IRecreateInstancesRegionInstanceGroupManagerRequest
-        | undefined
-      ),
-      {} | undefined
-    ]
-  >;
+      request?: protos.google.cloud.compute.v1.IRecreateInstancesRegionInstanceGroupManagerRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.compute.v1.IOperation,
+        protos.google.cloud.compute.v1.IRecreateInstancesRegionInstanceGroupManagerRequest|undefined, {}|undefined
+      ]>;
   recreateInstances(
-    request: protos.google.cloud.compute.v1.IRecreateInstancesRegionInstanceGroupManagerRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.IRecreateInstancesRegionInstanceGroupManagerRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  recreateInstances(
-    request: protos.google.cloud.compute.v1.IRecreateInstancesRegionInstanceGroupManagerRequest,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.IRecreateInstancesRegionInstanceGroupManagerRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  /**
-   * Flags the specified instances in the managed instance group to be immediately recreated. The instances are deleted and recreated using the current instance template for the managed instance group. This operation is marked as DONE when the flag is set even if the instances have not yet been recreated. You must separately verify the status of the recreating action with the listmanagedinstances method.
-   *
-   * If the group is part of a backend service that has enabled connection draining, it can take up to 60 seconds after the connection draining duration has elapsed before the VM instance is removed or deleted.
-   *
-   * You can specify a maximum of 1000 instances with this method per request.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.instanceGroupManager
-   *   Name of the managed instance group.
-   * @param {string} request.project
-   *   Project ID for this request.
-   * @param {string} request.region
-   *   Name of the region scoping this request.
-   * @param {google.cloud.compute.v1.RegionInstanceGroupManagersRecreateRequest} request.regionInstanceGroupManagersRecreateRequestResource
-   *   The body resource for this request
-   * @param {string} request.requestId
-   *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
-   *
-   *   For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
-   *
-   *   The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Operation]{@link google.cloud.compute.v1.Operation}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.recreateInstances(request);
-   */
-  recreateInstances(
-    request: protos.google.cloud.compute.v1.IRecreateInstancesRegionInstanceGroupManagerRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.compute.v1.IRecreateInstancesRegionInstanceGroupManagerRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.compute.v1.IOperation,
-          | protos.google.cloud.compute.v1.IRecreateInstancesRegionInstanceGroupManagerRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.IRecreateInstancesRegionInstanceGroupManagerRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.compute.v1.IOperation,
-      (
-        | protos.google.cloud.compute.v1.IRecreateInstancesRegionInstanceGroupManagerRequest
-        | undefined
-      ),
-      {} | undefined
-    ]
-  > | void {
+          protos.google.cloud.compute.v1.IRecreateInstancesRegionInstanceGroupManagerRequest|null|undefined,
+          {}|null|undefined>): void;
+  recreateInstances(
+      request: protos.google.cloud.compute.v1.IRecreateInstancesRegionInstanceGroupManagerRequest,
+      callback: Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IRecreateInstancesRegionInstanceGroupManagerRequest|null|undefined,
+          {}|null|undefined>): void;
+/**
+ * Flags the specified VM instances in the managed instance group to be immediately recreated. Each instance is recreated using the group's current configuration. This operation is marked as DONE when the flag is set even if the instances have not yet been recreated. You must separately verify the status of each instance by checking its currentAction field; for more information, see Checking the status of managed instances.
+ *
+ * If the group is part of a backend service that has enabled connection draining, it can take up to 60 seconds after the connection draining duration has elapsed before the VM instance is removed or deleted.
+ *
+ * You can specify a maximum of 1000 instances with this method per request.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.instanceGroupManager
+ *   Name of the managed instance group.
+ * @param {string} request.project
+ *   Project ID for this request.
+ * @param {string} request.region
+ *   Name of the region scoping this request.
+ * @param {google.cloud.compute.v1.RegionInstanceGroupManagersRecreateRequest} request.regionInstanceGroupManagersRecreateRequestResource
+ *   The body resource for this request
+ * @param {string} request.requestId
+ *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
+ *
+ *   For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
+ *
+ *   The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing [Operation]{@link google.cloud.compute.v1.Operation}.
+ *   Please see the
+ *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+ *   for more details and examples.
+ * @example
+ * const [response] = await client.recreateInstances(request);
+ */
+  recreateInstances(
+      request?: protos.google.cloud.compute.v1.IRecreateInstancesRegionInstanceGroupManagerRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IRecreateInstancesRegionInstanceGroupManagerRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IRecreateInstancesRegionInstanceGroupManagerRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.compute.v1.IOperation,
+        protos.google.cloud.compute.v1.IRecreateInstancesRegionInstanceGroupManagerRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        project: request.project || '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      'project': request.project || '',
+    });
     this.initialize();
     return this.innerApiCalls.recreateInstances(request, options, callback);
   }
   resize(
-    request: protos.google.cloud.compute.v1.IResizeRegionInstanceGroupManagerRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.compute.v1.IOperation,
-      (
-        | protos.google.cloud.compute.v1.IResizeRegionInstanceGroupManagerRequest
-        | undefined
-      ),
-      {} | undefined
-    ]
-  >;
+      request?: protos.google.cloud.compute.v1.IResizeRegionInstanceGroupManagerRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.compute.v1.IOperation,
+        protos.google.cloud.compute.v1.IResizeRegionInstanceGroupManagerRequest|undefined, {}|undefined
+      ]>;
   resize(
-    request: protos.google.cloud.compute.v1.IResizeRegionInstanceGroupManagerRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.IResizeRegionInstanceGroupManagerRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  resize(
-    request: protos.google.cloud.compute.v1.IResizeRegionInstanceGroupManagerRequest,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.IResizeRegionInstanceGroupManagerRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  /**
-   * Changes the intended size of the managed instance group. If you increase the size, the group creates new instances using the current instance template. If you decrease the size, the group deletes one or more instances.
-   *
-   * The resize operation is marked DONE if the resize request is successful. The underlying actions take additional time. You must separately verify the status of the creating or deleting actions with the listmanagedinstances method.
-   *
-   * If the group is part of a backend service that has enabled connection draining, it can take up to 60 seconds after the connection draining duration has elapsed before the VM instance is removed or deleted.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.instanceGroupManager
-   *   Name of the managed instance group.
-   * @param {string} request.project
-   *   Project ID for this request.
-   * @param {string} request.region
-   *   Name of the region scoping this request.
-   * @param {string} request.requestId
-   *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
-   *
-   *   For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
-   *
-   *   The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
-   * @param {number} request.size
-   *   Number of instances that should exist in this instance group manager.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Operation]{@link google.cloud.compute.v1.Operation}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.resize(request);
-   */
-  resize(
-    request: protos.google.cloud.compute.v1.IResizeRegionInstanceGroupManagerRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.compute.v1.IResizeRegionInstanceGroupManagerRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.compute.v1.IOperation,
-          | protos.google.cloud.compute.v1.IResizeRegionInstanceGroupManagerRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.IResizeRegionInstanceGroupManagerRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.compute.v1.IOperation,
-      (
-        | protos.google.cloud.compute.v1.IResizeRegionInstanceGroupManagerRequest
-        | undefined
-      ),
-      {} | undefined
-    ]
-  > | void {
+          protos.google.cloud.compute.v1.IResizeRegionInstanceGroupManagerRequest|null|undefined,
+          {}|null|undefined>): void;
+  resize(
+      request: protos.google.cloud.compute.v1.IResizeRegionInstanceGroupManagerRequest,
+      callback: Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IResizeRegionInstanceGroupManagerRequest|null|undefined,
+          {}|null|undefined>): void;
+/**
+ * Changes the intended size of the managed instance group. If you increase the size, the group creates new instances using the current instance template. If you decrease the size, the group deletes one or more instances.
+ *
+ * The resize operation is marked DONE if the resize request is successful. The underlying actions take additional time. You must separately verify the status of the creating or deleting actions with the listmanagedinstances method.
+ *
+ * If the group is part of a backend service that has enabled connection draining, it can take up to 60 seconds after the connection draining duration has elapsed before the VM instance is removed or deleted.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.instanceGroupManager
+ *   Name of the managed instance group.
+ * @param {string} request.project
+ *   Project ID for this request.
+ * @param {string} request.region
+ *   Name of the region scoping this request.
+ * @param {string} request.requestId
+ *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
+ *
+ *   For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
+ *
+ *   The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+ * @param {number} request.size
+ *   Number of instances that should exist in this instance group manager.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing [Operation]{@link google.cloud.compute.v1.Operation}.
+ *   Please see the
+ *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+ *   for more details and examples.
+ * @example
+ * const [response] = await client.resize(request);
+ */
+  resize(
+      request?: protos.google.cloud.compute.v1.IResizeRegionInstanceGroupManagerRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IResizeRegionInstanceGroupManagerRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IResizeRegionInstanceGroupManagerRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.compute.v1.IOperation,
+        protos.google.cloud.compute.v1.IResizeRegionInstanceGroupManagerRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        project: request.project || '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      'project': request.project || '',
+    });
     this.initialize();
     return this.innerApiCalls.resize(request, options, callback);
   }
   setInstanceTemplate(
-    request: protos.google.cloud.compute.v1.ISetInstanceTemplateRegionInstanceGroupManagerRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.compute.v1.IOperation,
-      (
-        | protos.google.cloud.compute.v1.ISetInstanceTemplateRegionInstanceGroupManagerRequest
-        | undefined
-      ),
-      {} | undefined
-    ]
-  >;
+      request?: protos.google.cloud.compute.v1.ISetInstanceTemplateRegionInstanceGroupManagerRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.compute.v1.IOperation,
+        protos.google.cloud.compute.v1.ISetInstanceTemplateRegionInstanceGroupManagerRequest|undefined, {}|undefined
+      ]>;
   setInstanceTemplate(
-    request: protos.google.cloud.compute.v1.ISetInstanceTemplateRegionInstanceGroupManagerRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.ISetInstanceTemplateRegionInstanceGroupManagerRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  setInstanceTemplate(
-    request: protos.google.cloud.compute.v1.ISetInstanceTemplateRegionInstanceGroupManagerRequest,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.ISetInstanceTemplateRegionInstanceGroupManagerRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  /**
-   * Sets the instance template to use when creating new instances or recreating instances in this group. Existing instances are not affected.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.instanceGroupManager
-   *   The name of the managed instance group.
-   * @param {string} request.project
-   *   Project ID for this request.
-   * @param {string} request.region
-   *   Name of the region scoping this request.
-   * @param {google.cloud.compute.v1.RegionInstanceGroupManagersSetTemplateRequest} request.regionInstanceGroupManagersSetTemplateRequestResource
-   *   The body resource for this request
-   * @param {string} request.requestId
-   *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
-   *
-   *   For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
-   *
-   *   The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Operation]{@link google.cloud.compute.v1.Operation}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.setInstanceTemplate(request);
-   */
-  setInstanceTemplate(
-    request: protos.google.cloud.compute.v1.ISetInstanceTemplateRegionInstanceGroupManagerRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.compute.v1.ISetInstanceTemplateRegionInstanceGroupManagerRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.compute.v1.IOperation,
-          | protos.google.cloud.compute.v1.ISetInstanceTemplateRegionInstanceGroupManagerRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.ISetInstanceTemplateRegionInstanceGroupManagerRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.compute.v1.IOperation,
-      (
-        | protos.google.cloud.compute.v1.ISetInstanceTemplateRegionInstanceGroupManagerRequest
-        | undefined
-      ),
-      {} | undefined
-    ]
-  > | void {
+          protos.google.cloud.compute.v1.ISetInstanceTemplateRegionInstanceGroupManagerRequest|null|undefined,
+          {}|null|undefined>): void;
+  setInstanceTemplate(
+      request: protos.google.cloud.compute.v1.ISetInstanceTemplateRegionInstanceGroupManagerRequest,
+      callback: Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.ISetInstanceTemplateRegionInstanceGroupManagerRequest|null|undefined,
+          {}|null|undefined>): void;
+/**
+ * Sets the instance template to use when creating new instances or recreating instances in this group. Existing instances are not affected.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.instanceGroupManager
+ *   The name of the managed instance group.
+ * @param {string} request.project
+ *   Project ID for this request.
+ * @param {string} request.region
+ *   Name of the region scoping this request.
+ * @param {google.cloud.compute.v1.RegionInstanceGroupManagersSetTemplateRequest} request.regionInstanceGroupManagersSetTemplateRequestResource
+ *   The body resource for this request
+ * @param {string} request.requestId
+ *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
+ *
+ *   For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
+ *
+ *   The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing [Operation]{@link google.cloud.compute.v1.Operation}.
+ *   Please see the
+ *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+ *   for more details and examples.
+ * @example
+ * const [response] = await client.setInstanceTemplate(request);
+ */
+  setInstanceTemplate(
+      request?: protos.google.cloud.compute.v1.ISetInstanceTemplateRegionInstanceGroupManagerRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.ISetInstanceTemplateRegionInstanceGroupManagerRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.ISetInstanceTemplateRegionInstanceGroupManagerRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.compute.v1.IOperation,
+        protos.google.cloud.compute.v1.ISetInstanceTemplateRegionInstanceGroupManagerRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        project: request.project || '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      'project': request.project || '',
+    });
     this.initialize();
     return this.innerApiCalls.setInstanceTemplate(request, options, callback);
   }
   setTargetPools(
-    request: protos.google.cloud.compute.v1.ISetTargetPoolsRegionInstanceGroupManagerRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.compute.v1.IOperation,
-      (
-        | protos.google.cloud.compute.v1.ISetTargetPoolsRegionInstanceGroupManagerRequest
-        | undefined
-      ),
-      {} | undefined
-    ]
-  >;
+      request?: protos.google.cloud.compute.v1.ISetTargetPoolsRegionInstanceGroupManagerRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.compute.v1.IOperation,
+        protos.google.cloud.compute.v1.ISetTargetPoolsRegionInstanceGroupManagerRequest|undefined, {}|undefined
+      ]>;
   setTargetPools(
-    request: protos.google.cloud.compute.v1.ISetTargetPoolsRegionInstanceGroupManagerRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.ISetTargetPoolsRegionInstanceGroupManagerRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  setTargetPools(
-    request: protos.google.cloud.compute.v1.ISetTargetPoolsRegionInstanceGroupManagerRequest,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.ISetTargetPoolsRegionInstanceGroupManagerRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  /**
-   * Modifies the target pools to which all new instances in this group are assigned. Existing instances in the group are not affected.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.instanceGroupManager
-   *   Name of the managed instance group.
-   * @param {string} request.project
-   *   Project ID for this request.
-   * @param {string} request.region
-   *   Name of the region scoping this request.
-   * @param {google.cloud.compute.v1.RegionInstanceGroupManagersSetTargetPoolsRequest} request.regionInstanceGroupManagersSetTargetPoolsRequestResource
-   *   The body resource for this request
-   * @param {string} request.requestId
-   *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
-   *
-   *   For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
-   *
-   *   The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Operation]{@link google.cloud.compute.v1.Operation}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.setTargetPools(request);
-   */
-  setTargetPools(
-    request: protos.google.cloud.compute.v1.ISetTargetPoolsRegionInstanceGroupManagerRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.compute.v1.ISetTargetPoolsRegionInstanceGroupManagerRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.compute.v1.IOperation,
-          | protos.google.cloud.compute.v1.ISetTargetPoolsRegionInstanceGroupManagerRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.ISetTargetPoolsRegionInstanceGroupManagerRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.compute.v1.IOperation,
-      (
-        | protos.google.cloud.compute.v1.ISetTargetPoolsRegionInstanceGroupManagerRequest
-        | undefined
-      ),
-      {} | undefined
-    ]
-  > | void {
+          protos.google.cloud.compute.v1.ISetTargetPoolsRegionInstanceGroupManagerRequest|null|undefined,
+          {}|null|undefined>): void;
+  setTargetPools(
+      request: protos.google.cloud.compute.v1.ISetTargetPoolsRegionInstanceGroupManagerRequest,
+      callback: Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.ISetTargetPoolsRegionInstanceGroupManagerRequest|null|undefined,
+          {}|null|undefined>): void;
+/**
+ * Modifies the target pools to which all new instances in this group are assigned. Existing instances in the group are not affected.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.instanceGroupManager
+ *   Name of the managed instance group.
+ * @param {string} request.project
+ *   Project ID for this request.
+ * @param {string} request.region
+ *   Name of the region scoping this request.
+ * @param {google.cloud.compute.v1.RegionInstanceGroupManagersSetTargetPoolsRequest} request.regionInstanceGroupManagersSetTargetPoolsRequestResource
+ *   The body resource for this request
+ * @param {string} request.requestId
+ *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
+ *
+ *   For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
+ *
+ *   The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing [Operation]{@link google.cloud.compute.v1.Operation}.
+ *   Please see the
+ *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+ *   for more details and examples.
+ * @example
+ * const [response] = await client.setTargetPools(request);
+ */
+  setTargetPools(
+      request?: protos.google.cloud.compute.v1.ISetTargetPoolsRegionInstanceGroupManagerRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.ISetTargetPoolsRegionInstanceGroupManagerRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.ISetTargetPoolsRegionInstanceGroupManagerRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.compute.v1.IOperation,
+        protos.google.cloud.compute.v1.ISetTargetPoolsRegionInstanceGroupManagerRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        project: request.project || '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      'project': request.project || '',
+    });
     this.initialize();
     return this.innerApiCalls.setTargetPools(request, options, callback);
   }
   updatePerInstanceConfigs(
-    request: protos.google.cloud.compute.v1.IUpdatePerInstanceConfigsRegionInstanceGroupManagerRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.compute.v1.IOperation,
-      (
-        | protos.google.cloud.compute.v1.IUpdatePerInstanceConfigsRegionInstanceGroupManagerRequest
-        | undefined
-      ),
-      {} | undefined
-    ]
-  >;
+      request?: protos.google.cloud.compute.v1.IUpdatePerInstanceConfigsRegionInstanceGroupManagerRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.compute.v1.IOperation,
+        protos.google.cloud.compute.v1.IUpdatePerInstanceConfigsRegionInstanceGroupManagerRequest|undefined, {}|undefined
+      ]>;
   updatePerInstanceConfigs(
-    request: protos.google.cloud.compute.v1.IUpdatePerInstanceConfigsRegionInstanceGroupManagerRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.IUpdatePerInstanceConfigsRegionInstanceGroupManagerRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  updatePerInstanceConfigs(
-    request: protos.google.cloud.compute.v1.IUpdatePerInstanceConfigsRegionInstanceGroupManagerRequest,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.IUpdatePerInstanceConfigsRegionInstanceGroupManagerRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  /**
-   * Inserts or updates per-instance configs for the managed instance group. perInstanceConfig.name serves as a key used to distinguish whether to perform insert or patch.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.instanceGroupManager
-   *   The name of the managed instance group. It should conform to RFC1035.
-   * @param {string} request.project
-   *   Project ID for this request.
-   * @param {string} request.region
-   *   Name of the region scoping this request, should conform to RFC1035.
-   * @param {google.cloud.compute.v1.RegionInstanceGroupManagerUpdateInstanceConfigReq} request.regionInstanceGroupManagerUpdateInstanceConfigReqResource
-   *   The body resource for this request
-   * @param {string} request.requestId
-   *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
-   *
-   *   For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
-   *
-   *   The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Operation]{@link google.cloud.compute.v1.Operation}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.updatePerInstanceConfigs(request);
-   */
-  updatePerInstanceConfigs(
-    request: protos.google.cloud.compute.v1.IUpdatePerInstanceConfigsRegionInstanceGroupManagerRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.compute.v1.IUpdatePerInstanceConfigsRegionInstanceGroupManagerRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.compute.v1.IOperation,
-          | protos.google.cloud.compute.v1.IUpdatePerInstanceConfigsRegionInstanceGroupManagerRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.IUpdatePerInstanceConfigsRegionInstanceGroupManagerRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.compute.v1.IOperation,
-      (
-        | protos.google.cloud.compute.v1.IUpdatePerInstanceConfigsRegionInstanceGroupManagerRequest
-        | undefined
-      ),
-      {} | undefined
-    ]
-  > | void {
+          protos.google.cloud.compute.v1.IUpdatePerInstanceConfigsRegionInstanceGroupManagerRequest|null|undefined,
+          {}|null|undefined>): void;
+  updatePerInstanceConfigs(
+      request: protos.google.cloud.compute.v1.IUpdatePerInstanceConfigsRegionInstanceGroupManagerRequest,
+      callback: Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IUpdatePerInstanceConfigsRegionInstanceGroupManagerRequest|null|undefined,
+          {}|null|undefined>): void;
+/**
+ * Inserts or updates per-instance configs for the managed instance group. perInstanceConfig.name serves as a key used to distinguish whether to perform insert or patch.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.instanceGroupManager
+ *   The name of the managed instance group. It should conform to RFC1035.
+ * @param {string} request.project
+ *   Project ID for this request.
+ * @param {string} request.region
+ *   Name of the region scoping this request, should conform to RFC1035.
+ * @param {google.cloud.compute.v1.RegionInstanceGroupManagerUpdateInstanceConfigReq} request.regionInstanceGroupManagerUpdateInstanceConfigReqResource
+ *   The body resource for this request
+ * @param {string} request.requestId
+ *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
+ *
+ *   For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
+ *
+ *   The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing [Operation]{@link google.cloud.compute.v1.Operation}.
+ *   Please see the
+ *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+ *   for more details and examples.
+ * @example
+ * const [response] = await client.updatePerInstanceConfigs(request);
+ */
+  updatePerInstanceConfigs(
+      request?: protos.google.cloud.compute.v1.IUpdatePerInstanceConfigsRegionInstanceGroupManagerRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IUpdatePerInstanceConfigsRegionInstanceGroupManagerRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IUpdatePerInstanceConfigsRegionInstanceGroupManagerRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.compute.v1.IOperation,
+        protos.google.cloud.compute.v1.IUpdatePerInstanceConfigsRegionInstanceGroupManagerRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        project: request.project || '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      'project': request.project || '',
+    });
     this.initialize();
-    return this.innerApiCalls.updatePerInstanceConfigs(
-      request,
-      options,
-      callback
-    );
+    return this.innerApiCalls.updatePerInstanceConfigs(request, options, callback);
   }
+
 
   /**
    * Terminate the gRPC channel and close the client.

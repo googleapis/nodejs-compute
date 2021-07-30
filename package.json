@@ -109,7 +109,6 @@
     "predocs-test": "npm run docs",
     "prepare": "npm run compile-protos && npm run compile",
     "prelint": "cd samples; npm link ../; npm install",
-    "clean": "gts clean",
     "precompile": "gts clean"
   },
   "dependencies": {
@@ -121,7 +120,7 @@
     "@types/sinon": "^9.0.9",
     "c8": "^7.3.5",
     "chai": "^4.3.4",
-    "gts": "^3.0.3",
+    "gts": "^3.1.0",
     "jsdoc": "^3.6.6",
     "jsdoc-fresh": "^1.0.2",
     "jsdoc-region-tag": "^1.0.6",

@@ -39,6 +39,7 @@ const version = require('../../../package.json').version;
 export class InterconnectAttachmentsClient {
   private _terminated = false;
   private _opts: ClientOptions;
+  private _providedCustomServicePath: boolean;
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
@@ -50,6 +51,7 @@ export class InterconnectAttachmentsClient {
     longrunning: {},
     batching: {},
   };
+  warn: (code: string, message: string, warnType?: string) => void;
   innerApiCalls: {[name: string]: Function};
   interconnectAttachmentsStub?: Promise<{[name: string]: Function}>;
 
@@ -89,15 +91,12 @@ export class InterconnectAttachmentsClient {
    */
   constructor(opts?: ClientOptions) {
     // Ensure that options include all the required fields.
-    const staticMembers = this
-      .constructor as typeof InterconnectAttachmentsClient;
-    const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || staticMembers.servicePath;
+    const staticMembers = this.constructor as typeof InterconnectAttachmentsClient;
+    const servicePath = opts?.servicePath || opts?.apiEndpoint || staticMembers.servicePath;
+    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback =
-      opts?.fallback ??
-      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // If scopes are unset in options and we're connecting to a non-default endpoint, set scopes just in case.
@@ -115,7 +114,7 @@ export class InterconnectAttachmentsClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
 
     // Set the default scopes in auth client if needed.
     if (servicePath === staticMembers.servicePath) {
@@ -123,7 +122,10 @@ export class InterconnectAttachmentsClient {
     }
 
     // Determine the client header string.
-    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [
+      `gax/${this._gaxModule.version}`,
+      `gapic/${version}`,
+    ];
     if (typeof process !== 'undefined' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -131,6 +133,8 @@ export class InterconnectAttachmentsClient {
     }
     if (!opts.fallback) {
       clientHeader.push(`grpc/${this._gaxGrpc.grpcVersion}`);
+    } else if (opts.fallback === 'rest' ) {
+      clientHeader.push(`rest/${this._gaxGrpc.grpcVersion}`);
     }
     if (opts.libName && opts.libVersion) {
       clientHeader.push(`${opts.libName}/${opts.libVersion}`);
@@ -140,16 +144,16 @@ export class InterconnectAttachmentsClient {
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.cloud.compute.v1.InterconnectAttachments',
-      gapicConfig as gax.ClientConfig,
-      opts.clientConfig || {},
-      {'x-goog-api-client': clientHeader.join(' ')}
-    );
+        'google.cloud.compute.v1.InterconnectAttachments', gapicConfig as gax.ClientConfig,
+        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
     // merely providing the destination and request information.
     this.innerApiCalls = {};
+
+    // Add a warn function to the client constructor so it can be easily tested.
+    this.warn = gax.warn;
   }
 
   /**
@@ -172,41 +176,31 @@ export class InterconnectAttachmentsClient {
     // Put together the "service stub" for
     // google.cloud.compute.v1.InterconnectAttachments.
     this.interconnectAttachmentsStub = this._gaxGrpc.createStub(
-      this._opts.fallback
-        ? (this._protos as protobuf.Root).lookupService(
-            'google.cloud.compute.v1.InterconnectAttachments'
-          )
-        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        this._opts.fallback ?
+          (this._protos as protobuf.Root).lookupService('google.cloud.compute.v1.InterconnectAttachments') :
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.cloud.compute.v1.InterconnectAttachments,
-      this._opts
-    ) as Promise<{[method: string]: Function}>;
+        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const interconnectAttachmentsStubMethods = [
-      'aggregatedList',
-      'delete',
-      'get',
-      'insert',
-      'list',
-      'patch',
-    ];
+    const interconnectAttachmentsStubMethods =
+        ['aggregatedList', 'delete', 'get', 'insert', 'list', 'patch'];
     for (const methodName of interconnectAttachmentsStubMethods) {
       const callPromise = this.interconnectAttachmentsStub.then(
-        stub =>
-          (...args: Array<{}>) => {
-            if (this._terminated) {
-              return Promise.reject('The client has already been closed.');
-            }
-            const func = stub[methodName];
-            return func.apply(stub, args);
-          },
-        (err: Error | null | undefined) => () => {
+        stub => (...args: Array<{}>) => {
+          if (this._terminated) {
+            return Promise.reject('The client has already been closed.');
+          }
+          const func = stub[methodName];
+          return func.apply(stub, args);
+        },
+        (err: Error|null|undefined) => () => {
           throw err;
-        }
-      );
+        });
 
-      const descriptor = undefined;
+      const descriptor =
+        undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
@@ -252,7 +246,7 @@ export class InterconnectAttachmentsClient {
   static get scopes() {
     return [
       'https://www.googleapis.com/auth/compute',
-      'https://www.googleapis.com/auth/cloud-platform',
+      'https://www.googleapis.com/auth/cloud-platform'
     ];
   }
 
@@ -262,9 +256,8 @@ export class InterconnectAttachmentsClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(
-    callback?: Callback<string, undefined, undefined>
-  ): Promise<string> | void {
+  getProjectId(callback?: Callback<string, undefined, undefined>):
+      Promise<string>|void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -276,669 +269,514 @@ export class InterconnectAttachmentsClient {
   // -- Service calls --
   // -------------------
   aggregatedList(
-    request: protos.google.cloud.compute.v1.IAggregatedListInterconnectAttachmentsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.compute.v1.IInterconnectAttachmentAggregatedList,
-      (
-        | protos.google.cloud.compute.v1.IAggregatedListInterconnectAttachmentsRequest
-        | undefined
-      ),
-      {} | undefined
-    ]
-  >;
+      request?: protos.google.cloud.compute.v1.IAggregatedListInterconnectAttachmentsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.compute.v1.IInterconnectAttachmentAggregatedList,
+        protos.google.cloud.compute.v1.IAggregatedListInterconnectAttachmentsRequest|undefined, {}|undefined
+      ]>;
   aggregatedList(
-    request: protos.google.cloud.compute.v1.IAggregatedListInterconnectAttachmentsRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IInterconnectAttachmentAggregatedList,
-      | protos.google.cloud.compute.v1.IAggregatedListInterconnectAttachmentsRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  aggregatedList(
-    request: protos.google.cloud.compute.v1.IAggregatedListInterconnectAttachmentsRequest,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IInterconnectAttachmentAggregatedList,
-      | protos.google.cloud.compute.v1.IAggregatedListInterconnectAttachmentsRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  /**
-   * Retrieves an aggregated list of interconnect attachments.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.filter
-   *   A filter expression that filters resources listed in the response. The expression must specify the field name, a comparison operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The comparison operator must be either `=`, `!=`, `>`, or `<`.
-   *
-   *   For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`.
-   *
-   *   You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels.
-   *
-   *   To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ```
-   * @param {boolean} request.includeAllScopes
-   *   Indicates whether every visible scope for each scope type (zone, region, global) should be included in the response. For new resource types added after this field, the flag has no effect as new resource types will always include every visible scope for each scope type in response. For resource types which predate this field, if this flag is omitted or false, only scopes of the scope types where the resource type is expected to be found will be included.
-   * @param {number} request.maxResults
-   *   The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)
-   * @param {string} request.orderBy
-   *   Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name.
-   *
-   *   You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first.
-   *
-   *   Currently, only sorting by `name` or `creationTimestamp desc` is supported.
-   * @param {string} request.pageToken
-   *   Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
-   * @param {string} request.project
-   *   Project ID for this request.
-   * @param {boolean} request.returnPartialSuccess
-   *   Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [InterconnectAttachmentAggregatedList]{@link google.cloud.compute.v1.InterconnectAttachmentAggregatedList}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.aggregatedList(request);
-   */
-  aggregatedList(
-    request: protos.google.cloud.compute.v1.IAggregatedListInterconnectAttachmentsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.compute.v1.IAggregatedListInterconnectAttachmentsRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.compute.v1.IInterconnectAttachmentAggregatedList,
-          | protos.google.cloud.compute.v1.IAggregatedListInterconnectAttachmentsRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.compute.v1.IInterconnectAttachmentAggregatedList,
-      | protos.google.cloud.compute.v1.IAggregatedListInterconnectAttachmentsRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.compute.v1.IInterconnectAttachmentAggregatedList,
-      (
-        | protos.google.cloud.compute.v1.IAggregatedListInterconnectAttachmentsRequest
-        | undefined
-      ),
-      {} | undefined
-    ]
-  > | void {
+          protos.google.cloud.compute.v1.IAggregatedListInterconnectAttachmentsRequest|null|undefined,
+          {}|null|undefined>): void;
+  aggregatedList(
+      request: protos.google.cloud.compute.v1.IAggregatedListInterconnectAttachmentsRequest,
+      callback: Callback<
+          protos.google.cloud.compute.v1.IInterconnectAttachmentAggregatedList,
+          protos.google.cloud.compute.v1.IAggregatedListInterconnectAttachmentsRequest|null|undefined,
+          {}|null|undefined>): void;
+/**
+ * Retrieves an aggregated list of interconnect attachments.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.filter
+ *   A filter expression that filters resources listed in the response. The expression must specify the field name, a comparison operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The comparison operator must be either `=`, `!=`, `>`, or `<`.
+ *
+ *   For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`.
+ *
+ *   You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels.
+ *
+ *   To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ```
+ * @param {boolean} request.includeAllScopes
+ *   Indicates whether every visible scope for each scope type (zone, region, global) should be included in the response. For new resource types added after this field, the flag has no effect as new resource types will always include every visible scope for each scope type in response. For resource types which predate this field, if this flag is omitted or false, only scopes of the scope types where the resource type is expected to be found will be included.
+ * @param {number} request.maxResults
+ *   The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)
+ * @param {string} request.orderBy
+ *   Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name.
+ *
+ *   You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first.
+ *
+ *   Currently, only sorting by `name` or `creationTimestamp desc` is supported.
+ * @param {string} request.pageToken
+ *   Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
+ * @param {string} request.project
+ *   Project ID for this request.
+ * @param {boolean} request.returnPartialSuccess
+ *   Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing [InterconnectAttachmentAggregatedList]{@link google.cloud.compute.v1.InterconnectAttachmentAggregatedList}.
+ *   Please see the
+ *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+ *   for more details and examples.
+ * @example
+ * const [response] = await client.aggregatedList(request);
+ */
+  aggregatedList(
+      request?: protos.google.cloud.compute.v1.IAggregatedListInterconnectAttachmentsRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.compute.v1.IInterconnectAttachmentAggregatedList,
+          protos.google.cloud.compute.v1.IAggregatedListInterconnectAttachmentsRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.compute.v1.IInterconnectAttachmentAggregatedList,
+          protos.google.cloud.compute.v1.IAggregatedListInterconnectAttachmentsRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.compute.v1.IInterconnectAttachmentAggregatedList,
+        protos.google.cloud.compute.v1.IAggregatedListInterconnectAttachmentsRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        project: request.project || '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      'project': request.project || '',
+    });
     this.initialize();
     return this.innerApiCalls.aggregatedList(request, options, callback);
   }
   delete(
-    request: protos.google.cloud.compute.v1.IDeleteInterconnectAttachmentRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.compute.v1.IOperation,
-      (
-        | protos.google.cloud.compute.v1.IDeleteInterconnectAttachmentRequest
-        | undefined
-      ),
-      {} | undefined
-    ]
-  >;
+      request?: protos.google.cloud.compute.v1.IDeleteInterconnectAttachmentRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.compute.v1.IOperation,
+        protos.google.cloud.compute.v1.IDeleteInterconnectAttachmentRequest|undefined, {}|undefined
+      ]>;
   delete(
-    request: protos.google.cloud.compute.v1.IDeleteInterconnectAttachmentRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.IDeleteInterconnectAttachmentRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  delete(
-    request: protos.google.cloud.compute.v1.IDeleteInterconnectAttachmentRequest,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.IDeleteInterconnectAttachmentRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  /**
-   * Deletes the specified interconnect attachment.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.interconnectAttachment
-   *   Name of the interconnect attachment to delete.
-   * @param {string} request.project
-   *   Project ID for this request.
-   * @param {string} request.region
-   *   Name of the region for this request.
-   * @param {string} request.requestId
-   *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
-   *
-   *   For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
-   *
-   *   The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Operation]{@link google.cloud.compute.v1.Operation}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.delete(request);
-   */
-  delete(
-    request: protos.google.cloud.compute.v1.IDeleteInterconnectAttachmentRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.compute.v1.IDeleteInterconnectAttachmentRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.compute.v1.IOperation,
-          | protos.google.cloud.compute.v1.IDeleteInterconnectAttachmentRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.IDeleteInterconnectAttachmentRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.compute.v1.IOperation,
-      (
-        | protos.google.cloud.compute.v1.IDeleteInterconnectAttachmentRequest
-        | undefined
-      ),
-      {} | undefined
-    ]
-  > | void {
+          protos.google.cloud.compute.v1.IDeleteInterconnectAttachmentRequest|null|undefined,
+          {}|null|undefined>): void;
+  delete(
+      request: protos.google.cloud.compute.v1.IDeleteInterconnectAttachmentRequest,
+      callback: Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IDeleteInterconnectAttachmentRequest|null|undefined,
+          {}|null|undefined>): void;
+/**
+ * Deletes the specified interconnect attachment.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.interconnectAttachment
+ *   Name of the interconnect attachment to delete.
+ * @param {string} request.project
+ *   Project ID for this request.
+ * @param {string} request.region
+ *   Name of the region for this request.
+ * @param {string} request.requestId
+ *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
+ *
+ *   For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
+ *
+ *   The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing [Operation]{@link google.cloud.compute.v1.Operation}.
+ *   Please see the
+ *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+ *   for more details and examples.
+ * @example
+ * const [response] = await client.delete(request);
+ */
+  delete(
+      request?: protos.google.cloud.compute.v1.IDeleteInterconnectAttachmentRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IDeleteInterconnectAttachmentRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IDeleteInterconnectAttachmentRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.compute.v1.IOperation,
+        protos.google.cloud.compute.v1.IDeleteInterconnectAttachmentRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        project: request.project || '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      'project': request.project || '',
+    });
     this.initialize();
     return this.innerApiCalls.delete(request, options, callback);
   }
   get(
-    request: protos.google.cloud.compute.v1.IGetInterconnectAttachmentRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.compute.v1.IInterconnectAttachment,
-      (
-        | protos.google.cloud.compute.v1.IGetInterconnectAttachmentRequest
-        | undefined
-      ),
-      {} | undefined
-    ]
-  >;
+      request?: protos.google.cloud.compute.v1.IGetInterconnectAttachmentRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.compute.v1.IInterconnectAttachment,
+        protos.google.cloud.compute.v1.IGetInterconnectAttachmentRequest|undefined, {}|undefined
+      ]>;
   get(
-    request: protos.google.cloud.compute.v1.IGetInterconnectAttachmentRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IInterconnectAttachment,
-      | protos.google.cloud.compute.v1.IGetInterconnectAttachmentRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  get(
-    request: protos.google.cloud.compute.v1.IGetInterconnectAttachmentRequest,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IInterconnectAttachment,
-      | protos.google.cloud.compute.v1.IGetInterconnectAttachmentRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  /**
-   * Returns the specified interconnect attachment.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.interconnectAttachment
-   *   Name of the interconnect attachment to return.
-   * @param {string} request.project
-   *   Project ID for this request.
-   * @param {string} request.region
-   *   Name of the region for this request.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [InterconnectAttachment]{@link google.cloud.compute.v1.InterconnectAttachment}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.get(request);
-   */
-  get(
-    request: protos.google.cloud.compute.v1.IGetInterconnectAttachmentRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.compute.v1.IGetInterconnectAttachmentRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.compute.v1.IInterconnectAttachment,
-          | protos.google.cloud.compute.v1.IGetInterconnectAttachmentRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.compute.v1.IInterconnectAttachment,
-      | protos.google.cloud.compute.v1.IGetInterconnectAttachmentRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.compute.v1.IInterconnectAttachment,
-      (
-        | protos.google.cloud.compute.v1.IGetInterconnectAttachmentRequest
-        | undefined
-      ),
-      {} | undefined
-    ]
-  > | void {
+          protos.google.cloud.compute.v1.IGetInterconnectAttachmentRequest|null|undefined,
+          {}|null|undefined>): void;
+  get(
+      request: protos.google.cloud.compute.v1.IGetInterconnectAttachmentRequest,
+      callback: Callback<
+          protos.google.cloud.compute.v1.IInterconnectAttachment,
+          protos.google.cloud.compute.v1.IGetInterconnectAttachmentRequest|null|undefined,
+          {}|null|undefined>): void;
+/**
+ * Returns the specified interconnect attachment.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.interconnectAttachment
+ *   Name of the interconnect attachment to return.
+ * @param {string} request.project
+ *   Project ID for this request.
+ * @param {string} request.region
+ *   Name of the region for this request.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing [InterconnectAttachment]{@link google.cloud.compute.v1.InterconnectAttachment}.
+ *   Please see the
+ *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+ *   for more details and examples.
+ * @example
+ * const [response] = await client.get(request);
+ */
+  get(
+      request?: protos.google.cloud.compute.v1.IGetInterconnectAttachmentRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.compute.v1.IInterconnectAttachment,
+          protos.google.cloud.compute.v1.IGetInterconnectAttachmentRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.compute.v1.IInterconnectAttachment,
+          protos.google.cloud.compute.v1.IGetInterconnectAttachmentRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.compute.v1.IInterconnectAttachment,
+        protos.google.cloud.compute.v1.IGetInterconnectAttachmentRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        project: request.project || '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      'project': request.project || '',
+    });
     this.initialize();
     return this.innerApiCalls.get(request, options, callback);
   }
   insert(
-    request: protos.google.cloud.compute.v1.IInsertInterconnectAttachmentRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.compute.v1.IOperation,
-      (
-        | protos.google.cloud.compute.v1.IInsertInterconnectAttachmentRequest
-        | undefined
-      ),
-      {} | undefined
-    ]
-  >;
+      request?: protos.google.cloud.compute.v1.IInsertInterconnectAttachmentRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.compute.v1.IOperation,
+        protos.google.cloud.compute.v1.IInsertInterconnectAttachmentRequest|undefined, {}|undefined
+      ]>;
   insert(
-    request: protos.google.cloud.compute.v1.IInsertInterconnectAttachmentRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.IInsertInterconnectAttachmentRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  insert(
-    request: protos.google.cloud.compute.v1.IInsertInterconnectAttachmentRequest,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.IInsertInterconnectAttachmentRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  /**
-   * Creates an InterconnectAttachment in the specified project using the data included in the request.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.compute.v1.InterconnectAttachment} request.interconnectAttachmentResource
-   *   The body resource for this request
-   * @param {string} request.project
-   *   Project ID for this request.
-   * @param {string} request.region
-   *   Name of the region for this request.
-   * @param {string} request.requestId
-   *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
-   *
-   *   For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
-   *
-   *   The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
-   * @param {boolean} request.validateOnly
-   *   If true, the request will not be committed.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Operation]{@link google.cloud.compute.v1.Operation}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.insert(request);
-   */
-  insert(
-    request: protos.google.cloud.compute.v1.IInsertInterconnectAttachmentRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.compute.v1.IInsertInterconnectAttachmentRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.compute.v1.IOperation,
-          | protos.google.cloud.compute.v1.IInsertInterconnectAttachmentRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.IInsertInterconnectAttachmentRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.compute.v1.IOperation,
-      (
-        | protos.google.cloud.compute.v1.IInsertInterconnectAttachmentRequest
-        | undefined
-      ),
-      {} | undefined
-    ]
-  > | void {
+          protos.google.cloud.compute.v1.IInsertInterconnectAttachmentRequest|null|undefined,
+          {}|null|undefined>): void;
+  insert(
+      request: protos.google.cloud.compute.v1.IInsertInterconnectAttachmentRequest,
+      callback: Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IInsertInterconnectAttachmentRequest|null|undefined,
+          {}|null|undefined>): void;
+/**
+ * Creates an InterconnectAttachment in the specified project using the data included in the request.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.cloud.compute.v1.InterconnectAttachment} request.interconnectAttachmentResource
+ *   The body resource for this request
+ * @param {string} request.project
+ *   Project ID for this request.
+ * @param {string} request.region
+ *   Name of the region for this request.
+ * @param {string} request.requestId
+ *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
+ *
+ *   For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
+ *
+ *   The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+ * @param {boolean} request.validateOnly
+ *   If true, the request will not be committed.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing [Operation]{@link google.cloud.compute.v1.Operation}.
+ *   Please see the
+ *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+ *   for more details and examples.
+ * @example
+ * const [response] = await client.insert(request);
+ */
+  insert(
+      request?: protos.google.cloud.compute.v1.IInsertInterconnectAttachmentRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IInsertInterconnectAttachmentRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IInsertInterconnectAttachmentRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.compute.v1.IOperation,
+        protos.google.cloud.compute.v1.IInsertInterconnectAttachmentRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        project: request.project || '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      'project': request.project || '',
+    });
     this.initialize();
     return this.innerApiCalls.insert(request, options, callback);
   }
   list(
-    request: protos.google.cloud.compute.v1.IListInterconnectAttachmentsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.compute.v1.IInterconnectAttachmentList,
-      (
-        | protos.google.cloud.compute.v1.IListInterconnectAttachmentsRequest
-        | undefined
-      ),
-      {} | undefined
-    ]
-  >;
+      request?: protos.google.cloud.compute.v1.IListInterconnectAttachmentsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.compute.v1.IInterconnectAttachmentList,
+        protos.google.cloud.compute.v1.IListInterconnectAttachmentsRequest|undefined, {}|undefined
+      ]>;
   list(
-    request: protos.google.cloud.compute.v1.IListInterconnectAttachmentsRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IInterconnectAttachmentList,
-      | protos.google.cloud.compute.v1.IListInterconnectAttachmentsRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  list(
-    request: protos.google.cloud.compute.v1.IListInterconnectAttachmentsRequest,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IInterconnectAttachmentList,
-      | protos.google.cloud.compute.v1.IListInterconnectAttachmentsRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  /**
-   * Retrieves the list of interconnect attachments contained within the specified region.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.filter
-   *   A filter expression that filters resources listed in the response. The expression must specify the field name, a comparison operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The comparison operator must be either `=`, `!=`, `>`, or `<`.
-   *
-   *   For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`.
-   *
-   *   You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels.
-   *
-   *   To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ```
-   * @param {number} request.maxResults
-   *   The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)
-   * @param {string} request.orderBy
-   *   Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name.
-   *
-   *   You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first.
-   *
-   *   Currently, only sorting by `name` or `creationTimestamp desc` is supported.
-   * @param {string} request.pageToken
-   *   Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
-   * @param {string} request.project
-   *   Project ID for this request.
-   * @param {string} request.region
-   *   Name of the region for this request.
-   * @param {boolean} request.returnPartialSuccess
-   *   Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [InterconnectAttachmentList]{@link google.cloud.compute.v1.InterconnectAttachmentList}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.list(request);
-   */
-  list(
-    request: protos.google.cloud.compute.v1.IListInterconnectAttachmentsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.compute.v1.IListInterconnectAttachmentsRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.compute.v1.IInterconnectAttachmentList,
-          | protos.google.cloud.compute.v1.IListInterconnectAttachmentsRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.compute.v1.IInterconnectAttachmentList,
-      | protos.google.cloud.compute.v1.IListInterconnectAttachmentsRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.compute.v1.IInterconnectAttachmentList,
-      (
-        | protos.google.cloud.compute.v1.IListInterconnectAttachmentsRequest
-        | undefined
-      ),
-      {} | undefined
-    ]
-  > | void {
+          protos.google.cloud.compute.v1.IListInterconnectAttachmentsRequest|null|undefined,
+          {}|null|undefined>): void;
+  list(
+      request: protos.google.cloud.compute.v1.IListInterconnectAttachmentsRequest,
+      callback: Callback<
+          protos.google.cloud.compute.v1.IInterconnectAttachmentList,
+          protos.google.cloud.compute.v1.IListInterconnectAttachmentsRequest|null|undefined,
+          {}|null|undefined>): void;
+/**
+ * Retrieves the list of interconnect attachments contained within the specified region.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.filter
+ *   A filter expression that filters resources listed in the response. The expression must specify the field name, a comparison operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The comparison operator must be either `=`, `!=`, `>`, or `<`.
+ *
+ *   For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`.
+ *
+ *   You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels.
+ *
+ *   To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ```
+ * @param {number} request.maxResults
+ *   The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)
+ * @param {string} request.orderBy
+ *   Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name.
+ *
+ *   You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first.
+ *
+ *   Currently, only sorting by `name` or `creationTimestamp desc` is supported.
+ * @param {string} request.pageToken
+ *   Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
+ * @param {string} request.project
+ *   Project ID for this request.
+ * @param {string} request.region
+ *   Name of the region for this request.
+ * @param {boolean} request.returnPartialSuccess
+ *   Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing [InterconnectAttachmentList]{@link google.cloud.compute.v1.InterconnectAttachmentList}.
+ *   Please see the
+ *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+ *   for more details and examples.
+ * @example
+ * const [response] = await client.list(request);
+ */
+  list(
+      request?: protos.google.cloud.compute.v1.IListInterconnectAttachmentsRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.compute.v1.IInterconnectAttachmentList,
+          protos.google.cloud.compute.v1.IListInterconnectAttachmentsRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.compute.v1.IInterconnectAttachmentList,
+          protos.google.cloud.compute.v1.IListInterconnectAttachmentsRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.compute.v1.IInterconnectAttachmentList,
+        protos.google.cloud.compute.v1.IListInterconnectAttachmentsRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        project: request.project || '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      'project': request.project || '',
+    });
     this.initialize();
     return this.innerApiCalls.list(request, options, callback);
   }
   patch(
-    request: protos.google.cloud.compute.v1.IPatchInterconnectAttachmentRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.compute.v1.IOperation,
-      (
-        | protos.google.cloud.compute.v1.IPatchInterconnectAttachmentRequest
-        | undefined
-      ),
-      {} | undefined
-    ]
-  >;
+      request?: protos.google.cloud.compute.v1.IPatchInterconnectAttachmentRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.compute.v1.IOperation,
+        protos.google.cloud.compute.v1.IPatchInterconnectAttachmentRequest|undefined, {}|undefined
+      ]>;
   patch(
-    request: protos.google.cloud.compute.v1.IPatchInterconnectAttachmentRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.IPatchInterconnectAttachmentRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  patch(
-    request: protos.google.cloud.compute.v1.IPatchInterconnectAttachmentRequest,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.IPatchInterconnectAttachmentRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  /**
-   * Updates the specified interconnect attachment with the data included in the request. This method supports PATCH semantics and uses the JSON merge patch format and processing rules.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.interconnectAttachment
-   *   Name of the interconnect attachment to patch.
-   * @param {google.cloud.compute.v1.InterconnectAttachment} request.interconnectAttachmentResource
-   *   The body resource for this request
-   * @param {string} request.project
-   *   Project ID for this request.
-   * @param {string} request.region
-   *   Name of the region scoping this request.
-   * @param {string} request.requestId
-   *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
-   *
-   *   For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
-   *
-   *   The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Operation]{@link google.cloud.compute.v1.Operation}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.patch(request);
-   */
-  patch(
-    request: protos.google.cloud.compute.v1.IPatchInterconnectAttachmentRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.compute.v1.IPatchInterconnectAttachmentRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.compute.v1.IOperation,
-          | protos.google.cloud.compute.v1.IPatchInterconnectAttachmentRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.IPatchInterconnectAttachmentRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.compute.v1.IOperation,
-      (
-        | protos.google.cloud.compute.v1.IPatchInterconnectAttachmentRequest
-        | undefined
-      ),
-      {} | undefined
-    ]
-  > | void {
+          protos.google.cloud.compute.v1.IPatchInterconnectAttachmentRequest|null|undefined,
+          {}|null|undefined>): void;
+  patch(
+      request: protos.google.cloud.compute.v1.IPatchInterconnectAttachmentRequest,
+      callback: Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IPatchInterconnectAttachmentRequest|null|undefined,
+          {}|null|undefined>): void;
+/**
+ * Updates the specified interconnect attachment with the data included in the request. This method supports PATCH semantics and uses the JSON merge patch format and processing rules.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.interconnectAttachment
+ *   Name of the interconnect attachment to patch.
+ * @param {google.cloud.compute.v1.InterconnectAttachment} request.interconnectAttachmentResource
+ *   The body resource for this request
+ * @param {string} request.project
+ *   Project ID for this request.
+ * @param {string} request.region
+ *   Name of the region scoping this request.
+ * @param {string} request.requestId
+ *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
+ *
+ *   For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
+ *
+ *   The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing [Operation]{@link google.cloud.compute.v1.Operation}.
+ *   Please see the
+ *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+ *   for more details and examples.
+ * @example
+ * const [response] = await client.patch(request);
+ */
+  patch(
+      request?: protos.google.cloud.compute.v1.IPatchInterconnectAttachmentRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IPatchInterconnectAttachmentRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IPatchInterconnectAttachmentRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.compute.v1.IOperation,
+        protos.google.cloud.compute.v1.IPatchInterconnectAttachmentRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        project: request.project || '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      'project': request.project || '',
+    });
     this.initialize();
     return this.innerApiCalls.patch(request, options, callback);
   }
+
 
   /**
    * Terminate the gRPC channel and close the client.

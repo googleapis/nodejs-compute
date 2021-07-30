@@ -33,6 +33,8 @@ const DiskTypesClient = v1.DiskTypesClient;
 type DiskTypesClient = v1.DiskTypesClient;
 const ExternalVpnGatewaysClient = v1.ExternalVpnGatewaysClient;
 type ExternalVpnGatewaysClient = v1.ExternalVpnGatewaysClient;
+const FirewallPoliciesClient = v1.FirewallPoliciesClient;
+type FirewallPoliciesClient = v1.FirewallPoliciesClient;
 const FirewallsClient = v1.FirewallsClient;
 type FirewallsClient = v1.FirewallsClient;
 const ForwardingRulesClient = v1.ForwardingRulesClient;
@@ -45,9 +47,10 @@ const GlobalNetworkEndpointGroupsClient = v1.GlobalNetworkEndpointGroupsClient;
 type GlobalNetworkEndpointGroupsClient = v1.GlobalNetworkEndpointGroupsClient;
 const GlobalOperationsClient = v1.GlobalOperationsClient;
 type GlobalOperationsClient = v1.GlobalOperationsClient;
-const GlobalOrganizationOperationsClient =
-  v1.GlobalOrganizationOperationsClient;
+const GlobalOrganizationOperationsClient = v1.GlobalOrganizationOperationsClient;
 type GlobalOrganizationOperationsClient = v1.GlobalOrganizationOperationsClient;
+const GlobalPublicDelegatedPrefixesClient = v1.GlobalPublicDelegatedPrefixesClient;
+type GlobalPublicDelegatedPrefixesClient = v1.GlobalPublicDelegatedPrefixesClient;
 const HealthChecksClient = v1.HealthChecksClient;
 type HealthChecksClient = v1.HealthChecksClient;
 const ImagesClient = v1.ImagesClient;
@@ -86,6 +89,10 @@ const PacketMirroringsClient = v1.PacketMirroringsClient;
 type PacketMirroringsClient = v1.PacketMirroringsClient;
 const ProjectsClient = v1.ProjectsClient;
 type ProjectsClient = v1.ProjectsClient;
+const PublicAdvertisedPrefixesClient = v1.PublicAdvertisedPrefixesClient;
+type PublicAdvertisedPrefixesClient = v1.PublicAdvertisedPrefixesClient;
+const PublicDelegatedPrefixesClient = v1.PublicDelegatedPrefixesClient;
+type PublicDelegatedPrefixesClient = v1.PublicDelegatedPrefixesClient;
 const RegionAutoscalersClient = v1.RegionAutoscalersClient;
 type RegionAutoscalersClient = v1.RegionAutoscalersClient;
 const RegionBackendServicesClient = v1.RegionBackendServicesClient;
@@ -104,6 +111,8 @@ const RegionInstanceGroupManagersClient = v1.RegionInstanceGroupManagersClient;
 type RegionInstanceGroupManagersClient = v1.RegionInstanceGroupManagersClient;
 const RegionInstanceGroupsClient = v1.RegionInstanceGroupsClient;
 type RegionInstanceGroupsClient = v1.RegionInstanceGroupsClient;
+const RegionInstancesClient = v1.RegionInstancesClient;
+type RegionInstancesClient = v1.RegionInstancesClient;
 const RegionNetworkEndpointGroupsClient = v1.RegionNetworkEndpointGroupsClient;
 type RegionNetworkEndpointGroupsClient = v1.RegionNetworkEndpointGroupsClient;
 const RegionNotificationEndpointsClient = v1.RegionNotificationEndpointsClient;
@@ -164,157 +173,7 @@ const ZoneOperationsClient = v1.ZoneOperationsClient;
 type ZoneOperationsClient = v1.ZoneOperationsClient;
 const ZonesClient = v1.ZonesClient;
 type ZonesClient = v1.ZonesClient;
-export {
-  v1,
-  AcceleratorTypesClient,
-  AddressesClient,
-  AutoscalersClient,
-  BackendBucketsClient,
-  BackendServicesClient,
-  DisksClient,
-  DiskTypesClient,
-  ExternalVpnGatewaysClient,
-  FirewallsClient,
-  ForwardingRulesClient,
-  GlobalAddressesClient,
-  GlobalForwardingRulesClient,
-  GlobalNetworkEndpointGroupsClient,
-  GlobalOperationsClient,
-  GlobalOrganizationOperationsClient,
-  HealthChecksClient,
-  ImagesClient,
-  InstanceGroupManagersClient,
-  InstanceGroupsClient,
-  InstancesClient,
-  InstanceTemplatesClient,
-  InterconnectAttachmentsClient,
-  InterconnectLocationsClient,
-  InterconnectsClient,
-  LicenseCodesClient,
-  LicensesClient,
-  MachineTypesClient,
-  NetworkEndpointGroupsClient,
-  NetworksClient,
-  NodeGroupsClient,
-  NodeTemplatesClient,
-  NodeTypesClient,
-  PacketMirroringsClient,
-  ProjectsClient,
-  RegionAutoscalersClient,
-  RegionBackendServicesClient,
-  RegionCommitmentsClient,
-  RegionDisksClient,
-  RegionDiskTypesClient,
-  RegionHealthChecksClient,
-  RegionHealthCheckServicesClient,
-  RegionInstanceGroupManagersClient,
-  RegionInstanceGroupsClient,
-  RegionNetworkEndpointGroupsClient,
-  RegionNotificationEndpointsClient,
-  RegionOperationsClient,
-  RegionsClient,
-  RegionSslCertificatesClient,
-  RegionTargetHttpProxiesClient,
-  RegionTargetHttpsProxiesClient,
-  RegionUrlMapsClient,
-  ReservationsClient,
-  ResourcePoliciesClient,
-  RoutersClient,
-  RoutesClient,
-  SecurityPoliciesClient,
-  SnapshotsClient,
-  SslCertificatesClient,
-  SslPoliciesClient,
-  SubnetworksClient,
-  TargetGrpcProxiesClient,
-  TargetHttpProxiesClient,
-  TargetHttpsProxiesClient,
-  TargetInstancesClient,
-  TargetPoolsClient,
-  TargetSslProxiesClient,
-  TargetTcpProxiesClient,
-  TargetVpnGatewaysClient,
-  UrlMapsClient,
-  VpnGatewaysClient,
-  VpnTunnelsClient,
-  ZoneOperationsClient,
-  ZonesClient,
-};
-export default {
-  v1,
-  AcceleratorTypesClient,
-  AddressesClient,
-  AutoscalersClient,
-  BackendBucketsClient,
-  BackendServicesClient,
-  DisksClient,
-  DiskTypesClient,
-  ExternalVpnGatewaysClient,
-  FirewallsClient,
-  ForwardingRulesClient,
-  GlobalAddressesClient,
-  GlobalForwardingRulesClient,
-  GlobalNetworkEndpointGroupsClient,
-  GlobalOperationsClient,
-  GlobalOrganizationOperationsClient,
-  HealthChecksClient,
-  ImagesClient,
-  InstanceGroupManagersClient,
-  InstanceGroupsClient,
-  InstancesClient,
-  InstanceTemplatesClient,
-  InterconnectAttachmentsClient,
-  InterconnectLocationsClient,
-  InterconnectsClient,
-  LicenseCodesClient,
-  LicensesClient,
-  MachineTypesClient,
-  NetworkEndpointGroupsClient,
-  NetworksClient,
-  NodeGroupsClient,
-  NodeTemplatesClient,
-  NodeTypesClient,
-  PacketMirroringsClient,
-  ProjectsClient,
-  RegionAutoscalersClient,
-  RegionBackendServicesClient,
-  RegionCommitmentsClient,
-  RegionDisksClient,
-  RegionDiskTypesClient,
-  RegionHealthChecksClient,
-  RegionHealthCheckServicesClient,
-  RegionInstanceGroupManagersClient,
-  RegionInstanceGroupsClient,
-  RegionNetworkEndpointGroupsClient,
-  RegionNotificationEndpointsClient,
-  RegionOperationsClient,
-  RegionsClient,
-  RegionSslCertificatesClient,
-  RegionTargetHttpProxiesClient,
-  RegionTargetHttpsProxiesClient,
-  RegionUrlMapsClient,
-  ReservationsClient,
-  ResourcePoliciesClient,
-  RoutersClient,
-  RoutesClient,
-  SecurityPoliciesClient,
-  SnapshotsClient,
-  SslCertificatesClient,
-  SslPoliciesClient,
-  SubnetworksClient,
-  TargetGrpcProxiesClient,
-  TargetHttpProxiesClient,
-  TargetHttpsProxiesClient,
-  TargetInstancesClient,
-  TargetPoolsClient,
-  TargetSslProxiesClient,
-  TargetTcpProxiesClient,
-  TargetVpnGatewaysClient,
-  UrlMapsClient,
-  VpnGatewaysClient,
-  VpnTunnelsClient,
-  ZoneOperationsClient,
-  ZonesClient,
-};
+export {v1, AcceleratorTypesClient, AddressesClient, AutoscalersClient, BackendBucketsClient, BackendServicesClient, DisksClient, DiskTypesClient, ExternalVpnGatewaysClient, FirewallPoliciesClient, FirewallsClient, ForwardingRulesClient, GlobalAddressesClient, GlobalForwardingRulesClient, GlobalNetworkEndpointGroupsClient, GlobalOperationsClient, GlobalOrganizationOperationsClient, GlobalPublicDelegatedPrefixesClient, HealthChecksClient, ImagesClient, InstanceGroupManagersClient, InstanceGroupsClient, InstancesClient, InstanceTemplatesClient, InterconnectAttachmentsClient, InterconnectLocationsClient, InterconnectsClient, LicenseCodesClient, LicensesClient, MachineTypesClient, NetworkEndpointGroupsClient, NetworksClient, NodeGroupsClient, NodeTemplatesClient, NodeTypesClient, PacketMirroringsClient, ProjectsClient, PublicAdvertisedPrefixesClient, PublicDelegatedPrefixesClient, RegionAutoscalersClient, RegionBackendServicesClient, RegionCommitmentsClient, RegionDisksClient, RegionDiskTypesClient, RegionHealthChecksClient, RegionHealthCheckServicesClient, RegionInstanceGroupManagersClient, RegionInstanceGroupsClient, RegionInstancesClient, RegionNetworkEndpointGroupsClient, RegionNotificationEndpointsClient, RegionOperationsClient, RegionsClient, RegionSslCertificatesClient, RegionTargetHttpProxiesClient, RegionTargetHttpsProxiesClient, RegionUrlMapsClient, ReservationsClient, ResourcePoliciesClient, RoutersClient, RoutesClient, SecurityPoliciesClient, SnapshotsClient, SslCertificatesClient, SslPoliciesClient, SubnetworksClient, TargetGrpcProxiesClient, TargetHttpProxiesClient, TargetHttpsProxiesClient, TargetInstancesClient, TargetPoolsClient, TargetSslProxiesClient, TargetTcpProxiesClient, TargetVpnGatewaysClient, UrlMapsClient, VpnGatewaysClient, VpnTunnelsClient, ZoneOperationsClient, ZonesClient};
+export default {v1, AcceleratorTypesClient, AddressesClient, AutoscalersClient, BackendBucketsClient, BackendServicesClient, DisksClient, DiskTypesClient, ExternalVpnGatewaysClient, FirewallPoliciesClient, FirewallsClient, ForwardingRulesClient, GlobalAddressesClient, GlobalForwardingRulesClient, GlobalNetworkEndpointGroupsClient, GlobalOperationsClient, GlobalOrganizationOperationsClient, GlobalPublicDelegatedPrefixesClient, HealthChecksClient, ImagesClient, InstanceGroupManagersClient, InstanceGroupsClient, InstancesClient, InstanceTemplatesClient, InterconnectAttachmentsClient, InterconnectLocationsClient, InterconnectsClient, LicenseCodesClient, LicensesClient, MachineTypesClient, NetworkEndpointGroupsClient, NetworksClient, NodeGroupsClient, NodeTemplatesClient, NodeTypesClient, PacketMirroringsClient, ProjectsClient, PublicAdvertisedPrefixesClient, PublicDelegatedPrefixesClient, RegionAutoscalersClient, RegionBackendServicesClient, RegionCommitmentsClient, RegionDisksClient, RegionDiskTypesClient, RegionHealthChecksClient, RegionHealthCheckServicesClient, RegionInstanceGroupManagersClient, RegionInstanceGroupsClient, RegionInstancesClient, RegionNetworkEndpointGroupsClient, RegionNotificationEndpointsClient, RegionOperationsClient, RegionsClient, RegionSslCertificatesClient, RegionTargetHttpProxiesClient, RegionTargetHttpsProxiesClient, RegionUrlMapsClient, ReservationsClient, ResourcePoliciesClient, RoutersClient, RoutesClient, SecurityPoliciesClient, SnapshotsClient, SslCertificatesClient, SslPoliciesClient, SubnetworksClient, TargetGrpcProxiesClient, TargetHttpProxiesClient, TargetHttpsProxiesClient, TargetInstancesClient, TargetPoolsClient, TargetSslProxiesClient, TargetTcpProxiesClient, TargetVpnGatewaysClient, UrlMapsClient, VpnGatewaysClient, VpnTunnelsClient, ZoneOperationsClient, ZonesClient};
 import * as protos from '../protos/protos';
-export {protos};
+export {protos}

@@ -39,6 +39,7 @@ const version = require('../../../package.json').version;
 export class PacketMirroringsClient {
   private _terminated = false;
   private _opts: ClientOptions;
+  private _providedCustomServicePath: boolean;
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
@@ -50,6 +51,7 @@ export class PacketMirroringsClient {
     longrunning: {},
     batching: {},
   };
+  warn: (code: string, message: string, warnType?: string) => void;
   innerApiCalls: {[name: string]: Function};
   packetMirroringsStub?: Promise<{[name: string]: Function}>;
 
@@ -90,13 +92,11 @@ export class PacketMirroringsClient {
   constructor(opts?: ClientOptions) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof PacketMirroringsClient;
-    const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || staticMembers.servicePath;
+    const servicePath = opts?.servicePath || opts?.apiEndpoint || staticMembers.servicePath;
+    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback =
-      opts?.fallback ??
-      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // If scopes are unset in options and we're connecting to a non-default endpoint, set scopes just in case.
@@ -114,7 +114,7 @@ export class PacketMirroringsClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
 
     // Set the default scopes in auth client if needed.
     if (servicePath === staticMembers.servicePath) {
@@ -122,7 +122,10 @@ export class PacketMirroringsClient {
     }
 
     // Determine the client header string.
-    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [
+      `gax/${this._gaxModule.version}`,
+      `gapic/${version}`,
+    ];
     if (typeof process !== 'undefined' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -130,6 +133,8 @@ export class PacketMirroringsClient {
     }
     if (!opts.fallback) {
       clientHeader.push(`grpc/${this._gaxGrpc.grpcVersion}`);
+    } else if (opts.fallback === 'rest' ) {
+      clientHeader.push(`rest/${this._gaxGrpc.grpcVersion}`);
     }
     if (opts.libName && opts.libVersion) {
       clientHeader.push(`${opts.libName}/${opts.libVersion}`);
@@ -139,16 +144,16 @@ export class PacketMirroringsClient {
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.cloud.compute.v1.PacketMirrorings',
-      gapicConfig as gax.ClientConfig,
-      opts.clientConfig || {},
-      {'x-goog-api-client': clientHeader.join(' ')}
-    );
+        'google.cloud.compute.v1.PacketMirrorings', gapicConfig as gax.ClientConfig,
+        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
     // merely providing the destination and request information.
     this.innerApiCalls = {};
+
+    // Add a warn function to the client constructor so it can be easily tested.
+    this.warn = gax.warn;
   }
 
   /**
@@ -171,42 +176,31 @@ export class PacketMirroringsClient {
     // Put together the "service stub" for
     // google.cloud.compute.v1.PacketMirrorings.
     this.packetMirroringsStub = this._gaxGrpc.createStub(
-      this._opts.fallback
-        ? (this._protos as protobuf.Root).lookupService(
-            'google.cloud.compute.v1.PacketMirrorings'
-          )
-        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        this._opts.fallback ?
+          (this._protos as protobuf.Root).lookupService('google.cloud.compute.v1.PacketMirrorings') :
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.cloud.compute.v1.PacketMirrorings,
-      this._opts
-    ) as Promise<{[method: string]: Function}>;
+        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const packetMirroringsStubMethods = [
-      'aggregatedList',
-      'delete',
-      'get',
-      'insert',
-      'list',
-      'patch',
-      'testIamPermissions',
-    ];
+    const packetMirroringsStubMethods =
+        ['aggregatedList', 'delete', 'get', 'insert', 'list', 'patch', 'testIamPermissions'];
     for (const methodName of packetMirroringsStubMethods) {
       const callPromise = this.packetMirroringsStub.then(
-        stub =>
-          (...args: Array<{}>) => {
-            if (this._terminated) {
-              return Promise.reject('The client has already been closed.');
-            }
-            const func = stub[methodName];
-            return func.apply(stub, args);
-          },
-        (err: Error | null | undefined) => () => {
+        stub => (...args: Array<{}>) => {
+          if (this._terminated) {
+            return Promise.reject('The client has already been closed.');
+          }
+          const func = stub[methodName];
+          return func.apply(stub, args);
+        },
+        (err: Error|null|undefined) => () => {
           throw err;
-        }
-      );
+        });
 
-      const descriptor = undefined;
+      const descriptor =
+        undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
@@ -252,7 +246,7 @@ export class PacketMirroringsClient {
   static get scopes() {
     return [
       'https://www.googleapis.com/auth/compute',
-      'https://www.googleapis.com/auth/cloud-platform',
+      'https://www.googleapis.com/auth/cloud-platform'
     ];
   }
 
@@ -262,9 +256,8 @@ export class PacketMirroringsClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(
-    callback?: Callback<string, undefined, undefined>
-  ): Promise<string> | void {
+  getProjectId(callback?: Callback<string, undefined, undefined>):
+      Promise<string>|void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -276,740 +269,589 @@ export class PacketMirroringsClient {
   // -- Service calls --
   // -------------------
   aggregatedList(
-    request: protos.google.cloud.compute.v1.IAggregatedListPacketMirroringsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.compute.v1.IPacketMirroringAggregatedList,
-      (
-        | protos.google.cloud.compute.v1.IAggregatedListPacketMirroringsRequest
-        | undefined
-      ),
-      {} | undefined
-    ]
-  >;
+      request?: protos.google.cloud.compute.v1.IAggregatedListPacketMirroringsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.compute.v1.IPacketMirroringAggregatedList,
+        protos.google.cloud.compute.v1.IAggregatedListPacketMirroringsRequest|undefined, {}|undefined
+      ]>;
   aggregatedList(
-    request: protos.google.cloud.compute.v1.IAggregatedListPacketMirroringsRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IPacketMirroringAggregatedList,
-      | protos.google.cloud.compute.v1.IAggregatedListPacketMirroringsRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  aggregatedList(
-    request: protos.google.cloud.compute.v1.IAggregatedListPacketMirroringsRequest,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IPacketMirroringAggregatedList,
-      | protos.google.cloud.compute.v1.IAggregatedListPacketMirroringsRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  /**
-   * Retrieves an aggregated list of packetMirrorings.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.filter
-   *   A filter expression that filters resources listed in the response. The expression must specify the field name, a comparison operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The comparison operator must be either `=`, `!=`, `>`, or `<`.
-   *
-   *   For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`.
-   *
-   *   You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels.
-   *
-   *   To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ```
-   * @param {boolean} request.includeAllScopes
-   *   Indicates whether every visible scope for each scope type (zone, region, global) should be included in the response. For new resource types added after this field, the flag has no effect as new resource types will always include every visible scope for each scope type in response. For resource types which predate this field, if this flag is omitted or false, only scopes of the scope types where the resource type is expected to be found will be included.
-   * @param {number} request.maxResults
-   *   The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)
-   * @param {string} request.orderBy
-   *   Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name.
-   *
-   *   You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first.
-   *
-   *   Currently, only sorting by `name` or `creationTimestamp desc` is supported.
-   * @param {string} request.pageToken
-   *   Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
-   * @param {string} request.project
-   *   Project ID for this request.
-   * @param {boolean} request.returnPartialSuccess
-   *   Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [PacketMirroringAggregatedList]{@link google.cloud.compute.v1.PacketMirroringAggregatedList}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.aggregatedList(request);
-   */
-  aggregatedList(
-    request: protos.google.cloud.compute.v1.IAggregatedListPacketMirroringsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.compute.v1.IAggregatedListPacketMirroringsRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.compute.v1.IPacketMirroringAggregatedList,
-          | protos.google.cloud.compute.v1.IAggregatedListPacketMirroringsRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.compute.v1.IPacketMirroringAggregatedList,
-      | protos.google.cloud.compute.v1.IAggregatedListPacketMirroringsRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.compute.v1.IPacketMirroringAggregatedList,
-      (
-        | protos.google.cloud.compute.v1.IAggregatedListPacketMirroringsRequest
-        | undefined
-      ),
-      {} | undefined
-    ]
-  > | void {
+          protos.google.cloud.compute.v1.IAggregatedListPacketMirroringsRequest|null|undefined,
+          {}|null|undefined>): void;
+  aggregatedList(
+      request: protos.google.cloud.compute.v1.IAggregatedListPacketMirroringsRequest,
+      callback: Callback<
+          protos.google.cloud.compute.v1.IPacketMirroringAggregatedList,
+          protos.google.cloud.compute.v1.IAggregatedListPacketMirroringsRequest|null|undefined,
+          {}|null|undefined>): void;
+/**
+ * Retrieves an aggregated list of packetMirrorings.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.filter
+ *   A filter expression that filters resources listed in the response. The expression must specify the field name, a comparison operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The comparison operator must be either `=`, `!=`, `>`, or `<`.
+ *
+ *   For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`.
+ *
+ *   You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels.
+ *
+ *   To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ```
+ * @param {boolean} request.includeAllScopes
+ *   Indicates whether every visible scope for each scope type (zone, region, global) should be included in the response. For new resource types added after this field, the flag has no effect as new resource types will always include every visible scope for each scope type in response. For resource types which predate this field, if this flag is omitted or false, only scopes of the scope types where the resource type is expected to be found will be included.
+ * @param {number} request.maxResults
+ *   The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)
+ * @param {string} request.orderBy
+ *   Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name.
+ *
+ *   You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first.
+ *
+ *   Currently, only sorting by `name` or `creationTimestamp desc` is supported.
+ * @param {string} request.pageToken
+ *   Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
+ * @param {string} request.project
+ *   Project ID for this request.
+ * @param {boolean} request.returnPartialSuccess
+ *   Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing [PacketMirroringAggregatedList]{@link google.cloud.compute.v1.PacketMirroringAggregatedList}.
+ *   Please see the
+ *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+ *   for more details and examples.
+ * @example
+ * const [response] = await client.aggregatedList(request);
+ */
+  aggregatedList(
+      request?: protos.google.cloud.compute.v1.IAggregatedListPacketMirroringsRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.compute.v1.IPacketMirroringAggregatedList,
+          protos.google.cloud.compute.v1.IAggregatedListPacketMirroringsRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.compute.v1.IPacketMirroringAggregatedList,
+          protos.google.cloud.compute.v1.IAggregatedListPacketMirroringsRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.compute.v1.IPacketMirroringAggregatedList,
+        protos.google.cloud.compute.v1.IAggregatedListPacketMirroringsRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        project: request.project || '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      'project': request.project || '',
+    });
     this.initialize();
     return this.innerApiCalls.aggregatedList(request, options, callback);
   }
   delete(
-    request: protos.google.cloud.compute.v1.IDeletePacketMirroringRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.compute.v1.IOperation,
-      protos.google.cloud.compute.v1.IDeletePacketMirroringRequest | undefined,
-      {} | undefined
-    ]
-  >;
+      request?: protos.google.cloud.compute.v1.IDeletePacketMirroringRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.compute.v1.IOperation,
+        protos.google.cloud.compute.v1.IDeletePacketMirroringRequest|undefined, {}|undefined
+      ]>;
   delete(
-    request: protos.google.cloud.compute.v1.IDeletePacketMirroringRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.IDeletePacketMirroringRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  delete(
-    request: protos.google.cloud.compute.v1.IDeletePacketMirroringRequest,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.IDeletePacketMirroringRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  /**
-   * Deletes the specified PacketMirroring resource.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.packetMirroring
-   *   Name of the PacketMirroring resource to delete.
-   * @param {string} request.project
-   *   Project ID for this request.
-   * @param {string} request.region
-   *   Name of the region for this request.
-   * @param {string} request.requestId
-   *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
-   *
-   *   For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
-   *
-   *   The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Operation]{@link google.cloud.compute.v1.Operation}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.delete(request);
-   */
-  delete(
-    request: protos.google.cloud.compute.v1.IDeletePacketMirroringRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.compute.v1.IDeletePacketMirroringRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.compute.v1.IOperation,
-          | protos.google.cloud.compute.v1.IDeletePacketMirroringRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.IDeletePacketMirroringRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.compute.v1.IOperation,
-      protos.google.cloud.compute.v1.IDeletePacketMirroringRequest | undefined,
-      {} | undefined
-    ]
-  > | void {
+          protos.google.cloud.compute.v1.IDeletePacketMirroringRequest|null|undefined,
+          {}|null|undefined>): void;
+  delete(
+      request: protos.google.cloud.compute.v1.IDeletePacketMirroringRequest,
+      callback: Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IDeletePacketMirroringRequest|null|undefined,
+          {}|null|undefined>): void;
+/**
+ * Deletes the specified PacketMirroring resource.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.packetMirroring
+ *   Name of the PacketMirroring resource to delete.
+ * @param {string} request.project
+ *   Project ID for this request.
+ * @param {string} request.region
+ *   Name of the region for this request.
+ * @param {string} request.requestId
+ *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
+ *
+ *   For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
+ *
+ *   The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing [Operation]{@link google.cloud.compute.v1.Operation}.
+ *   Please see the
+ *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+ *   for more details and examples.
+ * @example
+ * const [response] = await client.delete(request);
+ */
+  delete(
+      request?: protos.google.cloud.compute.v1.IDeletePacketMirroringRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IDeletePacketMirroringRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IDeletePacketMirroringRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.compute.v1.IOperation,
+        protos.google.cloud.compute.v1.IDeletePacketMirroringRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        project: request.project || '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      'project': request.project || '',
+    });
     this.initialize();
     return this.innerApiCalls.delete(request, options, callback);
   }
   get(
-    request: protos.google.cloud.compute.v1.IGetPacketMirroringRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.compute.v1.IPacketMirroring,
-      protos.google.cloud.compute.v1.IGetPacketMirroringRequest | undefined,
-      {} | undefined
-    ]
-  >;
+      request?: protos.google.cloud.compute.v1.IGetPacketMirroringRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.compute.v1.IPacketMirroring,
+        protos.google.cloud.compute.v1.IGetPacketMirroringRequest|undefined, {}|undefined
+      ]>;
   get(
-    request: protos.google.cloud.compute.v1.IGetPacketMirroringRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IPacketMirroring,
-      | protos.google.cloud.compute.v1.IGetPacketMirroringRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  get(
-    request: protos.google.cloud.compute.v1.IGetPacketMirroringRequest,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IPacketMirroring,
-      | protos.google.cloud.compute.v1.IGetPacketMirroringRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  /**
-   * Returns the specified PacketMirroring resource.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.packetMirroring
-   *   Name of the PacketMirroring resource to return.
-   * @param {string} request.project
-   *   Project ID for this request.
-   * @param {string} request.region
-   *   Name of the region for this request.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [PacketMirroring]{@link google.cloud.compute.v1.PacketMirroring}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.get(request);
-   */
-  get(
-    request: protos.google.cloud.compute.v1.IGetPacketMirroringRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.compute.v1.IGetPacketMirroringRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.compute.v1.IPacketMirroring,
-          | protos.google.cloud.compute.v1.IGetPacketMirroringRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.compute.v1.IPacketMirroring,
-      | protos.google.cloud.compute.v1.IGetPacketMirroringRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.compute.v1.IPacketMirroring,
-      protos.google.cloud.compute.v1.IGetPacketMirroringRequest | undefined,
-      {} | undefined
-    ]
-  > | void {
+          protos.google.cloud.compute.v1.IGetPacketMirroringRequest|null|undefined,
+          {}|null|undefined>): void;
+  get(
+      request: protos.google.cloud.compute.v1.IGetPacketMirroringRequest,
+      callback: Callback<
+          protos.google.cloud.compute.v1.IPacketMirroring,
+          protos.google.cloud.compute.v1.IGetPacketMirroringRequest|null|undefined,
+          {}|null|undefined>): void;
+/**
+ * Returns the specified PacketMirroring resource.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.packetMirroring
+ *   Name of the PacketMirroring resource to return.
+ * @param {string} request.project
+ *   Project ID for this request.
+ * @param {string} request.region
+ *   Name of the region for this request.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing [PacketMirroring]{@link google.cloud.compute.v1.PacketMirroring}.
+ *   Please see the
+ *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+ *   for more details and examples.
+ * @example
+ * const [response] = await client.get(request);
+ */
+  get(
+      request?: protos.google.cloud.compute.v1.IGetPacketMirroringRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.compute.v1.IPacketMirroring,
+          protos.google.cloud.compute.v1.IGetPacketMirroringRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.compute.v1.IPacketMirroring,
+          protos.google.cloud.compute.v1.IGetPacketMirroringRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.compute.v1.IPacketMirroring,
+        protos.google.cloud.compute.v1.IGetPacketMirroringRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        project: request.project || '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      'project': request.project || '',
+    });
     this.initialize();
     return this.innerApiCalls.get(request, options, callback);
   }
   insert(
-    request: protos.google.cloud.compute.v1.IInsertPacketMirroringRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.compute.v1.IOperation,
-      protos.google.cloud.compute.v1.IInsertPacketMirroringRequest | undefined,
-      {} | undefined
-    ]
-  >;
+      request?: protos.google.cloud.compute.v1.IInsertPacketMirroringRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.compute.v1.IOperation,
+        protos.google.cloud.compute.v1.IInsertPacketMirroringRequest|undefined, {}|undefined
+      ]>;
   insert(
-    request: protos.google.cloud.compute.v1.IInsertPacketMirroringRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.IInsertPacketMirroringRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  insert(
-    request: protos.google.cloud.compute.v1.IInsertPacketMirroringRequest,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.IInsertPacketMirroringRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  /**
-   * Creates a PacketMirroring resource in the specified project and region using the data included in the request.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.compute.v1.PacketMirroring} request.packetMirroringResource
-   *   The body resource for this request
-   * @param {string} request.project
-   *   Project ID for this request.
-   * @param {string} request.region
-   *   Name of the region for this request.
-   * @param {string} request.requestId
-   *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
-   *
-   *   For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
-   *
-   *   The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Operation]{@link google.cloud.compute.v1.Operation}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.insert(request);
-   */
-  insert(
-    request: protos.google.cloud.compute.v1.IInsertPacketMirroringRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.compute.v1.IInsertPacketMirroringRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.compute.v1.IOperation,
-          | protos.google.cloud.compute.v1.IInsertPacketMirroringRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.IInsertPacketMirroringRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.compute.v1.IOperation,
-      protos.google.cloud.compute.v1.IInsertPacketMirroringRequest | undefined,
-      {} | undefined
-    ]
-  > | void {
+          protos.google.cloud.compute.v1.IInsertPacketMirroringRequest|null|undefined,
+          {}|null|undefined>): void;
+  insert(
+      request: protos.google.cloud.compute.v1.IInsertPacketMirroringRequest,
+      callback: Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IInsertPacketMirroringRequest|null|undefined,
+          {}|null|undefined>): void;
+/**
+ * Creates a PacketMirroring resource in the specified project and region using the data included in the request.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.cloud.compute.v1.PacketMirroring} request.packetMirroringResource
+ *   The body resource for this request
+ * @param {string} request.project
+ *   Project ID for this request.
+ * @param {string} request.region
+ *   Name of the region for this request.
+ * @param {string} request.requestId
+ *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
+ *
+ *   For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
+ *
+ *   The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing [Operation]{@link google.cloud.compute.v1.Operation}.
+ *   Please see the
+ *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+ *   for more details and examples.
+ * @example
+ * const [response] = await client.insert(request);
+ */
+  insert(
+      request?: protos.google.cloud.compute.v1.IInsertPacketMirroringRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IInsertPacketMirroringRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IInsertPacketMirroringRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.compute.v1.IOperation,
+        protos.google.cloud.compute.v1.IInsertPacketMirroringRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        project: request.project || '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      'project': request.project || '',
+    });
     this.initialize();
     return this.innerApiCalls.insert(request, options, callback);
   }
   list(
-    request: protos.google.cloud.compute.v1.IListPacketMirroringsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.compute.v1.IPacketMirroringList,
-      protos.google.cloud.compute.v1.IListPacketMirroringsRequest | undefined,
-      {} | undefined
-    ]
-  >;
+      request?: protos.google.cloud.compute.v1.IListPacketMirroringsRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.compute.v1.IPacketMirroringList,
+        protos.google.cloud.compute.v1.IListPacketMirroringsRequest|undefined, {}|undefined
+      ]>;
   list(
-    request: protos.google.cloud.compute.v1.IListPacketMirroringsRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IPacketMirroringList,
-      | protos.google.cloud.compute.v1.IListPacketMirroringsRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  list(
-    request: protos.google.cloud.compute.v1.IListPacketMirroringsRequest,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IPacketMirroringList,
-      | protos.google.cloud.compute.v1.IListPacketMirroringsRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  /**
-   * Retrieves a list of PacketMirroring resources available to the specified project and region.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.filter
-   *   A filter expression that filters resources listed in the response. The expression must specify the field name, a comparison operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The comparison operator must be either `=`, `!=`, `>`, or `<`.
-   *
-   *   For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`.
-   *
-   *   You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels.
-   *
-   *   To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ```
-   * @param {number} request.maxResults
-   *   The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)
-   * @param {string} request.orderBy
-   *   Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name.
-   *
-   *   You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first.
-   *
-   *   Currently, only sorting by `name` or `creationTimestamp desc` is supported.
-   * @param {string} request.pageToken
-   *   Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
-   * @param {string} request.project
-   *   Project ID for this request.
-   * @param {string} request.region
-   *   Name of the region for this request.
-   * @param {boolean} request.returnPartialSuccess
-   *   Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [PacketMirroringList]{@link google.cloud.compute.v1.PacketMirroringList}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.list(request);
-   */
-  list(
-    request: protos.google.cloud.compute.v1.IListPacketMirroringsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.compute.v1.IListPacketMirroringsRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.compute.v1.IPacketMirroringList,
-          | protos.google.cloud.compute.v1.IListPacketMirroringsRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.compute.v1.IPacketMirroringList,
-      | protos.google.cloud.compute.v1.IListPacketMirroringsRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.compute.v1.IPacketMirroringList,
-      protos.google.cloud.compute.v1.IListPacketMirroringsRequest | undefined,
-      {} | undefined
-    ]
-  > | void {
+          protos.google.cloud.compute.v1.IListPacketMirroringsRequest|null|undefined,
+          {}|null|undefined>): void;
+  list(
+      request: protos.google.cloud.compute.v1.IListPacketMirroringsRequest,
+      callback: Callback<
+          protos.google.cloud.compute.v1.IPacketMirroringList,
+          protos.google.cloud.compute.v1.IListPacketMirroringsRequest|null|undefined,
+          {}|null|undefined>): void;
+/**
+ * Retrieves a list of PacketMirroring resources available to the specified project and region.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.filter
+ *   A filter expression that filters resources listed in the response. The expression must specify the field name, a comparison operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The comparison operator must be either `=`, `!=`, `>`, or `<`.
+ *
+ *   For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`.
+ *
+ *   You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels.
+ *
+ *   To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ```
+ * @param {number} request.maxResults
+ *   The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)
+ * @param {string} request.orderBy
+ *   Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name.
+ *
+ *   You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first.
+ *
+ *   Currently, only sorting by `name` or `creationTimestamp desc` is supported.
+ * @param {string} request.pageToken
+ *   Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
+ * @param {string} request.project
+ *   Project ID for this request.
+ * @param {string} request.region
+ *   Name of the region for this request.
+ * @param {boolean} request.returnPartialSuccess
+ *   Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing [PacketMirroringList]{@link google.cloud.compute.v1.PacketMirroringList}.
+ *   Please see the
+ *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+ *   for more details and examples.
+ * @example
+ * const [response] = await client.list(request);
+ */
+  list(
+      request?: protos.google.cloud.compute.v1.IListPacketMirroringsRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.compute.v1.IPacketMirroringList,
+          protos.google.cloud.compute.v1.IListPacketMirroringsRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.compute.v1.IPacketMirroringList,
+          protos.google.cloud.compute.v1.IListPacketMirroringsRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.compute.v1.IPacketMirroringList,
+        protos.google.cloud.compute.v1.IListPacketMirroringsRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        project: request.project || '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      'project': request.project || '',
+    });
     this.initialize();
     return this.innerApiCalls.list(request, options, callback);
   }
   patch(
-    request: protos.google.cloud.compute.v1.IPatchPacketMirroringRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.compute.v1.IOperation,
-      protos.google.cloud.compute.v1.IPatchPacketMirroringRequest | undefined,
-      {} | undefined
-    ]
-  >;
+      request?: protos.google.cloud.compute.v1.IPatchPacketMirroringRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.compute.v1.IOperation,
+        protos.google.cloud.compute.v1.IPatchPacketMirroringRequest|undefined, {}|undefined
+      ]>;
   patch(
-    request: protos.google.cloud.compute.v1.IPatchPacketMirroringRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.IPatchPacketMirroringRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  patch(
-    request: protos.google.cloud.compute.v1.IPatchPacketMirroringRequest,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.IPatchPacketMirroringRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  /**
-   * Patches the specified PacketMirroring resource with the data included in the request. This method supports PATCH semantics and uses JSON merge patch format and processing rules.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.packetMirroring
-   *   Name of the PacketMirroring resource to patch.
-   * @param {google.cloud.compute.v1.PacketMirroring} request.packetMirroringResource
-   *   The body resource for this request
-   * @param {string} request.project
-   *   Project ID for this request.
-   * @param {string} request.region
-   *   Name of the region for this request.
-   * @param {string} request.requestId
-   *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
-   *
-   *   For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
-   *
-   *   The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Operation]{@link google.cloud.compute.v1.Operation}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.patch(request);
-   */
-  patch(
-    request: protos.google.cloud.compute.v1.IPatchPacketMirroringRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.compute.v1.IPatchPacketMirroringRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.compute.v1.IOperation,
-          | protos.google.cloud.compute.v1.IPatchPacketMirroringRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.IPatchPacketMirroringRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.compute.v1.IOperation,
-      protos.google.cloud.compute.v1.IPatchPacketMirroringRequest | undefined,
-      {} | undefined
-    ]
-  > | void {
+          protos.google.cloud.compute.v1.IPatchPacketMirroringRequest|null|undefined,
+          {}|null|undefined>): void;
+  patch(
+      request: protos.google.cloud.compute.v1.IPatchPacketMirroringRequest,
+      callback: Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IPatchPacketMirroringRequest|null|undefined,
+          {}|null|undefined>): void;
+/**
+ * Patches the specified PacketMirroring resource with the data included in the request. This method supports PATCH semantics and uses JSON merge patch format and processing rules.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.packetMirroring
+ *   Name of the PacketMirroring resource to patch.
+ * @param {google.cloud.compute.v1.PacketMirroring} request.packetMirroringResource
+ *   The body resource for this request
+ * @param {string} request.project
+ *   Project ID for this request.
+ * @param {string} request.region
+ *   Name of the region for this request.
+ * @param {string} request.requestId
+ *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
+ *
+ *   For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
+ *
+ *   The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing [Operation]{@link google.cloud.compute.v1.Operation}.
+ *   Please see the
+ *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+ *   for more details and examples.
+ * @example
+ * const [response] = await client.patch(request);
+ */
+  patch(
+      request?: protos.google.cloud.compute.v1.IPatchPacketMirroringRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IPatchPacketMirroringRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IPatchPacketMirroringRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.compute.v1.IOperation,
+        protos.google.cloud.compute.v1.IPatchPacketMirroringRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        project: request.project || '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      'project': request.project || '',
+    });
     this.initialize();
     return this.innerApiCalls.patch(request, options, callback);
   }
   testIamPermissions(
-    request: protos.google.cloud.compute.v1.ITestIamPermissionsPacketMirroringRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.compute.v1.ITestPermissionsResponse,
-      (
-        | protos.google.cloud.compute.v1.ITestIamPermissionsPacketMirroringRequest
-        | undefined
-      ),
-      {} | undefined
-    ]
-  >;
+      request?: protos.google.cloud.compute.v1.ITestIamPermissionsPacketMirroringRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.compute.v1.ITestPermissionsResponse,
+        protos.google.cloud.compute.v1.ITestIamPermissionsPacketMirroringRequest|undefined, {}|undefined
+      ]>;
   testIamPermissions(
-    request: protos.google.cloud.compute.v1.ITestIamPermissionsPacketMirroringRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.compute.v1.ITestPermissionsResponse,
-      | protos.google.cloud.compute.v1.ITestIamPermissionsPacketMirroringRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  testIamPermissions(
-    request: protos.google.cloud.compute.v1.ITestIamPermissionsPacketMirroringRequest,
-    callback: Callback<
-      protos.google.cloud.compute.v1.ITestPermissionsResponse,
-      | protos.google.cloud.compute.v1.ITestIamPermissionsPacketMirroringRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  /**
-   * Returns permissions that a caller has on the specified resource.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.project
-   *   Project ID for this request.
-   * @param {string} request.region
-   *   The name of the region for this request.
-   * @param {string} request.resource
-   *   Name or id of the resource for this request.
-   * @param {google.cloud.compute.v1.TestPermissionsRequest} request.testPermissionsRequestResource
-   *   The body resource for this request
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [TestPermissionsResponse]{@link google.cloud.compute.v1.TestPermissionsResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.testIamPermissions(request);
-   */
-  testIamPermissions(
-    request: protos.google.cloud.compute.v1.ITestIamPermissionsPacketMirroringRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.compute.v1.ITestIamPermissionsPacketMirroringRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.compute.v1.ITestPermissionsResponse,
-          | protos.google.cloud.compute.v1.ITestIamPermissionsPacketMirroringRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.compute.v1.ITestPermissionsResponse,
-      | protos.google.cloud.compute.v1.ITestIamPermissionsPacketMirroringRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.compute.v1.ITestPermissionsResponse,
-      (
-        | protos.google.cloud.compute.v1.ITestIamPermissionsPacketMirroringRequest
-        | undefined
-      ),
-      {} | undefined
-    ]
-  > | void {
+          protos.google.cloud.compute.v1.ITestIamPermissionsPacketMirroringRequest|null|undefined,
+          {}|null|undefined>): void;
+  testIamPermissions(
+      request: protos.google.cloud.compute.v1.ITestIamPermissionsPacketMirroringRequest,
+      callback: Callback<
+          protos.google.cloud.compute.v1.ITestPermissionsResponse,
+          protos.google.cloud.compute.v1.ITestIamPermissionsPacketMirroringRequest|null|undefined,
+          {}|null|undefined>): void;
+/**
+ * Returns permissions that a caller has on the specified resource.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.project
+ *   Project ID for this request.
+ * @param {string} request.region
+ *   The name of the region for this request.
+ * @param {string} request.resource
+ *   Name or id of the resource for this request.
+ * @param {google.cloud.compute.v1.TestPermissionsRequest} request.testPermissionsRequestResource
+ *   The body resource for this request
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing [TestPermissionsResponse]{@link google.cloud.compute.v1.TestPermissionsResponse}.
+ *   Please see the
+ *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+ *   for more details and examples.
+ * @example
+ * const [response] = await client.testIamPermissions(request);
+ */
+  testIamPermissions(
+      request?: protos.google.cloud.compute.v1.ITestIamPermissionsPacketMirroringRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.compute.v1.ITestPermissionsResponse,
+          protos.google.cloud.compute.v1.ITestIamPermissionsPacketMirroringRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.compute.v1.ITestPermissionsResponse,
+          protos.google.cloud.compute.v1.ITestIamPermissionsPacketMirroringRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.compute.v1.ITestPermissionsResponse,
+        protos.google.cloud.compute.v1.ITestIamPermissionsPacketMirroringRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        project: request.project || '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      'project': request.project || '',
+    });
     this.initialize();
     return this.innerApiCalls.testIamPermissions(request, options, callback);
   }
+
 
   /**
    * Terminate the gRPC channel and close the client.

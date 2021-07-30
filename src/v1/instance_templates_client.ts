@@ -39,6 +39,7 @@ const version = require('../../../package.json').version;
 export class InstanceTemplatesClient {
   private _terminated = false;
   private _opts: ClientOptions;
+  private _providedCustomServicePath: boolean;
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
@@ -50,6 +51,7 @@ export class InstanceTemplatesClient {
     longrunning: {},
     batching: {},
   };
+  warn: (code: string, message: string, warnType?: string) => void;
   innerApiCalls: {[name: string]: Function};
   instanceTemplatesStub?: Promise<{[name: string]: Function}>;
 
@@ -90,13 +92,11 @@ export class InstanceTemplatesClient {
   constructor(opts?: ClientOptions) {
     // Ensure that options include all the required fields.
     const staticMembers = this.constructor as typeof InstanceTemplatesClient;
-    const servicePath =
-      opts?.servicePath || opts?.apiEndpoint || staticMembers.servicePath;
+    const servicePath = opts?.servicePath || opts?.apiEndpoint || staticMembers.servicePath;
+    this._providedCustomServicePath = !!(opts?.servicePath || opts?.apiEndpoint);
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    const fallback =
-      opts?.fallback ??
-      (typeof window !== 'undefined' && typeof window?.fetch === 'function');
+    const fallback = opts?.fallback ?? (typeof window !== 'undefined' && typeof window?.fetch === 'function');
     opts = Object.assign({servicePath, port, clientConfig, fallback}, opts);
 
     // If scopes are unset in options and we're connecting to a non-default endpoint, set scopes just in case.
@@ -114,7 +114,7 @@ export class InstanceTemplatesClient {
     this._opts = opts;
 
     // Save the auth object to the client, for use by other methods.
-    this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
+    this.auth = (this._gaxGrpc.auth as gax.GoogleAuth);
 
     // Set the default scopes in auth client if needed.
     if (servicePath === staticMembers.servicePath) {
@@ -122,7 +122,10 @@ export class InstanceTemplatesClient {
     }
 
     // Determine the client header string.
-    const clientHeader = [`gax/${this._gaxModule.version}`, `gapic/${version}`];
+    const clientHeader = [
+      `gax/${this._gaxModule.version}`,
+      `gapic/${version}`,
+    ];
     if (typeof process !== 'undefined' && 'versions' in process) {
       clientHeader.push(`gl-node/${process.versions.node}`);
     } else {
@@ -130,6 +133,8 @@ export class InstanceTemplatesClient {
     }
     if (!opts.fallback) {
       clientHeader.push(`grpc/${this._gaxGrpc.grpcVersion}`);
+    } else if (opts.fallback === 'rest' ) {
+      clientHeader.push(`rest/${this._gaxGrpc.grpcVersion}`);
     }
     if (opts.libName && opts.libVersion) {
       clientHeader.push(`${opts.libName}/${opts.libVersion}`);
@@ -139,16 +144,16 @@ export class InstanceTemplatesClient {
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.cloud.compute.v1.InstanceTemplates',
-      gapicConfig as gax.ClientConfig,
-      opts.clientConfig || {},
-      {'x-goog-api-client': clientHeader.join(' ')}
-    );
+        'google.cloud.compute.v1.InstanceTemplates', gapicConfig as gax.ClientConfig,
+        opts.clientConfig || {}, {'x-goog-api-client': clientHeader.join(' ')});
 
     // Set up a dictionary of "inner API calls"; the core implementation
     // of calling the API is handled in `google-gax`, with this code
     // merely providing the destination and request information.
     this.innerApiCalls = {};
+
+    // Add a warn function to the client constructor so it can be easily tested.
+    this.warn = gax.warn;
   }
 
   /**
@@ -171,42 +176,31 @@ export class InstanceTemplatesClient {
     // Put together the "service stub" for
     // google.cloud.compute.v1.InstanceTemplates.
     this.instanceTemplatesStub = this._gaxGrpc.createStub(
-      this._opts.fallback
-        ? (this._protos as protobuf.Root).lookupService(
-            'google.cloud.compute.v1.InstanceTemplates'
-          )
-        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        this._opts.fallback ?
+          (this._protos as protobuf.Root).lookupService('google.cloud.compute.v1.InstanceTemplates') :
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.cloud.compute.v1.InstanceTemplates,
-      this._opts
-    ) as Promise<{[method: string]: Function}>;
+        this._opts, this._providedCustomServicePath) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const instanceTemplatesStubMethods = [
-      'delete',
-      'get',
-      'getIamPolicy',
-      'insert',
-      'list',
-      'setIamPolicy',
-      'testIamPermissions',
-    ];
+    const instanceTemplatesStubMethods =
+        ['delete', 'get', 'getIamPolicy', 'insert', 'list', 'setIamPolicy', 'testIamPermissions'];
     for (const methodName of instanceTemplatesStubMethods) {
       const callPromise = this.instanceTemplatesStub.then(
-        stub =>
-          (...args: Array<{}>) => {
-            if (this._terminated) {
-              return Promise.reject('The client has already been closed.');
-            }
-            const func = stub[methodName];
-            return func.apply(stub, args);
-          },
-        (err: Error | null | undefined) => () => {
+        stub => (...args: Array<{}>) => {
+          if (this._terminated) {
+            return Promise.reject('The client has already been closed.');
+          }
+          const func = stub[methodName];
+          return func.apply(stub, args);
+        },
+        (err: Error|null|undefined) => () => {
           throw err;
-        }
-      );
+        });
 
-      const descriptor = undefined;
+      const descriptor =
+        undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
@@ -252,7 +246,7 @@ export class InstanceTemplatesClient {
   static get scopes() {
     return [
       'https://www.googleapis.com/auth/compute',
-      'https://www.googleapis.com/auth/cloud-platform',
+      'https://www.googleapis.com/auth/cloud-platform'
     ];
   }
 
@@ -262,9 +256,8 @@ export class InstanceTemplatesClient {
    * Return the project ID used by this class.
    * @returns {Promise} A promise that resolves to string containing the project ID.
    */
-  getProjectId(
-    callback?: Callback<string, undefined, undefined>
-  ): Promise<string> | void {
+  getProjectId(callback?: Callback<string, undefined, undefined>):
+      Promise<string>|void {
     if (callback) {
       this.auth.getProjectId(callback);
       return;
@@ -276,710 +269,553 @@ export class InstanceTemplatesClient {
   // -- Service calls --
   // -------------------
   delete(
-    request: protos.google.cloud.compute.v1.IDeleteInstanceTemplateRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.compute.v1.IOperation,
-      protos.google.cloud.compute.v1.IDeleteInstanceTemplateRequest | undefined,
-      {} | undefined
-    ]
-  >;
+      request?: protos.google.cloud.compute.v1.IDeleteInstanceTemplateRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.compute.v1.IOperation,
+        protos.google.cloud.compute.v1.IDeleteInstanceTemplateRequest|undefined, {}|undefined
+      ]>;
   delete(
-    request: protos.google.cloud.compute.v1.IDeleteInstanceTemplateRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.IDeleteInstanceTemplateRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  delete(
-    request: protos.google.cloud.compute.v1.IDeleteInstanceTemplateRequest,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.IDeleteInstanceTemplateRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  /**
-   * Deletes the specified instance template. Deleting an instance template is permanent and cannot be undone. It is not possible to delete templates that are already in use by a managed instance group.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.instanceTemplate
-   *   The name of the instance template to delete.
-   * @param {string} request.project
-   *   Project ID for this request.
-   * @param {string} request.requestId
-   *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
-   *
-   *   For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
-   *
-   *   The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Operation]{@link google.cloud.compute.v1.Operation}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.delete(request);
-   */
-  delete(
-    request: protos.google.cloud.compute.v1.IDeleteInstanceTemplateRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.compute.v1.IDeleteInstanceTemplateRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.compute.v1.IOperation,
-          | protos.google.cloud.compute.v1.IDeleteInstanceTemplateRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.IDeleteInstanceTemplateRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.compute.v1.IOperation,
-      protos.google.cloud.compute.v1.IDeleteInstanceTemplateRequest | undefined,
-      {} | undefined
-    ]
-  > | void {
+          protos.google.cloud.compute.v1.IDeleteInstanceTemplateRequest|null|undefined,
+          {}|null|undefined>): void;
+  delete(
+      request: protos.google.cloud.compute.v1.IDeleteInstanceTemplateRequest,
+      callback: Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IDeleteInstanceTemplateRequest|null|undefined,
+          {}|null|undefined>): void;
+/**
+ * Deletes the specified instance template. Deleting an instance template is permanent and cannot be undone. It is not possible to delete templates that are already in use by a managed instance group.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.instanceTemplate
+ *   The name of the instance template to delete.
+ * @param {string} request.project
+ *   Project ID for this request.
+ * @param {string} request.requestId
+ *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
+ *
+ *   For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
+ *
+ *   The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing [Operation]{@link google.cloud.compute.v1.Operation}.
+ *   Please see the
+ *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+ *   for more details and examples.
+ * @example
+ * const [response] = await client.delete(request);
+ */
+  delete(
+      request?: protos.google.cloud.compute.v1.IDeleteInstanceTemplateRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IDeleteInstanceTemplateRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IDeleteInstanceTemplateRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.compute.v1.IOperation,
+        protos.google.cloud.compute.v1.IDeleteInstanceTemplateRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        project: request.project || '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      'project': request.project || '',
+    });
     this.initialize();
     return this.innerApiCalls.delete(request, options, callback);
   }
   get(
-    request: protos.google.cloud.compute.v1.IGetInstanceTemplateRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.compute.v1.IInstanceTemplate,
-      protos.google.cloud.compute.v1.IGetInstanceTemplateRequest | undefined,
-      {} | undefined
-    ]
-  >;
+      request?: protos.google.cloud.compute.v1.IGetInstanceTemplateRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.compute.v1.IInstanceTemplate,
+        protos.google.cloud.compute.v1.IGetInstanceTemplateRequest|undefined, {}|undefined
+      ]>;
   get(
-    request: protos.google.cloud.compute.v1.IGetInstanceTemplateRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IInstanceTemplate,
-      | protos.google.cloud.compute.v1.IGetInstanceTemplateRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  get(
-    request: protos.google.cloud.compute.v1.IGetInstanceTemplateRequest,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IInstanceTemplate,
-      | protos.google.cloud.compute.v1.IGetInstanceTemplateRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  /**
-   * Returns the specified instance template. Gets a list of available instance templates by making a list() request.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.instanceTemplate
-   *   The name of the instance template.
-   * @param {string} request.project
-   *   Project ID for this request.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [InstanceTemplate]{@link google.cloud.compute.v1.InstanceTemplate}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.get(request);
-   */
-  get(
-    request: protos.google.cloud.compute.v1.IGetInstanceTemplateRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.compute.v1.IGetInstanceTemplateRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.compute.v1.IInstanceTemplate,
-          | protos.google.cloud.compute.v1.IGetInstanceTemplateRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.compute.v1.IInstanceTemplate,
-      | protos.google.cloud.compute.v1.IGetInstanceTemplateRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.compute.v1.IInstanceTemplate,
-      protos.google.cloud.compute.v1.IGetInstanceTemplateRequest | undefined,
-      {} | undefined
-    ]
-  > | void {
+          protos.google.cloud.compute.v1.IGetInstanceTemplateRequest|null|undefined,
+          {}|null|undefined>): void;
+  get(
+      request: protos.google.cloud.compute.v1.IGetInstanceTemplateRequest,
+      callback: Callback<
+          protos.google.cloud.compute.v1.IInstanceTemplate,
+          protos.google.cloud.compute.v1.IGetInstanceTemplateRequest|null|undefined,
+          {}|null|undefined>): void;
+/**
+ * Returns the specified instance template. Gets a list of available instance templates by making a list() request.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.instanceTemplate
+ *   The name of the instance template.
+ * @param {string} request.project
+ *   Project ID for this request.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing [InstanceTemplate]{@link google.cloud.compute.v1.InstanceTemplate}.
+ *   Please see the
+ *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+ *   for more details and examples.
+ * @example
+ * const [response] = await client.get(request);
+ */
+  get(
+      request?: protos.google.cloud.compute.v1.IGetInstanceTemplateRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.compute.v1.IInstanceTemplate,
+          protos.google.cloud.compute.v1.IGetInstanceTemplateRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.compute.v1.IInstanceTemplate,
+          protos.google.cloud.compute.v1.IGetInstanceTemplateRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.compute.v1.IInstanceTemplate,
+        protos.google.cloud.compute.v1.IGetInstanceTemplateRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        project: request.project || '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      'project': request.project || '',
+    });
     this.initialize();
     return this.innerApiCalls.get(request, options, callback);
   }
   getIamPolicy(
-    request: protos.google.cloud.compute.v1.IGetIamPolicyInstanceTemplateRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.compute.v1.IPolicy,
-      (
-        | protos.google.cloud.compute.v1.IGetIamPolicyInstanceTemplateRequest
-        | undefined
-      ),
-      {} | undefined
-    ]
-  >;
+      request?: protos.google.cloud.compute.v1.IGetIamPolicyInstanceTemplateRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.compute.v1.IPolicy,
+        protos.google.cloud.compute.v1.IGetIamPolicyInstanceTemplateRequest|undefined, {}|undefined
+      ]>;
   getIamPolicy(
-    request: protos.google.cloud.compute.v1.IGetIamPolicyInstanceTemplateRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IPolicy,
-      | protos.google.cloud.compute.v1.IGetIamPolicyInstanceTemplateRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getIamPolicy(
-    request: protos.google.cloud.compute.v1.IGetIamPolicyInstanceTemplateRequest,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IPolicy,
-      | protos.google.cloud.compute.v1.IGetIamPolicyInstanceTemplateRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  /**
-   * Gets the access control policy for a resource. May be empty if no such policy or resource exists.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {number} request.optionsRequestedPolicyVersion
-   *   Requested IAM Policy version.
-   * @param {string} request.project
-   *   Project ID for this request.
-   * @param {string} request.resource
-   *   Name or id of the resource for this request.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Policy]{@link google.cloud.compute.v1.Policy}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.getIamPolicy(request);
-   */
-  getIamPolicy(
-    request: protos.google.cloud.compute.v1.IGetIamPolicyInstanceTemplateRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.compute.v1.IGetIamPolicyInstanceTemplateRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.compute.v1.IPolicy,
-          | protos.google.cloud.compute.v1.IGetIamPolicyInstanceTemplateRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.compute.v1.IPolicy,
-      | protos.google.cloud.compute.v1.IGetIamPolicyInstanceTemplateRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.compute.v1.IPolicy,
-      (
-        | protos.google.cloud.compute.v1.IGetIamPolicyInstanceTemplateRequest
-        | undefined
-      ),
-      {} | undefined
-    ]
-  > | void {
+          protos.google.cloud.compute.v1.IGetIamPolicyInstanceTemplateRequest|null|undefined,
+          {}|null|undefined>): void;
+  getIamPolicy(
+      request: protos.google.cloud.compute.v1.IGetIamPolicyInstanceTemplateRequest,
+      callback: Callback<
+          protos.google.cloud.compute.v1.IPolicy,
+          protos.google.cloud.compute.v1.IGetIamPolicyInstanceTemplateRequest|null|undefined,
+          {}|null|undefined>): void;
+/**
+ * Gets the access control policy for a resource. May be empty if no such policy or resource exists.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {number} request.optionsRequestedPolicyVersion
+ *   Requested IAM Policy version.
+ * @param {string} request.project
+ *   Project ID for this request.
+ * @param {string} request.resource
+ *   Name or id of the resource for this request.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing [Policy]{@link google.cloud.compute.v1.Policy}.
+ *   Please see the
+ *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+ *   for more details and examples.
+ * @example
+ * const [response] = await client.getIamPolicy(request);
+ */
+  getIamPolicy(
+      request?: protos.google.cloud.compute.v1.IGetIamPolicyInstanceTemplateRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.compute.v1.IPolicy,
+          protos.google.cloud.compute.v1.IGetIamPolicyInstanceTemplateRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.compute.v1.IPolicy,
+          protos.google.cloud.compute.v1.IGetIamPolicyInstanceTemplateRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.compute.v1.IPolicy,
+        protos.google.cloud.compute.v1.IGetIamPolicyInstanceTemplateRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        project: request.project || '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      'project': request.project || '',
+    });
     this.initialize();
     return this.innerApiCalls.getIamPolicy(request, options, callback);
   }
   insert(
-    request: protos.google.cloud.compute.v1.IInsertInstanceTemplateRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.compute.v1.IOperation,
-      protos.google.cloud.compute.v1.IInsertInstanceTemplateRequest | undefined,
-      {} | undefined
-    ]
-  >;
+      request?: protos.google.cloud.compute.v1.IInsertInstanceTemplateRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.compute.v1.IOperation,
+        protos.google.cloud.compute.v1.IInsertInstanceTemplateRequest|undefined, {}|undefined
+      ]>;
   insert(
-    request: protos.google.cloud.compute.v1.IInsertInstanceTemplateRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.IInsertInstanceTemplateRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  insert(
-    request: protos.google.cloud.compute.v1.IInsertInstanceTemplateRequest,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.IInsertInstanceTemplateRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  /**
-   * Creates an instance template in the specified project using the data that is included in the request. If you are creating a new template to update an existing instance group, your new instance template must use the same network or, if applicable, the same subnetwork as the original template.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.compute.v1.InstanceTemplate} request.instanceTemplateResource
-   *   The body resource for this request
-   * @param {string} request.project
-   *   Project ID for this request.
-   * @param {string} request.requestId
-   *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
-   *
-   *   For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
-   *
-   *   The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Operation]{@link google.cloud.compute.v1.Operation}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.insert(request);
-   */
-  insert(
-    request: protos.google.cloud.compute.v1.IInsertInstanceTemplateRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.compute.v1.IInsertInstanceTemplateRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.compute.v1.IOperation,
-          | protos.google.cloud.compute.v1.IInsertInstanceTemplateRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.IInsertInstanceTemplateRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.compute.v1.IOperation,
-      protos.google.cloud.compute.v1.IInsertInstanceTemplateRequest | undefined,
-      {} | undefined
-    ]
-  > | void {
+          protos.google.cloud.compute.v1.IInsertInstanceTemplateRequest|null|undefined,
+          {}|null|undefined>): void;
+  insert(
+      request: protos.google.cloud.compute.v1.IInsertInstanceTemplateRequest,
+      callback: Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IInsertInstanceTemplateRequest|null|undefined,
+          {}|null|undefined>): void;
+/**
+ * Creates an instance template in the specified project using the data that is included in the request. If you are creating a new template to update an existing instance group, your new instance template must use the same network or, if applicable, the same subnetwork as the original template.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.cloud.compute.v1.InstanceTemplate} request.instanceTemplateResource
+ *   The body resource for this request
+ * @param {string} request.project
+ *   Project ID for this request.
+ * @param {string} request.requestId
+ *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
+ *
+ *   For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
+ *
+ *   The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing [Operation]{@link google.cloud.compute.v1.Operation}.
+ *   Please see the
+ *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+ *   for more details and examples.
+ * @example
+ * const [response] = await client.insert(request);
+ */
+  insert(
+      request?: protos.google.cloud.compute.v1.IInsertInstanceTemplateRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IInsertInstanceTemplateRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IInsertInstanceTemplateRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.compute.v1.IOperation,
+        protos.google.cloud.compute.v1.IInsertInstanceTemplateRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        project: request.project || '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      'project': request.project || '',
+    });
     this.initialize();
     return this.innerApiCalls.insert(request, options, callback);
   }
   list(
-    request: protos.google.cloud.compute.v1.IListInstanceTemplatesRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.compute.v1.IInstanceTemplateList,
-      protos.google.cloud.compute.v1.IListInstanceTemplatesRequest | undefined,
-      {} | undefined
-    ]
-  >;
+      request?: protos.google.cloud.compute.v1.IListInstanceTemplatesRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.compute.v1.IInstanceTemplateList,
+        protos.google.cloud.compute.v1.IListInstanceTemplatesRequest|undefined, {}|undefined
+      ]>;
   list(
-    request: protos.google.cloud.compute.v1.IListInstanceTemplatesRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IInstanceTemplateList,
-      | protos.google.cloud.compute.v1.IListInstanceTemplatesRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  list(
-    request: protos.google.cloud.compute.v1.IListInstanceTemplatesRequest,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IInstanceTemplateList,
-      | protos.google.cloud.compute.v1.IListInstanceTemplatesRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  /**
-   * Retrieves a list of instance templates that are contained within the specified project.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.filter
-   *   A filter expression that filters resources listed in the response. The expression must specify the field name, a comparison operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The comparison operator must be either `=`, `!=`, `>`, or `<`.
-   *
-   *   For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`.
-   *
-   *   You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels.
-   *
-   *   To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ```
-   * @param {number} request.maxResults
-   *   The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)
-   * @param {string} request.orderBy
-   *   Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name.
-   *
-   *   You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first.
-   *
-   *   Currently, only sorting by `name` or `creationTimestamp desc` is supported.
-   * @param {string} request.pageToken
-   *   Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
-   * @param {string} request.project
-   *   Project ID for this request.
-   * @param {boolean} request.returnPartialSuccess
-   *   Opt-in for partial success behavior which provides partial results in case of failure. The default value is false and the logic is the same as today.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [InstanceTemplateList]{@link google.cloud.compute.v1.InstanceTemplateList}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.list(request);
-   */
-  list(
-    request: protos.google.cloud.compute.v1.IListInstanceTemplatesRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.compute.v1.IListInstanceTemplatesRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.compute.v1.IInstanceTemplateList,
-          | protos.google.cloud.compute.v1.IListInstanceTemplatesRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.compute.v1.IInstanceTemplateList,
-      | protos.google.cloud.compute.v1.IListInstanceTemplatesRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.compute.v1.IInstanceTemplateList,
-      protos.google.cloud.compute.v1.IListInstanceTemplatesRequest | undefined,
-      {} | undefined
-    ]
-  > | void {
+          protos.google.cloud.compute.v1.IListInstanceTemplatesRequest|null|undefined,
+          {}|null|undefined>): void;
+  list(
+      request: protos.google.cloud.compute.v1.IListInstanceTemplatesRequest,
+      callback: Callback<
+          protos.google.cloud.compute.v1.IInstanceTemplateList,
+          protos.google.cloud.compute.v1.IListInstanceTemplatesRequest|null|undefined,
+          {}|null|undefined>): void;
+/**
+ * Retrieves a list of instance templates that are contained within the specified project.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.filter
+ *   A filter expression that filters resources listed in the response. The expression must specify the field name, a comparison operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The comparison operator must be either `=`, `!=`, `>`, or `<`.
+ *
+ *   For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`.
+ *
+ *   You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels.
+ *
+ *   To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ```
+ * @param {number} request.maxResults
+ *   The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)
+ * @param {string} request.orderBy
+ *   Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name.
+ *
+ *   You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first.
+ *
+ *   Currently, only sorting by `name` or `creationTimestamp desc` is supported.
+ * @param {string} request.pageToken
+ *   Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
+ * @param {string} request.project
+ *   Project ID for this request.
+ * @param {boolean} request.returnPartialSuccess
+ *   Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing [InstanceTemplateList]{@link google.cloud.compute.v1.InstanceTemplateList}.
+ *   Please see the
+ *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+ *   for more details and examples.
+ * @example
+ * const [response] = await client.list(request);
+ */
+  list(
+      request?: protos.google.cloud.compute.v1.IListInstanceTemplatesRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.compute.v1.IInstanceTemplateList,
+          protos.google.cloud.compute.v1.IListInstanceTemplatesRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.compute.v1.IInstanceTemplateList,
+          protos.google.cloud.compute.v1.IListInstanceTemplatesRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.compute.v1.IInstanceTemplateList,
+        protos.google.cloud.compute.v1.IListInstanceTemplatesRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        project: request.project || '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      'project': request.project || '',
+    });
     this.initialize();
     return this.innerApiCalls.list(request, options, callback);
   }
   setIamPolicy(
-    request: protos.google.cloud.compute.v1.ISetIamPolicyInstanceTemplateRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.compute.v1.IPolicy,
-      (
-        | protos.google.cloud.compute.v1.ISetIamPolicyInstanceTemplateRequest
-        | undefined
-      ),
-      {} | undefined
-    ]
-  >;
+      request?: protos.google.cloud.compute.v1.ISetIamPolicyInstanceTemplateRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.compute.v1.IPolicy,
+        protos.google.cloud.compute.v1.ISetIamPolicyInstanceTemplateRequest|undefined, {}|undefined
+      ]>;
   setIamPolicy(
-    request: protos.google.cloud.compute.v1.ISetIamPolicyInstanceTemplateRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IPolicy,
-      | protos.google.cloud.compute.v1.ISetIamPolicyInstanceTemplateRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  setIamPolicy(
-    request: protos.google.cloud.compute.v1.ISetIamPolicyInstanceTemplateRequest,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IPolicy,
-      | protos.google.cloud.compute.v1.ISetIamPolicyInstanceTemplateRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  /**
-   * Sets the access control policy on the specified resource. Replaces any existing policy.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.compute.v1.GlobalSetPolicyRequest} request.globalSetPolicyRequestResource
-   *   The body resource for this request
-   * @param {string} request.project
-   *   Project ID for this request.
-   * @param {string} request.resource
-   *   Name or id of the resource for this request.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Policy]{@link google.cloud.compute.v1.Policy}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.setIamPolicy(request);
-   */
-  setIamPolicy(
-    request: protos.google.cloud.compute.v1.ISetIamPolicyInstanceTemplateRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.compute.v1.ISetIamPolicyInstanceTemplateRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.compute.v1.IPolicy,
-          | protos.google.cloud.compute.v1.ISetIamPolicyInstanceTemplateRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.compute.v1.IPolicy,
-      | protos.google.cloud.compute.v1.ISetIamPolicyInstanceTemplateRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.compute.v1.IPolicy,
-      (
-        | protos.google.cloud.compute.v1.ISetIamPolicyInstanceTemplateRequest
-        | undefined
-      ),
-      {} | undefined
-    ]
-  > | void {
+          protos.google.cloud.compute.v1.ISetIamPolicyInstanceTemplateRequest|null|undefined,
+          {}|null|undefined>): void;
+  setIamPolicy(
+      request: protos.google.cloud.compute.v1.ISetIamPolicyInstanceTemplateRequest,
+      callback: Callback<
+          protos.google.cloud.compute.v1.IPolicy,
+          protos.google.cloud.compute.v1.ISetIamPolicyInstanceTemplateRequest|null|undefined,
+          {}|null|undefined>): void;
+/**
+ * Sets the access control policy on the specified resource. Replaces any existing policy.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {google.cloud.compute.v1.GlobalSetPolicyRequest} request.globalSetPolicyRequestResource
+ *   The body resource for this request
+ * @param {string} request.project
+ *   Project ID for this request.
+ * @param {string} request.resource
+ *   Name or id of the resource for this request.
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing [Policy]{@link google.cloud.compute.v1.Policy}.
+ *   Please see the
+ *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+ *   for more details and examples.
+ * @example
+ * const [response] = await client.setIamPolicy(request);
+ */
+  setIamPolicy(
+      request?: protos.google.cloud.compute.v1.ISetIamPolicyInstanceTemplateRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.compute.v1.IPolicy,
+          protos.google.cloud.compute.v1.ISetIamPolicyInstanceTemplateRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.compute.v1.IPolicy,
+          protos.google.cloud.compute.v1.ISetIamPolicyInstanceTemplateRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.compute.v1.IPolicy,
+        protos.google.cloud.compute.v1.ISetIamPolicyInstanceTemplateRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        project: request.project || '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      'project': request.project || '',
+    });
     this.initialize();
     return this.innerApiCalls.setIamPolicy(request, options, callback);
   }
   testIamPermissions(
-    request: protos.google.cloud.compute.v1.ITestIamPermissionsInstanceTemplateRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.compute.v1.ITestPermissionsResponse,
-      (
-        | protos.google.cloud.compute.v1.ITestIamPermissionsInstanceTemplateRequest
-        | undefined
-      ),
-      {} | undefined
-    ]
-  >;
+      request?: protos.google.cloud.compute.v1.ITestIamPermissionsInstanceTemplateRequest,
+      options?: CallOptions):
+      Promise<[
+        protos.google.cloud.compute.v1.ITestPermissionsResponse,
+        protos.google.cloud.compute.v1.ITestIamPermissionsInstanceTemplateRequest|undefined, {}|undefined
+      ]>;
   testIamPermissions(
-    request: protos.google.cloud.compute.v1.ITestIamPermissionsInstanceTemplateRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.compute.v1.ITestPermissionsResponse,
-      | protos.google.cloud.compute.v1.ITestIamPermissionsInstanceTemplateRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  testIamPermissions(
-    request: protos.google.cloud.compute.v1.ITestIamPermissionsInstanceTemplateRequest,
-    callback: Callback<
-      protos.google.cloud.compute.v1.ITestPermissionsResponse,
-      | protos.google.cloud.compute.v1.ITestIamPermissionsInstanceTemplateRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  /**
-   * Returns permissions that a caller has on the specified resource.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.project
-   *   Project ID for this request.
-   * @param {string} request.resource
-   *   Name or id of the resource for this request.
-   * @param {google.cloud.compute.v1.TestPermissionsRequest} request.testPermissionsRequestResource
-   *   The body resource for this request
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [TestPermissionsResponse]{@link google.cloud.compute.v1.TestPermissionsResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.testIamPermissions(request);
-   */
-  testIamPermissions(
-    request: protos.google.cloud.compute.v1.ITestIamPermissionsInstanceTemplateRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
+      request: protos.google.cloud.compute.v1.ITestIamPermissionsInstanceTemplateRequest,
+      options: CallOptions,
+      callback: Callback<
           protos.google.cloud.compute.v1.ITestPermissionsResponse,
-          | protos.google.cloud.compute.v1.ITestIamPermissionsInstanceTemplateRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.compute.v1.ITestPermissionsResponse,
-      | protos.google.cloud.compute.v1.ITestIamPermissionsInstanceTemplateRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.compute.v1.ITestPermissionsResponse,
-      (
-        | protos.google.cloud.compute.v1.ITestIamPermissionsInstanceTemplateRequest
-        | undefined
-      ),
-      {} | undefined
-    ]
-  > | void {
+          protos.google.cloud.compute.v1.ITestIamPermissionsInstanceTemplateRequest|null|undefined,
+          {}|null|undefined>): void;
+  testIamPermissions(
+      request: protos.google.cloud.compute.v1.ITestIamPermissionsInstanceTemplateRequest,
+      callback: Callback<
+          protos.google.cloud.compute.v1.ITestPermissionsResponse,
+          protos.google.cloud.compute.v1.ITestIamPermissionsInstanceTemplateRequest|null|undefined,
+          {}|null|undefined>): void;
+/**
+ * Returns permissions that a caller has on the specified resource.
+ *
+ * @param {Object} request
+ *   The request object that will be sent.
+ * @param {string} request.project
+ *   Project ID for this request.
+ * @param {string} request.resource
+ *   Name or id of the resource for this request.
+ * @param {google.cloud.compute.v1.TestPermissionsRequest} request.testPermissionsRequestResource
+ *   The body resource for this request
+ * @param {object} [options]
+ *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+ * @returns {Promise} - The promise which resolves to an array.
+ *   The first element of the array is an object representing [TestPermissionsResponse]{@link google.cloud.compute.v1.TestPermissionsResponse}.
+ *   Please see the
+ *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+ *   for more details and examples.
+ * @example
+ * const [response] = await client.testIamPermissions(request);
+ */
+  testIamPermissions(
+      request?: protos.google.cloud.compute.v1.ITestIamPermissionsInstanceTemplateRequest,
+      optionsOrCallback?: CallOptions|Callback<
+          protos.google.cloud.compute.v1.ITestPermissionsResponse,
+          protos.google.cloud.compute.v1.ITestIamPermissionsInstanceTemplateRequest|null|undefined,
+          {}|null|undefined>,
+      callback?: Callback<
+          protos.google.cloud.compute.v1.ITestPermissionsResponse,
+          protos.google.cloud.compute.v1.ITestIamPermissionsInstanceTemplateRequest|null|undefined,
+          {}|null|undefined>):
+      Promise<[
+        protos.google.cloud.compute.v1.ITestPermissionsResponse,
+        protos.google.cloud.compute.v1.ITestIamPermissionsInstanceTemplateRequest|undefined, {}|undefined
+      ]>|void {
     request = request || {};
     let options: CallOptions;
     if (typeof optionsOrCallback === 'function' && callback === undefined) {
       callback = optionsOrCallback;
       options = {};
-    } else {
+    }
+    else {
       options = optionsOrCallback as CallOptions;
     }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        project: request.project || '',
-      });
+    options.otherArgs.headers[
+      'x-goog-request-params'
+    ] = gax.routingHeader.fromParams({
+      'project': request.project || '',
+    });
     this.initialize();
     return this.innerApiCalls.testIamPermissions(request, options, callback);
   }
+
 
   /**
    * Terminate the gRPC channel and close the client.
