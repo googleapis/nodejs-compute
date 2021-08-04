@@ -39,7 +39,7 @@ function main(projectId, zone) {
 
     console.log(`Instances found in zone ${zone}:`);
 
-    for (const instance of instanceList.items) {
+    for (const instance of instanceList) {
       console.log(` - ${instance.name} (${instance.machineType})`);
     }
   }

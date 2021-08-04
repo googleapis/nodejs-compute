@@ -29,15 +29,21 @@ function main(projectId) {
   // List all instances in the specified project.
   async function listAllInstances() {
     const instancesClient = new compute.InstancesClient({fallback: 'rest'});
-    const [aggListRequest] = await instancesClient.aggregatedList({
+
+    //Use the `maxResults` parameter to limit the number of results that the API returns per response page.
+    const aggListRequest = instancesClient.aggregatedListAsync({
       project: projectId,
+      maxResults: 5,
     });
-    const aggList = aggListRequest.items;
 
     console.log('Instances found:');
 
-    for (const zone in aggList) {
-      const instances = aggList[zone].instances;
+    // Despite using the `maxResults` parameter, you don't need to handle the pagination
+    // yourself. The returned object handles pagination automatically,
+    // requesting next pages as you iterate over the results.
+    for await (const [zone, instancesObject] of aggListRequest) {
+      const instances = instancesObject.instances;
+
       if (instances && instances.length > 0) {
         console.log(` ${zone}`);
         for (const instance of instances) {

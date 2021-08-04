@@ -109,7 +109,6 @@
     "predocs-test": "npm run docs",
     "prepare": "npm run compile-protos && npm run compile",
     "prelint": "cd samples; npm link ../; npm install",
-    "clean": "gts clean",
     "precompile": "gts clean"
   },
   "dependencies": {
