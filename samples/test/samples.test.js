@@ -152,4 +152,22 @@ describe('samples', () => {
       assert.isUndefined(project.usageExportLocation);
     });
   });
+
+  describe('pagination', () => {
+    const projectId = 'windows-sql-cloud';
+
+    it('should automatically iterate throught the pages', async () => {
+      const output = execSync(`node listImages ${projectId}`);
+      const lines = output.split(' - ');
+
+      assert(lines.length > 3);
+    });
+
+    it('should iterate page by page granularly', async () => {
+      const output = execSync(`node listImagesByPage ${projectId}`);
+
+      assert.match(output, /Page 1/);
+      assert.match(output, /Page 2/);
+    });
+  });
 });
