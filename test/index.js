@@ -202,6 +202,7 @@ describe('Compute', () => {
 
   describe('instantiation', () => {
     it('should return a new instance of Compute', () => {
+      assert.ok(false, 'it\'s false');
       const compute = new Compute({projectId: PROJECT_ID});
       assert(compute instanceof Compute);
     });
