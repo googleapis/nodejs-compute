@@ -418,14 +418,14 @@ describe('Compute', () => {
       this.timeout(10 * 60 * 1000);
       const iterable = client.aggregatedListAsync({
         project,
-        maxResults: 10,
+        maxResults: 2,
       });
       let presented = false;
       for await (const [location, acceleratorTypesObj] of iterable) {
         if (location === 'zones/' + zone) {
           const acceleratorTypes = acceleratorTypesObj.acceleratorTypes;
           acceleratorTypes.forEach(acceleratorType => {
-            if (acceleratorType.name === 'nvidia-tesla-p4') {
+            if (acceleratorType.name === 'nvidia-tesla-t4') {
               presented = true;
             }
           });
