@@ -17,6 +17,8 @@
   * [Disable Usage Export](#disable-usage-export)
   * [Get Usage Export Bucket](#get-usage-export-bucket)
   * [List All Instances](#list-all-instances)
+  * [List Images](#list-images)
+  * [List Images By Page](#list-images-by-page)
   * [List Instances](#list-instances)
   * [Mailjet](#mailjet)
   * [Sendgrid](#sendgrid)
@@ -116,6 +118,40 @@ __Usage:__
 
 
 `node samples/listAllInstances.js`
+
+
+-----
+
+
+
+
+### List Images
+
+View the [source code](https://github.com/googleapis/nodejs-compute/blob/master/samples/listImages.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-compute&page=editor&open_in_editor=samples/listImages.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/listImages.js`
+
+
+-----
+
+
+
+
+### List Images By Page
+
+View the [source code](https://github.com/googleapis/nodejs-compute/blob/master/samples/listImagesByPage.js).
+
+[![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-compute&page=editor&open_in_editor=samples/listImagesByPage.js,samples/README.md)
+
+__Usage:__
+
+
+`node samples/listImagesByPage.js`
 
 
 -----
