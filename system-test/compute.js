@@ -80,7 +80,7 @@ describe('Compute', () => {
         region,
       });
       let presented = false;
-      for (const item of listResponse.items) {
+      for (const item of listResponse) {
         if (item.name === ADDRESS_NAME) {
           presented = true;
         }
@@ -91,17 +91,20 @@ describe('Compute', () => {
         'address was not found in list response.'
       );
 
-      const [aggregatedResponse] = await client.aggregatedList({
+      const iterable = client.aggregatedListAsync({
         project,
-        region,
       });
       presented = false;
-      const arr = aggregatedResponse.items['regions/' + region].addresses;
-      arr.forEach(address => {
-        if (address.name === ADDRESS_NAME) {
-          presented = true;
+      for await (const [location, addressesObject] of iterable) {
+        if (location === 'regions/' + region) {
+          const addresses = addressesObject.addresses;
+          addresses.forEach(address => {
+            if (address.name === ADDRESS_NAME) {
+              presented = true;
+            }
+          });
         }
-      });
+      }
       assert.strictEqual(
         presented,
         true,
@@ -384,6 +387,57 @@ describe('Compute', () => {
       }
     }
   }
+
+  describe('Pagination', () => {
+    let client = null;
+
+    before(async () => {
+      client = new compute.AcceleratorTypesClient({fallback: 'rest'});
+    });
+
+    it('Pagination in list response', async () => {
+      const [listResponse] = await client.list({
+        project,
+        zone,
+        maxResults: 1,
+      });
+      let presented = false;
+      for (const item of listResponse) {
+        if (item.name === 'nvidia-tesla-t4') {
+          presented = true;
+        }
+      }
+      assert.strictEqual(
+        presented,
+        true,
+        'accelerator type nvidia-tesla-t4 was not found in list response.'
+      );
+    });
+
+    it('Pagination in map responses', async function () {
+      this.timeout(10 * 60 * 1000);
+      const iterable = client.aggregatedListAsync({
+        project,
+        maxResults: 2,
+      });
+      let presented = false;
+      for await (const [location, acceleratorTypesObj] of iterable) {
+        if (location === 'zones/' + zone) {
+          const acceleratorTypes = acceleratorTypesObj.acceleratorTypes;
+          acceleratorTypes.forEach(acceleratorType => {
+            if (acceleratorType.name === 'nvidia-tesla-t4') {
+              presented = true;
+            }
+          });
+        }
+      }
+      assert.strictEqual(
+        presented,
+        true,
+        'accelerator type nvidia-tesla-t4 was not found in map response.'
+      );
+    });
+  });
 
   async function waitGlobalOperation(operation) {
     const globalClient = new compute.GlobalOperationsClient({fallback: 'rest'});
