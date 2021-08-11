@@ -12,8 +12,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-const { operationsProtos } = require('google-gax');
-
 /**
  * Sends an instance creation request to GCP and waits for it to complete.
  *
