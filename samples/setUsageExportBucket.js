@@ -48,7 +48,7 @@ function main(projectId, bucketName, reportNamePrefix = '') {
     const operationsClient = new compute.GlobalOperationsClient({
       fallback: 'rest',
     });
-  
+
     let [operation] = await projectsClient.setUsageExportBucket({
       project: projectId,
       usageExportLocationResource,
