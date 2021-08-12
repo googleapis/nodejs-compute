@@ -1,7 +1,12 @@
 {
   "name": "@google-cloud/compute",
-  "description": "Compute client for Node.js",
+  "description": "Google Compute Engine Client Library for Node.js",
   "version": "3.0.0-alpha.3",
+  "license": "Apache-2.0",
+  "author": "Google Inc.",
+  "engines": {
+    "node": ">=10"
+  },
   "repository": "googleapis/nodejs-compute",
   "license": "Apache-2.0",
   "author": "Google LLC",
