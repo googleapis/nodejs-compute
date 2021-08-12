@@ -20,12 +20,10 @@ import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
 import {SinonStub} from 'sinon';
-import {describe, it, beforeEach, afterEach} from 'mocha';
+import {describe, it} from 'mocha';
 import * as globalorganizationoperationsModule from '../src';
 
-import {PassThrough} from 'stream';
-
-import {GoogleAuth, protobuf} from 'google-gax';
+import {protobuf} from 'google-gax';
 
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
@@ -51,81 +49,7 @@ function stubSimpleCallWithCallback<ResponseType>(
     : sinon.stub().callsArgWith(2, null, response);
 }
 
-function stubPageStreamingCall<ResponseType>(
-  responses?: ResponseType[],
-  error?: Error
-) {
-  const pagingStub = sinon.stub();
-  if (responses) {
-    for (let i = 0; i < responses.length; ++i) {
-      pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
-    }
-  }
-  const transformStub = error
-    ? sinon.stub().callsArgWith(2, error)
-    : pagingStub;
-  const mockStream = new PassThrough({
-    objectMode: true,
-    transform: transformStub,
-  });
-  // trigger as many responses as needed
-  if (responses) {
-    for (let i = 0; i < responses.length; ++i) {
-      setImmediate(() => {
-        mockStream.write({});
-      });
-    }
-    setImmediate(() => {
-      mockStream.end();
-    });
-  } else {
-    setImmediate(() => {
-      mockStream.write({});
-    });
-    setImmediate(() => {
-      mockStream.end();
-    });
-  }
-  return sinon.stub().returns(mockStream);
-}
-
-function stubAsyncIterationCall<ResponseType>(
-  responses?: ResponseType[],
-  error?: Error
-) {
-  let counter = 0;
-  const asyncIterable = {
-    [Symbol.asyncIterator]() {
-      return {
-        async next() {
-          if (error) {
-            return Promise.reject(error);
-          }
-          if (counter >= responses!.length) {
-            return Promise.resolve({done: true, value: undefined});
-          }
-          return Promise.resolve({done: false, value: responses![counter++]});
-        },
-      };
-    },
-  };
-  return sinon.stub().returns(asyncIterable);
-}
-
 describe('v1.GlobalOrganizationOperationsClient', () => {
-  let googleAuth: GoogleAuth;
-  beforeEach(() => {
-    googleAuth = {
-      getClient: sinon.stub().resolves({
-        getRequestHeaders: sinon
-          .stub()
-          .resolves({Authorization: 'Bearer SOME_TOKEN'}),
-      }),
-    } as unknown as GoogleAuth;
-  });
-  afterEach(() => {
-    sinon.restore();
-  });
   it('has servicePath', () => {
     const servicePath =
       globalorganizationoperationsModule.v1.GlobalOrganizationOperationsClient
@@ -168,7 +92,7 @@ describe('v1.GlobalOrganizationOperationsClient', () => {
     const client =
       new globalorganizationoperationsModule.v1.GlobalOrganizationOperationsClient(
         {
-          auth: googleAuth,
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         }
       );
@@ -181,7 +105,7 @@ describe('v1.GlobalOrganizationOperationsClient', () => {
     const client =
       new globalorganizationoperationsModule.v1.GlobalOrganizationOperationsClient(
         {
-          auth: googleAuth,
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         }
       );
@@ -193,7 +117,7 @@ describe('v1.GlobalOrganizationOperationsClient', () => {
     const client =
       new globalorganizationoperationsModule.v1.GlobalOrganizationOperationsClient(
         {
-          auth: googleAuth,
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         }
       );
@@ -208,7 +132,7 @@ describe('v1.GlobalOrganizationOperationsClient', () => {
     const client =
       new globalorganizationoperationsModule.v1.GlobalOrganizationOperationsClient(
         {
-          auth: googleAuth,
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         }
       );
@@ -233,7 +157,7 @@ describe('v1.GlobalOrganizationOperationsClient', () => {
       const client =
         new globalorganizationoperationsModule.v1.GlobalOrganizationOperationsClient(
           {
-            auth: googleAuth,
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           }
         );
@@ -267,7 +191,7 @@ describe('v1.GlobalOrganizationOperationsClient', () => {
       const client =
         new globalorganizationoperationsModule.v1.GlobalOrganizationOperationsClient(
           {
-            auth: googleAuth,
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           }
         );
@@ -317,7 +241,7 @@ describe('v1.GlobalOrganizationOperationsClient', () => {
       const client =
         new globalorganizationoperationsModule.v1.GlobalOrganizationOperationsClient(
           {
-            auth: googleAuth,
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           }
         );
@@ -350,7 +274,7 @@ describe('v1.GlobalOrganizationOperationsClient', () => {
       const client =
         new globalorganizationoperationsModule.v1.GlobalOrganizationOperationsClient(
           {
-            auth: googleAuth,
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           }
         );
@@ -384,7 +308,7 @@ describe('v1.GlobalOrganizationOperationsClient', () => {
       const client =
         new globalorganizationoperationsModule.v1.GlobalOrganizationOperationsClient(
           {
-            auth: googleAuth,
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           }
         );
@@ -433,7 +357,7 @@ describe('v1.GlobalOrganizationOperationsClient', () => {
       const client =
         new globalorganizationoperationsModule.v1.GlobalOrganizationOperationsClient(
           {
-            auth: googleAuth,
+            credentials: {client_email: 'bogus', private_key: 'bogus'},
             projectId: 'bogus',
           }
         );
@@ -475,11 +399,9 @@ describe('v1.GlobalOrganizationOperationsClient', () => {
         new protos.google.cloud.compute.v1.ListGlobalOrganizationOperationsRequest()
       );
       const expectedOptions = {};
-      const expectedResponse = [
-        generateSampleMessage(new protos.google.cloud.compute.v1.Operation()),
-        generateSampleMessage(new protos.google.cloud.compute.v1.Operation()),
-        generateSampleMessage(new protos.google.cloud.compute.v1.Operation()),
-      ];
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.compute.v1.OperationList()
+      );
       client.innerApiCalls.list = stubSimpleCall(expectedResponse);
       const [response] = await client.list(request);
       assert.deepStrictEqual(response, expectedResponse);
@@ -503,18 +425,16 @@ describe('v1.GlobalOrganizationOperationsClient', () => {
         new protos.google.cloud.compute.v1.ListGlobalOrganizationOperationsRequest()
       );
       const expectedOptions = {};
-      const expectedResponse = [
-        generateSampleMessage(new protos.google.cloud.compute.v1.Operation()),
-        generateSampleMessage(new protos.google.cloud.compute.v1.Operation()),
-        generateSampleMessage(new protos.google.cloud.compute.v1.Operation()),
-      ];
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.compute.v1.OperationList()
+      );
       client.innerApiCalls.list = stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.list(
           request,
           (
             err?: Error | null,
-            result?: protos.google.cloud.compute.v1.IOperation[] | null
+            result?: protos.google.cloud.compute.v1.IOperationList | null
           ) => {
             if (err) {
               reject(err);
@@ -553,154 +473,6 @@ describe('v1.GlobalOrganizationOperationsClient', () => {
         (client.innerApiCalls.list as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
-      );
-    });
-
-    it('invokes listStream without error', async () => {
-      const client =
-        new globalorganizationoperationsModule.v1.GlobalOrganizationOperationsClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.compute.v1.ListGlobalOrganizationOperationsRequest()
-      );
-      const expectedResponse = [
-        generateSampleMessage(new protos.google.cloud.compute.v1.Operation()),
-        generateSampleMessage(new protos.google.cloud.compute.v1.Operation()),
-        generateSampleMessage(new protos.google.cloud.compute.v1.Operation()),
-      ];
-      client.descriptors.page.list.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.compute.v1.Operation[] = [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.compute.v1.Operation) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert(
-        (client.descriptors.page.list.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.list, request)
-      );
-    });
-
-    it('invokes listStream with error', async () => {
-      const client =
-        new globalorganizationoperationsModule.v1.GlobalOrganizationOperationsClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.compute.v1.ListGlobalOrganizationOperationsRequest()
-      );
-      const expectedError = new Error('expected');
-      client.descriptors.page.list.createStream = stubPageStreamingCall(
-        undefined,
-        expectedError
-      );
-      const stream = client.listStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.compute.v1.Operation[] = [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.compute.v1.Operation) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      await assert.rejects(promise, expectedError);
-      assert(
-        (client.descriptors.page.list.createStream as SinonStub)
-          .getCall(0)
-          .calledWith(client.innerApiCalls.list, request)
-      );
-    });
-
-    it('uses async iteration with list without error', async () => {
-      const client =
-        new globalorganizationoperationsModule.v1.GlobalOrganizationOperationsClient(
-          {
-            auth: googleAuth,
-            projectId: 'bogus',
-          }
-        );
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.compute.v1.ListGlobalOrganizationOperationsRequest()
-      );
-      const expectedResponse = [
-        generateSampleMessage(new protos.google.cloud.compute.v1.Operation()),
-        generateSampleMessage(new protos.google.cloud.compute.v1.Operation()),
-        generateSampleMessage(new protos.google.cloud.compute.v1.Operation()),
-      ];
-      client.descriptors.page.list.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.compute.v1.IOperation[] = [];
-      const iterable = client.listAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (client.descriptors.page.list.asyncIterate as SinonStub).getCall(0)
-          .args[1],
-        request
-      );
-    });
-
-    it('uses async iteration with list with error', async () => {
-      const client =
-        new globalorganizationoperationsModule.v1.GlobalOrganizationOperationsClient(
-          {
-            credentials: {client_email: 'bogus', private_key: 'bogus'},
-            projectId: 'bogus',
-          }
-        );
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.compute.v1.ListGlobalOrganizationOperationsRequest()
-      );
-      const expectedError = new Error('expected');
-      client.descriptors.page.list.asyncIterate = stubAsyncIterationCall(
-        undefined,
-        expectedError
-      );
-      const iterable = client.listAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.cloud.compute.v1.IOperation[] = [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
-        }
-      });
-      assert.deepStrictEqual(
-        (client.descriptors.page.list.asyncIterate as SinonStub).getCall(0)
-          .args[1],
-        request
       );
     });
   });
