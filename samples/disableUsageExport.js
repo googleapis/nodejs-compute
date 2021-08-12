@@ -28,12 +28,22 @@ function main(projectId) {
 
   async function disableUsageExport() {
     const projectsClient = new compute.ProjectsClient({fallback: 'rest'});
+    const operationsClient = new compute.GlobalOperationsClient({
+      fallback: 'rest',
+    });
 
     // Updating the setting with empty usageExportLocationResource will disable the usage report generation.
-    projectsClient.setUsageExportBucket({
+    let [operation] = await projectsClient.setUsageExportBucket({
       project: projectId,
       usageExportLocationResource: {},
     });
+
+    while (operation.status !== 'DONE') {
+      [operation] = await operationsClient.wait({
+        operation: operation.name,
+        project: projectId,
+      });
+    }
   }
 
   disableUsageExport();
