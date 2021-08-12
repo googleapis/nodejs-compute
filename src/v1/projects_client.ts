@@ -18,17 +18,8 @@
 
 /* global window */
 import * as gax from 'google-gax';
-import {
-  Callback,
-  CallOptions,
-  Descriptors,
-  ClientOptions,
-  PaginationCallback,
-  GaxCall,
-} from 'google-gax';
+import {Callback, CallOptions, Descriptors, ClientOptions} from 'google-gax';
 
-import {Transform} from 'stream';
-import {RequestType} from 'google-gax/build/src/apitypes';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
 /**
@@ -48,7 +39,6 @@ const version = require('../../../package.json').version;
 export class ProjectsClient {
   private _terminated = false;
   private _opts: ClientOptions;
-  private _providedCustomServicePath: boolean;
   private _gaxModule: typeof gax | typeof gax.fallback;
   private _gaxGrpc: gax.GrpcClient | gax.fallback.GrpcClient;
   private _protos: {};
@@ -60,7 +50,6 @@ export class ProjectsClient {
     longrunning: {},
     batching: {},
   };
-  warn: (code: string, message: string, warnType?: string) => void;
   innerApiCalls: {[name: string]: Function};
   projectsStub?: Promise<{[name: string]: Function}>;
 
@@ -103,17 +92,8 @@ export class ProjectsClient {
     const staticMembers = this.constructor as typeof ProjectsClient;
     const servicePath =
       opts?.servicePath || opts?.apiEndpoint || staticMembers.servicePath;
-    this._providedCustomServicePath = !!(
-      opts?.servicePath || opts?.apiEndpoint
-    );
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    // Implicitely set 'rest' value for the apis use rest as transport (eg. googleapis-discovery apis).
-    if (!opts) {
-      opts = {fallback: 'rest'};
-    } else {
-      opts.fallback = opts.fallback ?? 'rest';
-    }
     const fallback =
       opts?.fallback ??
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
@@ -159,22 +139,6 @@ export class ProjectsClient {
     // Load the applicable protos.
     this._protos = this._gaxGrpc.loadProtoJSON(jsonProtos);
 
-    // Some of the methods on this service return "paged" results,
-    // (e.g. 50 results at a time, with tokens to get subsequent
-    // pages). Denote the keys used for pagination and results.
-    this.descriptors.page = {
-      getXpnResources: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'resources'
-      ),
-      listXpnHosts: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'items'
-      ),
-    };
-
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
       'google.cloud.compute.v1.Projects',
@@ -187,9 +151,6 @@ export class ProjectsClient {
     // of calling the API is handled in `google-gax`, with this code
     // merely providing the destination and request information.
     this.innerApiCalls = {};
-
-    // Add a warn function to the client constructor so it can be easily tested.
-    this.warn = gax.warn;
   }
 
   /**
@@ -218,8 +179,7 @@ export class ProjectsClient {
           )
         : // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (this._protos as any).google.cloud.compute.v1.Projects,
-      this._opts,
-      this._providedCustomServicePath
+      this._opts
     ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
@@ -254,7 +214,7 @@ export class ProjectsClient {
         }
       );
 
-      const descriptor = this.descriptors.page[methodName] || undefined;
+      const descriptor = undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
@@ -901,6 +861,236 @@ export class ProjectsClient {
     this.initialize();
     return this.innerApiCalls.getXpnHost(request, options, callback);
   }
+  getXpnResources(
+    request?: protos.google.cloud.compute.v1.IGetXpnResourcesProjectsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.compute.v1.IProjectsGetXpnResources,
+      (
+        | protos.google.cloud.compute.v1.IGetXpnResourcesProjectsRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
+  getXpnResources(
+    request: protos.google.cloud.compute.v1.IGetXpnResourcesProjectsRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.compute.v1.IProjectsGetXpnResources,
+      | protos.google.cloud.compute.v1.IGetXpnResourcesProjectsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getXpnResources(
+    request: protos.google.cloud.compute.v1.IGetXpnResourcesProjectsRequest,
+    callback: Callback<
+      protos.google.cloud.compute.v1.IProjectsGetXpnResources,
+      | protos.google.cloud.compute.v1.IGetXpnResourcesProjectsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  /**
+   * Gets service resources (a.k.a service project) associated with this host project.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.filter
+   *   A filter expression that filters resources listed in the response. The expression must specify the field name, a comparison operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The comparison operator must be either `=`, `!=`, `>`, or `<`.
+   *
+   *   For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`.
+   *
+   *   You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels.
+   *
+   *   To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ```
+   * @param {number} request.maxResults
+   *   The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)
+   * @param {string} request.orderBy
+   *   Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name.
+   *
+   *   You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first.
+   *
+   *   Currently, only sorting by `name` or `creationTimestamp desc` is supported.
+   * @param {string} request.pageToken
+   *   Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
+   * @param {string} request.project
+   *   Project ID for this request.
+   * @param {boolean} request.returnPartialSuccess
+   *   Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [ProjectsGetXpnResources]{@link google.cloud.compute.v1.ProjectsGetXpnResources}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example
+   * const [response] = await client.getXpnResources(request);
+   */
+  getXpnResources(
+    request?: protos.google.cloud.compute.v1.IGetXpnResourcesProjectsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.compute.v1.IProjectsGetXpnResources,
+          | protos.google.cloud.compute.v1.IGetXpnResourcesProjectsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.compute.v1.IProjectsGetXpnResources,
+      | protos.google.cloud.compute.v1.IGetXpnResourcesProjectsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.compute.v1.IProjectsGetXpnResources,
+      (
+        | protos.google.cloud.compute.v1.IGetXpnResourcesProjectsRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        project: request.project || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.getXpnResources(request, options, callback);
+  }
+  listXpnHosts(
+    request?: protos.google.cloud.compute.v1.IListXpnHostsProjectsRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.compute.v1.IXpnHostList,
+      protos.google.cloud.compute.v1.IListXpnHostsProjectsRequest | undefined,
+      {} | undefined
+    ]
+  >;
+  listXpnHosts(
+    request: protos.google.cloud.compute.v1.IListXpnHostsProjectsRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.compute.v1.IXpnHostList,
+      | protos.google.cloud.compute.v1.IListXpnHostsProjectsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  listXpnHosts(
+    request: protos.google.cloud.compute.v1.IListXpnHostsProjectsRequest,
+    callback: Callback<
+      protos.google.cloud.compute.v1.IXpnHostList,
+      | protos.google.cloud.compute.v1.IListXpnHostsProjectsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  /**
+   * Lists all shared VPC host projects visible to the user in an organization.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.filter
+   *   A filter expression that filters resources listed in the response. The expression must specify the field name, a comparison operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The comparison operator must be either `=`, `!=`, `>`, or `<`.
+   *
+   *   For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`.
+   *
+   *   You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels.
+   *
+   *   To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ```
+   * @param {number} request.maxResults
+   *   The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)
+   * @param {string} request.orderBy
+   *   Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name.
+   *
+   *   You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first.
+   *
+   *   Currently, only sorting by `name` or `creationTimestamp desc` is supported.
+   * @param {string} request.pageToken
+   *   Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
+   * @param {string} request.project
+   *   Project ID for this request.
+   * @param {google.cloud.compute.v1.ProjectsListXpnHostsRequest} request.projectsListXpnHostsRequestResource
+   *   The body resource for this request
+   * @param {boolean} request.returnPartialSuccess
+   *   Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [XpnHostList]{@link google.cloud.compute.v1.XpnHostList}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example
+   * const [response] = await client.listXpnHosts(request);
+   */
+  listXpnHosts(
+    request?: protos.google.cloud.compute.v1.IListXpnHostsProjectsRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.compute.v1.IXpnHostList,
+          | protos.google.cloud.compute.v1.IListXpnHostsProjectsRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.compute.v1.IXpnHostList,
+      | protos.google.cloud.compute.v1.IListXpnHostsProjectsRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.compute.v1.IXpnHostList,
+      protos.google.cloud.compute.v1.IListXpnHostsProjectsRequest | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        project: request.project || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.listXpnHosts(request, options, callback);
+  }
   moveDisk(
     request?: protos.google.cloud.compute.v1.IMoveDiskProjectRequest,
     options?: CallOptions
@@ -1411,483 +1601,6 @@ export class ProjectsClient {
       });
     this.initialize();
     return this.innerApiCalls.setUsageExportBucket(request, options, callback);
-  }
-
-  getXpnResources(
-    request?: protos.google.cloud.compute.v1.IGetXpnResourcesProjectsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.compute.v1.IXpnResourceId[],
-      protos.google.cloud.compute.v1.IGetXpnResourcesProjectsRequest | null,
-      protos.google.cloud.compute.v1.IProjectsGetXpnResources
-    ]
-  >;
-  getXpnResources(
-    request: protos.google.cloud.compute.v1.IGetXpnResourcesProjectsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.compute.v1.IGetXpnResourcesProjectsRequest,
-      | protos.google.cloud.compute.v1.IProjectsGetXpnResources
-      | null
-      | undefined,
-      protos.google.cloud.compute.v1.IXpnResourceId
-    >
-  ): void;
-  getXpnResources(
-    request: protos.google.cloud.compute.v1.IGetXpnResourcesProjectsRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.compute.v1.IGetXpnResourcesProjectsRequest,
-      | protos.google.cloud.compute.v1.IProjectsGetXpnResources
-      | null
-      | undefined,
-      protos.google.cloud.compute.v1.IXpnResourceId
-    >
-  ): void;
-  /**
-   * Gets service resources (a.k.a service project) associated with this host project.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.filter
-   *   A filter expression that filters resources listed in the response. The expression must specify the field name, a comparison operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The comparison operator must be either `=`, `!=`, `>`, or `<`.
-   *
-   *   For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`.
-   *
-   *   You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels.
-   *
-   *   To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ```
-   * @param {number} request.maxResults
-   *   The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)
-   * @param {string} request.orderBy
-   *   Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name.
-   *
-   *   You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first.
-   *
-   *   Currently, only sorting by `name` or `creationTimestamp desc` is supported.
-   * @param {string} request.pageToken
-   *   Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
-   * @param {string} request.project
-   *   Project ID for this request.
-   * @param {boolean} request.returnPartialSuccess
-   *   Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of [XpnResourceId]{@link google.cloud.compute.v1.XpnResourceId}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `getXpnResourcesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
-   *   for more details and examples.
-   */
-  getXpnResources(
-    request?: protos.google.cloud.compute.v1.IGetXpnResourcesProjectsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
-          protos.google.cloud.compute.v1.IGetXpnResourcesProjectsRequest,
-          | protos.google.cloud.compute.v1.IProjectsGetXpnResources
-          | null
-          | undefined,
-          protos.google.cloud.compute.v1.IXpnResourceId
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.compute.v1.IGetXpnResourcesProjectsRequest,
-      | protos.google.cloud.compute.v1.IProjectsGetXpnResources
-      | null
-      | undefined,
-      protos.google.cloud.compute.v1.IXpnResourceId
-    >
-  ): Promise<
-    [
-      protos.google.cloud.compute.v1.IXpnResourceId[],
-      protos.google.cloud.compute.v1.IGetXpnResourcesProjectsRequest | null,
-      protos.google.cloud.compute.v1.IProjectsGetXpnResources
-    ]
-  > | void {
-    request = request || {};
-    let options: CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        project: request.project || '',
-      });
-    this.initialize();
-    return this.innerApiCalls.getXpnResources(request, options, callback);
-  }
-
-  /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.filter
-   *   A filter expression that filters resources listed in the response. The expression must specify the field name, a comparison operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The comparison operator must be either `=`, `!=`, `>`, or `<`.
-   *
-   *   For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`.
-   *
-   *   You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels.
-   *
-   *   To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ```
-   * @param {number} request.maxResults
-   *   The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)
-   * @param {string} request.orderBy
-   *   Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name.
-   *
-   *   You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first.
-   *
-   *   Currently, only sorting by `name` or `creationTimestamp desc` is supported.
-   * @param {string} request.pageToken
-   *   Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
-   * @param {string} request.project
-   *   Project ID for this request.
-   * @param {boolean} request.returnPartialSuccess
-   *   Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing [XpnResourceId]{@link google.cloud.compute.v1.XpnResourceId} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `getXpnResourcesAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
-   *   for more details and examples.
-   */
-  getXpnResourcesStream(
-    request?: protos.google.cloud.compute.v1.IGetXpnResourcesProjectsRequest,
-    options?: CallOptions
-  ): Transform {
-    request = request || {};
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        project: request.project || '',
-      });
-    const callSettings = new gax.CallSettings(options);
-    this.initialize();
-    return this.descriptors.page.getXpnResources.createStream(
-      this.innerApiCalls.getXpnResources as gax.GaxCall,
-      request,
-      callSettings
-    );
-  }
-
-  /**
-   * Equivalent to `getXpnResources`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.filter
-   *   A filter expression that filters resources listed in the response. The expression must specify the field name, a comparison operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The comparison operator must be either `=`, `!=`, `>`, or `<`.
-   *
-   *   For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`.
-   *
-   *   You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels.
-   *
-   *   To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ```
-   * @param {number} request.maxResults
-   *   The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)
-   * @param {string} request.orderBy
-   *   Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name.
-   *
-   *   You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first.
-   *
-   *   Currently, only sorting by `name` or `creationTimestamp desc` is supported.
-   * @param {string} request.pageToken
-   *   Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
-   * @param {string} request.project
-   *   Project ID for this request.
-   * @param {boolean} request.returnPartialSuccess
-   *   Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   [XpnResourceId]{@link google.cloud.compute.v1.XpnResourceId}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
-   *   for more details and examples.
-   * @example
-   * const iterable = client.getXpnResourcesAsync(request);
-   * for await (const response of iterable) {
-   *   // process response
-   * }
-   */
-  getXpnResourcesAsync(
-    request?: protos.google.cloud.compute.v1.IGetXpnResourcesProjectsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.compute.v1.IXpnResourceId> {
-    request = request || {};
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        project: request.project || '',
-      });
-    options = options || {};
-    const callSettings = new gax.CallSettings(options);
-    this.initialize();
-    return this.descriptors.page.getXpnResources.asyncIterate(
-      this.innerApiCalls['getXpnResources'] as GaxCall,
-      request as unknown as RequestType,
-      callSettings
-    ) as AsyncIterable<protos.google.cloud.compute.v1.IXpnResourceId>;
-  }
-  listXpnHosts(
-    request?: protos.google.cloud.compute.v1.IListXpnHostsProjectsRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.compute.v1.IProject[],
-      protos.google.cloud.compute.v1.IListXpnHostsProjectsRequest | null,
-      protos.google.cloud.compute.v1.IXpnHostList
-    ]
-  >;
-  listXpnHosts(
-    request: protos.google.cloud.compute.v1.IListXpnHostsProjectsRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.compute.v1.IListXpnHostsProjectsRequest,
-      protos.google.cloud.compute.v1.IXpnHostList | null | undefined,
-      protos.google.cloud.compute.v1.IProject
-    >
-  ): void;
-  listXpnHosts(
-    request: protos.google.cloud.compute.v1.IListXpnHostsProjectsRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.compute.v1.IListXpnHostsProjectsRequest,
-      protos.google.cloud.compute.v1.IXpnHostList | null | undefined,
-      protos.google.cloud.compute.v1.IProject
-    >
-  ): void;
-  /**
-   * Lists all shared VPC host projects visible to the user in an organization.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.filter
-   *   A filter expression that filters resources listed in the response. The expression must specify the field name, a comparison operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The comparison operator must be either `=`, `!=`, `>`, or `<`.
-   *
-   *   For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`.
-   *
-   *   You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels.
-   *
-   *   To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ```
-   * @param {number} request.maxResults
-   *   The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)
-   * @param {string} request.orderBy
-   *   Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name.
-   *
-   *   You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first.
-   *
-   *   Currently, only sorting by `name` or `creationTimestamp desc` is supported.
-   * @param {string} request.pageToken
-   *   Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
-   * @param {string} request.project
-   *   Project ID for this request.
-   * @param {google.cloud.compute.v1.ProjectsListXpnHostsRequest} request.projectsListXpnHostsRequestResource
-   *   The body resource for this request
-   * @param {boolean} request.returnPartialSuccess
-   *   Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of [Project]{@link google.cloud.compute.v1.Project}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listXpnHostsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
-   *   for more details and examples.
-   */
-  listXpnHosts(
-    request?: protos.google.cloud.compute.v1.IListXpnHostsProjectsRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
-          protos.google.cloud.compute.v1.IListXpnHostsProjectsRequest,
-          protos.google.cloud.compute.v1.IXpnHostList | null | undefined,
-          protos.google.cloud.compute.v1.IProject
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.compute.v1.IListXpnHostsProjectsRequest,
-      protos.google.cloud.compute.v1.IXpnHostList | null | undefined,
-      protos.google.cloud.compute.v1.IProject
-    >
-  ): Promise<
-    [
-      protos.google.cloud.compute.v1.IProject[],
-      protos.google.cloud.compute.v1.IListXpnHostsProjectsRequest | null,
-      protos.google.cloud.compute.v1.IXpnHostList
-    ]
-  > | void {
-    request = request || {};
-    let options: CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        project: request.project || '',
-      });
-    this.initialize();
-    return this.innerApiCalls.listXpnHosts(request, options, callback);
-  }
-
-  /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.filter
-   *   A filter expression that filters resources listed in the response. The expression must specify the field name, a comparison operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The comparison operator must be either `=`, `!=`, `>`, or `<`.
-   *
-   *   For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`.
-   *
-   *   You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels.
-   *
-   *   To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ```
-   * @param {number} request.maxResults
-   *   The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)
-   * @param {string} request.orderBy
-   *   Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name.
-   *
-   *   You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first.
-   *
-   *   Currently, only sorting by `name` or `creationTimestamp desc` is supported.
-   * @param {string} request.pageToken
-   *   Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
-   * @param {string} request.project
-   *   Project ID for this request.
-   * @param {google.cloud.compute.v1.ProjectsListXpnHostsRequest} request.projectsListXpnHostsRequestResource
-   *   The body resource for this request
-   * @param {boolean} request.returnPartialSuccess
-   *   Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing [Project]{@link google.cloud.compute.v1.Project} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listXpnHostsAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
-   *   for more details and examples.
-   */
-  listXpnHostsStream(
-    request?: protos.google.cloud.compute.v1.IListXpnHostsProjectsRequest,
-    options?: CallOptions
-  ): Transform {
-    request = request || {};
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        project: request.project || '',
-      });
-    const callSettings = new gax.CallSettings(options);
-    this.initialize();
-    return this.descriptors.page.listXpnHosts.createStream(
-      this.innerApiCalls.listXpnHosts as gax.GaxCall,
-      request,
-      callSettings
-    );
-  }
-
-  /**
-   * Equivalent to `listXpnHosts`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.filter
-   *   A filter expression that filters resources listed in the response. The expression must specify the field name, a comparison operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The comparison operator must be either `=`, `!=`, `>`, or `<`.
-   *
-   *   For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`.
-   *
-   *   You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels.
-   *
-   *   To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ```
-   * @param {number} request.maxResults
-   *   The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)
-   * @param {string} request.orderBy
-   *   Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name.
-   *
-   *   You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first.
-   *
-   *   Currently, only sorting by `name` or `creationTimestamp desc` is supported.
-   * @param {string} request.pageToken
-   *   Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
-   * @param {string} request.project
-   *   Project ID for this request.
-   * @param {google.cloud.compute.v1.ProjectsListXpnHostsRequest} request.projectsListXpnHostsRequestResource
-   *   The body resource for this request
-   * @param {boolean} request.returnPartialSuccess
-   *   Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   [Project]{@link google.cloud.compute.v1.Project}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
-   *   for more details and examples.
-   * @example
-   * const iterable = client.listXpnHostsAsync(request);
-   * for await (const response of iterable) {
-   *   // process response
-   * }
-   */
-  listXpnHostsAsync(
-    request?: protos.google.cloud.compute.v1.IListXpnHostsProjectsRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.compute.v1.IProject> {
-    request = request || {};
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        project: request.project || '',
-      });
-    options = options || {};
-    const callSettings = new gax.CallSettings(options);
-    this.initialize();
-    return this.descriptors.page.listXpnHosts.asyncIterate(
-      this.innerApiCalls['listXpnHosts'] as GaxCall,
-      request as unknown as RequestType,
-      callSettings
-    ) as AsyncIterable<protos.google.cloud.compute.v1.IProject>;
   }
 
   /**

@@ -3781,7 +3781,7 @@ message ForwardingRule {
   // - Internal HTTP(S) Load Balancing: The load balancing scheme is INTERNAL_MANAGED, and only TCP is valid.
   // - HTTP(S), SSL Proxy, and TCP Proxy Load Balancing: The load balancing scheme is EXTERNAL and only TCP is valid.
   // - Network Load Balancing: The load balancing scheme is EXTERNAL, and one of TCP or UDP is valid.
-  enum IPProtocol_ {
+  enum IPProtocol {
     // A value indicating that the enum field is not set.
     UNDEFINED_I_P_PROTOCOL = 0;
 
@@ -3886,7 +3886,7 @@ message ForwardingRule {
   // - Internal HTTP(S) Load Balancing: The load balancing scheme is INTERNAL_MANAGED, and only TCP is valid.
   // - HTTP(S), SSL Proxy, and TCP Proxy Load Balancing: The load balancing scheme is EXTERNAL and only TCP is valid.
   // - Network Load Balancing: The load balancing scheme is EXTERNAL, and one of TCP or UDP is valid.
-  optional IPProtocol_ I_p_protocol = 488094525;
+  optional IPProtocol I_p_protocol = 488094525;
 
   // This field is used along with the backend_service field for internal load balancing or with the target field for internal TargetInstance. This field cannot be used with port or portRange fields.
   //

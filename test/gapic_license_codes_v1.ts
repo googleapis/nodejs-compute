@@ -20,10 +20,10 @@ import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
 import {SinonStub} from 'sinon';
-import {describe, it, beforeEach, afterEach} from 'mocha';
+import {describe, it} from 'mocha';
 import * as licensecodesModule from '../src';
 
-import {GoogleAuth, protobuf} from 'google-gax';
+import {protobuf} from 'google-gax';
 
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
@@ -50,19 +50,6 @@ function stubSimpleCallWithCallback<ResponseType>(
 }
 
 describe('v1.LicenseCodesClient', () => {
-  let googleAuth: GoogleAuth;
-  beforeEach(() => {
-    googleAuth = {
-      getClient: sinon.stub().resolves({
-        getRequestHeaders: sinon
-          .stub()
-          .resolves({Authorization: 'Bearer SOME_TOKEN'}),
-      }),
-    } as unknown as GoogleAuth;
-  });
-  afterEach(() => {
-    sinon.restore();
-  });
   it('has servicePath', () => {
     const servicePath = licensecodesModule.v1.LicenseCodesClient.servicePath;
     assert(servicePath);
@@ -93,7 +80,7 @@ describe('v1.LicenseCodesClient', () => {
 
   it('has initialize method and supports deferred initialization', async () => {
     const client = new licensecodesModule.v1.LicenseCodesClient({
-      auth: googleAuth,
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
       projectId: 'bogus',
     });
     assert.strictEqual(client.licenseCodesStub, undefined);
@@ -103,7 +90,7 @@ describe('v1.LicenseCodesClient', () => {
 
   it('has close method', () => {
     const client = new licensecodesModule.v1.LicenseCodesClient({
-      auth: googleAuth,
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
       projectId: 'bogus',
     });
     client.close();
@@ -112,7 +99,7 @@ describe('v1.LicenseCodesClient', () => {
   it('has getProjectId method', async () => {
     const fakeProjectId = 'fake-project-id';
     const client = new licensecodesModule.v1.LicenseCodesClient({
-      auth: googleAuth,
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
       projectId: 'bogus',
     });
     client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -124,7 +111,7 @@ describe('v1.LicenseCodesClient', () => {
   it('has getProjectId method with callback', async () => {
     const fakeProjectId = 'fake-project-id';
     const client = new licensecodesModule.v1.LicenseCodesClient({
-      auth: googleAuth,
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
       projectId: 'bogus',
     });
     client.auth.getProjectId = sinon
@@ -146,7 +133,7 @@ describe('v1.LicenseCodesClient', () => {
   describe('get', () => {
     it('invokes get without error', async () => {
       const client = new licensecodesModule.v1.LicenseCodesClient({
-        auth: googleAuth,
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
@@ -177,7 +164,7 @@ describe('v1.LicenseCodesClient', () => {
 
     it('invokes get without error using callback', async () => {
       const client = new licensecodesModule.v1.LicenseCodesClient({
-        auth: googleAuth,
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
@@ -223,7 +210,7 @@ describe('v1.LicenseCodesClient', () => {
 
     it('invokes get with error', async () => {
       const client = new licensecodesModule.v1.LicenseCodesClient({
-        auth: googleAuth,
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
@@ -253,7 +240,7 @@ describe('v1.LicenseCodesClient', () => {
   describe('testIamPermissions', () => {
     it('invokes testIamPermissions without error', async () => {
       const client = new licensecodesModule.v1.LicenseCodesClient({
-        auth: googleAuth,
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
@@ -285,7 +272,7 @@ describe('v1.LicenseCodesClient', () => {
 
     it('invokes testIamPermissions without error using callback', async () => {
       const client = new licensecodesModule.v1.LicenseCodesClient({
-        auth: googleAuth,
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
@@ -332,7 +319,7 @@ describe('v1.LicenseCodesClient', () => {
 
     it('invokes testIamPermissions with error', async () => {
       const client = new licensecodesModule.v1.LicenseCodesClient({
-        auth: googleAuth,
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
