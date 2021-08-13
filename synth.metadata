@@ -3,8 +3,15 @@
     {
       "git": {
         "name": ".",
-        "remote": "git@github.com:googleapis/nodejs-compute.git",
-        "sha": "13d2f4172de5f51db0c85771fd254c392ffcd38c"
+        "remote": "https://github.com/googleapis/nodejs-compute.git",
+        "sha": "78cc7cf11e06d43691df4d5c042a9aa25a3657c5"
+      }
+    },
+    {
+      "git": {
+        "name": "googleapis-discovery",
+        "remote": "https://github.com/googleapis/googleapis-discovery.git",
+        "sha": "e693b037c832027854353dd6e1408284bd2eace3"
       }
     },
     {
