@@ -20,10 +20,10 @@ import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
 import {SinonStub} from 'sinon';
-import {describe, it, beforeEach, afterEach} from 'mocha';
+import {describe, it} from 'mocha';
 import * as regioninstancesModule from '../src';
 
-import {GoogleAuth, protobuf} from 'google-gax';
+import {protobuf} from 'google-gax';
 
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
@@ -50,19 +50,6 @@ function stubSimpleCallWithCallback<ResponseType>(
 }
 
 describe('v1.RegionInstancesClient', () => {
-  let googleAuth: GoogleAuth;
-  beforeEach(() => {
-    googleAuth = {
-      getClient: sinon.stub().resolves({
-        getRequestHeaders: sinon
-          .stub()
-          .resolves({Authorization: 'Bearer SOME_TOKEN'}),
-      }),
-    } as unknown as GoogleAuth;
-  });
-  afterEach(() => {
-    sinon.restore();
-  });
   it('has servicePath', () => {
     const servicePath =
       regioninstancesModule.v1.RegionInstancesClient.servicePath;
@@ -95,7 +82,7 @@ describe('v1.RegionInstancesClient', () => {
 
   it('has initialize method and supports deferred initialization', async () => {
     const client = new regioninstancesModule.v1.RegionInstancesClient({
-      auth: googleAuth,
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
       projectId: 'bogus',
     });
     assert.strictEqual(client.regionInstancesStub, undefined);
@@ -105,7 +92,7 @@ describe('v1.RegionInstancesClient', () => {
 
   it('has close method', () => {
     const client = new regioninstancesModule.v1.RegionInstancesClient({
-      auth: googleAuth,
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
       projectId: 'bogus',
     });
     client.close();
@@ -114,7 +101,7 @@ describe('v1.RegionInstancesClient', () => {
   it('has getProjectId method', async () => {
     const fakeProjectId = 'fake-project-id';
     const client = new regioninstancesModule.v1.RegionInstancesClient({
-      auth: googleAuth,
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
       projectId: 'bogus',
     });
     client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -126,7 +113,7 @@ describe('v1.RegionInstancesClient', () => {
   it('has getProjectId method with callback', async () => {
     const fakeProjectId = 'fake-project-id';
     const client = new regioninstancesModule.v1.RegionInstancesClient({
-      auth: googleAuth,
+      credentials: {client_email: 'bogus', private_key: 'bogus'},
       projectId: 'bogus',
     });
     client.auth.getProjectId = sinon
@@ -148,7 +135,7 @@ describe('v1.RegionInstancesClient', () => {
   describe('bulkInsert', () => {
     it('invokes bulkInsert without error', async () => {
       const client = new regioninstancesModule.v1.RegionInstancesClient({
-        auth: googleAuth,
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
@@ -179,7 +166,7 @@ describe('v1.RegionInstancesClient', () => {
 
     it('invokes bulkInsert without error using callback', async () => {
       const client = new regioninstancesModule.v1.RegionInstancesClient({
-        auth: googleAuth,
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
@@ -226,7 +213,7 @@ describe('v1.RegionInstancesClient', () => {
 
     it('invokes bulkInsert with error', async () => {
       const client = new regioninstancesModule.v1.RegionInstancesClient({
-        auth: googleAuth,
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
