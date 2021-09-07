@@ -122,6 +122,88 @@ describe('Compute', () => {
     });
   });
 
+  describe('Images', () => {
+    let NAME = null;
+
+    before(async () => {
+      client = new compute.ImagesClient({fallback: 'rest'});
+      NAME = generateName('image');
+    });
+
+    after(async () => {
+      if (dirty) {
+        await client.delete({
+          project,
+          zone,
+          image: NAME,
+        });
+      }
+    });
+
+    it('create and fetch image, test int64 type field', async function () {
+      this.timeout(10 * 60 * 1000);
+      const resource = {
+        name: NAME,
+        licenseCodes: [5543610867827062957],
+        sourceImage:
+          'projects/debian-cloud/global/images/debian-10-buster-v20210721',
+      };
+      const [op] = await client.insert({
+        project,
+        imageResource: resource,
+      });
+      await waitGlobalOperation(op);
+      const [fetched] = await client.get({
+        project,
+        image: NAME,
+      });
+      assert.strictEqual(fetched.licenseCodes[0], '5543610867827062957');
+    });
+  });
+
+  describe('Firewall', () => {
+    let NAME = null;
+
+    before(async () => {
+      client = new compute.FirewallsClient({fallback: 'rest'});
+      NAME = generateName('firewall');
+    });
+
+    after(async function () {
+      this.timeout(10 * 60 * 1000);
+      if (dirty) {
+        await client.delete({
+          project,
+          instance: NAME,
+        });
+      }
+    });
+
+    it('create and fetch firewall, test capital letter field like "IPProtocol"', async function () {
+      this.timeout(10 * 60 * 1000);
+      const resource = {
+        name: NAME,
+        sourceRanges: ['0.0.0.0/0'],
+        allowed: [
+          {
+            IPProtocol: 'tcp',
+            ports: ['80'],
+          },
+        ],
+      };
+      const [op] = await client.insert({
+        project,
+        firewallResource: resource,
+      });
+      await waitGlobalOperation(op);
+      const [fetched] = await client.get({
+        project,
+        image: NAME,
+      });
+      assert.strictEqual(fetched.allowed[0].IPProtocol, 'tcp');
+    });
+  });
+
   describe('Instances', () => {
     let INSTANCE_NAME = null;
 
