@@ -131,13 +131,10 @@ describe('Compute', () => {
     });
 
     after(async () => {
-      if (dirty) {
-        await client.delete({
-          project,
-          zone,
-          image: NAME,
-        });
-      }
+      await client.delete({
+        project,
+        image: NAME,
+      });
     });
 
     it('create and fetch image, test int64 type field', async function () {
@@ -171,12 +168,10 @@ describe('Compute', () => {
 
     after(async function () {
       this.timeout(10 * 60 * 1000);
-      if (dirty) {
-        await client.delete({
-          project,
-          instance: NAME,
-        });
-      }
+      await client.delete({
+        project,
+        firewall: NAME,
+      });
     });
 
     it('create and fetch firewall, test capital letter field like "IPProtocol"', async function () {
