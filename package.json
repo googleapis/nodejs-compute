@@ -4,6 +4,10 @@
   "version": "3.0.0-alpha.3",
   "license": "Apache-2.0",
   "author": "Google LLC",
+  "engines": {
+    "node": ">=v10.24.0"
+  },
+  "repository": "googleapis/nodejs-compute",
   "main": "build/src/index.js",
   "files": [
     "build/src",
@@ -138,8 +142,5 @@
     "uuid": "^8.0.0",
     "webpack": "^5.39.1",
     "webpack-cli": "^4.7.2"
-  },
-  "engines": {
-    "node": ">=v10.24.0"
   }
 }
