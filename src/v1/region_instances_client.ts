@@ -410,7 +410,6 @@ export class RegionInstancesClient {
               latestResponse: response,
               done: false,
               name: response.id,
-              targetLink: response.targetLink,
               metadata: null,
               result: {},
             },
