@@ -99,7 +99,11 @@ describe('samples', () => {
 
   describe('usage export', () => {
     before(async () => {
-      await storage.createBucket(bucketName);
+      try {
+        await storage.createBucket(bucketName);
+      } catch (err) {
+        // Resource likely already existed due to retry.
+      }
     });
 
     after(async () => {
