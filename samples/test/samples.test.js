@@ -118,7 +118,7 @@ describe('samples', () => {
 
       const usageExportLocation = project.usageExportLocation;
 
-      assert.equal(usageExportLocation.bucketName, bucketName);
+      assert.match(usageExportLocation.bucketName, /test-bucket-name/);
       assert.equal(usageExportLocation.reportNamePrefix, '');
     });
 
