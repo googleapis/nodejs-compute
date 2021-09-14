@@ -113,7 +113,7 @@ describe('samples', () => {
       await storage.bucket(bucketName).delete();
     });
 
-    it('should set empty default value in reportNamePrefix', function() {
+    it('should set empty default value in reportNamePrefix', async function () {
       this.retries(3);
       await delay(this.test);
       const projectId = await instancesClient.getProjectId();
@@ -138,7 +138,7 @@ describe('samples', () => {
       assert.equal(usageExportLocation.reportNamePrefix, '');
     });
 
-    it('should get current default value in reportNamePrefix', function () {
+    it('should get current default value in reportNamePrefix', async function () {
       this.retries(3);
       await delay(this.test);
       const projectId = await instancesClient.getProjectId();
@@ -155,7 +155,7 @@ describe('samples', () => {
       assert.match(output, /Returned reportNamePrefix: usage_gce/);
     });
 
-    it('should disable usage export', function () {
+    it('should disable usage export', async function () {
       this.retries(3);
       await delay(this.test);
       const projectId = await instancesClient.getProjectId();
