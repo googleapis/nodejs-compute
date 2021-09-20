@@ -194,4 +194,38 @@ describe('samples', () => {
       assert.match(output, /Page 2/);
     });
   });
+
+  const getInstance = async(projectId, zone) => {
+    const [instance] = await instancesClient.get({
+      project: projectId,
+      zone,
+      instance: instanceName,
+    });
+
+    return instance;
+  }
+
+  describe('start/stop instances', () => {
+    const projectId = await instancesClient.getProjectId();
+
+    it.only('should start/stop instances without encrypted disks', async () => {
+      const newInstanceName = `gcloud-test-intance-${uuid.v4().split('-')[0]}`;
+      execSync(`node createInstance ${projectId} ${zone} ${newInstanceName}`);
+
+      let instance = getInstance(projectId, zone, newInstanceName);
+
+      assert.equal(instance.status, 'RUNNING');
+
+      const stopOutput = execSync(`node stopInstance ${projectId} ${zone} ${newInstanceName}`);
+
+      assert.match(output, /Instance stopped/);
+
+
+    });
+
+    // it('should start/stop instances without encrypted disks', async () => {
+
+    // });
+
+  });
 });
