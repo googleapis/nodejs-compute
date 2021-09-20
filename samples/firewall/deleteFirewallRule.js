@@ -32,11 +32,12 @@
       const firewallsClient = new compute.FirewallsClient();
       const operationsClient = new compute.GlobalOperationsClient();
       
-      let [operation] = await firewallsClient.delete({
+      const [response] = await firewallsClient.delete({
         project: projectId,
         firewall: firewallRuleName,
       });
-  
+      let operation = response.latestResponse;
+
       // Wait for the create operation to complete.
       while (operation.status !== 'DONE') {
         [operation] = await operationsClient.wait({
@@ -44,6 +45,8 @@
           project: projectId,
         });
       }
+
+      console.log('Firewall rule deleted');
     }
   
     deleteFirewallRule();

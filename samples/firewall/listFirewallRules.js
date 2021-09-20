@@ -17,7 +17,7 @@
  *
  * @param {string} projectId - project ID or project number of the Cloud project you want to use.
  */
- function main(projectId) {
+function main(projectId) {
   // [START compute_firewall_list]
   /**
    * TODO(developer): Uncomment and replace these variables before running the sample.
@@ -28,19 +28,18 @@
 
   async function listFirewallRules() {
     const firewallsClient = new compute.FirewallsClient();
-    
+
     const [firewallRules] = await firewallsClient.list({
-        project: projectId,
+      project: projectId,
     });
 
     for (const rule of firewallRules) {
-      console.log(` - ${rule.name}`);
+      console.log(` - ${rule.name}: ${rule.description}`);
     }
   }
 
   listFirewallRules();
   // [END compute_firewall_list]
 }
-  
+
 main(...process.argv.slice(2));
-  

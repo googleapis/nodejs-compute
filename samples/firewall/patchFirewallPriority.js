@@ -19,45 +19,47 @@
  * @param {string} firewallRuleName - name of the rule you want to modify.
  * @param {number} priority - the new priority to be set for the rule.
  */
- function main(projectId, firewallRuleName, priority) {
-    // [START compute_firewall_patch]
-    /**
-     * TODO(developer): Uncomment and replace these variables before running the sample.
-     */
-    // const projectId = 'YOUR_PROJECT_ID';
-    // const firewallRuleName = 'FIREWALL_RULE_NAME';
-    // const priority = 10;
-  
-    const compute = require('@google-cloud/compute');
-    const compute_protos = compute.protos.google.cloud.compute.v1;
-  
-    async function patchFirewallPriority() {
-      const firewallsClient = new compute.FirewallsClient();
-      const operationsClient = new compute.GlobalOperationsClient();
+function main(projectId, firewallRuleName, priority = 10) {
+  // [START compute_firewall_patch]
+  /**
+   * TODO(developer): Uncomment and replace these variables before running the sample.
+   */
+  // const projectId = 'YOUR_PROJECT_ID';
+  // const firewallRuleName = 'FIREWALL_RULE_NAME';
+  // const priority = 10;
 
-      const firewallRule = new compute_protos.Firewall();
-      firewallRule.priority = priority;
+  const compute = require('@google-cloud/compute');
+  const compute_protos = compute.protos.google.cloud.compute.v1;
 
-      // The patch operation doesn't require the full definition of a Firewall object. It will only update
-      // the values that were set in it, in this case it will only change the priority.
-      
-      let [operation] = await firewallsClient.patch({
+  async function patchFirewallPriority() {
+    const firewallsClient = new compute.FirewallsClient();
+    const operationsClient = new compute.GlobalOperationsClient();
+
+    const firewallRule = new compute_protos.Firewall();
+    firewallRule.priority = priority;
+
+    // The patch operation doesn't require the full definition of a Firewall object. It will only update
+    // the values that were set in it, in this case it will only change the priority.
+    const [response] = await firewallsClient.patch({
+      project: projectId,
+      firewall: firewallRuleName,
+      firewallResource: firewallRule,
+    });
+    let operation = response.latestResponse;
+
+    // Wait for the create operation to complete.
+    while (operation.status !== 'DONE') {
+      [operation] = await operationsClient.wait({
+        operation: operation.name,
         project: projectId,
-        firewall: firewallRuleName,
-        firewallResource: firewallRule
       });
-  
-      // Wait for the create operation to complete.
-      while (operation.status !== 'DONE') {
-        [operation] = await operationsClient.wait({
-          operation: operation.name,
-          project: projectId,
-        });
-      }
     }
-  
-    patchFirewallPriority();
-    // [END compute_firewall_patch]
+
+    console.log('Firewall rule updated');
   }
-    
-  main(...process.argv.slice(2));
+
+  patchFirewallPriority();
+  // [END compute_firewall_patch]
+}
+
+main(...process.argv.slice(2));

@@ -17,14 +17,23 @@
  *
  * @param {string} projectId - project ID or project number of the Cloud project you want to use.
  * @param {string} firewallRuleName - name of the rule that is created.
+ * @param {string} network - name of the network the rule will be applied to. Available name formats:
+ *  https://www.googleapis.com/compute/v1/projects/{project_id}/global/networks/{network}
+ *  projects/{project_id}/global/networks/{network}
+ *  global/networks/{network}
  */
- function main(projectId, firewallRuleName) {
+function main(
+  projectId,
+  firewallRuleName,
+  networkName = 'global/networks/default'
+) {
   // [START compute_firewall_create]
   /**
    * TODO(developer): Uncomment and replace these variables before running the sample.
    */
   // const projectId = 'YOUR_PROJECT_ID';
   // const firewallRuleName = 'YOUR_FIREWALL_RULE_NAME'
+  // const networkName = 'global/networks/default'
 
   const compute = require('@google-cloud/compute');
   const compute_protos = compute.protos.google.cloud.compute.v1;
@@ -32,33 +41,34 @@
   async function createFirewallRule() {
     const firewallsClient = new compute.FirewallsClient();
     const operationsClient = new compute.GlobalOperationsClient();
-    
-    const tcpAllowed = new compute_protos.Allowed()
-    tcpAllowed.IPProtocol = "tcp";
-    tcpAllowed.ports = ["80", "443"]
 
     const firewallRule = new compute_protos.Firewall();
     firewallRule.name = firewallRuleName;
     firewallRule.direction = compute_protos.Firewall.Direction.INGRESS;
-    firewallRule.allowed = [tcpAllowed]
-    firewallRule.sourceRanges = ["0.0.0.0/0"]
-    firewallRule.network = "global/networks/default"
-    firewallRule.description = "Allowing TCP traffic on port 80 and 443 from Internet."
+    firewallRule.allowed = [
+      {
+        IPProtocol: 'tcp',
+        ports: ['80', '443'],
+      },
+    ];
+    firewallRule.sourceRanges = ['0.0.0.0/0'];
+    firewallRule.network = networkName;
+    firewallRule.description =
+      'Allowing TCP traffic on port 80 and 443 from Internet.';
 
     // Note that the default value of priority for the firewall API is 1000.
     // If you check the value of `firewallRule.priority` at this point it
-    // will be equal to 0, however it is not treated as "set" by the library and thus
+    // will be equal to null, however it is not treated as "set" by the library and thus
     // the default will be applied to the new rule. If you want to create a rule that
     // has priority == 0, you need to explicitly set it so:
 
     // firewallRule.priority = 0
 
-    console.log(firewallRule.priority);
-
-    let [operation] = await firewallsClient.insert({
-      project: projectId, 
-      firewallResource: firewallRule
+    const [response] = await firewallsClient.insert({
+      project: projectId,
+      firewallResource: firewallRule,
     });
+    let operation = response.latestResponse;
 
     // Wait for the create operation to complete.
     while (operation.status !== 'DONE') {
@@ -67,11 +77,12 @@
         project: projectId,
       });
     }
+
+    console.log('Firewall rule created');
   }
 
   createFirewallRule();
   // [END compute_firewall_create]
 }
-    
+
 main(...process.argv.slice(2));
-    
