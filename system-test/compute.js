@@ -193,7 +193,7 @@ describe('Compute', () => {
       await waitGlobalOperation(op);
       const [fetched] = await client.get({
         project,
-        image: NAME,
+        firewall: NAME,
       });
       assert.strictEqual(fetched.allowed[0].IPProtocol, 'tcp');
     });
