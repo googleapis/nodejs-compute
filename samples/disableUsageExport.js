@@ -31,11 +31,11 @@ function main(projectId) {
     const operationsClient = new compute.GlobalOperationsClient();
 
     // Updating the setting with empty usageExportLocationResource will disable the usage report generation.
-    let [operation] = await projectsClient.setUsageExportBucket({
+    const [response] = await projectsClient.setUsageExportBucket({
       project: projectId,
       usageExportLocationResource: {},
     });
-
+    let operation = response.latestResponse;
     while (operation.status !== 'DONE') {
       [operation] = await operationsClient.wait({
         operation: operation.name,
