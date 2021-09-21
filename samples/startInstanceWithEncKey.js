@@ -22,65 +22,59 @@
  *    For more information about disk encryption see:
  *    https://cloud.google.com/compute/docs/disks/customer-supplied-encryption#specifications
  */
- function main(
-    projectId,
-    zone,
-    instanceName,
-    key,
-  ) {
-    // [START compute_start_enc_instance]
-    /**
-     * TODO(developer): Uncomment and replace these variables before running the sample.
-     */
-    // const projectId = 'YOUR_PROJECT_ID';
-    // const zone = 'europe-central2-b'
-    // const instanceName = 'YOUR_INSTANCE_NAME'
-    // const key = 'YOUR_KEY_STRING'
-  
-    const compute = require('@google-cloud/compute');
-  
-    async function startInstanceWithEncryptionKey() {
-      const instancesClient = new compute.InstancesClient();
+function main(projectId, zone, instanceName, key) {
+  // [START compute_start_enc_instance]
+  /**
+   * TODO(developer): Uncomment and replace these variables before running the sample.
+   */
+  // const projectId = 'YOUR_PROJECT_ID';
+  // const zone = 'europe-central2-b'
+  // const instanceName = 'YOUR_INSTANCE_NAME'
+  // const key = 'YOUR_KEY_STRING'
 
-      const [instance] = await instancesClient.get({
+  const compute = require('@google-cloud/compute');
+
+  async function startInstanceWithEncryptionKey() {
+    const instancesClient = new compute.InstancesClient();
+
+    const [instance] = await instancesClient.get({
+      project: projectId,
+      zone,
+      instance: instanceName,
+    });
+
+    const [response] = await instancesClient.startWithEncryptionKey({
+      project: projectId,
+      zone,
+      instance: instanceName,
+      instancesStartWithEncryptionKeyRequestResource: {
+        disks: [
+          {
+            source: instance.disks[0].source,
+            diskEncryptionKey: {
+              rawKey: key,
+            },
+          },
+        ],
+      },
+    });
+    let operation = response.latestResponse;
+    const operationsClient = new compute.ZoneOperationsClient();
+
+    // Wait for the operation to complete.
+    while (operation.status !== 'DONE') {
+      [operation] = await operationsClient.wait({
+        operation: operation.name,
         project: projectId,
-        zone,
-        instance: instanceName,
+        zone: operation.zone.split('/').pop(),
       });
-  
-      const [response] = await instancesClient.startWithEncryptionKey({
-        project: projectId,
-        zone,
-        instance: instanceName,
-        instancesStartWithEncryptionKeyRequestResource: {
-            disks: [
-                {
-                    source: instance.disks[0].source,
-                    diskEncryptionKey: {
-                        rawKey: key,
-                    }
-                }
-            ],
-        }
-      });
-      let operation = response.latestResponse;
-      const operationsClient = new compute.ZoneOperationsClient();
-  
-      // Wait for the operation to complete.
-      while (operation.status !== 'DONE') {
-        [operation] = await operationsClient.wait({
-          operation: operation.name,
-          project: projectId,
-          zone: operation.zone.split('/').pop(),
-        });
-      }
-  
-      console.log('Instance with encryption key started.');
     }
-  
-    startInstanceWithEncryptionKey();
-    // [END compute_start_enc_instance]
+
+    console.log('Instance with encryption key started.');
   }
-  
-  main(...process.argv.slice(2));
-  
+
+  startInstanceWithEncryptionKey();
+  // [END compute_start_enc_instance]
+}
+
+main(...process.argv.slice(2));

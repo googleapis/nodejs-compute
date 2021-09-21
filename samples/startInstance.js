@@ -19,47 +19,42 @@
  * @param {string} zone - name of the zone your instance belongs to.
  * @param {string} instanceName - name of the instance your want to start.
  */
- function main(
-    projectId,
-    zone,
-    instanceName,
-  ) {
-    // [START compute_start_instance]
-    /**
-     * TODO(developer): Uncomment and replace these variables before running the sample.
-     */
-    // const projectId = 'YOUR_PROJECT_ID';
-    // const zone = 'europe-central2-b'
-    // const instanceName = 'YOUR_INSTANCE_NAME'
-  
-    const compute = require('@google-cloud/compute');
-  
-    async function startInstance() {
-      const instancesClient = new compute.InstancesClient();
-  
-      const [response] = await instancesClient.start({
+function main(projectId, zone, instanceName) {
+  // [START compute_start_instance]
+  /**
+   * TODO(developer): Uncomment and replace these variables before running the sample.
+   */
+  // const projectId = 'YOUR_PROJECT_ID';
+  // const zone = 'europe-central2-b'
+  // const instanceName = 'YOUR_INSTANCE_NAME'
+
+  const compute = require('@google-cloud/compute');
+
+  async function startInstance() {
+    const instancesClient = new compute.InstancesClient();
+
+    const [response] = await instancesClient.start({
+      project: projectId,
+      zone,
+      instance: instanceName,
+    });
+    let operation = response.latestResponse;
+    const operationsClient = new compute.ZoneOperationsClient();
+
+    // Wait for the operation to complete.
+    while (operation.status !== 'DONE') {
+      [operation] = await operationsClient.wait({
+        operation: operation.name,
         project: projectId,
-        zone,
-        instance: instanceName,
+        zone: operation.zone.split('/').pop(),
       });
-      let operation = response.latestResponse;
-      const operationsClient = new compute.ZoneOperationsClient();
-  
-      // Wait for the operation to complete.
-      while (operation.status !== 'DONE') {
-        [operation] = await operationsClient.wait({
-          operation: operation.name,
-          project: projectId,
-          zone: operation.zone.split('/').pop(),
-        });
-      }
-  
-      console.log('Instance started.');
     }
-  
-    startInstance();
-    // [END compute_start_instance]
+
+    console.log('Instance started.');
   }
-  
-  main(...process.argv.slice(2));
-  
+
+  startInstance();
+  // [END compute_start_instance]
+}
+
+main(...process.argv.slice(2));
