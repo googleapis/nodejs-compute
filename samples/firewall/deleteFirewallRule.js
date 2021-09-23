@@ -18,39 +18,39 @@
  * @param {string} projectId - project ID or project number of the Cloud project you want to use.
  * @param {string} firewallRuleName - name of the rule you want to modify.
  */
- function main(projectId, firewallRuleName) {
-    // [START compute_firewall_delete]
-    /**
-     * TODO(developer): Uncomment and replace these variables before running the sample.
-     */
-    // const projectId = 'YOUR_PROJECT_ID';
-    // const firewallRuleName = 'FIREWALL_RULE_NAME';
-  
-    const compute = require('@google-cloud/compute');
-  
-    async function deleteFirewallRule() {
-      const firewallsClient = new compute.FirewallsClient();
-      const operationsClient = new compute.GlobalOperationsClient();
-      
-      const [response] = await firewallsClient.delete({
+function main(projectId, firewallRuleName) {
+  // [START compute_firewall_delete]
+  /**
+   * TODO(developer): Uncomment and replace these variables before running the sample.
+   */
+  // const projectId = 'YOUR_PROJECT_ID';
+  // const firewallRuleName = 'FIREWALL_RULE_NAME';
+
+  const compute = require('@google-cloud/compute');
+
+  async function deleteFirewallRule() {
+    const firewallsClient = new compute.FirewallsClient();
+    const operationsClient = new compute.GlobalOperationsClient();
+
+    const [response] = await firewallsClient.delete({
+      project: projectId,
+      firewall: firewallRuleName,
+    });
+    let operation = response.latestResponse;
+
+    // Wait for the create operation to complete.
+    while (operation.status !== 'DONE') {
+      [operation] = await operationsClient.wait({
+        operation: operation.name,
         project: projectId,
-        firewall: firewallRuleName,
       });
-      let operation = response.latestResponse;
-
-      // Wait for the create operation to complete.
-      while (operation.status !== 'DONE') {
-        [operation] = await operationsClient.wait({
-          operation: operation.name,
-          project: projectId,
-        });
-      }
-
-      console.log('Firewall rule deleted');
     }
-  
-    deleteFirewallRule();
-    // [END compute_firewall_delete]
+
+    console.log('Firewall rule deleted');
   }
-    
-  main(...process.argv.slice(2));
+
+  deleteFirewallRule();
+  // [END compute_firewall_delete]
+}
+
+main(...process.argv.slice(2));
