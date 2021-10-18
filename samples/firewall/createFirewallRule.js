@@ -51,7 +51,7 @@ function main(
         ports: ['80', '443'],
       },
     ];
-    firewallRule.sourceRanges = ['0.0.0.0/0'];
+    firewallRule.targetTags = ['web'];
     firewallRule.network = networkName;
     firewallRule.description =
       'Allowing TCP traffic on port 80 and 443 from Internet.';
