@@ -13,12 +13,12 @@
 // limitations under the License.
 
 /**
- * Creates GCP instance from an instance template with a new disk and machine type.
+ * Creates a Compute Engine VM instance from an instance template, but overrides the disk and machine type options in the template.
  *
  * @param {string} projectId - ID or number of the project you want to use.
  * @param {string} zone - Name of the zone you want to check, for example: us-west3-b
  * @param {string} instanceName - Name of the new instance.
- * @param {string} instanceTemplateName - Name of the instance template using for creating the new instance.
+ * @param {string} instanceTemplateName - Name of the instance template to use when creating the new instance.
  * @param {string} machineType - Machine type you want to set in following format:
  *    "zones/{zone}/machineTypes/{type_name}". For example:
  *    "zones/europe-west3-c/machineTypes/f1-micro"
@@ -26,10 +26,10 @@
  *    https://cloud.google.com/sdk/gcloud/reference/compute/machine-types/list
  * @param {string} newDiskSourceImage - Path the the disk image you want to use for your new
  *    disk. This can be one of the public images
- *    (e.g. "projects/debian-cloud/global/images/family/debian-10")
+ *    (like "projects/debian-cloud/global/images/family/debian-10")
  *    or a private image you have access to.
- *    You can check the list of available public images using:
- *    $ gcloud compute images list
+ *    You can check the list of available public images using the doc:
+ *    http://cloud.google.com/compute/docs/images
  */
 function main(
   projectId,
@@ -53,7 +53,7 @@ function main(
   const compute = require('@google-cloud/compute');
   const computeProtos = compute.protos.google.cloud.compute.v1;
 
-  // Create a new instance from template in the specified project and zone with set machineType and new disk
+  // Creates a new instance in the specified project and zone using a selected template, but overrides the disk and machine type options in the template.
   async function createInstanceFromTemplateWithOverrides() {
     const instancesClient = new compute.InstancesClient();
     const instanceTemplatesClient = new compute.InstanceTemplatesClient();
@@ -62,13 +62,13 @@ function main(
       `Creating the ${instanceName} instance in ${zone} from template ${instanceTemplateName}...`
     );
 
-    // Receiving instance template
+    // Retrieve an instance template
     const [instanceTemplate] = await instanceTemplatesClient.get({
       project: projectId,
       instanceTemplate: instanceTemplateName,
     });
 
-    // Modifying diskTypes, cause diskType for instance insert function should be URL-formatted with specific zone.
+    // Adjust diskType field of the instance template to use the URL formatting required by instances.insert.diskType
     // For instance template, there is only a name, not URL.
     for (const disk of instanceTemplate.properties.disks) {
       if (disk.initializeParams.diskType) {
@@ -84,10 +84,10 @@ function main(
         machineType: `zones/${zone}/machineTypes/${machineType}`,
         disks: [
           // If you override a repeated field, all repeated values
-          // for that property will be replaced with the
+          // for that property are replaced with the
           // corresponding values provided in the request.
-          // If you want to add a new disk to existing disks,
-          // you should insert all existing disks either.
+          // When adding a new disk to existing disks,
+          // insert all existing disks as well.
           ...instanceTemplate.properties.disks,
           {
             initializeParams: {

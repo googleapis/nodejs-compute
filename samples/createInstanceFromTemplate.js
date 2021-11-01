@@ -13,7 +13,7 @@
 // limitations under the License.
 
 /**
- * Creates GCP instance from an instance template.
+ * Creates a Compute Engine VM instance from an instance template.
  *
  * @param {string} projectId - ID or number of the project you want to use.
  * @param {string} zone - Name of the zone you want to check, for example: us-west3-b
