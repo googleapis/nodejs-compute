@@ -15,6 +15,7 @@
 'use strict';
 
 const compute = require('@google-cloud/compute');
+const computeProtos = compute.protos.google.cloud.compute.v1;
 const {Storage} = require('@google-cloud/storage');
 
 const {describe, it} = require('mocha');
@@ -24,6 +25,7 @@ const {assert} = require('chai');
 
 const instancesClient = new compute.InstancesClient({fallback: 'rest'});
 const projectsClient = new compute.ProjectsClient({fallback: 'rest'});
+const firewallsClient = new compute.FirewallsClient({fallback: 'rest'});
 
 const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
 
@@ -192,6 +194,188 @@ describe('samples', () => {
 
       assert.match(output, /Page 1/);
       assert.match(output, /Page 2/);
+    });
+  });
+
+  const getInstance = async (projectId, zone, instanceName) => {
+    const [instance] = await instancesClient.get({
+      project: projectId,
+      zone,
+      instance: instanceName,
+    });
+    return instance;
+  };
+
+  describe('start/stop instances', () => {
+    it('should start/stop instances', async () => {
+      const projectId = await instancesClient.getProjectId();
+      const newInstanceName = `gcloud-test-instance-${uuid.v4().split('-')[0]}`;
+
+      execSync(`node createInstance ${projectId} ${zone} ${newInstanceName}`);
+
+      let instance = await getInstance(projectId, zone, newInstanceName);
+      assert.equal(instance.status, 'RUNNING');
+
+      const stopOutput = execSync(
+        `node stopInstance ${projectId} ${zone} ${newInstanceName}`
+      );
+      assert.match(stopOutput, /Instance stopped/);
+
+      instance = await getInstance(projectId, zone, newInstanceName);
+      assert.equal(instance.status, 'TERMINATED');
+
+      const startOutput = execSync(
+        `node startInstance ${projectId} ${zone} ${newInstanceName}`
+      );
+      assert.match(startOutput, /Instance started/);
+
+      instance = await getInstance(projectId, zone, newInstanceName);
+      assert.equal(instance.status, 'RUNNING');
+
+      execSync(`node deleteInstance ${projectId} ${zone} ${newInstanceName}`);
+    });
+
+    it('should start/stop instances with encrypted disks', async () => {
+      const projectId = await instancesClient.getProjectId();
+      const newInstanceName = `gcloud-test-instance-${uuid.v4().split('-')[0]}`;
+
+      const KEY = uuid.v4().split('-').join('');
+      const KEY_BASE64 = Buffer.from(KEY).toString('base64');
+
+      const [response] = await instancesClient.insert({
+        instanceResource: {
+          name: newInstanceName,
+          disks: [
+            {
+              initializeParams: {
+                diskSizeGb: '10',
+                sourceImage:
+                  'projects/debian-cloud/global/images/family/debian-10',
+              },
+              autoDelete: true,
+              boot: true,
+              type: computeProtos.AttachedDisk.Type.PERSISTENT,
+              diskEncryptionKey: {
+                rawKey: KEY_BASE64,
+              },
+            },
+          ],
+          machineType: `zones/${zone}/machineTypes/n1-standard-1`,
+          networkInterfaces: [
+            {
+              name: 'global/networks/default',
+            },
+          ],
+        },
+        project: projectId,
+        zone,
+      });
+      let operation = response.latestResponse;
+      const operationsClient = new compute.ZoneOperationsClient();
+
+      while (operation.status !== 'DONE') {
+        [operation] = await operationsClient.wait({
+          operation: operation.name,
+          project: projectId,
+          zone: operation.zone.split('/').pop(),
+        });
+      }
+
+      const stopOutput = execSync(
+        `node stopInstance ${projectId} ${zone} ${newInstanceName}`
+      );
+      assert.match(stopOutput, /Instance stopped/);
+
+      let instance = await getInstance(projectId, zone, newInstanceName);
+      assert.equal(instance.status, 'TERMINATED');
+
+      const startOutput = execSync(
+        `node startInstanceWithEncKey ${projectId} ${zone} ${newInstanceName} ${KEY_BASE64}`
+      );
+      assert.match(startOutput, /Instance with encryption key started/);
+
+      instance = await getInstance(projectId, zone, newInstanceName);
+      assert.equal(instance.status, 'RUNNING');
+
+      execSync(`node deleteInstance ${projectId} ${zone} ${newInstanceName}`);
+    });
+
+    it('should reset instance', async () => {
+      const projectId = await instancesClient.getProjectId();
+      const newInstanceName = `gcloud-test-instance-${uuid.v4().split('-')[0]}`;
+
+      execSync(`node createInstance ${projectId} ${zone} ${newInstanceName}`);
+
+      const resetOutput = execSync(
+        `node resetInstance ${projectId} ${zone} ${newInstanceName}`
+      );
+      assert.match(resetOutput, /Instance reset/);
+
+      execSync(`node deleteInstance ${projectId} ${zone} ${newInstanceName}`);
+    });
+  });
+
+  describe('firewall', () => {
+    it('should create and delete firewall rule', async () => {
+      const projectId = await instancesClient.getProjectId();
+      const firewallRuleName = `test-firewall-rule-${uuid.v4().split('-')[0]}`;
+
+      let output = execSync(
+        `node firewall/createFirewallRule ${projectId} ${firewallRuleName}`
+      );
+      assert.match(output, /Firewall rule created/);
+
+      output = execSync(
+        `node firewall/deleteFirewallRule ${projectId} ${firewallRuleName}`
+      );
+      assert.match(output, /Firewall rule deleted/);
+    });
+
+    it('should list firewall rules', async () => {
+      const projectId = await instancesClient.getProjectId();
+      const firewallRuleName = `test-firewall-rule-${uuid.v4().split('-')[0]}`;
+
+      execSync(
+        `node firewall/createFirewallRule ${projectId} ${firewallRuleName}`
+      );
+      const output = execSync(`node firewall/listFirewallRules ${projectId}`);
+      assert.isTrue(output.includes(`- ${firewallRuleName}:`));
+
+      execSync(
+        `node firewall/deleteFirewallRule ${projectId} ${firewallRuleName}`
+      );
+    });
+
+    it('should patch firewall rule', async () => {
+      const projectId = await instancesClient.getProjectId();
+      const firewallRuleName = `test-firewall-rule-${uuid.v4().split('-')[0]}`;
+
+      execSync(
+        `node firewall/createFirewallRule ${projectId} ${firewallRuleName}`
+      );
+
+      let [firewallRule] = await firewallsClient.get({
+        project: projectId,
+        firewall: firewallRuleName,
+      });
+
+      assert.equal(firewallRule.priority, 1000);
+
+      const output = execSync(
+        `node firewall/patchFirewallPriority ${projectId} ${firewallRuleName} 500`
+      );
+      assert.match(output, /Firewall rule updated/);
+
+      [firewallRule] = await firewallsClient.get({
+        project: projectId,
+        firewall: firewallRuleName,
+      });
+
+      assert.equal(firewallRule.priority, 500);
+
+      execSync(
+        `node firewall/deleteFirewallRule ${projectId} ${firewallRuleName}`
+      );
     });
   });
 });
