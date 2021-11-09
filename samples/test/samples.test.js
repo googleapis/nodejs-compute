@@ -451,7 +451,7 @@ describe('samples', () => {
       const output = execSync(
         `node createInstanceFromTemplate ${projectId} ${zone} ${instanceName} global/instanceTemplates/${instanceTemplateName}`
       );
-      assert.isTrue(output.includes('Instance created.'));
+      assert.include(output, 'Instance created.');
 
       execSync(`node deleteInstance ${projectId} ${zone} ${instanceName}`);
     });
@@ -463,7 +463,7 @@ describe('samples', () => {
       const output = execSync(
         `node createInstanceFromTemplateWithOverrides ${projectId} ${zone} ${instanceName} ${instanceTemplateName}`
       );
-      assert.isTrue(output.includes('Instance created.'));
+      assert.include(output, 'Instance created.');
 
       const instance = await getInstance(projectId, zone, instanceName);
       assert.equal(instance.disks.length, 2);
