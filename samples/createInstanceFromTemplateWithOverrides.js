@@ -28,7 +28,7 @@
  *    disk. This can be one of the public images
  *    (like "projects/debian-cloud/global/images/family/debian-10")
  *    or a private image you have access to.
- *    For a list of available public images, see the documentation: 
+ *    For a list of available public images, see the documentation:
  *    http://cloud.google.com/compute/docs/images
  */
 function main(
