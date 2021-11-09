@@ -318,7 +318,7 @@ describe('samples', () => {
   describe('firewall', () => {
     // Clean stale firewall rules, in case prior test runs have failed.
     before(async () => {
-      const FOUR_HOURS = 1000 * 60 * 60 * 4 * 5000;
+      const FOUR_HOURS = 1000 * 60 * 60 * 4;
       const projectId = await instancesClient.getProjectId();
       for await (const rule of firewallsClient.listAsync({
         project: projectId,
