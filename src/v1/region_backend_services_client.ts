@@ -18,18 +18,8 @@
 
 /* global window */
 import * as gax from 'google-gax';
-import {
-  Callback,
-  CallOptions,
-  Descriptors,
-  ClientOptions,
-  LROperation,
-  PaginationCallback,
-  GaxCall,
-} from 'google-gax';
+import {Callback, CallOptions, Descriptors, ClientOptions} from 'google-gax';
 
-import {Transform} from 'stream';
-import {RequestType} from 'google-gax/build/src/apitypes';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
 /**
@@ -110,12 +100,6 @@ export class RegionBackendServicesClient {
     );
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    // Implicitely set 'rest' value for the apis use rest as transport (eg. googleapis-discovery apis).
-    if (!opts) {
-      opts = {fallback: 'rest'};
-    } else {
-      opts.fallback = opts.fallback ?? 'rest';
-    }
     const fallback =
       opts?.fallback ??
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
@@ -137,6 +121,9 @@ export class RegionBackendServicesClient {
 
     // Save the auth object to the client, for use by other methods.
     this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
+
+    // Set useJWTAccessWithScope on the auth object.
+    this.auth.useJWTAccessWithScope = true;
 
     // Set defaultServicePath on the auth object.
     this.auth.defaultServicePath = staticMembers.servicePath;
@@ -163,17 +150,6 @@ export class RegionBackendServicesClient {
     }
     // Load the applicable protos.
     this._protos = this._gaxGrpc.loadProtoJSON(jsonProtos);
-
-    // Some of the methods on this service return "paged" results,
-    // (e.g. 50 results at a time, with tokens to get subsequent
-    // pages). Denote the keys used for pagination and results.
-    this.descriptors.page = {
-      list: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'items'
-      ),
-    };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
@@ -248,7 +224,7 @@ export class RegionBackendServicesClient {
         }
       );
 
-      const descriptor = this.descriptors.page[methodName] || undefined;
+      const descriptor = undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
@@ -317,13 +293,39 @@ export class RegionBackendServicesClient {
   // -------------------
   // -- Service calls --
   // -------------------
+  /**
+   * Deletes the specified regional BackendService resource.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.backendService
+   *   Name of the BackendService resource to delete.
+   * @param {string} request.project
+   *   Project ID for this request.
+   * @param {string} request.region
+   *   Name of the region scoping this request.
+   * @param {string} request.requestId
+   *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Operation]{@link google.cloud.compute.v1.Operation}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/region_backend_services.delete.js</caption>
+   * region_tag:compute_v1_generated_RegionBackendServices_Delete_async
+   */
   delete(
     request?: protos.google.cloud.compute.v1.IDeleteRegionBackendServiceRequest,
     options?: CallOptions
   ): Promise<
     [
-      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
-      protos.google.cloud.compute.v1.IOperation | undefined,
+      protos.google.cloud.compute.v1.IOperation,
+      (
+        | protos.google.cloud.compute.v1.IDeleteRegionBackendServiceRequest
+        | undefined
+      ),
       {} | undefined
     ]
   >;
@@ -348,38 +350,6 @@ export class RegionBackendServicesClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Deletes the specified regional BackendService resource.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.backendService
-   *   Name of the BackendService resource to delete.
-   * @param {string} request.project
-   *   Project ID for this request.
-   * @param {string} request.region
-   *   Name of the region scoping this request.
-   * @param {string} request.requestId
-   *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
-   *
-   *   For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
-   *
-   *   The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
-   *   for more details and examples.
-   *   This method is considered to be in beta. This means while
-   *   stable it is still a work-in-progress and under active development,
-   *   and might get backwards-incompatible changes at any time.
-   *   `.promise()` is not supported yet.
-   * @example
-   * const [operation] = await client.delete(request);
-   */
   delete(
     request?: protos.google.cloud.compute.v1.IDeleteRegionBackendServiceRequest,
     optionsOrCallback?:
@@ -400,8 +370,11 @@ export class RegionBackendServicesClient {
     >
   ): Promise<
     [
-      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
-      protos.google.cloud.compute.v1.IOperation | undefined,
+      protos.google.cloud.compute.v1.IOperation,
+      (
+        | protos.google.cloud.compute.v1.IDeleteRegionBackendServiceRequest
+        | undefined
+      ),
       {} | undefined
     ]
   > | void {
@@ -421,28 +394,29 @@ export class RegionBackendServicesClient {
         project: request.project || '',
       });
     this.initialize();
-    return this.innerApiCalls
-      .delete(request, options, callback)
-      .then(
-        ([response, operation, rawResponse]: [
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
-        ]) => {
-          return [
-            {
-              latestResponse: response,
-              done: false,
-              name: response.id,
-              metadata: null,
-              result: {},
-            },
-            operation,
-            rawResponse,
-          ];
-        }
-      );
+    return this.innerApiCalls.delete(request, options, callback);
   }
+  /**
+   * Returns the specified regional BackendService resource.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.backendService
+   *   Name of the BackendService resource to return.
+   * @param {string} request.project
+   *   Project ID for this request.
+   * @param {string} request.region
+   *   Name of the region scoping this request.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [BackendService]{@link google.cloud.compute.v1.BackendService}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/region_backend_services.get.js</caption>
+   * region_tag:compute_v1_generated_RegionBackendServices_Get_async
+   */
   get(
     request?: protos.google.cloud.compute.v1.IGetRegionBackendServiceRequest,
     options?: CallOptions
@@ -477,27 +451,6 @@ export class RegionBackendServicesClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Returns the specified regional BackendService resource.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.backendService
-   *   Name of the BackendService resource to return.
-   * @param {string} request.project
-   *   Project ID for this request.
-   * @param {string} request.region
-   *   Name of the region scoping this request.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [BackendService]{@link google.cloud.compute.v1.BackendService}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.get(request);
-   */
   get(
     request?: protos.google.cloud.compute.v1.IGetRegionBackendServiceRequest,
     optionsOrCallback?:
@@ -544,6 +497,28 @@ export class RegionBackendServicesClient {
     this.initialize();
     return this.innerApiCalls.get(request, options, callback);
   }
+  /**
+   * Gets the most recent health check results for this regional BackendService.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.backendService
+   *   Name of the BackendService resource for which to get health.
+   * @param {string} request.project
+   * @param {string} request.region
+   *   Name of the region scoping this request.
+   * @param {google.cloud.compute.v1.ResourceGroupReference} request.resourceGroupReferenceResource
+   *   The body resource for this request
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [BackendServiceGroupHealth]{@link google.cloud.compute.v1.BackendServiceGroupHealth}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/region_backend_services.get_health.js</caption>
+   * region_tag:compute_v1_generated_RegionBackendServices_GetHealth_async
+   */
   getHealth(
     request?: protos.google.cloud.compute.v1.IGetHealthRegionBackendServiceRequest,
     options?: CallOptions
@@ -578,28 +553,6 @@ export class RegionBackendServicesClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Gets the most recent health check results for this regional BackendService.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.backendService
-   *   Name of the BackendService resource for which to get health.
-   * @param {string} request.project
-   * @param {string} request.region
-   *   Name of the region scoping this request.
-   * @param {google.cloud.compute.v1.ResourceGroupReference} request.resourceGroupReferenceResource
-   *   The body resource for this request
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [BackendServiceGroupHealth]{@link google.cloud.compute.v1.BackendServiceGroupHealth}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * const [response] = await client.getHealth(request);
-   */
   getHealth(
     request?: protos.google.cloud.compute.v1.IGetHealthRegionBackendServiceRequest,
     optionsOrCallback?:
@@ -646,13 +599,39 @@ export class RegionBackendServicesClient {
     this.initialize();
     return this.innerApiCalls.getHealth(request, options, callback);
   }
+  /**
+   * Creates a regional BackendService resource in the specified project using the data included in the request. For more information, see Backend services overview.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.compute.v1.BackendService} request.backendServiceResource
+   *   The body resource for this request
+   * @param {string} request.project
+   *   Project ID for this request.
+   * @param {string} request.region
+   *   Name of the region scoping this request.
+   * @param {string} request.requestId
+   *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Operation]{@link google.cloud.compute.v1.Operation}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/region_backend_services.insert.js</caption>
+   * region_tag:compute_v1_generated_RegionBackendServices_Insert_async
+   */
   insert(
     request?: protos.google.cloud.compute.v1.IInsertRegionBackendServiceRequest,
     options?: CallOptions
   ): Promise<
     [
-      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
-      protos.google.cloud.compute.v1.IOperation | undefined,
+      protos.google.cloud.compute.v1.IOperation,
+      (
+        | protos.google.cloud.compute.v1.IInsertRegionBackendServiceRequest
+        | undefined
+      ),
       {} | undefined
     ]
   >;
@@ -677,38 +656,6 @@ export class RegionBackendServicesClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Creates a regional BackendService resource in the specified project using the data included in the request. For more information, see  Backend services overview.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.compute.v1.BackendService} request.backendServiceResource
-   *   The body resource for this request
-   * @param {string} request.project
-   *   Project ID for this request.
-   * @param {string} request.region
-   *   Name of the region scoping this request.
-   * @param {string} request.requestId
-   *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
-   *
-   *   For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
-   *
-   *   The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
-   *   for more details and examples.
-   *   This method is considered to be in beta. This means while
-   *   stable it is still a work-in-progress and under active development,
-   *   and might get backwards-incompatible changes at any time.
-   *   `.promise()` is not supported yet.
-   * @example
-   * const [operation] = await client.insert(request);
-   */
   insert(
     request?: protos.google.cloud.compute.v1.IInsertRegionBackendServiceRequest,
     optionsOrCallback?:
@@ -729,8 +676,11 @@ export class RegionBackendServicesClient {
     >
   ): Promise<
     [
-      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
-      protos.google.cloud.compute.v1.IOperation | undefined,
+      protos.google.cloud.compute.v1.IOperation,
+      (
+        | protos.google.cloud.compute.v1.IInsertRegionBackendServiceRequest
+        | undefined
+      ),
       {} | undefined
     ]
   > | void {
@@ -750,333 +700,19 @@ export class RegionBackendServicesClient {
         project: request.project || '',
       });
     this.initialize();
-    return this.innerApiCalls
-      .insert(request, options, callback)
-      .then(
-        ([response, operation, rawResponse]: [
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
-        ]) => {
-          return [
-            {
-              latestResponse: response,
-              done: false,
-              name: response.id,
-              metadata: null,
-              result: {},
-            },
-            operation,
-            rawResponse,
-          ];
-        }
-      );
+    return this.innerApiCalls.insert(request, options, callback);
   }
-  patch(
-    request?: protos.google.cloud.compute.v1.IPatchRegionBackendServiceRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
-      protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
-    ]
-  >;
-  patch(
-    request: protos.google.cloud.compute.v1.IPatchRegionBackendServiceRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.IPatchRegionBackendServiceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  patch(
-    request: protos.google.cloud.compute.v1.IPatchRegionBackendServiceRequest,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.IPatchRegionBackendServiceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  /**
-   * Updates the specified regional BackendService resource with the data included in the request. For more information, see  Understanding backend services This method supports PATCH semantics and uses the JSON merge patch format and processing rules.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.backendService
-   *   Name of the BackendService resource to patch.
-   * @param {google.cloud.compute.v1.BackendService} request.backendServiceResource
-   *   The body resource for this request
-   * @param {string} request.project
-   *   Project ID for this request.
-   * @param {string} request.region
-   *   Name of the region scoping this request.
-   * @param {string} request.requestId
-   *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
-   *
-   *   For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
-   *
-   *   The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
-   *   for more details and examples.
-   *   This method is considered to be in beta. This means while
-   *   stable it is still a work-in-progress and under active development,
-   *   and might get backwards-incompatible changes at any time.
-   *   `.promise()` is not supported yet.
-   * @example
-   * const [operation] = await client.patch(request);
-   */
-  patch(
-    request?: protos.google.cloud.compute.v1.IPatchRegionBackendServiceRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          protos.google.cloud.compute.v1.IOperation,
-          | protos.google.cloud.compute.v1.IPatchRegionBackendServiceRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.IPatchRegionBackendServiceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
-      protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
-    ]
-  > | void {
-    request = request || {};
-    let options: CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        project: request.project || '',
-      });
-    this.initialize();
-    return this.innerApiCalls
-      .patch(request, options, callback)
-      .then(
-        ([response, operation, rawResponse]: [
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
-        ]) => {
-          return [
-            {
-              latestResponse: response,
-              done: false,
-              name: response.id,
-              metadata: null,
-              result: {},
-            },
-            operation,
-            rawResponse,
-          ];
-        }
-      );
-  }
-  update(
-    request?: protos.google.cloud.compute.v1.IUpdateRegionBackendServiceRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
-      protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
-    ]
-  >;
-  update(
-    request: protos.google.cloud.compute.v1.IUpdateRegionBackendServiceRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.IUpdateRegionBackendServiceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  update(
-    request: protos.google.cloud.compute.v1.IUpdateRegionBackendServiceRequest,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.IUpdateRegionBackendServiceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  /**
-   * Updates the specified regional BackendService resource with the data included in the request. For more information, see  Backend services overview.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.backendService
-   *   Name of the BackendService resource to update.
-   * @param {google.cloud.compute.v1.BackendService} request.backendServiceResource
-   *   The body resource for this request
-   * @param {string} request.project
-   *   Project ID for this request.
-   * @param {string} request.region
-   *   Name of the region scoping this request.
-   * @param {string} request.requestId
-   *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
-   *
-   *   For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
-   *
-   *   The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
-   *   for more details and examples.
-   *   This method is considered to be in beta. This means while
-   *   stable it is still a work-in-progress and under active development,
-   *   and might get backwards-incompatible changes at any time.
-   *   `.promise()` is not supported yet.
-   * @example
-   * const [operation] = await client.update(request);
-   */
-  update(
-    request?: protos.google.cloud.compute.v1.IUpdateRegionBackendServiceRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          protos.google.cloud.compute.v1.IOperation,
-          | protos.google.cloud.compute.v1.IUpdateRegionBackendServiceRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.IUpdateRegionBackendServiceRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
-      protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
-    ]
-  > | void {
-    request = request || {};
-    let options: CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        project: request.project || '',
-      });
-    this.initialize();
-    return this.innerApiCalls
-      .update(request, options, callback)
-      .then(
-        ([response, operation, rawResponse]: [
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
-        ]) => {
-          return [
-            {
-              latestResponse: response,
-              done: false,
-              name: response.id,
-              metadata: null,
-              result: {},
-            },
-            operation,
-            rawResponse,
-          ];
-        }
-      );
-  }
-
-  list(
-    request?: protos.google.cloud.compute.v1.IListRegionBackendServicesRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.compute.v1.IBackendService[],
-      protos.google.cloud.compute.v1.IListRegionBackendServicesRequest | null,
-      protos.google.cloud.compute.v1.IBackendServiceList
-    ]
-  >;
-  list(
-    request: protos.google.cloud.compute.v1.IListRegionBackendServicesRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.compute.v1.IListRegionBackendServicesRequest,
-      protos.google.cloud.compute.v1.IBackendServiceList | null | undefined,
-      protos.google.cloud.compute.v1.IBackendService
-    >
-  ): void;
-  list(
-    request: protos.google.cloud.compute.v1.IListRegionBackendServicesRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.compute.v1.IListRegionBackendServicesRequest,
-      protos.google.cloud.compute.v1.IBackendServiceList | null | undefined,
-      protos.google.cloud.compute.v1.IBackendService
-    >
-  ): void;
   /**
    * Retrieves the list of regional BackendService resources available to the specified project in the given region.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.filter
-   *   A filter expression that filters resources listed in the response. The expression must specify the field name, a comparison operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The comparison operator must be either `=`, `!=`, `>`, or `<`.
-   *
-   *   For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`.
-   *
-   *   You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels.
-   *
-   *   To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ```
+   *   A filter expression that filters resources listed in the response. The expression must specify the field name, a comparison operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The comparison operator must be either `=`, `!=`, `>`, or `<`. For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`. You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels. To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ```
    * @param {number} request.maxResults
    *   The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)
    * @param {string} request.orderBy
-   *   Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name.
-   *
-   *   You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first.
-   *
-   *   Currently, only sorting by `name` or `creationTimestamp desc` is supported.
+   *   Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name. You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first. Currently, only sorting by `name` or `creationTimestamp desc` is supported.
    * @param {string} request.pageToken
    *   Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
    * @param {string} request.project
@@ -1088,35 +724,73 @@ export class RegionBackendServicesClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of [BackendService]{@link google.cloud.compute.v1.BackendService}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listAsync()`
-   *   method described below for async iteration which you can stop as needed.
+   *   The first element of the array is an object representing [BackendServiceList]{@link google.cloud.compute.v1.BackendServiceList}.
    *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/region_backend_services.list.js</caption>
+   * region_tag:compute_v1_generated_RegionBackendServices_List_async
    */
+  list(
+    request?: protos.google.cloud.compute.v1.IListRegionBackendServicesRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.compute.v1.IBackendServiceList,
+      (
+        | protos.google.cloud.compute.v1.IListRegionBackendServicesRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
+  list(
+    request: protos.google.cloud.compute.v1.IListRegionBackendServicesRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.compute.v1.IBackendServiceList,
+      | protos.google.cloud.compute.v1.IListRegionBackendServicesRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  list(
+    request: protos.google.cloud.compute.v1.IListRegionBackendServicesRequest,
+    callback: Callback<
+      protos.google.cloud.compute.v1.IBackendServiceList,
+      | protos.google.cloud.compute.v1.IListRegionBackendServicesRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
   list(
     request?: protos.google.cloud.compute.v1.IListRegionBackendServicesRequest,
     optionsOrCallback?:
       | CallOptions
-      | PaginationCallback<
-          protos.google.cloud.compute.v1.IListRegionBackendServicesRequest,
-          protos.google.cloud.compute.v1.IBackendServiceList | null | undefined,
-          protos.google.cloud.compute.v1.IBackendService
+      | Callback<
+          protos.google.cloud.compute.v1.IBackendServiceList,
+          | protos.google.cloud.compute.v1.IListRegionBackendServicesRequest
+          | null
+          | undefined,
+          {} | null | undefined
         >,
-    callback?: PaginationCallback<
-      protos.google.cloud.compute.v1.IListRegionBackendServicesRequest,
-      protos.google.cloud.compute.v1.IBackendServiceList | null | undefined,
-      protos.google.cloud.compute.v1.IBackendService
+    callback?: Callback<
+      protos.google.cloud.compute.v1.IBackendServiceList,
+      | protos.google.cloud.compute.v1.IListRegionBackendServicesRequest
+      | null
+      | undefined,
+      {} | null | undefined
     >
   ): Promise<
     [
-      protos.google.cloud.compute.v1.IBackendService[],
-      protos.google.cloud.compute.v1.IListRegionBackendServicesRequest | null,
-      protos.google.cloud.compute.v1.IBackendServiceList
+      protos.google.cloud.compute.v1.IBackendServiceList,
+      (
+        | protos.google.cloud.compute.v1.IListRegionBackendServicesRequest
+        | undefined
+      ),
+      {} | undefined
     ]
   > | void {
     request = request || {};
@@ -1137,52 +811,101 @@ export class RegionBackendServicesClient {
     this.initialize();
     return this.innerApiCalls.list(request, options, callback);
   }
-
   /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
+   * Updates the specified regional BackendService resource with the data included in the request. For more information, see Understanding backend services This method supports PATCH semantics and uses the JSON merge patch format and processing rules.
+   *
    * @param {Object} request
    *   The request object that will be sent.
-   * @param {string} request.filter
-   *   A filter expression that filters resources listed in the response. The expression must specify the field name, a comparison operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The comparison operator must be either `=`, `!=`, `>`, or `<`.
-   *
-   *   For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`.
-   *
-   *   You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels.
-   *
-   *   To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ```
-   * @param {number} request.maxResults
-   *   The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)
-   * @param {string} request.orderBy
-   *   Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name.
-   *
-   *   You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first.
-   *
-   *   Currently, only sorting by `name` or `creationTimestamp desc` is supported.
-   * @param {string} request.pageToken
-   *   Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
+   * @param {string} request.backendService
+   *   Name of the BackendService resource to patch.
+   * @param {google.cloud.compute.v1.BackendService} request.backendServiceResource
+   *   The body resource for this request
    * @param {string} request.project
    *   Project ID for this request.
    * @param {string} request.region
    *   Name of the region scoping this request.
-   * @param {boolean} request.returnPartialSuccess
-   *   Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+   * @param {string} request.requestId
+   *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing [BackendService]{@link google.cloud.compute.v1.BackendService} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listAsync()`
-   *   method described below for async iteration which you can stop as needed.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Operation]{@link google.cloud.compute.v1.Operation}.
    *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/region_backend_services.patch.js</caption>
+   * region_tag:compute_v1_generated_RegionBackendServices_Patch_async
    */
-  listStream(
-    request?: protos.google.cloud.compute.v1.IListRegionBackendServicesRequest,
+  patch(
+    request?: protos.google.cloud.compute.v1.IPatchRegionBackendServiceRequest,
     options?: CallOptions
-  ): Transform {
+  ): Promise<
+    [
+      protos.google.cloud.compute.v1.IOperation,
+      (
+        | protos.google.cloud.compute.v1.IPatchRegionBackendServiceRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
+  patch(
+    request: protos.google.cloud.compute.v1.IPatchRegionBackendServiceRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.compute.v1.IOperation,
+      | protos.google.cloud.compute.v1.IPatchRegionBackendServiceRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  patch(
+    request: protos.google.cloud.compute.v1.IPatchRegionBackendServiceRequest,
+    callback: Callback<
+      protos.google.cloud.compute.v1.IOperation,
+      | protos.google.cloud.compute.v1.IPatchRegionBackendServiceRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  patch(
+    request?: protos.google.cloud.compute.v1.IPatchRegionBackendServiceRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          | protos.google.cloud.compute.v1.IPatchRegionBackendServiceRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.compute.v1.IOperation,
+      | protos.google.cloud.compute.v1.IPatchRegionBackendServiceRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.compute.v1.IOperation,
+      (
+        | protos.google.cloud.compute.v1.IPatchRegionBackendServiceRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
     request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
@@ -1190,66 +913,104 @@ export class RegionBackendServicesClient {
       gax.routingHeader.fromParams({
         project: request.project || '',
       });
-    const callSettings = new gax.CallSettings(options);
     this.initialize();
-    return this.descriptors.page.list.createStream(
-      this.innerApiCalls.list as gax.GaxCall,
-      request,
-      callSettings
-    );
+    return this.innerApiCalls.patch(request, options, callback);
   }
-
   /**
-   * Equivalent to `list`, but returns an iterable object.
+   * Updates the specified regional BackendService resource with the data included in the request. For more information, see Backend services overview .
    *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
    * @param {Object} request
    *   The request object that will be sent.
-   * @param {string} request.filter
-   *   A filter expression that filters resources listed in the response. The expression must specify the field name, a comparison operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The comparison operator must be either `=`, `!=`, `>`, or `<`.
-   *
-   *   For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`.
-   *
-   *   You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels.
-   *
-   *   To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ```
-   * @param {number} request.maxResults
-   *   The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)
-   * @param {string} request.orderBy
-   *   Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name.
-   *
-   *   You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first.
-   *
-   *   Currently, only sorting by `name` or `creationTimestamp desc` is supported.
-   * @param {string} request.pageToken
-   *   Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
+   * @param {string} request.backendService
+   *   Name of the BackendService resource to update.
+   * @param {google.cloud.compute.v1.BackendService} request.backendServiceResource
+   *   The body resource for this request
    * @param {string} request.project
    *   Project ID for this request.
    * @param {string} request.region
    *   Name of the region scoping this request.
-   * @param {boolean} request.returnPartialSuccess
-   *   Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+   * @param {string} request.requestId
+   *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   [BackendService]{@link google.cloud.compute.v1.BackendService}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Operation]{@link google.cloud.compute.v1.Operation}.
    *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
-   * @example
-   * const iterable = client.listAsync(request);
-   * for await (const response of iterable) {
-   *   // process response
-   * }
+   * @example <caption>include:samples/generated/v1/region_backend_services.update.js</caption>
+   * region_tag:compute_v1_generated_RegionBackendServices_Update_async
    */
-  listAsync(
-    request?: protos.google.cloud.compute.v1.IListRegionBackendServicesRequest,
+  update(
+    request?: protos.google.cloud.compute.v1.IUpdateRegionBackendServiceRequest,
     options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.compute.v1.IBackendService> {
+  ): Promise<
+    [
+      protos.google.cloud.compute.v1.IOperation,
+      (
+        | protos.google.cloud.compute.v1.IUpdateRegionBackendServiceRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
+  update(
+    request: protos.google.cloud.compute.v1.IUpdateRegionBackendServiceRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.compute.v1.IOperation,
+      | protos.google.cloud.compute.v1.IUpdateRegionBackendServiceRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  update(
+    request: protos.google.cloud.compute.v1.IUpdateRegionBackendServiceRequest,
+    callback: Callback<
+      protos.google.cloud.compute.v1.IOperation,
+      | protos.google.cloud.compute.v1.IUpdateRegionBackendServiceRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  update(
+    request?: protos.google.cloud.compute.v1.IUpdateRegionBackendServiceRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          | protos.google.cloud.compute.v1.IUpdateRegionBackendServiceRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.compute.v1.IOperation,
+      | protos.google.cloud.compute.v1.IUpdateRegionBackendServiceRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.compute.v1.IOperation,
+      (
+        | protos.google.cloud.compute.v1.IUpdateRegionBackendServiceRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
     request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
     options = options || {};
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
@@ -1257,14 +1018,8 @@ export class RegionBackendServicesClient {
       gax.routingHeader.fromParams({
         project: request.project || '',
       });
-    options = options || {};
-    const callSettings = new gax.CallSettings(options);
     this.initialize();
-    return this.descriptors.page.list.asyncIterate(
-      this.innerApiCalls['list'] as GaxCall,
-      request as unknown as RequestType,
-      callSettings
-    ) as AsyncIterable<protos.google.cloud.compute.v1.IBackendService>;
+    return this.innerApiCalls.update(request, options, callback);
   }
 
   /**

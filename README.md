@@ -6,7 +6,7 @@
 
 [![release level](https://img.shields.io/badge/release%20level-alpha-orange.svg?style=flat)](https://cloud.google.com/terms/launch-stages)
 [![npm version](https://img.shields.io/npm/v/@google-cloud/compute.svg)](https://www.npmjs.org/package/@google-cloud/compute)
-[![codecov](https://img.shields.io/codecov/c/github/googleapis/nodejs-compute/main.svg?style=flat)](https://codecov.io/gh/googleapis/nodejs-compute)
+[![codecov](https://img.shields.io/codecov/c/github/googleapis/nodejs-compute/master.svg?style=flat)](https://codecov.io/gh/googleapis/nodejs-compute)
 
 
 
@@ -15,7 +15,7 @@ Google Compute Engine Client Library for Node.js
 
 
 A comprehensive list of changes in each version may be found in
-[the CHANGELOG](https://github.com/googleapis/nodejs-compute/blob/main/CHANGELOG.md).
+[the CHANGELOG](https://github.com/googleapis/nodejs-compute/blob/master/CHANGELOG.md).
 
 * [Google Compute Engine Node.js Client API Reference][client-docs]
 * [Google Compute Engine Documentation][product-docs]
@@ -59,28 +59,28 @@ npm install @google-cloud/compute
 
 ## Samples
 
-Samples are in the [`samples/`](https://github.com/googleapis/nodejs-compute/tree/main/samples) directory. Each sample's `README.md` has instructions for running its sample.
+Samples are in the [`samples/`](https://github.com/googleapis/nodejs-compute/tree/master/samples) directory. Each sample's `README.md` has instructions for running its sample.
 
 | Sample                      | Source Code                       | Try it |
 | --------------------------- | --------------------------------- | ------ |
-| Create Instance | [source code](https://github.com/googleapis/nodejs-compute/blob/main/samples/createInstance.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-compute&page=editor&open_in_editor=samples/createInstance.js,samples/README.md) |
-| Create Instance From Template | [source code](https://github.com/googleapis/nodejs-compute/blob/main/samples/createInstanceFromTemplate.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-compute&page=editor&open_in_editor=samples/createInstanceFromTemplate.js,samples/README.md) |
-| Create Instance From Template With Overrides | [source code](https://github.com/googleapis/nodejs-compute/blob/main/samples/createInstanceFromTemplateWithOverrides.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-compute&page=editor&open_in_editor=samples/createInstanceFromTemplateWithOverrides.js,samples/README.md) |
-| Delete Instance | [source code](https://github.com/googleapis/nodejs-compute/blob/main/samples/deleteInstance.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-compute&page=editor&open_in_editor=samples/deleteInstance.js,samples/README.md) |
-| Disable Usage Export | [source code](https://github.com/googleapis/nodejs-compute/blob/main/samples/disableUsageExport.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-compute&page=editor&open_in_editor=samples/disableUsageExport.js,samples/README.md) |
-| Get Usage Export Bucket | [source code](https://github.com/googleapis/nodejs-compute/blob/main/samples/getUsageExportBucket.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-compute&page=editor&open_in_editor=samples/getUsageExportBucket.js,samples/README.md) |
-| List All Instances | [source code](https://github.com/googleapis/nodejs-compute/blob/main/samples/listAllInstances.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-compute&page=editor&open_in_editor=samples/listAllInstances.js,samples/README.md) |
-| List Images | [source code](https://github.com/googleapis/nodejs-compute/blob/main/samples/listImages.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-compute&page=editor&open_in_editor=samples/listImages.js,samples/README.md) |
-| List Images By Page | [source code](https://github.com/googleapis/nodejs-compute/blob/main/samples/listImagesByPage.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-compute&page=editor&open_in_editor=samples/listImagesByPage.js,samples/README.md) |
-| List Instances | [source code](https://github.com/googleapis/nodejs-compute/blob/main/samples/listInstances.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-compute&page=editor&open_in_editor=samples/listInstances.js,samples/README.md) |
-| Mailjet | [source code](https://github.com/googleapis/nodejs-compute/blob/main/samples/mailjet.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-compute&page=editor&open_in_editor=samples/mailjet.js,samples/README.md) |
-| Reset Instance | [source code](https://github.com/googleapis/nodejs-compute/blob/main/samples/resetInstance.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-compute&page=editor&open_in_editor=samples/resetInstance.js,samples/README.md) |
-| Sendgrid | [source code](https://github.com/googleapis/nodejs-compute/blob/main/samples/sendgrid.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-compute&page=editor&open_in_editor=samples/sendgrid.js,samples/README.md) |
-| Set Usage Export Bucket | [source code](https://github.com/googleapis/nodejs-compute/blob/main/samples/setUsageExportBucket.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-compute&page=editor&open_in_editor=samples/setUsageExportBucket.js,samples/README.md) |
-| Start Instance | [source code](https://github.com/googleapis/nodejs-compute/blob/main/samples/startInstance.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-compute&page=editor&open_in_editor=samples/startInstance.js,samples/README.md) |
-| Start Instance With Enc Key | [source code](https://github.com/googleapis/nodejs-compute/blob/main/samples/startInstanceWithEncKey.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-compute&page=editor&open_in_editor=samples/startInstanceWithEncKey.js,samples/README.md) |
-| Stop Instance | [source code](https://github.com/googleapis/nodejs-compute/blob/main/samples/stopInstance.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-compute&page=editor&open_in_editor=samples/stopInstance.js,samples/README.md) |
-| Wait For Operation | [source code](https://github.com/googleapis/nodejs-compute/blob/main/samples/waitForOperation.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-compute&page=editor&open_in_editor=samples/waitForOperation.js,samples/README.md) |
+| Create Instance | [source code](https://github.com/googleapis/nodejs-compute/blob/master/samples/createInstance.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-compute&page=editor&open_in_editor=samples/createInstance.js,samples/README.md) |
+| Create Instance From Template | [source code](https://github.com/googleapis/nodejs-compute/blob/master/samples/createInstanceFromTemplate.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-compute&page=editor&open_in_editor=samples/createInstanceFromTemplate.js,samples/README.md) |
+| Create Instance From Template With Overrides | [source code](https://github.com/googleapis/nodejs-compute/blob/master/samples/createInstanceFromTemplateWithOverrides.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-compute&page=editor&open_in_editor=samples/createInstanceFromTemplateWithOverrides.js,samples/README.md) |
+| Delete Instance | [source code](https://github.com/googleapis/nodejs-compute/blob/master/samples/deleteInstance.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-compute&page=editor&open_in_editor=samples/deleteInstance.js,samples/README.md) |
+| Disable Usage Export | [source code](https://github.com/googleapis/nodejs-compute/blob/master/samples/disableUsageExport.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-compute&page=editor&open_in_editor=samples/disableUsageExport.js,samples/README.md) |
+| Get Usage Export Bucket | [source code](https://github.com/googleapis/nodejs-compute/blob/master/samples/getUsageExportBucket.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-compute&page=editor&open_in_editor=samples/getUsageExportBucket.js,samples/README.md) |
+| List All Instances | [source code](https://github.com/googleapis/nodejs-compute/blob/master/samples/listAllInstances.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-compute&page=editor&open_in_editor=samples/listAllInstances.js,samples/README.md) |
+| List Images | [source code](https://github.com/googleapis/nodejs-compute/blob/master/samples/listImages.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-compute&page=editor&open_in_editor=samples/listImages.js,samples/README.md) |
+| List Images By Page | [source code](https://github.com/googleapis/nodejs-compute/blob/master/samples/listImagesByPage.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-compute&page=editor&open_in_editor=samples/listImagesByPage.js,samples/README.md) |
+| List Instances | [source code](https://github.com/googleapis/nodejs-compute/blob/master/samples/listInstances.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-compute&page=editor&open_in_editor=samples/listInstances.js,samples/README.md) |
+| Mailjet | [source code](https://github.com/googleapis/nodejs-compute/blob/master/samples/mailjet.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-compute&page=editor&open_in_editor=samples/mailjet.js,samples/README.md) |
+| Reset Instance | [source code](https://github.com/googleapis/nodejs-compute/blob/master/samples/resetInstance.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-compute&page=editor&open_in_editor=samples/resetInstance.js,samples/README.md) |
+| Sendgrid | [source code](https://github.com/googleapis/nodejs-compute/blob/master/samples/sendgrid.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-compute&page=editor&open_in_editor=samples/sendgrid.js,samples/README.md) |
+| Set Usage Export Bucket | [source code](https://github.com/googleapis/nodejs-compute/blob/master/samples/setUsageExportBucket.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-compute&page=editor&open_in_editor=samples/setUsageExportBucket.js,samples/README.md) |
+| Start Instance | [source code](https://github.com/googleapis/nodejs-compute/blob/master/samples/startInstance.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-compute&page=editor&open_in_editor=samples/startInstance.js,samples/README.md) |
+| Start Instance With Enc Key | [source code](https://github.com/googleapis/nodejs-compute/blob/master/samples/startInstanceWithEncKey.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-compute&page=editor&open_in_editor=samples/startInstanceWithEncKey.js,samples/README.md) |
+| Stop Instance | [source code](https://github.com/googleapis/nodejs-compute/blob/master/samples/stopInstance.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-compute&page=editor&open_in_editor=samples/stopInstance.js,samples/README.md) |
+| Wait For Operation | [source code](https://github.com/googleapis/nodejs-compute/blob/master/samples/waitForOperation.js) | [![Open in Cloud Shell][shell_img]](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/googleapis/nodejs-compute&page=editor&open_in_editor=samples/waitForOperation.js,samples/README.md) |
 
 
 
@@ -127,7 +127,7 @@ More Information: [Google Cloud Platform Launch Stages][launch_stages]
 
 ## Contributing
 
-Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/nodejs-compute/blob/main/CONTRIBUTING.md).
+Contributions welcome! See the [Contributing Guide](https://github.com/googleapis/nodejs-compute/blob/master/CONTRIBUTING.md).
 
 Please note that this `README.md`, the `samples/README.md`,
 and a variety of configuration files in this repository (including `.nycrc` and `tsconfig.json`)
@@ -139,7 +139,7 @@ to its templates in
 
 Apache Version 2.0
 
-See [LICENSE](https://github.com/googleapis/nodejs-compute/blob/main/LICENSE)
+See [LICENSE](https://github.com/googleapis/nodejs-compute/blob/master/LICENSE)
 
 [client-docs]: https://cloud.google.com/nodejs/docs/reference/compute/latest
 [product-docs]: https://cloud.google.com/compute

@@ -20,12 +20,10 @@ import * as protos from '../protos/protos';
 import * as assert from 'assert';
 import * as sinon from 'sinon';
 import {SinonStub} from 'sinon';
-import {describe, it, beforeEach, afterEach} from 'mocha';
+import {describe, it} from 'mocha';
 import * as publicdelegatedprefixesModule from '../src';
 
-import {PassThrough} from 'stream';
-
-import {GoogleAuth, protobuf} from 'google-gax';
+import {protobuf} from 'google-gax';
 
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
@@ -51,81 +49,7 @@ function stubSimpleCallWithCallback<ResponseType>(
     : sinon.stub().callsArgWith(2, null, response);
 }
 
-function stubPageStreamingCall<ResponseType>(
-  responses?: ResponseType[],
-  error?: Error
-) {
-  const pagingStub = sinon.stub();
-  if (responses) {
-    for (let i = 0; i < responses.length; ++i) {
-      pagingStub.onCall(i).callsArgWith(2, null, responses[i]);
-    }
-  }
-  const transformStub = error
-    ? sinon.stub().callsArgWith(2, error)
-    : pagingStub;
-  const mockStream = new PassThrough({
-    objectMode: true,
-    transform: transformStub,
-  });
-  // trigger as many responses as needed
-  if (responses) {
-    for (let i = 0; i < responses.length; ++i) {
-      setImmediate(() => {
-        mockStream.write({});
-      });
-    }
-    setImmediate(() => {
-      mockStream.end();
-    });
-  } else {
-    setImmediate(() => {
-      mockStream.write({});
-    });
-    setImmediate(() => {
-      mockStream.end();
-    });
-  }
-  return sinon.stub().returns(mockStream);
-}
-
-function stubAsyncIterationCall<ResponseType>(
-  responses?: ResponseType[],
-  error?: Error
-) {
-  let counter = 0;
-  const asyncIterable = {
-    [Symbol.asyncIterator]() {
-      return {
-        async next() {
-          if (error) {
-            return Promise.reject(error);
-          }
-          if (counter >= responses!.length) {
-            return Promise.resolve({done: true, value: undefined});
-          }
-          return Promise.resolve({done: false, value: responses![counter++]});
-        },
-      };
-    },
-  };
-  return sinon.stub().returns(asyncIterable);
-}
-
 describe('v1.PublicDelegatedPrefixesClient', () => {
-  let googleAuth: GoogleAuth;
-  beforeEach(() => {
-    googleAuth = {
-      getClient: sinon.stub().resolves({
-        getRequestHeaders: sinon
-          .stub()
-          .resolves({Authorization: 'Bearer SOME_TOKEN'}),
-      }),
-    } as unknown as GoogleAuth;
-  });
-  afterEach(() => {
-    sinon.restore();
-  });
   it('has servicePath', () => {
     const servicePath =
       publicdelegatedprefixesModule.v1.PublicDelegatedPrefixesClient
@@ -164,7 +88,7 @@ describe('v1.PublicDelegatedPrefixesClient', () => {
   it('has initialize method and supports deferred initialization', async () => {
     const client =
       new publicdelegatedprefixesModule.v1.PublicDelegatedPrefixesClient({
-        auth: googleAuth,
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
     assert.strictEqual(client.publicDelegatedPrefixesStub, undefined);
@@ -175,7 +99,7 @@ describe('v1.PublicDelegatedPrefixesClient', () => {
   it('has close method', () => {
     const client =
       new publicdelegatedprefixesModule.v1.PublicDelegatedPrefixesClient({
-        auth: googleAuth,
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
     client.close();
@@ -185,7 +109,7 @@ describe('v1.PublicDelegatedPrefixesClient', () => {
     const fakeProjectId = 'fake-project-id';
     const client =
       new publicdelegatedprefixesModule.v1.PublicDelegatedPrefixesClient({
-        auth: googleAuth,
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
     client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
@@ -198,7 +122,7 @@ describe('v1.PublicDelegatedPrefixesClient', () => {
     const fakeProjectId = 'fake-project-id';
     const client =
       new publicdelegatedprefixesModule.v1.PublicDelegatedPrefixesClient({
-        auth: googleAuth,
+        credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
     client.auth.getProjectId = sinon
@@ -217,11 +141,125 @@ describe('v1.PublicDelegatedPrefixesClient', () => {
     assert.strictEqual(result, fakeProjectId);
   });
 
+  describe('aggregatedList', () => {
+    it('invokes aggregatedList without error', async () => {
+      const client =
+        new publicdelegatedprefixesModule.v1.PublicDelegatedPrefixesClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.AggregatedListPublicDelegatedPrefixesRequest()
+      );
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.compute.v1.PublicDelegatedPrefixAggregatedList()
+      );
+      client.innerApiCalls.aggregatedList = stubSimpleCall(expectedResponse);
+      const [response] = await client.aggregatedList(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.aggregatedList as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes aggregatedList without error using callback', async () => {
+      const client =
+        new publicdelegatedprefixesModule.v1.PublicDelegatedPrefixesClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.AggregatedListPublicDelegatedPrefixesRequest()
+      );
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.compute.v1.PublicDelegatedPrefixAggregatedList()
+      );
+      client.innerApiCalls.aggregatedList =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.aggregatedList(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.compute.v1.IPublicDelegatedPrefixAggregatedList | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.aggregatedList as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes aggregatedList with error', async () => {
+      const client =
+        new publicdelegatedprefixesModule.v1.PublicDelegatedPrefixesClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.AggregatedListPublicDelegatedPrefixesRequest()
+      );
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.aggregatedList = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.aggregatedList(request), expectedError);
+      assert(
+        (client.innerApiCalls.aggregatedList as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+  });
+
   describe('delete', () => {
     it('invokes delete without error', async () => {
       const client =
         new publicdelegatedprefixesModule.v1.PublicDelegatedPrefixesClient({
-          auth: googleAuth,
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.initialize();
@@ -242,7 +280,7 @@ describe('v1.PublicDelegatedPrefixesClient', () => {
       );
       client.innerApiCalls.delete = stubSimpleCall(expectedResponse);
       const [response] = await client.delete(request);
-      assert.deepStrictEqual(response.latestResponse, expectedResponse);
+      assert.deepStrictEqual(response, expectedResponse);
       assert(
         (client.innerApiCalls.delete as SinonStub)
           .getCall(0)
@@ -253,7 +291,7 @@ describe('v1.PublicDelegatedPrefixesClient', () => {
     it('invokes delete without error using callback', async () => {
       const client =
         new publicdelegatedprefixesModule.v1.PublicDelegatedPrefixesClient({
-          auth: googleAuth,
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.initialize();
@@ -301,7 +339,7 @@ describe('v1.PublicDelegatedPrefixesClient', () => {
     it('invokes delete with error', async () => {
       const client =
         new publicdelegatedprefixesModule.v1.PublicDelegatedPrefixesClient({
-          auth: googleAuth,
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.initialize();
@@ -332,7 +370,7 @@ describe('v1.PublicDelegatedPrefixesClient', () => {
     it('invokes get without error', async () => {
       const client =
         new publicdelegatedprefixesModule.v1.PublicDelegatedPrefixesClient({
-          auth: googleAuth,
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.initialize();
@@ -364,7 +402,7 @@ describe('v1.PublicDelegatedPrefixesClient', () => {
     it('invokes get without error using callback', async () => {
       const client =
         new publicdelegatedprefixesModule.v1.PublicDelegatedPrefixesClient({
-          auth: googleAuth,
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.initialize();
@@ -411,7 +449,7 @@ describe('v1.PublicDelegatedPrefixesClient', () => {
     it('invokes get with error', async () => {
       const client =
         new publicdelegatedprefixesModule.v1.PublicDelegatedPrefixesClient({
-          auth: googleAuth,
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.initialize();
@@ -442,7 +480,7 @@ describe('v1.PublicDelegatedPrefixesClient', () => {
     it('invokes insert without error', async () => {
       const client =
         new publicdelegatedprefixesModule.v1.PublicDelegatedPrefixesClient({
-          auth: googleAuth,
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.initialize();
@@ -463,7 +501,7 @@ describe('v1.PublicDelegatedPrefixesClient', () => {
       );
       client.innerApiCalls.insert = stubSimpleCall(expectedResponse);
       const [response] = await client.insert(request);
-      assert.deepStrictEqual(response.latestResponse, expectedResponse);
+      assert.deepStrictEqual(response, expectedResponse);
       assert(
         (client.innerApiCalls.insert as SinonStub)
           .getCall(0)
@@ -474,7 +512,7 @@ describe('v1.PublicDelegatedPrefixesClient', () => {
     it('invokes insert without error using callback', async () => {
       const client =
         new publicdelegatedprefixesModule.v1.PublicDelegatedPrefixesClient({
-          auth: googleAuth,
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.initialize();
@@ -522,7 +560,7 @@ describe('v1.PublicDelegatedPrefixesClient', () => {
     it('invokes insert with error', async () => {
       const client =
         new publicdelegatedprefixesModule.v1.PublicDelegatedPrefixesClient({
-          auth: googleAuth,
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
           projectId: 'bogus',
         });
       client.initialize();
@@ -549,218 +587,6 @@ describe('v1.PublicDelegatedPrefixesClient', () => {
     });
   });
 
-  describe('patch', () => {
-    it('invokes patch without error', async () => {
-      const client =
-        new publicdelegatedprefixesModule.v1.PublicDelegatedPrefixesClient({
-          auth: googleAuth,
-          projectId: 'bogus',
-        });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.compute.v1.PatchPublicDelegatedPrefixeRequest()
-      );
-      request.project = '';
-      const expectedHeaderRequestParams = 'project=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.compute.v1.Operation()
-      );
-      client.innerApiCalls.patch = stubSimpleCall(expectedResponse);
-      const [response] = await client.patch(request);
-      assert.deepStrictEqual(response.latestResponse, expectedResponse);
-      assert(
-        (client.innerApiCalls.patch as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
-    });
-
-    it('invokes patch without error using callback', async () => {
-      const client =
-        new publicdelegatedprefixesModule.v1.PublicDelegatedPrefixesClient({
-          auth: googleAuth,
-          projectId: 'bogus',
-        });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.compute.v1.PatchPublicDelegatedPrefixeRequest()
-      );
-      request.project = '';
-      const expectedHeaderRequestParams = 'project=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.compute.v1.Operation()
-      );
-      client.innerApiCalls.patch = stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.patch(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.compute.v1.IOperation | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.patch as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
-    });
-
-    it('invokes patch with error', async () => {
-      const client =
-        new publicdelegatedprefixesModule.v1.PublicDelegatedPrefixesClient({
-          auth: googleAuth,
-          projectId: 'bogus',
-        });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.compute.v1.PatchPublicDelegatedPrefixeRequest()
-      );
-      request.project = '';
-      const expectedHeaderRequestParams = 'project=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedError = new Error('expected');
-      client.innerApiCalls.patch = stubSimpleCall(undefined, expectedError);
-      await assert.rejects(client.patch(request), expectedError);
-      assert(
-        (client.innerApiCalls.patch as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
-    });
-  });
-
-  describe('aggregatedList', () => {
-    it('uses async iteration with aggregatedList without error', async () => {
-      const client =
-        new publicdelegatedprefixesModule.v1.PublicDelegatedPrefixesClient({
-          auth: googleAuth,
-          projectId: 'bogus',
-        });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.compute.v1.AggregatedListPublicDelegatedPrefixesRequest()
-      );
-      request.project = '';
-      const expectedHeaderRequestParams = 'project=';
-      const expectedResponse = [
-        [
-          'tuple_key_1',
-          generateSampleMessage(
-            new protos.google.cloud.compute.v1.PublicDelegatedPrefixesScopedList()
-          ),
-        ],
-        [
-          'tuple_key_2',
-          generateSampleMessage(
-            new protos.google.cloud.compute.v1.PublicDelegatedPrefixesScopedList()
-          ),
-        ],
-        [
-          'tuple_key_3',
-          generateSampleMessage(
-            new protos.google.cloud.compute.v1.PublicDelegatedPrefixesScopedList()
-          ),
-        ],
-      ];
-      client.descriptors.page.aggregatedList.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: Array<
-        [
-          string,
-          protos.google.cloud.compute.v1.IPublicDelegatedPrefixesScopedList
-        ]
-      > = [];
-      const iterable = client.aggregatedListAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.aggregatedList.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert.strictEqual(
-        (
-          client.descriptors.page.aggregatedList.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
-      );
-    });
-
-    it('uses async iteration with aggregatedList with error', async () => {
-      const client =
-        new publicdelegatedprefixesModule.v1.PublicDelegatedPrefixesClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.compute.v1.AggregatedListPublicDelegatedPrefixesRequest()
-      );
-      request.project = '';
-      const expectedHeaderRequestParams = 'project=';
-      const expectedError = new Error('expected');
-      client.descriptors.page.aggregatedList.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.aggregatedListAsync(request);
-      await assert.rejects(async () => {
-        const responses: Array<
-          [
-            string,
-            protos.google.cloud.compute.v1.IPublicDelegatedPrefixesScopedList
-          ]
-        > = [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
-        }
-      });
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.aggregatedList.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert.strictEqual(
-        (
-          client.descriptors.page.aggregatedList.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
-      );
-    });
-  });
-
   describe('list', () => {
     it('invokes list without error', async () => {
       const client =
@@ -781,17 +607,9 @@ describe('v1.PublicDelegatedPrefixesClient', () => {
           },
         },
       };
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.compute.v1.PublicDelegatedPrefix()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.compute.v1.PublicDelegatedPrefix()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.compute.v1.PublicDelegatedPrefix()
-        ),
-      ];
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.compute.v1.PublicDelegatedPrefixList()
+      );
       client.innerApiCalls.list = stubSimpleCall(expectedResponse);
       const [response] = await client.list(request);
       assert.deepStrictEqual(response, expectedResponse);
@@ -821,26 +639,16 @@ describe('v1.PublicDelegatedPrefixesClient', () => {
           },
         },
       };
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.compute.v1.PublicDelegatedPrefix()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.compute.v1.PublicDelegatedPrefix()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.compute.v1.PublicDelegatedPrefix()
-        ),
-      ];
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.compute.v1.PublicDelegatedPrefixList()
+      );
       client.innerApiCalls.list = stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
         client.list(
           request,
           (
             err?: Error | null,
-            result?:
-              | protos.google.cloud.compute.v1.IPublicDelegatedPrefix[]
-              | null
+            result?: protos.google.cloud.compute.v1.IPublicDelegatedPrefixList | null
           ) => {
             if (err) {
               reject(err);
@@ -887,8 +695,10 @@ describe('v1.PublicDelegatedPrefixesClient', () => {
           .calledWith(request, expectedOptions, undefined)
       );
     });
+  });
 
-    it('invokes listStream without error', async () => {
+  describe('patch', () => {
+    it('invokes patch without error', async () => {
       const client =
         new publicdelegatedprefixesModule.v1.PublicDelegatedPrefixesClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
@@ -896,55 +706,78 @@ describe('v1.PublicDelegatedPrefixesClient', () => {
         });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.compute.v1.ListPublicDelegatedPrefixesRequest()
+        new protos.google.cloud.compute.v1.PatchPublicDelegatedPrefixeRequest()
       );
       request.project = '';
       const expectedHeaderRequestParams = 'project=';
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.compute.v1.PublicDelegatedPrefix()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.compute.v1.PublicDelegatedPrefix()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.compute.v1.PublicDelegatedPrefix()
-        ),
-      ];
-      client.descriptors.page.list.createStream =
-        stubPageStreamingCall(expectedResponse);
-      const stream = client.listStream(request);
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.compute.v1.Operation()
+      );
+      client.innerApiCalls.patch = stubSimpleCall(expectedResponse);
+      const [response] = await client.patch(request);
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.patch as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes patch without error using callback', async () => {
+      const client =
+        new publicdelegatedprefixesModule.v1.PublicDelegatedPrefixesClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.PatchPublicDelegatedPrefixeRequest()
+      );
+      request.project = '';
+      const expectedHeaderRequestParams = 'project=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.compute.v1.Operation()
+      );
+      client.innerApiCalls.patch = stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.compute.v1.PublicDelegatedPrefix[] =
-          [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.compute.v1.PublicDelegatedPrefix) => {
-            responses.push(response);
+        client.patch(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.compute.v1.IOperation | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
           }
         );
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
       });
-      const responses = await promise;
-      assert.deepStrictEqual(responses, expectedResponse);
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
       assert(
-        (client.descriptors.page.list.createStream as SinonStub)
+        (client.innerApiCalls.patch as SinonStub)
           .getCall(0)
-          .calledWith(client.innerApiCalls.list, request)
-      );
-      assert.strictEqual(
-        (client.descriptors.page.list.createStream as SinonStub).getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+          .calledWith(request, expectedOptions /*, callback defined above */)
       );
     });
 
-    it('invokes listStream with error', async () => {
+    it('invokes patch with error', async () => {
       const client =
         new publicdelegatedprefixesModule.v1.PublicDelegatedPrefixesClient({
           credentials: {client_email: 'bogus', private_key: 'bogus'},
@@ -952,123 +785,24 @@ describe('v1.PublicDelegatedPrefixesClient', () => {
         });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.compute.v1.ListPublicDelegatedPrefixesRequest()
+        new protos.google.cloud.compute.v1.PatchPublicDelegatedPrefixeRequest()
       );
       request.project = '';
       const expectedHeaderRequestParams = 'project=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
       const expectedError = new Error('expected');
-      client.descriptors.page.list.createStream = stubPageStreamingCall(
-        undefined,
-        expectedError
-      );
-      const stream = client.listStream(request);
-      const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.compute.v1.PublicDelegatedPrefix[] =
-          [];
-        stream.on(
-          'data',
-          (response: protos.google.cloud.compute.v1.PublicDelegatedPrefix) => {
-            responses.push(response);
-          }
-        );
-        stream.on('end', () => {
-          resolve(responses);
-        });
-        stream.on('error', (err: Error) => {
-          reject(err);
-        });
-      });
-      await assert.rejects(promise, expectedError);
+      client.innerApiCalls.patch = stubSimpleCall(undefined, expectedError);
+      await assert.rejects(client.patch(request), expectedError);
       assert(
-        (client.descriptors.page.list.createStream as SinonStub)
+        (client.innerApiCalls.patch as SinonStub)
           .getCall(0)
-          .calledWith(client.innerApiCalls.list, request)
-      );
-      assert.strictEqual(
-        (client.descriptors.page.list.createStream as SinonStub).getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
-      );
-    });
-
-    it('uses async iteration with list without error', async () => {
-      const client =
-        new publicdelegatedprefixesModule.v1.PublicDelegatedPrefixesClient({
-          auth: googleAuth,
-          projectId: 'bogus',
-        });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.compute.v1.ListPublicDelegatedPrefixesRequest()
-      );
-      request.project = '';
-      const expectedHeaderRequestParams = 'project=';
-      const expectedResponse = [
-        generateSampleMessage(
-          new protos.google.cloud.compute.v1.PublicDelegatedPrefix()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.compute.v1.PublicDelegatedPrefix()
-        ),
-        generateSampleMessage(
-          new protos.google.cloud.compute.v1.PublicDelegatedPrefix()
-        ),
-      ];
-      client.descriptors.page.list.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.compute.v1.IPublicDelegatedPrefix[] =
-        [];
-      const iterable = client.listAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (client.descriptors.page.list.asyncIterate as SinonStub).getCall(0)
-          .args[1],
-        request
-      );
-      assert.strictEqual(
-        (client.descriptors.page.list.asyncIterate as SinonStub).getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
-      );
-    });
-
-    it('uses async iteration with list with error', async () => {
-      const client =
-        new publicdelegatedprefixesModule.v1.PublicDelegatedPrefixesClient({
-          credentials: {client_email: 'bogus', private_key: 'bogus'},
-          projectId: 'bogus',
-        });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.compute.v1.ListPublicDelegatedPrefixesRequest()
-      );
-      request.project = '';
-      const expectedHeaderRequestParams = 'project=';
-      const expectedError = new Error('expected');
-      client.descriptors.page.list.asyncIterate = stubAsyncIterationCall(
-        undefined,
-        expectedError
-      );
-      const iterable = client.listAsync(request);
-      await assert.rejects(async () => {
-        const responses: protos.google.cloud.compute.v1.IPublicDelegatedPrefix[] =
-          [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
-        }
-      });
-      assert.deepStrictEqual(
-        (client.descriptors.page.list.asyncIterate as SinonStub).getCall(0)
-          .args[1],
-        request
-      );
-      assert.strictEqual(
-        (client.descriptors.page.list.asyncIterate as SinonStub).getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+          .calledWith(request, expectedOptions, undefined)
       );
     });
   });
