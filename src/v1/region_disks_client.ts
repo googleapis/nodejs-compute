@@ -18,18 +18,8 @@
 
 /* global window */
 import * as gax from 'google-gax';
-import {
-  Callback,
-  CallOptions,
-  Descriptors,
-  ClientOptions,
-  LROperation,
-  PaginationCallback,
-  GaxCall,
-} from 'google-gax';
+import {Callback, CallOptions, Descriptors, ClientOptions} from 'google-gax';
 
-import {Transform} from 'stream';
-import {RequestType} from 'google-gax/build/src/apitypes';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
 /**
@@ -109,12 +99,6 @@ export class RegionDisksClient {
     );
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    // Implicitely set 'rest' value for the apis use rest as transport (eg. googleapis-discovery apis).
-    if (!opts) {
-      opts = {fallback: 'rest'};
-    } else {
-      opts.fallback = opts.fallback ?? 'rest';
-    }
     const fallback =
       opts?.fallback ??
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
@@ -136,6 +120,9 @@ export class RegionDisksClient {
 
     // Save the auth object to the client, for use by other methods.
     this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
+
+    // Set useJWTAccessWithScope on the auth object.
+    this.auth.useJWTAccessWithScope = true;
 
     // Set defaultServicePath on the auth object.
     this.auth.defaultServicePath = staticMembers.servicePath;
@@ -162,17 +149,6 @@ export class RegionDisksClient {
     }
     // Load the applicable protos.
     this._protos = this._gaxGrpc.loadProtoJSON(jsonProtos);
-
-    // Some of the methods on this service return "paged" results,
-    // (e.g. 50 results at a time, with tokens to get subsequent
-    // pages). Denote the keys used for pagination and results.
-    this.descriptors.page = {
-      list: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'items'
-      ),
-    };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
@@ -252,7 +228,7 @@ export class RegionDisksClient {
         }
       );
 
-      const descriptor = this.descriptors.page[methodName] || undefined;
+      const descriptor = undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
@@ -321,13 +297,41 @@ export class RegionDisksClient {
   // -------------------
   // -- Service calls --
   // -------------------
+  /**
+   * Adds existing resource policies to a regional disk. You can only add one policy which will be applied to this disk for scheduling snapshot creation.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.disk
+   *   The disk name for this request.
+   * @param {string} request.project
+   *   Project ID for this request.
+   * @param {string} request.region
+   *   The name of the region for this request.
+   * @param {google.cloud.compute.v1.RegionDisksAddResourcePoliciesRequest} request.regionDisksAddResourcePoliciesRequestResource
+   *   The body resource for this request
+   * @param {string} request.requestId
+   *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Operation]{@link google.cloud.compute.v1.Operation}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/region_disks.add_resource_policies.js</caption>
+   * region_tag:compute_v1_generated_RegionDisks_AddResourcePolicies_async
+   */
   addResourcePolicies(
     request?: protos.google.cloud.compute.v1.IAddResourcePoliciesRegionDiskRequest,
     options?: CallOptions
   ): Promise<
     [
-      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
-      protos.google.cloud.compute.v1.IOperation | undefined,
+      protos.google.cloud.compute.v1.IOperation,
+      (
+        | protos.google.cloud.compute.v1.IAddResourcePoliciesRegionDiskRequest
+        | undefined
+      ),
       {} | undefined
     ]
   >;
@@ -352,42 +356,6 @@ export class RegionDisksClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Adds existing resource policies to a regional disk. You can only add one policy which will be applied to this disk for scheduling snapshot creation.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.disk
-   *   The disk name for this request.
-   * @param {string} request.project
-   *   Project ID for this request.
-   * @param {string} request.region
-   *   The name of the region for this request.
-   * @param {google.cloud.compute.v1.RegionDisksAddResourcePoliciesRequest} request.regionDisksAddResourcePoliciesRequestResource
-   *   The body resource for this request
-   * @param {string} request.requestId
-   *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
-   *
-   *   For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
-   *
-   *   The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
-   *   for more details and examples.
-   *   This method is considered to be in beta. This means while
-   *   stable it is still a work-in-progress and under active development,
-   *   and might get backwards-incompatible changes at any time.
-   *   `.promise()` is not supported yet.
-   * @example
-   * ```
-   * const [operation] = await client.addResourcePolicies(request);
-   * ```
-   */
   addResourcePolicies(
     request?: protos.google.cloud.compute.v1.IAddResourcePoliciesRegionDiskRequest,
     optionsOrCallback?:
@@ -408,8 +376,11 @@ export class RegionDisksClient {
     >
   ): Promise<
     [
-      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
-      protos.google.cloud.compute.v1.IOperation | undefined,
+      protos.google.cloud.compute.v1.IOperation,
+      (
+        | protos.google.cloud.compute.v1.IAddResourcePoliciesRegionDiskRequest
+        | undefined
+      ),
       {} | undefined
     ]
   > | void {
@@ -429,35 +400,43 @@ export class RegionDisksClient {
         project: request.project || '',
       });
     this.initialize();
-    return this.innerApiCalls
-      .addResourcePolicies(request, options, callback)
-      .then(
-        ([response, operation, rawResponse]: [
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
-        ]) => {
-          return [
-            {
-              latestResponse: response,
-              done: false,
-              name: response.id,
-              metadata: null,
-              result: {},
-            },
-            operation,
-            rawResponse,
-          ];
-        }
-      );
+    return this.innerApiCalls.addResourcePolicies(request, options, callback);
   }
+  /**
+   * Creates a snapshot of this regional disk.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.disk
+   *   Name of the regional persistent disk to snapshot.
+   * @param {string} request.project
+   *   Project ID for this request.
+   * @param {string} request.region
+   *   Name of the region for this request.
+   * @param {string} request.requestId
+   *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+   * @param {google.cloud.compute.v1.Snapshot} request.snapshotResource
+   *   The body resource for this request
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Operation]{@link google.cloud.compute.v1.Operation}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/region_disks.create_snapshot.js</caption>
+   * region_tag:compute_v1_generated_RegionDisks_CreateSnapshot_async
+   */
   createSnapshot(
     request?: protos.google.cloud.compute.v1.ICreateSnapshotRegionDiskRequest,
     options?: CallOptions
   ): Promise<
     [
-      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
-      protos.google.cloud.compute.v1.IOperation | undefined,
+      protos.google.cloud.compute.v1.IOperation,
+      (
+        | protos.google.cloud.compute.v1.ICreateSnapshotRegionDiskRequest
+        | undefined
+      ),
       {} | undefined
     ]
   >;
@@ -482,42 +461,6 @@ export class RegionDisksClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Creates a snapshot of this regional disk.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.disk
-   *   Name of the regional persistent disk to snapshot.
-   * @param {string} request.project
-   *   Project ID for this request.
-   * @param {string} request.region
-   *   Name of the region for this request.
-   * @param {string} request.requestId
-   *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
-   *
-   *   For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
-   *
-   *   The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
-   * @param {google.cloud.compute.v1.Snapshot} request.snapshotResource
-   *   The body resource for this request
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
-   *   for more details and examples.
-   *   This method is considered to be in beta. This means while
-   *   stable it is still a work-in-progress and under active development,
-   *   and might get backwards-incompatible changes at any time.
-   *   `.promise()` is not supported yet.
-   * @example
-   * ```
-   * const [operation] = await client.createSnapshot(request);
-   * ```
-   */
   createSnapshot(
     request?: protos.google.cloud.compute.v1.ICreateSnapshotRegionDiskRequest,
     optionsOrCallback?:
@@ -538,8 +481,11 @@ export class RegionDisksClient {
     >
   ): Promise<
     [
-      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
-      protos.google.cloud.compute.v1.IOperation | undefined,
+      protos.google.cloud.compute.v1.IOperation,
+      (
+        | protos.google.cloud.compute.v1.ICreateSnapshotRegionDiskRequest
+        | undefined
+      ),
       {} | undefined
     ]
   > | void {
@@ -559,35 +505,38 @@ export class RegionDisksClient {
         project: request.project || '',
       });
     this.initialize();
-    return this.innerApiCalls
-      .createSnapshot(request, options, callback)
-      .then(
-        ([response, operation, rawResponse]: [
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
-        ]) => {
-          return [
-            {
-              latestResponse: response,
-              done: false,
-              name: response.id,
-              metadata: null,
-              result: {},
-            },
-            operation,
-            rawResponse,
-          ];
-        }
-      );
+    return this.innerApiCalls.createSnapshot(request, options, callback);
   }
+  /**
+   * Deletes the specified regional persistent disk. Deleting a regional disk removes all the replicas of its data permanently and is irreversible. However, deleting a disk does not delete any snapshots previously made from the disk. You must separately delete snapshots.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.disk
+   *   Name of the regional persistent disk to delete.
+   * @param {string} request.project
+   *   Project ID for this request.
+   * @param {string} request.region
+   *   Name of the region for this request.
+   * @param {string} request.requestId
+   *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Operation]{@link google.cloud.compute.v1.Operation}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/region_disks.delete.js</caption>
+   * region_tag:compute_v1_generated_RegionDisks_Delete_async
+   */
   delete(
     request?: protos.google.cloud.compute.v1.IDeleteRegionDiskRequest,
     options?: CallOptions
   ): Promise<
     [
-      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
-      protos.google.cloud.compute.v1.IOperation | undefined,
+      protos.google.cloud.compute.v1.IOperation,
+      protos.google.cloud.compute.v1.IDeleteRegionDiskRequest | undefined,
       {} | undefined
     ]
   >;
@@ -612,40 +561,6 @@ export class RegionDisksClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Deletes the specified regional persistent disk. Deleting a regional disk removes all the replicas of its data permanently and is irreversible. However, deleting a disk does not delete any snapshots previously made from the disk. You must separately delete snapshots.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.disk
-   *   Name of the regional persistent disk to delete.
-   * @param {string} request.project
-   *   Project ID for this request.
-   * @param {string} request.region
-   *   Name of the region for this request.
-   * @param {string} request.requestId
-   *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
-   *
-   *   For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
-   *
-   *   The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
-   *   for more details and examples.
-   *   This method is considered to be in beta. This means while
-   *   stable it is still a work-in-progress and under active development,
-   *   and might get backwards-incompatible changes at any time.
-   *   `.promise()` is not supported yet.
-   * @example
-   * ```
-   * const [operation] = await client.delete(request);
-   * ```
-   */
   delete(
     request?: protos.google.cloud.compute.v1.IDeleteRegionDiskRequest,
     optionsOrCallback?:
@@ -666,8 +581,8 @@ export class RegionDisksClient {
     >
   ): Promise<
     [
-      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
-      protos.google.cloud.compute.v1.IOperation | undefined,
+      protos.google.cloud.compute.v1.IOperation,
+      protos.google.cloud.compute.v1.IDeleteRegionDiskRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -687,28 +602,29 @@ export class RegionDisksClient {
         project: request.project || '',
       });
     this.initialize();
-    return this.innerApiCalls
-      .delete(request, options, callback)
-      .then(
-        ([response, operation, rawResponse]: [
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
-        ]) => {
-          return [
-            {
-              latestResponse: response,
-              done: false,
-              name: response.id,
-              metadata: null,
-              result: {},
-            },
-            operation,
-            rawResponse,
-          ];
-        }
-      );
+    return this.innerApiCalls.delete(request, options, callback);
   }
+  /**
+   * Returns a specified regional persistent disk.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.disk
+   *   Name of the regional persistent disk to return.
+   * @param {string} request.project
+   *   Project ID for this request.
+   * @param {string} request.region
+   *   Name of the region for this request.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Disk]{@link google.cloud.compute.v1.Disk}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/region_disks.get.js</caption>
+   * region_tag:compute_v1_generated_RegionDisks_Get_async
+   */
   get(
     request?: protos.google.cloud.compute.v1.IGetRegionDiskRequest,
     options?: CallOptions
@@ -736,29 +652,6 @@ export class RegionDisksClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Returns a specified regional persistent disk.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.disk
-   *   Name of the regional persistent disk to return.
-   * @param {string} request.project
-   *   Project ID for this request.
-   * @param {string} request.region
-   *   Name of the region for this request.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Disk]{@link google.cloud.compute.v1.Disk}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * ```
-   * const [response] = await client.get(request);
-   * ```
-   */
   get(
     request?: protos.google.cloud.compute.v1.IGetRegionDiskRequest,
     optionsOrCallback?:
@@ -800,6 +693,29 @@ export class RegionDisksClient {
     this.initialize();
     return this.innerApiCalls.get(request, options, callback);
   }
+  /**
+   * Gets the access control policy for a resource. May be empty if no such policy or resource exists.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {number} request.optionsRequestedPolicyVersion
+   *   Requested IAM Policy version.
+   * @param {string} request.project
+   *   Project ID for this request.
+   * @param {string} request.region
+   *   The name of the region for this request.
+   * @param {string} request.resource
+   *   Name or id of the resource for this request.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Policy]{@link google.cloud.compute.v1.Policy}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/region_disks.get_iam_policy.js</caption>
+   * region_tag:compute_v1_generated_RegionDisks_GetIamPolicy_async
+   */
   getIamPolicy(
     request?: protos.google.cloud.compute.v1.IGetIamPolicyRegionDiskRequest,
     options?: CallOptions
@@ -831,31 +747,6 @@ export class RegionDisksClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Gets the access control policy for a resource. May be empty if no such policy or resource exists.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {number} request.optionsRequestedPolicyVersion
-   *   Requested IAM Policy version.
-   * @param {string} request.project
-   *   Project ID for this request.
-   * @param {string} request.region
-   *   The name of the region for this request.
-   * @param {string} request.resource
-   *   Name or id of the resource for this request.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Policy]{@link google.cloud.compute.v1.Policy}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * ```
-   * const [response] = await client.getIamPolicy(request);
-   * ```
-   */
   getIamPolicy(
     request?: protos.google.cloud.compute.v1.IGetIamPolicyRegionDiskRequest,
     optionsOrCallback?:
@@ -899,13 +790,38 @@ export class RegionDisksClient {
     this.initialize();
     return this.innerApiCalls.getIamPolicy(request, options, callback);
   }
+  /**
+   * Creates a persistent regional disk in the specified project using the data included in the request.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.compute.v1.Disk} request.diskResource
+   *   The body resource for this request
+   * @param {string} request.project
+   *   Project ID for this request.
+   * @param {string} request.region
+   *   Name of the region for this request.
+   * @param {string} request.requestId
+   *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+   * @param {string} request.sourceImage
+   *   Source image to restore onto a disk. This field is optional.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Operation]{@link google.cloud.compute.v1.Operation}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/region_disks.insert.js</caption>
+   * region_tag:compute_v1_generated_RegionDisks_Insert_async
+   */
   insert(
     request?: protos.google.cloud.compute.v1.IInsertRegionDiskRequest,
     options?: CallOptions
   ): Promise<
     [
-      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
-      protos.google.cloud.compute.v1.IOperation | undefined,
+      protos.google.cloud.compute.v1.IOperation,
+      protos.google.cloud.compute.v1.IInsertRegionDiskRequest | undefined,
       {} | undefined
     ]
   >;
@@ -930,42 +846,6 @@ export class RegionDisksClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Creates a persistent regional disk in the specified project using the data included in the request.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.compute.v1.Disk} request.diskResource
-   *   The body resource for this request
-   * @param {string} request.project
-   *   Project ID for this request.
-   * @param {string} request.region
-   *   Name of the region for this request.
-   * @param {string} request.requestId
-   *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
-   *
-   *   For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
-   *
-   *   The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
-   * @param {string} request.sourceImage
-   *   Source image to restore onto a disk. This field is optional.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
-   *   for more details and examples.
-   *   This method is considered to be in beta. This means while
-   *   stable it is still a work-in-progress and under active development,
-   *   and might get backwards-incompatible changes at any time.
-   *   `.promise()` is not supported yet.
-   * @example
-   * ```
-   * const [operation] = await client.insert(request);
-   * ```
-   */
   insert(
     request?: protos.google.cloud.compute.v1.IInsertRegionDiskRequest,
     optionsOrCallback?:
@@ -986,8 +866,8 @@ export class RegionDisksClient {
     >
   ): Promise<
     [
-      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
-      protos.google.cloud.compute.v1.IOperation | undefined,
+      protos.google.cloud.compute.v1.IOperation,
+      protos.google.cloud.compute.v1.IInsertRegionDiskRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -1007,35 +887,140 @@ export class RegionDisksClient {
         project: request.project || '',
       });
     this.initialize();
-    return this.innerApiCalls
-      .insert(request, options, callback)
-      .then(
-        ([response, operation, rawResponse]: [
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
-        ]) => {
-          return [
-            {
-              latestResponse: response,
-              done: false,
-              name: response.id,
-              metadata: null,
-              result: {},
-            },
-            operation,
-            rawResponse,
-          ];
-        }
-      );
+    return this.innerApiCalls.insert(request, options, callback);
   }
+  /**
+   * Retrieves the list of persistent disks contained within the specified region.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.filter
+   *   A filter expression that filters resources listed in the response. The expression must specify the field name, a comparison operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The comparison operator must be either `=`, `!=`, `>`, or `<`. For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`. You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels. To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ```
+   * @param {number} request.maxResults
+   *   The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)
+   * @param {string} request.orderBy
+   *   Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name. You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first. Currently, only sorting by `name` or `creationTimestamp desc` is supported.
+   * @param {string} request.pageToken
+   *   Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
+   * @param {string} request.project
+   *   Project ID for this request.
+   * @param {string} request.region
+   *   Name of the region for this request.
+   * @param {boolean} request.returnPartialSuccess
+   *   Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [DiskList]{@link google.cloud.compute.v1.DiskList}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/region_disks.list.js</caption>
+   * region_tag:compute_v1_generated_RegionDisks_List_async
+   */
+  list(
+    request?: protos.google.cloud.compute.v1.IListRegionDisksRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.compute.v1.IDiskList,
+      protos.google.cloud.compute.v1.IListRegionDisksRequest | undefined,
+      {} | undefined
+    ]
+  >;
+  list(
+    request: protos.google.cloud.compute.v1.IListRegionDisksRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.compute.v1.IDiskList,
+      protos.google.cloud.compute.v1.IListRegionDisksRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  list(
+    request: protos.google.cloud.compute.v1.IListRegionDisksRequest,
+    callback: Callback<
+      protos.google.cloud.compute.v1.IDiskList,
+      protos.google.cloud.compute.v1.IListRegionDisksRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  list(
+    request?: protos.google.cloud.compute.v1.IListRegionDisksRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.compute.v1.IDiskList,
+          | protos.google.cloud.compute.v1.IListRegionDisksRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.compute.v1.IDiskList,
+      protos.google.cloud.compute.v1.IListRegionDisksRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.compute.v1.IDiskList,
+      protos.google.cloud.compute.v1.IListRegionDisksRequest | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        project: request.project || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.list(request, options, callback);
+  }
+  /**
+   * Removes resource policies from a regional disk.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.disk
+   *   The disk name for this request.
+   * @param {string} request.project
+   *   Project ID for this request.
+   * @param {string} request.region
+   *   The name of the region for this request.
+   * @param {google.cloud.compute.v1.RegionDisksRemoveResourcePoliciesRequest} request.regionDisksRemoveResourcePoliciesRequestResource
+   *   The body resource for this request
+   * @param {string} request.requestId
+   *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Operation]{@link google.cloud.compute.v1.Operation}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/region_disks.remove_resource_policies.js</caption>
+   * region_tag:compute_v1_generated_RegionDisks_RemoveResourcePolicies_async
+   */
   removeResourcePolicies(
     request?: protos.google.cloud.compute.v1.IRemoveResourcePoliciesRegionDiskRequest,
     options?: CallOptions
   ): Promise<
     [
-      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
-      protos.google.cloud.compute.v1.IOperation | undefined,
+      protos.google.cloud.compute.v1.IOperation,
+      (
+        | protos.google.cloud.compute.v1.IRemoveResourcePoliciesRegionDiskRequest
+        | undefined
+      ),
       {} | undefined
     ]
   >;
@@ -1060,42 +1045,6 @@ export class RegionDisksClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Removes resource policies from a regional disk.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.disk
-   *   The disk name for this request.
-   * @param {string} request.project
-   *   Project ID for this request.
-   * @param {string} request.region
-   *   The name of the region for this request.
-   * @param {google.cloud.compute.v1.RegionDisksRemoveResourcePoliciesRequest} request.regionDisksRemoveResourcePoliciesRequestResource
-   *   The body resource for this request
-   * @param {string} request.requestId
-   *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
-   *
-   *   For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
-   *
-   *   The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
-   *   for more details and examples.
-   *   This method is considered to be in beta. This means while
-   *   stable it is still a work-in-progress and under active development,
-   *   and might get backwards-incompatible changes at any time.
-   *   `.promise()` is not supported yet.
-   * @example
-   * ```
-   * const [operation] = await client.removeResourcePolicies(request);
-   * ```
-   */
   removeResourcePolicies(
     request?: protos.google.cloud.compute.v1.IRemoveResourcePoliciesRegionDiskRequest,
     optionsOrCallback?:
@@ -1116,8 +1065,11 @@ export class RegionDisksClient {
     >
   ): Promise<
     [
-      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
-      protos.google.cloud.compute.v1.IOperation | undefined,
+      protos.google.cloud.compute.v1.IOperation,
+      (
+        | protos.google.cloud.compute.v1.IRemoveResourcePoliciesRegionDiskRequest
+        | undefined
+      ),
       {} | undefined
     ]
   > | void {
@@ -1137,35 +1089,44 @@ export class RegionDisksClient {
         project: request.project || '',
       });
     this.initialize();
-    return this.innerApiCalls
-      .removeResourcePolicies(request, options, callback)
-      .then(
-        ([response, operation, rawResponse]: [
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
-        ]) => {
-          return [
-            {
-              latestResponse: response,
-              done: false,
-              name: response.id,
-              metadata: null,
-              result: {},
-            },
-            operation,
-            rawResponse,
-          ];
-        }
-      );
+    return this.innerApiCalls.removeResourcePolicies(
+      request,
+      options,
+      callback
+    );
   }
+  /**
+   * Resizes the specified regional persistent disk.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.disk
+   *   Name of the regional persistent disk.
+   * @param {string} request.project
+   *   The project ID for this request.
+   * @param {string} request.region
+   *   Name of the region for this request.
+   * @param {google.cloud.compute.v1.RegionDisksResizeRequest} request.regionDisksResizeRequestResource
+   *   The body resource for this request
+   * @param {string} request.requestId
+   *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Operation]{@link google.cloud.compute.v1.Operation}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/region_disks.resize.js</caption>
+   * region_tag:compute_v1_generated_RegionDisks_Resize_async
+   */
   resize(
     request?: protos.google.cloud.compute.v1.IResizeRegionDiskRequest,
     options?: CallOptions
   ): Promise<
     [
-      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
-      protos.google.cloud.compute.v1.IOperation | undefined,
+      protos.google.cloud.compute.v1.IOperation,
+      protos.google.cloud.compute.v1.IResizeRegionDiskRequest | undefined,
       {} | undefined
     ]
   >;
@@ -1190,42 +1151,6 @@ export class RegionDisksClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Resizes the specified regional persistent disk.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.disk
-   *   Name of the regional persistent disk.
-   * @param {string} request.project
-   *   The project ID for this request.
-   * @param {string} request.region
-   *   Name of the region for this request.
-   * @param {google.cloud.compute.v1.RegionDisksResizeRequest} request.regionDisksResizeRequestResource
-   *   The body resource for this request
-   * @param {string} request.requestId
-   *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
-   *
-   *   For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
-   *
-   *   The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
-   *   for more details and examples.
-   *   This method is considered to be in beta. This means while
-   *   stable it is still a work-in-progress and under active development,
-   *   and might get backwards-incompatible changes at any time.
-   *   `.promise()` is not supported yet.
-   * @example
-   * ```
-   * const [operation] = await client.resize(request);
-   * ```
-   */
   resize(
     request?: protos.google.cloud.compute.v1.IResizeRegionDiskRequest,
     optionsOrCallback?:
@@ -1246,8 +1171,8 @@ export class RegionDisksClient {
     >
   ): Promise<
     [
-      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
-      protos.google.cloud.compute.v1.IOperation | undefined,
+      protos.google.cloud.compute.v1.IOperation,
+      protos.google.cloud.compute.v1.IResizeRegionDiskRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -1267,28 +1192,31 @@ export class RegionDisksClient {
         project: request.project || '',
       });
     this.initialize();
-    return this.innerApiCalls
-      .resize(request, options, callback)
-      .then(
-        ([response, operation, rawResponse]: [
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
-        ]) => {
-          return [
-            {
-              latestResponse: response,
-              done: false,
-              name: response.id,
-              metadata: null,
-              result: {},
-            },
-            operation,
-            rawResponse,
-          ];
-        }
-      );
+    return this.innerApiCalls.resize(request, options, callback);
   }
+  /**
+   * Sets the access control policy on the specified resource. Replaces any existing policy.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.project
+   *   Project ID for this request.
+   * @param {string} request.region
+   *   The name of the region for this request.
+   * @param {google.cloud.compute.v1.RegionSetPolicyRequest} request.regionSetPolicyRequestResource
+   *   The body resource for this request
+   * @param {string} request.resource
+   *   Name or id of the resource for this request.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Policy]{@link google.cloud.compute.v1.Policy}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/region_disks.set_iam_policy.js</caption>
+   * region_tag:compute_v1_generated_RegionDisks_SetIamPolicy_async
+   */
   setIamPolicy(
     request?: protos.google.cloud.compute.v1.ISetIamPolicyRegionDiskRequest,
     options?: CallOptions
@@ -1320,31 +1248,6 @@ export class RegionDisksClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Sets the access control policy on the specified resource. Replaces any existing policy.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.project
-   *   Project ID for this request.
-   * @param {string} request.region
-   *   The name of the region for this request.
-   * @param {google.cloud.compute.v1.RegionSetPolicyRequest} request.regionSetPolicyRequestResource
-   *   The body resource for this request
-   * @param {string} request.resource
-   *   Name or id of the resource for this request.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Policy]{@link google.cloud.compute.v1.Policy}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * ```
-   * const [response] = await client.setIamPolicy(request);
-   * ```
-   */
   setIamPolicy(
     request?: protos.google.cloud.compute.v1.ISetIamPolicyRegionDiskRequest,
     optionsOrCallback?:
@@ -1388,13 +1291,38 @@ export class RegionDisksClient {
     this.initialize();
     return this.innerApiCalls.setIamPolicy(request, options, callback);
   }
+  /**
+   * Sets the labels on the target regional disk.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.project
+   *   Project ID for this request.
+   * @param {string} request.region
+   *   The region for this request.
+   * @param {google.cloud.compute.v1.RegionSetLabelsRequest} request.regionSetLabelsRequestResource
+   *   The body resource for this request
+   * @param {string} request.requestId
+   *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+   * @param {string} request.resource
+   *   Name or id of the resource for this request.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Operation]{@link google.cloud.compute.v1.Operation}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/region_disks.set_labels.js</caption>
+   * region_tag:compute_v1_generated_RegionDisks_SetLabels_async
+   */
   setLabels(
     request?: protos.google.cloud.compute.v1.ISetLabelsRegionDiskRequest,
     options?: CallOptions
   ): Promise<
     [
-      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
-      protos.google.cloud.compute.v1.IOperation | undefined,
+      protos.google.cloud.compute.v1.IOperation,
+      protos.google.cloud.compute.v1.ISetLabelsRegionDiskRequest | undefined,
       {} | undefined
     ]
   >;
@@ -1419,42 +1347,6 @@ export class RegionDisksClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Sets the labels on the target regional disk.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.project
-   *   Project ID for this request.
-   * @param {string} request.region
-   *   The region for this request.
-   * @param {google.cloud.compute.v1.RegionSetLabelsRequest} request.regionSetLabelsRequestResource
-   *   The body resource for this request
-   * @param {string} request.requestId
-   *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
-   *
-   *   For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
-   *
-   *   The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
-   * @param {string} request.resource
-   *   Name or id of the resource for this request.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
-   *   for more details and examples.
-   *   This method is considered to be in beta. This means while
-   *   stable it is still a work-in-progress and under active development,
-   *   and might get backwards-incompatible changes at any time.
-   *   `.promise()` is not supported yet.
-   * @example
-   * ```
-   * const [operation] = await client.setLabels(request);
-   * ```
-   */
   setLabels(
     request?: protos.google.cloud.compute.v1.ISetLabelsRegionDiskRequest,
     optionsOrCallback?:
@@ -1475,8 +1367,8 @@ export class RegionDisksClient {
     >
   ): Promise<
     [
-      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
-      protos.google.cloud.compute.v1.IOperation | undefined,
+      protos.google.cloud.compute.v1.IOperation,
+      protos.google.cloud.compute.v1.ISetLabelsRegionDiskRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -1496,28 +1388,31 @@ export class RegionDisksClient {
         project: request.project || '',
       });
     this.initialize();
-    return this.innerApiCalls
-      .setLabels(request, options, callback)
-      .then(
-        ([response, operation, rawResponse]: [
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
-        ]) => {
-          return [
-            {
-              latestResponse: response,
-              done: false,
-              name: response.id,
-              metadata: null,
-              result: {},
-            },
-            operation,
-            rawResponse,
-          ];
-        }
-      );
+    return this.innerApiCalls.setLabels(request, options, callback);
   }
+  /**
+   * Returns permissions that a caller has on the specified resource.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.project
+   *   Project ID for this request.
+   * @param {string} request.region
+   *   The name of the region for this request.
+   * @param {string} request.resource
+   *   Name or id of the resource for this request.
+   * @param {google.cloud.compute.v1.TestPermissionsRequest} request.testPermissionsRequestResource
+   *   The body resource for this request
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [TestPermissionsResponse]{@link google.cloud.compute.v1.TestPermissionsResponse}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/region_disks.test_iam_permissions.js</caption>
+   * region_tag:compute_v1_generated_RegionDisks_TestIamPermissions_async
+   */
   testIamPermissions(
     request?: protos.google.cloud.compute.v1.ITestIamPermissionsRegionDiskRequest,
     options?: CallOptions
@@ -1552,31 +1447,6 @@ export class RegionDisksClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Returns permissions that a caller has on the specified resource.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.project
-   *   Project ID for this request.
-   * @param {string} request.region
-   *   The name of the region for this request.
-   * @param {string} request.resource
-   *   Name or id of the resource for this request.
-   * @param {google.cloud.compute.v1.TestPermissionsRequest} request.testPermissionsRequestResource
-   *   The body resource for this request
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [TestPermissionsResponse]{@link google.cloud.compute.v1.TestPermissionsResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * ```
-   * const [response] = await client.testIamPermissions(request);
-   * ```
-   */
   testIamPermissions(
     request?: protos.google.cloud.compute.v1.ITestIamPermissionsRegionDiskRequest,
     optionsOrCallback?:
@@ -1622,246 +1492,6 @@ export class RegionDisksClient {
       });
     this.initialize();
     return this.innerApiCalls.testIamPermissions(request, options, callback);
-  }
-
-  list(
-    request?: protos.google.cloud.compute.v1.IListRegionDisksRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.compute.v1.IDisk[],
-      protos.google.cloud.compute.v1.IListRegionDisksRequest | null,
-      protos.google.cloud.compute.v1.IDiskList
-    ]
-  >;
-  list(
-    request: protos.google.cloud.compute.v1.IListRegionDisksRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.compute.v1.IListRegionDisksRequest,
-      protos.google.cloud.compute.v1.IDiskList | null | undefined,
-      protos.google.cloud.compute.v1.IDisk
-    >
-  ): void;
-  list(
-    request: protos.google.cloud.compute.v1.IListRegionDisksRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.compute.v1.IListRegionDisksRequest,
-      protos.google.cloud.compute.v1.IDiskList | null | undefined,
-      protos.google.cloud.compute.v1.IDisk
-    >
-  ): void;
-  /**
-   * Retrieves the list of persistent disks contained within the specified region.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.filter
-   *   A filter expression that filters resources listed in the response. The expression must specify the field name, a comparison operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The comparison operator must be either `=`, `!=`, `>`, or `<`.
-   *
-   *   For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`.
-   *
-   *   You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels.
-   *
-   *   To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ```
-   * @param {number} request.maxResults
-   *   The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)
-   * @param {string} request.orderBy
-   *   Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name.
-   *
-   *   You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first.
-   *
-   *   Currently, only sorting by `name` or `creationTimestamp desc` is supported.
-   * @param {string} request.pageToken
-   *   Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
-   * @param {string} request.project
-   *   Project ID for this request.
-   * @param {string} request.region
-   *   Name of the region for this request.
-   * @param {boolean} request.returnPartialSuccess
-   *   Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of [Disk]{@link google.cloud.compute.v1.Disk}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
-   *   for more details and examples.
-   */
-  list(
-    request?: protos.google.cloud.compute.v1.IListRegionDisksRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
-          protos.google.cloud.compute.v1.IListRegionDisksRequest,
-          protos.google.cloud.compute.v1.IDiskList | null | undefined,
-          protos.google.cloud.compute.v1.IDisk
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.compute.v1.IListRegionDisksRequest,
-      protos.google.cloud.compute.v1.IDiskList | null | undefined,
-      protos.google.cloud.compute.v1.IDisk
-    >
-  ): Promise<
-    [
-      protos.google.cloud.compute.v1.IDisk[],
-      protos.google.cloud.compute.v1.IListRegionDisksRequest | null,
-      protos.google.cloud.compute.v1.IDiskList
-    ]
-  > | void {
-    request = request || {};
-    let options: CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        project: request.project || '',
-      });
-    this.initialize();
-    return this.innerApiCalls.list(request, options, callback);
-  }
-
-  /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.filter
-   *   A filter expression that filters resources listed in the response. The expression must specify the field name, a comparison operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The comparison operator must be either `=`, `!=`, `>`, or `<`.
-   *
-   *   For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`.
-   *
-   *   You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels.
-   *
-   *   To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ```
-   * @param {number} request.maxResults
-   *   The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)
-   * @param {string} request.orderBy
-   *   Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name.
-   *
-   *   You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first.
-   *
-   *   Currently, only sorting by `name` or `creationTimestamp desc` is supported.
-   * @param {string} request.pageToken
-   *   Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
-   * @param {string} request.project
-   *   Project ID for this request.
-   * @param {string} request.region
-   *   Name of the region for this request.
-   * @param {boolean} request.returnPartialSuccess
-   *   Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing [Disk]{@link google.cloud.compute.v1.Disk} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
-   *   for more details and examples.
-   */
-  listStream(
-    request?: protos.google.cloud.compute.v1.IListRegionDisksRequest,
-    options?: CallOptions
-  ): Transform {
-    request = request || {};
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        project: request.project || '',
-      });
-    const callSettings = new gax.CallSettings(options);
-    this.initialize();
-    return this.descriptors.page.list.createStream(
-      this.innerApiCalls.list as gax.GaxCall,
-      request,
-      callSettings
-    );
-  }
-
-  /**
-   * Equivalent to `list`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.filter
-   *   A filter expression that filters resources listed in the response. The expression must specify the field name, a comparison operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The comparison operator must be either `=`, `!=`, `>`, or `<`.
-   *
-   *   For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`.
-   *
-   *   You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels.
-   *
-   *   To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ```
-   * @param {number} request.maxResults
-   *   The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)
-   * @param {string} request.orderBy
-   *   Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name.
-   *
-   *   You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first.
-   *
-   *   Currently, only sorting by `name` or `creationTimestamp desc` is supported.
-   * @param {string} request.pageToken
-   *   Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
-   * @param {string} request.project
-   *   Project ID for this request.
-   * @param {string} request.region
-   *   Name of the region for this request.
-   * @param {boolean} request.returnPartialSuccess
-   *   Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   [Disk]{@link google.cloud.compute.v1.Disk}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
-   *   for more details and examples.
-   * @example
-   * ```
-   * const iterable = client.listAsync(request);
-   * for await (const response of iterable) {
-   *   // process response
-   * }
-   * ```
-   */
-  listAsync(
-    request?: protos.google.cloud.compute.v1.IListRegionDisksRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.compute.v1.IDisk> {
-    request = request || {};
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        project: request.project || '',
-      });
-    options = options || {};
-    const callSettings = new gax.CallSettings(options);
-    this.initialize();
-    return this.descriptors.page.list.asyncIterate(
-      this.innerApiCalls['list'] as GaxCall,
-      request as unknown as RequestType,
-      callSettings
-    ) as AsyncIterable<protos.google.cloud.compute.v1.IDisk>;
   }
 
   /**

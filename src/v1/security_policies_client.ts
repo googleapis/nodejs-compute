@@ -18,18 +18,8 @@
 
 /* global window */
 import * as gax from 'google-gax';
-import {
-  Callback,
-  CallOptions,
-  Descriptors,
-  ClientOptions,
-  LROperation,
-  PaginationCallback,
-  GaxCall,
-} from 'google-gax';
+import {Callback, CallOptions, Descriptors, ClientOptions} from 'google-gax';
 
-import {Transform} from 'stream';
-import {RequestType} from 'google-gax/build/src/apitypes';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
 /**
@@ -109,12 +99,6 @@ export class SecurityPoliciesClient {
     );
     const port = opts?.port || staticMembers.port;
     const clientConfig = opts?.clientConfig ?? {};
-    // Implicitely set 'rest' value for the apis use rest as transport (eg. googleapis-discovery apis).
-    if (!opts) {
-      opts = {fallback: 'rest'};
-    } else {
-      opts.fallback = opts.fallback ?? 'rest';
-    }
     const fallback =
       opts?.fallback ??
       (typeof window !== 'undefined' && typeof window?.fetch === 'function');
@@ -136,6 +120,9 @@ export class SecurityPoliciesClient {
 
     // Save the auth object to the client, for use by other methods.
     this.auth = this._gaxGrpc.auth as gax.GoogleAuth;
+
+    // Set useJWTAccessWithScope on the auth object.
+    this.auth.useJWTAccessWithScope = true;
 
     // Set defaultServicePath on the auth object.
     this.auth.defaultServicePath = staticMembers.servicePath;
@@ -162,17 +149,6 @@ export class SecurityPoliciesClient {
     }
     // Load the applicable protos.
     this._protos = this._gaxGrpc.loadProtoJSON(jsonProtos);
-
-    // Some of the methods on this service return "paged" results,
-    // (e.g. 50 results at a time, with tokens to get subsequent
-    // pages). Denote the keys used for pagination and results.
-    this.descriptors.page = {
-      list: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'items'
-      ),
-    };
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
@@ -250,7 +226,7 @@ export class SecurityPoliciesClient {
         }
       );
 
-      const descriptor = this.descriptors.page[methodName] || undefined;
+      const descriptor = undefined;
       const apiCall = this._gaxModule.createApiCall(
         callPromise,
         this._defaults[methodName],
@@ -319,13 +295,34 @@ export class SecurityPoliciesClient {
   // -------------------
   // -- Service calls --
   // -------------------
+  /**
+   * Inserts a rule into a security policy.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.project
+   *   Project ID for this request.
+   * @param {string} request.securityPolicy
+   *   Name of the security policy to update.
+   * @param {google.cloud.compute.v1.SecurityPolicyRule} request.securityPolicyRuleResource
+   *   The body resource for this request
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Operation]{@link google.cloud.compute.v1.Operation}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/security_policies.add_rule.js</caption>
+   * region_tag:compute_v1_generated_SecurityPolicies_AddRule_async
+   */
   addRule(
     request?: protos.google.cloud.compute.v1.IAddRuleSecurityPolicyRequest,
     options?: CallOptions
   ): Promise<
     [
-      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
-      protos.google.cloud.compute.v1.IOperation | undefined,
+      protos.google.cloud.compute.v1.IOperation,
+      protos.google.cloud.compute.v1.IAddRuleSecurityPolicyRequest | undefined,
       {} | undefined
     ]
   >;
@@ -350,34 +347,6 @@ export class SecurityPoliciesClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Inserts a rule into a security policy.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.project
-   *   Project ID for this request.
-   * @param {string} request.securityPolicy
-   *   Name of the security policy to update.
-   * @param {google.cloud.compute.v1.SecurityPolicyRule} request.securityPolicyRuleResource
-   *   The body resource for this request
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
-   *   for more details and examples.
-   *   This method is considered to be in beta. This means while
-   *   stable it is still a work-in-progress and under active development,
-   *   and might get backwards-incompatible changes at any time.
-   *   `.promise()` is not supported yet.
-   * @example
-   * ```
-   * const [operation] = await client.addRule(request);
-   * ```
-   */
   addRule(
     request?: protos.google.cloud.compute.v1.IAddRuleSecurityPolicyRequest,
     optionsOrCallback?:
@@ -398,8 +367,8 @@ export class SecurityPoliciesClient {
     >
   ): Promise<
     [
-      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
-      protos.google.cloud.compute.v1.IOperation | undefined,
+      protos.google.cloud.compute.v1.IOperation,
+      protos.google.cloud.compute.v1.IAddRuleSecurityPolicyRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -419,35 +388,36 @@ export class SecurityPoliciesClient {
         project: request.project || '',
       });
     this.initialize();
-    return this.innerApiCalls
-      .addRule(request, options, callback)
-      .then(
-        ([response, operation, rawResponse]: [
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
-        ]) => {
-          return [
-            {
-              latestResponse: response,
-              done: false,
-              name: response.id,
-              metadata: null,
-              result: {},
-            },
-            operation,
-            rawResponse,
-          ];
-        }
-      );
+    return this.innerApiCalls.addRule(request, options, callback);
   }
+  /**
+   * Deletes the specified policy.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.project
+   *   Project ID for this request.
+   * @param {string} request.requestId
+   *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+   * @param {string} request.securityPolicy
+   *   Name of the security policy to delete.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Operation]{@link google.cloud.compute.v1.Operation}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/security_policies.delete.js</caption>
+   * region_tag:compute_v1_generated_SecurityPolicies_Delete_async
+   */
   delete(
     request?: protos.google.cloud.compute.v1.IDeleteSecurityPolicyRequest,
     options?: CallOptions
   ): Promise<
     [
-      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
-      protos.google.cloud.compute.v1.IOperation | undefined,
+      protos.google.cloud.compute.v1.IOperation,
+      protos.google.cloud.compute.v1.IDeleteSecurityPolicyRequest | undefined,
       {} | undefined
     ]
   >;
@@ -472,38 +442,6 @@ export class SecurityPoliciesClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Deletes the specified policy.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.project
-   *   Project ID for this request.
-   * @param {string} request.requestId
-   *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
-   *
-   *   For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
-   *
-   *   The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
-   * @param {string} request.securityPolicy
-   *   Name of the security policy to delete.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
-   *   for more details and examples.
-   *   This method is considered to be in beta. This means while
-   *   stable it is still a work-in-progress and under active development,
-   *   and might get backwards-incompatible changes at any time.
-   *   `.promise()` is not supported yet.
-   * @example
-   * ```
-   * const [operation] = await client.delete(request);
-   * ```
-   */
   delete(
     request?: protos.google.cloud.compute.v1.IDeleteSecurityPolicyRequest,
     optionsOrCallback?:
@@ -524,8 +462,8 @@ export class SecurityPoliciesClient {
     >
   ): Promise<
     [
-      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
-      protos.google.cloud.compute.v1.IOperation | undefined,
+      protos.google.cloud.compute.v1.IOperation,
+      protos.google.cloud.compute.v1.IDeleteSecurityPolicyRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -545,28 +483,27 @@ export class SecurityPoliciesClient {
         project: request.project || '',
       });
     this.initialize();
-    return this.innerApiCalls
-      .delete(request, options, callback)
-      .then(
-        ([response, operation, rawResponse]: [
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
-        ]) => {
-          return [
-            {
-              latestResponse: response,
-              done: false,
-              name: response.id,
-              metadata: null,
-              result: {},
-            },
-            operation,
-            rawResponse,
-          ];
-        }
-      );
+    return this.innerApiCalls.delete(request, options, callback);
   }
+  /**
+   * List all of the ordered rules present in a single specified policy.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.project
+   *   Project ID for this request.
+   * @param {string} request.securityPolicy
+   *   Name of the security policy to get.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [SecurityPolicy]{@link google.cloud.compute.v1.SecurityPolicy}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/security_policies.get.js</caption>
+   * region_tag:compute_v1_generated_SecurityPolicies_Get_async
+   */
   get(
     request?: protos.google.cloud.compute.v1.IGetSecurityPolicyRequest,
     options?: CallOptions
@@ -598,27 +535,6 @@ export class SecurityPoliciesClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * List all of the ordered rules present in a single specified policy.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.project
-   *   Project ID for this request.
-   * @param {string} request.securityPolicy
-   *   Name of the security policy to get.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [SecurityPolicy]{@link google.cloud.compute.v1.SecurityPolicy}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * ```
-   * const [response] = await client.get(request);
-   * ```
-   */
   get(
     request?: protos.google.cloud.compute.v1.IGetSecurityPolicyRequest,
     optionsOrCallback?:
@@ -662,6 +578,27 @@ export class SecurityPoliciesClient {
     this.initialize();
     return this.innerApiCalls.get(request, options, callback);
   }
+  /**
+   * Gets a rule at the specified priority.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {number} request.priority
+   *   The priority of the rule to get from the security policy.
+   * @param {string} request.project
+   *   Project ID for this request.
+   * @param {string} request.securityPolicy
+   *   Name of the security policy to which the queried rule belongs.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [SecurityPolicyRule]{@link google.cloud.compute.v1.SecurityPolicyRule}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/security_policies.get_rule.js</caption>
+   * region_tag:compute_v1_generated_SecurityPolicies_GetRule_async
+   */
   getRule(
     request?: protos.google.cloud.compute.v1.IGetRuleSecurityPolicyRequest,
     options?: CallOptions
@@ -693,29 +630,6 @@ export class SecurityPoliciesClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Gets a rule at the specified priority.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {number} request.priority
-   *   The priority of the rule to get from the security policy.
-   * @param {string} request.project
-   *   Project ID for this request.
-   * @param {string} request.securityPolicy
-   *   Name of the security policy to which the queried rule belongs.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [SecurityPolicyRule]{@link google.cloud.compute.v1.SecurityPolicyRule}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * ```
-   * const [response] = await client.getRule(request);
-   * ```
-   */
   getRule(
     request?: protos.google.cloud.compute.v1.IGetRuleSecurityPolicyRequest,
     optionsOrCallback?:
@@ -759,13 +673,34 @@ export class SecurityPoliciesClient {
     this.initialize();
     return this.innerApiCalls.getRule(request, options, callback);
   }
+  /**
+   * Creates a new policy in the specified project using the data included in the request.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.project
+   *   Project ID for this request.
+   * @param {string} request.requestId
+   *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+   * @param {google.cloud.compute.v1.SecurityPolicy} request.securityPolicyResource
+   *   The body resource for this request
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Operation]{@link google.cloud.compute.v1.Operation}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/security_policies.insert.js</caption>
+   * region_tag:compute_v1_generated_SecurityPolicies_Insert_async
+   */
   insert(
     request?: protos.google.cloud.compute.v1.IInsertSecurityPolicyRequest,
     options?: CallOptions
   ): Promise<
     [
-      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
-      protos.google.cloud.compute.v1.IOperation | undefined,
+      protos.google.cloud.compute.v1.IOperation,
+      protos.google.cloud.compute.v1.IInsertSecurityPolicyRequest | undefined,
       {} | undefined
     ]
   >;
@@ -790,38 +725,6 @@ export class SecurityPoliciesClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Creates a new policy in the specified project using the data included in the request.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.project
-   *   Project ID for this request.
-   * @param {string} request.requestId
-   *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
-   *
-   *   For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
-   *
-   *   The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
-   * @param {google.cloud.compute.v1.SecurityPolicy} request.securityPolicyResource
-   *   The body resource for this request
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
-   *   for more details and examples.
-   *   This method is considered to be in beta. This means while
-   *   stable it is still a work-in-progress and under active development,
-   *   and might get backwards-incompatible changes at any time.
-   *   `.promise()` is not supported yet.
-   * @example
-   * ```
-   * const [operation] = await client.insert(request);
-   * ```
-   */
   insert(
     request?: protos.google.cloud.compute.v1.IInsertSecurityPolicyRequest,
     optionsOrCallback?:
@@ -842,8 +745,8 @@ export class SecurityPoliciesClient {
     >
   ): Promise<
     [
-      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
-      protos.google.cloud.compute.v1.IOperation | undefined,
+      protos.google.cloud.compute.v1.IOperation,
+      protos.google.cloud.compute.v1.IInsertSecurityPolicyRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -863,28 +766,136 @@ export class SecurityPoliciesClient {
         project: request.project || '',
       });
     this.initialize();
-    return this.innerApiCalls
-      .insert(request, options, callback)
-      .then(
-        ([response, operation, rawResponse]: [
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
-        ]) => {
-          return [
-            {
-              latestResponse: response,
-              done: false,
-              name: response.id,
-              metadata: null,
-              result: {},
-            },
-            operation,
-            rawResponse,
-          ];
-        }
-      );
+    return this.innerApiCalls.insert(request, options, callback);
   }
+  /**
+   * List all the policies that have been configured for the specified project.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.filter
+   *   A filter expression that filters resources listed in the response. The expression must specify the field name, a comparison operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The comparison operator must be either `=`, `!=`, `>`, or `<`. For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`. You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels. To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ```
+   * @param {number} request.maxResults
+   *   The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)
+   * @param {string} request.orderBy
+   *   Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name. You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first. Currently, only sorting by `name` or `creationTimestamp desc` is supported.
+   * @param {string} request.pageToken
+   *   Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
+   * @param {string} request.project
+   *   Project ID for this request.
+   * @param {boolean} request.returnPartialSuccess
+   *   Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [SecurityPolicyList]{@link google.cloud.compute.v1.SecurityPolicyList}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/security_policies.list.js</caption>
+   * region_tag:compute_v1_generated_SecurityPolicies_List_async
+   */
+  list(
+    request?: protos.google.cloud.compute.v1.IListSecurityPoliciesRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.compute.v1.ISecurityPolicyList,
+      protos.google.cloud.compute.v1.IListSecurityPoliciesRequest | undefined,
+      {} | undefined
+    ]
+  >;
+  list(
+    request: protos.google.cloud.compute.v1.IListSecurityPoliciesRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.compute.v1.ISecurityPolicyList,
+      | protos.google.cloud.compute.v1.IListSecurityPoliciesRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  list(
+    request: protos.google.cloud.compute.v1.IListSecurityPoliciesRequest,
+    callback: Callback<
+      protos.google.cloud.compute.v1.ISecurityPolicyList,
+      | protos.google.cloud.compute.v1.IListSecurityPoliciesRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  list(
+    request?: protos.google.cloud.compute.v1.IListSecurityPoliciesRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.compute.v1.ISecurityPolicyList,
+          | protos.google.cloud.compute.v1.IListSecurityPoliciesRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.compute.v1.ISecurityPolicyList,
+      | protos.google.cloud.compute.v1.IListSecurityPoliciesRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.compute.v1.ISecurityPolicyList,
+      protos.google.cloud.compute.v1.IListSecurityPoliciesRequest | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        project: request.project || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.list(request, options, callback);
+  }
+  /**
+   * Gets the current list of preconfigured Web Application Firewall (WAF) expressions.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.filter
+   *   A filter expression that filters resources listed in the response. The expression must specify the field name, a comparison operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The comparison operator must be either `=`, `!=`, `>`, or `<`. For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`. You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels. To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ```
+   * @param {number} request.maxResults
+   *   The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)
+   * @param {string} request.orderBy
+   *   Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name. You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first. Currently, only sorting by `name` or `creationTimestamp desc` is supported.
+   * @param {string} request.pageToken
+   *   Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
+   * @param {string} request.project
+   *   Project ID for this request.
+   * @param {boolean} request.returnPartialSuccess
+   *   Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [SecurityPoliciesListPreconfiguredExpressionSetsResponse]{@link google.cloud.compute.v1.SecurityPoliciesListPreconfiguredExpressionSetsResponse}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/security_policies.list_preconfigured_expression_sets.js</caption>
+   * region_tag:compute_v1_generated_SecurityPolicies_ListPreconfiguredExpressionSets_async
+   */
   listPreconfiguredExpressionSets(
     request?: protos.google.cloud.compute.v1.IListPreconfiguredExpressionSetsSecurityPoliciesRequest,
     options?: CallOptions
@@ -919,45 +930,6 @@ export class SecurityPoliciesClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Gets the current list of preconfigured Web Application Firewall (WAF) expressions.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.filter
-   *   A filter expression that filters resources listed in the response. The expression must specify the field name, a comparison operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The comparison operator must be either `=`, `!=`, `>`, or `<`.
-   *
-   *   For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`.
-   *
-   *   You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels.
-   *
-   *   To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ```
-   * @param {number} request.maxResults
-   *   The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)
-   * @param {string} request.orderBy
-   *   Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name.
-   *
-   *   You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first.
-   *
-   *   Currently, only sorting by `name` or `creationTimestamp desc` is supported.
-   * @param {string} request.pageToken
-   *   Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
-   * @param {string} request.project
-   *   Project ID for this request.
-   * @param {boolean} request.returnPartialSuccess
-   *   Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [SecurityPoliciesListPreconfiguredExpressionSetsResponse]{@link google.cloud.compute.v1.SecurityPoliciesListPreconfiguredExpressionSetsResponse}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example
-   * ```
-   * const [response] = await client.listPreconfiguredExpressionSets(request);
-   * ```
-   */
   listPreconfiguredExpressionSets(
     request?: protos.google.cloud.compute.v1.IListPreconfiguredExpressionSetsSecurityPoliciesRequest,
     optionsOrCallback?:
@@ -1008,13 +980,36 @@ export class SecurityPoliciesClient {
       callback
     );
   }
+  /**
+   * Patches the specified policy with the data included in the request. This cannot be used to be update the rules in the policy. Please use the per rule methods like addRule, patchRule, and removeRule instead.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.project
+   *   Project ID for this request.
+   * @param {string} request.requestId
+   *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+   * @param {string} request.securityPolicy
+   *   Name of the security policy to update.
+   * @param {google.cloud.compute.v1.SecurityPolicy} request.securityPolicyResource
+   *   The body resource for this request
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Operation]{@link google.cloud.compute.v1.Operation}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/security_policies.patch.js</caption>
+   * region_tag:compute_v1_generated_SecurityPolicies_Patch_async
+   */
   patch(
     request?: protos.google.cloud.compute.v1.IPatchSecurityPolicyRequest,
     options?: CallOptions
   ): Promise<
     [
-      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
-      protos.google.cloud.compute.v1.IOperation | undefined,
+      protos.google.cloud.compute.v1.IOperation,
+      protos.google.cloud.compute.v1.IPatchSecurityPolicyRequest | undefined,
       {} | undefined
     ]
   >;
@@ -1039,40 +1034,6 @@ export class SecurityPoliciesClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Patches the specified policy with the data included in the request. This cannot be used to be update the rules in the policy. Please use the per rule methods like addRule, patchRule, and removeRule instead.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.project
-   *   Project ID for this request.
-   * @param {string} request.requestId
-   *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed.
-   *
-   *   For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments.
-   *
-   *   The request ID must be a valid UUID with the exception that zero UUID is not supported (00000000-0000-0000-0000-000000000000).
-   * @param {string} request.securityPolicy
-   *   Name of the security policy to update.
-   * @param {google.cloud.compute.v1.SecurityPolicy} request.securityPolicyResource
-   *   The body resource for this request
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
-   *   for more details and examples.
-   *   This method is considered to be in beta. This means while
-   *   stable it is still a work-in-progress and under active development,
-   *   and might get backwards-incompatible changes at any time.
-   *   `.promise()` is not supported yet.
-   * @example
-   * ```
-   * const [operation] = await client.patch(request);
-   * ```
-   */
   patch(
     request?: protos.google.cloud.compute.v1.IPatchSecurityPolicyRequest,
     optionsOrCallback?:
@@ -1093,8 +1054,8 @@ export class SecurityPoliciesClient {
     >
   ): Promise<
     [
-      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
-      protos.google.cloud.compute.v1.IOperation | undefined,
+      protos.google.cloud.compute.v1.IOperation,
+      protos.google.cloud.compute.v1.IPatchSecurityPolicyRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -1114,35 +1075,41 @@ export class SecurityPoliciesClient {
         project: request.project || '',
       });
     this.initialize();
-    return this.innerApiCalls
-      .patch(request, options, callback)
-      .then(
-        ([response, operation, rawResponse]: [
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
-        ]) => {
-          return [
-            {
-              latestResponse: response,
-              done: false,
-              name: response.id,
-              metadata: null,
-              result: {},
-            },
-            operation,
-            rawResponse,
-          ];
-        }
-      );
+    return this.innerApiCalls.patch(request, options, callback);
   }
+  /**
+   * Patches a rule at the specified priority.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {number} request.priority
+   *   The priority of the rule to patch.
+   * @param {string} request.project
+   *   Project ID for this request.
+   * @param {string} request.securityPolicy
+   *   Name of the security policy to update.
+   * @param {google.cloud.compute.v1.SecurityPolicyRule} request.securityPolicyRuleResource
+   *   The body resource for this request
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Operation]{@link google.cloud.compute.v1.Operation}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/security_policies.patch_rule.js</caption>
+   * region_tag:compute_v1_generated_SecurityPolicies_PatchRule_async
+   */
   patchRule(
     request?: protos.google.cloud.compute.v1.IPatchRuleSecurityPolicyRequest,
     options?: CallOptions
   ): Promise<
     [
-      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
-      protos.google.cloud.compute.v1.IOperation | undefined,
+      protos.google.cloud.compute.v1.IOperation,
+      (
+        | protos.google.cloud.compute.v1.IPatchRuleSecurityPolicyRequest
+        | undefined
+      ),
       {} | undefined
     ]
   >;
@@ -1167,36 +1134,6 @@ export class SecurityPoliciesClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Patches a rule at the specified priority.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {number} request.priority
-   *   The priority of the rule to patch.
-   * @param {string} request.project
-   *   Project ID for this request.
-   * @param {string} request.securityPolicy
-   *   Name of the security policy to update.
-   * @param {google.cloud.compute.v1.SecurityPolicyRule} request.securityPolicyRuleResource
-   *   The body resource for this request
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
-   *   for more details and examples.
-   *   This method is considered to be in beta. This means while
-   *   stable it is still a work-in-progress and under active development,
-   *   and might get backwards-incompatible changes at any time.
-   *   `.promise()` is not supported yet.
-   * @example
-   * ```
-   * const [operation] = await client.patchRule(request);
-   * ```
-   */
   patchRule(
     request?: protos.google.cloud.compute.v1.IPatchRuleSecurityPolicyRequest,
     optionsOrCallback?:
@@ -1217,8 +1154,11 @@ export class SecurityPoliciesClient {
     >
   ): Promise<
     [
-      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
-      protos.google.cloud.compute.v1.IOperation | undefined,
+      protos.google.cloud.compute.v1.IOperation,
+      (
+        | protos.google.cloud.compute.v1.IPatchRuleSecurityPolicyRequest
+        | undefined
+      ),
       {} | undefined
     ]
   > | void {
@@ -1238,35 +1178,39 @@ export class SecurityPoliciesClient {
         project: request.project || '',
       });
     this.initialize();
-    return this.innerApiCalls
-      .patchRule(request, options, callback)
-      .then(
-        ([response, operation, rawResponse]: [
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
-        ]) => {
-          return [
-            {
-              latestResponse: response,
-              done: false,
-              name: response.id,
-              metadata: null,
-              result: {},
-            },
-            operation,
-            rawResponse,
-          ];
-        }
-      );
+    return this.innerApiCalls.patchRule(request, options, callback);
   }
+  /**
+   * Deletes a rule at the specified priority.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {number} request.priority
+   *   The priority of the rule to remove from the security policy.
+   * @param {string} request.project
+   *   Project ID for this request.
+   * @param {string} request.securityPolicy
+   *   Name of the security policy to update.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Operation]{@link google.cloud.compute.v1.Operation}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/security_policies.remove_rule.js</caption>
+   * region_tag:compute_v1_generated_SecurityPolicies_RemoveRule_async
+   */
   removeRule(
     request?: protos.google.cloud.compute.v1.IRemoveRuleSecurityPolicyRequest,
     options?: CallOptions
   ): Promise<
     [
-      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
-      protos.google.cloud.compute.v1.IOperation | undefined,
+      protos.google.cloud.compute.v1.IOperation,
+      (
+        | protos.google.cloud.compute.v1.IRemoveRuleSecurityPolicyRequest
+        | undefined
+      ),
       {} | undefined
     ]
   >;
@@ -1291,34 +1235,6 @@ export class SecurityPoliciesClient {
       {} | null | undefined
     >
   ): void;
-  /**
-   * Deletes a rule at the specified priority.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {number} request.priority
-   *   The priority of the rule to remove from the security policy.
-   * @param {string} request.project
-   *   Project ID for this request.
-   * @param {string} request.securityPolicy
-   *   Name of the security policy to update.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
-   *   for more details and examples.
-   *   This method is considered to be in beta. This means while
-   *   stable it is still a work-in-progress and under active development,
-   *   and might get backwards-incompatible changes at any time.
-   *   `.promise()` is not supported yet.
-   * @example
-   * ```
-   * const [operation] = await client.removeRule(request);
-   * ```
-   */
   removeRule(
     request?: protos.google.cloud.compute.v1.IRemoveRuleSecurityPolicyRequest,
     optionsOrCallback?:
@@ -1339,8 +1255,11 @@ export class SecurityPoliciesClient {
     >
   ): Promise<
     [
-      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
-      protos.google.cloud.compute.v1.IOperation | undefined,
+      protos.google.cloud.compute.v1.IOperation,
+      (
+        | protos.google.cloud.compute.v1.IRemoveRuleSecurityPolicyRequest
+        | undefined
+      ),
       {} | undefined
     ]
   > | void {
@@ -1360,261 +1279,7 @@ export class SecurityPoliciesClient {
         project: request.project || '',
       });
     this.initialize();
-    return this.innerApiCalls
-      .removeRule(request, options, callback)
-      .then(
-        ([response, operation, rawResponse]: [
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
-        ]) => {
-          return [
-            {
-              latestResponse: response,
-              done: false,
-              name: response.id,
-              metadata: null,
-              result: {},
-            },
-            operation,
-            rawResponse,
-          ];
-        }
-      );
-  }
-
-  list(
-    request?: protos.google.cloud.compute.v1.IListSecurityPoliciesRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.compute.v1.ISecurityPolicy[],
-      protos.google.cloud.compute.v1.IListSecurityPoliciesRequest | null,
-      protos.google.cloud.compute.v1.ISecurityPolicyList
-    ]
-  >;
-  list(
-    request: protos.google.cloud.compute.v1.IListSecurityPoliciesRequest,
-    options: CallOptions,
-    callback: PaginationCallback<
-      protos.google.cloud.compute.v1.IListSecurityPoliciesRequest,
-      protos.google.cloud.compute.v1.ISecurityPolicyList | null | undefined,
-      protos.google.cloud.compute.v1.ISecurityPolicy
-    >
-  ): void;
-  list(
-    request: protos.google.cloud.compute.v1.IListSecurityPoliciesRequest,
-    callback: PaginationCallback<
-      protos.google.cloud.compute.v1.IListSecurityPoliciesRequest,
-      protos.google.cloud.compute.v1.ISecurityPolicyList | null | undefined,
-      protos.google.cloud.compute.v1.ISecurityPolicy
-    >
-  ): void;
-  /**
-   * List all the policies that have been configured for the specified project.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.filter
-   *   A filter expression that filters resources listed in the response. The expression must specify the field name, a comparison operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The comparison operator must be either `=`, `!=`, `>`, or `<`.
-   *
-   *   For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`.
-   *
-   *   You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels.
-   *
-   *   To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ```
-   * @param {number} request.maxResults
-   *   The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)
-   * @param {string} request.orderBy
-   *   Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name.
-   *
-   *   You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first.
-   *
-   *   Currently, only sorting by `name` or `creationTimestamp desc` is supported.
-   * @param {string} request.pageToken
-   *   Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
-   * @param {string} request.project
-   *   Project ID for this request.
-   * @param {boolean} request.returnPartialSuccess
-   *   Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of [SecurityPolicy]{@link google.cloud.compute.v1.SecurityPolicy}.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed and will merge results from all the pages into this array.
-   *   Note that it can affect your quota.
-   *   We recommend using `listAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
-   *   for more details and examples.
-   */
-  list(
-    request?: protos.google.cloud.compute.v1.IListSecurityPoliciesRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | PaginationCallback<
-          protos.google.cloud.compute.v1.IListSecurityPoliciesRequest,
-          protos.google.cloud.compute.v1.ISecurityPolicyList | null | undefined,
-          protos.google.cloud.compute.v1.ISecurityPolicy
-        >,
-    callback?: PaginationCallback<
-      protos.google.cloud.compute.v1.IListSecurityPoliciesRequest,
-      protos.google.cloud.compute.v1.ISecurityPolicyList | null | undefined,
-      protos.google.cloud.compute.v1.ISecurityPolicy
-    >
-  ): Promise<
-    [
-      protos.google.cloud.compute.v1.ISecurityPolicy[],
-      protos.google.cloud.compute.v1.IListSecurityPoliciesRequest | null,
-      protos.google.cloud.compute.v1.ISecurityPolicyList
-    ]
-  > | void {
-    request = request || {};
-    let options: CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        project: request.project || '',
-      });
-    this.initialize();
-    return this.innerApiCalls.list(request, options, callback);
-  }
-
-  /**
-   * Equivalent to `method.name.toCamelCase()`, but returns a NodeJS Stream object.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.filter
-   *   A filter expression that filters resources listed in the response. The expression must specify the field name, a comparison operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The comparison operator must be either `=`, `!=`, `>`, or `<`.
-   *
-   *   For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`.
-   *
-   *   You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels.
-   *
-   *   To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ```
-   * @param {number} request.maxResults
-   *   The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)
-   * @param {string} request.orderBy
-   *   Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name.
-   *
-   *   You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first.
-   *
-   *   Currently, only sorting by `name` or `creationTimestamp desc` is supported.
-   * @param {string} request.pageToken
-   *   Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
-   * @param {string} request.project
-   *   Project ID for this request.
-   * @param {boolean} request.returnPartialSuccess
-   *   Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Stream}
-   *   An object stream which emits an object representing [SecurityPolicy]{@link google.cloud.compute.v1.SecurityPolicy} on 'data' event.
-   *   The client library will perform auto-pagination by default: it will call the API as many
-   *   times as needed. Note that it can affect your quota.
-   *   We recommend using `listAsync()`
-   *   method described below for async iteration which you can stop as needed.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
-   *   for more details and examples.
-   */
-  listStream(
-    request?: protos.google.cloud.compute.v1.IListSecurityPoliciesRequest,
-    options?: CallOptions
-  ): Transform {
-    request = request || {};
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        project: request.project || '',
-      });
-    const callSettings = new gax.CallSettings(options);
-    this.initialize();
-    return this.descriptors.page.list.createStream(
-      this.innerApiCalls.list as gax.GaxCall,
-      request,
-      callSettings
-    );
-  }
-
-  /**
-   * Equivalent to `list`, but returns an iterable object.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.filter
-   *   A filter expression that filters resources listed in the response. The expression must specify the field name, a comparison operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The comparison operator must be either `=`, `!=`, `>`, or `<`.
-   *
-   *   For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`.
-   *
-   *   You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels.
-   *
-   *   To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ```
-   * @param {number} request.maxResults
-   *   The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)
-   * @param {string} request.orderBy
-   *   Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name.
-   *
-   *   You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first.
-   *
-   *   Currently, only sorting by `name` or `creationTimestamp desc` is supported.
-   * @param {string} request.pageToken
-   *   Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
-   * @param {string} request.project
-   *   Project ID for this request.
-   * @param {boolean} request.returnPartialSuccess
-   *   Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   [SecurityPolicy]{@link google.cloud.compute.v1.SecurityPolicy}. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
-   *   for more details and examples.
-   * @example
-   * ```
-   * const iterable = client.listAsync(request);
-   * for await (const response of iterable) {
-   *   // process response
-   * }
-   * ```
-   */
-  listAsync(
-    request?: protos.google.cloud.compute.v1.IListSecurityPoliciesRequest,
-    options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.compute.v1.ISecurityPolicy> {
-    request = request || {};
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
-        project: request.project || '',
-      });
-    options = options || {};
-    const callSettings = new gax.CallSettings(options);
-    this.initialize();
-    return this.descriptors.page.list.asyncIterate(
-      this.innerApiCalls['list'] as GaxCall,
-      request as unknown as RequestType,
-      callSettings
-    ) as AsyncIterable<protos.google.cloud.compute.v1.ISecurityPolicy>;
+    return this.innerApiCalls.removeRule(request, options, callback);
   }
 
   /**
