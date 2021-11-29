@@ -115,4 +115,9 @@ function main(
   // [END compute_instances_create_custom_hostname]
 }
 
+process.on('unhandledRejection', (err) => {
+  console.error(err.message);
+  process.exitCode = 1;
+});
+
 main(...process.argv.slice(2));
