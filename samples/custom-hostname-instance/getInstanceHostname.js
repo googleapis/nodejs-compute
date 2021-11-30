@@ -46,7 +46,7 @@ function main(projectId, zone, instanceName) {
   // [END compute_instances_get_hostname]
 }
 
-process.on('unhandledRejection', (err) => {
+process.on('unhandledRejection', err => {
   console.error(err.message);
   process.exitCode = 1;
 });
