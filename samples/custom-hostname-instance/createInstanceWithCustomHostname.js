@@ -15,19 +15,19 @@
 /**
  * Creates an instance with custom hostname.
  *
- * @param {string} projectId - ID or number of the project you want to use.
- * @param {string} zone - Name of the zone you want to check, for example: us-west3-b
- * @param {string} instanceName - Name of the new machine.
- * @param {string} hostname - Custom hostname of the new machine.
+ * @param {string} projectId - ID of the project in which you want to create the VM instance.
+ * @param {string} zone - Name of the zone where you want to create the VM in, for example: us-west3-b.
+ * @param {string} instanceName - Name of the new VM instance.
+ * @param {string} hostname - Custom hostname of the new VM instance.
  *    Custom hostnames must conform to RFC 1035 requirements for valid hostnames.
- * @param {string} machineType - Machine type you want to create in following format:
+ * @param {string} machineType - Machine type for the VM instance specified in the following format:
  *    "zones/{zone}/machineTypes/{type_name}". For example:
  *    "zones/europe-west3-c/machineTypes/f1-micro"
- *    You can find the list of available machine types using:
- *    https://cloud.google.com/sdk/gcloud/reference/compute/machine-types/list
- * @param {string} sourceImage - Path the the disk image you want to use for your boot
- *    disk. This can be one of the public images
- *    (e.g. "projects/debian-cloud/global/images/family/debian-10")
+ *    You can find the list of available machine types by using this gcloud command:
+ *    $ gcloud compute machine-types list
+ * @param {string} sourceImage - Path of the disk image you want to use for your boot
+ *    disk. This image can be one of the public images
+ *    (for example, "projects/...)
  *    or a private image you have access to.
  *    You can check the list of available public images using:
  *    $ gcloud compute images list

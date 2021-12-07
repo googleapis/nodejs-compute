@@ -13,11 +13,11 @@
 // limitations under the License.
 
 /**
- * Prints a hostname of the GCP VM instance.
+ * Prints the hostname of the Google Cloud VM instance.
  *
- * @param {string} projectId - ID or number of the project you want to list images from
- * @param {string} zone - name of the zone your instance belongs to, for example: us-west3-b
- * @param {string} instanceName - Name of the new machine.
+ * @param {string} projectId - ID of the project in which you want to get the VM instance hostname.
+ * @param {string} zone - Name of the zone your instance belongs to, for example: us-west3-b.
+ * @param {string} instanceName - Name of the new VM instance.
  */
 function main(projectId, zone, instanceName) {
   // [START compute_instances_get_hostname]
