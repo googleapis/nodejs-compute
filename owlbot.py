@@ -13,10 +13,7 @@
 # limitations under the License.
 
 import synthtool.languages.node as node
-from synthtool import shell
 
 node.owlbot_main(templates_excludes=[
   '.mocharc.js'
 ])
-
-shell.run(('rm', '-rf', 'samples/generated'), hide_output = False)
