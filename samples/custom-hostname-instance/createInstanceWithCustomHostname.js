@@ -13,19 +13,21 @@
 // limitations under the License.
 
 /**
- * Sends an instance creation request to GCP and waits for it to complete.
+ * Creates an instance with custom hostname.
  *
- * @param {string} projectId - ID or number of the project you want to use.
- * @param {string} zone - Name of the zone you want to check, for example: us-west3-b
- * @param {string} instanceName - Name of the new machine.
- * @param {string} machineType - Machine type you want to create in following format:
+ * @param {string} projectId - ID of the project in which you want to create the VM instance.
+ * @param {string} zone - Name of the zone where you want to create the VM in, for example: us-west3-b.
+ * @param {string} instanceName - Name of the new VM instance.
+ * @param {string} hostname - Custom hostname of the new VM instance.
+ *    Custom hostnames must conform to RFC 1035 requirements for valid hostnames.
+ * @param {string} machineType - Machine type for the VM instance specified in the following format:
  *    "zones/{zone}/machineTypes/{type_name}". For example:
  *    "zones/europe-west3-c/machineTypes/f1-micro"
- *    You can find the list of available machine types using:
- *    https://cloud.google.com/sdk/gcloud/reference/compute/machine-types/list
- * @param {string} sourceImage - Path the the disk image you want to use for your boot
- *    disk. This can be one of the public images
- *    (e.g. "projects/debian-cloud/global/images/family/debian-10")
+ *    You can find the list of available machine types by using this gcloud command:
+ *    $ gcloud compute machine-types list
+ * @param {string} sourceImage - Path of the disk image you want to use for your boot
+ *    disk. This image can be one of the public images
+ *    (for example, "projects/...)
  *    or a private image you have access to.
  *    You can check the list of available public images using:
  *    $ gcloud compute images list
@@ -36,17 +38,19 @@ function main(
   projectId,
   zone,
   instanceName,
+  hostname,
   machineType = 'n1-standard-1',
   sourceImage = 'projects/debian-cloud/global/images/family/debian-10',
   networkName = 'global/networks/default'
 ) {
-  // [START compute_instances_create]
+  // [START compute_instances_create_custom_hostname]
   /**
    * TODO(developer): Uncomment and replace these variables before running the sample.
    */
   // const projectId = 'YOUR_PROJECT_ID';
   // const zone = 'europe-central2-b'
   // const instanceName = 'YOUR_INSTANCE_NAME'
+  // const hostname = 'host.example.com'
   // const machineType = 'n1-standard-1';
   // const sourceImage = 'projects/debian-cloud/global/images/family/debian-10';
   // const networkName = 'global/networks/default';
@@ -54,14 +58,20 @@ function main(
   const compute = require('@google-cloud/compute');
 
   // Create a new instance with the values provided above in the specified project and zone.
-  async function createInstance() {
+  async function createInstanceWithCustomHostname() {
     const instancesClient = new compute.InstancesClient();
 
-    console.log(`Creating the ${instanceName} instance in ${zone}...`);
+    console.log(
+      `Creating the ${instanceName} instance in ${zone} with hostname ${hostname}...`
+    );
 
     const [response] = await instancesClient.insert({
       instanceResource: {
         name: instanceName,
+        // Custom hostnames are not resolved by the automatically created records
+        // provided by Compute Engine internal DNS.
+        // You must manually configure the DNS record for your custom hostname.
+        hostname,
         disks: [
           {
             // Describe the size and source image of the boot disk to attach to the instance.
@@ -100,8 +110,13 @@ function main(
     console.log('Instance created.');
   }
 
-  createInstance();
-  // [END compute_instances_create]
+  createInstanceWithCustomHostname();
+  // [END compute_instances_create_custom_hostname]
 }
+
+process.on('unhandledRejection', err => {
+  console.error(err.message);
+  process.exitCode = 1;
+});
 
 main(...process.argv.slice(2));
