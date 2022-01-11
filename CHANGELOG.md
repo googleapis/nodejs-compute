@@ -4,6 +4,127 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/compute?activeTab=versions
 
+## [3.1.0](https://github.com/googleapis/nodejs-compute/compare/v3.1.0...v3.1.0) (2022-01-11)
+
+
+### ⚠ BREAKING CHANGES
+
+* drop support for Node.js 10 (#668)
+* 3.1.0
+* IPProtocol enum has been renamed to IPProtocolEnum
+* v3.1.0
+* new generated version of compute API (#537)
+* update to latest version of gts and typescript (#433)
+* require node 10 in engines field (#431)
+* upgrade engines field to >=8.10.0 (#292)
+
+### Features
+
+* add `gcf-owl-bot[bot]` to `ignoreAuthors` ([#557](https://github.com/googleapis/nodejs-compute/issues/557)) ([1e354f7](https://github.com/googleapis/nodejs-compute/commit/1e354f71dd6b053cac4e9b56ff48f5b8ca937968))
+* add basic support for InstanceGroupManager ([#263](https://github.com/googleapis/nodejs-compute/issues/263)) ([2d9a322](https://github.com/googleapis/nodejs-compute/commit/2d9a32260e3d26ae509f5a1366574325eaa00c55))
+* add eslintignore for sameple generated code ([#1302](https://github.com/googleapis/nodejs-compute/issues/1302)) ([#652](https://github.com/googleapis/nodejs-compute/issues/652)) ([b170c29](https://github.com/googleapis/nodejs-compute/commit/b170c29f99656d17eafa2ea3bfe99a79dd390a2a))
+* Add getManagedInstances and deleteInstances to InstanceGroupManger API ([#265](https://github.com/googleapis/nodejs-compute/issues/265)) ([81921d9](https://github.com/googleapis/nodejs-compute/commit/81921d93c9d6224bc961ff161bdf37ef97c3643b))
+* add minimum wrapper for compute LRO method ([#618](https://github.com/googleapis/nodejs-compute/issues/618)) ([2fa4f93](https://github.com/googleapis/nodejs-compute/commit/2fa4f93d6d0c1a67e6f1223d2a3715529b2519a5))
+* add start param in getSerialPortOutput options ([#507](https://github.com/googleapis/nodejs-compute/issues/507)) ([de3ecd4](https://github.com/googleapis/nodejs-compute/commit/de3ecd42194a6997e27f409bb7ab59e4576e36c6))
+* add VM.get/setLabels() methods ([#515](https://github.com/googleapis/nodejs-compute/issues/515)) ([60c87e6](https://github.com/googleapis/nodejs-compute/commit/60c87e6e7e4307670eacbde695116e6c42dbc6d1))
+* add vm.update() method ([#478](https://github.com/googleapis/nodejs-compute/issues/478)) ([7bcb79c](https://github.com/googleapis/nodejs-compute/commit/7bcb79ce515b56b0a2c5aee2aadda4115ddb4fe7))
+* adding ability to specify firewall network ([#150](https://github.com/googleapis/nodejs-compute/issues/150)) ([b824c6a](https://github.com/googleapis/nodejs-compute/commit/b824c6a56c601633d8464ad38a5a83176eb2be4e))
+* Adding implementation of startWithEncryptionKey api call ([#539](https://github.com/googleapis/nodejs-compute/issues/539)) ([f8018a6](https://github.com/googleapis/nodejs-compute/commit/f8018a61bf0b986d6ad2d5a9216c5bcfb4bdcc6f))
+* Adds abandonInstances to InstanceGroupManger API ([#306](https://github.com/googleapis/nodejs-compute/issues/306)) ([c359ce3](https://github.com/googleapis/nodejs-compute/commit/c359ce3de084684c1716ab69e66e9e3b0005d017))
+* allow pollIntervalMs to be configured ([#392](https://github.com/googleapis/nodejs-compute/issues/392)) ([0f9c6eb](https://github.com/googleapis/nodejs-compute/commit/0f9c6eb973aa6ce166c5ee8e017bda8bdea4407f))
+* new generated version of compute API ([#537](https://github.com/googleapis/nodejs-compute/issues/537)) ([4023676](https://github.com/googleapis/nodejs-compute/commit/4023676e121e3b3c71b681dbd77136ab74184e68))
+* require node 10 in engines field ([#431](https://github.com/googleapis/nodejs-compute/issues/431)) ([fe2897f](https://github.com/googleapis/nodejs-compute/commit/fe2897fd1d625df0ccf5b910ec850e761c2ed6d3))
+* support a source template when creating a VM ([#500](https://github.com/googleapis/nodejs-compute/issues/500)) ([62f33be](https://github.com/googleapis/nodejs-compute/commit/62f33be7b84bff7d75b38b20dbd29e0642359bb2))
+* support apiEndpoint override ([#322](https://github.com/googleapis/nodejs-compute/issues/322)) ([49c5384](https://github.com/googleapis/nodejs-compute/commit/49c53847b3e5dd993a3996a80ad0fce798ba092c))
+* use teeny-request to reduce module size ([#175](https://github.com/googleapis/nodejs-compute/issues/175)) ([9cfb8d6](https://github.com/googleapis/nodejs-compute/commit/9cfb8d697f1e71fa81afa8c7082a8781f8d91988))
+
+
+### Bug Fixes
+
+* add parameter in compute bazel rules ([#692](https://github.com/googleapis/nodejs-compute/issues/692)) ([#654](https://github.com/googleapis/nodejs-compute/issues/654)) ([115d1da](https://github.com/googleapis/nodejs-compute/commit/115d1dac877566069af7320a67a77edd4400c4f2))
+* apache license URL ([#468](https://github.com/googleapis/nodejs-compute/issues/468)) ([#427](https://github.com/googleapis/nodejs-compute/issues/427)) ([02d63ed](https://github.com/googleapis/nodejs-compute/commit/02d63ed5a5a3559be0b5e49ed4c771b3661518a1))
+* asyncify and fix the system tests ([#203](https://github.com/googleapis/nodejs-compute/issues/203)) ([c54e6e9](https://github.com/googleapis/nodejs-compute/commit/c54e6e90a5cdfafeac4dec70459b10ca0a7007b7))
+* **build:** fix Kokoro release script ([#231](https://github.com/googleapis/nodejs-compute/issues/231)) ([05724e0](https://github.com/googleapis/nodejs-compute/commit/05724e07a8fc88003ddd4ac14e87945de93d6265))
+* **build:** fix system key decryption ([#217](https://github.com/googleapis/nodejs-compute/issues/217)) ([7921a4d](https://github.com/googleapis/nodejs-compute/commit/7921a4dcdf7402fbf64fd9be169536ee0aa7fc80))
+* **build:** migrate to using main branch ([#609](https://github.com/googleapis/nodejs-compute/issues/609)) ([3013bb5](https://github.com/googleapis/nodejs-compute/commit/3013bb53258d738e136327fd027b6ea4fae835db))
+* correct engines range to include node v10 ([#451](https://github.com/googleapis/nodejs-compute/issues/451)) ([c8a2b29](https://github.com/googleapis/nodejs-compute/commit/c8a2b29a12b8d5b2061b6979d2b8ffb2d96e208a))
+* **createVM:** do not define machineType or networkInterfaces when template provided ([#530](https://github.com/googleapis/nodejs-compute/issues/530)) ([e7b705e](https://github.com/googleapis/nodejs-compute/commit/e7b705e583936772663b9dba0a5d530a8e4d0dae)), closes [#529](https://github.com/googleapis/nodejs-compute/issues/529)
+* **deps:** google-gax v2.24.1 ([#612](https://github.com/googleapis/nodejs-compute/issues/612)) ([8569747](https://github.com/googleapis/nodejs-compute/commit/856974738ab7051cdbf05575bc5871c0b6b4ea28))
+* **deps:** pin TypeScript below 3.7.0 ([5f1fc47](https://github.com/googleapis/nodejs-compute/commit/5f1fc472dfc4046ba6ff966d1b2f31778a43a3c0))
+* **deps:** update dependency @google-cloud/common to ^0.25.0 ([#121](https://github.com/googleapis/nodejs-compute/issues/121)) ([ce3defb](https://github.com/googleapis/nodejs-compute/commit/ce3defb9cfa3c0381ce5ba11e91a01c0d96c9faf))
+* **deps:** update dependency @google-cloud/common to ^0.26.0 ([#185](https://github.com/googleapis/nodejs-compute/issues/185)) ([39cf873](https://github.com/googleapis/nodejs-compute/commit/39cf873427c82d6691f5fceb5ae71387204b084e))
+* **deps:** update dependency @google-cloud/common to ^0.27.0 ([#215](https://github.com/googleapis/nodejs-compute/issues/215)) ([8a92dd1](https://github.com/googleapis/nodejs-compute/commit/8a92dd1ed487e76a028548c23b658ecf6f26eb8d))
+* **deps:** update dependency @google-cloud/common to ^0.28.0 ([#238](https://github.com/googleapis/nodejs-compute/issues/238)) ([5e4fec7](https://github.com/googleapis/nodejs-compute/commit/5e4fec72329ded3ae7a479aa24be8725cd876059))
+* **deps:** update dependency @google-cloud/common to ^0.30.0 ([#254](https://github.com/googleapis/nodejs-compute/issues/254)) ([3c22417](https://github.com/googleapis/nodejs-compute/commit/3c224176b730c1a4c72f7bae096b433596c613ea))
+* **deps:** update dependency @google-cloud/common to ^0.31.0 ([#258](https://github.com/googleapis/nodejs-compute/issues/258)) ([75fbb85](https://github.com/googleapis/nodejs-compute/commit/75fbb858863949edaec8cfa2c66043165c115117))
+* **deps:** update dependency @google-cloud/common to ^0.32.0 ([#285](https://github.com/googleapis/nodejs-compute/issues/285)) ([a728cff](https://github.com/googleapis/nodejs-compute/commit/a728cffad6ee4bf060a7935ef3f1e611ef44da3b))
+* **deps:** update dependency @google-cloud/common to v1 ([#303](https://github.com/googleapis/nodejs-compute/issues/303)) ([5b5e2e7](https://github.com/googleapis/nodejs-compute/commit/5b5e2e76cd94acee6759c7928af6b830f75bfbb4))
+* **deps:** update dependency @google-cloud/common to v3 ([#421](https://github.com/googleapis/nodejs-compute/issues/421)) ([d4469b6](https://github.com/googleapis/nodejs-compute/commit/d4469b693745df5a8a36b6988b7dba98f7d55142))
+* **deps:** update dependency @google-cloud/paginator to ^0.2.0 ([#274](https://github.com/googleapis/nodejs-compute/issues/274)) ([0606252](https://github.com/googleapis/nodejs-compute/commit/0606252a354ce0b8e8125f26d5c8a9ae06f04cfa))
+* **deps:** update dependency @google-cloud/paginator to v1 ([#297](https://github.com/googleapis/nodejs-compute/issues/297)) ([16b5ff2](https://github.com/googleapis/nodejs-compute/commit/16b5ff2bc3e8c9fc4cc048cca49bfdc2e7477c51))
+* **deps:** update dependency @google-cloud/paginator to v2 ([#338](https://github.com/googleapis/nodejs-compute/issues/338)) ([db5de8c](https://github.com/googleapis/nodejs-compute/commit/db5de8cd268d7fd02bac13ab72977fb16db8114d))
+* **deps:** update dependency @google-cloud/paginator to v3 ([#419](https://github.com/googleapis/nodejs-compute/issues/419)) ([e667aee](https://github.com/googleapis/nodejs-compute/commit/e667aeecf7b9f51875c06cb6a885040828dc1181))
+* **deps:** update dependency @google-cloud/projectify to v1 ([#295](https://github.com/googleapis/nodejs-compute/issues/295)) ([30fff7d](https://github.com/googleapis/nodejs-compute/commit/30fff7d578bd16963d34d18cc0049a26c52fef70))
+* **deps:** update dependency @google-cloud/projectify to v2 ([#418](https://github.com/googleapis/nodejs-compute/issues/418)) ([b861540](https://github.com/googleapis/nodejs-compute/commit/b861540aa17118a7508c7c970d84864a9028f588))
+* **deps:** update dependency @google-cloud/promisify to ^0.4.0 ([#267](https://github.com/googleapis/nodejs-compute/issues/267)) ([3d11fca](https://github.com/googleapis/nodejs-compute/commit/3d11fcad8f567aa2cd6a7b226b208c081744c6f5))
+* **deps:** update dependency @google-cloud/promisify to v1 ([#296](https://github.com/googleapis/nodejs-compute/issues/296)) ([166e99e](https://github.com/googleapis/nodejs-compute/commit/166e99ec63626e6f11a699c6977470e464c82130))
+* **deps:** update dependency @google-cloud/promisify to v2 ([#417](https://github.com/googleapis/nodejs-compute/issues/417)) ([eedce75](https://github.com/googleapis/nodejs-compute/commit/eedce75e0d3f10dfed8151f12150d38d032f6a27))
+* **deps:** update dependency @sendgrid/mail to v7 ([#424](https://github.com/googleapis/nodejs-compute/issues/424)) ([17af0f4](https://github.com/googleapis/nodejs-compute/commit/17af0f425354b261f9afc8ab30e16e66b7193fec))
+* **deps:** update dependency arrify to v2 ([#287](https://github.com/googleapis/nodejs-compute/issues/287)) ([4bc19c8](https://github.com/googleapis/nodejs-compute/commit/4bc19c852902169dab9ef8fca31338788fdcf20a))
+* **deps:** update dependency async to v3 ([#313](https://github.com/googleapis/nodejs-compute/issues/313)) ([c459c57](https://github.com/googleapis/nodejs-compute/commit/c459c57343fb81d5d9f5f73d547c283410da165e))
+* **deps:** update dependency gce-images to v2 ([#304](https://github.com/googleapis/nodejs-compute/issues/304)) ([19eaaf5](https://github.com/googleapis/nodejs-compute/commit/19eaaf575be5e69bd7219ff4c03f8f15442a89ae))
+* **deps:** update dependency gce-images to v3 ([#443](https://github.com/googleapis/nodejs-compute/issues/443)) ([c861b8c](https://github.com/googleapis/nodejs-compute/commit/c861b8c0754cecfa15cef22be3c030bb146ce987))
+* **deps:** update dependency googleapis to v33 ([#144](https://github.com/googleapis/nodejs-compute/issues/144)) ([21a4673](https://github.com/googleapis/nodejs-compute/commit/21a46739a04e0d65edf020912605c5ba669390cb))
+* **deps:** update dependency googleapis to v34 ([#162](https://github.com/googleapis/nodejs-compute/issues/162)) ([379ef81](https://github.com/googleapis/nodejs-compute/commit/379ef81f5289a7e3b4fe622b1614206e3f727bfc))
+* **deps:** update dependency googleapis to v35 ([#205](https://github.com/googleapis/nodejs-compute/issues/205)) ([9812e0e](https://github.com/googleapis/nodejs-compute/commit/9812e0e5b7ebfa02fed4cca2c331bb8815c72985))
+* **deps:** update dependency googleapis to v36 ([#225](https://github.com/googleapis/nodejs-compute/issues/225)) ([ab39ffd](https://github.com/googleapis/nodejs-compute/commit/ab39ffd91c08da75266a3b0f52f30663a008183f))
+* **deps:** update dependency nodemailer to v5 ([#247](https://github.com/googleapis/nodejs-compute/issues/247)) ([d237401](https://github.com/googleapis/nodejs-compute/commit/d23740164f3c62eaf0ad75693b4f21ab204f6609))
+* **deps:** update dependency nodemailer to v6 ([4c8e9c5](https://github.com/googleapis/nodejs-compute/commit/4c8e9c54a46af547f09ecbac9f7f250196796a71))
+* **deps:** update google-gax with http grpc status code mapping ([#655](https://github.com/googleapis/nodejs-compute/issues/655)) ([ffa79f9](https://github.com/googleapis/nodejs-compute/commit/ffa79f91b24a1a3b593bcc81d4f12c06d9f48f34))
+* **deps:** upgrade to the latest gce-images ([#201](https://github.com/googleapis/nodejs-compute/issues/201)) ([e0000f3](https://github.com/googleapis/nodejs-compute/commit/e0000f3904e9b3a2d728db8355d0e077643b6661))
+* **deps:** upgrade to v0.29.1 of @google-cloud/nodejs-common ([#241](https://github.com/googleapis/nodejs-compute/issues/241)) ([6a22570](https://github.com/googleapis/nodejs-compute/commit/6a225702815ff1e78a4a246ea4dac12c2c96b5db))
+* **deps:** use the latest extend ([#344](https://github.com/googleapis/nodejs-compute/issues/344)) ([090bb96](https://github.com/googleapis/nodejs-compute/commit/090bb96cf4c3382ab83cda50ee933326fda45807))
+* **disks:** attach default disk first if needed ([#551](https://github.com/googleapis/nodejs-compute/issues/551)) ([0523f0e](https://github.com/googleapis/nodejs-compute/commit/0523f0e8406df929f97cb92808459b9118bb0ae6)), closes [#518](https://github.com/googleapis/nodejs-compute/issues/518)
+* do not override user-provided options ([#463](https://github.com/googleapis/nodejs-compute/issues/463)) ([e51074c](https://github.com/googleapis/nodejs-compute/commit/e51074c9c9524c7d4b3b8b64b897094ff344bce2))
+* **docs:** document correct object structure for zone.createVM ([#371](https://github.com/googleapis/nodejs-compute/issues/371)) ([4551f1e](https://github.com/googleapis/nodejs-compute/commit/4551f1ede21812d250d165f3b7f4c1a2da92b6ff))
+* **docs:** increase memory for reference doc generation ([#615](https://github.com/googleapis/nodejs-compute/issues/615)) ([5e63ce4](https://github.com/googleapis/nodejs-compute/commit/5e63ce4734686007f98f449f25807134274d0f0a))
+* **docs:** link to reference docs section on googleapis.dev ([#333](https://github.com/googleapis/nodejs-compute/issues/333)) ([206a0fa](https://github.com/googleapis/nodejs-compute/commit/206a0fa695130c028d27c87b2fac810cafe645d3))
+* **docs:** move to new client docs URL ([#326](https://github.com/googleapis/nodejs-compute/issues/326)) ([918e352](https://github.com/googleapis/nodejs-compute/commit/918e3524b59aa93d1b321805e04304ea0a6aadc7))
+* **docs:** snippets are now replaced in jsdoc comments ([#365](https://github.com/googleapis/nodejs-compute/issues/365)) ([408c75a](https://github.com/googleapis/nodejs-compute/commit/408c75a1a58c67e646406ed7271cf201364a16c4))
+* **docs:** stop linking reference documents to anchor ([48f90a0](https://github.com/googleapis/nodejs-compute/commit/48f90a0ac6467832946025ffcc1ab27ab9672145))
+* drop support for Node.js 10 ([#668](https://github.com/googleapis/nodejs-compute/issues/668)) ([a4a5c9c](https://github.com/googleapis/nodejs-compute/commit/a4a5c9c24ee3d1a78edc293819faaa8b3fbe0acb))
+* drop support for node.js 4.x and 9.x ([#126](https://github.com/googleapis/nodejs-compute/issues/126)) ([995a696](https://github.com/googleapis/nodejs-compute/commit/995a6963cbc8aa70964798f6487c33f532d8fbe8))
+* drop support for node.js 4.x and 9.x ([#97](https://github.com/googleapis/nodejs-compute/issues/97)) ([233c58e](https://github.com/googleapis/nodejs-compute/commit/233c58e7cd6e71101ba93450f37582741af60afa))
+* flaky test ([#563](https://github.com/googleapis/nodejs-compute/issues/563)) ([827a333](https://github.com/googleapis/nodejs-compute/commit/827a333443d6716b232fd21e00cc61a4df16aff0))
+* handle parameters to image.create() ([#541](https://github.com/googleapis/nodejs-compute/issues/541)) ([3b3a7dd](https://github.com/googleapis/nodejs-compute/commit/3b3a7dd81790b788d5d53947e2948df55b702c93))
+* improve the samples and tests ([#236](https://github.com/googleapis/nodejs-compute/issues/236)) ([e384112](https://github.com/googleapis/nodejs-compute/commit/e3841121957949a5aa6900acbf0b6b4aeca369e2))
+* modernize the samples ([#240](https://github.com/googleapis/nodejs-compute/issues/240)) ([f76704b](https://github.com/googleapis/nodejs-compute/commit/f76704bc5d8f73c0da9bf0f8819e5e4884a3f5fe))
+* move gitattributes files to node templates ([#472](https://github.com/googleapis/nodejs-compute/issues/472)) ([4e1dd20](https://github.com/googleapis/nodejs-compute/commit/4e1dd2032e09d90ffa4e80970091ac50de24ef17))
+* **package:** update @google-cloud/common to version 0.15.0 ([#25](https://github.com/googleapis/nodejs-compute/issues/25)) ([35c4812](https://github.com/googleapis/nodejs-compute/commit/35c4812685c336e616341dcd28e9230db325338f))
+* **package:** update @google-cloud/common to version 0.20.0 ([#101](https://github.com/googleapis/nodejs-compute/issues/101)) ([d1f3704](https://github.com/googleapis/nodejs-compute/commit/d1f3704a2faec54767704c609811f641ddbb26b0))
+* require use of `new` ([#99](https://github.com/googleapis/nodejs-compute/issues/99)) ([53d3699](https://github.com/googleapis/nodejs-compute/commit/53d36991e340c7215b9b52b4a9056752a651d049))
+* revert to 0.17.x of nodejs-common ([#100](https://github.com/googleapis/nodejs-compute/issues/100)) ([9795b27](https://github.com/googleapis/nodejs-compute/commit/9795b27623b6cff774c61fff742b7cd3174132af))
+* skip tests for now ([#523](https://github.com/googleapis/nodejs-compute/issues/523)) ([f0f8fae](https://github.com/googleapis/nodejs-compute/commit/f0f8faee962b5463b26c7551adae67a724875a55))
+* snapshot.delete() no longer throws ([#251](https://github.com/googleapis/nodejs-compute/issues/251)) ([dfd6507](https://github.com/googleapis/nodejs-compute/commit/dfd65078c1fde13b50b186ec91dcc95750392099))
+* typeo in nodejs .gitattribute ([#461](https://github.com/googleapis/nodejs-compute/issues/461)) ([67ab7d7](https://github.com/googleapis/nodejs-compute/commit/67ab7d7a9b246e7f200fa769653a0fb73d119bef))
+* update all the dependencies ([#95](https://github.com/googleapis/nodejs-compute/issues/95)) ([e17b3e6](https://github.com/googleapis/nodejs-compute/commit/e17b3e6f3248a4372db5b29ed32bae2d040bd7a2))
+* update linking for samples ([#115](https://github.com/googleapis/nodejs-compute/issues/115)) ([34625f7](https://github.com/googleapis/nodejs-compute/commit/34625f7fca1de978c1ee87daee0c9ad76cd6ba84))
+* update node issue template ([#456](https://github.com/googleapis/nodejs-compute/issues/456)) ([65ab831](https://github.com/googleapis/nodejs-compute/commit/65ab8312edceee2316a2b2ba6cfa294b218cf164))
+* update root url to `compute.googleapis.com` ([#349](https://github.com/googleapis/nodejs-compute/issues/349)) ([4ad52a3](https://github.com/googleapis/nodejs-compute/commit/4ad52a301d844252bcd6c6a3577c8520c027e643))
+* update template files for Node.js libraries ([#463](https://github.com/googleapis/nodejs-compute/issues/463)) ([c9933db](https://github.com/googleapis/nodejs-compute/commit/c9933dbddb008cd12040cbf758fb3ee3e4cb2dec))
+
+
+### Build System
+
+* automate generation and updates with OwlBot ([#651](https://github.com/googleapis/nodejs-compute/issues/651)) ([2b925fa](https://github.com/googleapis/nodejs-compute/commit/2b925fa9a6b76b773d3a8e0b40b21f8b503fe3e5))
+* update to latest version of gts and typescript ([#433](https://github.com/googleapis/nodejs-compute/issues/433)) ([a4fa8cc](https://github.com/googleapis/nodejs-compute/commit/a4fa8cc21df7a894486832b05449fa7afc02b7ee))
+* upgrade engines field to >=8.10.0 ([#292](https://github.com/googleapis/nodejs-compute/issues/292)) ([4101d77](https://github.com/googleapis/nodejs-compute/commit/4101d775d895160c19f8329e25fb92a508bd04ac))
+
+
+### Code Refactoring
+
+* IPProtocol enum has been renamed to IPProtocolEnum ([2b925fa](https://github.com/googleapis/nodejs-compute/commit/2b925fa9a6b76b773d3a8e0b40b21f8b503fe3e5))
+
 ## [3.1.0](https://github.com/googleapis/nodejs-compute/compare/v3.0.0...v3.1.0) (2022-01-11)
 
 
