@@ -110,7 +110,7 @@ const deleteDiskSnapshot = async (projectId, snapshotName) => {
 
 describe('create start instance tests', () => {
   const instanceName = `gcloud-test-instance-${uuid.v4().split('-')[0]}`;
-  const networkName = 'global/networks/default';
+  const networkName = 'global/networks/default-compute';
   const subnetworkName = 'regions/us-central1/subnetworks/default';
   const diskName = `gcloud-test-disk-${uuid.v4().split('-')[0]}`;
   const snapshotName = `gcloud-test-snapshot-${uuid.v4().split('-')[0]}`;
