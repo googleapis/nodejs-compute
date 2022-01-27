@@ -31,14 +31,13 @@ async function getStaleVMInstances() {
   const projectId = await instancesClient.getProjectId();
   const result = [];
   const currentDate = new Date();
-  currentDate.setHours(currentDate.getHours() - 1);
+  currentDate.setHours(currentDate.getHours() - 3);
 
   const aggListRequest = instancesClient.aggregatedListAsync({
     project: projectId,
   });
 
   for await (const [zone, instancesObject] of aggListRequest) {
-    console.log();
     const instances = instancesObject.instances;
     result.push(
       ...instances
