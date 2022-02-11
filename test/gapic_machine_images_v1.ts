@@ -21,7 +21,7 @@ import * as assert from 'assert';
 import * as sinon from 'sinon';
 import {SinonStub} from 'sinon';
 import {describe, it, beforeEach, afterEach} from 'mocha';
-import * as backendservicesModule from '../src';
+import * as machineimagesModule from '../src';
 
 import {PassThrough} from 'stream';
 
@@ -112,7 +112,7 @@ function stubAsyncIterationCall<ResponseType>(
   return sinon.stub().returns(asyncIterable);
 }
 
-describe('v1.BackendServicesClient', () => {
+describe('v1.MachineImagesClient', () => {
   let googleAuth: GoogleAuth;
   beforeEach(() => {
     googleAuth = {
@@ -127,47 +127,45 @@ describe('v1.BackendServicesClient', () => {
     sinon.restore();
   });
   it('has servicePath', () => {
-    const servicePath =
-      backendservicesModule.v1.BackendServicesClient.servicePath;
+    const servicePath = machineimagesModule.v1.MachineImagesClient.servicePath;
     assert(servicePath);
   });
 
   it('has apiEndpoint', () => {
-    const apiEndpoint =
-      backendservicesModule.v1.BackendServicesClient.apiEndpoint;
+    const apiEndpoint = machineimagesModule.v1.MachineImagesClient.apiEndpoint;
     assert(apiEndpoint);
   });
 
   it('has port', () => {
-    const port = backendservicesModule.v1.BackendServicesClient.port;
+    const port = machineimagesModule.v1.MachineImagesClient.port;
     assert(port);
     assert(typeof port === 'number');
   });
 
   it('should create a client with no option', () => {
-    const client = new backendservicesModule.v1.BackendServicesClient();
+    const client = new machineimagesModule.v1.MachineImagesClient();
     assert(client);
   });
 
   it('should create a client with gRPC fallback', () => {
-    const client = new backendservicesModule.v1.BackendServicesClient({
+    const client = new machineimagesModule.v1.MachineImagesClient({
       fallback: true,
     });
     assert(client);
   });
 
   it('has initialize method and supports deferred initialization', async () => {
-    const client = new backendservicesModule.v1.BackendServicesClient({
+    const client = new machineimagesModule.v1.MachineImagesClient({
       auth: googleAuth,
       projectId: 'bogus',
     });
-    assert.strictEqual(client.backendServicesStub, undefined);
+    assert.strictEqual(client.machineImagesStub, undefined);
     await client.initialize();
-    assert(client.backendServicesStub);
+    assert(client.machineImagesStub);
   });
 
   it('has close method', () => {
-    const client = new backendservicesModule.v1.BackendServicesClient({
+    const client = new machineimagesModule.v1.MachineImagesClient({
       auth: googleAuth,
       projectId: 'bogus',
     });
@@ -176,7 +174,7 @@ describe('v1.BackendServicesClient', () => {
 
   it('has getProjectId method', async () => {
     const fakeProjectId = 'fake-project-id';
-    const client = new backendservicesModule.v1.BackendServicesClient({
+    const client = new machineimagesModule.v1.MachineImagesClient({
       auth: googleAuth,
       projectId: 'bogus',
     });
@@ -188,7 +186,7 @@ describe('v1.BackendServicesClient', () => {
 
   it('has getProjectId method with callback', async () => {
     const fakeProjectId = 'fake-project-id';
-    const client = new backendservicesModule.v1.BackendServicesClient({
+    const client = new machineimagesModule.v1.MachineImagesClient({
       auth: googleAuth,
       projectId: 'bogus',
     });
@@ -208,126 +206,15 @@ describe('v1.BackendServicesClient', () => {
     assert.strictEqual(result, fakeProjectId);
   });
 
-  describe('addSignedUrlKey', () => {
-    it('invokes addSignedUrlKey without error', async () => {
-      const client = new backendservicesModule.v1.BackendServicesClient({
-        auth: googleAuth,
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.compute.v1.AddSignedUrlKeyBackendServiceRequest()
-      );
-      request.project = '';
-      const expectedHeaderRequestParams = 'project=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.compute.v1.Operation()
-      );
-      client.innerApiCalls.addSignedUrlKey = stubSimpleCall(expectedResponse);
-      const [response] = await client.addSignedUrlKey(request);
-      assert.deepStrictEqual(response.latestResponse, expectedResponse);
-      assert(
-        (client.innerApiCalls.addSignedUrlKey as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
-    });
-
-    it('invokes addSignedUrlKey without error using callback', async () => {
-      const client = new backendservicesModule.v1.BackendServicesClient({
-        auth: googleAuth,
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.compute.v1.AddSignedUrlKeyBackendServiceRequest()
-      );
-      request.project = '';
-      const expectedHeaderRequestParams = 'project=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.compute.v1.Operation()
-      );
-      client.innerApiCalls.addSignedUrlKey =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.addSignedUrlKey(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.compute.v1.IOperation | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.addSignedUrlKey as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
-    });
-
-    it('invokes addSignedUrlKey with error', async () => {
-      const client = new backendservicesModule.v1.BackendServicesClient({
-        auth: googleAuth,
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.compute.v1.AddSignedUrlKeyBackendServiceRequest()
-      );
-      request.project = '';
-      const expectedHeaderRequestParams = 'project=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedError = new Error('expected');
-      client.innerApiCalls.addSignedUrlKey = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.addSignedUrlKey(request), expectedError);
-      assert(
-        (client.innerApiCalls.addSignedUrlKey as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
-    });
-  });
-
   describe('delete', () => {
     it('invokes delete without error', async () => {
-      const client = new backendservicesModule.v1.BackendServicesClient({
+      const client = new machineimagesModule.v1.MachineImagesClient({
         auth: googleAuth,
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.compute.v1.DeleteBackendServiceRequest()
+        new protos.google.cloud.compute.v1.DeleteMachineImageRequest()
       );
       request.project = '';
       const expectedHeaderRequestParams = 'project=';
@@ -352,13 +239,13 @@ describe('v1.BackendServicesClient', () => {
     });
 
     it('invokes delete without error using callback', async () => {
-      const client = new backendservicesModule.v1.BackendServicesClient({
+      const client = new machineimagesModule.v1.MachineImagesClient({
         auth: googleAuth,
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.compute.v1.DeleteBackendServiceRequest()
+        new protos.google.cloud.compute.v1.DeleteMachineImageRequest()
       );
       request.project = '';
       const expectedHeaderRequestParams = 'project=';
@@ -399,13 +286,13 @@ describe('v1.BackendServicesClient', () => {
     });
 
     it('invokes delete with error', async () => {
-      const client = new backendservicesModule.v1.BackendServicesClient({
+      const client = new machineimagesModule.v1.MachineImagesClient({
         auth: googleAuth,
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.compute.v1.DeleteBackendServiceRequest()
+        new protos.google.cloud.compute.v1.DeleteMachineImageRequest()
       );
       request.project = '';
       const expectedHeaderRequestParams = 'project=';
@@ -427,127 +314,15 @@ describe('v1.BackendServicesClient', () => {
     });
   });
 
-  describe('deleteSignedUrlKey', () => {
-    it('invokes deleteSignedUrlKey without error', async () => {
-      const client = new backendservicesModule.v1.BackendServicesClient({
-        auth: googleAuth,
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.compute.v1.DeleteSignedUrlKeyBackendServiceRequest()
-      );
-      request.project = '';
-      const expectedHeaderRequestParams = 'project=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.compute.v1.Operation()
-      );
-      client.innerApiCalls.deleteSignedUrlKey =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.deleteSignedUrlKey(request);
-      assert.deepStrictEqual(response.latestResponse, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteSignedUrlKey as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
-    });
-
-    it('invokes deleteSignedUrlKey without error using callback', async () => {
-      const client = new backendservicesModule.v1.BackendServicesClient({
-        auth: googleAuth,
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.compute.v1.DeleteSignedUrlKeyBackendServiceRequest()
-      );
-      request.project = '';
-      const expectedHeaderRequestParams = 'project=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.compute.v1.Operation()
-      );
-      client.innerApiCalls.deleteSignedUrlKey =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.deleteSignedUrlKey(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.compute.v1.IOperation | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteSignedUrlKey as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
-    });
-
-    it('invokes deleteSignedUrlKey with error', async () => {
-      const client = new backendservicesModule.v1.BackendServicesClient({
-        auth: googleAuth,
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.compute.v1.DeleteSignedUrlKeyBackendServiceRequest()
-      );
-      request.project = '';
-      const expectedHeaderRequestParams = 'project=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedError = new Error('expected');
-      client.innerApiCalls.deleteSignedUrlKey = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.deleteSignedUrlKey(request), expectedError);
-      assert(
-        (client.innerApiCalls.deleteSignedUrlKey as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
-    });
-  });
-
   describe('get', () => {
     it('invokes get without error', async () => {
-      const client = new backendservicesModule.v1.BackendServicesClient({
+      const client = new machineimagesModule.v1.MachineImagesClient({
         auth: googleAuth,
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.compute.v1.GetBackendServiceRequest()
+        new protos.google.cloud.compute.v1.GetMachineImageRequest()
       );
       request.project = '';
       const expectedHeaderRequestParams = 'project=';
@@ -559,7 +334,7 @@ describe('v1.BackendServicesClient', () => {
         },
       };
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.compute.v1.BackendService()
+        new protos.google.cloud.compute.v1.MachineImage()
       );
       client.innerApiCalls.get = stubSimpleCall(expectedResponse);
       const [response] = await client.get(request);
@@ -572,13 +347,13 @@ describe('v1.BackendServicesClient', () => {
     });
 
     it('invokes get without error using callback', async () => {
-      const client = new backendservicesModule.v1.BackendServicesClient({
+      const client = new machineimagesModule.v1.MachineImagesClient({
         auth: googleAuth,
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.compute.v1.GetBackendServiceRequest()
+        new protos.google.cloud.compute.v1.GetMachineImageRequest()
       );
       request.project = '';
       const expectedHeaderRequestParams = 'project=';
@@ -590,7 +365,7 @@ describe('v1.BackendServicesClient', () => {
         },
       };
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.compute.v1.BackendService()
+        new protos.google.cloud.compute.v1.MachineImage()
       );
       client.innerApiCalls.get = stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
@@ -598,7 +373,7 @@ describe('v1.BackendServicesClient', () => {
           request,
           (
             err?: Error | null,
-            result?: protos.google.cloud.compute.v1.IBackendService | null
+            result?: protos.google.cloud.compute.v1.IMachineImage | null
           ) => {
             if (err) {
               reject(err);
@@ -618,13 +393,13 @@ describe('v1.BackendServicesClient', () => {
     });
 
     it('invokes get with error', async () => {
-      const client = new backendservicesModule.v1.BackendServicesClient({
+      const client = new machineimagesModule.v1.MachineImagesClient({
         auth: googleAuth,
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.compute.v1.GetBackendServiceRequest()
+        new protos.google.cloud.compute.v1.GetMachineImageRequest()
       );
       request.project = '';
       const expectedHeaderRequestParams = 'project=';
@@ -646,15 +421,15 @@ describe('v1.BackendServicesClient', () => {
     });
   });
 
-  describe('getHealth', () => {
-    it('invokes getHealth without error', async () => {
-      const client = new backendservicesModule.v1.BackendServicesClient({
+  describe('getIamPolicy', () => {
+    it('invokes getIamPolicy without error', async () => {
+      const client = new machineimagesModule.v1.MachineImagesClient({
         auth: googleAuth,
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.compute.v1.GetHealthBackendServiceRequest()
+        new protos.google.cloud.compute.v1.GetIamPolicyMachineImageRequest()
       );
       request.project = '';
       const expectedHeaderRequestParams = 'project=';
@@ -666,26 +441,26 @@ describe('v1.BackendServicesClient', () => {
         },
       };
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.compute.v1.BackendServiceGroupHealth()
+        new protos.google.cloud.compute.v1.Policy()
       );
-      client.innerApiCalls.getHealth = stubSimpleCall(expectedResponse);
-      const [response] = await client.getHealth(request);
+      client.innerApiCalls.getIamPolicy = stubSimpleCall(expectedResponse);
+      const [response] = await client.getIamPolicy(request);
       assert.deepStrictEqual(response, expectedResponse);
       assert(
-        (client.innerApiCalls.getHealth as SinonStub)
+        (client.innerApiCalls.getIamPolicy as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
     });
 
-    it('invokes getHealth without error using callback', async () => {
-      const client = new backendservicesModule.v1.BackendServicesClient({
+    it('invokes getIamPolicy without error using callback', async () => {
+      const client = new machineimagesModule.v1.MachineImagesClient({
         auth: googleAuth,
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.compute.v1.GetHealthBackendServiceRequest()
+        new protos.google.cloud.compute.v1.GetIamPolicyMachineImageRequest()
       );
       request.project = '';
       const expectedHeaderRequestParams = 'project=';
@@ -697,16 +472,16 @@ describe('v1.BackendServicesClient', () => {
         },
       };
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.compute.v1.BackendServiceGroupHealth()
+        new protos.google.cloud.compute.v1.Policy()
       );
-      client.innerApiCalls.getHealth =
+      client.innerApiCalls.getIamPolicy =
         stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
-        client.getHealth(
+        client.getIamPolicy(
           request,
           (
             err?: Error | null,
-            result?: protos.google.cloud.compute.v1.IBackendServiceGroupHealth | null
+            result?: protos.google.cloud.compute.v1.IPolicy | null
           ) => {
             if (err) {
               reject(err);
@@ -719,20 +494,20 @@ describe('v1.BackendServicesClient', () => {
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
       assert(
-        (client.innerApiCalls.getHealth as SinonStub)
+        (client.innerApiCalls.getIamPolicy as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions /*, callback defined above */)
       );
     });
 
-    it('invokes getHealth with error', async () => {
-      const client = new backendservicesModule.v1.BackendServicesClient({
+    it('invokes getIamPolicy with error', async () => {
+      const client = new machineimagesModule.v1.MachineImagesClient({
         auth: googleAuth,
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.compute.v1.GetHealthBackendServiceRequest()
+        new protos.google.cloud.compute.v1.GetIamPolicyMachineImageRequest()
       );
       request.project = '';
       const expectedHeaderRequestParams = 'project=';
@@ -744,10 +519,13 @@ describe('v1.BackendServicesClient', () => {
         },
       };
       const expectedError = new Error('expected');
-      client.innerApiCalls.getHealth = stubSimpleCall(undefined, expectedError);
-      await assert.rejects(client.getHealth(request), expectedError);
+      client.innerApiCalls.getIamPolicy = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.getIamPolicy(request), expectedError);
       assert(
-        (client.innerApiCalls.getHealth as SinonStub)
+        (client.innerApiCalls.getIamPolicy as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
@@ -756,13 +534,13 @@ describe('v1.BackendServicesClient', () => {
 
   describe('insert', () => {
     it('invokes insert without error', async () => {
-      const client = new backendservicesModule.v1.BackendServicesClient({
+      const client = new machineimagesModule.v1.MachineImagesClient({
         auth: googleAuth,
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.compute.v1.InsertBackendServiceRequest()
+        new protos.google.cloud.compute.v1.InsertMachineImageRequest()
       );
       request.project = '';
       const expectedHeaderRequestParams = 'project=';
@@ -787,13 +565,13 @@ describe('v1.BackendServicesClient', () => {
     });
 
     it('invokes insert without error using callback', async () => {
-      const client = new backendservicesModule.v1.BackendServicesClient({
+      const client = new machineimagesModule.v1.MachineImagesClient({
         auth: googleAuth,
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.compute.v1.InsertBackendServiceRequest()
+        new protos.google.cloud.compute.v1.InsertMachineImageRequest()
       );
       request.project = '';
       const expectedHeaderRequestParams = 'project=';
@@ -834,13 +612,13 @@ describe('v1.BackendServicesClient', () => {
     });
 
     it('invokes insert with error', async () => {
-      const client = new backendservicesModule.v1.BackendServicesClient({
+      const client = new machineimagesModule.v1.MachineImagesClient({
         auth: googleAuth,
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.compute.v1.InsertBackendServiceRequest()
+        new protos.google.cloud.compute.v1.InsertMachineImageRequest()
       );
       request.project = '';
       const expectedHeaderRequestParams = 'project=';
@@ -862,15 +640,15 @@ describe('v1.BackendServicesClient', () => {
     });
   });
 
-  describe('patch', () => {
-    it('invokes patch without error', async () => {
-      const client = new backendservicesModule.v1.BackendServicesClient({
+  describe('setIamPolicy', () => {
+    it('invokes setIamPolicy without error', async () => {
+      const client = new machineimagesModule.v1.MachineImagesClient({
         auth: googleAuth,
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.compute.v1.PatchBackendServiceRequest()
+        new protos.google.cloud.compute.v1.SetIamPolicyMachineImageRequest()
       );
       request.project = '';
       const expectedHeaderRequestParams = 'project=';
@@ -882,26 +660,26 @@ describe('v1.BackendServicesClient', () => {
         },
       };
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.compute.v1.Operation()
+        new protos.google.cloud.compute.v1.Policy()
       );
-      client.innerApiCalls.patch = stubSimpleCall(expectedResponse);
-      const [response] = await client.patch(request);
-      assert.deepStrictEqual(response.latestResponse, expectedResponse);
+      client.innerApiCalls.setIamPolicy = stubSimpleCall(expectedResponse);
+      const [response] = await client.setIamPolicy(request);
+      assert.deepStrictEqual(response, expectedResponse);
       assert(
-        (client.innerApiCalls.patch as SinonStub)
+        (client.innerApiCalls.setIamPolicy as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
     });
 
-    it('invokes patch without error using callback', async () => {
-      const client = new backendservicesModule.v1.BackendServicesClient({
+    it('invokes setIamPolicy without error using callback', async () => {
+      const client = new machineimagesModule.v1.MachineImagesClient({
         auth: googleAuth,
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.compute.v1.PatchBackendServiceRequest()
+        new protos.google.cloud.compute.v1.SetIamPolicyMachineImageRequest()
       );
       request.project = '';
       const expectedHeaderRequestParams = 'project=';
@@ -913,15 +691,16 @@ describe('v1.BackendServicesClient', () => {
         },
       };
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.compute.v1.Operation()
+        new protos.google.cloud.compute.v1.Policy()
       );
-      client.innerApiCalls.patch = stubSimpleCallWithCallback(expectedResponse);
+      client.innerApiCalls.setIamPolicy =
+        stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
-        client.patch(
+        client.setIamPolicy(
           request,
           (
             err?: Error | null,
-            result?: protos.google.cloud.compute.v1.IOperation | null
+            result?: protos.google.cloud.compute.v1.IPolicy | null
           ) => {
             if (err) {
               reject(err);
@@ -934,20 +713,20 @@ describe('v1.BackendServicesClient', () => {
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
       assert(
-        (client.innerApiCalls.patch as SinonStub)
+        (client.innerApiCalls.setIamPolicy as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions /*, callback defined above */)
       );
     });
 
-    it('invokes patch with error', async () => {
-      const client = new backendservicesModule.v1.BackendServicesClient({
+    it('invokes setIamPolicy with error', async () => {
+      const client = new machineimagesModule.v1.MachineImagesClient({
         auth: googleAuth,
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.compute.v1.PatchBackendServiceRequest()
+        new protos.google.cloud.compute.v1.SetIamPolicyMachineImageRequest()
       );
       request.project = '';
       const expectedHeaderRequestParams = 'project=';
@@ -959,25 +738,28 @@ describe('v1.BackendServicesClient', () => {
         },
       };
       const expectedError = new Error('expected');
-      client.innerApiCalls.patch = stubSimpleCall(undefined, expectedError);
-      await assert.rejects(client.patch(request), expectedError);
+      client.innerApiCalls.setIamPolicy = stubSimpleCall(
+        undefined,
+        expectedError
+      );
+      await assert.rejects(client.setIamPolicy(request), expectedError);
       assert(
-        (client.innerApiCalls.patch as SinonStub)
+        (client.innerApiCalls.setIamPolicy as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
     });
   });
 
-  describe('setEdgeSecurityPolicy', () => {
-    it('invokes setEdgeSecurityPolicy without error', async () => {
-      const client = new backendservicesModule.v1.BackendServicesClient({
+  describe('testIamPermissions', () => {
+    it('invokes testIamPermissions without error', async () => {
+      const client = new machineimagesModule.v1.MachineImagesClient({
         auth: googleAuth,
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.compute.v1.SetEdgeSecurityPolicyBackendServiceRequest()
+        new protos.google.cloud.compute.v1.TestIamPermissionsMachineImageRequest()
       );
       request.project = '';
       const expectedHeaderRequestParams = 'project=';
@@ -989,27 +771,27 @@ describe('v1.BackendServicesClient', () => {
         },
       };
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.compute.v1.Operation()
+        new protos.google.cloud.compute.v1.TestPermissionsResponse()
       );
-      client.innerApiCalls.setEdgeSecurityPolicy =
+      client.innerApiCalls.testIamPermissions =
         stubSimpleCall(expectedResponse);
-      const [response] = await client.setEdgeSecurityPolicy(request);
-      assert.deepStrictEqual(response.latestResponse, expectedResponse);
+      const [response] = await client.testIamPermissions(request);
+      assert.deepStrictEqual(response, expectedResponse);
       assert(
-        (client.innerApiCalls.setEdgeSecurityPolicy as SinonStub)
+        (client.innerApiCalls.testIamPermissions as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
       );
     });
 
-    it('invokes setEdgeSecurityPolicy without error using callback', async () => {
-      const client = new backendservicesModule.v1.BackendServicesClient({
+    it('invokes testIamPermissions without error using callback', async () => {
+      const client = new machineimagesModule.v1.MachineImagesClient({
         auth: googleAuth,
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.compute.v1.SetEdgeSecurityPolicyBackendServiceRequest()
+        new protos.google.cloud.compute.v1.TestIamPermissionsMachineImageRequest()
       );
       request.project = '';
       const expectedHeaderRequestParams = 'project=';
@@ -1021,16 +803,16 @@ describe('v1.BackendServicesClient', () => {
         },
       };
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.compute.v1.Operation()
+        new protos.google.cloud.compute.v1.TestPermissionsResponse()
       );
-      client.innerApiCalls.setEdgeSecurityPolicy =
+      client.innerApiCalls.testIamPermissions =
         stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
-        client.setEdgeSecurityPolicy(
+        client.testIamPermissions(
           request,
           (
             err?: Error | null,
-            result?: protos.google.cloud.compute.v1.IOperation | null
+            result?: protos.google.cloud.compute.v1.ITestPermissionsResponse | null
           ) => {
             if (err) {
               reject(err);
@@ -1043,20 +825,20 @@ describe('v1.BackendServicesClient', () => {
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
       assert(
-        (client.innerApiCalls.setEdgeSecurityPolicy as SinonStub)
+        (client.innerApiCalls.testIamPermissions as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions /*, callback defined above */)
       );
     });
 
-    it('invokes setEdgeSecurityPolicy with error', async () => {
-      const client = new backendservicesModule.v1.BackendServicesClient({
+    it('invokes testIamPermissions with error', async () => {
+      const client = new machineimagesModule.v1.MachineImagesClient({
         auth: googleAuth,
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.compute.v1.SetEdgeSecurityPolicyBackendServiceRequest()
+        new protos.google.cloud.compute.v1.TestIamPermissionsMachineImageRequest()
       );
       request.project = '';
       const expectedHeaderRequestParams = 'project=';
@@ -1068,344 +850,28 @@ describe('v1.BackendServicesClient', () => {
         },
       };
       const expectedError = new Error('expected');
-      client.innerApiCalls.setEdgeSecurityPolicy = stubSimpleCall(
+      client.innerApiCalls.testIamPermissions = stubSimpleCall(
         undefined,
         expectedError
       );
-      await assert.rejects(
-        client.setEdgeSecurityPolicy(request),
-        expectedError
-      );
+      await assert.rejects(client.testIamPermissions(request), expectedError);
       assert(
-        (client.innerApiCalls.setEdgeSecurityPolicy as SinonStub)
+        (client.innerApiCalls.testIamPermissions as SinonStub)
           .getCall(0)
           .calledWith(request, expectedOptions, undefined)
-      );
-    });
-  });
-
-  describe('setSecurityPolicy', () => {
-    it('invokes setSecurityPolicy without error', async () => {
-      const client = new backendservicesModule.v1.BackendServicesClient({
-        auth: googleAuth,
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.compute.v1.SetSecurityPolicyBackendServiceRequest()
-      );
-      request.project = '';
-      const expectedHeaderRequestParams = 'project=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.compute.v1.Operation()
-      );
-      client.innerApiCalls.setSecurityPolicy = stubSimpleCall(expectedResponse);
-      const [response] = await client.setSecurityPolicy(request);
-      assert.deepStrictEqual(response.latestResponse, expectedResponse);
-      assert(
-        (client.innerApiCalls.setSecurityPolicy as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
-    });
-
-    it('invokes setSecurityPolicy without error using callback', async () => {
-      const client = new backendservicesModule.v1.BackendServicesClient({
-        auth: googleAuth,
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.compute.v1.SetSecurityPolicyBackendServiceRequest()
-      );
-      request.project = '';
-      const expectedHeaderRequestParams = 'project=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.compute.v1.Operation()
-      );
-      client.innerApiCalls.setSecurityPolicy =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.setSecurityPolicy(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.compute.v1.IOperation | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.setSecurityPolicy as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
-    });
-
-    it('invokes setSecurityPolicy with error', async () => {
-      const client = new backendservicesModule.v1.BackendServicesClient({
-        auth: googleAuth,
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.compute.v1.SetSecurityPolicyBackendServiceRequest()
-      );
-      request.project = '';
-      const expectedHeaderRequestParams = 'project=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedError = new Error('expected');
-      client.innerApiCalls.setSecurityPolicy = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(client.setSecurityPolicy(request), expectedError);
-      assert(
-        (client.innerApiCalls.setSecurityPolicy as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
-    });
-  });
-
-  describe('update', () => {
-    it('invokes update without error', async () => {
-      const client = new backendservicesModule.v1.BackendServicesClient({
-        auth: googleAuth,
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.compute.v1.UpdateBackendServiceRequest()
-      );
-      request.project = '';
-      const expectedHeaderRequestParams = 'project=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.compute.v1.Operation()
-      );
-      client.innerApiCalls.update = stubSimpleCall(expectedResponse);
-      const [response] = await client.update(request);
-      assert.deepStrictEqual(response.latestResponse, expectedResponse);
-      assert(
-        (client.innerApiCalls.update as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
-    });
-
-    it('invokes update without error using callback', async () => {
-      const client = new backendservicesModule.v1.BackendServicesClient({
-        auth: googleAuth,
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.compute.v1.UpdateBackendServiceRequest()
-      );
-      request.project = '';
-      const expectedHeaderRequestParams = 'project=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.compute.v1.Operation()
-      );
-      client.innerApiCalls.update =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.update(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.compute.v1.IOperation | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.update as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
-    });
-
-    it('invokes update with error', async () => {
-      const client = new backendservicesModule.v1.BackendServicesClient({
-        auth: googleAuth,
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.compute.v1.UpdateBackendServiceRequest()
-      );
-      request.project = '';
-      const expectedHeaderRequestParams = 'project=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedError = new Error('expected');
-      client.innerApiCalls.update = stubSimpleCall(undefined, expectedError);
-      await assert.rejects(client.update(request), expectedError);
-      assert(
-        (client.innerApiCalls.update as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
-    });
-  });
-
-  describe('aggregatedList', () => {
-    it('uses async iteration with aggregatedList without error', async () => {
-      const client = new backendservicesModule.v1.BackendServicesClient({
-        auth: googleAuth,
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.compute.v1.AggregatedListBackendServicesRequest()
-      );
-      request.project = '';
-      const expectedHeaderRequestParams = 'project=';
-      const expectedResponse = [
-        [
-          'tuple_key_1',
-          generateSampleMessage(
-            new protos.google.cloud.compute.v1.BackendServicesScopedList()
-          ),
-        ],
-        [
-          'tuple_key_2',
-          generateSampleMessage(
-            new protos.google.cloud.compute.v1.BackendServicesScopedList()
-          ),
-        ],
-        [
-          'tuple_key_3',
-          generateSampleMessage(
-            new protos.google.cloud.compute.v1.BackendServicesScopedList()
-          ),
-        ],
-      ];
-      client.descriptors.page.aggregatedList.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: Array<
-        [string, protos.google.cloud.compute.v1.IBackendServicesScopedList]
-      > = [];
-      const iterable = client.aggregatedListAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.aggregatedList.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert.strictEqual(
-        (
-          client.descriptors.page.aggregatedList.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
-      );
-    });
-
-    it('uses async iteration with aggregatedList with error', async () => {
-      const client = new backendservicesModule.v1.BackendServicesClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.compute.v1.AggregatedListBackendServicesRequest()
-      );
-      request.project = '';
-      const expectedHeaderRequestParams = 'project=';
-      const expectedError = new Error('expected');
-      client.descriptors.page.aggregatedList.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.aggregatedListAsync(request);
-      await assert.rejects(async () => {
-        const responses: Array<
-          [string, protos.google.cloud.compute.v1.IBackendServicesScopedList]
-        > = [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
-        }
-      });
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.aggregatedList.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert.strictEqual(
-        (
-          client.descriptors.page.aggregatedList.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
       );
     });
   });
 
   describe('list', () => {
     it('invokes list without error', async () => {
-      const client = new backendservicesModule.v1.BackendServicesClient({
+      const client = new machineimagesModule.v1.MachineImagesClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.compute.v1.ListBackendServicesRequest()
+        new protos.google.cloud.compute.v1.ListMachineImagesRequest()
       );
       request.project = '';
       const expectedHeaderRequestParams = 'project=';
@@ -1418,13 +884,13 @@ describe('v1.BackendServicesClient', () => {
       };
       const expectedResponse = [
         generateSampleMessage(
-          new protos.google.cloud.compute.v1.BackendService()
+          new protos.google.cloud.compute.v1.MachineImage()
         ),
         generateSampleMessage(
-          new protos.google.cloud.compute.v1.BackendService()
+          new protos.google.cloud.compute.v1.MachineImage()
         ),
         generateSampleMessage(
-          new protos.google.cloud.compute.v1.BackendService()
+          new protos.google.cloud.compute.v1.MachineImage()
         ),
       ];
       client.innerApiCalls.list = stubSimpleCall(expectedResponse);
@@ -1438,13 +904,13 @@ describe('v1.BackendServicesClient', () => {
     });
 
     it('invokes list without error using callback', async () => {
-      const client = new backendservicesModule.v1.BackendServicesClient({
+      const client = new machineimagesModule.v1.MachineImagesClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.compute.v1.ListBackendServicesRequest()
+        new protos.google.cloud.compute.v1.ListMachineImagesRequest()
       );
       request.project = '';
       const expectedHeaderRequestParams = 'project=';
@@ -1457,13 +923,13 @@ describe('v1.BackendServicesClient', () => {
       };
       const expectedResponse = [
         generateSampleMessage(
-          new protos.google.cloud.compute.v1.BackendService()
+          new protos.google.cloud.compute.v1.MachineImage()
         ),
         generateSampleMessage(
-          new protos.google.cloud.compute.v1.BackendService()
+          new protos.google.cloud.compute.v1.MachineImage()
         ),
         generateSampleMessage(
-          new protos.google.cloud.compute.v1.BackendService()
+          new protos.google.cloud.compute.v1.MachineImage()
         ),
       ];
       client.innerApiCalls.list = stubSimpleCallWithCallback(expectedResponse);
@@ -1472,7 +938,7 @@ describe('v1.BackendServicesClient', () => {
           request,
           (
             err?: Error | null,
-            result?: protos.google.cloud.compute.v1.IBackendService[] | null
+            result?: protos.google.cloud.compute.v1.IMachineImage[] | null
           ) => {
             if (err) {
               reject(err);
@@ -1492,13 +958,13 @@ describe('v1.BackendServicesClient', () => {
     });
 
     it('invokes list with error', async () => {
-      const client = new backendservicesModule.v1.BackendServicesClient({
+      const client = new machineimagesModule.v1.MachineImagesClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.compute.v1.ListBackendServicesRequest()
+        new protos.google.cloud.compute.v1.ListMachineImagesRequest()
       );
       request.project = '';
       const expectedHeaderRequestParams = 'project=';
@@ -1520,35 +986,35 @@ describe('v1.BackendServicesClient', () => {
     });
 
     it('invokes listStream without error', async () => {
-      const client = new backendservicesModule.v1.BackendServicesClient({
+      const client = new machineimagesModule.v1.MachineImagesClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.compute.v1.ListBackendServicesRequest()
+        new protos.google.cloud.compute.v1.ListMachineImagesRequest()
       );
       request.project = '';
       const expectedHeaderRequestParams = 'project=';
       const expectedResponse = [
         generateSampleMessage(
-          new protos.google.cloud.compute.v1.BackendService()
+          new protos.google.cloud.compute.v1.MachineImage()
         ),
         generateSampleMessage(
-          new protos.google.cloud.compute.v1.BackendService()
+          new protos.google.cloud.compute.v1.MachineImage()
         ),
         generateSampleMessage(
-          new protos.google.cloud.compute.v1.BackendService()
+          new protos.google.cloud.compute.v1.MachineImage()
         ),
       ];
       client.descriptors.page.list.createStream =
         stubPageStreamingCall(expectedResponse);
       const stream = client.listStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.compute.v1.BackendService[] = [];
+        const responses: protos.google.cloud.compute.v1.MachineImage[] = [];
         stream.on(
           'data',
-          (response: protos.google.cloud.compute.v1.BackendService) => {
+          (response: protos.google.cloud.compute.v1.MachineImage) => {
             responses.push(response);
           }
         );
@@ -1574,13 +1040,13 @@ describe('v1.BackendServicesClient', () => {
     });
 
     it('invokes listStream with error', async () => {
-      const client = new backendservicesModule.v1.BackendServicesClient({
+      const client = new machineimagesModule.v1.MachineImagesClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.compute.v1.ListBackendServicesRequest()
+        new protos.google.cloud.compute.v1.ListMachineImagesRequest()
       );
       request.project = '';
       const expectedHeaderRequestParams = 'project=';
@@ -1591,10 +1057,10 @@ describe('v1.BackendServicesClient', () => {
       );
       const stream = client.listStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.compute.v1.BackendService[] = [];
+        const responses: protos.google.cloud.compute.v1.MachineImage[] = [];
         stream.on(
           'data',
-          (response: protos.google.cloud.compute.v1.BackendService) => {
+          (response: protos.google.cloud.compute.v1.MachineImage) => {
             responses.push(response);
           }
         );
@@ -1619,30 +1085,30 @@ describe('v1.BackendServicesClient', () => {
     });
 
     it('uses async iteration with list without error', async () => {
-      const client = new backendservicesModule.v1.BackendServicesClient({
+      const client = new machineimagesModule.v1.MachineImagesClient({
         auth: googleAuth,
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.compute.v1.ListBackendServicesRequest()
+        new protos.google.cloud.compute.v1.ListMachineImagesRequest()
       );
       request.project = '';
       const expectedHeaderRequestParams = 'project=';
       const expectedResponse = [
         generateSampleMessage(
-          new protos.google.cloud.compute.v1.BackendService()
+          new protos.google.cloud.compute.v1.MachineImage()
         ),
         generateSampleMessage(
-          new protos.google.cloud.compute.v1.BackendService()
+          new protos.google.cloud.compute.v1.MachineImage()
         ),
         generateSampleMessage(
-          new protos.google.cloud.compute.v1.BackendService()
+          new protos.google.cloud.compute.v1.MachineImage()
         ),
       ];
       client.descriptors.page.list.asyncIterate =
         stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.compute.v1.IBackendService[] = [];
+      const responses: protos.google.cloud.compute.v1.IMachineImage[] = [];
       const iterable = client.listAsync(request);
       for await (const resource of iterable) {
         responses.push(resource!);
@@ -1661,13 +1127,13 @@ describe('v1.BackendServicesClient', () => {
     });
 
     it('uses async iteration with list with error', async () => {
-      const client = new backendservicesModule.v1.BackendServicesClient({
+      const client = new machineimagesModule.v1.MachineImagesClient({
         credentials: {client_email: 'bogus', private_key: 'bogus'},
         projectId: 'bogus',
       });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.compute.v1.ListBackendServicesRequest()
+        new protos.google.cloud.compute.v1.ListMachineImagesRequest()
       );
       request.project = '';
       const expectedHeaderRequestParams = 'project=';
@@ -1678,7 +1144,7 @@ describe('v1.BackendServicesClient', () => {
       );
       const iterable = client.listAsync(request);
       await assert.rejects(async () => {
-        const responses: protos.google.cloud.compute.v1.IBackendService[] = [];
+        const responses: protos.google.cloud.compute.v1.IMachineImage[] = [];
         for await (const resource of iterable) {
           responses.push(resource!);
         }

@@ -23,6 +23,7 @@ import {
   CallOptions,
   Descriptors,
   ClientOptions,
+  LROperation,
   PaginationCallback,
   GaxCall,
 } from 'google-gax';
@@ -33,19 +34,19 @@ import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
 /**
  * Client JSON configuration object, loaded from
- * `src/v1/interconnect_locations_client_config.json`.
+ * `src/v1/machine_images_client_config.json`.
  * This file defines retry strategy and timeouts for all API methods in this library.
  */
-import * as gapicConfig from './interconnect_locations_client_config.json';
+import * as gapicConfig from './machine_images_client_config.json';
 
 const version = require('../../../package.json').version;
 
 /**
- *  The InterconnectLocations API.
+ *  The MachineImages API.
  * @class
  * @memberof v1
  */
-export class InterconnectLocationsClient {
+export class MachineImagesClient {
   private _terminated = false;
   private _opts: ClientOptions;
   private _providedCustomServicePath: boolean;
@@ -62,10 +63,10 @@ export class InterconnectLocationsClient {
   };
   warn: (code: string, message: string, warnType?: string) => void;
   innerApiCalls: {[name: string]: Function};
-  interconnectLocationsStub?: Promise<{[name: string]: Function}>;
+  machineImagesStub?: Promise<{[name: string]: Function}>;
 
   /**
-   * Construct an instance of InterconnectLocationsClient.
+   * Construct an instance of MachineImagesClient.
    *
    * @param {object} [options] - The configuration object.
    * The options accepted by the constructor are described in detail
@@ -100,8 +101,7 @@ export class InterconnectLocationsClient {
    */
   constructor(opts?: ClientOptions) {
     // Ensure that options include all the required fields.
-    const staticMembers = this
-      .constructor as typeof InterconnectLocationsClient;
+    const staticMembers = this.constructor as typeof MachineImagesClient;
     const servicePath =
       opts?.servicePath || opts?.apiEndpoint || staticMembers.servicePath;
     this._providedCustomServicePath = !!(
@@ -176,7 +176,7 @@ export class InterconnectLocationsClient {
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.cloud.compute.v1.InterconnectLocations',
+      'google.cloud.compute.v1.MachineImages',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
       {'x-goog-api-client': clientHeader.join(' ')}
@@ -204,28 +204,36 @@ export class InterconnectLocationsClient {
    */
   initialize() {
     // If the client stub promise is already initialized, return immediately.
-    if (this.interconnectLocationsStub) {
-      return this.interconnectLocationsStub;
+    if (this.machineImagesStub) {
+      return this.machineImagesStub;
     }
 
     // Put together the "service stub" for
-    // google.cloud.compute.v1.InterconnectLocations.
-    this.interconnectLocationsStub = this._gaxGrpc.createStub(
+    // google.cloud.compute.v1.MachineImages.
+    this.machineImagesStub = this._gaxGrpc.createStub(
       this._opts.fallback
         ? (this._protos as protobuf.Root).lookupService(
-            'google.cloud.compute.v1.InterconnectLocations'
+            'google.cloud.compute.v1.MachineImages'
           )
         : // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          (this._protos as any).google.cloud.compute.v1.InterconnectLocations,
+          (this._protos as any).google.cloud.compute.v1.MachineImages,
       this._opts,
       this._providedCustomServicePath
     ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const interconnectLocationsStubMethods = ['get', 'list'];
-    for (const methodName of interconnectLocationsStubMethods) {
-      const callPromise = this.interconnectLocationsStub.then(
+    const machineImagesStubMethods = [
+      'delete',
+      'get',
+      'getIamPolicy',
+      'insert',
+      'list',
+      'setIamPolicy',
+      'testIamPermissions',
+    ];
+    for (const methodName of machineImagesStubMethods) {
+      const callPromise = this.machineImagesStub.then(
         stub =>
           (...args: Array<{}>) => {
             if (this._terminated) {
@@ -249,7 +257,7 @@ export class InterconnectLocationsClient {
       this.innerApiCalls[methodName] = apiCall;
     }
 
-    return this.interconnectLocationsStub;
+    return this.machineImagesStub;
   }
 
   /**
@@ -284,7 +292,6 @@ export class InterconnectLocationsClient {
    */
   static get scopes() {
     return [
-      'https://www.googleapis.com/auth/compute.readonly',
       'https://www.googleapis.com/auth/compute',
       'https://www.googleapis.com/auth/cloud-platform',
     ];
@@ -310,83 +317,191 @@ export class InterconnectLocationsClient {
   // -- Service calls --
   // -------------------
   /**
-   * Returns the details for the specified interconnect location. Gets a list of available interconnect locations by making a list() request.
+   * Deletes the specified machine image. Deleting a machine image is permanent and cannot be undone.
    *
    * @param {Object} request
    *   The request object that will be sent.
-   * @param {string} request.interconnectLocation
-   *   Name of the interconnect location to return.
+   * @param {string} request.machineImage
+   *   The name of the machine image to delete.
    * @param {string} request.project
    *   Project ID for this request.
+   * @param {string} request.requestId
+   *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [InterconnectLocation]{@link google.cloud.compute.v1.InterconnectLocation}.
+   *   The first element of the array is an object representing
+   *   a long running operation.
    *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
    *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/interconnect_locations.get.js</caption>
-   * region_tag:compute_v1_generated_InterconnectLocations_Get_async
+   *   This method is considered to be in beta. This means while
+   *   stable it is still a work-in-progress and under active development,
+   *   and might get backwards-incompatible changes at any time.
+   *   `.promise()` is not supported yet.
+   * @example <caption>include:samples/generated/v1/machine_images.delete.js</caption>
+   * region_tag:compute_v1_generated_MachineImages_Delete_async
    */
-  get(
-    request?: protos.google.cloud.compute.v1.IGetInterconnectLocationRequest,
+  delete(
+    request?: protos.google.cloud.compute.v1.IDeleteMachineImageRequest,
     options?: CallOptions
   ): Promise<
     [
-      protos.google.cloud.compute.v1.IInterconnectLocation,
-      (
-        | protos.google.cloud.compute.v1.IGetInterconnectLocationRequest
-        | undefined
-      ),
+      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+      protos.google.cloud.compute.v1.IOperation | undefined,
       {} | undefined
     ]
   >;
-  get(
-    request: protos.google.cloud.compute.v1.IGetInterconnectLocationRequest,
+  delete(
+    request: protos.google.cloud.compute.v1.IDeleteMachineImageRequest,
     options: CallOptions,
     callback: Callback<
-      protos.google.cloud.compute.v1.IInterconnectLocation,
-      | protos.google.cloud.compute.v1.IGetInterconnectLocationRequest
+      protos.google.cloud.compute.v1.IOperation,
+      | protos.google.cloud.compute.v1.IDeleteMachineImageRequest
       | null
       | undefined,
       {} | null | undefined
     >
   ): void;
-  get(
-    request: protos.google.cloud.compute.v1.IGetInterconnectLocationRequest,
+  delete(
+    request: protos.google.cloud.compute.v1.IDeleteMachineImageRequest,
     callback: Callback<
-      protos.google.cloud.compute.v1.IInterconnectLocation,
-      | protos.google.cloud.compute.v1.IGetInterconnectLocationRequest
+      protos.google.cloud.compute.v1.IOperation,
+      | protos.google.cloud.compute.v1.IDeleteMachineImageRequest
       | null
       | undefined,
       {} | null | undefined
     >
   ): void;
-  get(
-    request?: protos.google.cloud.compute.v1.IGetInterconnectLocationRequest,
+  delete(
+    request?: protos.google.cloud.compute.v1.IDeleteMachineImageRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
-          protos.google.cloud.compute.v1.IInterconnectLocation,
-          | protos.google.cloud.compute.v1.IGetInterconnectLocationRequest
+          protos.google.cloud.compute.v1.IOperation,
+          | protos.google.cloud.compute.v1.IDeleteMachineImageRequest
           | null
           | undefined,
           {} | null | undefined
         >,
     callback?: Callback<
-      protos.google.cloud.compute.v1.IInterconnectLocation,
-      | protos.google.cloud.compute.v1.IGetInterconnectLocationRequest
+      protos.google.cloud.compute.v1.IOperation,
+      | protos.google.cloud.compute.v1.IDeleteMachineImageRequest
       | null
       | undefined,
       {} | null | undefined
     >
   ): Promise<
     [
-      protos.google.cloud.compute.v1.IInterconnectLocation,
-      (
-        | protos.google.cloud.compute.v1.IGetInterconnectLocationRequest
-        | undefined
-      ),
+      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+      protos.google.cloud.compute.v1.IOperation | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        project: request.project || '',
+      });
+    this.initialize();
+    return this.innerApiCalls
+      .delete(request, options, callback)
+      .then(
+        ([response, operation, rawResponse]: [
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IOperation
+        ]) => {
+          return [
+            {
+              latestResponse: response,
+              done: false,
+              name: response.id,
+              metadata: null,
+              result: {},
+            },
+            operation,
+            rawResponse,
+          ];
+        }
+      );
+  }
+  /**
+   * Returns the specified machine image. Gets a list of available machine images by making a list() request.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.machineImage
+   *   The name of the machine image.
+   * @param {string} request.project
+   *   Project ID for this request.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [MachineImage]{@link google.cloud.compute.v1.MachineImage}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/machine_images.get.js</caption>
+   * region_tag:compute_v1_generated_MachineImages_Get_async
+   */
+  get(
+    request?: protos.google.cloud.compute.v1.IGetMachineImageRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.compute.v1.IMachineImage,
+      protos.google.cloud.compute.v1.IGetMachineImageRequest | undefined,
+      {} | undefined
+    ]
+  >;
+  get(
+    request: protos.google.cloud.compute.v1.IGetMachineImageRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.compute.v1.IMachineImage,
+      protos.google.cloud.compute.v1.IGetMachineImageRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  get(
+    request: protos.google.cloud.compute.v1.IGetMachineImageRequest,
+    callback: Callback<
+      protos.google.cloud.compute.v1.IMachineImage,
+      protos.google.cloud.compute.v1.IGetMachineImageRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  get(
+    request?: protos.google.cloud.compute.v1.IGetMachineImageRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.compute.v1.IMachineImage,
+          | protos.google.cloud.compute.v1.IGetMachineImageRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.compute.v1.IMachineImage,
+      protos.google.cloud.compute.v1.IGetMachineImageRequest | null | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.compute.v1.IMachineImage,
+      protos.google.cloud.compute.v1.IGetMachineImageRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -408,9 +523,434 @@ export class InterconnectLocationsClient {
     this.initialize();
     return this.innerApiCalls.get(request, options, callback);
   }
+  /**
+   * Gets the access control policy for a resource. May be empty if no such policy or resource exists.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {number} request.optionsRequestedPolicyVersion
+   *   Requested IAM Policy version.
+   * @param {string} request.project
+   *   Project ID for this request.
+   * @param {string} request.resource
+   *   Name or id of the resource for this request.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Policy]{@link google.cloud.compute.v1.Policy}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/machine_images.get_iam_policy.js</caption>
+   * region_tag:compute_v1_generated_MachineImages_GetIamPolicy_async
+   */
+  getIamPolicy(
+    request?: protos.google.cloud.compute.v1.IGetIamPolicyMachineImageRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.compute.v1.IPolicy,
+      (
+        | protos.google.cloud.compute.v1.IGetIamPolicyMachineImageRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
+  getIamPolicy(
+    request: protos.google.cloud.compute.v1.IGetIamPolicyMachineImageRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.compute.v1.IPolicy,
+      | protos.google.cloud.compute.v1.IGetIamPolicyMachineImageRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getIamPolicy(
+    request: protos.google.cloud.compute.v1.IGetIamPolicyMachineImageRequest,
+    callback: Callback<
+      protos.google.cloud.compute.v1.IPolicy,
+      | protos.google.cloud.compute.v1.IGetIamPolicyMachineImageRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getIamPolicy(
+    request?: protos.google.cloud.compute.v1.IGetIamPolicyMachineImageRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.compute.v1.IPolicy,
+          | protos.google.cloud.compute.v1.IGetIamPolicyMachineImageRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.compute.v1.IPolicy,
+      | protos.google.cloud.compute.v1.IGetIamPolicyMachineImageRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.compute.v1.IPolicy,
+      (
+        | protos.google.cloud.compute.v1.IGetIamPolicyMachineImageRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        project: request.project || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.getIamPolicy(request, options, callback);
+  }
+  /**
+   * Creates a machine image in the specified project using the data that is included in the request. If you are creating a new machine image to update an existing instance, your new machine image should use the same network or, if applicable, the same subnetwork as the original instance.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.compute.v1.MachineImage} request.machineImageResource
+   *   The body resource for this request
+   * @param {string} request.project
+   *   Project ID for this request.
+   * @param {string} request.requestId
+   *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+   * @param {string} request.sourceInstance
+   *   Required. Source instance that is used to create the machine image from.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing
+   *   a long running operation.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
+   *   for more details and examples.
+   *   This method is considered to be in beta. This means while
+   *   stable it is still a work-in-progress and under active development,
+   *   and might get backwards-incompatible changes at any time.
+   *   `.promise()` is not supported yet.
+   * @example <caption>include:samples/generated/v1/machine_images.insert.js</caption>
+   * region_tag:compute_v1_generated_MachineImages_Insert_async
+   */
+  insert(
+    request?: protos.google.cloud.compute.v1.IInsertMachineImageRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+      protos.google.cloud.compute.v1.IOperation | undefined,
+      {} | undefined
+    ]
+  >;
+  insert(
+    request: protos.google.cloud.compute.v1.IInsertMachineImageRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.compute.v1.IOperation,
+      | protos.google.cloud.compute.v1.IInsertMachineImageRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  insert(
+    request: protos.google.cloud.compute.v1.IInsertMachineImageRequest,
+    callback: Callback<
+      protos.google.cloud.compute.v1.IOperation,
+      | protos.google.cloud.compute.v1.IInsertMachineImageRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  insert(
+    request?: protos.google.cloud.compute.v1.IInsertMachineImageRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.compute.v1.IOperation,
+          | protos.google.cloud.compute.v1.IInsertMachineImageRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.compute.v1.IOperation,
+      | protos.google.cloud.compute.v1.IInsertMachineImageRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
+      protos.google.cloud.compute.v1.IOperation | undefined,
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        project: request.project || '',
+      });
+    this.initialize();
+    return this.innerApiCalls
+      .insert(request, options, callback)
+      .then(
+        ([response, operation, rawResponse]: [
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IOperation,
+          protos.google.cloud.compute.v1.IOperation
+        ]) => {
+          return [
+            {
+              latestResponse: response,
+              done: false,
+              name: response.id,
+              metadata: null,
+              result: {},
+            },
+            operation,
+            rawResponse,
+          ];
+        }
+      );
+  }
+  /**
+   * Sets the access control policy on the specified resource. Replaces any existing policy.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.compute.v1.GlobalSetPolicyRequest} request.globalSetPolicyRequestResource
+   *   The body resource for this request
+   * @param {string} request.project
+   *   Project ID for this request.
+   * @param {string} request.resource
+   *   Name or id of the resource for this request.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Policy]{@link google.cloud.compute.v1.Policy}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/machine_images.set_iam_policy.js</caption>
+   * region_tag:compute_v1_generated_MachineImages_SetIamPolicy_async
+   */
+  setIamPolicy(
+    request?: protos.google.cloud.compute.v1.ISetIamPolicyMachineImageRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.compute.v1.IPolicy,
+      (
+        | protos.google.cloud.compute.v1.ISetIamPolicyMachineImageRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
+  setIamPolicy(
+    request: protos.google.cloud.compute.v1.ISetIamPolicyMachineImageRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.compute.v1.IPolicy,
+      | protos.google.cloud.compute.v1.ISetIamPolicyMachineImageRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  setIamPolicy(
+    request: protos.google.cloud.compute.v1.ISetIamPolicyMachineImageRequest,
+    callback: Callback<
+      protos.google.cloud.compute.v1.IPolicy,
+      | protos.google.cloud.compute.v1.ISetIamPolicyMachineImageRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  setIamPolicy(
+    request?: protos.google.cloud.compute.v1.ISetIamPolicyMachineImageRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.compute.v1.IPolicy,
+          | protos.google.cloud.compute.v1.ISetIamPolicyMachineImageRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.compute.v1.IPolicy,
+      | protos.google.cloud.compute.v1.ISetIamPolicyMachineImageRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.compute.v1.IPolicy,
+      (
+        | protos.google.cloud.compute.v1.ISetIamPolicyMachineImageRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        project: request.project || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.setIamPolicy(request, options, callback);
+  }
+  /**
+   * Returns permissions that a caller has on the specified resource.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.project
+   *   Project ID for this request.
+   * @param {string} request.resource
+   *   Name or id of the resource for this request.
+   * @param {google.cloud.compute.v1.TestPermissionsRequest} request.testPermissionsRequestResource
+   *   The body resource for this request
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [TestPermissionsResponse]{@link google.cloud.compute.v1.TestPermissionsResponse}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/machine_images.test_iam_permissions.js</caption>
+   * region_tag:compute_v1_generated_MachineImages_TestIamPermissions_async
+   */
+  testIamPermissions(
+    request?: protos.google.cloud.compute.v1.ITestIamPermissionsMachineImageRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.compute.v1.ITestPermissionsResponse,
+      (
+        | protos.google.cloud.compute.v1.ITestIamPermissionsMachineImageRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
+  testIamPermissions(
+    request: protos.google.cloud.compute.v1.ITestIamPermissionsMachineImageRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.compute.v1.ITestPermissionsResponse,
+      | protos.google.cloud.compute.v1.ITestIamPermissionsMachineImageRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  testIamPermissions(
+    request: protos.google.cloud.compute.v1.ITestIamPermissionsMachineImageRequest,
+    callback: Callback<
+      protos.google.cloud.compute.v1.ITestPermissionsResponse,
+      | protos.google.cloud.compute.v1.ITestIamPermissionsMachineImageRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  testIamPermissions(
+    request?: protos.google.cloud.compute.v1.ITestIamPermissionsMachineImageRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.compute.v1.ITestPermissionsResponse,
+          | protos.google.cloud.compute.v1.ITestIamPermissionsMachineImageRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.compute.v1.ITestPermissionsResponse,
+      | protos.google.cloud.compute.v1.ITestIamPermissionsMachineImageRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.compute.v1.ITestPermissionsResponse,
+      (
+        | protos.google.cloud.compute.v1.ITestIamPermissionsMachineImageRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      gax.routingHeader.fromParams({
+        project: request.project || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.testIamPermissions(request, options, callback);
+  }
 
   /**
-   * Retrieves the list of interconnect locations available to the specified project.
+   * Retrieves a list of machine images that are contained within the specified project.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -429,7 +969,7 @@ export class InterconnectLocationsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of [InterconnectLocation]{@link google.cloud.compute.v1.InterconnectLocation}.
+   *   The first element of the array is Array of [MachineImage]{@link google.cloud.compute.v1.MachineImage}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
@@ -440,59 +980,51 @@ export class InterconnectLocationsClient {
    *   for more details and examples.
    */
   list(
-    request?: protos.google.cloud.compute.v1.IListInterconnectLocationsRequest,
+    request?: protos.google.cloud.compute.v1.IListMachineImagesRequest,
     options?: CallOptions
   ): Promise<
     [
-      protos.google.cloud.compute.v1.IInterconnectLocation[],
-      protos.google.cloud.compute.v1.IListInterconnectLocationsRequest | null,
-      protos.google.cloud.compute.v1.IInterconnectLocationList
+      protos.google.cloud.compute.v1.IMachineImage[],
+      protos.google.cloud.compute.v1.IListMachineImagesRequest | null,
+      protos.google.cloud.compute.v1.IMachineImageList
     ]
   >;
   list(
-    request: protos.google.cloud.compute.v1.IListInterconnectLocationsRequest,
+    request: protos.google.cloud.compute.v1.IListMachineImagesRequest,
     options: CallOptions,
     callback: PaginationCallback<
-      protos.google.cloud.compute.v1.IListInterconnectLocationsRequest,
-      | protos.google.cloud.compute.v1.IInterconnectLocationList
-      | null
-      | undefined,
-      protos.google.cloud.compute.v1.IInterconnectLocation
+      protos.google.cloud.compute.v1.IListMachineImagesRequest,
+      protos.google.cloud.compute.v1.IMachineImageList | null | undefined,
+      protos.google.cloud.compute.v1.IMachineImage
     >
   ): void;
   list(
-    request: protos.google.cloud.compute.v1.IListInterconnectLocationsRequest,
+    request: protos.google.cloud.compute.v1.IListMachineImagesRequest,
     callback: PaginationCallback<
-      protos.google.cloud.compute.v1.IListInterconnectLocationsRequest,
-      | protos.google.cloud.compute.v1.IInterconnectLocationList
-      | null
-      | undefined,
-      protos.google.cloud.compute.v1.IInterconnectLocation
+      protos.google.cloud.compute.v1.IListMachineImagesRequest,
+      protos.google.cloud.compute.v1.IMachineImageList | null | undefined,
+      protos.google.cloud.compute.v1.IMachineImage
     >
   ): void;
   list(
-    request?: protos.google.cloud.compute.v1.IListInterconnectLocationsRequest,
+    request?: protos.google.cloud.compute.v1.IListMachineImagesRequest,
     optionsOrCallback?:
       | CallOptions
       | PaginationCallback<
-          protos.google.cloud.compute.v1.IListInterconnectLocationsRequest,
-          | protos.google.cloud.compute.v1.IInterconnectLocationList
-          | null
-          | undefined,
-          protos.google.cloud.compute.v1.IInterconnectLocation
+          protos.google.cloud.compute.v1.IListMachineImagesRequest,
+          protos.google.cloud.compute.v1.IMachineImageList | null | undefined,
+          protos.google.cloud.compute.v1.IMachineImage
         >,
     callback?: PaginationCallback<
-      protos.google.cloud.compute.v1.IListInterconnectLocationsRequest,
-      | protos.google.cloud.compute.v1.IInterconnectLocationList
-      | null
-      | undefined,
-      protos.google.cloud.compute.v1.IInterconnectLocation
+      protos.google.cloud.compute.v1.IListMachineImagesRequest,
+      protos.google.cloud.compute.v1.IMachineImageList | null | undefined,
+      protos.google.cloud.compute.v1.IMachineImage
     >
   ): Promise<
     [
-      protos.google.cloud.compute.v1.IInterconnectLocation[],
-      protos.google.cloud.compute.v1.IListInterconnectLocationsRequest | null,
-      protos.google.cloud.compute.v1.IInterconnectLocationList
+      protos.google.cloud.compute.v1.IMachineImage[],
+      protos.google.cloud.compute.v1.IListMachineImagesRequest | null,
+      protos.google.cloud.compute.v1.IMachineImageList
     ]
   > | void {
     request = request || {};
@@ -533,7 +1065,7 @@ export class InterconnectLocationsClient {
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing [InterconnectLocation]{@link google.cloud.compute.v1.InterconnectLocation} on 'data' event.
+   *   An object stream which emits an object representing [MachineImage]{@link google.cloud.compute.v1.MachineImage} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listAsync()`
@@ -543,7 +1075,7 @@ export class InterconnectLocationsClient {
    *   for more details and examples.
    */
   listStream(
-    request?: protos.google.cloud.compute.v1.IListInterconnectLocationsRequest,
+    request?: protos.google.cloud.compute.v1.IListMachineImagesRequest,
     options?: CallOptions
   ): Transform {
     request = request || {};
@@ -587,18 +1119,18 @@ export class InterconnectLocationsClient {
    * @returns {Object}
    *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
    *   When you iterate the returned iterable, each element will be an object representing
-   *   [InterconnectLocation]{@link google.cloud.compute.v1.InterconnectLocation}. The API will be called under the hood as needed, once per the page,
+   *   [MachineImage]{@link google.cloud.compute.v1.MachineImage}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/interconnect_locations.list.js</caption>
-   * region_tag:compute_v1_generated_InterconnectLocations_List_async
+   * @example <caption>include:samples/generated/v1/machine_images.list.js</caption>
+   * region_tag:compute_v1_generated_MachineImages_List_async
    */
   listAsync(
-    request?: protos.google.cloud.compute.v1.IListInterconnectLocationsRequest,
+    request?: protos.google.cloud.compute.v1.IListMachineImagesRequest,
     options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.compute.v1.IInterconnectLocation> {
+  ): AsyncIterable<protos.google.cloud.compute.v1.IMachineImage> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -614,7 +1146,7 @@ export class InterconnectLocationsClient {
       this.innerApiCalls['list'] as GaxCall,
       request as unknown as RequestType,
       callSettings
-    ) as AsyncIterable<protos.google.cloud.compute.v1.IInterconnectLocation>;
+    ) as AsyncIterable<protos.google.cloud.compute.v1.IMachineImage>;
   }
 
   /**
@@ -626,7 +1158,7 @@ export class InterconnectLocationsClient {
   close(): Promise<void> {
     this.initialize();
     if (!this._terminated) {
-      return this.interconnectLocationsStub!.then(stub => {
+      return this.machineImagesStub!.then(stub => {
         this._terminated = true;
         stub.close();
       });
