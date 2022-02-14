@@ -1,4 +1,4 @@
-Introduction: |-
+introduction: |-
     > Node.js idiomatic client for [Compute Engine][product-docs].
     [Compute Engine](https://cloud.google.com/compute/docs) is a
     computing and hosting service that lets you create and run virtual
