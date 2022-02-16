@@ -136,6 +136,7 @@ describe('Compute', () => {
         image: NAME,
       });
     });
+  });
 
   describe('Firewall', () => {
     let NAME = null;
