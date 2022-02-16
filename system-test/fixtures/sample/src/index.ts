@@ -1,4 +1,4 @@
-// Copyright 2021 Google LLC
+// Copyright 2022 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -46,6 +46,7 @@ import {
   InterconnectsClient,
   LicenseCodesClient,
   LicensesClient,
+  MachineImagesClient,
   MachineTypesClient,
   NetworkEndpointGroupsClient,
   NetworksClient,
@@ -201,6 +202,9 @@ function doStuffWithLicenseCodesClient(client: LicenseCodesClient) {
   client.close();
 }
 function doStuffWithLicensesClient(client: LicensesClient) {
+  client.close();
+}
+function doStuffWithMachineImagesClient(client: MachineImagesClient) {
   client.close();
 }
 function doStuffWithMachineTypesClient(client: MachineTypesClient) {
@@ -478,6 +482,9 @@ function main() {
   // check that the client instance can be created
   const licensesClient = new LicensesClient();
   doStuffWithLicensesClient(licensesClient);
+  // check that the client instance can be created
+  const machineImagesClient = new MachineImagesClient();
+  doStuffWithMachineImagesClient(machineImagesClient);
   // check that the client instance can be created
   const machineTypesClient = new MachineTypesClient();
   doStuffWithMachineTypesClient(machineTypesClient);

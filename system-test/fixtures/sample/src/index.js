@@ -1,4 +1,4 @@
-// Copyright 2021 Google LLC
+// Copyright 2022 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -53,6 +53,7 @@ function main() {
   const interconnectsClient = new compute.InterconnectsClient();
   const licenseCodesClient = new compute.LicenseCodesClient();
   const licensesClient = new compute.LicensesClient();
+  const machineImagesClient = new compute.MachineImagesClient();
   const machineTypesClient = new compute.MachineTypesClient();
   const networkEndpointGroupsClient = new compute.NetworkEndpointGroupsClient();
   const networksClient = new compute.NetworksClient();

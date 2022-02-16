@@ -1,4 +1,4 @@
-// Copyright 2021 Google LLC
+// Copyright 2022 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -45,6 +45,7 @@ export {InterconnectLocationsClient} from './interconnect_locations_client';
 export {InterconnectsClient} from './interconnects_client';
 export {LicenseCodesClient} from './license_codes_client';
 export {LicensesClient} from './licenses_client';
+export {MachineImagesClient} from './machine_images_client';
 export {MachineTypesClient} from './machine_types_client';
 export {NetworkEndpointGroupsClient} from './network_endpoint_groups_client';
 export {NetworksClient} from './networks_client';

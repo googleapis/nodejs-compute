@@ -4,13 +4,24 @@
 
 # [Google Compute Engine: Node.js Client](https://github.com/googleapis/nodejs-compute)
 
-[![release level](https://img.shields.io/badge/release%20level-preview-yellow.svg?style=flat)](https://cloud.google.com/terms/launch-stages)
+[![release level](https://img.shields.io/badge/release%20level-stable-brightgreen.svg?style=flat)](https://cloud.google.com/terms/launch-stages)
 [![npm version](https://img.shields.io/npm/v/@google-cloud/compute.svg)](https://www.npmjs.org/package/@google-cloud/compute)
 
 
 
 
-Google Compute Engine Client Library for Node.js
+> Node.js idiomatic client for [Compute Engine][product-docs].
+[Compute Engine](https://cloud.google.com/compute/docs) is a
+computing and hosting service that lets you create and run virtual
+machines on Google infrastructure. Compute Engine offers scale,
+performance, and value that lets you easily launch large compute
+clusters on Google's infrastructure. There are no upfront
+investments, and you can run thousands of virtual CPUs on a system
+that offers quick, consistent performance.
+
+This library is GA from version 3.1.0. It is
+backwards-incompatible with prior versions 0.x.y, 1.x.y, 2.x.y,
+and 3.0.y.
 
 
 A comprehensive list of changes in each version may be found in
@@ -91,21 +102,21 @@ also contains samples.
 Our client libraries follow the [Node.js release schedule](https://nodejs.org/en/about/releases/).
 Libraries are compatible with all current _active_ and _maintenance_ versions of
 Node.js.
+If you are using an end-of-life version of Node.js, we recommend that you update
+as soon as possible to an actively supported LTS version.
+
+Google's client libraries support legacy versions of Node.js runtimes on a
+best-efforts basis with the following warnings:
+
+* Legacy versions are not tested in continuous integration.
+* Some security patches and features cannot be backported.
+* Dependencies cannot be kept up-to-date.
 
 Client libraries targeting some end-of-life versions of Node.js are available, and
-can be installed via npm [dist-tags](https://docs.npmjs.com/cli/dist-tag).
+can be installed through npm [dist-tags](https://docs.npmjs.com/cli/dist-tag).
 The dist-tags follow the naming convention `legacy-(version)`.
-
-_Legacy Node.js versions are supported as a best effort:_
-
-* Legacy versions will not be tested in continuous integration.
-* Some security patches may not be able to be backported.
-* Dependencies will not be kept up-to-date, and features will not be backported.
-
-#### Legacy tags available
-
-* `legacy-8`: install client libraries from this dist-tag for versions
-  compatible with Node.js 8.
+For example, `npm install @google-cloud/compute@legacy-8` installs client libraries
+for versions compatible with Node.js 8.
 
 ## Versioning
 
@@ -113,13 +124,14 @@ This library follows [Semantic Versioning](http://semver.org/).
 
 
 
+This library is considered to be **stable**. The code surface will not change in backwards-incompatible ways
+unless absolutely necessary (e.g. because of critical security issues) or with
+an extensive deprecation period. Issues and requests against **stable** libraries
+are addressed with the highest priority.
 
 
 
 
-This library is considered to be in **preview**. This means it is still a
-work-in-progress and under active development. Any release is subject to
-backwards-incompatible changes at any time.
 
 
 More Information: [Google Cloud Platform Launch Stages][launch_stages]
