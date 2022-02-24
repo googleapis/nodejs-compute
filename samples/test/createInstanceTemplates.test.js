@@ -68,8 +68,8 @@ describe('create instance templates tests', () => {
   const templateName = generateTestId();
   const zone = 'europe-central2-b';
   const instanceName = generateTestId();
-  const networkName = 'global/networks/default';
-  const subnetworkName = 'regions/asia-east1/subnetworks/default';
+  const networkName = 'global/networks/default-compute';
+  const subnetworkName = 'regions/asia-east1/subnetworks/default-compute';
 
   after(async () => {
     const instances = await getStaleVMInstances();
