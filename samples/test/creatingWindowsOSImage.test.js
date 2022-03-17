@@ -23,6 +23,9 @@ const {assert} = require('chai');
 const {generateTestId, getStaleVMInstances, deleteInstance} = require('./util');
 
 const instancesClient = new compute.InstancesClient();
+const imagesClient = new compute.ImagesClient();
+const globalOperationsClient = new compute.GlobalOperationsClient();
+const zoneOperationsClient = new compute.ZoneOperationsClient();
 
 const execSync = cmd => cp.execSync(cmd, {encoding: 'utf-8'});
 
@@ -44,7 +47,7 @@ describe('create windows os image tests', () => {
   it('should create windows os image', async () => {
     const projectId = await instancesClient.getProjectId();
 
-    const [response] = await instancesClient.insert({
+    const [insertResponse] = await instancesClient.insert({
       instanceResource: {
         name: instanceName,
         disks: [
@@ -71,21 +74,44 @@ describe('create windows os image tests', () => {
       project: projectId,
       zone,
     });
-    let operation = response.latestResponse;
-    const operationsClient = new compute.ZoneOperationsClient();
+    let operation = insertResponse.latestResponse;
 
     while (operation.status !== 'DONE') {
-      [operation] = await operationsClient.wait({
+      [operation] = await zoneOperationsClient.wait({
         operation: operation.name,
         project: projectId,
         zone: operation.zone.split('/').pop(),
       });
     }
 
-    const outputCreate = execSync(
+    try {
+      execSync(
+        `node instances/windows/creatingWindowsOSImage ${projectId} ${zone} ${diskName} ${imageName}`
+      );
+    } catch (err) {
+      assert.include(
+        err.stderr.toString(),
+        `Instance ${instanceName} should be stopped.`
+      );
+    }
+
+    const outputCreate2 = execSync(
       `node instances/windows/creatingWindowsOSImage ${projectId} ${zone} ${diskName} ${imageName} eu true`
     );
-    assert.match(outputCreate, /Image created./);
+    assert.match(outputCreate2, /Image created./);
+
+    const [deleteResponse] = await imagesClient.delete({
+      project: projectId,
+      image: imageName,
+    });
+    operation = deleteResponse.latestResponse;
+
+    while (operation.status !== 'DONE') {
+      [operation] = await globalOperationsClient.wait({
+        operation: operation.name,
+        project: projectId,
+      });
+    }
 
     execSync(`node deleteInstance ${projectId} ${zone} ${instanceName}`);
   });
