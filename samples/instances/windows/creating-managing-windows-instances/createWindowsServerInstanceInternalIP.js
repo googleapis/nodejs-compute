@@ -113,7 +113,7 @@ function main(
   }
 
   createWndowsServerInstanceExpernalIP();
-  // [END compute_create_windows_instance_external_ip]
+  // [END compute_create_windows_instance_internal_ip]
 }
 
 process.on('unhandledRejection', err => {
