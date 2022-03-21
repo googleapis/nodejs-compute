@@ -47,6 +47,12 @@ function main(
     const parsedName = name.split('/');
     const l = parsedName.length;
 
+    if (parsedName.legth < 5) {
+      throw new Error(
+        'Provide correct instance name in the following format: https://www.googleapis.com/compute/v1/projects/PROJECT/zones/ZONE/instances/INSTANCE_NAME'
+      );
+    }
+
     return [parsedName[l - 1], parsedName[l - 3], parsedName[l - 5]];
   }
 
@@ -83,7 +89,7 @@ function main(
     }
 
     if (forceCreate) {
-      console.log(
+      console.warn(
         'Warning: forceCreate option compromise the integrity of your image. Stop the instance before you create the image if possible.'
       );
     }
