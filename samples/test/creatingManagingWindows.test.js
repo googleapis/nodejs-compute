@@ -36,7 +36,7 @@ const deleteFirewallRule = async (projectId, firewallRule) => {
   });
   let operation = response.latestResponse;
 
-  // Wait for the create operation to complete.
+  // Wait for the delete operation to complete.
   while (operation.status !== 'DONE') {
     [operation] = await globalOperationsClient.wait({
       operation: operation.name,
@@ -53,7 +53,7 @@ const deleteRoute = async (projectId, routeName) => {
   let operation = response.latestResponse;
   const operationsClient = new compute.GlobalOperationsClient();
 
-  // Wait for the create operation to complete.
+  // Wait for the delete operation to complete.
   while (operation.status !== 'DONE') {
     [operation] = await operationsClient.wait({
       operation: operation.name,
@@ -72,7 +72,7 @@ describe('creating managing windows instances tests', () => {
   const machineType = 'n1-standard-1';
   const sourceImageFamily = 'windows-2012-r2';
 
-  after(async () => {
+  before(async () => {
     const instances = await getStaleVMInstances();
     await Promise.all(
       instances.map(instance =>
