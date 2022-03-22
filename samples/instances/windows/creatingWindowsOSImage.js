@@ -13,11 +13,11 @@
 // limitations under the License.
 
 /**
- * Creates a new windows image from the provided source disk name.
+ * Creates a new Windows image from the specified source disk.
  *
  * @param {string} projectId - Project ID or project number of the Cloud project you use.
  * @param {string} zone - Zone of the disk you copy from.
- * @param {string} sourceDiskName - Source disk name you copy from.
+ * @param {string} sourceDiskName - Name of the source disk you copy from.
  * @param {string} imageName - Name of the image you want to create.
  * @param {string} storageLocation - Storage location for the image. If the value is undefined, function will store the image in the multi-region closest to your image's source location.
  * @param {boolean} forceCreate - Create the image even if the source disk is attached to a running instance.
@@ -61,14 +61,14 @@ function main(
     const instancesClient = new compute.InstancesClient();
     const disksClient = new compute.DisksClient();
 
-    // Getting instances where source disk uses
+    // Getting instances where source disk is attached
     const [sourceDisk] = await disksClient.get({
       project: projectId,
       zone,
       disk: sourceDiskName,
     });
 
-    // Сhecking the instances to which the disk is attached
+    // Сhecking whether the instances is stopped
     for (const fullInstanceName of sourceDisk.users) {
       const [instanceName, instanceZone, instanceProjectId] =
         parseInstanceName(fullInstanceName);
@@ -83,7 +83,7 @@ function main(
         !forceCreate
       ) {
         throw new Error(
-          `Instance ${instanceName} should be stopped. Please, stop the instance using GCESysprep command or set forceCreate parameter to true (not recommended). More information here: https://cloud.google.com/compute/docs/instances/windows/creating-windows-os-image#api.`
+          `Instance ${instanceName} should be stopped. Please stop the instance using GCESysprep command or set forceCreate parameter to true (not recommended). More information here: https://cloud.google.com/compute/docs/instances/windows/creating-windows-os-image#api.`
         );
       }
     }
