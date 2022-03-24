@@ -13,11 +13,11 @@
 // limitations under the License.
 
 /**
- * Prints an instance serial port output
+ * Prints the serial port output for an instance.
  *
  * @param {string} projectId - ID or number of the project you want to use.
- * @param {string} zone - Name of the zone you want to check, for example: us-west3-b
- * @param {string} instanceName - Name of the instance you wan to check.
+ * @param {string} zone - The zone of your instance that you want to check, for example: us-west3-b
+ * @param {string} instanceName - Name of the instance you want to check.
  */
 function main(projectId, zone, instanceName) {
   // [START compute_get_instance_serial_port]
