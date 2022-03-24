@@ -13,7 +13,7 @@
 // limitations under the License.
 
 /**
- * Creates a new allow egress firewall rule with the highest priority for host kms.windows.googlecloud.com (35.190.247.13) for Windows activation.
+ * Creates an egress firewall rule with the highest priority for host kms.windows.googlecloud.com (35.190.247.13) for Windows activation.
  *
  * @param {string} projectId - ID or number of the project you want to use.
  * @param {string} firewallRuleName - Name of the firewall rule you want to create.
