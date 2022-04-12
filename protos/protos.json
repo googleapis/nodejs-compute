@@ -23186,6 +23186,7 @@
                           "id": 459714768,
                           "options": {
                             "(google.cloud.operation_request_field)": "parent_id",
+                            "(google.api.field_behavior)": "REQUIRED",
                             "proto3_optional": true
                           }
                         },
