@@ -1,10 +1,12 @@
 branchProtectionRules:
   - pattern: main
+    isAdminEnforced: true
+    requiredApprovingReviewCount: 1
     requiresCodeOwnerReviews: true
-    requiresStrictStatusChecks: true
+    requiresStrictStatusChecks: false
     requiredStatusCheckContexts:
-      - 'ci/kokoro: Samples test'
-      - 'ci/kokoro: System test'
+      - "ci/kokoro: Samples test"
+      - "ci/kokoro: System test"
       - docs
       - lint
       - test (12)
@@ -13,10 +15,3 @@ branchProtectionRules:
       - cla/google
       - windows
       - OwlBot Post Processor
-permissionRules:
-  - team: yoshi-admins
-    permission: admin
-  - team: yoshi-nodejs-admins
-    permission: admin
-  - team: yoshi-nodejs
-    permission: push
