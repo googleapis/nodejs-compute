@@ -55,7 +55,7 @@ function main(
 
   const compute = require('@google-cloud/compute');
 
-  async function createWndowsServerInstanceInternalIP() {
+  async function createWindowsServerInstanceInternalIP() {
     const instancesClient = new compute.InstancesClient();
 
     const [response] = await instancesClient.insert({
@@ -112,7 +112,7 @@ function main(
     console.log('Instance created.');
   }
 
-  createWndowsServerInstanceInternalIP();
+  createWindowsServerInstanceInternalIP();
   // [END compute_create_windows_instance_internal_ip]
 }
 
