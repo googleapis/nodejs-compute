@@ -4,6 +4,13 @@
 
 [1]: https://www.npmjs.com/package/@google-cloud/compute?activeTab=versions
 
+### [3.2.2](https://github.com/googleapis/nodejs-compute/compare/v3.2.1...v3.2.2) (2022-05-11)
+
+
+### Bug Fixes
+
+* **deps:** update dependency google-gax to v3 ([#727](https://github.com/googleapis/nodejs-compute/issues/727)) ([b856cbd](https://github.com/googleapis/nodejs-compute/commit/b856cbdf4d7440826173e8ceabe50556daada3ed))
+
 ### [3.2.1](https://github.com/googleapis/nodejs-compute/compare/v3.2.0...v3.2.1) (2022-05-09)
 
 
