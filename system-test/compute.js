@@ -24,7 +24,7 @@ const DiskType = compute.protos.google.cloud.compute.v1.AttachedDisk.Type;
 const delay = async test => {
   const retries = test.currentRetry();
   if (retries === 0) return; // no retry on the first failure.
-  // see: https://cloud.google.com/storage/docs/exponential-backoff:
+  // see: https://github.com/grpc/proposal/blob/master/A6-client-retries.md#exponential-backoff
   const ms = Math.pow(2, retries) * 500 + Math.random() * 1000;
   return new Promise(done => {
     console.info(`retrying "${test.title}" in ${ms}ms`);
