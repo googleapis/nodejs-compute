@@ -74,7 +74,8 @@ function main(projectId, zone, instanceName, newMemory) {
     // is available only for N1, N2 and N2D CPUs
 
     const start = instance.machineType.substring(
-      instance.machineType.lastIndexOf('-') + 1
+      0,
+      instance.machineType.lastIndexOf('-')
     );
 
     const [response] = await instancesClient.setMachineType({

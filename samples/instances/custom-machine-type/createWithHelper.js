@@ -115,7 +115,6 @@ function main(projectId, zone, instanceName, cpuSeries, coreCount, memory) {
 
       this.TYPE_LIMITS = {
         [this.N1]: this.CpuSeriesN1Limit,
-        [this.N1]: this.CpuSeriesN1Limit,
         [this.N2]: this.CpuSeriesN2Limit,
         [this.N2D]: this.CpuSeriesN2DLimit,
         [this.E2]: this.CpuSeriesE2Limit,
@@ -137,7 +136,7 @@ function main(projectId, zone, instanceName, cpuSeries, coreCount, memory) {
       // Check the number of cores
       if (
         this.typeLimit.allowedCores.length > 0 &&
-        !this.typeLimt.allowedCores.includes(coreCount)
+        !this.typeLimit.allowedCores.includes(coreCount)
       ) {
         throw new Error(
           `Invalid number of cores requested. Allowed number of cores for ${this.cpuSeries} is: ${this.typeLimit.allowedCores}`

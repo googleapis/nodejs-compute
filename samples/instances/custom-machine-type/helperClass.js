@@ -43,7 +43,6 @@ function main(zone, cpuSeries, coreCount, memory) {
       this.cpuSeries = cpuSeries;
       this.coreCount = coreCount;
       this.memory = memory;
-      this.typeLimit = this.TYPE_LIMITS[this.cpuSeries];
 
       this.N1 = 'custom';
       this.N2 = 'n2-custom';
@@ -111,7 +110,6 @@ function main(zone, cpuSeries, coreCount, memory) {
 
       this.TYPE_LIMITS = {
         [this.N1]: this.CpuSeriesN1Limit,
-        [this.N1]: this.CpuSeriesN1Limit,
         [this.N2]: this.CpuSeriesN2Limit,
         [this.N2D]: this.CpuSeriesN2DLimit,
         [this.E2]: this.CpuSeriesE2Limit,
@@ -119,6 +117,8 @@ function main(zone, cpuSeries, coreCount, memory) {
         [this.E2Small]: this.CpuSeriesE2SmallLimit,
         [this.E2Medium]: this.CpuSeriesE2MediumLimit,
       };
+
+      this.typeLimit = this.TYPE_LIMITS[this.cpuSeries];
     }
 
     validate() {
@@ -173,16 +173,16 @@ function main(zone, cpuSeries, coreCount, memory) {
       }
 
       if (this.memory > this.coreCount * this.typeLimit.maxMemPerCore) {
-        return `zones/${this.zone}/machineTypes/${this.cpuSeries}-${coreCount}-${memory}-ext`;
+        return `zones/${this.zone}/machineTypes/${this.cpuSeries}-${coreCount}-${this.memory}-ext`;
       }
 
-      return `zones/${zone}/machineTypes/${cpuSeries}-${coreCount}-${memory}`;
+      return `zones/${zone}/machineTypes/${this.cpuSeries}-${this.coreCount}-${this.memory}`;
     }
 
     // Returns machine type in a format without the zone. For example, n2-custom-0-10240.
     // This format is used to create instance templates.
     getMachineType() {
-      return this.getURI().split('/').pop();
+      return this.getMachineTypeURI().split('/').pop();
     }
   }
 
@@ -200,8 +200,8 @@ function main(zone, cpuSeries, coreCount, memory) {
     const machineType = new CustomMachineType(
       zone,
       cpuSeries,
-      memory,
-      coreCount
+      coreCount,
+      memory
     );
 
     console.log(`URI: ${machineType.getMachineTypeURI()}`);
