@@ -164,7 +164,7 @@ describe('disks tests', () => {
     const projectId = await instancesClient.getProjectId();
 
     const output = execSync(
-      `node disks/createDiskFromSnapshot ${projectId} ${zone} ${diskName} ${diskType} 10`
+      `node disks/createEmptyDisk ${projectId} ${zone} ${diskName} ${diskType} 10`
     );
     assert.match(output, /Disk created./);
 
@@ -218,7 +218,7 @@ describe('disks tests', () => {
     const output = execSync(
       `node disks/setDiskAutodelete ${projectId} ${zone} ${instanceName} ${diskName} true`
     );
-    assert.match(output, /Instance autoDelete field updated./);
+    assert.match(output, /Disk autoDelete field updated./);
 
     const instance = await getInstance(projectId, zone, instanceName);
 

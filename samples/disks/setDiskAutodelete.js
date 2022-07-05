@@ -68,7 +68,7 @@ function main(projectId, zone, instanceName, diskName, autoDelete) {
       });
     }
 
-    console.log('Instance autoDelete field updated.');
+    console.log('Disk autoDelete field updated.');
   }
 
   setDiskAutodelete();

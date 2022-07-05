@@ -42,7 +42,7 @@ function main(
   location,
   diskProjectId
 ) {
-  // [START compute_snapshot_delete]
+  // [START compute_snapshot_create]
   /**
    * TODO(developer): Uncomment and replace these variables before running the sample.
    */
@@ -56,7 +56,7 @@ function main(
 
   const compute = require('@google-cloud/compute');
 
-  async function deleteSnapshot() {
+  async function createSnapshot() {
     const snapshotsClient = new compute.SnapshotsClient();
 
     let disk;
@@ -118,8 +118,8 @@ function main(
     console.log('Snapshot created.');
   }
 
-  deleteSnapshot();
-  // [END compute_snapshot_delete]
+  createSnapshot();
+  // [END compute_snapshot_create]
 }
 
 process.on('unhandledRejection', err => {

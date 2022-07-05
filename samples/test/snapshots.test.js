@@ -57,7 +57,7 @@ const createRegionDisk = async (projectId, region, diskName) => {
 
 const createDisk = async (projectId, zone, diskName, sourceImage) => {
   const [response] = await disksClient.insert({
-    project: projectId,
+    project: projeDctId,
     zone,
     diskResource: {
       sourceImage,
