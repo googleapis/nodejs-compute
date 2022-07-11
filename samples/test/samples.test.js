@@ -81,15 +81,10 @@ describe('samples', () => {
 
   it('should print instance data', async () => {
     const projectId = await instancesClient.getProjectId();
-
-    execSync(`node createInstance ${projectId} ${zone} ${instanceName}`);
-
     const output = execSync(
       `node getInstance ${projectId} ${zone} ${instanceName}`
     );
     assert.include(output, `"name": "${instanceName}"`);
-
-    execSync(`node deleteInstance ${projectId} ${zone} ${instanceName}`);
   });
 
   it('should print instances list', async () => {
