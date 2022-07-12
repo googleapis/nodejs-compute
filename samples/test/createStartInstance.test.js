@@ -131,11 +131,11 @@ describe('create start instance tests', () => {
     const projectId = await instancesClient.getProjectId();
     let output;
     try {
-      execSync(
+      output = execSync(
         `node instances/create-start-instance/createInstanceFromPublicImage ${projectId} ${zone} ${instanceName}`
       );
     } catch (err) {
-      if (err.message.includes(/already exists/)) {
+      if (err.message.includes('already exists')) {
         return;
       }
       throw err;
@@ -164,7 +164,7 @@ describe('create start instance tests', () => {
         `node instances/create-start-instance/createInstanceFromSnapshot ${projectId} ${zone} ${instanceName} ${diskSnapshotLink}`
       );
     } catch (err) {
-      if (err.message.includes(/already exists/)) {
+      if (err.message.includes('already exists')) {
         return;
       }
       throw err;
@@ -195,7 +195,7 @@ describe('create start instance tests', () => {
         `node instances/create-start-instance/createInstanceWithSnapshottedDataDisk ${projectId} ${zone} ${instanceName} ${diskSnapshotLink}`
       );
     } catch (err) {
-      if (err.message.includes(/already exists/)) {
+      if (err.message.includes('already exists')) {
         return;
       }
       throw err;
@@ -221,7 +221,7 @@ describe('create start instance tests', () => {
         `node instances/create-start-instance/createInstanceFromCustomImage ${projectId} ${zone} ${instanceName} ${newestDebian.selfLink}`
       );
     } catch (err) {
-      if (err.message.includes(/already exists/)) {
+      if (err.message.includes('already exists')) {
         return;
       }
       throw err;
@@ -240,7 +240,7 @@ describe('create start instance tests', () => {
         `node instances/create-start-instance/createInstanceWithAdditionalDisk ${projectId} ${zone} ${instanceName}`
       );
     } catch (err) {
-      if (err.message.includes(/already exists/)) {
+      if (err.message.includes('already exists')) {
         return;
       }
       throw err;
@@ -259,7 +259,7 @@ describe('create start instance tests', () => {
         `node instances/create-start-instance/createInstanceWithSubnet ${projectId} ${zone} ${instanceName} ${networkName} ${subnetworkName}`
       );
     } catch (err) {
-      if (err.message.includes(/already exists/)) {
+      if (err.message.includes('already exists')) {
         return;
       }
       throw err;
