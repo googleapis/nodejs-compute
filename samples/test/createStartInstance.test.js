@@ -129,11 +129,16 @@ describe('create start instance tests', () => {
 
   it('should create instance from public image', async () => {
     const projectId = await instancesClient.getProjectId();
-
-    const output = execSync(
-      `node instances/create-start-instance/createInstanceFromPublicImage ${projectId} ${zone} ${instanceName}`
-    );
-    assert.match(output, /Instance created./);
+    let output;
+    try {
+      execSync(
+        `node instances/create-start-instance/createInstanceFromPublicImage ${projectId} ${zone} ${instanceName}`
+      );
+    } catch (err) {
+      if (!err.message.includes(/already exists/)) {
+        assert.match(output, /Instance created./);
+      }
+    }
 
     execSync(`node deleteInstance ${projectId} ${zone} ${instanceName}`);
   });
@@ -151,10 +156,16 @@ describe('create start instance tests', () => {
 
     const diskSnapshotLink = `projects/${projectId}/global/snapshots/${snapshotName}`;
 
-    const output = execSync(
-      `node instances/create-start-instance/createInstanceFromSnapshot ${projectId} ${zone} ${instanceName} ${diskSnapshotLink}`
-    );
-    assert.match(output, /Instance created./);
+    let output;
+    try {
+      output = execSync(
+        `node instances/create-start-instance/createInstanceFromSnapshot ${projectId} ${zone} ${instanceName} ${diskSnapshotLink}`
+      );
+    } catch (err) {
+      if (!err.message.includes(/already exists/)) {
+        assert.match(output, /Instance created./);
+      }
+    }
 
     execSync(`node deleteInstance ${projectId} ${zone} ${instanceName}`);
 
@@ -175,10 +186,16 @@ describe('create start instance tests', () => {
 
     const diskSnapshotLink = `projects/${projectId}/global/snapshots/${snapshotName}`;
 
-    const output = execSync(
-      `node instances/create-start-instance/createInstanceWithSnapshottedDataDisk ${projectId} ${zone} ${instanceName} ${diskSnapshotLink}`
-    );
-    assert.match(output, /Instance created./);
+    let output;
+    try {
+      output = execSync(
+        `node instances/create-start-instance/createInstanceWithSnapshottedDataDisk ${projectId} ${zone} ${instanceName} ${diskSnapshotLink}`
+      );
+    } catch (err) {
+      if (!err.message.includes(/already exists/)) {
+        assert.match(output, /Instance created./);
+      }
+    }
 
     execSync(`node deleteInstance ${projectId} ${zone} ${instanceName}`);
 
@@ -194,10 +211,16 @@ describe('create start instance tests', () => {
       family: 'debian-10',
     });
 
-    const output = execSync(
-      `node instances/create-start-instance/createInstanceFromCustomImage ${projectId} ${zone} ${instanceName} ${newestDebian.selfLink}`
-    );
-    assert.match(output, /Instance created./);
+    let output;
+    try {
+      output = execSync(
+        `node instances/create-start-instance/createInstanceFromCustomImage ${projectId} ${zone} ${instanceName} ${newestDebian.selfLink}`
+      );
+    } catch (err) {
+      if (!err.message.includes(/already exists/)) {
+        assert.match(output, /Instance created./);
+      }
+    }
 
     execSync(`node deleteInstance ${projectId} ${zone} ${instanceName}`);
   });
@@ -205,10 +228,16 @@ describe('create start instance tests', () => {
   it('should create instance with additional disk', async () => {
     const projectId = await instancesClient.getProjectId();
 
-    const output = execSync(
-      `node instances/create-start-instance/createInstanceWithAdditionalDisk ${projectId} ${zone} ${instanceName}`
-    );
-    assert.match(output, /Instance created./);
+    let output;
+    try {
+      output = execSync(
+        `node instances/create-start-instance/createInstanceWithAdditionalDisk ${projectId} ${zone} ${instanceName}`
+      );
+    } catch (err) {
+      if (!err.message.includes(/already exists/)) {
+        assert.match(output, /Instance created./);
+      }
+    }
 
     execSync(`node deleteInstance ${projectId} ${zone} ${instanceName}`);
   });
@@ -216,10 +245,16 @@ describe('create start instance tests', () => {
   it('should create instance with subnet', async () => {
     const projectId = await instancesClient.getProjectId();
 
-    const output = execSync(
-      `node instances/create-start-instance/createInstanceWithSubnet ${projectId} ${zone} ${instanceName} ${networkName} ${subnetworkName}`
-    );
-    assert.match(output, /Instance created./);
+    let output;
+    try {
+      execSync(
+        `node instances/create-start-instance/createInstanceWithSubnet ${projectId} ${zone} ${instanceName} ${networkName} ${subnetworkName}`
+      );
+    } catch (err) {
+      if (!err.message.includes(/already exists/)) {
+        assert.match(output, /Instance created./);
+      }
+    }
 
     execSync(`node deleteInstance ${projectId} ${zone} ${instanceName}`);
   });
