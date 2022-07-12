@@ -255,7 +255,7 @@ describe('create start instance tests', () => {
 
     let output;
     try {
-      execSync(
+      output = execSync(
         `node instances/create-start-instance/createInstanceWithSubnet ${projectId} ${zone} ${instanceName} ${networkName} ${subnetworkName}`
       );
     } catch (err) {
