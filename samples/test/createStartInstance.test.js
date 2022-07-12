@@ -135,10 +135,12 @@ describe('create start instance tests', () => {
         `node instances/create-start-instance/createInstanceFromPublicImage ${projectId} ${zone} ${instanceName}`
       );
     } catch (err) {
-      if (!err.message.includes(/already exists/)) {
-        assert.match(output, /Instance created./);
+      if (err.message.includes(/already exists/)) {
+        return;
       }
+      throw err;
     }
+    assert.match(output, /Instance created./);
 
     execSync(`node deleteInstance ${projectId} ${zone} ${instanceName}`);
   });
@@ -162,11 +164,12 @@ describe('create start instance tests', () => {
         `node instances/create-start-instance/createInstanceFromSnapshot ${projectId} ${zone} ${instanceName} ${diskSnapshotLink}`
       );
     } catch (err) {
-      if (!err.message.includes(/already exists/)) {
-        assert.match(output, /Instance created./);
+      if (err.message.includes(/already exists/)) {
+        return;
       }
+      throw err;
     }
-
+    assert.match(output, /Instance created./);
     execSync(`node deleteInstance ${projectId} ${zone} ${instanceName}`);
 
     await deleteDiskSnapshot(projectId, snapshotName);
@@ -192,11 +195,12 @@ describe('create start instance tests', () => {
         `node instances/create-start-instance/createInstanceWithSnapshottedDataDisk ${projectId} ${zone} ${instanceName} ${diskSnapshotLink}`
       );
     } catch (err) {
-      if (!err.message.includes(/already exists/)) {
-        assert.match(output, /Instance created./);
+      if (err.message.includes(/already exists/)) {
+        return;
       }
+      throw err;
     }
-
+    assert.match(output, /Instance created./);
     execSync(`node deleteInstance ${projectId} ${zone} ${instanceName}`);
 
     await deleteDiskSnapshot(projectId, snapshotName);
@@ -217,10 +221,12 @@ describe('create start instance tests', () => {
         `node instances/create-start-instance/createInstanceFromCustomImage ${projectId} ${zone} ${instanceName} ${newestDebian.selfLink}`
       );
     } catch (err) {
-      if (!err.message.includes(/already exists/)) {
-        assert.match(output, /Instance created./);
+      if (err.message.includes(/already exists/)) {
+        return;
       }
+      throw err;
     }
+    assert.match(output, /Instance created./);
 
     execSync(`node deleteInstance ${projectId} ${zone} ${instanceName}`);
   });
@@ -234,10 +240,12 @@ describe('create start instance tests', () => {
         `node instances/create-start-instance/createInstanceWithAdditionalDisk ${projectId} ${zone} ${instanceName}`
       );
     } catch (err) {
-      if (!err.message.includes(/already exists/)) {
-        assert.match(output, /Instance created./);
+      if (err.message.includes(/already exists/)) {
+        return;
       }
+      throw err;
     }
+    assert.match(output, /Instance created./);
 
     execSync(`node deleteInstance ${projectId} ${zone} ${instanceName}`);
   });
@@ -251,11 +259,12 @@ describe('create start instance tests', () => {
         `node instances/create-start-instance/createInstanceWithSubnet ${projectId} ${zone} ${instanceName} ${networkName} ${subnetworkName}`
       );
     } catch (err) {
-      if (!err.message.includes(/already exists/)) {
-        assert.match(output, /Instance created./);
+      if (err.message.includes(/already exists/)) {
+        return;
       }
+      throw err;
     }
-
+    assert.match(output, /Instance created./);
     execSync(`node deleteInstance ${projectId} ${zone} ${instanceName}`);
   });
 });
