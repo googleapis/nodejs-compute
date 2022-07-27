@@ -215,7 +215,7 @@ describe('Compute', () => {
     });
   });
 
-  describe('Instances', () => {
+  describe.only('Instances', () => {
     let INSTANCE_NAME = null;
 
     before(async () => {
@@ -328,7 +328,7 @@ describe('Compute', () => {
 
     it('instances update desc to an empty string', async function () {
       this.timeout(10 * 60 * 1000);
-      this.retries(3);
+      this.retries(4);
       await delay(this.test);
       const [instance] = await client.get({
         project,
