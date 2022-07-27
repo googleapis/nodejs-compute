@@ -215,7 +215,7 @@ describe('Compute', () => {
     });
   });
 
-  describe.only('Instances', () => {
+  describe('Instances', () => {
     let INSTANCE_NAME = null;
 
     before(async () => {
