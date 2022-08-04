@@ -746,7 +746,7 @@ export class InstancesClient {
       );
   }
   /**
-   * Creates multiple instances. Count specifies the number of instances to create.
+   * Creates multiple instances. Count specifies the number of instances to create. For more information, see About bulk creation of VMs.
    *
    * @param {Object} request
    *   The request object that will be sent.
