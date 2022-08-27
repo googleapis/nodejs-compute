@@ -17,8 +17,8 @@
 // ** All changes to this file may be overwritten. **
 
 /* global window */
-import * as gax from 'google-gax';
-import {
+import type * as gax from 'google-gax';
+import type {
   Callback,
   CallOptions,
   Descriptors,
@@ -27,7 +27,6 @@ import {
   PaginationCallback,
   GaxCall,
 } from 'google-gax';
-
 import {Transform} from 'stream';
 import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
@@ -37,7 +36,6 @@ import jsonProtos = require('../../protos/protos.json');
  * This file defines retry strategy and timeouts for all API methods in this library.
  */
 import * as gapicConfig from './region_network_firewall_policies_client_config.json';
-
 const version = require('../../../package.json').version;
 
 /**
@@ -96,8 +94,18 @@ export class RegionNetworkFirewallPoliciesClient {
    *     Pass "rest" to use HTTP/1.1 REST API instead of gRPC.
    *     For more information, please check the
    *     {@link https://github.com/googleapis/gax-nodejs/blob/main/client-libraries.md#http11-rest-api-mode documentation}.
+   * @param {gax} [gaxInstance]: loaded instance of `google-gax`. Useful if you
+   *     need to avoid loading the default gRPC version and want to use the fallback
+   *     HTTP implementation. Load only fallback version and pass it to the constructor:
+   *     ```
+   *     const gax = require('google-gax/build/src/fallback'); // avoids loading google-gax with gRPC
+   *     const client = new RegionNetworkFirewallPoliciesClient({fallback: 'rest'}, gax);
+   *     ```
    */
-  constructor(opts?: ClientOptions) {
+  constructor(
+    opts?: ClientOptions,
+    gaxInstance?: typeof gax | typeof gax.fallback
+  ) {
     // Ensure that options include all the required fields.
     const staticMembers = this
       .constructor as typeof RegionNetworkFirewallPoliciesClient;
@@ -124,8 +132,13 @@ export class RegionNetworkFirewallPoliciesClient {
       opts['scopes'] = staticMembers.scopes;
     }
 
+    // Load google-gax module synchronously if needed
+    if (!gaxInstance) {
+      gaxInstance = require('google-gax') as typeof gax;
+    }
+
     // Choose either gRPC or proto-over-HTTP implementation of google-gax.
-    this._gaxModule = opts.fallback ? gax.fallback : gax;
+    this._gaxModule = opts.fallback ? gaxInstance.fallback : gaxInstance;
 
     // Create a `gaxGrpc` object, with any grpc-specific options sent to the client.
     this._gaxGrpc = new this._gaxModule.GrpcClient(opts);
@@ -187,7 +200,7 @@ export class RegionNetworkFirewallPoliciesClient {
     this.innerApiCalls = {};
 
     // Add a warn function to the client constructor so it can be easily tested.
-    this.warn = gax.warn;
+    this.warn = this._gaxModule.warn;
   }
 
   /**
@@ -427,7 +440,7 @@ export class RegionNetworkFirewallPoliciesClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
+      this._gaxModule.routingHeader.fromParams({
         project: request.project || '',
         region: request.region || '',
         firewall_policy: request.firewallPolicy || '',
@@ -557,7 +570,7 @@ export class RegionNetworkFirewallPoliciesClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
+      this._gaxModule.routingHeader.fromParams({
         project: request.project || '',
         region: request.region || '',
         firewall_policy: request.firewallPolicy || '',
@@ -683,7 +696,7 @@ export class RegionNetworkFirewallPoliciesClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
+      this._gaxModule.routingHeader.fromParams({
         project: request.project || '',
         region: request.region || '',
         firewall_policy: request.firewallPolicy || '',
@@ -807,7 +820,7 @@ export class RegionNetworkFirewallPoliciesClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
+      this._gaxModule.routingHeader.fromParams({
         project: request.project || '',
         region: request.region || '',
         firewall_policy: request.firewallPolicy || '',
@@ -930,7 +943,7 @@ export class RegionNetworkFirewallPoliciesClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
+      this._gaxModule.routingHeader.fromParams({
         project: request.project || '',
         region: request.region || '',
         firewall_policy: request.firewallPolicy || '',
@@ -1035,7 +1048,7 @@ export class RegionNetworkFirewallPoliciesClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
+      this._gaxModule.routingHeader.fromParams({
         project: request.project || '',
         region: request.region || '',
         firewall_policy: request.firewallPolicy || '',
@@ -1138,7 +1151,7 @@ export class RegionNetworkFirewallPoliciesClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
+      this._gaxModule.routingHeader.fromParams({
         project: request.project || '',
         region: request.region || '',
       });
@@ -1242,7 +1255,7 @@ export class RegionNetworkFirewallPoliciesClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
+      this._gaxModule.routingHeader.fromParams({
         project: request.project || '',
         region: request.region || '',
         resource: request.resource || '',
@@ -1347,7 +1360,7 @@ export class RegionNetworkFirewallPoliciesClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
+      this._gaxModule.routingHeader.fromParams({
         project: request.project || '',
         region: request.region || '',
         firewall_policy: request.firewallPolicy || '',
@@ -1451,7 +1464,7 @@ export class RegionNetworkFirewallPoliciesClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
+      this._gaxModule.routingHeader.fromParams({
         project: request.project || '',
         region: request.region || '',
       });
@@ -1576,7 +1589,7 @@ export class RegionNetworkFirewallPoliciesClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
+      this._gaxModule.routingHeader.fromParams({
         project: request.project || '',
         region: request.region || '',
         firewall_policy: request.firewallPolicy || '',
@@ -1704,7 +1717,7 @@ export class RegionNetworkFirewallPoliciesClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
+      this._gaxModule.routingHeader.fromParams({
         project: request.project || '',
         region: request.region || '',
         firewall_policy: request.firewallPolicy || '',
@@ -1830,7 +1843,7 @@ export class RegionNetworkFirewallPoliciesClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
+      this._gaxModule.routingHeader.fromParams({
         project: request.project || '',
         region: request.region || '',
         firewall_policy: request.firewallPolicy || '',
@@ -1956,7 +1969,7 @@ export class RegionNetworkFirewallPoliciesClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
+      this._gaxModule.routingHeader.fromParams({
         project: request.project || '',
         region: request.region || '',
         firewall_policy: request.firewallPolicy || '',
@@ -2081,7 +2094,7 @@ export class RegionNetworkFirewallPoliciesClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
+      this._gaxModule.routingHeader.fromParams({
         project: request.project || '',
         region: request.region || '',
         resource: request.resource || '',
@@ -2186,7 +2199,7 @@ export class RegionNetworkFirewallPoliciesClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
+      this._gaxModule.routingHeader.fromParams({
         project: request.project || '',
         region: request.region || '',
         resource: request.resource || '',
@@ -2287,7 +2300,7 @@ export class RegionNetworkFirewallPoliciesClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
+      this._gaxModule.routingHeader.fromParams({
         project: request.project || '',
         region: request.region || '',
       });
@@ -2334,7 +2347,7 @@ export class RegionNetworkFirewallPoliciesClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
+      this._gaxModule.routingHeader.fromParams({
         project: request.project || '',
         region: request.region || '',
       });
@@ -2390,7 +2403,7 @@ export class RegionNetworkFirewallPoliciesClient {
     options.otherArgs = options.otherArgs || {};
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
-      gax.routingHeader.fromParams({
+      this._gaxModule.routingHeader.fromParams({
         project: request.project || '',
         region: request.region || '',
       });
