@@ -32,18 +32,18 @@ import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
 /**
  * Client JSON configuration object, loaded from
- * `src/v1/global_addresses_client_config.json`.
+ * `src/v1/region_target_tcp_proxies_client_config.json`.
  * This file defines retry strategy and timeouts for all API methods in this library.
  */
-import * as gapicConfig from './global_addresses_client_config.json';
+import * as gapicConfig from './region_target_tcp_proxies_client_config.json';
 const version = require('../../../package.json').version;
 
 /**
- *  The GlobalAddresses API.
+ *  The RegionTargetTcpProxies API.
  * @class
  * @memberof v1
  */
-export class GlobalAddressesClient {
+export class RegionTargetTcpProxiesClient {
   private _terminated = false;
   private _opts: ClientOptions;
   private _providedCustomServicePath: boolean;
@@ -60,10 +60,10 @@ export class GlobalAddressesClient {
   };
   warn: (code: string, message: string, warnType?: string) => void;
   innerApiCalls: {[name: string]: Function};
-  globalAddressesStub?: Promise<{[name: string]: Function}>;
+  regionTargetTcpProxiesStub?: Promise<{[name: string]: Function}>;
 
   /**
-   * Construct an instance of GlobalAddressesClient.
+   * Construct an instance of RegionTargetTcpProxiesClient.
    *
    * @param {object} [options] - The configuration object.
    * The options accepted by the constructor are described in detail
@@ -99,7 +99,7 @@ export class GlobalAddressesClient {
    *     HTTP implementation. Load only fallback version and pass it to the constructor:
    *     ```
    *     const gax = require('google-gax/build/src/fallback'); // avoids loading google-gax with gRPC
-   *     const client = new GlobalAddressesClient({fallback: 'rest'}, gax);
+   *     const client = new RegionTargetTcpProxiesClient({fallback: 'rest'}, gax);
    *     ```
    */
   constructor(
@@ -107,7 +107,8 @@ export class GlobalAddressesClient {
     gaxInstance?: typeof gax | typeof gax.fallback
   ) {
     // Ensure that options include all the required fields.
-    const staticMembers = this.constructor as typeof GlobalAddressesClient;
+    const staticMembers = this
+      .constructor as typeof RegionTargetTcpProxiesClient;
     const servicePath =
       opts?.servicePath || opts?.apiEndpoint || staticMembers.servicePath;
     this._providedCustomServicePath = !!(
@@ -187,7 +188,7 @@ export class GlobalAddressesClient {
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.cloud.compute.v1.GlobalAddresses',
+      'google.cloud.compute.v1.RegionTargetTcpProxies',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
       {'x-goog-api-client': clientHeader.join(' ')}
@@ -215,34 +216,33 @@ export class GlobalAddressesClient {
    */
   initialize() {
     // If the client stub promise is already initialized, return immediately.
-    if (this.globalAddressesStub) {
-      return this.globalAddressesStub;
+    if (this.regionTargetTcpProxiesStub) {
+      return this.regionTargetTcpProxiesStub;
     }
 
     // Put together the "service stub" for
-    // google.cloud.compute.v1.GlobalAddresses.
-    this.globalAddressesStub = this._gaxGrpc.createStub(
+    // google.cloud.compute.v1.RegionTargetTcpProxies.
+    this.regionTargetTcpProxiesStub = this._gaxGrpc.createStub(
       this._opts.fallback
         ? (this._protos as protobuf.Root).lookupService(
-            'google.cloud.compute.v1.GlobalAddresses'
+            'google.cloud.compute.v1.RegionTargetTcpProxies'
           )
         : // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          (this._protos as any).google.cloud.compute.v1.GlobalAddresses,
+          (this._protos as any).google.cloud.compute.v1.RegionTargetTcpProxies,
       this._opts,
       this._providedCustomServicePath
     ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const globalAddressesStubMethods = [
+    const regionTargetTcpProxiesStubMethods = [
       'delete',
       'get',
       'insert',
       'list',
-      'setLabels',
     ];
-    for (const methodName of globalAddressesStubMethods) {
-      const callPromise = this.globalAddressesStub.then(
+    for (const methodName of regionTargetTcpProxiesStubMethods) {
+      const callPromise = this.regionTargetTcpProxiesStub.then(
         stub =>
           (...args: Array<{}>) => {
             if (this._terminated) {
@@ -267,7 +267,7 @@ export class GlobalAddressesClient {
       this.innerApiCalls[methodName] = apiCall;
     }
 
-    return this.globalAddressesStub;
+    return this.regionTargetTcpProxiesStub;
   }
 
   /**
@@ -327,16 +327,18 @@ export class GlobalAddressesClient {
   // -- Service calls --
   // -------------------
   /**
-   * Deletes the specified address resource.
+   * Deletes the specified TargetTcpProxy resource.
    *
    * @param {Object} request
    *   The request object that will be sent.
-   * @param {string} request.address
-   *   Name of the address resource to delete.
    * @param {string} request.project
    *   Project ID for this request.
+   * @param {string} request.region
+   *   Name of the region scoping this request.
    * @param {string} request.requestId
    *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+   * @param {string} request.targetTcpProxy
+   *   Name of the TargetTcpProxy resource to delete.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -349,11 +351,11 @@ export class GlobalAddressesClient {
    *   stable it is still a work-in-progress and under active development,
    *   and might get backwards-incompatible changes at any time.
    *   `.promise()` is not supported yet.
-   * @example <caption>include:samples/generated/v1/global_addresses.delete.js</caption>
-   * region_tag:compute_v1_generated_GlobalAddresses_Delete_async
+   * @example <caption>include:samples/generated/v1/region_target_tcp_proxies.delete.js</caption>
+   * region_tag:compute_v1_generated_RegionTargetTcpProxies_Delete_async
    */
   delete(
-    request?: protos.google.cloud.compute.v1.IDeleteGlobalAddressRequest,
+    request?: protos.google.cloud.compute.v1.IDeleteRegionTargetTcpProxyRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -363,40 +365,40 @@ export class GlobalAddressesClient {
     ]
   >;
   delete(
-    request: protos.google.cloud.compute.v1.IDeleteGlobalAddressRequest,
+    request: protos.google.cloud.compute.v1.IDeleteRegionTargetTcpProxyRequest,
     options: CallOptions,
     callback: Callback<
       protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.IDeleteGlobalAddressRequest
+      | protos.google.cloud.compute.v1.IDeleteRegionTargetTcpProxyRequest
       | null
       | undefined,
       {} | null | undefined
     >
   ): void;
   delete(
-    request: protos.google.cloud.compute.v1.IDeleteGlobalAddressRequest,
+    request: protos.google.cloud.compute.v1.IDeleteRegionTargetTcpProxyRequest,
     callback: Callback<
       protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.IDeleteGlobalAddressRequest
+      | protos.google.cloud.compute.v1.IDeleteRegionTargetTcpProxyRequest
       | null
       | undefined,
       {} | null | undefined
     >
   ): void;
   delete(
-    request?: protos.google.cloud.compute.v1.IDeleteGlobalAddressRequest,
+    request?: protos.google.cloud.compute.v1.IDeleteRegionTargetTcpProxyRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
           protos.google.cloud.compute.v1.IOperation,
-          | protos.google.cloud.compute.v1.IDeleteGlobalAddressRequest
+          | protos.google.cloud.compute.v1.IDeleteRegionTargetTcpProxyRequest
           | null
           | undefined,
           {} | null | undefined
         >,
     callback?: Callback<
       protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.IDeleteGlobalAddressRequest
+      | protos.google.cloud.compute.v1.IDeleteRegionTargetTcpProxyRequest
       | null
       | undefined,
       {} | null | undefined
@@ -422,7 +424,8 @@ export class GlobalAddressesClient {
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
         project: request.project || '',
-        address: request.address || '',
+        region: request.region || '',
+        target_tcp_proxy: request.targetTcpProxy || '',
       });
     this.initialize();
     return this.innerApiCalls
@@ -448,77 +451,85 @@ export class GlobalAddressesClient {
       );
   }
   /**
-   * Returns the specified address resource. Gets a list of available addresses by making a list() request.
+   * Returns the specified TargetTcpProxy resource.
    *
    * @param {Object} request
    *   The request object that will be sent.
-   * @param {string} request.address
-   *   Name of the address resource to return.
    * @param {string} request.project
    *   Project ID for this request.
+   * @param {string} request.region
+   *   Name of the region scoping this request.
+   * @param {string} request.targetTcpProxy
+   *   Name of the TargetTcpProxy resource to return.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [Address]{@link google.cloud.compute.v1.Address}.
+   *   The first element of the array is an object representing [TargetTcpProxy]{@link google.cloud.compute.v1.TargetTcpProxy}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/global_addresses.get.js</caption>
-   * region_tag:compute_v1_generated_GlobalAddresses_Get_async
+   * @example <caption>include:samples/generated/v1/region_target_tcp_proxies.get.js</caption>
+   * region_tag:compute_v1_generated_RegionTargetTcpProxies_Get_async
    */
   get(
-    request?: protos.google.cloud.compute.v1.IGetGlobalAddressRequest,
+    request?: protos.google.cloud.compute.v1.IGetRegionTargetTcpProxyRequest,
     options?: CallOptions
   ): Promise<
     [
-      protos.google.cloud.compute.v1.IAddress,
-      protos.google.cloud.compute.v1.IGetGlobalAddressRequest | undefined,
+      protos.google.cloud.compute.v1.ITargetTcpProxy,
+      (
+        | protos.google.cloud.compute.v1.IGetRegionTargetTcpProxyRequest
+        | undefined
+      ),
       {} | undefined
     ]
   >;
   get(
-    request: protos.google.cloud.compute.v1.IGetGlobalAddressRequest,
+    request: protos.google.cloud.compute.v1.IGetRegionTargetTcpProxyRequest,
     options: CallOptions,
     callback: Callback<
-      protos.google.cloud.compute.v1.IAddress,
-      | protos.google.cloud.compute.v1.IGetGlobalAddressRequest
+      protos.google.cloud.compute.v1.ITargetTcpProxy,
+      | protos.google.cloud.compute.v1.IGetRegionTargetTcpProxyRequest
       | null
       | undefined,
       {} | null | undefined
     >
   ): void;
   get(
-    request: protos.google.cloud.compute.v1.IGetGlobalAddressRequest,
+    request: protos.google.cloud.compute.v1.IGetRegionTargetTcpProxyRequest,
     callback: Callback<
-      protos.google.cloud.compute.v1.IAddress,
-      | protos.google.cloud.compute.v1.IGetGlobalAddressRequest
+      protos.google.cloud.compute.v1.ITargetTcpProxy,
+      | protos.google.cloud.compute.v1.IGetRegionTargetTcpProxyRequest
       | null
       | undefined,
       {} | null | undefined
     >
   ): void;
   get(
-    request?: protos.google.cloud.compute.v1.IGetGlobalAddressRequest,
+    request?: protos.google.cloud.compute.v1.IGetRegionTargetTcpProxyRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
-          protos.google.cloud.compute.v1.IAddress,
-          | protos.google.cloud.compute.v1.IGetGlobalAddressRequest
+          protos.google.cloud.compute.v1.ITargetTcpProxy,
+          | protos.google.cloud.compute.v1.IGetRegionTargetTcpProxyRequest
           | null
           | undefined,
           {} | null | undefined
         >,
     callback?: Callback<
-      protos.google.cloud.compute.v1.IAddress,
-      | protos.google.cloud.compute.v1.IGetGlobalAddressRequest
+      protos.google.cloud.compute.v1.ITargetTcpProxy,
+      | protos.google.cloud.compute.v1.IGetRegionTargetTcpProxyRequest
       | null
       | undefined,
       {} | null | undefined
     >
   ): Promise<
     [
-      protos.google.cloud.compute.v1.IAddress,
-      protos.google.cloud.compute.v1.IGetGlobalAddressRequest | undefined,
+      protos.google.cloud.compute.v1.ITargetTcpProxy,
+      (
+        | protos.google.cloud.compute.v1.IGetRegionTargetTcpProxyRequest
+        | undefined
+      ),
       {} | undefined
     ]
   > | void {
@@ -536,22 +547,25 @@ export class GlobalAddressesClient {
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
         project: request.project || '',
-        address: request.address || '',
+        region: request.region || '',
+        target_tcp_proxy: request.targetTcpProxy || '',
       });
     this.initialize();
     return this.innerApiCalls.get(request, options, callback);
   }
   /**
-   * Creates an address resource in the specified project by using the data included in the request.
+   * Creates a TargetTcpProxy resource in the specified project and region using the data included in the request.
    *
    * @param {Object} request
    *   The request object that will be sent.
-   * @param {google.cloud.compute.v1.Address} request.addressResource
-   *   The body resource for this request
    * @param {string} request.project
    *   Project ID for this request.
+   * @param {string} request.region
+   *   Name of the region scoping this request.
    * @param {string} request.requestId
    *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+   * @param {google.cloud.compute.v1.TargetTcpProxy} request.targetTcpProxyResource
+   *   The body resource for this request
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -564,11 +578,11 @@ export class GlobalAddressesClient {
    *   stable it is still a work-in-progress and under active development,
    *   and might get backwards-incompatible changes at any time.
    *   `.promise()` is not supported yet.
-   * @example <caption>include:samples/generated/v1/global_addresses.insert.js</caption>
-   * region_tag:compute_v1_generated_GlobalAddresses_Insert_async
+   * @example <caption>include:samples/generated/v1/region_target_tcp_proxies.insert.js</caption>
+   * region_tag:compute_v1_generated_RegionTargetTcpProxies_Insert_async
    */
   insert(
-    request?: protos.google.cloud.compute.v1.IInsertGlobalAddressRequest,
+    request?: protos.google.cloud.compute.v1.IInsertRegionTargetTcpProxyRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -578,40 +592,40 @@ export class GlobalAddressesClient {
     ]
   >;
   insert(
-    request: protos.google.cloud.compute.v1.IInsertGlobalAddressRequest,
+    request: protos.google.cloud.compute.v1.IInsertRegionTargetTcpProxyRequest,
     options: CallOptions,
     callback: Callback<
       protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.IInsertGlobalAddressRequest
+      | protos.google.cloud.compute.v1.IInsertRegionTargetTcpProxyRequest
       | null
       | undefined,
       {} | null | undefined
     >
   ): void;
   insert(
-    request: protos.google.cloud.compute.v1.IInsertGlobalAddressRequest,
+    request: protos.google.cloud.compute.v1.IInsertRegionTargetTcpProxyRequest,
     callback: Callback<
       protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.IInsertGlobalAddressRequest
+      | protos.google.cloud.compute.v1.IInsertRegionTargetTcpProxyRequest
       | null
       | undefined,
       {} | null | undefined
     >
   ): void;
   insert(
-    request?: protos.google.cloud.compute.v1.IInsertGlobalAddressRequest,
+    request?: protos.google.cloud.compute.v1.IInsertRegionTargetTcpProxyRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
           protos.google.cloud.compute.v1.IOperation,
-          | protos.google.cloud.compute.v1.IInsertGlobalAddressRequest
+          | protos.google.cloud.compute.v1.IInsertRegionTargetTcpProxyRequest
           | null
           | undefined,
           {} | null | undefined
         >,
     callback?: Callback<
       protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.IInsertGlobalAddressRequest
+      | protos.google.cloud.compute.v1.IInsertRegionTargetTcpProxyRequest
       | null
       | undefined,
       {} | null | undefined
@@ -637,6 +651,7 @@ export class GlobalAddressesClient {
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
         project: request.project || '',
+        region: request.region || '',
       });
     this.initialize();
     return this.innerApiCalls
@@ -661,130 +676,9 @@ export class GlobalAddressesClient {
         }
       );
   }
-  /**
-   * Sets the labels on a GlobalAddress. To learn more about labels, read the Labeling Resources documentation.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.compute.v1.GlobalSetLabelsRequest} request.globalSetLabelsRequestResource
-   *   The body resource for this request
-   * @param {string} request.project
-   *   Project ID for this request.
-   * @param {string} request.resource
-   *   Name or id of the resource for this request.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
-   *   for more details and examples.
-   *   This method is considered to be in beta. This means while
-   *   stable it is still a work-in-progress and under active development,
-   *   and might get backwards-incompatible changes at any time.
-   *   `.promise()` is not supported yet.
-   * @example <caption>include:samples/generated/v1/global_addresses.set_labels.js</caption>
-   * region_tag:compute_v1_generated_GlobalAddresses_SetLabels_async
-   */
-  setLabels(
-    request?: protos.google.cloud.compute.v1.ISetLabelsGlobalAddressRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
-      protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
-    ]
-  >;
-  setLabels(
-    request: protos.google.cloud.compute.v1.ISetLabelsGlobalAddressRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.ISetLabelsGlobalAddressRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  setLabels(
-    request: protos.google.cloud.compute.v1.ISetLabelsGlobalAddressRequest,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.ISetLabelsGlobalAddressRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  setLabels(
-    request?: protos.google.cloud.compute.v1.ISetLabelsGlobalAddressRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          protos.google.cloud.compute.v1.IOperation,
-          | protos.google.cloud.compute.v1.ISetLabelsGlobalAddressRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.ISetLabelsGlobalAddressRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
-      protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
-    ]
-  > | void {
-    request = request || {};
-    let options: CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        project: request.project || '',
-        resource: request.resource || '',
-      });
-    this.initialize();
-    return this.innerApiCalls
-      .setLabels(request, options, callback)
-      .then(
-        ([response, operation, rawResponse]: [
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
-        ]) => {
-          return [
-            {
-              latestResponse: response,
-              done: false,
-              name: response.id,
-              metadata: null,
-              result: {},
-            },
-            operation,
-            rawResponse,
-          ];
-        }
-      );
-  }
 
   /**
-   * Retrieves a list of global addresses.
+   * Retrieves a list of TargetTcpProxy resources available to the specified project in a given region.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -798,12 +692,14 @@ export class GlobalAddressesClient {
    *   Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
    * @param {string} request.project
    *   Project ID for this request.
+   * @param {string} request.region
+   *   Name of the region scoping this request.
    * @param {boolean} request.returnPartialSuccess
    *   Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of [Address]{@link google.cloud.compute.v1.Address}.
+   *   The first element of the array is Array of [TargetTcpProxy]{@link google.cloud.compute.v1.TargetTcpProxy}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
@@ -814,51 +710,51 @@ export class GlobalAddressesClient {
    *   for more details and examples.
    */
   list(
-    request?: protos.google.cloud.compute.v1.IListGlobalAddressesRequest,
+    request?: protos.google.cloud.compute.v1.IListRegionTargetTcpProxiesRequest,
     options?: CallOptions
   ): Promise<
     [
-      protos.google.cloud.compute.v1.IAddress[],
-      protos.google.cloud.compute.v1.IListGlobalAddressesRequest | null,
-      protos.google.cloud.compute.v1.IAddressList
+      protos.google.cloud.compute.v1.ITargetTcpProxy[],
+      protos.google.cloud.compute.v1.IListRegionTargetTcpProxiesRequest | null,
+      protos.google.cloud.compute.v1.ITargetTcpProxyList
     ]
   >;
   list(
-    request: protos.google.cloud.compute.v1.IListGlobalAddressesRequest,
+    request: protos.google.cloud.compute.v1.IListRegionTargetTcpProxiesRequest,
     options: CallOptions,
     callback: PaginationCallback<
-      protos.google.cloud.compute.v1.IListGlobalAddressesRequest,
-      protos.google.cloud.compute.v1.IAddressList | null | undefined,
-      protos.google.cloud.compute.v1.IAddress
+      protos.google.cloud.compute.v1.IListRegionTargetTcpProxiesRequest,
+      protos.google.cloud.compute.v1.ITargetTcpProxyList | null | undefined,
+      protos.google.cloud.compute.v1.ITargetTcpProxy
     >
   ): void;
   list(
-    request: protos.google.cloud.compute.v1.IListGlobalAddressesRequest,
+    request: protos.google.cloud.compute.v1.IListRegionTargetTcpProxiesRequest,
     callback: PaginationCallback<
-      protos.google.cloud.compute.v1.IListGlobalAddressesRequest,
-      protos.google.cloud.compute.v1.IAddressList | null | undefined,
-      protos.google.cloud.compute.v1.IAddress
+      protos.google.cloud.compute.v1.IListRegionTargetTcpProxiesRequest,
+      protos.google.cloud.compute.v1.ITargetTcpProxyList | null | undefined,
+      protos.google.cloud.compute.v1.ITargetTcpProxy
     >
   ): void;
   list(
-    request?: protos.google.cloud.compute.v1.IListGlobalAddressesRequest,
+    request?: protos.google.cloud.compute.v1.IListRegionTargetTcpProxiesRequest,
     optionsOrCallback?:
       | CallOptions
       | PaginationCallback<
-          protos.google.cloud.compute.v1.IListGlobalAddressesRequest,
-          protos.google.cloud.compute.v1.IAddressList | null | undefined,
-          protos.google.cloud.compute.v1.IAddress
+          protos.google.cloud.compute.v1.IListRegionTargetTcpProxiesRequest,
+          protos.google.cloud.compute.v1.ITargetTcpProxyList | null | undefined,
+          protos.google.cloud.compute.v1.ITargetTcpProxy
         >,
     callback?: PaginationCallback<
-      protos.google.cloud.compute.v1.IListGlobalAddressesRequest,
-      protos.google.cloud.compute.v1.IAddressList | null | undefined,
-      protos.google.cloud.compute.v1.IAddress
+      protos.google.cloud.compute.v1.IListRegionTargetTcpProxiesRequest,
+      protos.google.cloud.compute.v1.ITargetTcpProxyList | null | undefined,
+      protos.google.cloud.compute.v1.ITargetTcpProxy
     >
   ): Promise<
     [
-      protos.google.cloud.compute.v1.IAddress[],
-      protos.google.cloud.compute.v1.IListGlobalAddressesRequest | null,
-      protos.google.cloud.compute.v1.IAddressList
+      protos.google.cloud.compute.v1.ITargetTcpProxy[],
+      protos.google.cloud.compute.v1.IListRegionTargetTcpProxiesRequest | null,
+      protos.google.cloud.compute.v1.ITargetTcpProxyList
     ]
   > | void {
     request = request || {};
@@ -875,6 +771,7 @@ export class GlobalAddressesClient {
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
         project: request.project || '',
+        region: request.region || '',
       });
     this.initialize();
     return this.innerApiCalls.list(request, options, callback);
@@ -894,12 +791,14 @@ export class GlobalAddressesClient {
    *   Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
    * @param {string} request.project
    *   Project ID for this request.
+   * @param {string} request.region
+   *   Name of the region scoping this request.
    * @param {boolean} request.returnPartialSuccess
    *   Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing [Address]{@link google.cloud.compute.v1.Address} on 'data' event.
+   *   An object stream which emits an object representing [TargetTcpProxy]{@link google.cloud.compute.v1.TargetTcpProxy} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listAsync()`
@@ -909,7 +808,7 @@ export class GlobalAddressesClient {
    *   for more details and examples.
    */
   listStream(
-    request?: protos.google.cloud.compute.v1.IListGlobalAddressesRequest,
+    request?: protos.google.cloud.compute.v1.IListRegionTargetTcpProxiesRequest,
     options?: CallOptions
   ): Transform {
     request = request || {};
@@ -919,6 +818,7 @@ export class GlobalAddressesClient {
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
         project: request.project || '',
+        region: request.region || '',
       });
     const defaultCallSettings = this._defaults['list'];
     const callSettings = defaultCallSettings.merge(options);
@@ -946,6 +846,8 @@ export class GlobalAddressesClient {
    *   Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
    * @param {string} request.project
    *   Project ID for this request.
+   * @param {string} request.region
+   *   Name of the region scoping this request.
    * @param {boolean} request.returnPartialSuccess
    *   Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
    * @param {object} [options]
@@ -953,18 +855,18 @@ export class GlobalAddressesClient {
    * @returns {Object}
    *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
    *   When you iterate the returned iterable, each element will be an object representing
-   *   [Address]{@link google.cloud.compute.v1.Address}. The API will be called under the hood as needed, once per the page,
+   *   [TargetTcpProxy]{@link google.cloud.compute.v1.TargetTcpProxy}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/global_addresses.list.js</caption>
-   * region_tag:compute_v1_generated_GlobalAddresses_List_async
+   * @example <caption>include:samples/generated/v1/region_target_tcp_proxies.list.js</caption>
+   * region_tag:compute_v1_generated_RegionTargetTcpProxies_List_async
    */
   listAsync(
-    request?: protos.google.cloud.compute.v1.IListGlobalAddressesRequest,
+    request?: protos.google.cloud.compute.v1.IListRegionTargetTcpProxiesRequest,
     options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.compute.v1.IAddress> {
+  ): AsyncIterable<protos.google.cloud.compute.v1.ITargetTcpProxy> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -972,6 +874,7 @@ export class GlobalAddressesClient {
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
         project: request.project || '',
+        region: request.region || '',
       });
     const defaultCallSettings = this._defaults['list'];
     const callSettings = defaultCallSettings.merge(options);
@@ -980,7 +883,7 @@ export class GlobalAddressesClient {
       this.innerApiCalls['list'] as GaxCall,
       request as {},
       callSettings
-    ) as AsyncIterable<protos.google.cloud.compute.v1.IAddress>;
+    ) as AsyncIterable<protos.google.cloud.compute.v1.ITargetTcpProxy>;
   }
 
   /**
@@ -990,8 +893,8 @@ export class GlobalAddressesClient {
    * @returns {Promise} A promise that resolves when the client is closed.
    */
   close(): Promise<void> {
-    if (this.globalAddressesStub && !this._terminated) {
-      return this.globalAddressesStub.then(stub => {
+    if (this.regionTargetTcpProxiesStub && !this._terminated) {
+      return this.regionTargetTcpProxiesStub.then(stub => {
         this._terminated = true;
         stub.close();
       });

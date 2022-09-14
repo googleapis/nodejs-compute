@@ -611,6 +611,137 @@ describe('v1.VpnTunnelsClient', () => {
     });
   });
 
+  describe('setLabels', () => {
+    it('invokes setLabels without error', async () => {
+      const client = new vpntunnelsModule.v1.VpnTunnelsClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.SetLabelsVpnTunnelRequest()
+      );
+      request.project = '';
+      request.region = '';
+      request.resource = '';
+      const expectedHeaderRequestParams = 'project=&region=&resource=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.compute.v1.Operation()
+      );
+      client.innerApiCalls.setLabels = stubSimpleCall(expectedResponse);
+      const [response] = await client.setLabels(request);
+      assert.deepStrictEqual(response.latestResponse, expectedResponse);
+      assert(
+        (client.innerApiCalls.setLabels as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes setLabels without error using callback', async () => {
+      const client = new vpntunnelsModule.v1.VpnTunnelsClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.SetLabelsVpnTunnelRequest()
+      );
+      request.project = '';
+      request.region = '';
+      request.resource = '';
+      const expectedHeaderRequestParams = 'project=&region=&resource=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedResponse = generateSampleMessage(
+        new protos.google.cloud.compute.v1.Operation()
+      );
+      client.innerApiCalls.setLabels =
+        stubSimpleCallWithCallback(expectedResponse);
+      const promise = new Promise((resolve, reject) => {
+        client.setLabels(
+          request,
+          (
+            err?: Error | null,
+            result?: protos.google.cloud.compute.v1.IOperation | null
+          ) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(result);
+            }
+          }
+        );
+      });
+      const response = await promise;
+      assert.deepStrictEqual(response, expectedResponse);
+      assert(
+        (client.innerApiCalls.setLabels as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions /*, callback defined above */)
+      );
+    });
+
+    it('invokes setLabels with error', async () => {
+      const client = new vpntunnelsModule.v1.VpnTunnelsClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.SetLabelsVpnTunnelRequest()
+      );
+      request.project = '';
+      request.region = '';
+      request.resource = '';
+      const expectedHeaderRequestParams = 'project=&region=&resource=';
+      const expectedOptions = {
+        otherArgs: {
+          headers: {
+            'x-goog-request-params': expectedHeaderRequestParams,
+          },
+        },
+      };
+      const expectedError = new Error('expected');
+      client.innerApiCalls.setLabels = stubSimpleCall(undefined, expectedError);
+      await assert.rejects(client.setLabels(request), expectedError);
+      assert(
+        (client.innerApiCalls.setLabels as SinonStub)
+          .getCall(0)
+          .calledWith(request, expectedOptions, undefined)
+      );
+    });
+
+    it('invokes setLabels with closed client', async () => {
+      const client = new vpntunnelsModule.v1.VpnTunnelsClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      client.initialize();
+      const request = generateSampleMessage(
+        new protos.google.cloud.compute.v1.SetLabelsVpnTunnelRequest()
+      );
+      request.project = '';
+      request.region = '';
+      request.resource = '';
+      const expectedError = new Error('The client has already been closed.');
+      client.close();
+      await assert.rejects(client.setLabels(request), expectedError);
+    });
+  });
+
   describe('aggregatedList', () => {
     it('uses async iteration with aggregatedList without error', async () => {
       const client = new vpntunnelsModule.v1.VpnTunnelsClient({

@@ -32,18 +32,18 @@ import * as protos from '../../protos/protos';
 import jsonProtos = require('../../protos/protos.json');
 /**
  * Client JSON configuration object, loaded from
- * `src/v1/security_policies_client_config.json`.
+ * `src/v1/region_ssl_policies_client_config.json`.
  * This file defines retry strategy and timeouts for all API methods in this library.
  */
-import * as gapicConfig from './security_policies_client_config.json';
+import * as gapicConfig from './region_ssl_policies_client_config.json';
 const version = require('../../../package.json').version;
 
 /**
- *  The SecurityPolicies API.
+ *  The RegionSslPolicies API.
  * @class
  * @memberof v1
  */
-export class SecurityPoliciesClient {
+export class RegionSslPoliciesClient {
   private _terminated = false;
   private _opts: ClientOptions;
   private _providedCustomServicePath: boolean;
@@ -60,10 +60,10 @@ export class SecurityPoliciesClient {
   };
   warn: (code: string, message: string, warnType?: string) => void;
   innerApiCalls: {[name: string]: Function};
-  securityPoliciesStub?: Promise<{[name: string]: Function}>;
+  regionSslPoliciesStub?: Promise<{[name: string]: Function}>;
 
   /**
-   * Construct an instance of SecurityPoliciesClient.
+   * Construct an instance of RegionSslPoliciesClient.
    *
    * @param {object} [options] - The configuration object.
    * The options accepted by the constructor are described in detail
@@ -99,7 +99,7 @@ export class SecurityPoliciesClient {
    *     HTTP implementation. Load only fallback version and pass it to the constructor:
    *     ```
    *     const gax = require('google-gax/build/src/fallback'); // avoids loading google-gax with gRPC
-   *     const client = new SecurityPoliciesClient({fallback: 'rest'}, gax);
+   *     const client = new RegionSslPoliciesClient({fallback: 'rest'}, gax);
    *     ```
    */
   constructor(
@@ -107,7 +107,7 @@ export class SecurityPoliciesClient {
     gaxInstance?: typeof gax | typeof gax.fallback
   ) {
     // Ensure that options include all the required fields.
-    const staticMembers = this.constructor as typeof SecurityPoliciesClient;
+    const staticMembers = this.constructor as typeof RegionSslPoliciesClient;
     const servicePath =
       opts?.servicePath || opts?.apiEndpoint || staticMembers.servicePath;
     this._providedCustomServicePath = !!(
@@ -178,11 +178,6 @@ export class SecurityPoliciesClient {
     // (e.g. 50 results at a time, with tokens to get subsequent
     // pages). Denote the keys used for pagination and results.
     this.descriptors.page = {
-      aggregatedList: new this._gaxModule.PageDescriptor(
-        'pageToken',
-        'nextPageToken',
-        'items'
-      ),
       list: new this._gaxModule.PageDescriptor(
         'pageToken',
         'nextPageToken',
@@ -192,7 +187,7 @@ export class SecurityPoliciesClient {
 
     // Put together the default options sent with requests.
     this._defaults = this._gaxGrpc.constructSettings(
-      'google.cloud.compute.v1.SecurityPolicies',
+      'google.cloud.compute.v1.RegionSslPolicies',
       gapicConfig as gax.ClientConfig,
       opts.clientConfig || {},
       {'x-goog-api-client': clientHeader.join(' ')}
@@ -220,41 +215,35 @@ export class SecurityPoliciesClient {
    */
   initialize() {
     // If the client stub promise is already initialized, return immediately.
-    if (this.securityPoliciesStub) {
-      return this.securityPoliciesStub;
+    if (this.regionSslPoliciesStub) {
+      return this.regionSslPoliciesStub;
     }
 
     // Put together the "service stub" for
-    // google.cloud.compute.v1.SecurityPolicies.
-    this.securityPoliciesStub = this._gaxGrpc.createStub(
+    // google.cloud.compute.v1.RegionSslPolicies.
+    this.regionSslPoliciesStub = this._gaxGrpc.createStub(
       this._opts.fallback
         ? (this._protos as protobuf.Root).lookupService(
-            'google.cloud.compute.v1.SecurityPolicies'
+            'google.cloud.compute.v1.RegionSslPolicies'
           )
         : // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          (this._protos as any).google.cloud.compute.v1.SecurityPolicies,
+          (this._protos as any).google.cloud.compute.v1.RegionSslPolicies,
       this._opts,
       this._providedCustomServicePath
     ) as Promise<{[method: string]: Function}>;
 
     // Iterate over each of the methods that the service provides
     // and create an API call method for each.
-    const securityPoliciesStubMethods = [
-      'addRule',
-      'aggregatedList',
+    const regionSslPoliciesStubMethods = [
       'delete',
       'get',
-      'getRule',
       'insert',
       'list',
-      'listPreconfiguredExpressionSets',
+      'listAvailableFeatures',
       'patch',
-      'patchRule',
-      'removeRule',
-      'setLabels',
     ];
-    for (const methodName of securityPoliciesStubMethods) {
-      const callPromise = this.securityPoliciesStub.then(
+    for (const methodName of regionSslPoliciesStubMethods) {
+      const callPromise = this.regionSslPoliciesStub.then(
         stub =>
           (...args: Array<{}>) => {
             if (this._terminated) {
@@ -279,7 +268,7 @@ export class SecurityPoliciesClient {
       this.innerApiCalls[methodName] = apiCall;
     }
 
-    return this.securityPoliciesStub;
+    return this.regionSslPoliciesStub;
   }
 
   /**
@@ -339,139 +328,18 @@ export class SecurityPoliciesClient {
   // -- Service calls --
   // -------------------
   /**
-   * Inserts a rule into a security policy.
+   * Deletes the specified SSL policy. The SSL policy resource can be deleted only if it is not in use by any TargetHttpsProxy or TargetSslProxy resources.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.project
    *   Project ID for this request.
-   * @param {string} request.securityPolicy
-   *   Name of the security policy to update.
-   * @param {google.cloud.compute.v1.SecurityPolicyRule} request.securityPolicyRuleResource
-   *   The body resource for this request
-   * @param {boolean} request.validateOnly
-   *   If true, the request will not be committed.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
-   *   for more details and examples.
-   *   This method is considered to be in beta. This means while
-   *   stable it is still a work-in-progress and under active development,
-   *   and might get backwards-incompatible changes at any time.
-   *   `.promise()` is not supported yet.
-   * @example <caption>include:samples/generated/v1/security_policies.add_rule.js</caption>
-   * region_tag:compute_v1_generated_SecurityPolicies_AddRule_async
-   */
-  addRule(
-    request?: protos.google.cloud.compute.v1.IAddRuleSecurityPolicyRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
-      protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
-    ]
-  >;
-  addRule(
-    request: protos.google.cloud.compute.v1.IAddRuleSecurityPolicyRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.IAddRuleSecurityPolicyRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  addRule(
-    request: protos.google.cloud.compute.v1.IAddRuleSecurityPolicyRequest,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.IAddRuleSecurityPolicyRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  addRule(
-    request?: protos.google.cloud.compute.v1.IAddRuleSecurityPolicyRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          protos.google.cloud.compute.v1.IOperation,
-          | protos.google.cloud.compute.v1.IAddRuleSecurityPolicyRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.IAddRuleSecurityPolicyRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
-      protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
-    ]
-  > | void {
-    request = request || {};
-    let options: CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        project: request.project || '',
-        security_policy: request.securityPolicy || '',
-      });
-    this.initialize();
-    return this.innerApiCalls
-      .addRule(request, options, callback)
-      .then(
-        ([response, operation, rawResponse]: [
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
-        ]) => {
-          return [
-            {
-              latestResponse: response,
-              done: false,
-              name: response.id,
-              metadata: null,
-              result: {},
-            },
-            operation,
-            rawResponse,
-          ];
-        }
-      );
-  }
-  /**
-   * Deletes the specified policy.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.project
-   *   Project ID for this request.
+   * @param {string} request.region
+   *   Name of the region scoping this request.
    * @param {string} request.requestId
    *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
-   * @param {string} request.securityPolicy
-   *   Name of the security policy to delete.
+   * @param {string} request.sslPolicy
+   *   Name of the SSL policy to delete. The name must be 1-63 characters long, and comply with RFC1035.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -484,11 +352,11 @@ export class SecurityPoliciesClient {
    *   stable it is still a work-in-progress and under active development,
    *   and might get backwards-incompatible changes at any time.
    *   `.promise()` is not supported yet.
-   * @example <caption>include:samples/generated/v1/security_policies.delete.js</caption>
-   * region_tag:compute_v1_generated_SecurityPolicies_Delete_async
+   * @example <caption>include:samples/generated/v1/region_ssl_policies.delete.js</caption>
+   * region_tag:compute_v1_generated_RegionSslPolicies_Delete_async
    */
   delete(
-    request?: protos.google.cloud.compute.v1.IDeleteSecurityPolicyRequest,
+    request?: protos.google.cloud.compute.v1.IDeleteRegionSslPolicyRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -498,40 +366,40 @@ export class SecurityPoliciesClient {
     ]
   >;
   delete(
-    request: protos.google.cloud.compute.v1.IDeleteSecurityPolicyRequest,
+    request: protos.google.cloud.compute.v1.IDeleteRegionSslPolicyRequest,
     options: CallOptions,
     callback: Callback<
       protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.IDeleteSecurityPolicyRequest
+      | protos.google.cloud.compute.v1.IDeleteRegionSslPolicyRequest
       | null
       | undefined,
       {} | null | undefined
     >
   ): void;
   delete(
-    request: protos.google.cloud.compute.v1.IDeleteSecurityPolicyRequest,
+    request: protos.google.cloud.compute.v1.IDeleteRegionSslPolicyRequest,
     callback: Callback<
       protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.IDeleteSecurityPolicyRequest
+      | protos.google.cloud.compute.v1.IDeleteRegionSslPolicyRequest
       | null
       | undefined,
       {} | null | undefined
     >
   ): void;
   delete(
-    request?: protos.google.cloud.compute.v1.IDeleteSecurityPolicyRequest,
+    request?: protos.google.cloud.compute.v1.IDeleteRegionSslPolicyRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
           protos.google.cloud.compute.v1.IOperation,
-          | protos.google.cloud.compute.v1.IDeleteSecurityPolicyRequest
+          | protos.google.cloud.compute.v1.IDeleteRegionSslPolicyRequest
           | null
           | undefined,
           {} | null | undefined
         >,
     callback?: Callback<
       protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.IDeleteSecurityPolicyRequest
+      | protos.google.cloud.compute.v1.IDeleteRegionSslPolicyRequest
       | null
       | undefined,
       {} | null | undefined
@@ -557,7 +425,8 @@ export class SecurityPoliciesClient {
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
         project: request.project || '',
-        security_policy: request.securityPolicy || '',
+        region: request.region || '',
+        ssl_policy: request.sslPolicy || '',
       });
     this.initialize();
     return this.innerApiCalls
@@ -583,77 +452,79 @@ export class SecurityPoliciesClient {
       );
   }
   /**
-   * List all of the ordered rules present in a single specified policy.
+   * Lists all of the ordered rules present in a single specified policy.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.project
    *   Project ID for this request.
-   * @param {string} request.securityPolicy
-   *   Name of the security policy to get.
+   * @param {string} request.region
+   *   Name of the region scoping this request.
+   * @param {string} request.sslPolicy
+   *   Name of the SSL policy to update. The name must be 1-63 characters long, and comply with RFC1035.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [SecurityPolicy]{@link google.cloud.compute.v1.SecurityPolicy}.
+   *   The first element of the array is an object representing [SslPolicy]{@link google.cloud.compute.v1.SslPolicy}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/security_policies.get.js</caption>
-   * region_tag:compute_v1_generated_SecurityPolicies_Get_async
+   * @example <caption>include:samples/generated/v1/region_ssl_policies.get.js</caption>
+   * region_tag:compute_v1_generated_RegionSslPolicies_Get_async
    */
   get(
-    request?: protos.google.cloud.compute.v1.IGetSecurityPolicyRequest,
+    request?: protos.google.cloud.compute.v1.IGetRegionSslPolicyRequest,
     options?: CallOptions
   ): Promise<
     [
-      protos.google.cloud.compute.v1.ISecurityPolicy,
-      protos.google.cloud.compute.v1.IGetSecurityPolicyRequest | undefined,
+      protos.google.cloud.compute.v1.ISslPolicy,
+      protos.google.cloud.compute.v1.IGetRegionSslPolicyRequest | undefined,
       {} | undefined
     ]
   >;
   get(
-    request: protos.google.cloud.compute.v1.IGetSecurityPolicyRequest,
+    request: protos.google.cloud.compute.v1.IGetRegionSslPolicyRequest,
     options: CallOptions,
     callback: Callback<
-      protos.google.cloud.compute.v1.ISecurityPolicy,
-      | protos.google.cloud.compute.v1.IGetSecurityPolicyRequest
+      protos.google.cloud.compute.v1.ISslPolicy,
+      | protos.google.cloud.compute.v1.IGetRegionSslPolicyRequest
       | null
       | undefined,
       {} | null | undefined
     >
   ): void;
   get(
-    request: protos.google.cloud.compute.v1.IGetSecurityPolicyRequest,
+    request: protos.google.cloud.compute.v1.IGetRegionSslPolicyRequest,
     callback: Callback<
-      protos.google.cloud.compute.v1.ISecurityPolicy,
-      | protos.google.cloud.compute.v1.IGetSecurityPolicyRequest
+      protos.google.cloud.compute.v1.ISslPolicy,
+      | protos.google.cloud.compute.v1.IGetRegionSslPolicyRequest
       | null
       | undefined,
       {} | null | undefined
     >
   ): void;
   get(
-    request?: protos.google.cloud.compute.v1.IGetSecurityPolicyRequest,
+    request?: protos.google.cloud.compute.v1.IGetRegionSslPolicyRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
-          protos.google.cloud.compute.v1.ISecurityPolicy,
-          | protos.google.cloud.compute.v1.IGetSecurityPolicyRequest
+          protos.google.cloud.compute.v1.ISslPolicy,
+          | protos.google.cloud.compute.v1.IGetRegionSslPolicyRequest
           | null
           | undefined,
           {} | null | undefined
         >,
     callback?: Callback<
-      protos.google.cloud.compute.v1.ISecurityPolicy,
-      | protos.google.cloud.compute.v1.IGetSecurityPolicyRequest
+      protos.google.cloud.compute.v1.ISslPolicy,
+      | protos.google.cloud.compute.v1.IGetRegionSslPolicyRequest
       | null
       | undefined,
       {} | null | undefined
     >
   ): Promise<
     [
-      protos.google.cloud.compute.v1.ISecurityPolicy,
-      protos.google.cloud.compute.v1.IGetSecurityPolicyRequest | undefined,
+      protos.google.cloud.compute.v1.ISslPolicy,
+      protos.google.cloud.compute.v1.IGetRegionSslPolicyRequest | undefined,
       {} | undefined
     ]
   > | void {
@@ -671,120 +542,25 @@ export class SecurityPoliciesClient {
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
         project: request.project || '',
-        security_policy: request.securityPolicy || '',
+        region: request.region || '',
+        ssl_policy: request.sslPolicy || '',
       });
     this.initialize();
     return this.innerApiCalls.get(request, options, callback);
   }
   /**
-   * Gets a rule at the specified priority.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {number} request.priority
-   *   The priority of the rule to get from the security policy.
-   * @param {string} request.project
-   *   Project ID for this request.
-   * @param {string} request.securityPolicy
-   *   Name of the security policy to which the queried rule belongs.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [SecurityPolicyRule]{@link google.cloud.compute.v1.SecurityPolicyRule}.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/security_policies.get_rule.js</caption>
-   * region_tag:compute_v1_generated_SecurityPolicies_GetRule_async
-   */
-  getRule(
-    request?: protos.google.cloud.compute.v1.IGetRuleSecurityPolicyRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      protos.google.cloud.compute.v1.ISecurityPolicyRule,
-      protos.google.cloud.compute.v1.IGetRuleSecurityPolicyRequest | undefined,
-      {} | undefined
-    ]
-  >;
-  getRule(
-    request: protos.google.cloud.compute.v1.IGetRuleSecurityPolicyRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.compute.v1.ISecurityPolicyRule,
-      | protos.google.cloud.compute.v1.IGetRuleSecurityPolicyRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getRule(
-    request: protos.google.cloud.compute.v1.IGetRuleSecurityPolicyRequest,
-    callback: Callback<
-      protos.google.cloud.compute.v1.ISecurityPolicyRule,
-      | protos.google.cloud.compute.v1.IGetRuleSecurityPolicyRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  getRule(
-    request?: protos.google.cloud.compute.v1.IGetRuleSecurityPolicyRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          protos.google.cloud.compute.v1.ISecurityPolicyRule,
-          | protos.google.cloud.compute.v1.IGetRuleSecurityPolicyRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.compute.v1.ISecurityPolicyRule,
-      | protos.google.cloud.compute.v1.IGetRuleSecurityPolicyRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      protos.google.cloud.compute.v1.ISecurityPolicyRule,
-      protos.google.cloud.compute.v1.IGetRuleSecurityPolicyRequest | undefined,
-      {} | undefined
-    ]
-  > | void {
-    request = request || {};
-    let options: CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        project: request.project || '',
-        security_policy: request.securityPolicy || '',
-      });
-    this.initialize();
-    return this.innerApiCalls.getRule(request, options, callback);
-  }
-  /**
-   * Creates a new policy in the specified project using the data included in the request.
+   * Creates a new policy in the specified project and region using the data included in the request.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.project
    *   Project ID for this request.
+   * @param {string} request.region
+   *   Name of the region scoping this request.
    * @param {string} request.requestId
    *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
-   * @param {google.cloud.compute.v1.SecurityPolicy} request.securityPolicyResource
+   * @param {google.cloud.compute.v1.SslPolicy} request.sslPolicyResource
    *   The body resource for this request
-   * @param {boolean} request.validateOnly
-   *   If true, the request will not be committed.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
@@ -797,11 +573,11 @@ export class SecurityPoliciesClient {
    *   stable it is still a work-in-progress and under active development,
    *   and might get backwards-incompatible changes at any time.
    *   `.promise()` is not supported yet.
-   * @example <caption>include:samples/generated/v1/security_policies.insert.js</caption>
-   * region_tag:compute_v1_generated_SecurityPolicies_Insert_async
+   * @example <caption>include:samples/generated/v1/region_ssl_policies.insert.js</caption>
+   * region_tag:compute_v1_generated_RegionSslPolicies_Insert_async
    */
   insert(
-    request?: protos.google.cloud.compute.v1.IInsertSecurityPolicyRequest,
+    request?: protos.google.cloud.compute.v1.IInsertRegionSslPolicyRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -811,40 +587,40 @@ export class SecurityPoliciesClient {
     ]
   >;
   insert(
-    request: protos.google.cloud.compute.v1.IInsertSecurityPolicyRequest,
+    request: protos.google.cloud.compute.v1.IInsertRegionSslPolicyRequest,
     options: CallOptions,
     callback: Callback<
       protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.IInsertSecurityPolicyRequest
+      | protos.google.cloud.compute.v1.IInsertRegionSslPolicyRequest
       | null
       | undefined,
       {} | null | undefined
     >
   ): void;
   insert(
-    request: protos.google.cloud.compute.v1.IInsertSecurityPolicyRequest,
+    request: protos.google.cloud.compute.v1.IInsertRegionSslPolicyRequest,
     callback: Callback<
       protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.IInsertSecurityPolicyRequest
+      | protos.google.cloud.compute.v1.IInsertRegionSslPolicyRequest
       | null
       | undefined,
       {} | null | undefined
     >
   ): void;
   insert(
-    request?: protos.google.cloud.compute.v1.IInsertSecurityPolicyRequest,
+    request?: protos.google.cloud.compute.v1.IInsertRegionSslPolicyRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
           protos.google.cloud.compute.v1.IOperation,
-          | protos.google.cloud.compute.v1.IInsertSecurityPolicyRequest
+          | protos.google.cloud.compute.v1.IInsertRegionSslPolicyRequest
           | null
           | undefined,
           {} | null | undefined
         >,
     callback?: Callback<
       protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.IInsertSecurityPolicyRequest
+      | protos.google.cloud.compute.v1.IInsertRegionSslPolicyRequest
       | null
       | undefined,
       {} | null | undefined
@@ -870,6 +646,7 @@ export class SecurityPoliciesClient {
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
         project: request.project || '',
+        region: request.region || '',
       });
     this.initialize();
     return this.innerApiCalls
@@ -895,7 +672,7 @@ export class SecurityPoliciesClient {
       );
   }
   /**
-   * Gets the current list of preconfigured Web Application Firewall (WAF) expressions.
+   * Lists all features that can be specified in the SSL policy when using custom profile.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -909,75 +686,77 @@ export class SecurityPoliciesClient {
    *   Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
    * @param {string} request.project
    *   Project ID for this request.
+   * @param {string} request.region
+   *   Name of the region scoping this request.
    * @param {boolean} request.returnPartialSuccess
    *   Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing [SecurityPoliciesListPreconfiguredExpressionSetsResponse]{@link google.cloud.compute.v1.SecurityPoliciesListPreconfiguredExpressionSetsResponse}.
+   *   The first element of the array is an object representing [SslPoliciesListAvailableFeaturesResponse]{@link google.cloud.compute.v1.SslPoliciesListAvailableFeaturesResponse}.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
    *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/security_policies.list_preconfigured_expression_sets.js</caption>
-   * region_tag:compute_v1_generated_SecurityPolicies_ListPreconfiguredExpressionSets_async
+   * @example <caption>include:samples/generated/v1/region_ssl_policies.list_available_features.js</caption>
+   * region_tag:compute_v1_generated_RegionSslPolicies_ListAvailableFeatures_async
    */
-  listPreconfiguredExpressionSets(
-    request?: protos.google.cloud.compute.v1.IListPreconfiguredExpressionSetsSecurityPoliciesRequest,
+  listAvailableFeatures(
+    request?: protos.google.cloud.compute.v1.IListAvailableFeaturesRegionSslPoliciesRequest,
     options?: CallOptions
   ): Promise<
     [
-      protos.google.cloud.compute.v1.ISecurityPoliciesListPreconfiguredExpressionSetsResponse,
+      protos.google.cloud.compute.v1.ISslPoliciesListAvailableFeaturesResponse,
       (
-        | protos.google.cloud.compute.v1.IListPreconfiguredExpressionSetsSecurityPoliciesRequest
+        | protos.google.cloud.compute.v1.IListAvailableFeaturesRegionSslPoliciesRequest
         | undefined
       ),
       {} | undefined
     ]
   >;
-  listPreconfiguredExpressionSets(
-    request: protos.google.cloud.compute.v1.IListPreconfiguredExpressionSetsSecurityPoliciesRequest,
+  listAvailableFeatures(
+    request: protos.google.cloud.compute.v1.IListAvailableFeaturesRegionSslPoliciesRequest,
     options: CallOptions,
     callback: Callback<
-      protos.google.cloud.compute.v1.ISecurityPoliciesListPreconfiguredExpressionSetsResponse,
-      | protos.google.cloud.compute.v1.IListPreconfiguredExpressionSetsSecurityPoliciesRequest
+      protos.google.cloud.compute.v1.ISslPoliciesListAvailableFeaturesResponse,
+      | protos.google.cloud.compute.v1.IListAvailableFeaturesRegionSslPoliciesRequest
       | null
       | undefined,
       {} | null | undefined
     >
   ): void;
-  listPreconfiguredExpressionSets(
-    request: protos.google.cloud.compute.v1.IListPreconfiguredExpressionSetsSecurityPoliciesRequest,
+  listAvailableFeatures(
+    request: protos.google.cloud.compute.v1.IListAvailableFeaturesRegionSslPoliciesRequest,
     callback: Callback<
-      protos.google.cloud.compute.v1.ISecurityPoliciesListPreconfiguredExpressionSetsResponse,
-      | protos.google.cloud.compute.v1.IListPreconfiguredExpressionSetsSecurityPoliciesRequest
+      protos.google.cloud.compute.v1.ISslPoliciesListAvailableFeaturesResponse,
+      | protos.google.cloud.compute.v1.IListAvailableFeaturesRegionSslPoliciesRequest
       | null
       | undefined,
       {} | null | undefined
     >
   ): void;
-  listPreconfiguredExpressionSets(
-    request?: protos.google.cloud.compute.v1.IListPreconfiguredExpressionSetsSecurityPoliciesRequest,
+  listAvailableFeatures(
+    request?: protos.google.cloud.compute.v1.IListAvailableFeaturesRegionSslPoliciesRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
-          protos.google.cloud.compute.v1.ISecurityPoliciesListPreconfiguredExpressionSetsResponse,
-          | protos.google.cloud.compute.v1.IListPreconfiguredExpressionSetsSecurityPoliciesRequest
+          protos.google.cloud.compute.v1.ISslPoliciesListAvailableFeaturesResponse,
+          | protos.google.cloud.compute.v1.IListAvailableFeaturesRegionSslPoliciesRequest
           | null
           | undefined,
           {} | null | undefined
         >,
     callback?: Callback<
-      protos.google.cloud.compute.v1.ISecurityPoliciesListPreconfiguredExpressionSetsResponse,
-      | protos.google.cloud.compute.v1.IListPreconfiguredExpressionSetsSecurityPoliciesRequest
+      protos.google.cloud.compute.v1.ISslPoliciesListAvailableFeaturesResponse,
+      | protos.google.cloud.compute.v1.IListAvailableFeaturesRegionSslPoliciesRequest
       | null
       | undefined,
       {} | null | undefined
     >
   ): Promise<
     [
-      protos.google.cloud.compute.v1.ISecurityPoliciesListPreconfiguredExpressionSetsResponse,
+      protos.google.cloud.compute.v1.ISslPoliciesListAvailableFeaturesResponse,
       (
-        | protos.google.cloud.compute.v1.IListPreconfiguredExpressionSetsSecurityPoliciesRequest
+        | protos.google.cloud.compute.v1.IListAvailableFeaturesRegionSslPoliciesRequest
         | undefined
       ),
       {} | undefined
@@ -997,26 +776,25 @@ export class SecurityPoliciesClient {
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
         project: request.project || '',
+        region: request.region || '',
       });
     this.initialize();
-    return this.innerApiCalls.listPreconfiguredExpressionSets(
-      request,
-      options,
-      callback
-    );
+    return this.innerApiCalls.listAvailableFeatures(request, options, callback);
   }
   /**
-   * Patches the specified policy with the data included in the request. This cannot be used to be update the rules in the policy. Please use the per rule methods like addRule, patchRule, and removeRule instead.
+   * Patches the specified SSL policy with the data included in the request.
    *
    * @param {Object} request
    *   The request object that will be sent.
    * @param {string} request.project
    *   Project ID for this request.
+   * @param {string} request.region
+   *   Name of the region scoping this request.
    * @param {string} request.requestId
    *   An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
-   * @param {string} request.securityPolicy
-   *   Name of the security policy to update.
-   * @param {google.cloud.compute.v1.SecurityPolicy} request.securityPolicyResource
+   * @param {string} request.sslPolicy
+   *   Name of the SSL policy to update. The name must be 1-63 characters long, and comply with RFC1035.
+   * @param {google.cloud.compute.v1.SslPolicy} request.sslPolicyResource
    *   The body resource for this request
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
@@ -1030,11 +808,11 @@ export class SecurityPoliciesClient {
    *   stable it is still a work-in-progress and under active development,
    *   and might get backwards-incompatible changes at any time.
    *   `.promise()` is not supported yet.
-   * @example <caption>include:samples/generated/v1/security_policies.patch.js</caption>
-   * region_tag:compute_v1_generated_SecurityPolicies_Patch_async
+   * @example <caption>include:samples/generated/v1/region_ssl_policies.patch.js</caption>
+   * region_tag:compute_v1_generated_RegionSslPolicies_Patch_async
    */
   patch(
-    request?: protos.google.cloud.compute.v1.IPatchSecurityPolicyRequest,
+    request?: protos.google.cloud.compute.v1.IPatchRegionSslPolicyRequest,
     options?: CallOptions
   ): Promise<
     [
@@ -1044,40 +822,40 @@ export class SecurityPoliciesClient {
     ]
   >;
   patch(
-    request: protos.google.cloud.compute.v1.IPatchSecurityPolicyRequest,
+    request: protos.google.cloud.compute.v1.IPatchRegionSslPolicyRequest,
     options: CallOptions,
     callback: Callback<
       protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.IPatchSecurityPolicyRequest
+      | protos.google.cloud.compute.v1.IPatchRegionSslPolicyRequest
       | null
       | undefined,
       {} | null | undefined
     >
   ): void;
   patch(
-    request: protos.google.cloud.compute.v1.IPatchSecurityPolicyRequest,
+    request: protos.google.cloud.compute.v1.IPatchRegionSslPolicyRequest,
     callback: Callback<
       protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.IPatchSecurityPolicyRequest
+      | protos.google.cloud.compute.v1.IPatchRegionSslPolicyRequest
       | null
       | undefined,
       {} | null | undefined
     >
   ): void;
   patch(
-    request?: protos.google.cloud.compute.v1.IPatchSecurityPolicyRequest,
+    request?: protos.google.cloud.compute.v1.IPatchRegionSslPolicyRequest,
     optionsOrCallback?:
       | CallOptions
       | Callback<
           protos.google.cloud.compute.v1.IOperation,
-          | protos.google.cloud.compute.v1.IPatchSecurityPolicyRequest
+          | protos.google.cloud.compute.v1.IPatchRegionSslPolicyRequest
           | null
           | undefined,
           {} | null | undefined
         >,
     callback?: Callback<
       protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.IPatchSecurityPolicyRequest
+      | protos.google.cloud.compute.v1.IPatchRegionSslPolicyRequest
       | null
       | undefined,
       {} | null | undefined
@@ -1103,7 +881,8 @@ export class SecurityPoliciesClient {
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
         project: request.project || '',
-        security_policy: request.securityPolicy || '',
+        region: request.region || '',
+        ssl_policy: request.sslPolicy || '',
       });
     this.initialize();
     return this.innerApiCalls
@@ -1128,434 +907,9 @@ export class SecurityPoliciesClient {
         }
       );
   }
-  /**
-   * Patches a rule at the specified priority.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {number} request.priority
-   *   The priority of the rule to patch.
-   * @param {string} request.project
-   *   Project ID for this request.
-   * @param {string} request.securityPolicy
-   *   Name of the security policy to update.
-   * @param {google.cloud.compute.v1.SecurityPolicyRule} request.securityPolicyRuleResource
-   *   The body resource for this request
-   * @param {boolean} request.validateOnly
-   *   If true, the request will not be committed.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
-   *   for more details and examples.
-   *   This method is considered to be in beta. This means while
-   *   stable it is still a work-in-progress and under active development,
-   *   and might get backwards-incompatible changes at any time.
-   *   `.promise()` is not supported yet.
-   * @example <caption>include:samples/generated/v1/security_policies.patch_rule.js</caption>
-   * region_tag:compute_v1_generated_SecurityPolicies_PatchRule_async
-   */
-  patchRule(
-    request?: protos.google.cloud.compute.v1.IPatchRuleSecurityPolicyRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
-      protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
-    ]
-  >;
-  patchRule(
-    request: protos.google.cloud.compute.v1.IPatchRuleSecurityPolicyRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.IPatchRuleSecurityPolicyRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  patchRule(
-    request: protos.google.cloud.compute.v1.IPatchRuleSecurityPolicyRequest,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.IPatchRuleSecurityPolicyRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  patchRule(
-    request?: protos.google.cloud.compute.v1.IPatchRuleSecurityPolicyRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          protos.google.cloud.compute.v1.IOperation,
-          | protos.google.cloud.compute.v1.IPatchRuleSecurityPolicyRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.IPatchRuleSecurityPolicyRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
-      protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
-    ]
-  > | void {
-    request = request || {};
-    let options: CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        project: request.project || '',
-        security_policy: request.securityPolicy || '',
-      });
-    this.initialize();
-    return this.innerApiCalls
-      .patchRule(request, options, callback)
-      .then(
-        ([response, operation, rawResponse]: [
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
-        ]) => {
-          return [
-            {
-              latestResponse: response,
-              done: false,
-              name: response.id,
-              metadata: null,
-              result: {},
-            },
-            operation,
-            rawResponse,
-          ];
-        }
-      );
-  }
-  /**
-   * Deletes a rule at the specified priority.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {number} request.priority
-   *   The priority of the rule to remove from the security policy.
-   * @param {string} request.project
-   *   Project ID for this request.
-   * @param {string} request.securityPolicy
-   *   Name of the security policy to update.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
-   *   for more details and examples.
-   *   This method is considered to be in beta. This means while
-   *   stable it is still a work-in-progress and under active development,
-   *   and might get backwards-incompatible changes at any time.
-   *   `.promise()` is not supported yet.
-   * @example <caption>include:samples/generated/v1/security_policies.remove_rule.js</caption>
-   * region_tag:compute_v1_generated_SecurityPolicies_RemoveRule_async
-   */
-  removeRule(
-    request?: protos.google.cloud.compute.v1.IRemoveRuleSecurityPolicyRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
-      protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
-    ]
-  >;
-  removeRule(
-    request: protos.google.cloud.compute.v1.IRemoveRuleSecurityPolicyRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.IRemoveRuleSecurityPolicyRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  removeRule(
-    request: protos.google.cloud.compute.v1.IRemoveRuleSecurityPolicyRequest,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.IRemoveRuleSecurityPolicyRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  removeRule(
-    request?: protos.google.cloud.compute.v1.IRemoveRuleSecurityPolicyRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          protos.google.cloud.compute.v1.IOperation,
-          | protos.google.cloud.compute.v1.IRemoveRuleSecurityPolicyRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.IRemoveRuleSecurityPolicyRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
-      protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
-    ]
-  > | void {
-    request = request || {};
-    let options: CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        project: request.project || '',
-        security_policy: request.securityPolicy || '',
-      });
-    this.initialize();
-    return this.innerApiCalls
-      .removeRule(request, options, callback)
-      .then(
-        ([response, operation, rawResponse]: [
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
-        ]) => {
-          return [
-            {
-              latestResponse: response,
-              done: false,
-              name: response.id,
-              metadata: null,
-              result: {},
-            },
-            operation,
-            rawResponse,
-          ];
-        }
-      );
-  }
-  /**
-   * Sets the labels on a security policy. To learn more about labels, read the Labeling Resources documentation.
-   *
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {google.cloud.compute.v1.GlobalSetLabelsRequest} request.globalSetLabelsRequestResource
-   *   The body resource for this request
-   * @param {string} request.project
-   *   Project ID for this request.
-   * @param {string} request.resource
-   *   Name or id of the resource for this request.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is an object representing
-   *   a long running operation.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#long-running-operations)
-   *   for more details and examples.
-   *   This method is considered to be in beta. This means while
-   *   stable it is still a work-in-progress and under active development,
-   *   and might get backwards-incompatible changes at any time.
-   *   `.promise()` is not supported yet.
-   * @example <caption>include:samples/generated/v1/security_policies.set_labels.js</caption>
-   * region_tag:compute_v1_generated_SecurityPolicies_SetLabels_async
-   */
-  setLabels(
-    request?: protos.google.cloud.compute.v1.ISetLabelsSecurityPolicyRequest,
-    options?: CallOptions
-  ): Promise<
-    [
-      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
-      protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
-    ]
-  >;
-  setLabels(
-    request: protos.google.cloud.compute.v1.ISetLabelsSecurityPolicyRequest,
-    options: CallOptions,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.ISetLabelsSecurityPolicyRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  setLabels(
-    request: protos.google.cloud.compute.v1.ISetLabelsSecurityPolicyRequest,
-    callback: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.ISetLabelsSecurityPolicyRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): void;
-  setLabels(
-    request?: protos.google.cloud.compute.v1.ISetLabelsSecurityPolicyRequest,
-    optionsOrCallback?:
-      | CallOptions
-      | Callback<
-          protos.google.cloud.compute.v1.IOperation,
-          | protos.google.cloud.compute.v1.ISetLabelsSecurityPolicyRequest
-          | null
-          | undefined,
-          {} | null | undefined
-        >,
-    callback?: Callback<
-      protos.google.cloud.compute.v1.IOperation,
-      | protos.google.cloud.compute.v1.ISetLabelsSecurityPolicyRequest
-      | null
-      | undefined,
-      {} | null | undefined
-    >
-  ): Promise<
-    [
-      LROperation<protos.google.cloud.compute.v1.IOperation, null>,
-      protos.google.cloud.compute.v1.IOperation | undefined,
-      {} | undefined
-    ]
-  > | void {
-    request = request || {};
-    let options: CallOptions;
-    if (typeof optionsOrCallback === 'function' && callback === undefined) {
-      callback = optionsOrCallback;
-      options = {};
-    } else {
-      options = optionsOrCallback as CallOptions;
-    }
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        project: request.project || '',
-        resource: request.resource || '',
-      });
-    this.initialize();
-    return this.innerApiCalls
-      .setLabels(request, options, callback)
-      .then(
-        ([response, operation, rawResponse]: [
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation,
-          protos.google.cloud.compute.v1.IOperation
-        ]) => {
-          return [
-            {
-              latestResponse: response,
-              done: false,
-              name: response.id,
-              metadata: null,
-              result: {},
-            },
-            operation,
-            rawResponse,
-          ];
-        }
-      );
-  }
 
   /**
-   * Retrieves the list of all SecurityPolicy resources, regional and global, available to the specified project.
-   *
-   * `for`-`await`-`of` syntax is used with the iterable to get response elements on-demand.
-   * @param {Object} request
-   *   The request object that will be sent.
-   * @param {string} request.filter
-   *   A filter expression that filters resources listed in the response. Most Compute resources support two types of filter expressions: expressions that support regular expressions and expressions that follow API improvement proposal AIP-160. If you want to use AIP-160, your expression must specify the field name, an operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The operator must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`. For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`. The `:` operator can be used with string fields to match substrings. For non-string fields it is equivalent to the `=` operator. The `:*` comparison can be used to test whether a key has been defined. For example, to find all objects with `owner` label use: ``` labels.owner:* ``` You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels. To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ``` If you want to use a regular expression, use the `eq` (equal) or `ne` (not equal) operator against a single un-parenthesized expression with or without quotes or against multiple parenthesized expressions. Examples: `fieldname eq unquoted literal` `fieldname eq 'single quoted literal'` `fieldname eq "double quoted literal"` `(fieldname1 eq literal) (fieldname2 ne "literal")` The literal value is interpreted as a regular expression using Google RE2 library syntax. The literal value must match the entire field. For example, to filter for instances that do not end with name "instance", you would use `name ne .*instance`.
-   * @param {boolean} request.includeAllScopes
-   *   Indicates whether every visible scope for each scope type (zone, region, global) should be included in the response. For new resource types added after this field, the flag has no effect as new resource types will always include every visible scope for each scope type in response. For resource types which predate this field, if this flag is omitted or false, only scopes of the scope types where the resource type is expected to be found will be included.
-   * @param {number} request.maxResults
-   *   The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)
-   * @param {string} request.orderBy
-   *   Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name. You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first. Currently, only sorting by `name` or `creationTimestamp desc` is supported.
-   * @param {string} request.pageToken
-   *   Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
-   * @param {string} request.project
-   *   Name of the project scoping this request.
-   * @param {boolean} request.returnPartialSuccess
-   *   Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
-   * @param {object} [options]
-   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
-   * @returns {Object}
-   *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
-   *   When you iterate the returned iterable, each element will be an object representing
-   *   as tuple [string, [SecurityPoliciesScopedList]{@link google.cloud.compute.v1.SecurityPoliciesScopedList}]. The API will be called under the hood as needed, once per the page,
-   *   so you can stop the iteration when you don't need more results.
-   *   Please see the
-   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
-   *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/security_policies.aggregated_list.js</caption>
-   * region_tag:compute_v1_generated_SecurityPolicies_AggregatedList_async
-   */
-  aggregatedListAsync(
-    request?: protos.google.cloud.compute.v1.IAggregatedListSecurityPoliciesRequest,
-    options?: CallOptions
-  ): AsyncIterable<
-    [string, protos.google.cloud.compute.v1.ISecurityPoliciesScopedList]
-  > {
-    request = request || {};
-    options = options || {};
-    options.otherArgs = options.otherArgs || {};
-    options.otherArgs.headers = options.otherArgs.headers || {};
-    options.otherArgs.headers['x-goog-request-params'] =
-      this._gaxModule.routingHeader.fromParams({
-        project: request.project || '',
-      });
-    const defaultCallSettings = this._defaults['aggregatedList'];
-    const callSettings = defaultCallSettings.merge(options);
-    this.initialize();
-    return this.descriptors.page.aggregatedList.asyncIterate(
-      this.innerApiCalls['aggregatedList'] as GaxCall,
-      request as {},
-      callSettings
-    ) as AsyncIterable<
-      [string, protos.google.cloud.compute.v1.ISecurityPoliciesScopedList]
-    >;
-  }
-  /**
-   * List all the policies that have been configured for the specified project.
+   * Lists all the SSL policies that have been configured for the specified project and region.
    *
    * @param {Object} request
    *   The request object that will be sent.
@@ -1569,12 +923,14 @@ export class SecurityPoliciesClient {
    *   Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
    * @param {string} request.project
    *   Project ID for this request.
+   * @param {string} request.region
+   *   Name of the region scoping this request.
    * @param {boolean} request.returnPartialSuccess
    *   Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Promise} - The promise which resolves to an array.
-   *   The first element of the array is Array of [SecurityPolicy]{@link google.cloud.compute.v1.SecurityPolicy}.
+   *   The first element of the array is Array of [SslPolicy]{@link google.cloud.compute.v1.SslPolicy}.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed and will merge results from all the pages into this array.
    *   Note that it can affect your quota.
@@ -1585,51 +941,51 @@ export class SecurityPoliciesClient {
    *   for more details and examples.
    */
   list(
-    request?: protos.google.cloud.compute.v1.IListSecurityPoliciesRequest,
+    request?: protos.google.cloud.compute.v1.IListRegionSslPoliciesRequest,
     options?: CallOptions
   ): Promise<
     [
-      protos.google.cloud.compute.v1.ISecurityPolicy[],
-      protos.google.cloud.compute.v1.IListSecurityPoliciesRequest | null,
-      protos.google.cloud.compute.v1.ISecurityPolicyList
+      protos.google.cloud.compute.v1.ISslPolicy[],
+      protos.google.cloud.compute.v1.IListRegionSslPoliciesRequest | null,
+      protos.google.cloud.compute.v1.ISslPoliciesList
     ]
   >;
   list(
-    request: protos.google.cloud.compute.v1.IListSecurityPoliciesRequest,
+    request: protos.google.cloud.compute.v1.IListRegionSslPoliciesRequest,
     options: CallOptions,
     callback: PaginationCallback<
-      protos.google.cloud.compute.v1.IListSecurityPoliciesRequest,
-      protos.google.cloud.compute.v1.ISecurityPolicyList | null | undefined,
-      protos.google.cloud.compute.v1.ISecurityPolicy
+      protos.google.cloud.compute.v1.IListRegionSslPoliciesRequest,
+      protos.google.cloud.compute.v1.ISslPoliciesList | null | undefined,
+      protos.google.cloud.compute.v1.ISslPolicy
     >
   ): void;
   list(
-    request: protos.google.cloud.compute.v1.IListSecurityPoliciesRequest,
+    request: protos.google.cloud.compute.v1.IListRegionSslPoliciesRequest,
     callback: PaginationCallback<
-      protos.google.cloud.compute.v1.IListSecurityPoliciesRequest,
-      protos.google.cloud.compute.v1.ISecurityPolicyList | null | undefined,
-      protos.google.cloud.compute.v1.ISecurityPolicy
+      protos.google.cloud.compute.v1.IListRegionSslPoliciesRequest,
+      protos.google.cloud.compute.v1.ISslPoliciesList | null | undefined,
+      protos.google.cloud.compute.v1.ISslPolicy
     >
   ): void;
   list(
-    request?: protos.google.cloud.compute.v1.IListSecurityPoliciesRequest,
+    request?: protos.google.cloud.compute.v1.IListRegionSslPoliciesRequest,
     optionsOrCallback?:
       | CallOptions
       | PaginationCallback<
-          protos.google.cloud.compute.v1.IListSecurityPoliciesRequest,
-          protos.google.cloud.compute.v1.ISecurityPolicyList | null | undefined,
-          protos.google.cloud.compute.v1.ISecurityPolicy
+          protos.google.cloud.compute.v1.IListRegionSslPoliciesRequest,
+          protos.google.cloud.compute.v1.ISslPoliciesList | null | undefined,
+          protos.google.cloud.compute.v1.ISslPolicy
         >,
     callback?: PaginationCallback<
-      protos.google.cloud.compute.v1.IListSecurityPoliciesRequest,
-      protos.google.cloud.compute.v1.ISecurityPolicyList | null | undefined,
-      protos.google.cloud.compute.v1.ISecurityPolicy
+      protos.google.cloud.compute.v1.IListRegionSslPoliciesRequest,
+      protos.google.cloud.compute.v1.ISslPoliciesList | null | undefined,
+      protos.google.cloud.compute.v1.ISslPolicy
     >
   ): Promise<
     [
-      protos.google.cloud.compute.v1.ISecurityPolicy[],
-      protos.google.cloud.compute.v1.IListSecurityPoliciesRequest | null,
-      protos.google.cloud.compute.v1.ISecurityPolicyList
+      protos.google.cloud.compute.v1.ISslPolicy[],
+      protos.google.cloud.compute.v1.IListRegionSslPoliciesRequest | null,
+      protos.google.cloud.compute.v1.ISslPoliciesList
     ]
   > | void {
     request = request || {};
@@ -1646,6 +1002,7 @@ export class SecurityPoliciesClient {
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
         project: request.project || '',
+        region: request.region || '',
       });
     this.initialize();
     return this.innerApiCalls.list(request, options, callback);
@@ -1665,12 +1022,14 @@ export class SecurityPoliciesClient {
    *   Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
    * @param {string} request.project
    *   Project ID for this request.
+   * @param {string} request.region
+   *   Name of the region scoping this request.
    * @param {boolean} request.returnPartialSuccess
    *   Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
    * @param {object} [options]
    *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
    * @returns {Stream}
-   *   An object stream which emits an object representing [SecurityPolicy]{@link google.cloud.compute.v1.SecurityPolicy} on 'data' event.
+   *   An object stream which emits an object representing [SslPolicy]{@link google.cloud.compute.v1.SslPolicy} on 'data' event.
    *   The client library will perform auto-pagination by default: it will call the API as many
    *   times as needed. Note that it can affect your quota.
    *   We recommend using `listAsync()`
@@ -1680,7 +1039,7 @@ export class SecurityPoliciesClient {
    *   for more details and examples.
    */
   listStream(
-    request?: protos.google.cloud.compute.v1.IListSecurityPoliciesRequest,
+    request?: protos.google.cloud.compute.v1.IListRegionSslPoliciesRequest,
     options?: CallOptions
   ): Transform {
     request = request || {};
@@ -1690,6 +1049,7 @@ export class SecurityPoliciesClient {
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
         project: request.project || '',
+        region: request.region || '',
       });
     const defaultCallSettings = this._defaults['list'];
     const callSettings = defaultCallSettings.merge(options);
@@ -1717,6 +1077,8 @@ export class SecurityPoliciesClient {
    *   Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
    * @param {string} request.project
    *   Project ID for this request.
+   * @param {string} request.region
+   *   Name of the region scoping this request.
    * @param {boolean} request.returnPartialSuccess
    *   Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
    * @param {object} [options]
@@ -1724,18 +1086,18 @@ export class SecurityPoliciesClient {
    * @returns {Object}
    *   An iterable Object that allows [async iteration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols).
    *   When you iterate the returned iterable, each element will be an object representing
-   *   [SecurityPolicy]{@link google.cloud.compute.v1.SecurityPolicy}. The API will be called under the hood as needed, once per the page,
+   *   [SslPolicy]{@link google.cloud.compute.v1.SslPolicy}. The API will be called under the hood as needed, once per the page,
    *   so you can stop the iteration when you don't need more results.
    *   Please see the
    *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#auto-pagination)
    *   for more details and examples.
-   * @example <caption>include:samples/generated/v1/security_policies.list.js</caption>
-   * region_tag:compute_v1_generated_SecurityPolicies_List_async
+   * @example <caption>include:samples/generated/v1/region_ssl_policies.list.js</caption>
+   * region_tag:compute_v1_generated_RegionSslPolicies_List_async
    */
   listAsync(
-    request?: protos.google.cloud.compute.v1.IListSecurityPoliciesRequest,
+    request?: protos.google.cloud.compute.v1.IListRegionSslPoliciesRequest,
     options?: CallOptions
-  ): AsyncIterable<protos.google.cloud.compute.v1.ISecurityPolicy> {
+  ): AsyncIterable<protos.google.cloud.compute.v1.ISslPolicy> {
     request = request || {};
     options = options || {};
     options.otherArgs = options.otherArgs || {};
@@ -1743,6 +1105,7 @@ export class SecurityPoliciesClient {
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
         project: request.project || '',
+        region: request.region || '',
       });
     const defaultCallSettings = this._defaults['list'];
     const callSettings = defaultCallSettings.merge(options);
@@ -1751,7 +1114,7 @@ export class SecurityPoliciesClient {
       this.innerApiCalls['list'] as GaxCall,
       request as {},
       callSettings
-    ) as AsyncIterable<protos.google.cloud.compute.v1.ISecurityPolicy>;
+    ) as AsyncIterable<protos.google.cloud.compute.v1.ISslPolicy>;
   }
 
   /**
@@ -1761,8 +1124,8 @@ export class SecurityPoliciesClient {
    * @returns {Promise} A promise that resolves when the client is closed.
    */
   close(): Promise<void> {
-    if (this.securityPoliciesStub && !this._terminated) {
-      return this.securityPoliciesStub.then(stub => {
+    if (this.regionSslPoliciesStub && !this._terminated) {
+      return this.regionSslPoliciesStub.then(stub => {
         this._terminated = true;
         stub.close();
       });

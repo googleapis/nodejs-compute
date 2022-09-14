@@ -246,10 +246,12 @@ export class BackendServicesClient {
       'deleteSignedUrlKey',
       'get',
       'getHealth',
+      'getIamPolicy',
       'insert',
       'list',
       'patch',
       'setEdgeSecurityPolicy',
+      'setIamPolicy',
       'setSecurityPolicy',
       'update',
     ];
@@ -901,6 +903,108 @@ export class BackendServicesClient {
     return this.innerApiCalls.getHealth(request, options, callback);
   }
   /**
+   * Gets the access control policy for a resource. May be empty if no such policy or resource exists.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {number} request.optionsRequestedPolicyVersion
+   *   Requested IAM Policy version.
+   * @param {string} request.project
+   *   Project ID for this request.
+   * @param {string} request.resource
+   *   Name or id of the resource for this request.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Policy]{@link google.cloud.compute.v1.Policy}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/backend_services.get_iam_policy.js</caption>
+   * region_tag:compute_v1_generated_BackendServices_GetIamPolicy_async
+   */
+  getIamPolicy(
+    request?: protos.google.cloud.compute.v1.IGetIamPolicyBackendServiceRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.compute.v1.IPolicy,
+      (
+        | protos.google.cloud.compute.v1.IGetIamPolicyBackendServiceRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
+  getIamPolicy(
+    request: protos.google.cloud.compute.v1.IGetIamPolicyBackendServiceRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.compute.v1.IPolicy,
+      | protos.google.cloud.compute.v1.IGetIamPolicyBackendServiceRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getIamPolicy(
+    request: protos.google.cloud.compute.v1.IGetIamPolicyBackendServiceRequest,
+    callback: Callback<
+      protos.google.cloud.compute.v1.IPolicy,
+      | protos.google.cloud.compute.v1.IGetIamPolicyBackendServiceRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getIamPolicy(
+    request?: protos.google.cloud.compute.v1.IGetIamPolicyBackendServiceRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.compute.v1.IPolicy,
+          | protos.google.cloud.compute.v1.IGetIamPolicyBackendServiceRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.compute.v1.IPolicy,
+      | protos.google.cloud.compute.v1.IGetIamPolicyBackendServiceRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.compute.v1.IPolicy,
+      (
+        | protos.google.cloud.compute.v1.IGetIamPolicyBackendServiceRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        project: request.project || '',
+        resource: request.resource || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.getIamPolicy(request, options, callback);
+  }
+  /**
    * Creates a BackendService resource in the specified project using the data included in the request. For more information, see Backend services overview .
    *
    * @param {Object} request
@@ -1265,6 +1369,108 @@ export class BackendServicesClient {
           ];
         }
       );
+  }
+  /**
+   * Sets the access control policy on the specified resource. Replaces any existing policy.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {google.cloud.compute.v1.GlobalSetPolicyRequest} request.globalSetPolicyRequestResource
+   *   The body resource for this request
+   * @param {string} request.project
+   *   Project ID for this request.
+   * @param {string} request.resource
+   *   Name or id of the resource for this request.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Policy]{@link google.cloud.compute.v1.Policy}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/backend_services.set_iam_policy.js</caption>
+   * region_tag:compute_v1_generated_BackendServices_SetIamPolicy_async
+   */
+  setIamPolicy(
+    request?: protos.google.cloud.compute.v1.ISetIamPolicyBackendServiceRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.compute.v1.IPolicy,
+      (
+        | protos.google.cloud.compute.v1.ISetIamPolicyBackendServiceRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
+  setIamPolicy(
+    request: protos.google.cloud.compute.v1.ISetIamPolicyBackendServiceRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.compute.v1.IPolicy,
+      | protos.google.cloud.compute.v1.ISetIamPolicyBackendServiceRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  setIamPolicy(
+    request: protos.google.cloud.compute.v1.ISetIamPolicyBackendServiceRequest,
+    callback: Callback<
+      protos.google.cloud.compute.v1.IPolicy,
+      | protos.google.cloud.compute.v1.ISetIamPolicyBackendServiceRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  setIamPolicy(
+    request?: protos.google.cloud.compute.v1.ISetIamPolicyBackendServiceRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.compute.v1.IPolicy,
+          | protos.google.cloud.compute.v1.ISetIamPolicyBackendServiceRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.compute.v1.IPolicy,
+      | protos.google.cloud.compute.v1.ISetIamPolicyBackendServiceRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.compute.v1.IPolicy,
+      (
+        | protos.google.cloud.compute.v1.ISetIamPolicyBackendServiceRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        project: request.project || '',
+        resource: request.resource || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.setIamPolicy(request, options, callback);
   }
   /**
    * Sets the Google Cloud Armor security policy for the specified backend service. For more information, see Google Cloud Armor Overview

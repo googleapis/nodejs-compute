@@ -21,7 +21,7 @@ import * as assert from 'assert';
 import * as sinon from 'sinon';
 import {SinonStub} from 'sinon';
 import {describe, it, beforeEach, afterEach} from 'mocha';
-import * as sslpoliciesModule from '../src';
+import * as regiontargettcpproxiesModule from '../src';
 
 import {PassThrough} from 'stream';
 
@@ -112,7 +112,7 @@ function stubAsyncIterationCall<ResponseType>(
   return sinon.stub().returns(asyncIterable);
 }
 
-describe('v1.SslPoliciesClient', () => {
+describe('v1.RegionTargetTcpProxiesClient', () => {
   let googleAuth: GoogleAuth;
   beforeEach(() => {
     googleAuth = {
@@ -128,61 +128,71 @@ describe('v1.SslPoliciesClient', () => {
   });
   describe('Common methods', () => {
     it('has servicePath', () => {
-      const servicePath = sslpoliciesModule.v1.SslPoliciesClient.servicePath;
+      const servicePath =
+        regiontargettcpproxiesModule.v1.RegionTargetTcpProxiesClient
+          .servicePath;
       assert(servicePath);
     });
 
     it('has apiEndpoint', () => {
-      const apiEndpoint = sslpoliciesModule.v1.SslPoliciesClient.apiEndpoint;
+      const apiEndpoint =
+        regiontargettcpproxiesModule.v1.RegionTargetTcpProxiesClient
+          .apiEndpoint;
       assert(apiEndpoint);
     });
 
     it('has port', () => {
-      const port = sslpoliciesModule.v1.SslPoliciesClient.port;
+      const port =
+        regiontargettcpproxiesModule.v1.RegionTargetTcpProxiesClient.port;
       assert(port);
       assert(typeof port === 'number');
     });
 
     it('should create a client with no option', () => {
-      const client = new sslpoliciesModule.v1.SslPoliciesClient();
+      const client =
+        new regiontargettcpproxiesModule.v1.RegionTargetTcpProxiesClient();
       assert(client);
     });
 
     it('should create a client with gRPC fallback', () => {
-      const client = new sslpoliciesModule.v1.SslPoliciesClient({
-        fallback: true,
-      });
+      const client =
+        new regiontargettcpproxiesModule.v1.RegionTargetTcpProxiesClient({
+          fallback: true,
+        });
       assert(client);
     });
 
     it('has initialize method and supports deferred initialization', async () => {
-      const client = new sslpoliciesModule.v1.SslPoliciesClient({
-        auth: googleAuth,
-        projectId: 'bogus',
-      });
-      assert.strictEqual(client.sslPoliciesStub, undefined);
+      const client =
+        new regiontargettcpproxiesModule.v1.RegionTargetTcpProxiesClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      assert.strictEqual(client.regionTargetTcpProxiesStub, undefined);
       await client.initialize();
-      assert(client.sslPoliciesStub);
+      assert(client.regionTargetTcpProxiesStub);
     });
 
     it('has close method for the initialized client', done => {
-      const client = new sslpoliciesModule.v1.SslPoliciesClient({
-        auth: googleAuth,
-        projectId: 'bogus',
-      });
+      const client =
+        new regiontargettcpproxiesModule.v1.RegionTargetTcpProxiesClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
       client.initialize();
-      assert(client.sslPoliciesStub);
+      assert(client.regionTargetTcpProxiesStub);
       client.close().then(() => {
         done();
       });
     });
 
     it('has close method for the non-initialized client', done => {
-      const client = new sslpoliciesModule.v1.SslPoliciesClient({
-        auth: googleAuth,
-        projectId: 'bogus',
-      });
-      assert.strictEqual(client.sslPoliciesStub, undefined);
+      const client =
+        new regiontargettcpproxiesModule.v1.RegionTargetTcpProxiesClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
+      assert.strictEqual(client.regionTargetTcpProxiesStub, undefined);
       client.close().then(() => {
         done();
       });
@@ -190,10 +200,11 @@ describe('v1.SslPoliciesClient', () => {
 
     it('has getProjectId method', async () => {
       const fakeProjectId = 'fake-project-id';
-      const client = new sslpoliciesModule.v1.SslPoliciesClient({
-        auth: googleAuth,
-        projectId: 'bogus',
-      });
+      const client =
+        new regiontargettcpproxiesModule.v1.RegionTargetTcpProxiesClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
       client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
       const result = await client.getProjectId();
       assert.strictEqual(result, fakeProjectId);
@@ -202,10 +213,11 @@ describe('v1.SslPoliciesClient', () => {
 
     it('has getProjectId method with callback', async () => {
       const fakeProjectId = 'fake-project-id';
-      const client = new sslpoliciesModule.v1.SslPoliciesClient({
-        auth: googleAuth,
-        projectId: 'bogus',
-      });
+      const client =
+        new regiontargettcpproxiesModule.v1.RegionTargetTcpProxiesClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
       client.auth.getProjectId = sinon
         .stub()
         .callsArgWith(0, null, fakeProjectId);
@@ -225,17 +237,19 @@ describe('v1.SslPoliciesClient', () => {
 
   describe('delete', () => {
     it('invokes delete without error', async () => {
-      const client = new sslpoliciesModule.v1.SslPoliciesClient({
-        auth: googleAuth,
-        projectId: 'bogus',
-      });
+      const client =
+        new regiontargettcpproxiesModule.v1.RegionTargetTcpProxiesClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.compute.v1.DeleteSslPolicyRequest()
+        new protos.google.cloud.compute.v1.DeleteRegionTargetTcpProxyRequest()
       );
       request.project = '';
-      request.sslPolicy = '';
-      const expectedHeaderRequestParams = 'project=&ssl_policy=';
+      request.region = '';
+      request.targetTcpProxy = '';
+      const expectedHeaderRequestParams = 'project=&region=&target_tcp_proxy=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -257,17 +271,19 @@ describe('v1.SslPoliciesClient', () => {
     });
 
     it('invokes delete without error using callback', async () => {
-      const client = new sslpoliciesModule.v1.SslPoliciesClient({
-        auth: googleAuth,
-        projectId: 'bogus',
-      });
+      const client =
+        new regiontargettcpproxiesModule.v1.RegionTargetTcpProxiesClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.compute.v1.DeleteSslPolicyRequest()
+        new protos.google.cloud.compute.v1.DeleteRegionTargetTcpProxyRequest()
       );
       request.project = '';
-      request.sslPolicy = '';
-      const expectedHeaderRequestParams = 'project=&ssl_policy=';
+      request.region = '';
+      request.targetTcpProxy = '';
+      const expectedHeaderRequestParams = 'project=&region=&target_tcp_proxy=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -305,17 +321,19 @@ describe('v1.SslPoliciesClient', () => {
     });
 
     it('invokes delete with error', async () => {
-      const client = new sslpoliciesModule.v1.SslPoliciesClient({
-        auth: googleAuth,
-        projectId: 'bogus',
-      });
+      const client =
+        new regiontargettcpproxiesModule.v1.RegionTargetTcpProxiesClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.compute.v1.DeleteSslPolicyRequest()
+        new protos.google.cloud.compute.v1.DeleteRegionTargetTcpProxyRequest()
       );
       request.project = '';
-      request.sslPolicy = '';
-      const expectedHeaderRequestParams = 'project=&ssl_policy=';
+      request.region = '';
+      request.targetTcpProxy = '';
+      const expectedHeaderRequestParams = 'project=&region=&target_tcp_proxy=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -334,16 +352,18 @@ describe('v1.SslPoliciesClient', () => {
     });
 
     it('invokes delete with closed client', async () => {
-      const client = new sslpoliciesModule.v1.SslPoliciesClient({
-        auth: googleAuth,
-        projectId: 'bogus',
-      });
+      const client =
+        new regiontargettcpproxiesModule.v1.RegionTargetTcpProxiesClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.compute.v1.DeleteSslPolicyRequest()
+        new protos.google.cloud.compute.v1.DeleteRegionTargetTcpProxyRequest()
       );
       request.project = '';
-      request.sslPolicy = '';
+      request.region = '';
+      request.targetTcpProxy = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.delete(request), expectedError);
@@ -352,17 +372,19 @@ describe('v1.SslPoliciesClient', () => {
 
   describe('get', () => {
     it('invokes get without error', async () => {
-      const client = new sslpoliciesModule.v1.SslPoliciesClient({
-        auth: googleAuth,
-        projectId: 'bogus',
-      });
+      const client =
+        new regiontargettcpproxiesModule.v1.RegionTargetTcpProxiesClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.compute.v1.GetSslPolicyRequest()
+        new protos.google.cloud.compute.v1.GetRegionTargetTcpProxyRequest()
       );
       request.project = '';
-      request.sslPolicy = '';
-      const expectedHeaderRequestParams = 'project=&ssl_policy=';
+      request.region = '';
+      request.targetTcpProxy = '';
+      const expectedHeaderRequestParams = 'project=&region=&target_tcp_proxy=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -371,7 +393,7 @@ describe('v1.SslPoliciesClient', () => {
         },
       };
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.compute.v1.SslPolicy()
+        new protos.google.cloud.compute.v1.TargetTcpProxy()
       );
       client.innerApiCalls.get = stubSimpleCall(expectedResponse);
       const [response] = await client.get(request);
@@ -384,17 +406,19 @@ describe('v1.SslPoliciesClient', () => {
     });
 
     it('invokes get without error using callback', async () => {
-      const client = new sslpoliciesModule.v1.SslPoliciesClient({
-        auth: googleAuth,
-        projectId: 'bogus',
-      });
+      const client =
+        new regiontargettcpproxiesModule.v1.RegionTargetTcpProxiesClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.compute.v1.GetSslPolicyRequest()
+        new protos.google.cloud.compute.v1.GetRegionTargetTcpProxyRequest()
       );
       request.project = '';
-      request.sslPolicy = '';
-      const expectedHeaderRequestParams = 'project=&ssl_policy=';
+      request.region = '';
+      request.targetTcpProxy = '';
+      const expectedHeaderRequestParams = 'project=&region=&target_tcp_proxy=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -403,7 +427,7 @@ describe('v1.SslPoliciesClient', () => {
         },
       };
       const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.compute.v1.SslPolicy()
+        new protos.google.cloud.compute.v1.TargetTcpProxy()
       );
       client.innerApiCalls.get = stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
@@ -411,7 +435,7 @@ describe('v1.SslPoliciesClient', () => {
           request,
           (
             err?: Error | null,
-            result?: protos.google.cloud.compute.v1.ISslPolicy | null
+            result?: protos.google.cloud.compute.v1.ITargetTcpProxy | null
           ) => {
             if (err) {
               reject(err);
@@ -431,17 +455,19 @@ describe('v1.SslPoliciesClient', () => {
     });
 
     it('invokes get with error', async () => {
-      const client = new sslpoliciesModule.v1.SslPoliciesClient({
-        auth: googleAuth,
-        projectId: 'bogus',
-      });
+      const client =
+        new regiontargettcpproxiesModule.v1.RegionTargetTcpProxiesClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.compute.v1.GetSslPolicyRequest()
+        new protos.google.cloud.compute.v1.GetRegionTargetTcpProxyRequest()
       );
       request.project = '';
-      request.sslPolicy = '';
-      const expectedHeaderRequestParams = 'project=&ssl_policy=';
+      request.region = '';
+      request.targetTcpProxy = '';
+      const expectedHeaderRequestParams = 'project=&region=&target_tcp_proxy=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -460,16 +486,18 @@ describe('v1.SslPoliciesClient', () => {
     });
 
     it('invokes get with closed client', async () => {
-      const client = new sslpoliciesModule.v1.SslPoliciesClient({
-        auth: googleAuth,
-        projectId: 'bogus',
-      });
+      const client =
+        new regiontargettcpproxiesModule.v1.RegionTargetTcpProxiesClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.compute.v1.GetSslPolicyRequest()
+        new protos.google.cloud.compute.v1.GetRegionTargetTcpProxyRequest()
       );
       request.project = '';
-      request.sslPolicy = '';
+      request.region = '';
+      request.targetTcpProxy = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.get(request), expectedError);
@@ -478,16 +506,18 @@ describe('v1.SslPoliciesClient', () => {
 
   describe('insert', () => {
     it('invokes insert without error', async () => {
-      const client = new sslpoliciesModule.v1.SslPoliciesClient({
-        auth: googleAuth,
-        projectId: 'bogus',
-      });
+      const client =
+        new regiontargettcpproxiesModule.v1.RegionTargetTcpProxiesClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.compute.v1.InsertSslPolicyRequest()
+        new protos.google.cloud.compute.v1.InsertRegionTargetTcpProxyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -509,16 +539,18 @@ describe('v1.SslPoliciesClient', () => {
     });
 
     it('invokes insert without error using callback', async () => {
-      const client = new sslpoliciesModule.v1.SslPoliciesClient({
-        auth: googleAuth,
-        projectId: 'bogus',
-      });
+      const client =
+        new regiontargettcpproxiesModule.v1.RegionTargetTcpProxiesClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.compute.v1.InsertSslPolicyRequest()
+        new protos.google.cloud.compute.v1.InsertRegionTargetTcpProxyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -556,16 +588,18 @@ describe('v1.SslPoliciesClient', () => {
     });
 
     it('invokes insert with error', async () => {
-      const client = new sslpoliciesModule.v1.SslPoliciesClient({
-        auth: googleAuth,
-        projectId: 'bogus',
-      });
+      const client =
+        new regiontargettcpproxiesModule.v1.RegionTargetTcpProxiesClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.compute.v1.InsertSslPolicyRequest()
+        new protos.google.cloud.compute.v1.InsertRegionTargetTcpProxyRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -584,386 +618,37 @@ describe('v1.SslPoliciesClient', () => {
     });
 
     it('invokes insert with closed client', async () => {
-      const client = new sslpoliciesModule.v1.SslPoliciesClient({
-        auth: googleAuth,
-        projectId: 'bogus',
-      });
+      const client =
+        new regiontargettcpproxiesModule.v1.RegionTargetTcpProxiesClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.compute.v1.InsertSslPolicyRequest()
+        new protos.google.cloud.compute.v1.InsertRegionTargetTcpProxyRequest()
       );
       request.project = '';
+      request.region = '';
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.insert(request), expectedError);
     });
   });
 
-  describe('listAvailableFeatures', () => {
-    it('invokes listAvailableFeatures without error', async () => {
-      const client = new sslpoliciesModule.v1.SslPoliciesClient({
-        auth: googleAuth,
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.compute.v1.ListAvailableFeaturesSslPoliciesRequest()
-      );
-      request.project = '';
-      const expectedHeaderRequestParams = 'project=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.compute.v1.SslPoliciesListAvailableFeaturesResponse()
-      );
-      client.innerApiCalls.listAvailableFeatures =
-        stubSimpleCall(expectedResponse);
-      const [response] = await client.listAvailableFeatures(request);
-      assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listAvailableFeatures as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
-    });
-
-    it('invokes listAvailableFeatures without error using callback', async () => {
-      const client = new sslpoliciesModule.v1.SslPoliciesClient({
-        auth: googleAuth,
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.compute.v1.ListAvailableFeaturesSslPoliciesRequest()
-      );
-      request.project = '';
-      const expectedHeaderRequestParams = 'project=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.compute.v1.SslPoliciesListAvailableFeaturesResponse()
-      );
-      client.innerApiCalls.listAvailableFeatures =
-        stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.listAvailableFeatures(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.compute.v1.ISslPoliciesListAvailableFeaturesResponse | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listAvailableFeatures as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
-    });
-
-    it('invokes listAvailableFeatures with error', async () => {
-      const client = new sslpoliciesModule.v1.SslPoliciesClient({
-        auth: googleAuth,
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.compute.v1.ListAvailableFeaturesSslPoliciesRequest()
-      );
-      request.project = '';
-      const expectedHeaderRequestParams = 'project=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedError = new Error('expected');
-      client.innerApiCalls.listAvailableFeatures = stubSimpleCall(
-        undefined,
-        expectedError
-      );
-      await assert.rejects(
-        client.listAvailableFeatures(request),
-        expectedError
-      );
-      assert(
-        (client.innerApiCalls.listAvailableFeatures as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
-    });
-
-    it('invokes listAvailableFeatures with closed client', async () => {
-      const client = new sslpoliciesModule.v1.SslPoliciesClient({
-        auth: googleAuth,
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.compute.v1.ListAvailableFeaturesSslPoliciesRequest()
-      );
-      request.project = '';
-      const expectedError = new Error('The client has already been closed.');
-      client.close();
-      await assert.rejects(
-        client.listAvailableFeatures(request),
-        expectedError
-      );
-    });
-  });
-
-  describe('patch', () => {
-    it('invokes patch without error', async () => {
-      const client = new sslpoliciesModule.v1.SslPoliciesClient({
-        auth: googleAuth,
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.compute.v1.PatchSslPolicyRequest()
-      );
-      request.project = '';
-      request.sslPolicy = '';
-      const expectedHeaderRequestParams = 'project=&ssl_policy=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.compute.v1.Operation()
-      );
-      client.innerApiCalls.patch = stubSimpleCall(expectedResponse);
-      const [response] = await client.patch(request);
-      assert.deepStrictEqual(response.latestResponse, expectedResponse);
-      assert(
-        (client.innerApiCalls.patch as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
-    });
-
-    it('invokes patch without error using callback', async () => {
-      const client = new sslpoliciesModule.v1.SslPoliciesClient({
-        auth: googleAuth,
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.compute.v1.PatchSslPolicyRequest()
-      );
-      request.project = '';
-      request.sslPolicy = '';
-      const expectedHeaderRequestParams = 'project=&ssl_policy=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedResponse = generateSampleMessage(
-        new protos.google.cloud.compute.v1.Operation()
-      );
-      client.innerApiCalls.patch = stubSimpleCallWithCallback(expectedResponse);
-      const promise = new Promise((resolve, reject) => {
-        client.patch(
-          request,
-          (
-            err?: Error | null,
-            result?: protos.google.cloud.compute.v1.IOperation | null
-          ) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(result);
-            }
-          }
-        );
-      });
-      const response = await promise;
-      assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.patch as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
-    });
-
-    it('invokes patch with error', async () => {
-      const client = new sslpoliciesModule.v1.SslPoliciesClient({
-        auth: googleAuth,
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.compute.v1.PatchSslPolicyRequest()
-      );
-      request.project = '';
-      request.sslPolicy = '';
-      const expectedHeaderRequestParams = 'project=&ssl_policy=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
-      const expectedError = new Error('expected');
-      client.innerApiCalls.patch = stubSimpleCall(undefined, expectedError);
-      await assert.rejects(client.patch(request), expectedError);
-      assert(
-        (client.innerApiCalls.patch as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
-    });
-
-    it('invokes patch with closed client', async () => {
-      const client = new sslpoliciesModule.v1.SslPoliciesClient({
-        auth: googleAuth,
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.compute.v1.PatchSslPolicyRequest()
-      );
-      request.project = '';
-      request.sslPolicy = '';
-      const expectedError = new Error('The client has already been closed.');
-      client.close();
-      await assert.rejects(client.patch(request), expectedError);
-    });
-  });
-
-  describe('aggregatedList', () => {
-    it('uses async iteration with aggregatedList without error', async () => {
-      const client = new sslpoliciesModule.v1.SslPoliciesClient({
-        auth: googleAuth,
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.compute.v1.AggregatedListSslPoliciesRequest()
-      );
-      request.project = '';
-      const expectedHeaderRequestParams = 'project=';
-      const expectedResponse = [
-        [
-          'tuple_key_1',
-          generateSampleMessage(
-            new protos.google.cloud.compute.v1.SslPoliciesScopedList()
-          ),
-        ],
-        [
-          'tuple_key_2',
-          generateSampleMessage(
-            new protos.google.cloud.compute.v1.SslPoliciesScopedList()
-          ),
-        ],
-        [
-          'tuple_key_3',
-          generateSampleMessage(
-            new protos.google.cloud.compute.v1.SslPoliciesScopedList()
-          ),
-        ],
-      ];
-      client.descriptors.page.aggregatedList.asyncIterate =
-        stubAsyncIterationCall(expectedResponse);
-      const responses: Array<
-        [string, protos.google.cloud.compute.v1.ISslPoliciesScopedList]
-      > = [];
-      const iterable = client.aggregatedListAsync(request);
-      for await (const resource of iterable) {
-        responses.push(resource!);
-      }
-      assert.deepStrictEqual(responses, expectedResponse);
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.aggregatedList.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert.strictEqual(
-        (
-          client.descriptors.page.aggregatedList.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
-      );
-    });
-
-    it('uses async iteration with aggregatedList with error', async () => {
-      const client = new sslpoliciesModule.v1.SslPoliciesClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
-      client.initialize();
-      const request = generateSampleMessage(
-        new protos.google.cloud.compute.v1.AggregatedListSslPoliciesRequest()
-      );
-      request.project = '';
-      const expectedHeaderRequestParams = 'project=';
-      const expectedError = new Error('expected');
-      client.descriptors.page.aggregatedList.asyncIterate =
-        stubAsyncIterationCall(undefined, expectedError);
-      const iterable = client.aggregatedListAsync(request);
-      await assert.rejects(async () => {
-        const responses: Array<
-          [string, protos.google.cloud.compute.v1.ISslPoliciesScopedList]
-        > = [];
-        for await (const resource of iterable) {
-          responses.push(resource!);
-        }
-      });
-      assert.deepStrictEqual(
-        (
-          client.descriptors.page.aggregatedList.asyncIterate as SinonStub
-        ).getCall(0).args[1],
-        request
-      );
-      assert.strictEqual(
-        (
-          client.descriptors.page.aggregatedList.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
-      );
-    });
-  });
-
   describe('list', () => {
     it('invokes list without error', async () => {
-      const client = new sslpoliciesModule.v1.SslPoliciesClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new regiontargettcpproxiesModule.v1.RegionTargetTcpProxiesClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.compute.v1.ListSslPoliciesRequest()
+        new protos.google.cloud.compute.v1.ListRegionTargetTcpProxiesRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -972,9 +657,15 @@ describe('v1.SslPoliciesClient', () => {
         },
       };
       const expectedResponse = [
-        generateSampleMessage(new protos.google.cloud.compute.v1.SslPolicy()),
-        generateSampleMessage(new protos.google.cloud.compute.v1.SslPolicy()),
-        generateSampleMessage(new protos.google.cloud.compute.v1.SslPolicy()),
+        generateSampleMessage(
+          new protos.google.cloud.compute.v1.TargetTcpProxy()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.compute.v1.TargetTcpProxy()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.compute.v1.TargetTcpProxy()
+        ),
       ];
       client.innerApiCalls.list = stubSimpleCall(expectedResponse);
       const [response] = await client.list(request);
@@ -987,16 +678,18 @@ describe('v1.SslPoliciesClient', () => {
     });
 
     it('invokes list without error using callback', async () => {
-      const client = new sslpoliciesModule.v1.SslPoliciesClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new regiontargettcpproxiesModule.v1.RegionTargetTcpProxiesClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.compute.v1.ListSslPoliciesRequest()
+        new protos.google.cloud.compute.v1.ListRegionTargetTcpProxiesRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1005,9 +698,15 @@ describe('v1.SslPoliciesClient', () => {
         },
       };
       const expectedResponse = [
-        generateSampleMessage(new protos.google.cloud.compute.v1.SslPolicy()),
-        generateSampleMessage(new protos.google.cloud.compute.v1.SslPolicy()),
-        generateSampleMessage(new protos.google.cloud.compute.v1.SslPolicy()),
+        generateSampleMessage(
+          new protos.google.cloud.compute.v1.TargetTcpProxy()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.compute.v1.TargetTcpProxy()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.compute.v1.TargetTcpProxy()
+        ),
       ];
       client.innerApiCalls.list = stubSimpleCallWithCallback(expectedResponse);
       const promise = new Promise((resolve, reject) => {
@@ -1015,7 +714,7 @@ describe('v1.SslPoliciesClient', () => {
           request,
           (
             err?: Error | null,
-            result?: protos.google.cloud.compute.v1.ISslPolicy[] | null
+            result?: protos.google.cloud.compute.v1.ITargetTcpProxy[] | null
           ) => {
             if (err) {
               reject(err);
@@ -1035,16 +734,18 @@ describe('v1.SslPoliciesClient', () => {
     });
 
     it('invokes list with error', async () => {
-      const client = new sslpoliciesModule.v1.SslPoliciesClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new regiontargettcpproxiesModule.v1.RegionTargetTcpProxiesClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.compute.v1.ListSslPoliciesRequest()
+        new protos.google.cloud.compute.v1.ListRegionTargetTcpProxiesRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedOptions = {
         otherArgs: {
           headers: {
@@ -1063,29 +764,37 @@ describe('v1.SslPoliciesClient', () => {
     });
 
     it('invokes listStream without error', async () => {
-      const client = new sslpoliciesModule.v1.SslPoliciesClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new regiontargettcpproxiesModule.v1.RegionTargetTcpProxiesClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.compute.v1.ListSslPoliciesRequest()
+        new protos.google.cloud.compute.v1.ListRegionTargetTcpProxiesRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedResponse = [
-        generateSampleMessage(new protos.google.cloud.compute.v1.SslPolicy()),
-        generateSampleMessage(new protos.google.cloud.compute.v1.SslPolicy()),
-        generateSampleMessage(new protos.google.cloud.compute.v1.SslPolicy()),
+        generateSampleMessage(
+          new protos.google.cloud.compute.v1.TargetTcpProxy()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.compute.v1.TargetTcpProxy()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.compute.v1.TargetTcpProxy()
+        ),
       ];
       client.descriptors.page.list.createStream =
         stubPageStreamingCall(expectedResponse);
       const stream = client.listStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.compute.v1.SslPolicy[] = [];
+        const responses: protos.google.cloud.compute.v1.TargetTcpProxy[] = [];
         stream.on(
           'data',
-          (response: protos.google.cloud.compute.v1.SslPolicy) => {
+          (response: protos.google.cloud.compute.v1.TargetTcpProxy) => {
             responses.push(response);
           }
         );
@@ -1111,16 +820,18 @@ describe('v1.SslPoliciesClient', () => {
     });
 
     it('invokes listStream with error', async () => {
-      const client = new sslpoliciesModule.v1.SslPoliciesClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new regiontargettcpproxiesModule.v1.RegionTargetTcpProxiesClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.compute.v1.ListSslPoliciesRequest()
+        new protos.google.cloud.compute.v1.ListRegionTargetTcpProxiesRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedError = new Error('expected');
       client.descriptors.page.list.createStream = stubPageStreamingCall(
         undefined,
@@ -1128,10 +839,10 @@ describe('v1.SslPoliciesClient', () => {
       );
       const stream = client.listStream(request);
       const promise = new Promise((resolve, reject) => {
-        const responses: protos.google.cloud.compute.v1.SslPolicy[] = [];
+        const responses: protos.google.cloud.compute.v1.TargetTcpProxy[] = [];
         stream.on(
           'data',
-          (response: protos.google.cloud.compute.v1.SslPolicy) => {
+          (response: protos.google.cloud.compute.v1.TargetTcpProxy) => {
             responses.push(response);
           }
         );
@@ -1156,24 +867,32 @@ describe('v1.SslPoliciesClient', () => {
     });
 
     it('uses async iteration with list without error', async () => {
-      const client = new sslpoliciesModule.v1.SslPoliciesClient({
-        auth: googleAuth,
-        projectId: 'bogus',
-      });
+      const client =
+        new regiontargettcpproxiesModule.v1.RegionTargetTcpProxiesClient({
+          auth: googleAuth,
+          projectId: 'bogus',
+        });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.compute.v1.ListSslPoliciesRequest()
+        new protos.google.cloud.compute.v1.ListRegionTargetTcpProxiesRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedResponse = [
-        generateSampleMessage(new protos.google.cloud.compute.v1.SslPolicy()),
-        generateSampleMessage(new protos.google.cloud.compute.v1.SslPolicy()),
-        generateSampleMessage(new protos.google.cloud.compute.v1.SslPolicy()),
+        generateSampleMessage(
+          new protos.google.cloud.compute.v1.TargetTcpProxy()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.compute.v1.TargetTcpProxy()
+        ),
+        generateSampleMessage(
+          new protos.google.cloud.compute.v1.TargetTcpProxy()
+        ),
       ];
       client.descriptors.page.list.asyncIterate =
         stubAsyncIterationCall(expectedResponse);
-      const responses: protos.google.cloud.compute.v1.ISslPolicy[] = [];
+      const responses: protos.google.cloud.compute.v1.ITargetTcpProxy[] = [];
       const iterable = client.listAsync(request);
       for await (const resource of iterable) {
         responses.push(resource!);
@@ -1192,16 +911,18 @@ describe('v1.SslPoliciesClient', () => {
     });
 
     it('uses async iteration with list with error', async () => {
-      const client = new sslpoliciesModule.v1.SslPoliciesClient({
-        credentials: {client_email: 'bogus', private_key: 'bogus'},
-        projectId: 'bogus',
-      });
+      const client =
+        new regiontargettcpproxiesModule.v1.RegionTargetTcpProxiesClient({
+          credentials: {client_email: 'bogus', private_key: 'bogus'},
+          projectId: 'bogus',
+        });
       client.initialize();
       const request = generateSampleMessage(
-        new protos.google.cloud.compute.v1.ListSslPoliciesRequest()
+        new protos.google.cloud.compute.v1.ListRegionTargetTcpProxiesRequest()
       );
       request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      request.region = '';
+      const expectedHeaderRequestParams = 'project=&region=';
       const expectedError = new Error('expected');
       client.descriptors.page.list.asyncIterate = stubAsyncIterationCall(
         undefined,
@@ -1209,7 +930,7 @@ describe('v1.SslPoliciesClient', () => {
       );
       const iterable = client.listAsync(request);
       await assert.rejects(async () => {
-        const responses: protos.google.cloud.compute.v1.ISslPolicy[] = [];
+        const responses: protos.google.cloud.compute.v1.ITargetTcpProxy[] = [];
         for await (const resource of iterable) {
           responses.push(resource!);
         }

@@ -239,9 +239,11 @@ export class RegionBackendServicesClient {
       'delete',
       'get',
       'getHealth',
+      'getIamPolicy',
       'insert',
       'list',
       'patch',
+      'setIamPolicy',
       'update',
     ];
     for (const methodName of regionBackendServicesStubMethods) {
@@ -661,6 +663,111 @@ export class RegionBackendServicesClient {
     return this.innerApiCalls.getHealth(request, options, callback);
   }
   /**
+   * Gets the access control policy for a resource. May be empty if no such policy or resource exists.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {number} request.optionsRequestedPolicyVersion
+   *   Requested IAM Policy version.
+   * @param {string} request.project
+   *   Project ID for this request.
+   * @param {string} request.region
+   *   The name of the region for this request.
+   * @param {string} request.resource
+   *   Name or id of the resource for this request.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Policy]{@link google.cloud.compute.v1.Policy}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/region_backend_services.get_iam_policy.js</caption>
+   * region_tag:compute_v1_generated_RegionBackendServices_GetIamPolicy_async
+   */
+  getIamPolicy(
+    request?: protos.google.cloud.compute.v1.IGetIamPolicyRegionBackendServiceRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.compute.v1.IPolicy,
+      (
+        | protos.google.cloud.compute.v1.IGetIamPolicyRegionBackendServiceRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
+  getIamPolicy(
+    request: protos.google.cloud.compute.v1.IGetIamPolicyRegionBackendServiceRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.compute.v1.IPolicy,
+      | protos.google.cloud.compute.v1.IGetIamPolicyRegionBackendServiceRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getIamPolicy(
+    request: protos.google.cloud.compute.v1.IGetIamPolicyRegionBackendServiceRequest,
+    callback: Callback<
+      protos.google.cloud.compute.v1.IPolicy,
+      | protos.google.cloud.compute.v1.IGetIamPolicyRegionBackendServiceRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  getIamPolicy(
+    request?: protos.google.cloud.compute.v1.IGetIamPolicyRegionBackendServiceRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.compute.v1.IPolicy,
+          | protos.google.cloud.compute.v1.IGetIamPolicyRegionBackendServiceRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.compute.v1.IPolicy,
+      | protos.google.cloud.compute.v1.IGetIamPolicyRegionBackendServiceRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.compute.v1.IPolicy,
+      (
+        | protos.google.cloud.compute.v1.IGetIamPolicyRegionBackendServiceRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        project: request.project || '',
+        region: request.region || '',
+        resource: request.resource || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.getIamPolicy(request, options, callback);
+  }
+  /**
    * Creates a regional BackendService resource in the specified project using the data included in the request. For more information, see Backend services overview.
    *
    * @param {Object} request
@@ -908,6 +1015,111 @@ export class RegionBackendServicesClient {
           ];
         }
       );
+  }
+  /**
+   * Sets the access control policy on the specified resource. Replaces any existing policy.
+   *
+   * @param {Object} request
+   *   The request object that will be sent.
+   * @param {string} request.project
+   *   Project ID for this request.
+   * @param {string} request.region
+   *   The name of the region for this request.
+   * @param {google.cloud.compute.v1.RegionSetPolicyRequest} request.regionSetPolicyRequestResource
+   *   The body resource for this request
+   * @param {string} request.resource
+   *   Name or id of the resource for this request.
+   * @param {object} [options]
+   *   Call options. See {@link https://googleapis.dev/nodejs/google-gax/latest/interfaces/CallOptions.html|CallOptions} for more details.
+   * @returns {Promise} - The promise which resolves to an array.
+   *   The first element of the array is an object representing [Policy]{@link google.cloud.compute.v1.Policy}.
+   *   Please see the
+   *   [documentation](https://github.com/googleapis/gax-nodejs/blob/master/client-libraries.md#regular-methods)
+   *   for more details and examples.
+   * @example <caption>include:samples/generated/v1/region_backend_services.set_iam_policy.js</caption>
+   * region_tag:compute_v1_generated_RegionBackendServices_SetIamPolicy_async
+   */
+  setIamPolicy(
+    request?: protos.google.cloud.compute.v1.ISetIamPolicyRegionBackendServiceRequest,
+    options?: CallOptions
+  ): Promise<
+    [
+      protos.google.cloud.compute.v1.IPolicy,
+      (
+        | protos.google.cloud.compute.v1.ISetIamPolicyRegionBackendServiceRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  >;
+  setIamPolicy(
+    request: protos.google.cloud.compute.v1.ISetIamPolicyRegionBackendServiceRequest,
+    options: CallOptions,
+    callback: Callback<
+      protos.google.cloud.compute.v1.IPolicy,
+      | protos.google.cloud.compute.v1.ISetIamPolicyRegionBackendServiceRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  setIamPolicy(
+    request: protos.google.cloud.compute.v1.ISetIamPolicyRegionBackendServiceRequest,
+    callback: Callback<
+      protos.google.cloud.compute.v1.IPolicy,
+      | protos.google.cloud.compute.v1.ISetIamPolicyRegionBackendServiceRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): void;
+  setIamPolicy(
+    request?: protos.google.cloud.compute.v1.ISetIamPolicyRegionBackendServiceRequest,
+    optionsOrCallback?:
+      | CallOptions
+      | Callback<
+          protos.google.cloud.compute.v1.IPolicy,
+          | protos.google.cloud.compute.v1.ISetIamPolicyRegionBackendServiceRequest
+          | null
+          | undefined,
+          {} | null | undefined
+        >,
+    callback?: Callback<
+      protos.google.cloud.compute.v1.IPolicy,
+      | protos.google.cloud.compute.v1.ISetIamPolicyRegionBackendServiceRequest
+      | null
+      | undefined,
+      {} | null | undefined
+    >
+  ): Promise<
+    [
+      protos.google.cloud.compute.v1.IPolicy,
+      (
+        | protos.google.cloud.compute.v1.ISetIamPolicyRegionBackendServiceRequest
+        | undefined
+      ),
+      {} | undefined
+    ]
+  > | void {
+    request = request || {};
+    let options: CallOptions;
+    if (typeof optionsOrCallback === 'function' && callback === undefined) {
+      callback = optionsOrCallback;
+      options = {};
+    } else {
+      options = optionsOrCallback as CallOptions;
+    }
+    options = options || {};
+    options.otherArgs = options.otherArgs || {};
+    options.otherArgs.headers = options.otherArgs.headers || {};
+    options.otherArgs.headers['x-goog-request-params'] =
+      this._gaxModule.routingHeader.fromParams({
+        project: request.project || '',
+        region: request.region || '',
+        resource: request.resource || '',
+      });
+    this.initialize();
+    return this.innerApiCalls.setIamPolicy(request, options, callback);
   }
   /**
    * Updates the specified regional BackendService resource with the data included in the request. For more information, see Backend services overview .
