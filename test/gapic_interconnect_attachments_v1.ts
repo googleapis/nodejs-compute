@@ -27,6 +27,21 @@ import {PassThrough} from 'stream';
 
 import {GoogleAuth, protobuf} from 'google-gax';
 
+// Dynamically loaded proto JSON is needed to get the type information
+// to fill in default values for request objects
+const root = protobuf.Root.fromJSON(
+  require('../protos/protos.json')
+).resolveAll();
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function getTypeDefaultValue(typeName: string, fields: string[]) {
+  let type = root.lookupType(typeName) as protobuf.Type;
+  for (const field of fields.slice(0, -1)) {
+    type = type.fields[field]?.resolvedType as protobuf.Type;
+  }
+  return type.fields[fields[fields.length - 1]]?.defaultValue;
+}
+
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
@@ -246,29 +261,36 @@ describe('v1.InterconnectAttachmentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteInterconnectAttachmentRequest()
       );
-      request.project = '';
-      request.region = '';
-      request.interconnectAttachment = '';
-      const expectedHeaderRequestParams =
-        'project=&region=&interconnect_attachment=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'DeleteInterconnectAttachmentRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        'DeleteInterconnectAttachmentRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        'DeleteInterconnectAttachmentRequest',
+        ['interconnectAttachment']
+      );
+      request.interconnectAttachment = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&interconnect_attachment=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
       client.innerApiCalls.delete = stubSimpleCall(expectedResponse);
       const [response] = await client.delete(request);
       assert.deepStrictEqual(response.latestResponse, expectedResponse);
-      assert(
-        (client.innerApiCalls.delete as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (client.innerApiCalls.delete as SinonStub).getCall(
+        0
+      ).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.delete as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes delete without error using callback', async () => {
@@ -281,18 +303,22 @@ describe('v1.InterconnectAttachmentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteInterconnectAttachmentRequest()
       );
-      request.project = '';
-      request.region = '';
-      request.interconnectAttachment = '';
-      const expectedHeaderRequestParams =
-        'project=&region=&interconnect_attachment=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'DeleteInterconnectAttachmentRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        'DeleteInterconnectAttachmentRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        'DeleteInterconnectAttachmentRequest',
+        ['interconnectAttachment']
+      );
+      request.interconnectAttachment = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&interconnect_attachment=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -315,11 +341,14 @@ describe('v1.InterconnectAttachmentsClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.delete as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (client.innerApiCalls.delete as SinonStub).getCall(
+        0
+      ).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.delete as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes delete with error', async () => {
@@ -332,26 +361,33 @@ describe('v1.InterconnectAttachmentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteInterconnectAttachmentRequest()
       );
-      request.project = '';
-      request.region = '';
-      request.interconnectAttachment = '';
-      const expectedHeaderRequestParams =
-        'project=&region=&interconnect_attachment=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'DeleteInterconnectAttachmentRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        'DeleteInterconnectAttachmentRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        'DeleteInterconnectAttachmentRequest',
+        ['interconnectAttachment']
+      );
+      request.interconnectAttachment = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&interconnect_attachment=${defaultValue3}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.delete = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.delete(request), expectedError);
-      assert(
-        (client.innerApiCalls.delete as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (client.innerApiCalls.delete as SinonStub).getCall(
+        0
+      ).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.delete as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes delete with closed client', async () => {
@@ -364,9 +400,21 @@ describe('v1.InterconnectAttachmentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteInterconnectAttachmentRequest()
       );
-      request.project = '';
-      request.region = '';
-      request.interconnectAttachment = '';
+      const defaultValue1 = getTypeDefaultValue(
+        'DeleteInterconnectAttachmentRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        'DeleteInterconnectAttachmentRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        'DeleteInterconnectAttachmentRequest',
+        ['interconnectAttachment']
+      );
+      request.interconnectAttachment = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.delete(request), expectedError);
@@ -384,29 +432,35 @@ describe('v1.InterconnectAttachmentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetInterconnectAttachmentRequest()
       );
-      request.project = '';
-      request.region = '';
-      request.interconnectAttachment = '';
-      const expectedHeaderRequestParams =
-        'project=&region=&interconnect_attachment=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'GetInterconnectAttachmentRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        'GetInterconnectAttachmentRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        'GetInterconnectAttachmentRequest',
+        ['interconnectAttachment']
+      );
+      request.interconnectAttachment = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&interconnect_attachment=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.InterconnectAttachment()
       );
       client.innerApiCalls.get = stubSimpleCall(expectedResponse);
       const [response] = await client.get(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.get as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (client.innerApiCalls.get as SinonStub).getCall(0)
+        .args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.get as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes get without error using callback', async () => {
@@ -419,18 +473,22 @@ describe('v1.InterconnectAttachmentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetInterconnectAttachmentRequest()
       );
-      request.project = '';
-      request.region = '';
-      request.interconnectAttachment = '';
-      const expectedHeaderRequestParams =
-        'project=&region=&interconnect_attachment=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'GetInterconnectAttachmentRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        'GetInterconnectAttachmentRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        'GetInterconnectAttachmentRequest',
+        ['interconnectAttachment']
+      );
+      request.interconnectAttachment = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&interconnect_attachment=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.InterconnectAttachment()
       );
@@ -452,11 +510,13 @@ describe('v1.InterconnectAttachmentsClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.get as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (client.innerApiCalls.get as SinonStub).getCall(0)
+        .args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.get as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes get with error', async () => {
@@ -469,26 +529,32 @@ describe('v1.InterconnectAttachmentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetInterconnectAttachmentRequest()
       );
-      request.project = '';
-      request.region = '';
-      request.interconnectAttachment = '';
-      const expectedHeaderRequestParams =
-        'project=&region=&interconnect_attachment=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'GetInterconnectAttachmentRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        'GetInterconnectAttachmentRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        'GetInterconnectAttachmentRequest',
+        ['interconnectAttachment']
+      );
+      request.interconnectAttachment = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&interconnect_attachment=${defaultValue3}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.get = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.get(request), expectedError);
-      assert(
-        (client.innerApiCalls.get as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (client.innerApiCalls.get as SinonStub).getCall(0)
+        .args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.get as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes get with closed client', async () => {
@@ -501,9 +567,21 @@ describe('v1.InterconnectAttachmentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetInterconnectAttachmentRequest()
       );
-      request.project = '';
-      request.region = '';
-      request.interconnectAttachment = '';
+      const defaultValue1 = getTypeDefaultValue(
+        'GetInterconnectAttachmentRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        'GetInterconnectAttachmentRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        'GetInterconnectAttachmentRequest',
+        ['interconnectAttachment']
+      );
+      request.interconnectAttachment = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.get(request), expectedError);
@@ -521,27 +599,31 @@ describe('v1.InterconnectAttachmentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertInterconnectAttachmentRequest()
       );
-      request.project = '';
-      request.region = '';
-      const expectedHeaderRequestParams = 'project=&region=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'InsertInterconnectAttachmentRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        'InsertInterconnectAttachmentRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
       client.innerApiCalls.insert = stubSimpleCall(expectedResponse);
       const [response] = await client.insert(request);
       assert.deepStrictEqual(response.latestResponse, expectedResponse);
-      assert(
-        (client.innerApiCalls.insert as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (client.innerApiCalls.insert as SinonStub).getCall(
+        0
+      ).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.insert as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes insert without error using callback', async () => {
@@ -554,16 +636,17 @@ describe('v1.InterconnectAttachmentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertInterconnectAttachmentRequest()
       );
-      request.project = '';
-      request.region = '';
-      const expectedHeaderRequestParams = 'project=&region=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'InsertInterconnectAttachmentRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        'InsertInterconnectAttachmentRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -586,11 +669,14 @@ describe('v1.InterconnectAttachmentsClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.insert as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (client.innerApiCalls.insert as SinonStub).getCall(
+        0
+      ).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.insert as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes insert with error', async () => {
@@ -603,24 +689,28 @@ describe('v1.InterconnectAttachmentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertInterconnectAttachmentRequest()
       );
-      request.project = '';
-      request.region = '';
-      const expectedHeaderRequestParams = 'project=&region=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'InsertInterconnectAttachmentRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        'InsertInterconnectAttachmentRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.insert = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.insert(request), expectedError);
-      assert(
-        (client.innerApiCalls.insert as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (client.innerApiCalls.insert as SinonStub).getCall(
+        0
+      ).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.insert as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes insert with closed client', async () => {
@@ -633,8 +723,16 @@ describe('v1.InterconnectAttachmentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertInterconnectAttachmentRequest()
       );
-      request.project = '';
-      request.region = '';
+      const defaultValue1 = getTypeDefaultValue(
+        'InsertInterconnectAttachmentRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        'InsertInterconnectAttachmentRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.insert(request), expectedError);
@@ -652,29 +750,35 @@ describe('v1.InterconnectAttachmentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchInterconnectAttachmentRequest()
       );
-      request.project = '';
-      request.region = '';
-      request.interconnectAttachment = '';
-      const expectedHeaderRequestParams =
-        'project=&region=&interconnect_attachment=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'PatchInterconnectAttachmentRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        'PatchInterconnectAttachmentRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        'PatchInterconnectAttachmentRequest',
+        ['interconnectAttachment']
+      );
+      request.interconnectAttachment = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&interconnect_attachment=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
       client.innerApiCalls.patch = stubSimpleCall(expectedResponse);
       const [response] = await client.patch(request);
       assert.deepStrictEqual(response.latestResponse, expectedResponse);
-      assert(
-        (client.innerApiCalls.patch as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (client.innerApiCalls.patch as SinonStub).getCall(0)
+        .args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.patch as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes patch without error using callback', async () => {
@@ -687,18 +791,22 @@ describe('v1.InterconnectAttachmentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchInterconnectAttachmentRequest()
       );
-      request.project = '';
-      request.region = '';
-      request.interconnectAttachment = '';
-      const expectedHeaderRequestParams =
-        'project=&region=&interconnect_attachment=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'PatchInterconnectAttachmentRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        'PatchInterconnectAttachmentRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        'PatchInterconnectAttachmentRequest',
+        ['interconnectAttachment']
+      );
+      request.interconnectAttachment = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&interconnect_attachment=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -720,11 +828,13 @@ describe('v1.InterconnectAttachmentsClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.patch as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (client.innerApiCalls.patch as SinonStub).getCall(0)
+        .args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.patch as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes patch with error', async () => {
@@ -737,26 +847,32 @@ describe('v1.InterconnectAttachmentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchInterconnectAttachmentRequest()
       );
-      request.project = '';
-      request.region = '';
-      request.interconnectAttachment = '';
-      const expectedHeaderRequestParams =
-        'project=&region=&interconnect_attachment=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'PatchInterconnectAttachmentRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        'PatchInterconnectAttachmentRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        'PatchInterconnectAttachmentRequest',
+        ['interconnectAttachment']
+      );
+      request.interconnectAttachment = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&interconnect_attachment=${defaultValue3}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.patch = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.patch(request), expectedError);
-      assert(
-        (client.innerApiCalls.patch as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (client.innerApiCalls.patch as SinonStub).getCall(0)
+        .args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.patch as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes patch with closed client', async () => {
@@ -769,9 +885,21 @@ describe('v1.InterconnectAttachmentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchInterconnectAttachmentRequest()
       );
-      request.project = '';
-      request.region = '';
-      request.interconnectAttachment = '';
+      const defaultValue1 = getTypeDefaultValue(
+        'PatchInterconnectAttachmentRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        'PatchInterconnectAttachmentRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        'PatchInterconnectAttachmentRequest',
+        ['interconnectAttachment']
+      );
+      request.interconnectAttachment = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.patch(request), expectedError);
@@ -789,28 +917,36 @@ describe('v1.InterconnectAttachmentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetLabelsInterconnectAttachmentRequest()
       );
-      request.project = '';
-      request.region = '';
-      request.resource = '';
-      const expectedHeaderRequestParams = 'project=&region=&resource=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'SetLabelsInterconnectAttachmentRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        'SetLabelsInterconnectAttachmentRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        'SetLabelsInterconnectAttachmentRequest',
+        ['resource']
+      );
+      request.resource = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&resource=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
       client.innerApiCalls.setLabels = stubSimpleCall(expectedResponse);
       const [response] = await client.setLabels(request);
       assert.deepStrictEqual(response.latestResponse, expectedResponse);
-      assert(
-        (client.innerApiCalls.setLabels as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.setLabels as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.setLabels as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes setLabels without error using callback', async () => {
@@ -823,17 +959,22 @@ describe('v1.InterconnectAttachmentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetLabelsInterconnectAttachmentRequest()
       );
-      request.project = '';
-      request.region = '';
-      request.resource = '';
-      const expectedHeaderRequestParams = 'project=&region=&resource=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'SetLabelsInterconnectAttachmentRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        'SetLabelsInterconnectAttachmentRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        'SetLabelsInterconnectAttachmentRequest',
+        ['resource']
+      );
+      request.resource = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&resource=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -856,11 +997,14 @@ describe('v1.InterconnectAttachmentsClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.setLabels as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.setLabels as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.setLabels as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes setLabels with error', async () => {
@@ -873,25 +1017,33 @@ describe('v1.InterconnectAttachmentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetLabelsInterconnectAttachmentRequest()
       );
-      request.project = '';
-      request.region = '';
-      request.resource = '';
-      const expectedHeaderRequestParams = 'project=&region=&resource=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'SetLabelsInterconnectAttachmentRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        'SetLabelsInterconnectAttachmentRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        'SetLabelsInterconnectAttachmentRequest',
+        ['resource']
+      );
+      request.resource = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&resource=${defaultValue3}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.setLabels = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.setLabels(request), expectedError);
-      assert(
-        (client.innerApiCalls.setLabels as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.setLabels as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.setLabels as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes setLabels with closed client', async () => {
@@ -904,9 +1056,21 @@ describe('v1.InterconnectAttachmentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetLabelsInterconnectAttachmentRequest()
       );
-      request.project = '';
-      request.region = '';
-      request.resource = '';
+      const defaultValue1 = getTypeDefaultValue(
+        'SetLabelsInterconnectAttachmentRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        'SetLabelsInterconnectAttachmentRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        'SetLabelsInterconnectAttachmentRequest',
+        ['resource']
+      );
+      request.resource = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.setLabels(request), expectedError);
@@ -924,8 +1088,12 @@ describe('v1.InterconnectAttachmentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.AggregatedListInterconnectAttachmentsRequest()
       );
-      request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      const defaultValue1 = getTypeDefaultValue(
+        'AggregatedListInterconnectAttachmentsRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedResponse = [
         [
           'tuple_key_1',
@@ -965,11 +1133,12 @@ describe('v1.InterconnectAttachmentsClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.aggregatedList.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.aggregatedList.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -983,8 +1152,12 @@ describe('v1.InterconnectAttachmentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.AggregatedListInterconnectAttachmentsRequest()
       );
-      request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      const defaultValue1 = getTypeDefaultValue(
+        'AggregatedListInterconnectAttachmentsRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.aggregatedList.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -1006,11 +1179,12 @@ describe('v1.InterconnectAttachmentsClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.aggregatedList.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.aggregatedList.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });
@@ -1026,16 +1200,17 @@ describe('v1.InterconnectAttachmentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListInterconnectAttachmentsRequest()
       );
-      request.project = '';
-      request.region = '';
-      const expectedHeaderRequestParams = 'project=&region=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'ListInterconnectAttachmentsRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        'ListInterconnectAttachmentsRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.compute.v1.InterconnectAttachment()
@@ -1050,11 +1225,13 @@ describe('v1.InterconnectAttachmentsClient', () => {
       client.innerApiCalls.list = stubSimpleCall(expectedResponse);
       const [response] = await client.list(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.list as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (client.innerApiCalls.list as SinonStub).getCall(0)
+        .args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.list as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes list without error using callback', async () => {
@@ -1067,16 +1244,17 @@ describe('v1.InterconnectAttachmentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListInterconnectAttachmentsRequest()
       );
-      request.project = '';
-      request.region = '';
-      const expectedHeaderRequestParams = 'project=&region=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'ListInterconnectAttachmentsRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        'ListInterconnectAttachmentsRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.compute.v1.InterconnectAttachment()
@@ -1108,11 +1286,13 @@ describe('v1.InterconnectAttachmentsClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.list as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (client.innerApiCalls.list as SinonStub).getCall(0)
+        .args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.list as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes list with error', async () => {
@@ -1125,24 +1305,27 @@ describe('v1.InterconnectAttachmentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListInterconnectAttachmentsRequest()
       );
-      request.project = '';
-      request.region = '';
-      const expectedHeaderRequestParams = 'project=&region=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'ListInterconnectAttachmentsRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        'ListInterconnectAttachmentsRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.list = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.list(request), expectedError);
-      assert(
-        (client.innerApiCalls.list as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (client.innerApiCalls.list as SinonStub).getCall(0)
+        .args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.list as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listStream without error', async () => {
@@ -1155,9 +1338,17 @@ describe('v1.InterconnectAttachmentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListInterconnectAttachmentsRequest()
       );
-      request.project = '';
-      request.region = '';
-      const expectedHeaderRequestParams = 'project=&region=';
+      const defaultValue1 = getTypeDefaultValue(
+        'ListInterconnectAttachmentsRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        'ListInterconnectAttachmentsRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.compute.v1.InterconnectAttachment()
@@ -1195,10 +1386,12 @@ describe('v1.InterconnectAttachmentsClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.list, request)
       );
-      assert.strictEqual(
-        (client.descriptors.page.list.createStream as SinonStub).getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.list.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -1212,9 +1405,17 @@ describe('v1.InterconnectAttachmentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListInterconnectAttachmentsRequest()
       );
-      request.project = '';
-      request.region = '';
-      const expectedHeaderRequestParams = 'project=&region=';
+      const defaultValue1 = getTypeDefaultValue(
+        'ListInterconnectAttachmentsRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        'ListInterconnectAttachmentsRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}`;
       const expectedError = new Error('expected');
       client.descriptors.page.list.createStream = stubPageStreamingCall(
         undefined,
@@ -1243,10 +1444,12 @@ describe('v1.InterconnectAttachmentsClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.list, request)
       );
-      assert.strictEqual(
-        (client.descriptors.page.list.createStream as SinonStub).getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.list.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -1260,9 +1463,17 @@ describe('v1.InterconnectAttachmentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListInterconnectAttachmentsRequest()
       );
-      request.project = '';
-      request.region = '';
-      const expectedHeaderRequestParams = 'project=&region=';
+      const defaultValue1 = getTypeDefaultValue(
+        'ListInterconnectAttachmentsRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        'ListInterconnectAttachmentsRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.compute.v1.InterconnectAttachment()
@@ -1288,10 +1499,12 @@ describe('v1.InterconnectAttachmentsClient', () => {
           .args[1],
         request
       );
-      assert.strictEqual(
-        (client.descriptors.page.list.asyncIterate as SinonStub).getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.list.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -1305,9 +1518,17 @@ describe('v1.InterconnectAttachmentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListInterconnectAttachmentsRequest()
       );
-      request.project = '';
-      request.region = '';
-      const expectedHeaderRequestParams = 'project=&region=';
+      const defaultValue1 = getTypeDefaultValue(
+        'ListInterconnectAttachmentsRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        'ListInterconnectAttachmentsRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}`;
       const expectedError = new Error('expected');
       client.descriptors.page.list.asyncIterate = stubAsyncIterationCall(
         undefined,
@@ -1326,10 +1547,12 @@ describe('v1.InterconnectAttachmentsClient', () => {
           .args[1],
         request
       );
-      assert.strictEqual(
-        (client.descriptors.page.list.asyncIterate as SinonStub).getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.list.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });

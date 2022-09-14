@@ -25,6 +25,21 @@ import * as regionoperationsModule from '../src';
 
 import {GoogleAuth, protobuf} from 'google-gax';
 
+// Dynamically loaded proto JSON is needed to get the type information
+// to fill in default values for request objects
+const root = protobuf.Root.fromJSON(
+  require('../protos/protos.json')
+).resolveAll();
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function getTypeDefaultValue(typeName: string, fields: string[]) {
+  let type = root.lookupType(typeName) as protobuf.Type;
+  for (const field of fields.slice(0, -1)) {
+    type = type.fields[field]?.resolvedType as protobuf.Type;
+  }
+  return type.fields[fields[fields.length - 1]]?.defaultValue;
+}
+
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
@@ -173,28 +188,32 @@ describe('v1small.RegionOperationsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1small.GetRegionOperationRequest()
       );
-      request.project = '';
-      request.region = '';
-      request.operation = '';
-      const expectedHeaderRequestParams = 'project=&region=&operation=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetRegionOperationRequest', [
+        'project',
+      ]);
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('GetRegionOperationRequest', [
+        'region',
+      ]);
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue('GetRegionOperationRequest', [
+        'operation',
+      ]);
+      request.operation = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&operation=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1small.Operation()
       );
       client.innerApiCalls.get = stubSimpleCall(expectedResponse);
       const [response] = await client.get(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.get as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (client.innerApiCalls.get as SinonStub).getCall(0)
+        .args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.get as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes get without error using callback', async () => {
@@ -206,17 +225,19 @@ describe('v1small.RegionOperationsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1small.GetRegionOperationRequest()
       );
-      request.project = '';
-      request.region = '';
-      request.operation = '';
-      const expectedHeaderRequestParams = 'project=&region=&operation=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetRegionOperationRequest', [
+        'project',
+      ]);
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('GetRegionOperationRequest', [
+        'region',
+      ]);
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue('GetRegionOperationRequest', [
+        'operation',
+      ]);
+      request.operation = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&operation=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1small.Operation()
       );
@@ -238,11 +259,13 @@ describe('v1small.RegionOperationsClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.get as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (client.innerApiCalls.get as SinonStub).getCall(0)
+        .args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.get as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes get with error', async () => {
@@ -254,25 +277,29 @@ describe('v1small.RegionOperationsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1small.GetRegionOperationRequest()
       );
-      request.project = '';
-      request.region = '';
-      request.operation = '';
-      const expectedHeaderRequestParams = 'project=&region=&operation=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetRegionOperationRequest', [
+        'project',
+      ]);
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('GetRegionOperationRequest', [
+        'region',
+      ]);
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue('GetRegionOperationRequest', [
+        'operation',
+      ]);
+      request.operation = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&operation=${defaultValue3}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.get = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.get(request), expectedError);
-      assert(
-        (client.innerApiCalls.get as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (client.innerApiCalls.get as SinonStub).getCall(0)
+        .args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.get as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes get with closed client', async () => {
@@ -284,9 +311,18 @@ describe('v1small.RegionOperationsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1small.GetRegionOperationRequest()
       );
-      request.project = '';
-      request.region = '';
-      request.operation = '';
+      const defaultValue1 = getTypeDefaultValue('GetRegionOperationRequest', [
+        'project',
+      ]);
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('GetRegionOperationRequest', [
+        'region',
+      ]);
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue('GetRegionOperationRequest', [
+        'operation',
+      ]);
+      request.operation = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.get(request), expectedError);
@@ -303,28 +339,32 @@ describe('v1small.RegionOperationsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1small.WaitRegionOperationRequest()
       );
-      request.project = '';
-      request.region = '';
-      request.operation = '';
-      const expectedHeaderRequestParams = 'project=&region=&operation=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('WaitRegionOperationRequest', [
+        'project',
+      ]);
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('WaitRegionOperationRequest', [
+        'region',
+      ]);
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue('WaitRegionOperationRequest', [
+        'operation',
+      ]);
+      request.operation = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&operation=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1small.Operation()
       );
       client.innerApiCalls.wait = stubSimpleCall(expectedResponse);
       const [response] = await client.wait(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.wait as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (client.innerApiCalls.wait as SinonStub).getCall(0)
+        .args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.wait as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes wait without error using callback', async () => {
@@ -336,17 +376,19 @@ describe('v1small.RegionOperationsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1small.WaitRegionOperationRequest()
       );
-      request.project = '';
-      request.region = '';
-      request.operation = '';
-      const expectedHeaderRequestParams = 'project=&region=&operation=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('WaitRegionOperationRequest', [
+        'project',
+      ]);
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('WaitRegionOperationRequest', [
+        'region',
+      ]);
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue('WaitRegionOperationRequest', [
+        'operation',
+      ]);
+      request.operation = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&operation=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1small.Operation()
       );
@@ -368,11 +410,13 @@ describe('v1small.RegionOperationsClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.wait as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (client.innerApiCalls.wait as SinonStub).getCall(0)
+        .args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.wait as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes wait with error', async () => {
@@ -384,25 +428,29 @@ describe('v1small.RegionOperationsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1small.WaitRegionOperationRequest()
       );
-      request.project = '';
-      request.region = '';
-      request.operation = '';
-      const expectedHeaderRequestParams = 'project=&region=&operation=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('WaitRegionOperationRequest', [
+        'project',
+      ]);
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('WaitRegionOperationRequest', [
+        'region',
+      ]);
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue('WaitRegionOperationRequest', [
+        'operation',
+      ]);
+      request.operation = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&operation=${defaultValue3}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.wait = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.wait(request), expectedError);
-      assert(
-        (client.innerApiCalls.wait as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (client.innerApiCalls.wait as SinonStub).getCall(0)
+        .args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.wait as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes wait with closed client', async () => {
@@ -414,9 +462,18 @@ describe('v1small.RegionOperationsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1small.WaitRegionOperationRequest()
       );
-      request.project = '';
-      request.region = '';
-      request.operation = '';
+      const defaultValue1 = getTypeDefaultValue('WaitRegionOperationRequest', [
+        'project',
+      ]);
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('WaitRegionOperationRequest', [
+        'region',
+      ]);
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue('WaitRegionOperationRequest', [
+        'operation',
+      ]);
+      request.operation = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.wait(request), expectedError);

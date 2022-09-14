@@ -436,7 +436,7 @@ export class FirewallPoliciesClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        firewall_policy: request.firewallPolicy || '',
+        firewall_policy: request.firewallPolicy ?? '',
       });
     this.initialize();
     return this.innerApiCalls
@@ -556,7 +556,7 @@ export class FirewallPoliciesClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        firewall_policy: request.firewallPolicy || '',
+        firewall_policy: request.firewallPolicy ?? '',
       });
     this.initialize();
     return this.innerApiCalls
@@ -676,7 +676,7 @@ export class FirewallPoliciesClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        firewall_policy: request.firewallPolicy || '',
+        firewall_policy: request.firewallPolicy ?? '',
       });
     this.initialize();
     return this.innerApiCalls
@@ -794,7 +794,7 @@ export class FirewallPoliciesClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        firewall_policy: request.firewallPolicy || '',
+        firewall_policy: request.firewallPolicy ?? '',
       });
     this.initialize();
     return this.innerApiCalls
@@ -905,7 +905,7 @@ export class FirewallPoliciesClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        firewall_policy: request.firewallPolicy || '',
+        firewall_policy: request.firewallPolicy ?? '',
       });
     this.initialize();
     return this.innerApiCalls.get(request, options, callback);
@@ -1004,7 +1004,7 @@ export class FirewallPoliciesClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        firewall_policy: request.firewallPolicy || '',
+        firewall_policy: request.firewallPolicy ?? '',
       });
     this.initialize();
     return this.innerApiCalls.getAssociation(request, options, callback);
@@ -1103,7 +1103,7 @@ export class FirewallPoliciesClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        resource: request.resource || '',
+        resource: request.resource ?? '',
       });
     this.initialize();
     return this.innerApiCalls.getIamPolicy(request, options, callback);
@@ -1196,7 +1196,7 @@ export class FirewallPoliciesClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        firewall_policy: request.firewallPolicy || '',
+        firewall_policy: request.firewallPolicy ?? '',
       });
     this.initialize();
     return this.innerApiCalls.getRule(request, options, callback);
@@ -1505,7 +1505,7 @@ export class FirewallPoliciesClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        firewall_policy: request.firewallPolicy || '',
+        firewall_policy: request.firewallPolicy ?? '',
       });
     this.initialize();
     return this.innerApiCalls
@@ -1625,7 +1625,7 @@ export class FirewallPoliciesClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        firewall_policy: request.firewallPolicy || '',
+        firewall_policy: request.firewallPolicy ?? '',
       });
     this.initialize();
     return this.innerApiCalls
@@ -1747,7 +1747,7 @@ export class FirewallPoliciesClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        firewall_policy: request.firewallPolicy || '',
+        firewall_policy: request.firewallPolicy ?? '',
       });
     this.initialize();
     return this.innerApiCalls
@@ -1867,7 +1867,7 @@ export class FirewallPoliciesClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        firewall_policy: request.firewallPolicy || '',
+        firewall_policy: request.firewallPolicy ?? '',
       });
     this.initialize();
     return this.innerApiCalls
@@ -1987,7 +1987,7 @@ export class FirewallPoliciesClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        firewall_policy: request.firewallPolicy || '',
+        firewall_policy: request.firewallPolicy ?? '',
       });
     this.initialize();
     return this.innerApiCalls
@@ -2106,7 +2106,7 @@ export class FirewallPoliciesClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        resource: request.resource || '',
+        resource: request.resource ?? '',
       });
     this.initialize();
     return this.innerApiCalls.setIamPolicy(request, options, callback);
@@ -2205,7 +2205,7 @@ export class FirewallPoliciesClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        resource: request.resource || '',
+        resource: request.resource ?? '',
       });
     this.initialize();
     return this.innerApiCalls.testIamPermissions(request, options, callback);

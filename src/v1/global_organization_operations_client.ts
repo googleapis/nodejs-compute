@@ -415,7 +415,7 @@ export class GlobalOrganizationOperationsClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        operation: request.operation || '',
+        operation: request.operation ?? '',
       });
     this.initialize();
     return this.innerApiCalls.delete(request, options, callback);
@@ -514,7 +514,7 @@ export class GlobalOrganizationOperationsClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        operation: request.operation || '',
+        operation: request.operation ?? '',
       });
     this.initialize();
     return this.innerApiCalls.get(request, options, callback);

@@ -389,8 +389,8 @@ export class LicenseCodesClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        project: request.project || '',
-        license_code: request.licenseCode || '',
+        project: request.project ?? '',
+        license_code: request.licenseCode ?? '',
       });
     this.initialize();
     return this.innerApiCalls.get(request, options, callback);
@@ -491,8 +491,8 @@ export class LicenseCodesClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        project: request.project || '',
-        resource: request.resource || '',
+        project: request.project ?? '',
+        resource: request.resource ?? '',
       });
     this.initialize();
     return this.innerApiCalls.testIamPermissions(request, options, callback);

@@ -423,9 +423,9 @@ export class RegionSslCertificatesClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        project: request.project || '',
-        region: request.region || '',
-        ssl_certificate: request.sslCertificate || '',
+        project: request.project ?? '',
+        region: request.region ?? '',
+        ssl_certificate: request.sslCertificate ?? '',
       });
     this.initialize();
     return this.innerApiCalls
@@ -546,9 +546,9 @@ export class RegionSslCertificatesClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        project: request.project || '',
-        region: request.region || '',
-        ssl_certificate: request.sslCertificate || '',
+        project: request.project ?? '',
+        region: request.region ?? '',
+        ssl_certificate: request.sslCertificate ?? '',
       });
     this.initialize();
     return this.innerApiCalls.get(request, options, callback);
@@ -650,8 +650,8 @@ export class RegionSslCertificatesClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        project: request.project || '',
-        region: request.region || '',
+        project: request.project ?? '',
+        region: request.region ?? '',
       });
     this.initialize();
     return this.innerApiCalls
@@ -770,8 +770,8 @@ export class RegionSslCertificatesClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        project: request.project || '',
-        region: request.region || '',
+        project: request.project ?? '',
+        region: request.region ?? '',
       });
     this.initialize();
     return this.innerApiCalls.list(request, options, callback);
@@ -817,8 +817,8 @@ export class RegionSslCertificatesClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        project: request.project || '',
-        region: request.region || '',
+        project: request.project ?? '',
+        region: request.region ?? '',
       });
     const defaultCallSettings = this._defaults['list'];
     const callSettings = defaultCallSettings.merge(options);
@@ -873,8 +873,8 @@ export class RegionSslCertificatesClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        project: request.project || '',
-        region: request.region || '',
+        project: request.project ?? '',
+        region: request.region ?? '',
       });
     const defaultCallSettings = this._defaults['list'];
     const callSettings = defaultCallSettings.merge(options);

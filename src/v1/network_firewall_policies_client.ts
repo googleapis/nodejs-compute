@@ -437,8 +437,8 @@ export class NetworkFirewallPoliciesClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        project: request.project || '',
-        firewall_policy: request.firewallPolicy || '',
+        project: request.project ?? '',
+        firewall_policy: request.firewallPolicy ?? '',
       });
     this.initialize();
     return this.innerApiCalls
@@ -564,8 +564,8 @@ export class NetworkFirewallPoliciesClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        project: request.project || '',
-        firewall_policy: request.firewallPolicy || '',
+        project: request.project ?? '',
+        firewall_policy: request.firewallPolicy ?? '',
       });
     this.initialize();
     return this.innerApiCalls
@@ -687,8 +687,8 @@ export class NetworkFirewallPoliciesClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        project: request.project || '',
-        firewall_policy: request.firewallPolicy || '',
+        project: request.project ?? '',
+        firewall_policy: request.firewallPolicy ?? '',
       });
     this.initialize();
     return this.innerApiCalls
@@ -808,8 +808,8 @@ export class NetworkFirewallPoliciesClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        project: request.project || '',
-        firewall_policy: request.firewallPolicy || '',
+        project: request.project ?? '',
+        firewall_policy: request.firewallPolicy ?? '',
       });
     this.initialize();
     return this.innerApiCalls
@@ -928,8 +928,8 @@ export class NetworkFirewallPoliciesClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        project: request.project || '',
-        firewall_policy: request.firewallPolicy || '',
+        project: request.project ?? '',
+        firewall_policy: request.firewallPolicy ?? '',
       });
     this.initialize();
     return this.innerApiCalls.get(request, options, callback);
@@ -1030,8 +1030,8 @@ export class NetworkFirewallPoliciesClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        project: request.project || '',
-        firewall_policy: request.firewallPolicy || '',
+        project: request.project ?? '',
+        firewall_policy: request.firewallPolicy ?? '',
       });
     this.initialize();
     return this.innerApiCalls.getAssociation(request, options, callback);
@@ -1132,8 +1132,8 @@ export class NetworkFirewallPoliciesClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        project: request.project || '',
-        resource: request.resource || '',
+        project: request.project ?? '',
+        resource: request.resource ?? '',
       });
     this.initialize();
     return this.innerApiCalls.getIamPolicy(request, options, callback);
@@ -1234,8 +1234,8 @@ export class NetworkFirewallPoliciesClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        project: request.project || '',
-        firewall_policy: request.firewallPolicy || '',
+        project: request.project ?? '',
+        firewall_policy: request.firewallPolicy ?? '',
       });
     this.initialize();
     return this.innerApiCalls.getRule(request, options, callback);
@@ -1335,7 +1335,7 @@ export class NetworkFirewallPoliciesClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        project: request.project || '',
+        project: request.project ?? '',
       });
     this.initialize();
     return this.innerApiCalls
@@ -1457,8 +1457,8 @@ export class NetworkFirewallPoliciesClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        project: request.project || '',
-        firewall_policy: request.firewallPolicy || '',
+        project: request.project ?? '',
+        firewall_policy: request.firewallPolicy ?? '',
       });
     this.initialize();
     return this.innerApiCalls
@@ -1582,8 +1582,8 @@ export class NetworkFirewallPoliciesClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        project: request.project || '',
-        firewall_policy: request.firewallPolicy || '',
+        project: request.project ?? '',
+        firewall_policy: request.firewallPolicy ?? '',
       });
     this.initialize();
     return this.innerApiCalls
@@ -1705,8 +1705,8 @@ export class NetworkFirewallPoliciesClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        project: request.project || '',
-        firewall_policy: request.firewallPolicy || '',
+        project: request.project ?? '',
+        firewall_policy: request.firewallPolicy ?? '',
       });
     this.initialize();
     return this.innerApiCalls
@@ -1828,8 +1828,8 @@ export class NetworkFirewallPoliciesClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        project: request.project || '',
-        firewall_policy: request.firewallPolicy || '',
+        project: request.project ?? '',
+        firewall_policy: request.firewallPolicy ?? '',
       });
     this.initialize();
     return this.innerApiCalls
@@ -1950,8 +1950,8 @@ export class NetworkFirewallPoliciesClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        project: request.project || '',
-        resource: request.resource || '',
+        project: request.project ?? '',
+        resource: request.resource ?? '',
       });
     this.initialize();
     return this.innerApiCalls.setIamPolicy(request, options, callback);
@@ -2052,8 +2052,8 @@ export class NetworkFirewallPoliciesClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        project: request.project || '',
-        resource: request.resource || '',
+        project: request.project ?? '',
+        resource: request.resource ?? '',
       });
     this.initialize();
     return this.innerApiCalls.testIamPermissions(request, options, callback);
@@ -2150,7 +2150,7 @@ export class NetworkFirewallPoliciesClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        project: request.project || '',
+        project: request.project ?? '',
       });
     this.initialize();
     return this.innerApiCalls.list(request, options, callback);
@@ -2194,7 +2194,7 @@ export class NetworkFirewallPoliciesClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        project: request.project || '',
+        project: request.project ?? '',
       });
     const defaultCallSettings = this._defaults['list'];
     const callSettings = defaultCallSettings.merge(options);
@@ -2247,7 +2247,7 @@ export class NetworkFirewallPoliciesClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        project: request.project || '',
+        project: request.project ?? '',
       });
     const defaultCallSettings = this._defaults['list'];
     const callSettings = defaultCallSettings.merge(options);

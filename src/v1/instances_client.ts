@@ -477,9 +477,9 @@ export class InstancesClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        project: request.project || '',
-        zone: request.zone || '',
-        instance: request.instance || '',
+        project: request.project ?? '',
+        zone: request.zone ?? '',
+        instance: request.instance ?? '',
       });
     this.initialize();
     return this.innerApiCalls
@@ -603,9 +603,9 @@ export class InstancesClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        project: request.project || '',
-        zone: request.zone || '',
-        instance: request.instance || '',
+        project: request.project ?? '',
+        zone: request.zone ?? '',
+        instance: request.instance ?? '',
       });
     this.initialize();
     return this.innerApiCalls
@@ -731,9 +731,9 @@ export class InstancesClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        project: request.project || '',
-        zone: request.zone || '',
-        instance: request.instance || '',
+        project: request.project ?? '',
+        zone: request.zone ?? '',
+        instance: request.instance ?? '',
       });
     this.initialize();
     return this.innerApiCalls
@@ -855,8 +855,8 @@ export class InstancesClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        project: request.project || '',
-        zone: request.zone || '',
+        project: request.project ?? '',
+        zone: request.zone ?? '',
       });
     this.initialize();
     return this.innerApiCalls
@@ -972,9 +972,9 @@ export class InstancesClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        project: request.project || '',
-        zone: request.zone || '',
-        instance: request.instance || '',
+        project: request.project ?? '',
+        zone: request.zone ?? '',
+        instance: request.instance ?? '',
       });
     this.initialize();
     return this.innerApiCalls
@@ -1100,9 +1100,9 @@ export class InstancesClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        project: request.project || '',
-        zone: request.zone || '',
-        instance: request.instance || '',
+        project: request.project ?? '',
+        zone: request.zone ?? '',
+        instance: request.instance ?? '',
       });
     this.initialize();
     return this.innerApiCalls
@@ -1226,9 +1226,9 @@ export class InstancesClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        project: request.project || '',
-        zone: request.zone || '',
-        instance: request.instance || '',
+        project: request.project ?? '',
+        zone: request.zone ?? '',
+        instance: request.instance ?? '',
       });
     this.initialize();
     return this.innerApiCalls
@@ -1335,9 +1335,9 @@ export class InstancesClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        project: request.project || '',
-        zone: request.zone || '',
-        instance: request.instance || '',
+        project: request.project ?? '',
+        zone: request.zone ?? '',
+        instance: request.instance ?? '',
       });
     this.initialize();
     return this.innerApiCalls.get(request, options, callback);
@@ -1440,9 +1440,9 @@ export class InstancesClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        project: request.project || '',
-        zone: request.zone || '',
-        instance: request.instance || '',
+        project: request.project ?? '',
+        zone: request.zone ?? '',
+        instance: request.instance ?? '',
       });
     this.initialize();
     return this.innerApiCalls.getEffectiveFirewalls(request, options, callback);
@@ -1547,9 +1547,9 @@ export class InstancesClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        project: request.project || '',
-        zone: request.zone || '',
-        instance: request.instance || '',
+        project: request.project ?? '',
+        zone: request.zone ?? '',
+        instance: request.instance ?? '',
       });
     this.initialize();
     return this.innerApiCalls.getGuestAttributes(request, options, callback);
@@ -1646,9 +1646,9 @@ export class InstancesClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        project: request.project || '',
-        zone: request.zone || '',
-        resource: request.resource || '',
+        project: request.project ?? '',
+        zone: request.zone ?? '',
+        resource: request.resource ?? '',
       });
     this.initialize();
     return this.innerApiCalls.getIamPolicy(request, options, callback);
@@ -1743,9 +1743,9 @@ export class InstancesClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        project: request.project || '',
-        zone: request.zone || '',
-        instance: request.instance || '',
+        project: request.project ?? '',
+        zone: request.zone ?? '',
+        instance: request.instance ?? '',
       });
     this.initialize();
     return this.innerApiCalls.getScreenshot(request, options, callback);
@@ -1850,9 +1850,9 @@ export class InstancesClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        project: request.project || '',
-        zone: request.zone || '',
-        instance: request.instance || '',
+        project: request.project ?? '',
+        zone: request.zone ?? '',
+        instance: request.instance ?? '',
       });
     this.initialize();
     return this.innerApiCalls.getSerialPortOutput(request, options, callback);
@@ -1953,9 +1953,9 @@ export class InstancesClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        project: request.project || '',
-        zone: request.zone || '',
-        instance: request.instance || '',
+        project: request.project ?? '',
+        zone: request.zone ?? '',
+        instance: request.instance ?? '',
       });
     this.initialize();
     return this.innerApiCalls.getShieldedInstanceIdentity(
@@ -2059,8 +2059,8 @@ export class InstancesClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        project: request.project || '',
-        zone: request.zone || '',
+        project: request.project ?? '',
+        zone: request.zone ?? '',
       });
     this.initialize();
     return this.innerApiCalls
@@ -2184,9 +2184,9 @@ export class InstancesClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        project: request.project || '',
-        zone: request.zone || '',
-        instance: request.instance || '',
+        project: request.project ?? '',
+        zone: request.zone ?? '',
+        instance: request.instance ?? '',
       });
     this.initialize();
     return this.innerApiCalls
@@ -2302,9 +2302,9 @@ export class InstancesClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        project: request.project || '',
-        zone: request.zone || '',
-        instance: request.instance || '',
+        project: request.project ?? '',
+        zone: request.zone ?? '',
+        instance: request.instance ?? '',
       });
     this.initialize();
     return this.innerApiCalls
@@ -2420,9 +2420,9 @@ export class InstancesClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        project: request.project || '',
-        zone: request.zone || '',
-        instance: request.instance || '',
+        project: request.project ?? '',
+        zone: request.zone ?? '',
+        instance: request.instance ?? '',
       });
     this.initialize();
     return this.innerApiCalls
@@ -2543,9 +2543,9 @@ export class InstancesClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        project: request.project || '',
-        zone: request.zone || '',
-        instance: request.instance || '',
+        project: request.project ?? '',
+        zone: request.zone ?? '',
+        instance: request.instance ?? '',
       });
     this.initialize();
     return this.innerApiCalls.sendDiagnosticInterrupt(
@@ -2653,9 +2653,9 @@ export class InstancesClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        project: request.project || '',
-        zone: request.zone || '',
-        resource: request.resource || '',
+        project: request.project ?? '',
+        zone: request.zone ?? '',
+        resource: request.resource ?? '',
       });
     this.initialize();
     return this.innerApiCalls
@@ -2781,9 +2781,9 @@ export class InstancesClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        project: request.project || '',
-        zone: request.zone || '',
-        instance: request.instance || '',
+        project: request.project ?? '',
+        zone: request.zone ?? '',
+        instance: request.instance ?? '',
       });
     this.initialize();
     return this.innerApiCalls
@@ -2900,9 +2900,9 @@ export class InstancesClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        project: request.project || '',
-        zone: request.zone || '',
-        resource: request.resource || '',
+        project: request.project ?? '',
+        zone: request.zone ?? '',
+        resource: request.resource ?? '',
       });
     this.initialize();
     return this.innerApiCalls.setIamPolicy(request, options, callback);
@@ -3006,9 +3006,9 @@ export class InstancesClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        project: request.project || '',
-        zone: request.zone || '',
-        instance: request.instance || '',
+        project: request.project ?? '',
+        zone: request.zone ?? '',
+        instance: request.instance ?? '',
       });
     this.initialize();
     return this.innerApiCalls
@@ -3132,9 +3132,9 @@ export class InstancesClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        project: request.project || '',
-        zone: request.zone || '',
-        instance: request.instance || '',
+        project: request.project ?? '',
+        zone: request.zone ?? '',
+        instance: request.instance ?? '',
       });
     this.initialize();
     return this.innerApiCalls
@@ -3258,9 +3258,9 @@ export class InstancesClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        project: request.project || '',
-        zone: request.zone || '',
-        instance: request.instance || '',
+        project: request.project ?? '',
+        zone: request.zone ?? '',
+        instance: request.instance ?? '',
       });
     this.initialize();
     return this.innerApiCalls
@@ -3384,9 +3384,9 @@ export class InstancesClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        project: request.project || '',
-        zone: request.zone || '',
-        instance: request.instance || '',
+        project: request.project ?? '',
+        zone: request.zone ?? '',
+        instance: request.instance ?? '',
       });
     this.initialize();
     return this.innerApiCalls
@@ -3510,9 +3510,9 @@ export class InstancesClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        project: request.project || '',
-        zone: request.zone || '',
-        instance: request.instance || '',
+        project: request.project ?? '',
+        zone: request.zone ?? '',
+        instance: request.instance ?? '',
       });
     this.initialize();
     return this.innerApiCalls
@@ -3636,9 +3636,9 @@ export class InstancesClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        project: request.project || '',
-        zone: request.zone || '',
-        instance: request.instance || '',
+        project: request.project ?? '',
+        zone: request.zone ?? '',
+        instance: request.instance ?? '',
       });
     this.initialize();
     return this.innerApiCalls
@@ -3762,9 +3762,9 @@ export class InstancesClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        project: request.project || '',
-        zone: request.zone || '',
-        instance: request.instance || '',
+        project: request.project ?? '',
+        zone: request.zone ?? '',
+        instance: request.instance ?? '',
       });
     this.initialize();
     return this.innerApiCalls
@@ -3888,9 +3888,9 @@ export class InstancesClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        project: request.project || '',
-        zone: request.zone || '',
-        instance: request.instance || '',
+        project: request.project ?? '',
+        zone: request.zone ?? '',
+        instance: request.instance ?? '',
       });
     this.initialize();
     return this.innerApiCalls
@@ -4008,9 +4008,9 @@ export class InstancesClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        project: request.project || '',
-        zone: request.zone || '',
-        instance: request.instance || '',
+        project: request.project ?? '',
+        zone: request.zone ?? '',
+        instance: request.instance ?? '',
       });
     this.initialize();
     return this.innerApiCalls
@@ -4130,9 +4130,9 @@ export class InstancesClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        project: request.project || '',
-        zone: request.zone || '',
-        instance: request.instance || '',
+        project: request.project ?? '',
+        zone: request.zone ?? '',
+        instance: request.instance ?? '',
       });
     this.initialize();
     return this.innerApiCalls
@@ -4248,9 +4248,9 @@ export class InstancesClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        project: request.project || '',
-        zone: request.zone || '',
-        instance: request.instance || '',
+        project: request.project ?? '',
+        zone: request.zone ?? '',
+        instance: request.instance ?? '',
       });
     this.initialize();
     return this.innerApiCalls
@@ -4374,9 +4374,9 @@ export class InstancesClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        project: request.project || '',
-        zone: request.zone || '',
-        instance: request.instance || '',
+        project: request.project ?? '',
+        zone: request.zone ?? '',
+        instance: request.instance ?? '',
       });
     this.initialize();
     return this.innerApiCalls
@@ -4492,9 +4492,9 @@ export class InstancesClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        project: request.project || '',
-        zone: request.zone || '',
-        instance: request.instance || '',
+        project: request.project ?? '',
+        zone: request.zone ?? '',
+        instance: request.instance ?? '',
       });
     this.initialize();
     return this.innerApiCalls
@@ -4610,9 +4610,9 @@ export class InstancesClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        project: request.project || '',
-        zone: request.zone || '',
-        instance: request.instance || '',
+        project: request.project ?? '',
+        zone: request.zone ?? '',
+        instance: request.instance ?? '',
       });
     this.initialize();
     return this.innerApiCalls
@@ -4735,9 +4735,9 @@ export class InstancesClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        project: request.project || '',
-        zone: request.zone || '',
-        resource: request.resource || '',
+        project: request.project ?? '',
+        zone: request.zone ?? '',
+        resource: request.resource ?? '',
       });
     this.initialize();
     return this.innerApiCalls.testIamPermissions(request, options, callback);
@@ -4841,9 +4841,9 @@ export class InstancesClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        project: request.project || '',
-        zone: request.zone || '',
-        instance: request.instance || '',
+        project: request.project ?? '',
+        zone: request.zone ?? '',
+        instance: request.instance ?? '',
       });
     this.initialize();
     return this.innerApiCalls
@@ -4969,9 +4969,9 @@ export class InstancesClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        project: request.project || '',
-        zone: request.zone || '',
-        instance: request.instance || '',
+        project: request.project ?? '',
+        zone: request.zone ?? '',
+        instance: request.instance ?? '',
       });
     this.initialize();
     return this.innerApiCalls
@@ -5095,9 +5095,9 @@ export class InstancesClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        project: request.project || '',
-        zone: request.zone || '',
-        instance: request.instance || '',
+        project: request.project ?? '',
+        zone: request.zone ?? '',
+        instance: request.instance ?? '',
       });
     this.initialize();
     return this.innerApiCalls
@@ -5223,9 +5223,9 @@ export class InstancesClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        project: request.project || '',
-        zone: request.zone || '',
-        instance: request.instance || '',
+        project: request.project ?? '',
+        zone: request.zone ?? '',
+        instance: request.instance ?? '',
       });
     this.initialize();
     return this.innerApiCalls
@@ -5349,9 +5349,9 @@ export class InstancesClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        project: request.project || '',
-        zone: request.zone || '',
-        instance: request.instance || '',
+        project: request.project ?? '',
+        zone: request.zone ?? '',
+        instance: request.instance ?? '',
       });
     this.initialize();
     return this.innerApiCalls
@@ -5422,7 +5422,7 @@ export class InstancesClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        project: request.project || '',
+        project: request.project ?? '',
       });
     const defaultCallSettings = this._defaults['aggregatedList'];
     const callSettings = defaultCallSettings.merge(options);
@@ -5528,8 +5528,8 @@ export class InstancesClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        project: request.project || '',
-        zone: request.zone || '',
+        project: request.project ?? '',
+        zone: request.zone ?? '',
       });
     this.initialize();
     return this.innerApiCalls.list(request, options, callback);
@@ -5575,8 +5575,8 @@ export class InstancesClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        project: request.project || '',
-        zone: request.zone || '',
+        project: request.project ?? '',
+        zone: request.zone ?? '',
       });
     const defaultCallSettings = this._defaults['list'];
     const callSettings = defaultCallSettings.merge(options);
@@ -5631,8 +5631,8 @@ export class InstancesClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        project: request.project || '',
-        zone: request.zone || '',
+        project: request.project ?? '',
+        zone: request.zone ?? '',
       });
     const defaultCallSettings = this._defaults['list'];
     const callSettings = defaultCallSettings.merge(options);
@@ -5740,9 +5740,9 @@ export class InstancesClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        project: request.project || '',
-        zone: request.zone || '',
-        instance: request.instance || '',
+        project: request.project ?? '',
+        zone: request.zone ?? '',
+        instance: request.instance ?? '',
       });
     this.initialize();
     return this.innerApiCalls.listReferrers(request, options, callback);
@@ -5790,9 +5790,9 @@ export class InstancesClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        project: request.project || '',
-        zone: request.zone || '',
-        instance: request.instance || '',
+        project: request.project ?? '',
+        zone: request.zone ?? '',
+        instance: request.instance ?? '',
       });
     const defaultCallSettings = this._defaults['listReferrers'];
     const callSettings = defaultCallSettings.merge(options);
@@ -5849,9 +5849,9 @@ export class InstancesClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        project: request.project || '',
-        zone: request.zone || '',
-        instance: request.instance || '',
+        project: request.project ?? '',
+        zone: request.zone ?? '',
+        instance: request.instance ?? '',
       });
     const defaultCallSettings = this._defaults['listReferrers'];
     const callSettings = defaultCallSettings.merge(options);

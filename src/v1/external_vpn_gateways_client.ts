@@ -422,8 +422,8 @@ export class ExternalVpnGatewaysClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        project: request.project || '',
-        external_vpn_gateway: request.externalVpnGateway || '',
+        project: request.project ?? '',
+        external_vpn_gateway: request.externalVpnGateway ?? '',
       });
     this.initialize();
     return this.innerApiCalls
@@ -536,8 +536,8 @@ export class ExternalVpnGatewaysClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        project: request.project || '',
-        external_vpn_gateway: request.externalVpnGateway || '',
+        project: request.project ?? '',
+        external_vpn_gateway: request.externalVpnGateway ?? '',
       });
     this.initialize();
     return this.innerApiCalls.get(request, options, callback);
@@ -637,7 +637,7 @@ export class ExternalVpnGatewaysClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        project: request.project || '',
+        project: request.project ?? '',
       });
     this.initialize();
     return this.innerApiCalls
@@ -757,8 +757,8 @@ export class ExternalVpnGatewaysClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        project: request.project || '',
-        resource: request.resource || '',
+        project: request.project ?? '',
+        resource: request.resource ?? '',
       });
     this.initialize();
     return this.innerApiCalls
@@ -879,8 +879,8 @@ export class ExternalVpnGatewaysClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        project: request.project || '',
-        resource: request.resource || '',
+        project: request.project ?? '',
+        resource: request.resource ?? '',
       });
     this.initialize();
     return this.innerApiCalls.testIamPermissions(request, options, callback);
@@ -979,7 +979,7 @@ export class ExternalVpnGatewaysClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        project: request.project || '',
+        project: request.project ?? '',
       });
     this.initialize();
     return this.innerApiCalls.list(request, options, callback);
@@ -1023,7 +1023,7 @@ export class ExternalVpnGatewaysClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        project: request.project || '',
+        project: request.project ?? '',
       });
     const defaultCallSettings = this._defaults['list'];
     const callSettings = defaultCallSettings.merge(options);
@@ -1076,7 +1076,7 @@ export class ExternalVpnGatewaysClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        project: request.project || '',
+        project: request.project ?? '',
       });
     const defaultCallSettings = this._defaults['list'];
     const callSettings = defaultCallSettings.merge(options);

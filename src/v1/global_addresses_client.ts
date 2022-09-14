@@ -421,8 +421,8 @@ export class GlobalAddressesClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        project: request.project || '',
-        address: request.address || '',
+        project: request.project ?? '',
+        address: request.address ?? '',
       });
     this.initialize();
     return this.innerApiCalls
@@ -535,8 +535,8 @@ export class GlobalAddressesClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        project: request.project || '',
-        address: request.address || '',
+        project: request.project ?? '',
+        address: request.address ?? '',
       });
     this.initialize();
     return this.innerApiCalls.get(request, options, callback);
@@ -636,7 +636,7 @@ export class GlobalAddressesClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        project: request.project || '',
+        project: request.project ?? '',
       });
     this.initialize();
     return this.innerApiCalls
@@ -756,8 +756,8 @@ export class GlobalAddressesClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        project: request.project || '',
-        resource: request.resource || '',
+        project: request.project ?? '',
+        resource: request.resource ?? '',
       });
     this.initialize();
     return this.innerApiCalls
@@ -874,7 +874,7 @@ export class GlobalAddressesClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        project: request.project || '',
+        project: request.project ?? '',
       });
     this.initialize();
     return this.innerApiCalls.list(request, options, callback);
@@ -918,7 +918,7 @@ export class GlobalAddressesClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        project: request.project || '',
+        project: request.project ?? '',
       });
     const defaultCallSettings = this._defaults['list'];
     const callSettings = defaultCallSettings.merge(options);
@@ -971,7 +971,7 @@ export class GlobalAddressesClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        project: request.project || '',
+        project: request.project ?? '',
       });
     const defaultCallSettings = this._defaults['list'];
     const callSettings = defaultCallSettings.merge(options);

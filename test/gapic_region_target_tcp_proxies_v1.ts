@@ -27,6 +27,21 @@ import {PassThrough} from 'stream';
 
 import {GoogleAuth, protobuf} from 'google-gax';
 
+// Dynamically loaded proto JSON is needed to get the type information
+// to fill in default values for request objects
+const root = protobuf.Root.fromJSON(
+  require('../protos/protos.json')
+).resolveAll();
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function getTypeDefaultValue(typeName: string, fields: string[]) {
+  let type = root.lookupType(typeName) as protobuf.Type;
+  for (const field of fields.slice(0, -1)) {
+    type = type.fields[field]?.resolvedType as protobuf.Type;
+  }
+  return type.fields[fields[fields.length - 1]]?.defaultValue;
+}
+
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
@@ -246,28 +261,36 @@ describe('v1.RegionTargetTcpProxiesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteRegionTargetTcpProxyRequest()
       );
-      request.project = '';
-      request.region = '';
-      request.targetTcpProxy = '';
-      const expectedHeaderRequestParams = 'project=&region=&target_tcp_proxy=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'DeleteRegionTargetTcpProxyRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        'DeleteRegionTargetTcpProxyRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        'DeleteRegionTargetTcpProxyRequest',
+        ['targetTcpProxy']
+      );
+      request.targetTcpProxy = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&target_tcp_proxy=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
       client.innerApiCalls.delete = stubSimpleCall(expectedResponse);
       const [response] = await client.delete(request);
       assert.deepStrictEqual(response.latestResponse, expectedResponse);
-      assert(
-        (client.innerApiCalls.delete as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (client.innerApiCalls.delete as SinonStub).getCall(
+        0
+      ).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.delete as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes delete without error using callback', async () => {
@@ -280,17 +303,22 @@ describe('v1.RegionTargetTcpProxiesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteRegionTargetTcpProxyRequest()
       );
-      request.project = '';
-      request.region = '';
-      request.targetTcpProxy = '';
-      const expectedHeaderRequestParams = 'project=&region=&target_tcp_proxy=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'DeleteRegionTargetTcpProxyRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        'DeleteRegionTargetTcpProxyRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        'DeleteRegionTargetTcpProxyRequest',
+        ['targetTcpProxy']
+      );
+      request.targetTcpProxy = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&target_tcp_proxy=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -313,11 +341,14 @@ describe('v1.RegionTargetTcpProxiesClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.delete as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (client.innerApiCalls.delete as SinonStub).getCall(
+        0
+      ).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.delete as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes delete with error', async () => {
@@ -330,25 +361,33 @@ describe('v1.RegionTargetTcpProxiesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteRegionTargetTcpProxyRequest()
       );
-      request.project = '';
-      request.region = '';
-      request.targetTcpProxy = '';
-      const expectedHeaderRequestParams = 'project=&region=&target_tcp_proxy=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'DeleteRegionTargetTcpProxyRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        'DeleteRegionTargetTcpProxyRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        'DeleteRegionTargetTcpProxyRequest',
+        ['targetTcpProxy']
+      );
+      request.targetTcpProxy = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&target_tcp_proxy=${defaultValue3}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.delete = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.delete(request), expectedError);
-      assert(
-        (client.innerApiCalls.delete as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (client.innerApiCalls.delete as SinonStub).getCall(
+        0
+      ).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.delete as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes delete with closed client', async () => {
@@ -361,9 +400,21 @@ describe('v1.RegionTargetTcpProxiesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteRegionTargetTcpProxyRequest()
       );
-      request.project = '';
-      request.region = '';
-      request.targetTcpProxy = '';
+      const defaultValue1 = getTypeDefaultValue(
+        'DeleteRegionTargetTcpProxyRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        'DeleteRegionTargetTcpProxyRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        'DeleteRegionTargetTcpProxyRequest',
+        ['targetTcpProxy']
+      );
+      request.targetTcpProxy = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.delete(request), expectedError);
@@ -381,28 +432,35 @@ describe('v1.RegionTargetTcpProxiesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetRegionTargetTcpProxyRequest()
       );
-      request.project = '';
-      request.region = '';
-      request.targetTcpProxy = '';
-      const expectedHeaderRequestParams = 'project=&region=&target_tcp_proxy=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'GetRegionTargetTcpProxyRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        'GetRegionTargetTcpProxyRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        'GetRegionTargetTcpProxyRequest',
+        ['targetTcpProxy']
+      );
+      request.targetTcpProxy = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&target_tcp_proxy=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.TargetTcpProxy()
       );
       client.innerApiCalls.get = stubSimpleCall(expectedResponse);
       const [response] = await client.get(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.get as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (client.innerApiCalls.get as SinonStub).getCall(0)
+        .args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.get as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes get without error using callback', async () => {
@@ -415,17 +473,22 @@ describe('v1.RegionTargetTcpProxiesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetRegionTargetTcpProxyRequest()
       );
-      request.project = '';
-      request.region = '';
-      request.targetTcpProxy = '';
-      const expectedHeaderRequestParams = 'project=&region=&target_tcp_proxy=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'GetRegionTargetTcpProxyRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        'GetRegionTargetTcpProxyRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        'GetRegionTargetTcpProxyRequest',
+        ['targetTcpProxy']
+      );
+      request.targetTcpProxy = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&target_tcp_proxy=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.TargetTcpProxy()
       );
@@ -447,11 +510,13 @@ describe('v1.RegionTargetTcpProxiesClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.get as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (client.innerApiCalls.get as SinonStub).getCall(0)
+        .args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.get as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes get with error', async () => {
@@ -464,25 +529,32 @@ describe('v1.RegionTargetTcpProxiesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetRegionTargetTcpProxyRequest()
       );
-      request.project = '';
-      request.region = '';
-      request.targetTcpProxy = '';
-      const expectedHeaderRequestParams = 'project=&region=&target_tcp_proxy=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'GetRegionTargetTcpProxyRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        'GetRegionTargetTcpProxyRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        'GetRegionTargetTcpProxyRequest',
+        ['targetTcpProxy']
+      );
+      request.targetTcpProxy = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&target_tcp_proxy=${defaultValue3}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.get = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.get(request), expectedError);
-      assert(
-        (client.innerApiCalls.get as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (client.innerApiCalls.get as SinonStub).getCall(0)
+        .args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.get as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes get with closed client', async () => {
@@ -495,9 +567,21 @@ describe('v1.RegionTargetTcpProxiesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetRegionTargetTcpProxyRequest()
       );
-      request.project = '';
-      request.region = '';
-      request.targetTcpProxy = '';
+      const defaultValue1 = getTypeDefaultValue(
+        'GetRegionTargetTcpProxyRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        'GetRegionTargetTcpProxyRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        'GetRegionTargetTcpProxyRequest',
+        ['targetTcpProxy']
+      );
+      request.targetTcpProxy = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.get(request), expectedError);
@@ -515,27 +599,31 @@ describe('v1.RegionTargetTcpProxiesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertRegionTargetTcpProxyRequest()
       );
-      request.project = '';
-      request.region = '';
-      const expectedHeaderRequestParams = 'project=&region=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'InsertRegionTargetTcpProxyRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        'InsertRegionTargetTcpProxyRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
       client.innerApiCalls.insert = stubSimpleCall(expectedResponse);
       const [response] = await client.insert(request);
       assert.deepStrictEqual(response.latestResponse, expectedResponse);
-      assert(
-        (client.innerApiCalls.insert as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (client.innerApiCalls.insert as SinonStub).getCall(
+        0
+      ).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.insert as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes insert without error using callback', async () => {
@@ -548,16 +636,17 @@ describe('v1.RegionTargetTcpProxiesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertRegionTargetTcpProxyRequest()
       );
-      request.project = '';
-      request.region = '';
-      const expectedHeaderRequestParams = 'project=&region=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'InsertRegionTargetTcpProxyRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        'InsertRegionTargetTcpProxyRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -580,11 +669,14 @@ describe('v1.RegionTargetTcpProxiesClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.insert as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (client.innerApiCalls.insert as SinonStub).getCall(
+        0
+      ).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.insert as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes insert with error', async () => {
@@ -597,24 +689,28 @@ describe('v1.RegionTargetTcpProxiesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertRegionTargetTcpProxyRequest()
       );
-      request.project = '';
-      request.region = '';
-      const expectedHeaderRequestParams = 'project=&region=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'InsertRegionTargetTcpProxyRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        'InsertRegionTargetTcpProxyRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.insert = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.insert(request), expectedError);
-      assert(
-        (client.innerApiCalls.insert as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (client.innerApiCalls.insert as SinonStub).getCall(
+        0
+      ).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.insert as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes insert with closed client', async () => {
@@ -627,8 +723,16 @@ describe('v1.RegionTargetTcpProxiesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertRegionTargetTcpProxyRequest()
       );
-      request.project = '';
-      request.region = '';
+      const defaultValue1 = getTypeDefaultValue(
+        'InsertRegionTargetTcpProxyRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        'InsertRegionTargetTcpProxyRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.insert(request), expectedError);
@@ -646,16 +750,17 @@ describe('v1.RegionTargetTcpProxiesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListRegionTargetTcpProxiesRequest()
       );
-      request.project = '';
-      request.region = '';
-      const expectedHeaderRequestParams = 'project=&region=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'ListRegionTargetTcpProxiesRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        'ListRegionTargetTcpProxiesRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.compute.v1.TargetTcpProxy()
@@ -670,11 +775,13 @@ describe('v1.RegionTargetTcpProxiesClient', () => {
       client.innerApiCalls.list = stubSimpleCall(expectedResponse);
       const [response] = await client.list(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.list as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (client.innerApiCalls.list as SinonStub).getCall(0)
+        .args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.list as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes list without error using callback', async () => {
@@ -687,16 +794,17 @@ describe('v1.RegionTargetTcpProxiesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListRegionTargetTcpProxiesRequest()
       );
-      request.project = '';
-      request.region = '';
-      const expectedHeaderRequestParams = 'project=&region=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'ListRegionTargetTcpProxiesRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        'ListRegionTargetTcpProxiesRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.compute.v1.TargetTcpProxy()
@@ -726,11 +834,13 @@ describe('v1.RegionTargetTcpProxiesClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.list as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (client.innerApiCalls.list as SinonStub).getCall(0)
+        .args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.list as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes list with error', async () => {
@@ -743,24 +853,27 @@ describe('v1.RegionTargetTcpProxiesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListRegionTargetTcpProxiesRequest()
       );
-      request.project = '';
-      request.region = '';
-      const expectedHeaderRequestParams = 'project=&region=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'ListRegionTargetTcpProxiesRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        'ListRegionTargetTcpProxiesRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.list = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.list(request), expectedError);
-      assert(
-        (client.innerApiCalls.list as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (client.innerApiCalls.list as SinonStub).getCall(0)
+        .args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.list as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listStream without error', async () => {
@@ -773,9 +886,17 @@ describe('v1.RegionTargetTcpProxiesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListRegionTargetTcpProxiesRequest()
       );
-      request.project = '';
-      request.region = '';
-      const expectedHeaderRequestParams = 'project=&region=';
+      const defaultValue1 = getTypeDefaultValue(
+        'ListRegionTargetTcpProxiesRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        'ListRegionTargetTcpProxiesRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.compute.v1.TargetTcpProxy()
@@ -812,10 +933,12 @@ describe('v1.RegionTargetTcpProxiesClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.list, request)
       );
-      assert.strictEqual(
-        (client.descriptors.page.list.createStream as SinonStub).getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.list.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -829,9 +952,17 @@ describe('v1.RegionTargetTcpProxiesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListRegionTargetTcpProxiesRequest()
       );
-      request.project = '';
-      request.region = '';
-      const expectedHeaderRequestParams = 'project=&region=';
+      const defaultValue1 = getTypeDefaultValue(
+        'ListRegionTargetTcpProxiesRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        'ListRegionTargetTcpProxiesRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}`;
       const expectedError = new Error('expected');
       client.descriptors.page.list.createStream = stubPageStreamingCall(
         undefined,
@@ -859,10 +990,12 @@ describe('v1.RegionTargetTcpProxiesClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.list, request)
       );
-      assert.strictEqual(
-        (client.descriptors.page.list.createStream as SinonStub).getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.list.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -876,9 +1009,17 @@ describe('v1.RegionTargetTcpProxiesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListRegionTargetTcpProxiesRequest()
       );
-      request.project = '';
-      request.region = '';
-      const expectedHeaderRequestParams = 'project=&region=';
+      const defaultValue1 = getTypeDefaultValue(
+        'ListRegionTargetTcpProxiesRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        'ListRegionTargetTcpProxiesRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.compute.v1.TargetTcpProxy()
@@ -903,10 +1044,12 @@ describe('v1.RegionTargetTcpProxiesClient', () => {
           .args[1],
         request
       );
-      assert.strictEqual(
-        (client.descriptors.page.list.asyncIterate as SinonStub).getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.list.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -920,9 +1063,17 @@ describe('v1.RegionTargetTcpProxiesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListRegionTargetTcpProxiesRequest()
       );
-      request.project = '';
-      request.region = '';
-      const expectedHeaderRequestParams = 'project=&region=';
+      const defaultValue1 = getTypeDefaultValue(
+        'ListRegionTargetTcpProxiesRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        'ListRegionTargetTcpProxiesRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}`;
       const expectedError = new Error('expected');
       client.descriptors.page.list.asyncIterate = stubAsyncIterationCall(
         undefined,
@@ -940,10 +1091,12 @@ describe('v1.RegionTargetTcpProxiesClient', () => {
           .args[1],
         request
       );
-      assert.strictEqual(
-        (client.descriptors.page.list.asyncIterate as SinonStub).getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.list.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });

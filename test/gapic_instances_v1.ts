@@ -27,6 +27,21 @@ import {PassThrough} from 'stream';
 
 import {GoogleAuth, protobuf} from 'google-gax';
 
+// Dynamically loaded proto JSON is needed to get the type information
+// to fill in default values for request objects
+const root = protobuf.Root.fromJSON(
+  require('../protos/protos.json')
+).resolveAll();
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function getTypeDefaultValue(typeName: string, fields: string[]) {
+  let type = root.lookupType(typeName) as protobuf.Type;
+  for (const field of fields.slice(0, -1)) {
+    type = type.fields[field]?.resolvedType as protobuf.Type;
+  }
+  return type.fields[fields[fields.length - 1]]?.defaultValue;
+}
+
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
@@ -233,28 +248,36 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.AddAccessConfigInstanceRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.instance = '';
-      const expectedHeaderRequestParams = 'project=&zone=&instance=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'AddAccessConfigInstanceRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        'AddAccessConfigInstanceRequest',
+        ['zone']
+      );
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        'AddAccessConfigInstanceRequest',
+        ['instance']
+      );
+      request.instance = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
       client.innerApiCalls.addAccessConfig = stubSimpleCall(expectedResponse);
       const [response] = await client.addAccessConfig(request);
       assert.deepStrictEqual(response.latestResponse, expectedResponse);
-      assert(
-        (client.innerApiCalls.addAccessConfig as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.addAccessConfig as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.addAccessConfig as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes addAccessConfig without error using callback', async () => {
@@ -266,17 +289,22 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.AddAccessConfigInstanceRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.instance = '';
-      const expectedHeaderRequestParams = 'project=&zone=&instance=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'AddAccessConfigInstanceRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        'AddAccessConfigInstanceRequest',
+        ['zone']
+      );
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        'AddAccessConfigInstanceRequest',
+        ['instance']
+      );
+      request.instance = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -299,11 +327,14 @@ describe('v1.InstancesClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.addAccessConfig as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.addAccessConfig as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.addAccessConfig as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes addAccessConfig with error', async () => {
@@ -315,28 +346,36 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.AddAccessConfigInstanceRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.instance = '';
-      const expectedHeaderRequestParams = 'project=&zone=&instance=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'AddAccessConfigInstanceRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        'AddAccessConfigInstanceRequest',
+        ['zone']
+      );
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        'AddAccessConfigInstanceRequest',
+        ['instance']
+      );
+      request.instance = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.addAccessConfig = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.addAccessConfig(request), expectedError);
-      assert(
-        (client.innerApiCalls.addAccessConfig as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.addAccessConfig as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.addAccessConfig as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes addAccessConfig with closed client', async () => {
@@ -348,9 +387,21 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.AddAccessConfigInstanceRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.instance = '';
+      const defaultValue1 = getTypeDefaultValue(
+        'AddAccessConfigInstanceRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        'AddAccessConfigInstanceRequest',
+        ['zone']
+      );
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        'AddAccessConfigInstanceRequest',
+        ['instance']
+      );
+      request.instance = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.addAccessConfig(request), expectedError);
@@ -367,17 +418,22 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.AddResourcePoliciesInstanceRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.instance = '';
-      const expectedHeaderRequestParams = 'project=&zone=&instance=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'AddResourcePoliciesInstanceRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        'AddResourcePoliciesInstanceRequest',
+        ['zone']
+      );
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        'AddResourcePoliciesInstanceRequest',
+        ['instance']
+      );
+      request.instance = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -385,11 +441,14 @@ describe('v1.InstancesClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.addResourcePolicies(request);
       assert.deepStrictEqual(response.latestResponse, expectedResponse);
-      assert(
-        (client.innerApiCalls.addResourcePolicies as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.addResourcePolicies as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.addResourcePolicies as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes addResourcePolicies without error using callback', async () => {
@@ -401,17 +460,22 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.AddResourcePoliciesInstanceRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.instance = '';
-      const expectedHeaderRequestParams = 'project=&zone=&instance=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'AddResourcePoliciesInstanceRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        'AddResourcePoliciesInstanceRequest',
+        ['zone']
+      );
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        'AddResourcePoliciesInstanceRequest',
+        ['instance']
+      );
+      request.instance = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -434,11 +498,14 @@ describe('v1.InstancesClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.addResourcePolicies as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.addResourcePolicies as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.addResourcePolicies as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes addResourcePolicies with error', async () => {
@@ -450,28 +517,36 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.AddResourcePoliciesInstanceRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.instance = '';
-      const expectedHeaderRequestParams = 'project=&zone=&instance=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'AddResourcePoliciesInstanceRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        'AddResourcePoliciesInstanceRequest',
+        ['zone']
+      );
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        'AddResourcePoliciesInstanceRequest',
+        ['instance']
+      );
+      request.instance = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.addResourcePolicies = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.addResourcePolicies(request), expectedError);
-      assert(
-        (client.innerApiCalls.addResourcePolicies as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.addResourcePolicies as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.addResourcePolicies as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes addResourcePolicies with closed client', async () => {
@@ -483,9 +558,21 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.AddResourcePoliciesInstanceRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.instance = '';
+      const defaultValue1 = getTypeDefaultValue(
+        'AddResourcePoliciesInstanceRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        'AddResourcePoliciesInstanceRequest',
+        ['zone']
+      );
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        'AddResourcePoliciesInstanceRequest',
+        ['instance']
+      );
+      request.instance = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.addResourcePolicies(request), expectedError);
@@ -502,28 +589,33 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.AttachDiskInstanceRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.instance = '';
-      const expectedHeaderRequestParams = 'project=&zone=&instance=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('AttachDiskInstanceRequest', [
+        'project',
+      ]);
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('AttachDiskInstanceRequest', [
+        'zone',
+      ]);
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue('AttachDiskInstanceRequest', [
+        'instance',
+      ]);
+      request.instance = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
       client.innerApiCalls.attachDisk = stubSimpleCall(expectedResponse);
       const [response] = await client.attachDisk(request);
       assert.deepStrictEqual(response.latestResponse, expectedResponse);
-      assert(
-        (client.innerApiCalls.attachDisk as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.attachDisk as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.attachDisk as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes attachDisk without error using callback', async () => {
@@ -535,17 +627,19 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.AttachDiskInstanceRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.instance = '';
-      const expectedHeaderRequestParams = 'project=&zone=&instance=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('AttachDiskInstanceRequest', [
+        'project',
+      ]);
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('AttachDiskInstanceRequest', [
+        'zone',
+      ]);
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue('AttachDiskInstanceRequest', [
+        'instance',
+      ]);
+      request.instance = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -568,11 +662,14 @@ describe('v1.InstancesClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.attachDisk as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.attachDisk as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.attachDisk as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes attachDisk with error', async () => {
@@ -584,28 +681,33 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.AttachDiskInstanceRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.instance = '';
-      const expectedHeaderRequestParams = 'project=&zone=&instance=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('AttachDiskInstanceRequest', [
+        'project',
+      ]);
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('AttachDiskInstanceRequest', [
+        'zone',
+      ]);
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue('AttachDiskInstanceRequest', [
+        'instance',
+      ]);
+      request.instance = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.attachDisk = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.attachDisk(request), expectedError);
-      assert(
-        (client.innerApiCalls.attachDisk as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.attachDisk as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.attachDisk as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes attachDisk with closed client', async () => {
@@ -617,9 +719,18 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.AttachDiskInstanceRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.instance = '';
+      const defaultValue1 = getTypeDefaultValue('AttachDiskInstanceRequest', [
+        'project',
+      ]);
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('AttachDiskInstanceRequest', [
+        'zone',
+      ]);
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue('AttachDiskInstanceRequest', [
+        'instance',
+      ]);
+      request.instance = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.attachDisk(request), expectedError);
@@ -636,27 +747,29 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.BulkInsertInstanceRequest()
       );
-      request.project = '';
-      request.zone = '';
-      const expectedHeaderRequestParams = 'project=&zone=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('BulkInsertInstanceRequest', [
+        'project',
+      ]);
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('BulkInsertInstanceRequest', [
+        'zone',
+      ]);
+      request.zone = defaultValue2;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
       client.innerApiCalls.bulkInsert = stubSimpleCall(expectedResponse);
       const [response] = await client.bulkInsert(request);
       assert.deepStrictEqual(response.latestResponse, expectedResponse);
-      assert(
-        (client.innerApiCalls.bulkInsert as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.bulkInsert as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.bulkInsert as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes bulkInsert without error using callback', async () => {
@@ -668,16 +781,15 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.BulkInsertInstanceRequest()
       );
-      request.project = '';
-      request.zone = '';
-      const expectedHeaderRequestParams = 'project=&zone=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('BulkInsertInstanceRequest', [
+        'project',
+      ]);
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('BulkInsertInstanceRequest', [
+        'zone',
+      ]);
+      request.zone = defaultValue2;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -700,11 +812,14 @@ describe('v1.InstancesClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.bulkInsert as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.bulkInsert as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.bulkInsert as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes bulkInsert with error', async () => {
@@ -716,27 +831,29 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.BulkInsertInstanceRequest()
       );
-      request.project = '';
-      request.zone = '';
-      const expectedHeaderRequestParams = 'project=&zone=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('BulkInsertInstanceRequest', [
+        'project',
+      ]);
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('BulkInsertInstanceRequest', [
+        'zone',
+      ]);
+      request.zone = defaultValue2;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.bulkInsert = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.bulkInsert(request), expectedError);
-      assert(
-        (client.innerApiCalls.bulkInsert as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.bulkInsert as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.bulkInsert as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes bulkInsert with closed client', async () => {
@@ -748,8 +865,14 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.BulkInsertInstanceRequest()
       );
-      request.project = '';
-      request.zone = '';
+      const defaultValue1 = getTypeDefaultValue('BulkInsertInstanceRequest', [
+        'project',
+      ]);
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('BulkInsertInstanceRequest', [
+        'zone',
+      ]);
+      request.zone = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.bulkInsert(request), expectedError);
@@ -766,28 +889,33 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteInstanceRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.instance = '';
-      const expectedHeaderRequestParams = 'project=&zone=&instance=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteInstanceRequest', [
+        'project',
+      ]);
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('DeleteInstanceRequest', [
+        'zone',
+      ]);
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue('DeleteInstanceRequest', [
+        'instance',
+      ]);
+      request.instance = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
       client.innerApiCalls.delete = stubSimpleCall(expectedResponse);
       const [response] = await client.delete(request);
       assert.deepStrictEqual(response.latestResponse, expectedResponse);
-      assert(
-        (client.innerApiCalls.delete as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (client.innerApiCalls.delete as SinonStub).getCall(
+        0
+      ).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.delete as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes delete without error using callback', async () => {
@@ -799,17 +927,19 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteInstanceRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.instance = '';
-      const expectedHeaderRequestParams = 'project=&zone=&instance=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteInstanceRequest', [
+        'project',
+      ]);
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('DeleteInstanceRequest', [
+        'zone',
+      ]);
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue('DeleteInstanceRequest', [
+        'instance',
+      ]);
+      request.instance = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -832,11 +962,14 @@ describe('v1.InstancesClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.delete as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (client.innerApiCalls.delete as SinonStub).getCall(
+        0
+      ).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.delete as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes delete with error', async () => {
@@ -848,25 +981,30 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteInstanceRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.instance = '';
-      const expectedHeaderRequestParams = 'project=&zone=&instance=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteInstanceRequest', [
+        'project',
+      ]);
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('DeleteInstanceRequest', [
+        'zone',
+      ]);
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue('DeleteInstanceRequest', [
+        'instance',
+      ]);
+      request.instance = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.delete = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.delete(request), expectedError);
-      assert(
-        (client.innerApiCalls.delete as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (client.innerApiCalls.delete as SinonStub).getCall(
+        0
+      ).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.delete as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes delete with closed client', async () => {
@@ -878,9 +1016,18 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteInstanceRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.instance = '';
+      const defaultValue1 = getTypeDefaultValue('DeleteInstanceRequest', [
+        'project',
+      ]);
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('DeleteInstanceRequest', [
+        'zone',
+      ]);
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue('DeleteInstanceRequest', [
+        'instance',
+      ]);
+      request.instance = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.delete(request), expectedError);
@@ -897,17 +1044,22 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteAccessConfigInstanceRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.instance = '';
-      const expectedHeaderRequestParams = 'project=&zone=&instance=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'DeleteAccessConfigInstanceRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        'DeleteAccessConfigInstanceRequest',
+        ['zone']
+      );
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        'DeleteAccessConfigInstanceRequest',
+        ['instance']
+      );
+      request.instance = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -915,11 +1067,14 @@ describe('v1.InstancesClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.deleteAccessConfig(request);
       assert.deepStrictEqual(response.latestResponse, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteAccessConfig as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteAccessConfig as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteAccessConfig as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteAccessConfig without error using callback', async () => {
@@ -931,17 +1086,22 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteAccessConfigInstanceRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.instance = '';
-      const expectedHeaderRequestParams = 'project=&zone=&instance=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'DeleteAccessConfigInstanceRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        'DeleteAccessConfigInstanceRequest',
+        ['zone']
+      );
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        'DeleteAccessConfigInstanceRequest',
+        ['instance']
+      );
+      request.instance = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -964,11 +1124,14 @@ describe('v1.InstancesClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.deleteAccessConfig as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteAccessConfig as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteAccessConfig as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteAccessConfig with error', async () => {
@@ -980,28 +1143,36 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteAccessConfigInstanceRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.instance = '';
-      const expectedHeaderRequestParams = 'project=&zone=&instance=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'DeleteAccessConfigInstanceRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        'DeleteAccessConfigInstanceRequest',
+        ['zone']
+      );
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        'DeleteAccessConfigInstanceRequest',
+        ['instance']
+      );
+      request.instance = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.deleteAccessConfig = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.deleteAccessConfig(request), expectedError);
-      assert(
-        (client.innerApiCalls.deleteAccessConfig as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.deleteAccessConfig as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.deleteAccessConfig as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes deleteAccessConfig with closed client', async () => {
@@ -1013,9 +1184,21 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteAccessConfigInstanceRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.instance = '';
+      const defaultValue1 = getTypeDefaultValue(
+        'DeleteAccessConfigInstanceRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        'DeleteAccessConfigInstanceRequest',
+        ['zone']
+      );
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        'DeleteAccessConfigInstanceRequest',
+        ['instance']
+      );
+      request.instance = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.deleteAccessConfig(request), expectedError);
@@ -1032,28 +1215,33 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DetachDiskInstanceRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.instance = '';
-      const expectedHeaderRequestParams = 'project=&zone=&instance=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DetachDiskInstanceRequest', [
+        'project',
+      ]);
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('DetachDiskInstanceRequest', [
+        'zone',
+      ]);
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue('DetachDiskInstanceRequest', [
+        'instance',
+      ]);
+      request.instance = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
       client.innerApiCalls.detachDisk = stubSimpleCall(expectedResponse);
       const [response] = await client.detachDisk(request);
       assert.deepStrictEqual(response.latestResponse, expectedResponse);
-      assert(
-        (client.innerApiCalls.detachDisk as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.detachDisk as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.detachDisk as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes detachDisk without error using callback', async () => {
@@ -1065,17 +1253,19 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DetachDiskInstanceRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.instance = '';
-      const expectedHeaderRequestParams = 'project=&zone=&instance=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DetachDiskInstanceRequest', [
+        'project',
+      ]);
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('DetachDiskInstanceRequest', [
+        'zone',
+      ]);
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue('DetachDiskInstanceRequest', [
+        'instance',
+      ]);
+      request.instance = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -1098,11 +1288,14 @@ describe('v1.InstancesClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.detachDisk as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.detachDisk as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.detachDisk as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes detachDisk with error', async () => {
@@ -1114,28 +1307,33 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DetachDiskInstanceRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.instance = '';
-      const expectedHeaderRequestParams = 'project=&zone=&instance=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DetachDiskInstanceRequest', [
+        'project',
+      ]);
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('DetachDiskInstanceRequest', [
+        'zone',
+      ]);
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue('DetachDiskInstanceRequest', [
+        'instance',
+      ]);
+      request.instance = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.detachDisk = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.detachDisk(request), expectedError);
-      assert(
-        (client.innerApiCalls.detachDisk as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.detachDisk as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.detachDisk as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes detachDisk with closed client', async () => {
@@ -1147,9 +1345,18 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DetachDiskInstanceRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.instance = '';
+      const defaultValue1 = getTypeDefaultValue('DetachDiskInstanceRequest', [
+        'project',
+      ]);
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('DetachDiskInstanceRequest', [
+        'zone',
+      ]);
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue('DetachDiskInstanceRequest', [
+        'instance',
+      ]);
+      request.instance = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.detachDisk(request), expectedError);
@@ -1166,28 +1373,30 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetInstanceRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.instance = '';
-      const expectedHeaderRequestParams = 'project=&zone=&instance=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetInstanceRequest', [
+        'project',
+      ]);
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('GetInstanceRequest', ['zone']);
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue('GetInstanceRequest', [
+        'instance',
+      ]);
+      request.instance = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Instance()
       );
       client.innerApiCalls.get = stubSimpleCall(expectedResponse);
       const [response] = await client.get(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.get as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (client.innerApiCalls.get as SinonStub).getCall(0)
+        .args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.get as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes get without error using callback', async () => {
@@ -1199,17 +1408,17 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetInstanceRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.instance = '';
-      const expectedHeaderRequestParams = 'project=&zone=&instance=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetInstanceRequest', [
+        'project',
+      ]);
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('GetInstanceRequest', ['zone']);
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue('GetInstanceRequest', [
+        'instance',
+      ]);
+      request.instance = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Instance()
       );
@@ -1231,11 +1440,13 @@ describe('v1.InstancesClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.get as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (client.innerApiCalls.get as SinonStub).getCall(0)
+        .args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.get as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes get with error', async () => {
@@ -1247,25 +1458,27 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetInstanceRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.instance = '';
-      const expectedHeaderRequestParams = 'project=&zone=&instance=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetInstanceRequest', [
+        'project',
+      ]);
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('GetInstanceRequest', ['zone']);
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue('GetInstanceRequest', [
+        'instance',
+      ]);
+      request.instance = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.get = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.get(request), expectedError);
-      assert(
-        (client.innerApiCalls.get as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (client.innerApiCalls.get as SinonStub).getCall(0)
+        .args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.get as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes get with closed client', async () => {
@@ -1277,9 +1490,16 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetInstanceRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.instance = '';
+      const defaultValue1 = getTypeDefaultValue('GetInstanceRequest', [
+        'project',
+      ]);
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('GetInstanceRequest', ['zone']);
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue('GetInstanceRequest', [
+        'instance',
+      ]);
+      request.instance = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.get(request), expectedError);
@@ -1296,17 +1516,22 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetEffectiveFirewallsInstanceRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.instance = '';
-      const expectedHeaderRequestParams = 'project=&zone=&instance=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'GetEffectiveFirewallsInstanceRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        'GetEffectiveFirewallsInstanceRequest',
+        ['zone']
+      );
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        'GetEffectiveFirewallsInstanceRequest',
+        ['instance']
+      );
+      request.instance = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.InstancesGetEffectiveFirewallsResponse()
       );
@@ -1314,11 +1539,14 @@ describe('v1.InstancesClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.getEffectiveFirewalls(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getEffectiveFirewalls as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getEffectiveFirewalls as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getEffectiveFirewalls as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getEffectiveFirewalls without error using callback', async () => {
@@ -1330,17 +1558,22 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetEffectiveFirewallsInstanceRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.instance = '';
-      const expectedHeaderRequestParams = 'project=&zone=&instance=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'GetEffectiveFirewallsInstanceRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        'GetEffectiveFirewallsInstanceRequest',
+        ['zone']
+      );
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        'GetEffectiveFirewallsInstanceRequest',
+        ['instance']
+      );
+      request.instance = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.InstancesGetEffectiveFirewallsResponse()
       );
@@ -1363,11 +1596,14 @@ describe('v1.InstancesClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getEffectiveFirewalls as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getEffectiveFirewalls as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getEffectiveFirewalls as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getEffectiveFirewalls with error', async () => {
@@ -1379,17 +1615,22 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetEffectiveFirewallsInstanceRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.instance = '';
-      const expectedHeaderRequestParams = 'project=&zone=&instance=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'GetEffectiveFirewallsInstanceRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        'GetEffectiveFirewallsInstanceRequest',
+        ['zone']
+      );
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        'GetEffectiveFirewallsInstanceRequest',
+        ['instance']
+      );
+      request.instance = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getEffectiveFirewalls = stubSimpleCall(
         undefined,
@@ -1399,11 +1640,14 @@ describe('v1.InstancesClient', () => {
         client.getEffectiveFirewalls(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.getEffectiveFirewalls as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getEffectiveFirewalls as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getEffectiveFirewalls as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getEffectiveFirewalls with closed client', async () => {
@@ -1415,9 +1659,21 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetEffectiveFirewallsInstanceRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.instance = '';
+      const defaultValue1 = getTypeDefaultValue(
+        'GetEffectiveFirewallsInstanceRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        'GetEffectiveFirewallsInstanceRequest',
+        ['zone']
+      );
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        'GetEffectiveFirewallsInstanceRequest',
+        ['instance']
+      );
+      request.instance = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -1437,17 +1693,22 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetGuestAttributesInstanceRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.instance = '';
-      const expectedHeaderRequestParams = 'project=&zone=&instance=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'GetGuestAttributesInstanceRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        'GetGuestAttributesInstanceRequest',
+        ['zone']
+      );
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        'GetGuestAttributesInstanceRequest',
+        ['instance']
+      );
+      request.instance = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.GuestAttributes()
       );
@@ -1455,11 +1716,14 @@ describe('v1.InstancesClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.getGuestAttributes(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getGuestAttributes as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getGuestAttributes as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getGuestAttributes as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getGuestAttributes without error using callback', async () => {
@@ -1471,17 +1735,22 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetGuestAttributesInstanceRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.instance = '';
-      const expectedHeaderRequestParams = 'project=&zone=&instance=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'GetGuestAttributesInstanceRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        'GetGuestAttributesInstanceRequest',
+        ['zone']
+      );
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        'GetGuestAttributesInstanceRequest',
+        ['instance']
+      );
+      request.instance = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.GuestAttributes()
       );
@@ -1504,11 +1773,14 @@ describe('v1.InstancesClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getGuestAttributes as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getGuestAttributes as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getGuestAttributes as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getGuestAttributes with error', async () => {
@@ -1520,28 +1792,36 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetGuestAttributesInstanceRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.instance = '';
-      const expectedHeaderRequestParams = 'project=&zone=&instance=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'GetGuestAttributesInstanceRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        'GetGuestAttributesInstanceRequest',
+        ['zone']
+      );
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        'GetGuestAttributesInstanceRequest',
+        ['instance']
+      );
+      request.instance = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getGuestAttributes = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.getGuestAttributes(request), expectedError);
-      assert(
-        (client.innerApiCalls.getGuestAttributes as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getGuestAttributes as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getGuestAttributes as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getGuestAttributes with closed client', async () => {
@@ -1553,9 +1833,21 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetGuestAttributesInstanceRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.instance = '';
+      const defaultValue1 = getTypeDefaultValue(
+        'GetGuestAttributesInstanceRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        'GetGuestAttributesInstanceRequest',
+        ['zone']
+      );
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        'GetGuestAttributesInstanceRequest',
+        ['instance']
+      );
+      request.instance = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getGuestAttributes(request), expectedError);
@@ -1572,28 +1864,33 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetIamPolicyInstanceRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.resource = '';
-      const expectedHeaderRequestParams = 'project=&zone=&resource=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetIamPolicyInstanceRequest', [
+        'project',
+      ]);
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('GetIamPolicyInstanceRequest', [
+        'zone',
+      ]);
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue('GetIamPolicyInstanceRequest', [
+        'resource',
+      ]);
+      request.resource = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&resource=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Policy()
       );
       client.innerApiCalls.getIamPolicy = stubSimpleCall(expectedResponse);
       const [response] = await client.getIamPolicy(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getIamPolicy as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getIamPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getIamPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getIamPolicy without error using callback', async () => {
@@ -1605,17 +1902,19 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetIamPolicyInstanceRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.resource = '';
-      const expectedHeaderRequestParams = 'project=&zone=&resource=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetIamPolicyInstanceRequest', [
+        'project',
+      ]);
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('GetIamPolicyInstanceRequest', [
+        'zone',
+      ]);
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue('GetIamPolicyInstanceRequest', [
+        'resource',
+      ]);
+      request.resource = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&resource=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Policy()
       );
@@ -1638,11 +1937,14 @@ describe('v1.InstancesClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getIamPolicy as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getIamPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getIamPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getIamPolicy with error', async () => {
@@ -1654,28 +1956,33 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetIamPolicyInstanceRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.resource = '';
-      const expectedHeaderRequestParams = 'project=&zone=&resource=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetIamPolicyInstanceRequest', [
+        'project',
+      ]);
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('GetIamPolicyInstanceRequest', [
+        'zone',
+      ]);
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue('GetIamPolicyInstanceRequest', [
+        'resource',
+      ]);
+      request.resource = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&resource=${defaultValue3}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getIamPolicy = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.getIamPolicy(request), expectedError);
-      assert(
-        (client.innerApiCalls.getIamPolicy as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getIamPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getIamPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getIamPolicy with closed client', async () => {
@@ -1687,9 +1994,18 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetIamPolicyInstanceRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.resource = '';
+      const defaultValue1 = getTypeDefaultValue('GetIamPolicyInstanceRequest', [
+        'project',
+      ]);
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('GetIamPolicyInstanceRequest', [
+        'zone',
+      ]);
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue('GetIamPolicyInstanceRequest', [
+        'resource',
+      ]);
+      request.resource = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getIamPolicy(request), expectedError);
@@ -1706,28 +2022,36 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetScreenshotInstanceRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.instance = '';
-      const expectedHeaderRequestParams = 'project=&zone=&instance=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'GetScreenshotInstanceRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        'GetScreenshotInstanceRequest',
+        ['zone']
+      );
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        'GetScreenshotInstanceRequest',
+        ['instance']
+      );
+      request.instance = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Screenshot()
       );
       client.innerApiCalls.getScreenshot = stubSimpleCall(expectedResponse);
       const [response] = await client.getScreenshot(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getScreenshot as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getScreenshot as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getScreenshot as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getScreenshot without error using callback', async () => {
@@ -1739,17 +2063,22 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetScreenshotInstanceRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.instance = '';
-      const expectedHeaderRequestParams = 'project=&zone=&instance=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'GetScreenshotInstanceRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        'GetScreenshotInstanceRequest',
+        ['zone']
+      );
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        'GetScreenshotInstanceRequest',
+        ['instance']
+      );
+      request.instance = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Screenshot()
       );
@@ -1772,11 +2101,14 @@ describe('v1.InstancesClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getScreenshot as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getScreenshot as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getScreenshot as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getScreenshot with error', async () => {
@@ -1788,28 +2120,36 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetScreenshotInstanceRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.instance = '';
-      const expectedHeaderRequestParams = 'project=&zone=&instance=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'GetScreenshotInstanceRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        'GetScreenshotInstanceRequest',
+        ['zone']
+      );
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        'GetScreenshotInstanceRequest',
+        ['instance']
+      );
+      request.instance = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getScreenshot = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.getScreenshot(request), expectedError);
-      assert(
-        (client.innerApiCalls.getScreenshot as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getScreenshot as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getScreenshot as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getScreenshot with closed client', async () => {
@@ -1821,9 +2161,21 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetScreenshotInstanceRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.instance = '';
+      const defaultValue1 = getTypeDefaultValue(
+        'GetScreenshotInstanceRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        'GetScreenshotInstanceRequest',
+        ['zone']
+      );
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        'GetScreenshotInstanceRequest',
+        ['instance']
+      );
+      request.instance = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getScreenshot(request), expectedError);
@@ -1840,17 +2192,22 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetSerialPortOutputInstanceRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.instance = '';
-      const expectedHeaderRequestParams = 'project=&zone=&instance=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'GetSerialPortOutputInstanceRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        'GetSerialPortOutputInstanceRequest',
+        ['zone']
+      );
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        'GetSerialPortOutputInstanceRequest',
+        ['instance']
+      );
+      request.instance = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.SerialPortOutput()
       );
@@ -1858,11 +2215,14 @@ describe('v1.InstancesClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.getSerialPortOutput(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getSerialPortOutput as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getSerialPortOutput as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getSerialPortOutput as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getSerialPortOutput without error using callback', async () => {
@@ -1874,17 +2234,22 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetSerialPortOutputInstanceRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.instance = '';
-      const expectedHeaderRequestParams = 'project=&zone=&instance=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'GetSerialPortOutputInstanceRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        'GetSerialPortOutputInstanceRequest',
+        ['zone']
+      );
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        'GetSerialPortOutputInstanceRequest',
+        ['instance']
+      );
+      request.instance = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.SerialPortOutput()
       );
@@ -1907,11 +2272,14 @@ describe('v1.InstancesClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getSerialPortOutput as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getSerialPortOutput as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getSerialPortOutput as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getSerialPortOutput with error', async () => {
@@ -1923,28 +2291,36 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetSerialPortOutputInstanceRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.instance = '';
-      const expectedHeaderRequestParams = 'project=&zone=&instance=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'GetSerialPortOutputInstanceRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        'GetSerialPortOutputInstanceRequest',
+        ['zone']
+      );
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        'GetSerialPortOutputInstanceRequest',
+        ['instance']
+      );
+      request.instance = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getSerialPortOutput = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.getSerialPortOutput(request), expectedError);
-      assert(
-        (client.innerApiCalls.getSerialPortOutput as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getSerialPortOutput as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getSerialPortOutput as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getSerialPortOutput with closed client', async () => {
@@ -1956,9 +2332,21 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetSerialPortOutputInstanceRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.instance = '';
+      const defaultValue1 = getTypeDefaultValue(
+        'GetSerialPortOutputInstanceRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        'GetSerialPortOutputInstanceRequest',
+        ['zone']
+      );
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        'GetSerialPortOutputInstanceRequest',
+        ['instance']
+      );
+      request.instance = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getSerialPortOutput(request), expectedError);
@@ -1975,17 +2363,22 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetShieldedInstanceIdentityInstanceRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.instance = '';
-      const expectedHeaderRequestParams = 'project=&zone=&instance=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'GetShieldedInstanceIdentityInstanceRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        'GetShieldedInstanceIdentityInstanceRequest',
+        ['zone']
+      );
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        'GetShieldedInstanceIdentityInstanceRequest',
+        ['instance']
+      );
+      request.instance = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.ShieldedInstanceIdentity()
       );
@@ -1993,11 +2386,14 @@ describe('v1.InstancesClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.getShieldedInstanceIdentity(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getShieldedInstanceIdentity as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getShieldedInstanceIdentity as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getShieldedInstanceIdentity as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getShieldedInstanceIdentity without error using callback', async () => {
@@ -2009,17 +2405,22 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetShieldedInstanceIdentityInstanceRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.instance = '';
-      const expectedHeaderRequestParams = 'project=&zone=&instance=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'GetShieldedInstanceIdentityInstanceRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        'GetShieldedInstanceIdentityInstanceRequest',
+        ['zone']
+      );
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        'GetShieldedInstanceIdentityInstanceRequest',
+        ['instance']
+      );
+      request.instance = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.ShieldedInstanceIdentity()
       );
@@ -2042,11 +2443,14 @@ describe('v1.InstancesClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getShieldedInstanceIdentity as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getShieldedInstanceIdentity as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getShieldedInstanceIdentity as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getShieldedInstanceIdentity with error', async () => {
@@ -2058,17 +2462,22 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetShieldedInstanceIdentityInstanceRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.instance = '';
-      const expectedHeaderRequestParams = 'project=&zone=&instance=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'GetShieldedInstanceIdentityInstanceRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        'GetShieldedInstanceIdentityInstanceRequest',
+        ['zone']
+      );
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        'GetShieldedInstanceIdentityInstanceRequest',
+        ['instance']
+      );
+      request.instance = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getShieldedInstanceIdentity = stubSimpleCall(
         undefined,
@@ -2078,11 +2487,14 @@ describe('v1.InstancesClient', () => {
         client.getShieldedInstanceIdentity(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.getShieldedInstanceIdentity as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getShieldedInstanceIdentity as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getShieldedInstanceIdentity as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getShieldedInstanceIdentity with closed client', async () => {
@@ -2094,9 +2506,21 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetShieldedInstanceIdentityInstanceRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.instance = '';
+      const defaultValue1 = getTypeDefaultValue(
+        'GetShieldedInstanceIdentityInstanceRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        'GetShieldedInstanceIdentityInstanceRequest',
+        ['zone']
+      );
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        'GetShieldedInstanceIdentityInstanceRequest',
+        ['instance']
+      );
+      request.instance = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -2116,27 +2540,29 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertInstanceRequest()
       );
-      request.project = '';
-      request.zone = '';
-      const expectedHeaderRequestParams = 'project=&zone=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('InsertInstanceRequest', [
+        'project',
+      ]);
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('InsertInstanceRequest', [
+        'zone',
+      ]);
+      request.zone = defaultValue2;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
       client.innerApiCalls.insert = stubSimpleCall(expectedResponse);
       const [response] = await client.insert(request);
       assert.deepStrictEqual(response.latestResponse, expectedResponse);
-      assert(
-        (client.innerApiCalls.insert as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (client.innerApiCalls.insert as SinonStub).getCall(
+        0
+      ).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.insert as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes insert without error using callback', async () => {
@@ -2148,16 +2574,15 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertInstanceRequest()
       );
-      request.project = '';
-      request.zone = '';
-      const expectedHeaderRequestParams = 'project=&zone=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('InsertInstanceRequest', [
+        'project',
+      ]);
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('InsertInstanceRequest', [
+        'zone',
+      ]);
+      request.zone = defaultValue2;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -2180,11 +2605,14 @@ describe('v1.InstancesClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.insert as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (client.innerApiCalls.insert as SinonStub).getCall(
+        0
+      ).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.insert as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes insert with error', async () => {
@@ -2196,24 +2624,26 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertInstanceRequest()
       );
-      request.project = '';
-      request.zone = '';
-      const expectedHeaderRequestParams = 'project=&zone=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('InsertInstanceRequest', [
+        'project',
+      ]);
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('InsertInstanceRequest', [
+        'zone',
+      ]);
+      request.zone = defaultValue2;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.insert = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.insert(request), expectedError);
-      assert(
-        (client.innerApiCalls.insert as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (client.innerApiCalls.insert as SinonStub).getCall(
+        0
+      ).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.insert as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes insert with closed client', async () => {
@@ -2225,8 +2655,14 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertInstanceRequest()
       );
-      request.project = '';
-      request.zone = '';
+      const defaultValue1 = getTypeDefaultValue('InsertInstanceRequest', [
+        'project',
+      ]);
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('InsertInstanceRequest', [
+        'zone',
+      ]);
+      request.zone = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.insert(request), expectedError);
@@ -2243,17 +2679,22 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.RemoveResourcePoliciesInstanceRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.instance = '';
-      const expectedHeaderRequestParams = 'project=&zone=&instance=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'RemoveResourcePoliciesInstanceRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        'RemoveResourcePoliciesInstanceRequest',
+        ['zone']
+      );
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        'RemoveResourcePoliciesInstanceRequest',
+        ['instance']
+      );
+      request.instance = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -2261,11 +2702,14 @@ describe('v1.InstancesClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.removeResourcePolicies(request);
       assert.deepStrictEqual(response.latestResponse, expectedResponse);
-      assert(
-        (client.innerApiCalls.removeResourcePolicies as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.removeResourcePolicies as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.removeResourcePolicies as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes removeResourcePolicies without error using callback', async () => {
@@ -2277,17 +2721,22 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.RemoveResourcePoliciesInstanceRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.instance = '';
-      const expectedHeaderRequestParams = 'project=&zone=&instance=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'RemoveResourcePoliciesInstanceRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        'RemoveResourcePoliciesInstanceRequest',
+        ['zone']
+      );
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        'RemoveResourcePoliciesInstanceRequest',
+        ['instance']
+      );
+      request.instance = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -2310,11 +2759,14 @@ describe('v1.InstancesClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.removeResourcePolicies as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.removeResourcePolicies as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.removeResourcePolicies as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes removeResourcePolicies with error', async () => {
@@ -2326,17 +2778,22 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.RemoveResourcePoliciesInstanceRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.instance = '';
-      const expectedHeaderRequestParams = 'project=&zone=&instance=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'RemoveResourcePoliciesInstanceRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        'RemoveResourcePoliciesInstanceRequest',
+        ['zone']
+      );
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        'RemoveResourcePoliciesInstanceRequest',
+        ['instance']
+      );
+      request.instance = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.removeResourcePolicies = stubSimpleCall(
         undefined,
@@ -2346,11 +2803,14 @@ describe('v1.InstancesClient', () => {
         client.removeResourcePolicies(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.removeResourcePolicies as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.removeResourcePolicies as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.removeResourcePolicies as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes removeResourcePolicies with closed client', async () => {
@@ -2362,9 +2822,21 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.RemoveResourcePoliciesInstanceRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.instance = '';
+      const defaultValue1 = getTypeDefaultValue(
+        'RemoveResourcePoliciesInstanceRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        'RemoveResourcePoliciesInstanceRequest',
+        ['zone']
+      );
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        'RemoveResourcePoliciesInstanceRequest',
+        ['instance']
+      );
+      request.instance = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -2384,28 +2856,32 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ResetInstanceRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.instance = '';
-      const expectedHeaderRequestParams = 'project=&zone=&instance=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ResetInstanceRequest', [
+        'project',
+      ]);
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('ResetInstanceRequest', [
+        'zone',
+      ]);
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue('ResetInstanceRequest', [
+        'instance',
+      ]);
+      request.instance = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
       client.innerApiCalls.reset = stubSimpleCall(expectedResponse);
       const [response] = await client.reset(request);
       assert.deepStrictEqual(response.latestResponse, expectedResponse);
-      assert(
-        (client.innerApiCalls.reset as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (client.innerApiCalls.reset as SinonStub).getCall(0)
+        .args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.reset as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes reset without error using callback', async () => {
@@ -2417,17 +2893,19 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ResetInstanceRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.instance = '';
-      const expectedHeaderRequestParams = 'project=&zone=&instance=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ResetInstanceRequest', [
+        'project',
+      ]);
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('ResetInstanceRequest', [
+        'zone',
+      ]);
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue('ResetInstanceRequest', [
+        'instance',
+      ]);
+      request.instance = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -2449,11 +2927,13 @@ describe('v1.InstancesClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.reset as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (client.innerApiCalls.reset as SinonStub).getCall(0)
+        .args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.reset as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes reset with error', async () => {
@@ -2465,25 +2945,29 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ResetInstanceRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.instance = '';
-      const expectedHeaderRequestParams = 'project=&zone=&instance=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ResetInstanceRequest', [
+        'project',
+      ]);
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('ResetInstanceRequest', [
+        'zone',
+      ]);
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue('ResetInstanceRequest', [
+        'instance',
+      ]);
+      request.instance = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.reset = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.reset(request), expectedError);
-      assert(
-        (client.innerApiCalls.reset as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (client.innerApiCalls.reset as SinonStub).getCall(0)
+        .args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.reset as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes reset with closed client', async () => {
@@ -2495,9 +2979,18 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ResetInstanceRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.instance = '';
+      const defaultValue1 = getTypeDefaultValue('ResetInstanceRequest', [
+        'project',
+      ]);
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('ResetInstanceRequest', [
+        'zone',
+      ]);
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue('ResetInstanceRequest', [
+        'instance',
+      ]);
+      request.instance = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.reset(request), expectedError);
@@ -2514,28 +3007,33 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ResumeInstanceRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.instance = '';
-      const expectedHeaderRequestParams = 'project=&zone=&instance=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ResumeInstanceRequest', [
+        'project',
+      ]);
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('ResumeInstanceRequest', [
+        'zone',
+      ]);
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue('ResumeInstanceRequest', [
+        'instance',
+      ]);
+      request.instance = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
       client.innerApiCalls.resume = stubSimpleCall(expectedResponse);
       const [response] = await client.resume(request);
       assert.deepStrictEqual(response.latestResponse, expectedResponse);
-      assert(
-        (client.innerApiCalls.resume as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (client.innerApiCalls.resume as SinonStub).getCall(
+        0
+      ).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.resume as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes resume without error using callback', async () => {
@@ -2547,17 +3045,19 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ResumeInstanceRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.instance = '';
-      const expectedHeaderRequestParams = 'project=&zone=&instance=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ResumeInstanceRequest', [
+        'project',
+      ]);
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('ResumeInstanceRequest', [
+        'zone',
+      ]);
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue('ResumeInstanceRequest', [
+        'instance',
+      ]);
+      request.instance = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -2580,11 +3080,14 @@ describe('v1.InstancesClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.resume as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (client.innerApiCalls.resume as SinonStub).getCall(
+        0
+      ).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.resume as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes resume with error', async () => {
@@ -2596,25 +3099,30 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ResumeInstanceRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.instance = '';
-      const expectedHeaderRequestParams = 'project=&zone=&instance=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ResumeInstanceRequest', [
+        'project',
+      ]);
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('ResumeInstanceRequest', [
+        'zone',
+      ]);
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue('ResumeInstanceRequest', [
+        'instance',
+      ]);
+      request.instance = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.resume = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.resume(request), expectedError);
-      assert(
-        (client.innerApiCalls.resume as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (client.innerApiCalls.resume as SinonStub).getCall(
+        0
+      ).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.resume as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes resume with closed client', async () => {
@@ -2626,9 +3134,18 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ResumeInstanceRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.instance = '';
+      const defaultValue1 = getTypeDefaultValue('ResumeInstanceRequest', [
+        'project',
+      ]);
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('ResumeInstanceRequest', [
+        'zone',
+      ]);
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue('ResumeInstanceRequest', [
+        'instance',
+      ]);
+      request.instance = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.resume(request), expectedError);
@@ -2645,17 +3162,22 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SendDiagnosticInterruptInstanceRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.instance = '';
-      const expectedHeaderRequestParams = 'project=&zone=&instance=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'SendDiagnosticInterruptInstanceRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        'SendDiagnosticInterruptInstanceRequest',
+        ['zone']
+      );
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        'SendDiagnosticInterruptInstanceRequest',
+        ['instance']
+      );
+      request.instance = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.SendDiagnosticInterruptInstanceResponse()
       );
@@ -2663,11 +3185,14 @@ describe('v1.InstancesClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.sendDiagnosticInterrupt(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.sendDiagnosticInterrupt as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.sendDiagnosticInterrupt as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.sendDiagnosticInterrupt as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes sendDiagnosticInterrupt without error using callback', async () => {
@@ -2679,17 +3204,22 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SendDiagnosticInterruptInstanceRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.instance = '';
-      const expectedHeaderRequestParams = 'project=&zone=&instance=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'SendDiagnosticInterruptInstanceRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        'SendDiagnosticInterruptInstanceRequest',
+        ['zone']
+      );
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        'SendDiagnosticInterruptInstanceRequest',
+        ['instance']
+      );
+      request.instance = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.SendDiagnosticInterruptInstanceResponse()
       );
@@ -2712,11 +3242,14 @@ describe('v1.InstancesClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.sendDiagnosticInterrupt as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.sendDiagnosticInterrupt as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.sendDiagnosticInterrupt as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes sendDiagnosticInterrupt with error', async () => {
@@ -2728,17 +3261,22 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SendDiagnosticInterruptInstanceRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.instance = '';
-      const expectedHeaderRequestParams = 'project=&zone=&instance=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'SendDiagnosticInterruptInstanceRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        'SendDiagnosticInterruptInstanceRequest',
+        ['zone']
+      );
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        'SendDiagnosticInterruptInstanceRequest',
+        ['instance']
+      );
+      request.instance = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.sendDiagnosticInterrupt = stubSimpleCall(
         undefined,
@@ -2748,11 +3286,14 @@ describe('v1.InstancesClient', () => {
         client.sendDiagnosticInterrupt(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.sendDiagnosticInterrupt as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.sendDiagnosticInterrupt as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.sendDiagnosticInterrupt as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes sendDiagnosticInterrupt with closed client', async () => {
@@ -2764,9 +3305,21 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SendDiagnosticInterruptInstanceRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.instance = '';
+      const defaultValue1 = getTypeDefaultValue(
+        'SendDiagnosticInterruptInstanceRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        'SendDiagnosticInterruptInstanceRequest',
+        ['zone']
+      );
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        'SendDiagnosticInterruptInstanceRequest',
+        ['instance']
+      );
+      request.instance = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -2786,17 +3339,22 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetDeletionProtectionInstanceRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.resource = '';
-      const expectedHeaderRequestParams = 'project=&zone=&resource=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'SetDeletionProtectionInstanceRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        'SetDeletionProtectionInstanceRequest',
+        ['zone']
+      );
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        'SetDeletionProtectionInstanceRequest',
+        ['resource']
+      );
+      request.resource = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&resource=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -2804,11 +3362,14 @@ describe('v1.InstancesClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.setDeletionProtection(request);
       assert.deepStrictEqual(response.latestResponse, expectedResponse);
-      assert(
-        (client.innerApiCalls.setDeletionProtection as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.setDeletionProtection as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.setDeletionProtection as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes setDeletionProtection without error using callback', async () => {
@@ -2820,17 +3381,22 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetDeletionProtectionInstanceRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.resource = '';
-      const expectedHeaderRequestParams = 'project=&zone=&resource=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'SetDeletionProtectionInstanceRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        'SetDeletionProtectionInstanceRequest',
+        ['zone']
+      );
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        'SetDeletionProtectionInstanceRequest',
+        ['resource']
+      );
+      request.resource = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&resource=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -2853,11 +3419,14 @@ describe('v1.InstancesClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.setDeletionProtection as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.setDeletionProtection as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.setDeletionProtection as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes setDeletionProtection with error', async () => {
@@ -2869,17 +3438,22 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetDeletionProtectionInstanceRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.resource = '';
-      const expectedHeaderRequestParams = 'project=&zone=&resource=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'SetDeletionProtectionInstanceRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        'SetDeletionProtectionInstanceRequest',
+        ['zone']
+      );
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        'SetDeletionProtectionInstanceRequest',
+        ['resource']
+      );
+      request.resource = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&resource=${defaultValue3}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.setDeletionProtection = stubSimpleCall(
         undefined,
@@ -2889,11 +3463,14 @@ describe('v1.InstancesClient', () => {
         client.setDeletionProtection(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.setDeletionProtection as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.setDeletionProtection as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.setDeletionProtection as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes setDeletionProtection with closed client', async () => {
@@ -2905,9 +3482,21 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetDeletionProtectionInstanceRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.resource = '';
+      const defaultValue1 = getTypeDefaultValue(
+        'SetDeletionProtectionInstanceRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        'SetDeletionProtectionInstanceRequest',
+        ['zone']
+      );
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        'SetDeletionProtectionInstanceRequest',
+        ['resource']
+      );
+      request.resource = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -2927,28 +3516,36 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetDiskAutoDeleteInstanceRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.instance = '';
-      const expectedHeaderRequestParams = 'project=&zone=&instance=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'SetDiskAutoDeleteInstanceRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        'SetDiskAutoDeleteInstanceRequest',
+        ['zone']
+      );
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        'SetDiskAutoDeleteInstanceRequest',
+        ['instance']
+      );
+      request.instance = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
       client.innerApiCalls.setDiskAutoDelete = stubSimpleCall(expectedResponse);
       const [response] = await client.setDiskAutoDelete(request);
       assert.deepStrictEqual(response.latestResponse, expectedResponse);
-      assert(
-        (client.innerApiCalls.setDiskAutoDelete as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.setDiskAutoDelete as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.setDiskAutoDelete as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes setDiskAutoDelete without error using callback', async () => {
@@ -2960,17 +3557,22 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetDiskAutoDeleteInstanceRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.instance = '';
-      const expectedHeaderRequestParams = 'project=&zone=&instance=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'SetDiskAutoDeleteInstanceRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        'SetDiskAutoDeleteInstanceRequest',
+        ['zone']
+      );
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        'SetDiskAutoDeleteInstanceRequest',
+        ['instance']
+      );
+      request.instance = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -2993,11 +3595,14 @@ describe('v1.InstancesClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.setDiskAutoDelete as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.setDiskAutoDelete as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.setDiskAutoDelete as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes setDiskAutoDelete with error', async () => {
@@ -3009,28 +3614,36 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetDiskAutoDeleteInstanceRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.instance = '';
-      const expectedHeaderRequestParams = 'project=&zone=&instance=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'SetDiskAutoDeleteInstanceRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        'SetDiskAutoDeleteInstanceRequest',
+        ['zone']
+      );
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        'SetDiskAutoDeleteInstanceRequest',
+        ['instance']
+      );
+      request.instance = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.setDiskAutoDelete = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.setDiskAutoDelete(request), expectedError);
-      assert(
-        (client.innerApiCalls.setDiskAutoDelete as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.setDiskAutoDelete as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.setDiskAutoDelete as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes setDiskAutoDelete with closed client', async () => {
@@ -3042,9 +3655,21 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetDiskAutoDeleteInstanceRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.instance = '';
+      const defaultValue1 = getTypeDefaultValue(
+        'SetDiskAutoDeleteInstanceRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        'SetDiskAutoDeleteInstanceRequest',
+        ['zone']
+      );
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        'SetDiskAutoDeleteInstanceRequest',
+        ['instance']
+      );
+      request.instance = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.setDiskAutoDelete(request), expectedError);
@@ -3061,28 +3686,33 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetIamPolicyInstanceRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.resource = '';
-      const expectedHeaderRequestParams = 'project=&zone=&resource=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('SetIamPolicyInstanceRequest', [
+        'project',
+      ]);
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('SetIamPolicyInstanceRequest', [
+        'zone',
+      ]);
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue('SetIamPolicyInstanceRequest', [
+        'resource',
+      ]);
+      request.resource = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&resource=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Policy()
       );
       client.innerApiCalls.setIamPolicy = stubSimpleCall(expectedResponse);
       const [response] = await client.setIamPolicy(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.setIamPolicy as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.setIamPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.setIamPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes setIamPolicy without error using callback', async () => {
@@ -3094,17 +3724,19 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetIamPolicyInstanceRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.resource = '';
-      const expectedHeaderRequestParams = 'project=&zone=&resource=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('SetIamPolicyInstanceRequest', [
+        'project',
+      ]);
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('SetIamPolicyInstanceRequest', [
+        'zone',
+      ]);
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue('SetIamPolicyInstanceRequest', [
+        'resource',
+      ]);
+      request.resource = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&resource=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Policy()
       );
@@ -3127,11 +3759,14 @@ describe('v1.InstancesClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.setIamPolicy as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.setIamPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.setIamPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes setIamPolicy with error', async () => {
@@ -3143,28 +3778,33 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetIamPolicyInstanceRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.resource = '';
-      const expectedHeaderRequestParams = 'project=&zone=&resource=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('SetIamPolicyInstanceRequest', [
+        'project',
+      ]);
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('SetIamPolicyInstanceRequest', [
+        'zone',
+      ]);
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue('SetIamPolicyInstanceRequest', [
+        'resource',
+      ]);
+      request.resource = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&resource=${defaultValue3}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.setIamPolicy = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.setIamPolicy(request), expectedError);
-      assert(
-        (client.innerApiCalls.setIamPolicy as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.setIamPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.setIamPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes setIamPolicy with closed client', async () => {
@@ -3176,9 +3816,18 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetIamPolicyInstanceRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.resource = '';
+      const defaultValue1 = getTypeDefaultValue('SetIamPolicyInstanceRequest', [
+        'project',
+      ]);
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('SetIamPolicyInstanceRequest', [
+        'zone',
+      ]);
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue('SetIamPolicyInstanceRequest', [
+        'resource',
+      ]);
+      request.resource = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.setIamPolicy(request), expectedError);
@@ -3195,28 +3844,33 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetLabelsInstanceRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.instance = '';
-      const expectedHeaderRequestParams = 'project=&zone=&instance=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('SetLabelsInstanceRequest', [
+        'project',
+      ]);
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('SetLabelsInstanceRequest', [
+        'zone',
+      ]);
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue('SetLabelsInstanceRequest', [
+        'instance',
+      ]);
+      request.instance = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
       client.innerApiCalls.setLabels = stubSimpleCall(expectedResponse);
       const [response] = await client.setLabels(request);
       assert.deepStrictEqual(response.latestResponse, expectedResponse);
-      assert(
-        (client.innerApiCalls.setLabels as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.setLabels as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.setLabels as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes setLabels without error using callback', async () => {
@@ -3228,17 +3882,19 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetLabelsInstanceRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.instance = '';
-      const expectedHeaderRequestParams = 'project=&zone=&instance=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('SetLabelsInstanceRequest', [
+        'project',
+      ]);
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('SetLabelsInstanceRequest', [
+        'zone',
+      ]);
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue('SetLabelsInstanceRequest', [
+        'instance',
+      ]);
+      request.instance = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -3261,11 +3917,14 @@ describe('v1.InstancesClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.setLabels as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.setLabels as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.setLabels as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes setLabels with error', async () => {
@@ -3277,25 +3936,30 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetLabelsInstanceRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.instance = '';
-      const expectedHeaderRequestParams = 'project=&zone=&instance=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('SetLabelsInstanceRequest', [
+        'project',
+      ]);
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('SetLabelsInstanceRequest', [
+        'zone',
+      ]);
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue('SetLabelsInstanceRequest', [
+        'instance',
+      ]);
+      request.instance = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.setLabels = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.setLabels(request), expectedError);
-      assert(
-        (client.innerApiCalls.setLabels as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.setLabels as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.setLabels as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes setLabels with closed client', async () => {
@@ -3307,9 +3971,18 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetLabelsInstanceRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.instance = '';
+      const defaultValue1 = getTypeDefaultValue('SetLabelsInstanceRequest', [
+        'project',
+      ]);
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('SetLabelsInstanceRequest', [
+        'zone',
+      ]);
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue('SetLabelsInstanceRequest', [
+        'instance',
+      ]);
+      request.instance = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.setLabels(request), expectedError);
@@ -3326,17 +3999,22 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetMachineResourcesInstanceRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.instance = '';
-      const expectedHeaderRequestParams = 'project=&zone=&instance=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'SetMachineResourcesInstanceRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        'SetMachineResourcesInstanceRequest',
+        ['zone']
+      );
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        'SetMachineResourcesInstanceRequest',
+        ['instance']
+      );
+      request.instance = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -3344,11 +4022,14 @@ describe('v1.InstancesClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.setMachineResources(request);
       assert.deepStrictEqual(response.latestResponse, expectedResponse);
-      assert(
-        (client.innerApiCalls.setMachineResources as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.setMachineResources as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.setMachineResources as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes setMachineResources without error using callback', async () => {
@@ -3360,17 +4041,22 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetMachineResourcesInstanceRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.instance = '';
-      const expectedHeaderRequestParams = 'project=&zone=&instance=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'SetMachineResourcesInstanceRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        'SetMachineResourcesInstanceRequest',
+        ['zone']
+      );
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        'SetMachineResourcesInstanceRequest',
+        ['instance']
+      );
+      request.instance = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -3393,11 +4079,14 @@ describe('v1.InstancesClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.setMachineResources as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.setMachineResources as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.setMachineResources as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes setMachineResources with error', async () => {
@@ -3409,28 +4098,36 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetMachineResourcesInstanceRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.instance = '';
-      const expectedHeaderRequestParams = 'project=&zone=&instance=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'SetMachineResourcesInstanceRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        'SetMachineResourcesInstanceRequest',
+        ['zone']
+      );
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        'SetMachineResourcesInstanceRequest',
+        ['instance']
+      );
+      request.instance = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.setMachineResources = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.setMachineResources(request), expectedError);
-      assert(
-        (client.innerApiCalls.setMachineResources as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.setMachineResources as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.setMachineResources as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes setMachineResources with closed client', async () => {
@@ -3442,9 +4139,21 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetMachineResourcesInstanceRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.instance = '';
+      const defaultValue1 = getTypeDefaultValue(
+        'SetMachineResourcesInstanceRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        'SetMachineResourcesInstanceRequest',
+        ['zone']
+      );
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        'SetMachineResourcesInstanceRequest',
+        ['instance']
+      );
+      request.instance = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.setMachineResources(request), expectedError);
@@ -3461,28 +4170,36 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetMachineTypeInstanceRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.instance = '';
-      const expectedHeaderRequestParams = 'project=&zone=&instance=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'SetMachineTypeInstanceRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        'SetMachineTypeInstanceRequest',
+        ['zone']
+      );
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        'SetMachineTypeInstanceRequest',
+        ['instance']
+      );
+      request.instance = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
       client.innerApiCalls.setMachineType = stubSimpleCall(expectedResponse);
       const [response] = await client.setMachineType(request);
       assert.deepStrictEqual(response.latestResponse, expectedResponse);
-      assert(
-        (client.innerApiCalls.setMachineType as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.setMachineType as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.setMachineType as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes setMachineType without error using callback', async () => {
@@ -3494,17 +4211,22 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetMachineTypeInstanceRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.instance = '';
-      const expectedHeaderRequestParams = 'project=&zone=&instance=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'SetMachineTypeInstanceRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        'SetMachineTypeInstanceRequest',
+        ['zone']
+      );
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        'SetMachineTypeInstanceRequest',
+        ['instance']
+      );
+      request.instance = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -3527,11 +4249,14 @@ describe('v1.InstancesClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.setMachineType as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.setMachineType as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.setMachineType as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes setMachineType with error', async () => {
@@ -3543,28 +4268,36 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetMachineTypeInstanceRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.instance = '';
-      const expectedHeaderRequestParams = 'project=&zone=&instance=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'SetMachineTypeInstanceRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        'SetMachineTypeInstanceRequest',
+        ['zone']
+      );
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        'SetMachineTypeInstanceRequest',
+        ['instance']
+      );
+      request.instance = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.setMachineType = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.setMachineType(request), expectedError);
-      assert(
-        (client.innerApiCalls.setMachineType as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.setMachineType as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.setMachineType as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes setMachineType with closed client', async () => {
@@ -3576,9 +4309,21 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetMachineTypeInstanceRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.instance = '';
+      const defaultValue1 = getTypeDefaultValue(
+        'SetMachineTypeInstanceRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        'SetMachineTypeInstanceRequest',
+        ['zone']
+      );
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        'SetMachineTypeInstanceRequest',
+        ['instance']
+      );
+      request.instance = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.setMachineType(request), expectedError);
@@ -3595,28 +4340,33 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetMetadataInstanceRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.instance = '';
-      const expectedHeaderRequestParams = 'project=&zone=&instance=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('SetMetadataInstanceRequest', [
+        'project',
+      ]);
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('SetMetadataInstanceRequest', [
+        'zone',
+      ]);
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue('SetMetadataInstanceRequest', [
+        'instance',
+      ]);
+      request.instance = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
       client.innerApiCalls.setMetadata = stubSimpleCall(expectedResponse);
       const [response] = await client.setMetadata(request);
       assert.deepStrictEqual(response.latestResponse, expectedResponse);
-      assert(
-        (client.innerApiCalls.setMetadata as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.setMetadata as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.setMetadata as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes setMetadata without error using callback', async () => {
@@ -3628,17 +4378,19 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetMetadataInstanceRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.instance = '';
-      const expectedHeaderRequestParams = 'project=&zone=&instance=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('SetMetadataInstanceRequest', [
+        'project',
+      ]);
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('SetMetadataInstanceRequest', [
+        'zone',
+      ]);
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue('SetMetadataInstanceRequest', [
+        'instance',
+      ]);
+      request.instance = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -3661,11 +4413,14 @@ describe('v1.InstancesClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.setMetadata as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.setMetadata as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.setMetadata as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes setMetadata with error', async () => {
@@ -3677,28 +4432,33 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetMetadataInstanceRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.instance = '';
-      const expectedHeaderRequestParams = 'project=&zone=&instance=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('SetMetadataInstanceRequest', [
+        'project',
+      ]);
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('SetMetadataInstanceRequest', [
+        'zone',
+      ]);
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue('SetMetadataInstanceRequest', [
+        'instance',
+      ]);
+      request.instance = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.setMetadata = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.setMetadata(request), expectedError);
-      assert(
-        (client.innerApiCalls.setMetadata as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.setMetadata as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.setMetadata as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes setMetadata with closed client', async () => {
@@ -3710,9 +4470,18 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetMetadataInstanceRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.instance = '';
+      const defaultValue1 = getTypeDefaultValue('SetMetadataInstanceRequest', [
+        'project',
+      ]);
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('SetMetadataInstanceRequest', [
+        'zone',
+      ]);
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue('SetMetadataInstanceRequest', [
+        'instance',
+      ]);
+      request.instance = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.setMetadata(request), expectedError);
@@ -3729,28 +4498,36 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetMinCpuPlatformInstanceRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.instance = '';
-      const expectedHeaderRequestParams = 'project=&zone=&instance=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'SetMinCpuPlatformInstanceRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        'SetMinCpuPlatformInstanceRequest',
+        ['zone']
+      );
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        'SetMinCpuPlatformInstanceRequest',
+        ['instance']
+      );
+      request.instance = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
       client.innerApiCalls.setMinCpuPlatform = stubSimpleCall(expectedResponse);
       const [response] = await client.setMinCpuPlatform(request);
       assert.deepStrictEqual(response.latestResponse, expectedResponse);
-      assert(
-        (client.innerApiCalls.setMinCpuPlatform as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.setMinCpuPlatform as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.setMinCpuPlatform as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes setMinCpuPlatform without error using callback', async () => {
@@ -3762,17 +4539,22 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetMinCpuPlatformInstanceRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.instance = '';
-      const expectedHeaderRequestParams = 'project=&zone=&instance=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'SetMinCpuPlatformInstanceRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        'SetMinCpuPlatformInstanceRequest',
+        ['zone']
+      );
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        'SetMinCpuPlatformInstanceRequest',
+        ['instance']
+      );
+      request.instance = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -3795,11 +4577,14 @@ describe('v1.InstancesClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.setMinCpuPlatform as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.setMinCpuPlatform as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.setMinCpuPlatform as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes setMinCpuPlatform with error', async () => {
@@ -3811,28 +4596,36 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetMinCpuPlatformInstanceRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.instance = '';
-      const expectedHeaderRequestParams = 'project=&zone=&instance=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'SetMinCpuPlatformInstanceRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        'SetMinCpuPlatformInstanceRequest',
+        ['zone']
+      );
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        'SetMinCpuPlatformInstanceRequest',
+        ['instance']
+      );
+      request.instance = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.setMinCpuPlatform = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.setMinCpuPlatform(request), expectedError);
-      assert(
-        (client.innerApiCalls.setMinCpuPlatform as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.setMinCpuPlatform as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.setMinCpuPlatform as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes setMinCpuPlatform with closed client', async () => {
@@ -3844,9 +4637,21 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetMinCpuPlatformInstanceRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.instance = '';
+      const defaultValue1 = getTypeDefaultValue(
+        'SetMinCpuPlatformInstanceRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        'SetMinCpuPlatformInstanceRequest',
+        ['zone']
+      );
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        'SetMinCpuPlatformInstanceRequest',
+        ['instance']
+      );
+      request.instance = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.setMinCpuPlatform(request), expectedError);
@@ -3863,28 +4668,36 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetSchedulingInstanceRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.instance = '';
-      const expectedHeaderRequestParams = 'project=&zone=&instance=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'SetSchedulingInstanceRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        'SetSchedulingInstanceRequest',
+        ['zone']
+      );
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        'SetSchedulingInstanceRequest',
+        ['instance']
+      );
+      request.instance = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
       client.innerApiCalls.setScheduling = stubSimpleCall(expectedResponse);
       const [response] = await client.setScheduling(request);
       assert.deepStrictEqual(response.latestResponse, expectedResponse);
-      assert(
-        (client.innerApiCalls.setScheduling as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.setScheduling as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.setScheduling as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes setScheduling without error using callback', async () => {
@@ -3896,17 +4709,22 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetSchedulingInstanceRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.instance = '';
-      const expectedHeaderRequestParams = 'project=&zone=&instance=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'SetSchedulingInstanceRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        'SetSchedulingInstanceRequest',
+        ['zone']
+      );
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        'SetSchedulingInstanceRequest',
+        ['instance']
+      );
+      request.instance = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -3929,11 +4747,14 @@ describe('v1.InstancesClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.setScheduling as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.setScheduling as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.setScheduling as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes setScheduling with error', async () => {
@@ -3945,28 +4766,36 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetSchedulingInstanceRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.instance = '';
-      const expectedHeaderRequestParams = 'project=&zone=&instance=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'SetSchedulingInstanceRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        'SetSchedulingInstanceRequest',
+        ['zone']
+      );
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        'SetSchedulingInstanceRequest',
+        ['instance']
+      );
+      request.instance = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.setScheduling = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.setScheduling(request), expectedError);
-      assert(
-        (client.innerApiCalls.setScheduling as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.setScheduling as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.setScheduling as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes setScheduling with closed client', async () => {
@@ -3978,9 +4807,21 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetSchedulingInstanceRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.instance = '';
+      const defaultValue1 = getTypeDefaultValue(
+        'SetSchedulingInstanceRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        'SetSchedulingInstanceRequest',
+        ['zone']
+      );
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        'SetSchedulingInstanceRequest',
+        ['instance']
+      );
+      request.instance = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.setScheduling(request), expectedError);
@@ -3997,28 +4838,36 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetServiceAccountInstanceRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.instance = '';
-      const expectedHeaderRequestParams = 'project=&zone=&instance=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'SetServiceAccountInstanceRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        'SetServiceAccountInstanceRequest',
+        ['zone']
+      );
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        'SetServiceAccountInstanceRequest',
+        ['instance']
+      );
+      request.instance = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
       client.innerApiCalls.setServiceAccount = stubSimpleCall(expectedResponse);
       const [response] = await client.setServiceAccount(request);
       assert.deepStrictEqual(response.latestResponse, expectedResponse);
-      assert(
-        (client.innerApiCalls.setServiceAccount as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.setServiceAccount as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.setServiceAccount as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes setServiceAccount without error using callback', async () => {
@@ -4030,17 +4879,22 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetServiceAccountInstanceRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.instance = '';
-      const expectedHeaderRequestParams = 'project=&zone=&instance=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'SetServiceAccountInstanceRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        'SetServiceAccountInstanceRequest',
+        ['zone']
+      );
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        'SetServiceAccountInstanceRequest',
+        ['instance']
+      );
+      request.instance = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -4063,11 +4917,14 @@ describe('v1.InstancesClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.setServiceAccount as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.setServiceAccount as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.setServiceAccount as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes setServiceAccount with error', async () => {
@@ -4079,28 +4936,36 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetServiceAccountInstanceRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.instance = '';
-      const expectedHeaderRequestParams = 'project=&zone=&instance=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'SetServiceAccountInstanceRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        'SetServiceAccountInstanceRequest',
+        ['zone']
+      );
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        'SetServiceAccountInstanceRequest',
+        ['instance']
+      );
+      request.instance = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.setServiceAccount = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.setServiceAccount(request), expectedError);
-      assert(
-        (client.innerApiCalls.setServiceAccount as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.setServiceAccount as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.setServiceAccount as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes setServiceAccount with closed client', async () => {
@@ -4112,9 +4977,21 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetServiceAccountInstanceRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.instance = '';
+      const defaultValue1 = getTypeDefaultValue(
+        'SetServiceAccountInstanceRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        'SetServiceAccountInstanceRequest',
+        ['zone']
+      );
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        'SetServiceAccountInstanceRequest',
+        ['instance']
+      );
+      request.instance = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.setServiceAccount(request), expectedError);
@@ -4131,17 +5008,22 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetShieldedInstanceIntegrityPolicyInstanceRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.instance = '';
-      const expectedHeaderRequestParams = 'project=&zone=&instance=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'SetShieldedInstanceIntegrityPolicyInstanceRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        'SetShieldedInstanceIntegrityPolicyInstanceRequest',
+        ['zone']
+      );
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        'SetShieldedInstanceIntegrityPolicyInstanceRequest',
+        ['instance']
+      );
+      request.instance = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -4151,11 +5033,14 @@ describe('v1.InstancesClient', () => {
         request
       );
       assert.deepStrictEqual(response.latestResponse, expectedResponse);
-      assert(
-        (client.innerApiCalls.setShieldedInstanceIntegrityPolicy as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.setShieldedInstanceIntegrityPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.setShieldedInstanceIntegrityPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes setShieldedInstanceIntegrityPolicy without error using callback', async () => {
@@ -4167,17 +5052,22 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetShieldedInstanceIntegrityPolicyInstanceRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.instance = '';
-      const expectedHeaderRequestParams = 'project=&zone=&instance=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'SetShieldedInstanceIntegrityPolicyInstanceRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        'SetShieldedInstanceIntegrityPolicyInstanceRequest',
+        ['zone']
+      );
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        'SetShieldedInstanceIntegrityPolicyInstanceRequest',
+        ['instance']
+      );
+      request.instance = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -4200,11 +5090,14 @@ describe('v1.InstancesClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.setShieldedInstanceIntegrityPolicy as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.setShieldedInstanceIntegrityPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.setShieldedInstanceIntegrityPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes setShieldedInstanceIntegrityPolicy with error', async () => {
@@ -4216,17 +5109,22 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetShieldedInstanceIntegrityPolicyInstanceRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.instance = '';
-      const expectedHeaderRequestParams = 'project=&zone=&instance=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'SetShieldedInstanceIntegrityPolicyInstanceRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        'SetShieldedInstanceIntegrityPolicyInstanceRequest',
+        ['zone']
+      );
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        'SetShieldedInstanceIntegrityPolicyInstanceRequest',
+        ['instance']
+      );
+      request.instance = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.setShieldedInstanceIntegrityPolicy = stubSimpleCall(
         undefined,
@@ -4236,11 +5134,14 @@ describe('v1.InstancesClient', () => {
         client.setShieldedInstanceIntegrityPolicy(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.setShieldedInstanceIntegrityPolicy as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.setShieldedInstanceIntegrityPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.setShieldedInstanceIntegrityPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes setShieldedInstanceIntegrityPolicy with closed client', async () => {
@@ -4252,9 +5153,21 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetShieldedInstanceIntegrityPolicyInstanceRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.instance = '';
+      const defaultValue1 = getTypeDefaultValue(
+        'SetShieldedInstanceIntegrityPolicyInstanceRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        'SetShieldedInstanceIntegrityPolicyInstanceRequest',
+        ['zone']
+      );
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        'SetShieldedInstanceIntegrityPolicyInstanceRequest',
+        ['instance']
+      );
+      request.instance = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -4274,28 +5187,33 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetTagsInstanceRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.instance = '';
-      const expectedHeaderRequestParams = 'project=&zone=&instance=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('SetTagsInstanceRequest', [
+        'project',
+      ]);
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('SetTagsInstanceRequest', [
+        'zone',
+      ]);
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue('SetTagsInstanceRequest', [
+        'instance',
+      ]);
+      request.instance = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
       client.innerApiCalls.setTags = stubSimpleCall(expectedResponse);
       const [response] = await client.setTags(request);
       assert.deepStrictEqual(response.latestResponse, expectedResponse);
-      assert(
-        (client.innerApiCalls.setTags as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (client.innerApiCalls.setTags as SinonStub).getCall(
+        0
+      ).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.setTags as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes setTags without error using callback', async () => {
@@ -4307,17 +5225,19 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetTagsInstanceRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.instance = '';
-      const expectedHeaderRequestParams = 'project=&zone=&instance=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('SetTagsInstanceRequest', [
+        'project',
+      ]);
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('SetTagsInstanceRequest', [
+        'zone',
+      ]);
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue('SetTagsInstanceRequest', [
+        'instance',
+      ]);
+      request.instance = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -4340,11 +5260,14 @@ describe('v1.InstancesClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.setTags as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (client.innerApiCalls.setTags as SinonStub).getCall(
+        0
+      ).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.setTags as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes setTags with error', async () => {
@@ -4356,25 +5279,30 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetTagsInstanceRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.instance = '';
-      const expectedHeaderRequestParams = 'project=&zone=&instance=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('SetTagsInstanceRequest', [
+        'project',
+      ]);
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('SetTagsInstanceRequest', [
+        'zone',
+      ]);
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue('SetTagsInstanceRequest', [
+        'instance',
+      ]);
+      request.instance = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.setTags = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.setTags(request), expectedError);
-      assert(
-        (client.innerApiCalls.setTags as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (client.innerApiCalls.setTags as SinonStub).getCall(
+        0
+      ).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.setTags as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes setTags with closed client', async () => {
@@ -4386,9 +5314,18 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetTagsInstanceRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.instance = '';
+      const defaultValue1 = getTypeDefaultValue('SetTagsInstanceRequest', [
+        'project',
+      ]);
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('SetTagsInstanceRequest', [
+        'zone',
+      ]);
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue('SetTagsInstanceRequest', [
+        'instance',
+      ]);
+      request.instance = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.setTags(request), expectedError);
@@ -4405,17 +5342,22 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SimulateMaintenanceEventInstanceRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.instance = '';
-      const expectedHeaderRequestParams = 'project=&zone=&instance=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'SimulateMaintenanceEventInstanceRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        'SimulateMaintenanceEventInstanceRequest',
+        ['zone']
+      );
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        'SimulateMaintenanceEventInstanceRequest',
+        ['instance']
+      );
+      request.instance = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -4423,11 +5365,14 @@ describe('v1.InstancesClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.simulateMaintenanceEvent(request);
       assert.deepStrictEqual(response.latestResponse, expectedResponse);
-      assert(
-        (client.innerApiCalls.simulateMaintenanceEvent as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.simulateMaintenanceEvent as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.simulateMaintenanceEvent as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes simulateMaintenanceEvent without error using callback', async () => {
@@ -4439,17 +5384,22 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SimulateMaintenanceEventInstanceRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.instance = '';
-      const expectedHeaderRequestParams = 'project=&zone=&instance=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'SimulateMaintenanceEventInstanceRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        'SimulateMaintenanceEventInstanceRequest',
+        ['zone']
+      );
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        'SimulateMaintenanceEventInstanceRequest',
+        ['instance']
+      );
+      request.instance = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -4472,11 +5422,14 @@ describe('v1.InstancesClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.simulateMaintenanceEvent as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.simulateMaintenanceEvent as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.simulateMaintenanceEvent as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes simulateMaintenanceEvent with error', async () => {
@@ -4488,17 +5441,22 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SimulateMaintenanceEventInstanceRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.instance = '';
-      const expectedHeaderRequestParams = 'project=&zone=&instance=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'SimulateMaintenanceEventInstanceRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        'SimulateMaintenanceEventInstanceRequest',
+        ['zone']
+      );
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        'SimulateMaintenanceEventInstanceRequest',
+        ['instance']
+      );
+      request.instance = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.simulateMaintenanceEvent = stubSimpleCall(
         undefined,
@@ -4508,11 +5466,14 @@ describe('v1.InstancesClient', () => {
         client.simulateMaintenanceEvent(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.simulateMaintenanceEvent as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.simulateMaintenanceEvent as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.simulateMaintenanceEvent as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes simulateMaintenanceEvent with closed client', async () => {
@@ -4524,9 +5485,21 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SimulateMaintenanceEventInstanceRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.instance = '';
+      const defaultValue1 = getTypeDefaultValue(
+        'SimulateMaintenanceEventInstanceRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        'SimulateMaintenanceEventInstanceRequest',
+        ['zone']
+      );
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        'SimulateMaintenanceEventInstanceRequest',
+        ['instance']
+      );
+      request.instance = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -4546,28 +5519,32 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.StartInstanceRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.instance = '';
-      const expectedHeaderRequestParams = 'project=&zone=&instance=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('StartInstanceRequest', [
+        'project',
+      ]);
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('StartInstanceRequest', [
+        'zone',
+      ]);
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue('StartInstanceRequest', [
+        'instance',
+      ]);
+      request.instance = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
       client.innerApiCalls.start = stubSimpleCall(expectedResponse);
       const [response] = await client.start(request);
       assert.deepStrictEqual(response.latestResponse, expectedResponse);
-      assert(
-        (client.innerApiCalls.start as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (client.innerApiCalls.start as SinonStub).getCall(0)
+        .args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.start as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes start without error using callback', async () => {
@@ -4579,17 +5556,19 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.StartInstanceRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.instance = '';
-      const expectedHeaderRequestParams = 'project=&zone=&instance=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('StartInstanceRequest', [
+        'project',
+      ]);
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('StartInstanceRequest', [
+        'zone',
+      ]);
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue('StartInstanceRequest', [
+        'instance',
+      ]);
+      request.instance = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -4611,11 +5590,13 @@ describe('v1.InstancesClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.start as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (client.innerApiCalls.start as SinonStub).getCall(0)
+        .args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.start as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes start with error', async () => {
@@ -4627,25 +5608,29 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.StartInstanceRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.instance = '';
-      const expectedHeaderRequestParams = 'project=&zone=&instance=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('StartInstanceRequest', [
+        'project',
+      ]);
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('StartInstanceRequest', [
+        'zone',
+      ]);
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue('StartInstanceRequest', [
+        'instance',
+      ]);
+      request.instance = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.start = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.start(request), expectedError);
-      assert(
-        (client.innerApiCalls.start as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (client.innerApiCalls.start as SinonStub).getCall(0)
+        .args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.start as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes start with closed client', async () => {
@@ -4657,9 +5642,18 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.StartInstanceRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.instance = '';
+      const defaultValue1 = getTypeDefaultValue('StartInstanceRequest', [
+        'project',
+      ]);
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('StartInstanceRequest', [
+        'zone',
+      ]);
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue('StartInstanceRequest', [
+        'instance',
+      ]);
+      request.instance = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.start(request), expectedError);
@@ -4676,17 +5670,22 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.StartWithEncryptionKeyInstanceRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.instance = '';
-      const expectedHeaderRequestParams = 'project=&zone=&instance=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'StartWithEncryptionKeyInstanceRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        'StartWithEncryptionKeyInstanceRequest',
+        ['zone']
+      );
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        'StartWithEncryptionKeyInstanceRequest',
+        ['instance']
+      );
+      request.instance = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -4694,11 +5693,14 @@ describe('v1.InstancesClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.startWithEncryptionKey(request);
       assert.deepStrictEqual(response.latestResponse, expectedResponse);
-      assert(
-        (client.innerApiCalls.startWithEncryptionKey as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.startWithEncryptionKey as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.startWithEncryptionKey as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes startWithEncryptionKey without error using callback', async () => {
@@ -4710,17 +5712,22 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.StartWithEncryptionKeyInstanceRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.instance = '';
-      const expectedHeaderRequestParams = 'project=&zone=&instance=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'StartWithEncryptionKeyInstanceRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        'StartWithEncryptionKeyInstanceRequest',
+        ['zone']
+      );
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        'StartWithEncryptionKeyInstanceRequest',
+        ['instance']
+      );
+      request.instance = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -4743,11 +5750,14 @@ describe('v1.InstancesClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.startWithEncryptionKey as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.startWithEncryptionKey as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.startWithEncryptionKey as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes startWithEncryptionKey with error', async () => {
@@ -4759,17 +5769,22 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.StartWithEncryptionKeyInstanceRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.instance = '';
-      const expectedHeaderRequestParams = 'project=&zone=&instance=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'StartWithEncryptionKeyInstanceRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        'StartWithEncryptionKeyInstanceRequest',
+        ['zone']
+      );
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        'StartWithEncryptionKeyInstanceRequest',
+        ['instance']
+      );
+      request.instance = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.startWithEncryptionKey = stubSimpleCall(
         undefined,
@@ -4779,11 +5794,14 @@ describe('v1.InstancesClient', () => {
         client.startWithEncryptionKey(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.startWithEncryptionKey as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.startWithEncryptionKey as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.startWithEncryptionKey as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes startWithEncryptionKey with closed client', async () => {
@@ -4795,9 +5813,21 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.StartWithEncryptionKeyInstanceRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.instance = '';
+      const defaultValue1 = getTypeDefaultValue(
+        'StartWithEncryptionKeyInstanceRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        'StartWithEncryptionKeyInstanceRequest',
+        ['zone']
+      );
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        'StartWithEncryptionKeyInstanceRequest',
+        ['instance']
+      );
+      request.instance = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -4817,28 +5847,32 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.StopInstanceRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.instance = '';
-      const expectedHeaderRequestParams = 'project=&zone=&instance=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('StopInstanceRequest', [
+        'project',
+      ]);
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('StopInstanceRequest', [
+        'zone',
+      ]);
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue('StopInstanceRequest', [
+        'instance',
+      ]);
+      request.instance = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
       client.innerApiCalls.stop = stubSimpleCall(expectedResponse);
       const [response] = await client.stop(request);
       assert.deepStrictEqual(response.latestResponse, expectedResponse);
-      assert(
-        (client.innerApiCalls.stop as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (client.innerApiCalls.stop as SinonStub).getCall(0)
+        .args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.stop as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes stop without error using callback', async () => {
@@ -4850,17 +5884,19 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.StopInstanceRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.instance = '';
-      const expectedHeaderRequestParams = 'project=&zone=&instance=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('StopInstanceRequest', [
+        'project',
+      ]);
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('StopInstanceRequest', [
+        'zone',
+      ]);
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue('StopInstanceRequest', [
+        'instance',
+      ]);
+      request.instance = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -4882,11 +5918,13 @@ describe('v1.InstancesClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.stop as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (client.innerApiCalls.stop as SinonStub).getCall(0)
+        .args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.stop as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes stop with error', async () => {
@@ -4898,25 +5936,29 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.StopInstanceRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.instance = '';
-      const expectedHeaderRequestParams = 'project=&zone=&instance=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('StopInstanceRequest', [
+        'project',
+      ]);
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('StopInstanceRequest', [
+        'zone',
+      ]);
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue('StopInstanceRequest', [
+        'instance',
+      ]);
+      request.instance = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.stop = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.stop(request), expectedError);
-      assert(
-        (client.innerApiCalls.stop as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (client.innerApiCalls.stop as SinonStub).getCall(0)
+        .args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.stop as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes stop with closed client', async () => {
@@ -4928,9 +5970,18 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.StopInstanceRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.instance = '';
+      const defaultValue1 = getTypeDefaultValue('StopInstanceRequest', [
+        'project',
+      ]);
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('StopInstanceRequest', [
+        'zone',
+      ]);
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue('StopInstanceRequest', [
+        'instance',
+      ]);
+      request.instance = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.stop(request), expectedError);
@@ -4947,28 +5998,33 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SuspendInstanceRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.instance = '';
-      const expectedHeaderRequestParams = 'project=&zone=&instance=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('SuspendInstanceRequest', [
+        'project',
+      ]);
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('SuspendInstanceRequest', [
+        'zone',
+      ]);
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue('SuspendInstanceRequest', [
+        'instance',
+      ]);
+      request.instance = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
       client.innerApiCalls.suspend = stubSimpleCall(expectedResponse);
       const [response] = await client.suspend(request);
       assert.deepStrictEqual(response.latestResponse, expectedResponse);
-      assert(
-        (client.innerApiCalls.suspend as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (client.innerApiCalls.suspend as SinonStub).getCall(
+        0
+      ).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.suspend as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes suspend without error using callback', async () => {
@@ -4980,17 +6036,19 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SuspendInstanceRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.instance = '';
-      const expectedHeaderRequestParams = 'project=&zone=&instance=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('SuspendInstanceRequest', [
+        'project',
+      ]);
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('SuspendInstanceRequest', [
+        'zone',
+      ]);
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue('SuspendInstanceRequest', [
+        'instance',
+      ]);
+      request.instance = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -5013,11 +6071,14 @@ describe('v1.InstancesClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.suspend as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (client.innerApiCalls.suspend as SinonStub).getCall(
+        0
+      ).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.suspend as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes suspend with error', async () => {
@@ -5029,25 +6090,30 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SuspendInstanceRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.instance = '';
-      const expectedHeaderRequestParams = 'project=&zone=&instance=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('SuspendInstanceRequest', [
+        'project',
+      ]);
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('SuspendInstanceRequest', [
+        'zone',
+      ]);
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue('SuspendInstanceRequest', [
+        'instance',
+      ]);
+      request.instance = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.suspend = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.suspend(request), expectedError);
-      assert(
-        (client.innerApiCalls.suspend as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (client.innerApiCalls.suspend as SinonStub).getCall(
+        0
+      ).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.suspend as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes suspend with closed client', async () => {
@@ -5059,9 +6125,18 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SuspendInstanceRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.instance = '';
+      const defaultValue1 = getTypeDefaultValue('SuspendInstanceRequest', [
+        'project',
+      ]);
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('SuspendInstanceRequest', [
+        'zone',
+      ]);
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue('SuspendInstanceRequest', [
+        'instance',
+      ]);
+      request.instance = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.suspend(request), expectedError);
@@ -5078,17 +6153,22 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.TestIamPermissionsInstanceRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.resource = '';
-      const expectedHeaderRequestParams = 'project=&zone=&resource=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'TestIamPermissionsInstanceRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        'TestIamPermissionsInstanceRequest',
+        ['zone']
+      );
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        'TestIamPermissionsInstanceRequest',
+        ['resource']
+      );
+      request.resource = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&resource=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.TestPermissionsResponse()
       );
@@ -5096,11 +6176,14 @@ describe('v1.InstancesClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.testIamPermissions(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.testIamPermissions as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.testIamPermissions as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.testIamPermissions as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes testIamPermissions without error using callback', async () => {
@@ -5112,17 +6195,22 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.TestIamPermissionsInstanceRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.resource = '';
-      const expectedHeaderRequestParams = 'project=&zone=&resource=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'TestIamPermissionsInstanceRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        'TestIamPermissionsInstanceRequest',
+        ['zone']
+      );
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        'TestIamPermissionsInstanceRequest',
+        ['resource']
+      );
+      request.resource = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&resource=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.TestPermissionsResponse()
       );
@@ -5145,11 +6233,14 @@ describe('v1.InstancesClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.testIamPermissions as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.testIamPermissions as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.testIamPermissions as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes testIamPermissions with error', async () => {
@@ -5161,28 +6252,36 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.TestIamPermissionsInstanceRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.resource = '';
-      const expectedHeaderRequestParams = 'project=&zone=&resource=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'TestIamPermissionsInstanceRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        'TestIamPermissionsInstanceRequest',
+        ['zone']
+      );
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        'TestIamPermissionsInstanceRequest',
+        ['resource']
+      );
+      request.resource = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&resource=${defaultValue3}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.testIamPermissions = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.testIamPermissions(request), expectedError);
-      assert(
-        (client.innerApiCalls.testIamPermissions as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.testIamPermissions as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.testIamPermissions as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes testIamPermissions with closed client', async () => {
@@ -5194,9 +6293,21 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.TestIamPermissionsInstanceRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.resource = '';
+      const defaultValue1 = getTypeDefaultValue(
+        'TestIamPermissionsInstanceRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        'TestIamPermissionsInstanceRequest',
+        ['zone']
+      );
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        'TestIamPermissionsInstanceRequest',
+        ['resource']
+      );
+      request.resource = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.testIamPermissions(request), expectedError);
@@ -5213,28 +6324,33 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.UpdateInstanceRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.instance = '';
-      const expectedHeaderRequestParams = 'project=&zone=&instance=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('UpdateInstanceRequest', [
+        'project',
+      ]);
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('UpdateInstanceRequest', [
+        'zone',
+      ]);
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue('UpdateInstanceRequest', [
+        'instance',
+      ]);
+      request.instance = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
       client.innerApiCalls.update = stubSimpleCall(expectedResponse);
       const [response] = await client.update(request);
       assert.deepStrictEqual(response.latestResponse, expectedResponse);
-      assert(
-        (client.innerApiCalls.update as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (client.innerApiCalls.update as SinonStub).getCall(
+        0
+      ).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.update as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes update without error using callback', async () => {
@@ -5246,17 +6362,19 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.UpdateInstanceRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.instance = '';
-      const expectedHeaderRequestParams = 'project=&zone=&instance=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('UpdateInstanceRequest', [
+        'project',
+      ]);
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('UpdateInstanceRequest', [
+        'zone',
+      ]);
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue('UpdateInstanceRequest', [
+        'instance',
+      ]);
+      request.instance = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -5279,11 +6397,14 @@ describe('v1.InstancesClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.update as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (client.innerApiCalls.update as SinonStub).getCall(
+        0
+      ).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.update as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes update with error', async () => {
@@ -5295,25 +6416,30 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.UpdateInstanceRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.instance = '';
-      const expectedHeaderRequestParams = 'project=&zone=&instance=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('UpdateInstanceRequest', [
+        'project',
+      ]);
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('UpdateInstanceRequest', [
+        'zone',
+      ]);
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue('UpdateInstanceRequest', [
+        'instance',
+      ]);
+      request.instance = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.update = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.update(request), expectedError);
-      assert(
-        (client.innerApiCalls.update as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (client.innerApiCalls.update as SinonStub).getCall(
+        0
+      ).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.update as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes update with closed client', async () => {
@@ -5325,9 +6451,18 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.UpdateInstanceRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.instance = '';
+      const defaultValue1 = getTypeDefaultValue('UpdateInstanceRequest', [
+        'project',
+      ]);
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('UpdateInstanceRequest', [
+        'zone',
+      ]);
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue('UpdateInstanceRequest', [
+        'instance',
+      ]);
+      request.instance = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.update(request), expectedError);
@@ -5344,17 +6479,22 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.UpdateAccessConfigInstanceRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.instance = '';
-      const expectedHeaderRequestParams = 'project=&zone=&instance=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'UpdateAccessConfigInstanceRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        'UpdateAccessConfigInstanceRequest',
+        ['zone']
+      );
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        'UpdateAccessConfigInstanceRequest',
+        ['instance']
+      );
+      request.instance = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -5362,11 +6502,14 @@ describe('v1.InstancesClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.updateAccessConfig(request);
       assert.deepStrictEqual(response.latestResponse, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateAccessConfig as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateAccessConfig as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateAccessConfig as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateAccessConfig without error using callback', async () => {
@@ -5378,17 +6521,22 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.UpdateAccessConfigInstanceRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.instance = '';
-      const expectedHeaderRequestParams = 'project=&zone=&instance=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'UpdateAccessConfigInstanceRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        'UpdateAccessConfigInstanceRequest',
+        ['zone']
+      );
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        'UpdateAccessConfigInstanceRequest',
+        ['instance']
+      );
+      request.instance = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -5411,11 +6559,14 @@ describe('v1.InstancesClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateAccessConfig as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateAccessConfig as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateAccessConfig as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateAccessConfig with error', async () => {
@@ -5427,28 +6578,36 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.UpdateAccessConfigInstanceRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.instance = '';
-      const expectedHeaderRequestParams = 'project=&zone=&instance=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'UpdateAccessConfigInstanceRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        'UpdateAccessConfigInstanceRequest',
+        ['zone']
+      );
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        'UpdateAccessConfigInstanceRequest',
+        ['instance']
+      );
+      request.instance = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateAccessConfig = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.updateAccessConfig(request), expectedError);
-      assert(
-        (client.innerApiCalls.updateAccessConfig as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateAccessConfig as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateAccessConfig as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateAccessConfig with closed client', async () => {
@@ -5460,9 +6619,21 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.UpdateAccessConfigInstanceRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.instance = '';
+      const defaultValue1 = getTypeDefaultValue(
+        'UpdateAccessConfigInstanceRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        'UpdateAccessConfigInstanceRequest',
+        ['zone']
+      );
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        'UpdateAccessConfigInstanceRequest',
+        ['instance']
+      );
+      request.instance = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.updateAccessConfig(request), expectedError);
@@ -5479,17 +6650,22 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.UpdateDisplayDeviceInstanceRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.instance = '';
-      const expectedHeaderRequestParams = 'project=&zone=&instance=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'UpdateDisplayDeviceInstanceRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        'UpdateDisplayDeviceInstanceRequest',
+        ['zone']
+      );
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        'UpdateDisplayDeviceInstanceRequest',
+        ['instance']
+      );
+      request.instance = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -5497,11 +6673,14 @@ describe('v1.InstancesClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.updateDisplayDevice(request);
       assert.deepStrictEqual(response.latestResponse, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateDisplayDevice as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateDisplayDevice as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateDisplayDevice as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateDisplayDevice without error using callback', async () => {
@@ -5513,17 +6692,22 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.UpdateDisplayDeviceInstanceRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.instance = '';
-      const expectedHeaderRequestParams = 'project=&zone=&instance=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'UpdateDisplayDeviceInstanceRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        'UpdateDisplayDeviceInstanceRequest',
+        ['zone']
+      );
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        'UpdateDisplayDeviceInstanceRequest',
+        ['instance']
+      );
+      request.instance = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -5546,11 +6730,14 @@ describe('v1.InstancesClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateDisplayDevice as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateDisplayDevice as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateDisplayDevice as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateDisplayDevice with error', async () => {
@@ -5562,28 +6749,36 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.UpdateDisplayDeviceInstanceRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.instance = '';
-      const expectedHeaderRequestParams = 'project=&zone=&instance=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'UpdateDisplayDeviceInstanceRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        'UpdateDisplayDeviceInstanceRequest',
+        ['zone']
+      );
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        'UpdateDisplayDeviceInstanceRequest',
+        ['instance']
+      );
+      request.instance = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateDisplayDevice = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.updateDisplayDevice(request), expectedError);
-      assert(
-        (client.innerApiCalls.updateDisplayDevice as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateDisplayDevice as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateDisplayDevice as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateDisplayDevice with closed client', async () => {
@@ -5595,9 +6790,21 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.UpdateDisplayDeviceInstanceRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.instance = '';
+      const defaultValue1 = getTypeDefaultValue(
+        'UpdateDisplayDeviceInstanceRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        'UpdateDisplayDeviceInstanceRequest',
+        ['zone']
+      );
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        'UpdateDisplayDeviceInstanceRequest',
+        ['instance']
+      );
+      request.instance = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.updateDisplayDevice(request), expectedError);
@@ -5614,17 +6821,22 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.UpdateNetworkInterfaceInstanceRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.instance = '';
-      const expectedHeaderRequestParams = 'project=&zone=&instance=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'UpdateNetworkInterfaceInstanceRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        'UpdateNetworkInterfaceInstanceRequest',
+        ['zone']
+      );
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        'UpdateNetworkInterfaceInstanceRequest',
+        ['instance']
+      );
+      request.instance = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -5632,11 +6844,14 @@ describe('v1.InstancesClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.updateNetworkInterface(request);
       assert.deepStrictEqual(response.latestResponse, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateNetworkInterface as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateNetworkInterface as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateNetworkInterface as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateNetworkInterface without error using callback', async () => {
@@ -5648,17 +6863,22 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.UpdateNetworkInterfaceInstanceRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.instance = '';
-      const expectedHeaderRequestParams = 'project=&zone=&instance=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'UpdateNetworkInterfaceInstanceRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        'UpdateNetworkInterfaceInstanceRequest',
+        ['zone']
+      );
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        'UpdateNetworkInterfaceInstanceRequest',
+        ['instance']
+      );
+      request.instance = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -5681,11 +6901,14 @@ describe('v1.InstancesClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateNetworkInterface as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateNetworkInterface as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateNetworkInterface as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateNetworkInterface with error', async () => {
@@ -5697,17 +6920,22 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.UpdateNetworkInterfaceInstanceRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.instance = '';
-      const expectedHeaderRequestParams = 'project=&zone=&instance=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'UpdateNetworkInterfaceInstanceRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        'UpdateNetworkInterfaceInstanceRequest',
+        ['zone']
+      );
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        'UpdateNetworkInterfaceInstanceRequest',
+        ['instance']
+      );
+      request.instance = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateNetworkInterface = stubSimpleCall(
         undefined,
@@ -5717,11 +6945,14 @@ describe('v1.InstancesClient', () => {
         client.updateNetworkInterface(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.updateNetworkInterface as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateNetworkInterface as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateNetworkInterface as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateNetworkInterface with closed client', async () => {
@@ -5733,9 +6964,21 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.UpdateNetworkInterfaceInstanceRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.instance = '';
+      const defaultValue1 = getTypeDefaultValue(
+        'UpdateNetworkInterfaceInstanceRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        'UpdateNetworkInterfaceInstanceRequest',
+        ['zone']
+      );
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        'UpdateNetworkInterfaceInstanceRequest',
+        ['instance']
+      );
+      request.instance = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -5755,17 +6998,22 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.UpdateShieldedInstanceConfigInstanceRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.instance = '';
-      const expectedHeaderRequestParams = 'project=&zone=&instance=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'UpdateShieldedInstanceConfigInstanceRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        'UpdateShieldedInstanceConfigInstanceRequest',
+        ['zone']
+      );
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        'UpdateShieldedInstanceConfigInstanceRequest',
+        ['instance']
+      );
+      request.instance = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -5773,11 +7021,14 @@ describe('v1.InstancesClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.updateShieldedInstanceConfig(request);
       assert.deepStrictEqual(response.latestResponse, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateShieldedInstanceConfig as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateShieldedInstanceConfig as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateShieldedInstanceConfig as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateShieldedInstanceConfig without error using callback', async () => {
@@ -5789,17 +7040,22 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.UpdateShieldedInstanceConfigInstanceRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.instance = '';
-      const expectedHeaderRequestParams = 'project=&zone=&instance=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'UpdateShieldedInstanceConfigInstanceRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        'UpdateShieldedInstanceConfigInstanceRequest',
+        ['zone']
+      );
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        'UpdateShieldedInstanceConfigInstanceRequest',
+        ['instance']
+      );
+      request.instance = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -5822,11 +7078,14 @@ describe('v1.InstancesClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updateShieldedInstanceConfig as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateShieldedInstanceConfig as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateShieldedInstanceConfig as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateShieldedInstanceConfig with error', async () => {
@@ -5838,17 +7097,22 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.UpdateShieldedInstanceConfigInstanceRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.instance = '';
-      const expectedHeaderRequestParams = 'project=&zone=&instance=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'UpdateShieldedInstanceConfigInstanceRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        'UpdateShieldedInstanceConfigInstanceRequest',
+        ['zone']
+      );
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        'UpdateShieldedInstanceConfigInstanceRequest',
+        ['instance']
+      );
+      request.instance = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updateShieldedInstanceConfig = stubSimpleCall(
         undefined,
@@ -5858,11 +7122,14 @@ describe('v1.InstancesClient', () => {
         client.updateShieldedInstanceConfig(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.updateShieldedInstanceConfig as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updateShieldedInstanceConfig as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updateShieldedInstanceConfig as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updateShieldedInstanceConfig with closed client', async () => {
@@ -5874,9 +7141,21 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.UpdateShieldedInstanceConfigInstanceRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.instance = '';
+      const defaultValue1 = getTypeDefaultValue(
+        'UpdateShieldedInstanceConfigInstanceRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        'UpdateShieldedInstanceConfigInstanceRequest',
+        ['zone']
+      );
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        'UpdateShieldedInstanceConfigInstanceRequest',
+        ['instance']
+      );
+      request.instance = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -5896,8 +7175,12 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.AggregatedListInstancesRequest()
       );
-      request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      const defaultValue1 = getTypeDefaultValue(
+        'AggregatedListInstancesRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedResponse = [
         [
           'tuple_key_1',
@@ -5934,11 +7217,12 @@ describe('v1.InstancesClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.aggregatedList.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.aggregatedList.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -5951,8 +7235,12 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.AggregatedListInstancesRequest()
       );
-      request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      const defaultValue1 = getTypeDefaultValue(
+        'AggregatedListInstancesRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.aggregatedList.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -5971,11 +7259,12 @@ describe('v1.InstancesClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.aggregatedList.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.aggregatedList.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });
@@ -5990,16 +7279,15 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListInstancesRequest()
       );
-      request.project = '';
-      request.zone = '';
-      const expectedHeaderRequestParams = 'project=&zone=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListInstancesRequest', [
+        'project',
+      ]);
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('ListInstancesRequest', [
+        'zone',
+      ]);
+      request.zone = defaultValue2;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.compute.v1.Instance()),
         generateSampleMessage(new protos.google.cloud.compute.v1.Instance()),
@@ -6008,11 +7296,13 @@ describe('v1.InstancesClient', () => {
       client.innerApiCalls.list = stubSimpleCall(expectedResponse);
       const [response] = await client.list(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.list as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (client.innerApiCalls.list as SinonStub).getCall(0)
+        .args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.list as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes list without error using callback', async () => {
@@ -6024,16 +7314,15 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListInstancesRequest()
       );
-      request.project = '';
-      request.zone = '';
-      const expectedHeaderRequestParams = 'project=&zone=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListInstancesRequest', [
+        'project',
+      ]);
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('ListInstancesRequest', [
+        'zone',
+      ]);
+      request.zone = defaultValue2;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.compute.v1.Instance()),
         generateSampleMessage(new protos.google.cloud.compute.v1.Instance()),
@@ -6057,11 +7346,13 @@ describe('v1.InstancesClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.list as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (client.innerApiCalls.list as SinonStub).getCall(0)
+        .args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.list as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes list with error', async () => {
@@ -6073,24 +7364,25 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListInstancesRequest()
       );
-      request.project = '';
-      request.zone = '';
-      const expectedHeaderRequestParams = 'project=&zone=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListInstancesRequest', [
+        'project',
+      ]);
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('ListInstancesRequest', [
+        'zone',
+      ]);
+      request.zone = defaultValue2;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.list = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.list(request), expectedError);
-      assert(
-        (client.innerApiCalls.list as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (client.innerApiCalls.list as SinonStub).getCall(0)
+        .args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.list as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listStream without error', async () => {
@@ -6102,9 +7394,15 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListInstancesRequest()
       );
-      request.project = '';
-      request.zone = '';
-      const expectedHeaderRequestParams = 'project=&zone=';
+      const defaultValue1 = getTypeDefaultValue('ListInstancesRequest', [
+        'project',
+      ]);
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('ListInstancesRequest', [
+        'zone',
+      ]);
+      request.zone = defaultValue2;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.compute.v1.Instance()),
         generateSampleMessage(new protos.google.cloud.compute.v1.Instance()),
@@ -6135,10 +7433,12 @@ describe('v1.InstancesClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.list, request)
       );
-      assert.strictEqual(
-        (client.descriptors.page.list.createStream as SinonStub).getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.list.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -6151,9 +7451,15 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListInstancesRequest()
       );
-      request.project = '';
-      request.zone = '';
-      const expectedHeaderRequestParams = 'project=&zone=';
+      const defaultValue1 = getTypeDefaultValue('ListInstancesRequest', [
+        'project',
+      ]);
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('ListInstancesRequest', [
+        'zone',
+      ]);
+      request.zone = defaultValue2;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}`;
       const expectedError = new Error('expected');
       client.descriptors.page.list.createStream = stubPageStreamingCall(
         undefined,
@@ -6181,10 +7487,12 @@ describe('v1.InstancesClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.list, request)
       );
-      assert.strictEqual(
-        (client.descriptors.page.list.createStream as SinonStub).getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.list.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -6197,9 +7505,15 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListInstancesRequest()
       );
-      request.project = '';
-      request.zone = '';
-      const expectedHeaderRequestParams = 'project=&zone=';
+      const defaultValue1 = getTypeDefaultValue('ListInstancesRequest', [
+        'project',
+      ]);
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('ListInstancesRequest', [
+        'zone',
+      ]);
+      request.zone = defaultValue2;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.compute.v1.Instance()),
         generateSampleMessage(new protos.google.cloud.compute.v1.Instance()),
@@ -6218,10 +7532,12 @@ describe('v1.InstancesClient', () => {
           .args[1],
         request
       );
-      assert.strictEqual(
-        (client.descriptors.page.list.asyncIterate as SinonStub).getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.list.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -6234,9 +7550,15 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListInstancesRequest()
       );
-      request.project = '';
-      request.zone = '';
-      const expectedHeaderRequestParams = 'project=&zone=';
+      const defaultValue1 = getTypeDefaultValue('ListInstancesRequest', [
+        'project',
+      ]);
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('ListInstancesRequest', [
+        'zone',
+      ]);
+      request.zone = defaultValue2;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}`;
       const expectedError = new Error('expected');
       client.descriptors.page.list.asyncIterate = stubAsyncIterationCall(
         undefined,
@@ -6254,10 +7576,12 @@ describe('v1.InstancesClient', () => {
           .args[1],
         request
       );
-      assert.strictEqual(
-        (client.descriptors.page.list.asyncIterate as SinonStub).getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.list.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });
@@ -6272,17 +7596,22 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListReferrersInstancesRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.instance = '';
-      const expectedHeaderRequestParams = 'project=&zone=&instance=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'ListReferrersInstancesRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        'ListReferrersInstancesRequest',
+        ['zone']
+      );
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        'ListReferrersInstancesRequest',
+        ['instance']
+      );
+      request.instance = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.compute.v1.Reference()),
         generateSampleMessage(new protos.google.cloud.compute.v1.Reference()),
@@ -6291,11 +7620,14 @@ describe('v1.InstancesClient', () => {
       client.innerApiCalls.listReferrers = stubSimpleCall(expectedResponse);
       const [response] = await client.listReferrers(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listReferrers as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listReferrers as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listReferrers as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listReferrers without error using callback', async () => {
@@ -6307,17 +7639,22 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListReferrersInstancesRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.instance = '';
-      const expectedHeaderRequestParams = 'project=&zone=&instance=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'ListReferrersInstancesRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        'ListReferrersInstancesRequest',
+        ['zone']
+      );
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        'ListReferrersInstancesRequest',
+        ['instance']
+      );
+      request.instance = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.compute.v1.Reference()),
         generateSampleMessage(new protos.google.cloud.compute.v1.Reference()),
@@ -6342,11 +7679,14 @@ describe('v1.InstancesClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listReferrers as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listReferrers as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listReferrers as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listReferrers with error', async () => {
@@ -6358,28 +7698,36 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListReferrersInstancesRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.instance = '';
-      const expectedHeaderRequestParams = 'project=&zone=&instance=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'ListReferrersInstancesRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        'ListReferrersInstancesRequest',
+        ['zone']
+      );
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        'ListReferrersInstancesRequest',
+        ['instance']
+      );
+      request.instance = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listReferrers = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.listReferrers(request), expectedError);
-      assert(
-        (client.innerApiCalls.listReferrers as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listReferrers as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listReferrers as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listReferrersStream without error', async () => {
@@ -6391,10 +7739,22 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListReferrersInstancesRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.instance = '';
-      const expectedHeaderRequestParams = 'project=&zone=&instance=';
+      const defaultValue1 = getTypeDefaultValue(
+        'ListReferrersInstancesRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        'ListReferrersInstancesRequest',
+        ['zone']
+      );
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        'ListReferrersInstancesRequest',
+        ['instance']
+      );
+      request.instance = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.compute.v1.Reference()),
         generateSampleMessage(new protos.google.cloud.compute.v1.Reference()),
@@ -6425,11 +7785,12 @@ describe('v1.InstancesClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listReferrers, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listReferrers.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listReferrers.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -6442,10 +7803,22 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListReferrersInstancesRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.instance = '';
-      const expectedHeaderRequestParams = 'project=&zone=&instance=';
+      const defaultValue1 = getTypeDefaultValue(
+        'ListReferrersInstancesRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        'ListReferrersInstancesRequest',
+        ['zone']
+      );
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        'ListReferrersInstancesRequest',
+        ['instance']
+      );
+      request.instance = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listReferrers.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -6471,11 +7844,12 @@ describe('v1.InstancesClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listReferrers, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listReferrers.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listReferrers.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -6488,10 +7862,22 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListReferrersInstancesRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.instance = '';
-      const expectedHeaderRequestParams = 'project=&zone=&instance=';
+      const defaultValue1 = getTypeDefaultValue(
+        'ListReferrersInstancesRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        'ListReferrersInstancesRequest',
+        ['zone']
+      );
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        'ListReferrersInstancesRequest',
+        ['instance']
+      );
+      request.instance = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.compute.v1.Reference()),
         generateSampleMessage(new protos.google.cloud.compute.v1.Reference()),
@@ -6511,11 +7897,12 @@ describe('v1.InstancesClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listReferrers.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listReferrers.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -6528,10 +7915,22 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListReferrersInstancesRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.instance = '';
-      const expectedHeaderRequestParams = 'project=&zone=&instance=';
+      const defaultValue1 = getTypeDefaultValue(
+        'ListReferrersInstancesRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        'ListReferrersInstancesRequest',
+        ['zone']
+      );
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        'ListReferrersInstancesRequest',
+        ['instance']
+      );
+      request.instance = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listReferrers.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -6548,11 +7947,12 @@ describe('v1.InstancesClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listReferrers.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listReferrers.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });

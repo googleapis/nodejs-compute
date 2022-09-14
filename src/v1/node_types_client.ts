@@ -407,9 +407,9 @@ export class NodeTypesClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        project: request.project || '',
-        zone: request.zone || '',
-        node_type: request.nodeType || '',
+        project: request.project ?? '',
+        zone: request.zone ?? '',
+        node_type: request.nodeType ?? '',
       });
     this.initialize();
     return this.innerApiCalls.get(request, options, callback);
@@ -460,7 +460,7 @@ export class NodeTypesClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        project: request.project || '',
+        project: request.project ?? '',
       });
     const defaultCallSettings = this._defaults['aggregatedList'];
     const callSettings = defaultCallSettings.merge(options);
@@ -566,8 +566,8 @@ export class NodeTypesClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        project: request.project || '',
-        zone: request.zone || '',
+        project: request.project ?? '',
+        zone: request.zone ?? '',
       });
     this.initialize();
     return this.innerApiCalls.list(request, options, callback);
@@ -613,8 +613,8 @@ export class NodeTypesClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        project: request.project || '',
-        zone: request.zone || '',
+        project: request.project ?? '',
+        zone: request.zone ?? '',
       });
     const defaultCallSettings = this._defaults['list'];
     const callSettings = defaultCallSettings.merge(options);
@@ -669,8 +669,8 @@ export class NodeTypesClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        project: request.project || '',
-        zone: request.zone || '',
+        project: request.project ?? '',
+        zone: request.zone ?? '',
       });
     const defaultCallSettings = this._defaults['list'];
     const callSettings = defaultCallSettings.merge(options);

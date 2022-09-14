@@ -27,6 +27,21 @@ import {PassThrough} from 'stream';
 
 import {GoogleAuth, protobuf} from 'google-gax';
 
+// Dynamically loaded proto JSON is needed to get the type information
+// to fill in default values for request objects
+const root = protobuf.Root.fromJSON(
+  require('../protos/protos.json')
+).resolveAll();
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function getTypeDefaultValue(typeName: string, fields: string[]) {
+  let type = root.lookupType(typeName) as protobuf.Type;
+  for (const field of fields.slice(0, -1)) {
+    type = type.fields[field]?.resolvedType as protobuf.Type;
+  }
+  return type.fields[fields[fields.length - 1]]?.defaultValue;
+}
+
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
@@ -233,27 +248,29 @@ describe('v1.NetworksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.AddPeeringNetworkRequest()
       );
-      request.project = '';
-      request.network = '';
-      const expectedHeaderRequestParams = 'project=&network=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('AddPeeringNetworkRequest', [
+        'project',
+      ]);
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('AddPeeringNetworkRequest', [
+        'network',
+      ]);
+      request.network = defaultValue2;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&network=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
       client.innerApiCalls.addPeering = stubSimpleCall(expectedResponse);
       const [response] = await client.addPeering(request);
       assert.deepStrictEqual(response.latestResponse, expectedResponse);
-      assert(
-        (client.innerApiCalls.addPeering as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.addPeering as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.addPeering as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes addPeering without error using callback', async () => {
@@ -265,16 +282,15 @@ describe('v1.NetworksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.AddPeeringNetworkRequest()
       );
-      request.project = '';
-      request.network = '';
-      const expectedHeaderRequestParams = 'project=&network=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('AddPeeringNetworkRequest', [
+        'project',
+      ]);
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('AddPeeringNetworkRequest', [
+        'network',
+      ]);
+      request.network = defaultValue2;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&network=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -297,11 +313,14 @@ describe('v1.NetworksClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.addPeering as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.addPeering as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.addPeering as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes addPeering with error', async () => {
@@ -313,27 +332,29 @@ describe('v1.NetworksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.AddPeeringNetworkRequest()
       );
-      request.project = '';
-      request.network = '';
-      const expectedHeaderRequestParams = 'project=&network=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('AddPeeringNetworkRequest', [
+        'project',
+      ]);
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('AddPeeringNetworkRequest', [
+        'network',
+      ]);
+      request.network = defaultValue2;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&network=${defaultValue2}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.addPeering = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.addPeering(request), expectedError);
-      assert(
-        (client.innerApiCalls.addPeering as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.addPeering as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.addPeering as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes addPeering with closed client', async () => {
@@ -345,8 +366,14 @@ describe('v1.NetworksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.AddPeeringNetworkRequest()
       );
-      request.project = '';
-      request.network = '';
+      const defaultValue1 = getTypeDefaultValue('AddPeeringNetworkRequest', [
+        'project',
+      ]);
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('AddPeeringNetworkRequest', [
+        'network',
+      ]);
+      request.network = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.addPeering(request), expectedError);
@@ -363,27 +390,29 @@ describe('v1.NetworksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteNetworkRequest()
       );
-      request.project = '';
-      request.network = '';
-      const expectedHeaderRequestParams = 'project=&network=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteNetworkRequest', [
+        'project',
+      ]);
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('DeleteNetworkRequest', [
+        'network',
+      ]);
+      request.network = defaultValue2;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&network=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
       client.innerApiCalls.delete = stubSimpleCall(expectedResponse);
       const [response] = await client.delete(request);
       assert.deepStrictEqual(response.latestResponse, expectedResponse);
-      assert(
-        (client.innerApiCalls.delete as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (client.innerApiCalls.delete as SinonStub).getCall(
+        0
+      ).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.delete as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes delete without error using callback', async () => {
@@ -395,16 +424,15 @@ describe('v1.NetworksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteNetworkRequest()
       );
-      request.project = '';
-      request.network = '';
-      const expectedHeaderRequestParams = 'project=&network=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteNetworkRequest', [
+        'project',
+      ]);
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('DeleteNetworkRequest', [
+        'network',
+      ]);
+      request.network = defaultValue2;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&network=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -427,11 +455,14 @@ describe('v1.NetworksClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.delete as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (client.innerApiCalls.delete as SinonStub).getCall(
+        0
+      ).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.delete as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes delete with error', async () => {
@@ -443,24 +474,26 @@ describe('v1.NetworksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteNetworkRequest()
       );
-      request.project = '';
-      request.network = '';
-      const expectedHeaderRequestParams = 'project=&network=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteNetworkRequest', [
+        'project',
+      ]);
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('DeleteNetworkRequest', [
+        'network',
+      ]);
+      request.network = defaultValue2;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&network=${defaultValue2}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.delete = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.delete(request), expectedError);
-      assert(
-        (client.innerApiCalls.delete as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (client.innerApiCalls.delete as SinonStub).getCall(
+        0
+      ).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.delete as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes delete with closed client', async () => {
@@ -472,8 +505,14 @@ describe('v1.NetworksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteNetworkRequest()
       );
-      request.project = '';
-      request.network = '';
+      const defaultValue1 = getTypeDefaultValue('DeleteNetworkRequest', [
+        'project',
+      ]);
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('DeleteNetworkRequest', [
+        'network',
+      ]);
+      request.network = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.delete(request), expectedError);
@@ -490,27 +529,28 @@ describe('v1.NetworksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetNetworkRequest()
       );
-      request.project = '';
-      request.network = '';
-      const expectedHeaderRequestParams = 'project=&network=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetNetworkRequest', [
+        'project',
+      ]);
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('GetNetworkRequest', [
+        'network',
+      ]);
+      request.network = defaultValue2;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&network=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Network()
       );
       client.innerApiCalls.get = stubSimpleCall(expectedResponse);
       const [response] = await client.get(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.get as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (client.innerApiCalls.get as SinonStub).getCall(0)
+        .args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.get as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes get without error using callback', async () => {
@@ -522,16 +562,15 @@ describe('v1.NetworksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetNetworkRequest()
       );
-      request.project = '';
-      request.network = '';
-      const expectedHeaderRequestParams = 'project=&network=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetNetworkRequest', [
+        'project',
+      ]);
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('GetNetworkRequest', [
+        'network',
+      ]);
+      request.network = defaultValue2;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&network=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Network()
       );
@@ -553,11 +592,13 @@ describe('v1.NetworksClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.get as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (client.innerApiCalls.get as SinonStub).getCall(0)
+        .args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.get as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes get with error', async () => {
@@ -569,24 +610,25 @@ describe('v1.NetworksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetNetworkRequest()
       );
-      request.project = '';
-      request.network = '';
-      const expectedHeaderRequestParams = 'project=&network=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetNetworkRequest', [
+        'project',
+      ]);
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('GetNetworkRequest', [
+        'network',
+      ]);
+      request.network = defaultValue2;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&network=${defaultValue2}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.get = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.get(request), expectedError);
-      assert(
-        (client.innerApiCalls.get as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (client.innerApiCalls.get as SinonStub).getCall(0)
+        .args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.get as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes get with closed client', async () => {
@@ -598,8 +640,14 @@ describe('v1.NetworksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetNetworkRequest()
       );
-      request.project = '';
-      request.network = '';
+      const defaultValue1 = getTypeDefaultValue('GetNetworkRequest', [
+        'project',
+      ]);
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('GetNetworkRequest', [
+        'network',
+      ]);
+      request.network = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.get(request), expectedError);
@@ -616,16 +664,17 @@ describe('v1.NetworksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetEffectiveFirewallsNetworkRequest()
       );
-      request.project = '';
-      request.network = '';
-      const expectedHeaderRequestParams = 'project=&network=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'GetEffectiveFirewallsNetworkRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        'GetEffectiveFirewallsNetworkRequest',
+        ['network']
+      );
+      request.network = defaultValue2;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&network=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.NetworksGetEffectiveFirewallsResponse()
       );
@@ -633,11 +682,14 @@ describe('v1.NetworksClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.getEffectiveFirewalls(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getEffectiveFirewalls as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getEffectiveFirewalls as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getEffectiveFirewalls as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getEffectiveFirewalls without error using callback', async () => {
@@ -649,16 +701,17 @@ describe('v1.NetworksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetEffectiveFirewallsNetworkRequest()
       );
-      request.project = '';
-      request.network = '';
-      const expectedHeaderRequestParams = 'project=&network=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'GetEffectiveFirewallsNetworkRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        'GetEffectiveFirewallsNetworkRequest',
+        ['network']
+      );
+      request.network = defaultValue2;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&network=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.NetworksGetEffectiveFirewallsResponse()
       );
@@ -681,11 +734,14 @@ describe('v1.NetworksClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getEffectiveFirewalls as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getEffectiveFirewalls as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getEffectiveFirewalls as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getEffectiveFirewalls with error', async () => {
@@ -697,16 +753,17 @@ describe('v1.NetworksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetEffectiveFirewallsNetworkRequest()
       );
-      request.project = '';
-      request.network = '';
-      const expectedHeaderRequestParams = 'project=&network=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'GetEffectiveFirewallsNetworkRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        'GetEffectiveFirewallsNetworkRequest',
+        ['network']
+      );
+      request.network = defaultValue2;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&network=${defaultValue2}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getEffectiveFirewalls = stubSimpleCall(
         undefined,
@@ -716,11 +773,14 @@ describe('v1.NetworksClient', () => {
         client.getEffectiveFirewalls(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.getEffectiveFirewalls as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getEffectiveFirewalls as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getEffectiveFirewalls as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getEffectiveFirewalls with closed client', async () => {
@@ -732,8 +792,16 @@ describe('v1.NetworksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetEffectiveFirewallsNetworkRequest()
       );
-      request.project = '';
-      request.network = '';
+      const defaultValue1 = getTypeDefaultValue(
+        'GetEffectiveFirewallsNetworkRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        'GetEffectiveFirewallsNetworkRequest',
+        ['network']
+      );
+      request.network = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -753,26 +821,25 @@ describe('v1.NetworksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertNetworkRequest()
       );
-      request.project = '';
-      const expectedHeaderRequestParams = 'project=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('InsertNetworkRequest', [
+        'project',
+      ]);
+      request.project = defaultValue1;
+      const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
       client.innerApiCalls.insert = stubSimpleCall(expectedResponse);
       const [response] = await client.insert(request);
       assert.deepStrictEqual(response.latestResponse, expectedResponse);
-      assert(
-        (client.innerApiCalls.insert as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (client.innerApiCalls.insert as SinonStub).getCall(
+        0
+      ).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.insert as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes insert without error using callback', async () => {
@@ -784,15 +851,11 @@ describe('v1.NetworksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertNetworkRequest()
       );
-      request.project = '';
-      const expectedHeaderRequestParams = 'project=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('InsertNetworkRequest', [
+        'project',
+      ]);
+      request.project = defaultValue1;
+      const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -815,11 +878,14 @@ describe('v1.NetworksClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.insert as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (client.innerApiCalls.insert as SinonStub).getCall(
+        0
+      ).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.insert as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes insert with error', async () => {
@@ -831,23 +897,22 @@ describe('v1.NetworksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertNetworkRequest()
       );
-      request.project = '';
-      const expectedHeaderRequestParams = 'project=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('InsertNetworkRequest', [
+        'project',
+      ]);
+      request.project = defaultValue1;
+      const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.insert = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.insert(request), expectedError);
-      assert(
-        (client.innerApiCalls.insert as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (client.innerApiCalls.insert as SinonStub).getCall(
+        0
+      ).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.insert as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes insert with closed client', async () => {
@@ -859,7 +924,10 @@ describe('v1.NetworksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertNetworkRequest()
       );
-      request.project = '';
+      const defaultValue1 = getTypeDefaultValue('InsertNetworkRequest', [
+        'project',
+      ]);
+      request.project = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.insert(request), expectedError);
@@ -876,27 +944,28 @@ describe('v1.NetworksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchNetworkRequest()
       );
-      request.project = '';
-      request.network = '';
-      const expectedHeaderRequestParams = 'project=&network=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('PatchNetworkRequest', [
+        'project',
+      ]);
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('PatchNetworkRequest', [
+        'network',
+      ]);
+      request.network = defaultValue2;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&network=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
       client.innerApiCalls.patch = stubSimpleCall(expectedResponse);
       const [response] = await client.patch(request);
       assert.deepStrictEqual(response.latestResponse, expectedResponse);
-      assert(
-        (client.innerApiCalls.patch as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (client.innerApiCalls.patch as SinonStub).getCall(0)
+        .args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.patch as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes patch without error using callback', async () => {
@@ -908,16 +977,15 @@ describe('v1.NetworksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchNetworkRequest()
       );
-      request.project = '';
-      request.network = '';
-      const expectedHeaderRequestParams = 'project=&network=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('PatchNetworkRequest', [
+        'project',
+      ]);
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('PatchNetworkRequest', [
+        'network',
+      ]);
+      request.network = defaultValue2;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&network=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -939,11 +1007,13 @@ describe('v1.NetworksClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.patch as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (client.innerApiCalls.patch as SinonStub).getCall(0)
+        .args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.patch as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes patch with error', async () => {
@@ -955,24 +1025,25 @@ describe('v1.NetworksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchNetworkRequest()
       );
-      request.project = '';
-      request.network = '';
-      const expectedHeaderRequestParams = 'project=&network=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('PatchNetworkRequest', [
+        'project',
+      ]);
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('PatchNetworkRequest', [
+        'network',
+      ]);
+      request.network = defaultValue2;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&network=${defaultValue2}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.patch = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.patch(request), expectedError);
-      assert(
-        (client.innerApiCalls.patch as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (client.innerApiCalls.patch as SinonStub).getCall(0)
+        .args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.patch as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes patch with closed client', async () => {
@@ -984,8 +1055,14 @@ describe('v1.NetworksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchNetworkRequest()
       );
-      request.project = '';
-      request.network = '';
+      const defaultValue1 = getTypeDefaultValue('PatchNetworkRequest', [
+        'project',
+      ]);
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('PatchNetworkRequest', [
+        'network',
+      ]);
+      request.network = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.patch(request), expectedError);
@@ -1002,27 +1079,29 @@ describe('v1.NetworksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.RemovePeeringNetworkRequest()
       );
-      request.project = '';
-      request.network = '';
-      const expectedHeaderRequestParams = 'project=&network=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('RemovePeeringNetworkRequest', [
+        'project',
+      ]);
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('RemovePeeringNetworkRequest', [
+        'network',
+      ]);
+      request.network = defaultValue2;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&network=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
       client.innerApiCalls.removePeering = stubSimpleCall(expectedResponse);
       const [response] = await client.removePeering(request);
       assert.deepStrictEqual(response.latestResponse, expectedResponse);
-      assert(
-        (client.innerApiCalls.removePeering as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.removePeering as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.removePeering as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes removePeering without error using callback', async () => {
@@ -1034,16 +1113,15 @@ describe('v1.NetworksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.RemovePeeringNetworkRequest()
       );
-      request.project = '';
-      request.network = '';
-      const expectedHeaderRequestParams = 'project=&network=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('RemovePeeringNetworkRequest', [
+        'project',
+      ]);
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('RemovePeeringNetworkRequest', [
+        'network',
+      ]);
+      request.network = defaultValue2;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&network=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -1066,11 +1144,14 @@ describe('v1.NetworksClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.removePeering as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.removePeering as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.removePeering as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes removePeering with error', async () => {
@@ -1082,27 +1163,29 @@ describe('v1.NetworksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.RemovePeeringNetworkRequest()
       );
-      request.project = '';
-      request.network = '';
-      const expectedHeaderRequestParams = 'project=&network=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('RemovePeeringNetworkRequest', [
+        'project',
+      ]);
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('RemovePeeringNetworkRequest', [
+        'network',
+      ]);
+      request.network = defaultValue2;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&network=${defaultValue2}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.removePeering = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.removePeering(request), expectedError);
-      assert(
-        (client.innerApiCalls.removePeering as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.removePeering as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.removePeering as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes removePeering with closed client', async () => {
@@ -1114,8 +1197,14 @@ describe('v1.NetworksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.RemovePeeringNetworkRequest()
       );
-      request.project = '';
-      request.network = '';
+      const defaultValue1 = getTypeDefaultValue('RemovePeeringNetworkRequest', [
+        'project',
+      ]);
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('RemovePeeringNetworkRequest', [
+        'network',
+      ]);
+      request.network = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.removePeering(request), expectedError);
@@ -1132,16 +1221,17 @@ describe('v1.NetworksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SwitchToCustomModeNetworkRequest()
       );
-      request.project = '';
-      request.network = '';
-      const expectedHeaderRequestParams = 'project=&network=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'SwitchToCustomModeNetworkRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        'SwitchToCustomModeNetworkRequest',
+        ['network']
+      );
+      request.network = defaultValue2;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&network=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -1149,11 +1239,14 @@ describe('v1.NetworksClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.switchToCustomMode(request);
       assert.deepStrictEqual(response.latestResponse, expectedResponse);
-      assert(
-        (client.innerApiCalls.switchToCustomMode as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.switchToCustomMode as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.switchToCustomMode as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes switchToCustomMode without error using callback', async () => {
@@ -1165,16 +1258,17 @@ describe('v1.NetworksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SwitchToCustomModeNetworkRequest()
       );
-      request.project = '';
-      request.network = '';
-      const expectedHeaderRequestParams = 'project=&network=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'SwitchToCustomModeNetworkRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        'SwitchToCustomModeNetworkRequest',
+        ['network']
+      );
+      request.network = defaultValue2;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&network=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -1197,11 +1291,14 @@ describe('v1.NetworksClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.switchToCustomMode as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.switchToCustomMode as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.switchToCustomMode as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes switchToCustomMode with error', async () => {
@@ -1213,27 +1310,31 @@ describe('v1.NetworksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SwitchToCustomModeNetworkRequest()
       );
-      request.project = '';
-      request.network = '';
-      const expectedHeaderRequestParams = 'project=&network=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'SwitchToCustomModeNetworkRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        'SwitchToCustomModeNetworkRequest',
+        ['network']
+      );
+      request.network = defaultValue2;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&network=${defaultValue2}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.switchToCustomMode = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.switchToCustomMode(request), expectedError);
-      assert(
-        (client.innerApiCalls.switchToCustomMode as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.switchToCustomMode as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.switchToCustomMode as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes switchToCustomMode with closed client', async () => {
@@ -1245,8 +1346,16 @@ describe('v1.NetworksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SwitchToCustomModeNetworkRequest()
       );
-      request.project = '';
-      request.network = '';
+      const defaultValue1 = getTypeDefaultValue(
+        'SwitchToCustomModeNetworkRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        'SwitchToCustomModeNetworkRequest',
+        ['network']
+      );
+      request.network = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.switchToCustomMode(request), expectedError);
@@ -1263,27 +1372,29 @@ describe('v1.NetworksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.UpdatePeeringNetworkRequest()
       );
-      request.project = '';
-      request.network = '';
-      const expectedHeaderRequestParams = 'project=&network=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('UpdatePeeringNetworkRequest', [
+        'project',
+      ]);
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('UpdatePeeringNetworkRequest', [
+        'network',
+      ]);
+      request.network = defaultValue2;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&network=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
       client.innerApiCalls.updatePeering = stubSimpleCall(expectedResponse);
       const [response] = await client.updatePeering(request);
       assert.deepStrictEqual(response.latestResponse, expectedResponse);
-      assert(
-        (client.innerApiCalls.updatePeering as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updatePeering as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updatePeering as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updatePeering without error using callback', async () => {
@@ -1295,16 +1406,15 @@ describe('v1.NetworksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.UpdatePeeringNetworkRequest()
       );
-      request.project = '';
-      request.network = '';
-      const expectedHeaderRequestParams = 'project=&network=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('UpdatePeeringNetworkRequest', [
+        'project',
+      ]);
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('UpdatePeeringNetworkRequest', [
+        'network',
+      ]);
+      request.network = defaultValue2;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&network=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -1327,11 +1437,14 @@ describe('v1.NetworksClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.updatePeering as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updatePeering as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updatePeering as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updatePeering with error', async () => {
@@ -1343,27 +1456,29 @@ describe('v1.NetworksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.UpdatePeeringNetworkRequest()
       );
-      request.project = '';
-      request.network = '';
-      const expectedHeaderRequestParams = 'project=&network=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('UpdatePeeringNetworkRequest', [
+        'project',
+      ]);
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('UpdatePeeringNetworkRequest', [
+        'network',
+      ]);
+      request.network = defaultValue2;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&network=${defaultValue2}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.updatePeering = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.updatePeering(request), expectedError);
-      assert(
-        (client.innerApiCalls.updatePeering as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.updatePeering as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.updatePeering as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes updatePeering with closed client', async () => {
@@ -1375,8 +1490,14 @@ describe('v1.NetworksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.UpdatePeeringNetworkRequest()
       );
-      request.project = '';
-      request.network = '';
+      const defaultValue1 = getTypeDefaultValue('UpdatePeeringNetworkRequest', [
+        'project',
+      ]);
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('UpdatePeeringNetworkRequest', [
+        'network',
+      ]);
+      request.network = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.updatePeering(request), expectedError);
@@ -1393,15 +1514,11 @@ describe('v1.NetworksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListNetworksRequest()
       );
-      request.project = '';
-      const expectedHeaderRequestParams = 'project=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListNetworksRequest', [
+        'project',
+      ]);
+      request.project = defaultValue1;
+      const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.compute.v1.Network()),
         generateSampleMessage(new protos.google.cloud.compute.v1.Network()),
@@ -1410,11 +1527,13 @@ describe('v1.NetworksClient', () => {
       client.innerApiCalls.list = stubSimpleCall(expectedResponse);
       const [response] = await client.list(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.list as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (client.innerApiCalls.list as SinonStub).getCall(0)
+        .args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.list as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes list without error using callback', async () => {
@@ -1426,15 +1545,11 @@ describe('v1.NetworksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListNetworksRequest()
       );
-      request.project = '';
-      const expectedHeaderRequestParams = 'project=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListNetworksRequest', [
+        'project',
+      ]);
+      request.project = defaultValue1;
+      const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.compute.v1.Network()),
         generateSampleMessage(new protos.google.cloud.compute.v1.Network()),
@@ -1458,11 +1573,13 @@ describe('v1.NetworksClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.list as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (client.innerApiCalls.list as SinonStub).getCall(0)
+        .args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.list as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes list with error', async () => {
@@ -1474,23 +1591,21 @@ describe('v1.NetworksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListNetworksRequest()
       );
-      request.project = '';
-      const expectedHeaderRequestParams = 'project=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListNetworksRequest', [
+        'project',
+      ]);
+      request.project = defaultValue1;
+      const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.list = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.list(request), expectedError);
-      assert(
-        (client.innerApiCalls.list as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (client.innerApiCalls.list as SinonStub).getCall(0)
+        .args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.list as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listStream without error', async () => {
@@ -1502,8 +1617,11 @@ describe('v1.NetworksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListNetworksRequest()
       );
-      request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      const defaultValue1 = getTypeDefaultValue('ListNetworksRequest', [
+        'project',
+      ]);
+      request.project = defaultValue1;
+      const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.compute.v1.Network()),
         generateSampleMessage(new protos.google.cloud.compute.v1.Network()),
@@ -1534,10 +1652,12 @@ describe('v1.NetworksClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.list, request)
       );
-      assert.strictEqual(
-        (client.descriptors.page.list.createStream as SinonStub).getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.list.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -1550,8 +1670,11 @@ describe('v1.NetworksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListNetworksRequest()
       );
-      request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      const defaultValue1 = getTypeDefaultValue('ListNetworksRequest', [
+        'project',
+      ]);
+      request.project = defaultValue1;
+      const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.list.createStream = stubPageStreamingCall(
         undefined,
@@ -1579,10 +1702,12 @@ describe('v1.NetworksClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.list, request)
       );
-      assert.strictEqual(
-        (client.descriptors.page.list.createStream as SinonStub).getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.list.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -1595,8 +1720,11 @@ describe('v1.NetworksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListNetworksRequest()
       );
-      request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      const defaultValue1 = getTypeDefaultValue('ListNetworksRequest', [
+        'project',
+      ]);
+      request.project = defaultValue1;
+      const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.compute.v1.Network()),
         generateSampleMessage(new protos.google.cloud.compute.v1.Network()),
@@ -1615,10 +1743,12 @@ describe('v1.NetworksClient', () => {
           .args[1],
         request
       );
-      assert.strictEqual(
-        (client.descriptors.page.list.asyncIterate as SinonStub).getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.list.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -1631,8 +1761,11 @@ describe('v1.NetworksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListNetworksRequest()
       );
-      request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      const defaultValue1 = getTypeDefaultValue('ListNetworksRequest', [
+        'project',
+      ]);
+      request.project = defaultValue1;
+      const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.list.asyncIterate = stubAsyncIterationCall(
         undefined,
@@ -1650,10 +1783,12 @@ describe('v1.NetworksClient', () => {
           .args[1],
         request
       );
-      assert.strictEqual(
-        (client.descriptors.page.list.asyncIterate as SinonStub).getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.list.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });
@@ -1668,16 +1803,17 @@ describe('v1.NetworksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListPeeringRoutesNetworksRequest()
       );
-      request.project = '';
-      request.network = '';
-      const expectedHeaderRequestParams = 'project=&network=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'ListPeeringRoutesNetworksRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        'ListPeeringRoutesNetworksRequest',
+        ['network']
+      );
+      request.network = defaultValue2;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&network=${defaultValue2}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.compute.v1.ExchangedPeeringRoute()
@@ -1692,11 +1828,14 @@ describe('v1.NetworksClient', () => {
       client.innerApiCalls.listPeeringRoutes = stubSimpleCall(expectedResponse);
       const [response] = await client.listPeeringRoutes(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listPeeringRoutes as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listPeeringRoutes as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listPeeringRoutes as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listPeeringRoutes without error using callback', async () => {
@@ -1708,16 +1847,17 @@ describe('v1.NetworksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListPeeringRoutesNetworksRequest()
       );
-      request.project = '';
-      request.network = '';
-      const expectedHeaderRequestParams = 'project=&network=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'ListPeeringRoutesNetworksRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        'ListPeeringRoutesNetworksRequest',
+        ['network']
+      );
+      request.network = defaultValue2;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&network=${defaultValue2}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.compute.v1.ExchangedPeeringRoute()
@@ -1750,11 +1890,14 @@ describe('v1.NetworksClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.listPeeringRoutes as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listPeeringRoutes as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listPeeringRoutes as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listPeeringRoutes with error', async () => {
@@ -1766,27 +1909,31 @@ describe('v1.NetworksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListPeeringRoutesNetworksRequest()
       );
-      request.project = '';
-      request.network = '';
-      const expectedHeaderRequestParams = 'project=&network=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'ListPeeringRoutesNetworksRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        'ListPeeringRoutesNetworksRequest',
+        ['network']
+      );
+      request.network = defaultValue2;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&network=${defaultValue2}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.listPeeringRoutes = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.listPeeringRoutes(request), expectedError);
-      assert(
-        (client.innerApiCalls.listPeeringRoutes as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.listPeeringRoutes as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.listPeeringRoutes as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listPeeringRoutesStream without error', async () => {
@@ -1798,9 +1945,17 @@ describe('v1.NetworksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListPeeringRoutesNetworksRequest()
       );
-      request.project = '';
-      request.network = '';
-      const expectedHeaderRequestParams = 'project=&network=';
+      const defaultValue1 = getTypeDefaultValue(
+        'ListPeeringRoutesNetworksRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        'ListPeeringRoutesNetworksRequest',
+        ['network']
+      );
+      request.network = defaultValue2;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&network=${defaultValue2}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.compute.v1.ExchangedPeeringRoute()
@@ -1838,11 +1993,12 @@ describe('v1.NetworksClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listPeeringRoutes, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listPeeringRoutes.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listPeeringRoutes.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -1855,9 +2011,17 @@ describe('v1.NetworksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListPeeringRoutesNetworksRequest()
       );
-      request.project = '';
-      request.network = '';
-      const expectedHeaderRequestParams = 'project=&network=';
+      const defaultValue1 = getTypeDefaultValue(
+        'ListPeeringRoutesNetworksRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        'ListPeeringRoutesNetworksRequest',
+        ['network']
+      );
+      request.network = defaultValue2;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&network=${defaultValue2}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listPeeringRoutes.createStream =
         stubPageStreamingCall(undefined, expectedError);
@@ -1884,11 +2048,12 @@ describe('v1.NetworksClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.listPeeringRoutes, request)
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listPeeringRoutes.createStream as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listPeeringRoutes.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -1901,9 +2066,17 @@ describe('v1.NetworksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListPeeringRoutesNetworksRequest()
       );
-      request.project = '';
-      request.network = '';
-      const expectedHeaderRequestParams = 'project=&network=';
+      const defaultValue1 = getTypeDefaultValue(
+        'ListPeeringRoutesNetworksRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        'ListPeeringRoutesNetworksRequest',
+        ['network']
+      );
+      request.network = defaultValue2;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&network=${defaultValue2}`;
       const expectedResponse = [
         generateSampleMessage(
           new protos.google.cloud.compute.v1.ExchangedPeeringRoute()
@@ -1930,11 +2103,12 @@ describe('v1.NetworksClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listPeeringRoutes.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listPeeringRoutes.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -1947,9 +2121,17 @@ describe('v1.NetworksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListPeeringRoutesNetworksRequest()
       );
-      request.project = '';
-      request.network = '';
-      const expectedHeaderRequestParams = 'project=&network=';
+      const defaultValue1 = getTypeDefaultValue(
+        'ListPeeringRoutesNetworksRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        'ListPeeringRoutesNetworksRequest',
+        ['network']
+      );
+      request.network = defaultValue2;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&network=${defaultValue2}`;
       const expectedError = new Error('expected');
       client.descriptors.page.listPeeringRoutes.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -1967,11 +2149,12 @@ describe('v1.NetworksClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.listPeeringRoutes.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.listPeeringRoutes.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });

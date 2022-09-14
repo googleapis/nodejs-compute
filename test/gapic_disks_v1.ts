@@ -27,6 +27,21 @@ import {PassThrough} from 'stream';
 
 import {GoogleAuth, protobuf} from 'google-gax';
 
+// Dynamically loaded proto JSON is needed to get the type information
+// to fill in default values for request objects
+const root = protobuf.Root.fromJSON(
+  require('../protos/protos.json')
+).resolveAll();
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function getTypeDefaultValue(typeName: string, fields: string[]) {
+  let type = root.lookupType(typeName) as protobuf.Type;
+  for (const field of fields.slice(0, -1)) {
+    type = type.fields[field]?.resolvedType as protobuf.Type;
+  }
+  return type.fields[fields[fields.length - 1]]?.defaultValue;
+}
+
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
@@ -233,17 +248,22 @@ describe('v1.DisksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.AddResourcePoliciesDiskRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.disk = '';
-      const expectedHeaderRequestParams = 'project=&zone=&disk=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'AddResourcePoliciesDiskRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        'AddResourcePoliciesDiskRequest',
+        ['zone']
+      );
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        'AddResourcePoliciesDiskRequest',
+        ['disk']
+      );
+      request.disk = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&disk=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -251,11 +271,14 @@ describe('v1.DisksClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.addResourcePolicies(request);
       assert.deepStrictEqual(response.latestResponse, expectedResponse);
-      assert(
-        (client.innerApiCalls.addResourcePolicies as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.addResourcePolicies as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.addResourcePolicies as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes addResourcePolicies without error using callback', async () => {
@@ -267,17 +290,22 @@ describe('v1.DisksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.AddResourcePoliciesDiskRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.disk = '';
-      const expectedHeaderRequestParams = 'project=&zone=&disk=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'AddResourcePoliciesDiskRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        'AddResourcePoliciesDiskRequest',
+        ['zone']
+      );
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        'AddResourcePoliciesDiskRequest',
+        ['disk']
+      );
+      request.disk = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&disk=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -300,11 +328,14 @@ describe('v1.DisksClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.addResourcePolicies as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.addResourcePolicies as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.addResourcePolicies as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes addResourcePolicies with error', async () => {
@@ -316,28 +347,36 @@ describe('v1.DisksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.AddResourcePoliciesDiskRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.disk = '';
-      const expectedHeaderRequestParams = 'project=&zone=&disk=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'AddResourcePoliciesDiskRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        'AddResourcePoliciesDiskRequest',
+        ['zone']
+      );
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        'AddResourcePoliciesDiskRequest',
+        ['disk']
+      );
+      request.disk = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&disk=${defaultValue3}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.addResourcePolicies = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.addResourcePolicies(request), expectedError);
-      assert(
-        (client.innerApiCalls.addResourcePolicies as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.addResourcePolicies as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.addResourcePolicies as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes addResourcePolicies with closed client', async () => {
@@ -349,9 +388,21 @@ describe('v1.DisksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.AddResourcePoliciesDiskRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.disk = '';
+      const defaultValue1 = getTypeDefaultValue(
+        'AddResourcePoliciesDiskRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        'AddResourcePoliciesDiskRequest',
+        ['zone']
+      );
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        'AddResourcePoliciesDiskRequest',
+        ['disk']
+      );
+      request.disk = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.addResourcePolicies(request), expectedError);
@@ -368,28 +419,33 @@ describe('v1.DisksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.CreateSnapshotDiskRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.disk = '';
-      const expectedHeaderRequestParams = 'project=&zone=&disk=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateSnapshotDiskRequest', [
+        'project',
+      ]);
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('CreateSnapshotDiskRequest', [
+        'zone',
+      ]);
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue('CreateSnapshotDiskRequest', [
+        'disk',
+      ]);
+      request.disk = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&disk=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
       client.innerApiCalls.createSnapshot = stubSimpleCall(expectedResponse);
       const [response] = await client.createSnapshot(request);
       assert.deepStrictEqual(response.latestResponse, expectedResponse);
-      assert(
-        (client.innerApiCalls.createSnapshot as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createSnapshot as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createSnapshot as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createSnapshot without error using callback', async () => {
@@ -401,17 +457,19 @@ describe('v1.DisksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.CreateSnapshotDiskRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.disk = '';
-      const expectedHeaderRequestParams = 'project=&zone=&disk=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateSnapshotDiskRequest', [
+        'project',
+      ]);
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('CreateSnapshotDiskRequest', [
+        'zone',
+      ]);
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue('CreateSnapshotDiskRequest', [
+        'disk',
+      ]);
+      request.disk = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&disk=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -434,11 +492,14 @@ describe('v1.DisksClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.createSnapshot as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createSnapshot as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createSnapshot as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createSnapshot with error', async () => {
@@ -450,28 +511,33 @@ describe('v1.DisksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.CreateSnapshotDiskRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.disk = '';
-      const expectedHeaderRequestParams = 'project=&zone=&disk=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('CreateSnapshotDiskRequest', [
+        'project',
+      ]);
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('CreateSnapshotDiskRequest', [
+        'zone',
+      ]);
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue('CreateSnapshotDiskRequest', [
+        'disk',
+      ]);
+      request.disk = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&disk=${defaultValue3}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.createSnapshot = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.createSnapshot(request), expectedError);
-      assert(
-        (client.innerApiCalls.createSnapshot as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.createSnapshot as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.createSnapshot as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes createSnapshot with closed client', async () => {
@@ -483,9 +549,18 @@ describe('v1.DisksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.CreateSnapshotDiskRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.disk = '';
+      const defaultValue1 = getTypeDefaultValue('CreateSnapshotDiskRequest', [
+        'project',
+      ]);
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('CreateSnapshotDiskRequest', [
+        'zone',
+      ]);
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue('CreateSnapshotDiskRequest', [
+        'disk',
+      ]);
+      request.disk = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.createSnapshot(request), expectedError);
@@ -502,28 +577,29 @@ describe('v1.DisksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteDiskRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.disk = '';
-      const expectedHeaderRequestParams = 'project=&zone=&disk=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteDiskRequest', [
+        'project',
+      ]);
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('DeleteDiskRequest', ['zone']);
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue('DeleteDiskRequest', ['disk']);
+      request.disk = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&disk=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
       client.innerApiCalls.delete = stubSimpleCall(expectedResponse);
       const [response] = await client.delete(request);
       assert.deepStrictEqual(response.latestResponse, expectedResponse);
-      assert(
-        (client.innerApiCalls.delete as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (client.innerApiCalls.delete as SinonStub).getCall(
+        0
+      ).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.delete as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes delete without error using callback', async () => {
@@ -535,17 +611,15 @@ describe('v1.DisksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteDiskRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.disk = '';
-      const expectedHeaderRequestParams = 'project=&zone=&disk=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteDiskRequest', [
+        'project',
+      ]);
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('DeleteDiskRequest', ['zone']);
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue('DeleteDiskRequest', ['disk']);
+      request.disk = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&disk=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -568,11 +642,14 @@ describe('v1.DisksClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.delete as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (client.innerApiCalls.delete as SinonStub).getCall(
+        0
+      ).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.delete as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes delete with error', async () => {
@@ -584,25 +661,26 @@ describe('v1.DisksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteDiskRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.disk = '';
-      const expectedHeaderRequestParams = 'project=&zone=&disk=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('DeleteDiskRequest', [
+        'project',
+      ]);
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('DeleteDiskRequest', ['zone']);
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue('DeleteDiskRequest', ['disk']);
+      request.disk = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&disk=${defaultValue3}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.delete = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.delete(request), expectedError);
-      assert(
-        (client.innerApiCalls.delete as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (client.innerApiCalls.delete as SinonStub).getCall(
+        0
+      ).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.delete as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes delete with closed client', async () => {
@@ -614,9 +692,14 @@ describe('v1.DisksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteDiskRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.disk = '';
+      const defaultValue1 = getTypeDefaultValue('DeleteDiskRequest', [
+        'project',
+      ]);
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('DeleteDiskRequest', ['zone']);
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue('DeleteDiskRequest', ['disk']);
+      request.disk = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.delete(request), expectedError);
@@ -633,28 +716,26 @@ describe('v1.DisksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetDiskRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.disk = '';
-      const expectedHeaderRequestParams = 'project=&zone=&disk=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetDiskRequest', ['project']);
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('GetDiskRequest', ['zone']);
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue('GetDiskRequest', ['disk']);
+      request.disk = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&disk=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Disk()
       );
       client.innerApiCalls.get = stubSimpleCall(expectedResponse);
       const [response] = await client.get(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.get as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (client.innerApiCalls.get as SinonStub).getCall(0)
+        .args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.get as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes get without error using callback', async () => {
@@ -666,17 +747,13 @@ describe('v1.DisksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetDiskRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.disk = '';
-      const expectedHeaderRequestParams = 'project=&zone=&disk=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetDiskRequest', ['project']);
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('GetDiskRequest', ['zone']);
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue('GetDiskRequest', ['disk']);
+      request.disk = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&disk=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Disk()
       );
@@ -698,11 +775,13 @@ describe('v1.DisksClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.get as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (client.innerApiCalls.get as SinonStub).getCall(0)
+        .args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.get as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes get with error', async () => {
@@ -714,25 +793,23 @@ describe('v1.DisksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetDiskRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.disk = '';
-      const expectedHeaderRequestParams = 'project=&zone=&disk=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetDiskRequest', ['project']);
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('GetDiskRequest', ['zone']);
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue('GetDiskRequest', ['disk']);
+      request.disk = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&disk=${defaultValue3}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.get = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.get(request), expectedError);
-      assert(
-        (client.innerApiCalls.get as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (client.innerApiCalls.get as SinonStub).getCall(0)
+        .args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.get as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes get with closed client', async () => {
@@ -744,9 +821,12 @@ describe('v1.DisksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetDiskRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.disk = '';
+      const defaultValue1 = getTypeDefaultValue('GetDiskRequest', ['project']);
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('GetDiskRequest', ['zone']);
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue('GetDiskRequest', ['disk']);
+      request.disk = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.get(request), expectedError);
@@ -763,28 +843,33 @@ describe('v1.DisksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetIamPolicyDiskRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.resource = '';
-      const expectedHeaderRequestParams = 'project=&zone=&resource=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetIamPolicyDiskRequest', [
+        'project',
+      ]);
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('GetIamPolicyDiskRequest', [
+        'zone',
+      ]);
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue('GetIamPolicyDiskRequest', [
+        'resource',
+      ]);
+      request.resource = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&resource=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Policy()
       );
       client.innerApiCalls.getIamPolicy = stubSimpleCall(expectedResponse);
       const [response] = await client.getIamPolicy(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getIamPolicy as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getIamPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getIamPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getIamPolicy without error using callback', async () => {
@@ -796,17 +881,19 @@ describe('v1.DisksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetIamPolicyDiskRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.resource = '';
-      const expectedHeaderRequestParams = 'project=&zone=&resource=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetIamPolicyDiskRequest', [
+        'project',
+      ]);
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('GetIamPolicyDiskRequest', [
+        'zone',
+      ]);
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue('GetIamPolicyDiskRequest', [
+        'resource',
+      ]);
+      request.resource = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&resource=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Policy()
       );
@@ -829,11 +916,14 @@ describe('v1.DisksClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.getIamPolicy as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getIamPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getIamPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getIamPolicy with error', async () => {
@@ -845,28 +935,33 @@ describe('v1.DisksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetIamPolicyDiskRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.resource = '';
-      const expectedHeaderRequestParams = 'project=&zone=&resource=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('GetIamPolicyDiskRequest', [
+        'project',
+      ]);
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('GetIamPolicyDiskRequest', [
+        'zone',
+      ]);
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue('GetIamPolicyDiskRequest', [
+        'resource',
+      ]);
+      request.resource = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&resource=${defaultValue3}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.getIamPolicy = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.getIamPolicy(request), expectedError);
-      assert(
-        (client.innerApiCalls.getIamPolicy as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.getIamPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.getIamPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes getIamPolicy with closed client', async () => {
@@ -878,9 +973,18 @@ describe('v1.DisksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetIamPolicyDiskRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.resource = '';
+      const defaultValue1 = getTypeDefaultValue('GetIamPolicyDiskRequest', [
+        'project',
+      ]);
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('GetIamPolicyDiskRequest', [
+        'zone',
+      ]);
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue('GetIamPolicyDiskRequest', [
+        'resource',
+      ]);
+      request.resource = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.getIamPolicy(request), expectedError);
@@ -897,27 +1001,27 @@ describe('v1.DisksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertDiskRequest()
       );
-      request.project = '';
-      request.zone = '';
-      const expectedHeaderRequestParams = 'project=&zone=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('InsertDiskRequest', [
+        'project',
+      ]);
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('InsertDiskRequest', ['zone']);
+      request.zone = defaultValue2;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
       client.innerApiCalls.insert = stubSimpleCall(expectedResponse);
       const [response] = await client.insert(request);
       assert.deepStrictEqual(response.latestResponse, expectedResponse);
-      assert(
-        (client.innerApiCalls.insert as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (client.innerApiCalls.insert as SinonStub).getCall(
+        0
+      ).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.insert as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes insert without error using callback', async () => {
@@ -929,16 +1033,13 @@ describe('v1.DisksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertDiskRequest()
       );
-      request.project = '';
-      request.zone = '';
-      const expectedHeaderRequestParams = 'project=&zone=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('InsertDiskRequest', [
+        'project',
+      ]);
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('InsertDiskRequest', ['zone']);
+      request.zone = defaultValue2;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -961,11 +1062,14 @@ describe('v1.DisksClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.insert as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (client.innerApiCalls.insert as SinonStub).getCall(
+        0
+      ).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.insert as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes insert with error', async () => {
@@ -977,24 +1081,24 @@ describe('v1.DisksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertDiskRequest()
       );
-      request.project = '';
-      request.zone = '';
-      const expectedHeaderRequestParams = 'project=&zone=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('InsertDiskRequest', [
+        'project',
+      ]);
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('InsertDiskRequest', ['zone']);
+      request.zone = defaultValue2;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.insert = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.insert(request), expectedError);
-      assert(
-        (client.innerApiCalls.insert as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (client.innerApiCalls.insert as SinonStub).getCall(
+        0
+      ).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.insert as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes insert with closed client', async () => {
@@ -1006,8 +1110,12 @@ describe('v1.DisksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertDiskRequest()
       );
-      request.project = '';
-      request.zone = '';
+      const defaultValue1 = getTypeDefaultValue('InsertDiskRequest', [
+        'project',
+      ]);
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('InsertDiskRequest', ['zone']);
+      request.zone = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.insert(request), expectedError);
@@ -1024,17 +1132,22 @@ describe('v1.DisksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.RemoveResourcePoliciesDiskRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.disk = '';
-      const expectedHeaderRequestParams = 'project=&zone=&disk=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'RemoveResourcePoliciesDiskRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        'RemoveResourcePoliciesDiskRequest',
+        ['zone']
+      );
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        'RemoveResourcePoliciesDiskRequest',
+        ['disk']
+      );
+      request.disk = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&disk=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -1042,11 +1155,14 @@ describe('v1.DisksClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.removeResourcePolicies(request);
       assert.deepStrictEqual(response.latestResponse, expectedResponse);
-      assert(
-        (client.innerApiCalls.removeResourcePolicies as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.removeResourcePolicies as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.removeResourcePolicies as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes removeResourcePolicies without error using callback', async () => {
@@ -1058,17 +1174,22 @@ describe('v1.DisksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.RemoveResourcePoliciesDiskRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.disk = '';
-      const expectedHeaderRequestParams = 'project=&zone=&disk=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'RemoveResourcePoliciesDiskRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        'RemoveResourcePoliciesDiskRequest',
+        ['zone']
+      );
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        'RemoveResourcePoliciesDiskRequest',
+        ['disk']
+      );
+      request.disk = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&disk=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -1091,11 +1212,14 @@ describe('v1.DisksClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.removeResourcePolicies as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.removeResourcePolicies as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.removeResourcePolicies as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes removeResourcePolicies with error', async () => {
@@ -1107,17 +1231,22 @@ describe('v1.DisksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.RemoveResourcePoliciesDiskRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.disk = '';
-      const expectedHeaderRequestParams = 'project=&zone=&disk=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'RemoveResourcePoliciesDiskRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        'RemoveResourcePoliciesDiskRequest',
+        ['zone']
+      );
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        'RemoveResourcePoliciesDiskRequest',
+        ['disk']
+      );
+      request.disk = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&disk=${defaultValue3}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.removeResourcePolicies = stubSimpleCall(
         undefined,
@@ -1127,11 +1256,14 @@ describe('v1.DisksClient', () => {
         client.removeResourcePolicies(request),
         expectedError
       );
-      assert(
-        (client.innerApiCalls.removeResourcePolicies as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.removeResourcePolicies as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.removeResourcePolicies as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes removeResourcePolicies with closed client', async () => {
@@ -1143,9 +1275,21 @@ describe('v1.DisksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.RemoveResourcePoliciesDiskRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.disk = '';
+      const defaultValue1 = getTypeDefaultValue(
+        'RemoveResourcePoliciesDiskRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        'RemoveResourcePoliciesDiskRequest',
+        ['zone']
+      );
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        'RemoveResourcePoliciesDiskRequest',
+        ['disk']
+      );
+      request.disk = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(
@@ -1165,28 +1309,29 @@ describe('v1.DisksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ResizeDiskRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.disk = '';
-      const expectedHeaderRequestParams = 'project=&zone=&disk=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ResizeDiskRequest', [
+        'project',
+      ]);
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('ResizeDiskRequest', ['zone']);
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue('ResizeDiskRequest', ['disk']);
+      request.disk = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&disk=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
       client.innerApiCalls.resize = stubSimpleCall(expectedResponse);
       const [response] = await client.resize(request);
       assert.deepStrictEqual(response.latestResponse, expectedResponse);
-      assert(
-        (client.innerApiCalls.resize as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (client.innerApiCalls.resize as SinonStub).getCall(
+        0
+      ).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.resize as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes resize without error using callback', async () => {
@@ -1198,17 +1343,15 @@ describe('v1.DisksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ResizeDiskRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.disk = '';
-      const expectedHeaderRequestParams = 'project=&zone=&disk=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ResizeDiskRequest', [
+        'project',
+      ]);
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('ResizeDiskRequest', ['zone']);
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue('ResizeDiskRequest', ['disk']);
+      request.disk = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&disk=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -1231,11 +1374,14 @@ describe('v1.DisksClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.resize as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (client.innerApiCalls.resize as SinonStub).getCall(
+        0
+      ).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.resize as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes resize with error', async () => {
@@ -1247,25 +1393,26 @@ describe('v1.DisksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ResizeDiskRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.disk = '';
-      const expectedHeaderRequestParams = 'project=&zone=&disk=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ResizeDiskRequest', [
+        'project',
+      ]);
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('ResizeDiskRequest', ['zone']);
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue('ResizeDiskRequest', ['disk']);
+      request.disk = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&disk=${defaultValue3}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.resize = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.resize(request), expectedError);
-      assert(
-        (client.innerApiCalls.resize as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (client.innerApiCalls.resize as SinonStub).getCall(
+        0
+      ).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.resize as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes resize with closed client', async () => {
@@ -1277,9 +1424,14 @@ describe('v1.DisksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ResizeDiskRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.disk = '';
+      const defaultValue1 = getTypeDefaultValue('ResizeDiskRequest', [
+        'project',
+      ]);
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('ResizeDiskRequest', ['zone']);
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue('ResizeDiskRequest', ['disk']);
+      request.disk = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.resize(request), expectedError);
@@ -1296,28 +1448,33 @@ describe('v1.DisksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetIamPolicyDiskRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.resource = '';
-      const expectedHeaderRequestParams = 'project=&zone=&resource=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('SetIamPolicyDiskRequest', [
+        'project',
+      ]);
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('SetIamPolicyDiskRequest', [
+        'zone',
+      ]);
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue('SetIamPolicyDiskRequest', [
+        'resource',
+      ]);
+      request.resource = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&resource=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Policy()
       );
       client.innerApiCalls.setIamPolicy = stubSimpleCall(expectedResponse);
       const [response] = await client.setIamPolicy(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.setIamPolicy as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.setIamPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.setIamPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes setIamPolicy without error using callback', async () => {
@@ -1329,17 +1486,19 @@ describe('v1.DisksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetIamPolicyDiskRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.resource = '';
-      const expectedHeaderRequestParams = 'project=&zone=&resource=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('SetIamPolicyDiskRequest', [
+        'project',
+      ]);
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('SetIamPolicyDiskRequest', [
+        'zone',
+      ]);
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue('SetIamPolicyDiskRequest', [
+        'resource',
+      ]);
+      request.resource = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&resource=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Policy()
       );
@@ -1362,11 +1521,14 @@ describe('v1.DisksClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.setIamPolicy as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.setIamPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.setIamPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes setIamPolicy with error', async () => {
@@ -1378,28 +1540,33 @@ describe('v1.DisksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetIamPolicyDiskRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.resource = '';
-      const expectedHeaderRequestParams = 'project=&zone=&resource=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('SetIamPolicyDiskRequest', [
+        'project',
+      ]);
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('SetIamPolicyDiskRequest', [
+        'zone',
+      ]);
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue('SetIamPolicyDiskRequest', [
+        'resource',
+      ]);
+      request.resource = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&resource=${defaultValue3}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.setIamPolicy = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.setIamPolicy(request), expectedError);
-      assert(
-        (client.innerApiCalls.setIamPolicy as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.setIamPolicy as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.setIamPolicy as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes setIamPolicy with closed client', async () => {
@@ -1411,9 +1578,18 @@ describe('v1.DisksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetIamPolicyDiskRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.resource = '';
+      const defaultValue1 = getTypeDefaultValue('SetIamPolicyDiskRequest', [
+        'project',
+      ]);
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('SetIamPolicyDiskRequest', [
+        'zone',
+      ]);
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue('SetIamPolicyDiskRequest', [
+        'resource',
+      ]);
+      request.resource = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.setIamPolicy(request), expectedError);
@@ -1430,28 +1606,33 @@ describe('v1.DisksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetLabelsDiskRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.resource = '';
-      const expectedHeaderRequestParams = 'project=&zone=&resource=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('SetLabelsDiskRequest', [
+        'project',
+      ]);
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('SetLabelsDiskRequest', [
+        'zone',
+      ]);
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue('SetLabelsDiskRequest', [
+        'resource',
+      ]);
+      request.resource = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&resource=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
       client.innerApiCalls.setLabels = stubSimpleCall(expectedResponse);
       const [response] = await client.setLabels(request);
       assert.deepStrictEqual(response.latestResponse, expectedResponse);
-      assert(
-        (client.innerApiCalls.setLabels as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.setLabels as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.setLabels as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes setLabels without error using callback', async () => {
@@ -1463,17 +1644,19 @@ describe('v1.DisksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetLabelsDiskRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.resource = '';
-      const expectedHeaderRequestParams = 'project=&zone=&resource=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('SetLabelsDiskRequest', [
+        'project',
+      ]);
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('SetLabelsDiskRequest', [
+        'zone',
+      ]);
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue('SetLabelsDiskRequest', [
+        'resource',
+      ]);
+      request.resource = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&resource=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -1496,11 +1679,14 @@ describe('v1.DisksClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.setLabels as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.setLabels as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.setLabels as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes setLabels with error', async () => {
@@ -1512,25 +1698,30 @@ describe('v1.DisksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetLabelsDiskRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.resource = '';
-      const expectedHeaderRequestParams = 'project=&zone=&resource=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('SetLabelsDiskRequest', [
+        'project',
+      ]);
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('SetLabelsDiskRequest', [
+        'zone',
+      ]);
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue('SetLabelsDiskRequest', [
+        'resource',
+      ]);
+      request.resource = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&resource=${defaultValue3}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.setLabels = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.setLabels(request), expectedError);
-      assert(
-        (client.innerApiCalls.setLabels as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.setLabels as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.setLabels as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes setLabels with closed client', async () => {
@@ -1542,9 +1733,18 @@ describe('v1.DisksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetLabelsDiskRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.resource = '';
+      const defaultValue1 = getTypeDefaultValue('SetLabelsDiskRequest', [
+        'project',
+      ]);
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('SetLabelsDiskRequest', [
+        'zone',
+      ]);
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue('SetLabelsDiskRequest', [
+        'resource',
+      ]);
+      request.resource = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.setLabels(request), expectedError);
@@ -1561,17 +1761,22 @@ describe('v1.DisksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.TestIamPermissionsDiskRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.resource = '';
-      const expectedHeaderRequestParams = 'project=&zone=&resource=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'TestIamPermissionsDiskRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        'TestIamPermissionsDiskRequest',
+        ['zone']
+      );
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        'TestIamPermissionsDiskRequest',
+        ['resource']
+      );
+      request.resource = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&resource=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.TestPermissionsResponse()
       );
@@ -1579,11 +1784,14 @@ describe('v1.DisksClient', () => {
         stubSimpleCall(expectedResponse);
       const [response] = await client.testIamPermissions(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.testIamPermissions as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.testIamPermissions as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.testIamPermissions as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes testIamPermissions without error using callback', async () => {
@@ -1595,17 +1803,22 @@ describe('v1.DisksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.TestIamPermissionsDiskRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.resource = '';
-      const expectedHeaderRequestParams = 'project=&zone=&resource=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'TestIamPermissionsDiskRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        'TestIamPermissionsDiskRequest',
+        ['zone']
+      );
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        'TestIamPermissionsDiskRequest',
+        ['resource']
+      );
+      request.resource = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&resource=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.TestPermissionsResponse()
       );
@@ -1628,11 +1841,14 @@ describe('v1.DisksClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.testIamPermissions as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.testIamPermissions as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.testIamPermissions as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes testIamPermissions with error', async () => {
@@ -1644,28 +1860,36 @@ describe('v1.DisksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.TestIamPermissionsDiskRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.resource = '';
-      const expectedHeaderRequestParams = 'project=&zone=&resource=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        'TestIamPermissionsDiskRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        'TestIamPermissionsDiskRequest',
+        ['zone']
+      );
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        'TestIamPermissionsDiskRequest',
+        ['resource']
+      );
+      request.resource = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&resource=${defaultValue3}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.testIamPermissions = stubSimpleCall(
         undefined,
         expectedError
       );
       await assert.rejects(client.testIamPermissions(request), expectedError);
-      assert(
-        (client.innerApiCalls.testIamPermissions as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.testIamPermissions as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.testIamPermissions as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes testIamPermissions with closed client', async () => {
@@ -1677,9 +1901,21 @@ describe('v1.DisksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.TestIamPermissionsDiskRequest()
       );
-      request.project = '';
-      request.zone = '';
-      request.resource = '';
+      const defaultValue1 = getTypeDefaultValue(
+        'TestIamPermissionsDiskRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        'TestIamPermissionsDiskRequest',
+        ['zone']
+      );
+      request.zone = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        'TestIamPermissionsDiskRequest',
+        ['resource']
+      );
+      request.resource = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.testIamPermissions(request), expectedError);
@@ -1696,8 +1932,11 @@ describe('v1.DisksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.AggregatedListDisksRequest()
       );
-      request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      const defaultValue1 = getTypeDefaultValue('AggregatedListDisksRequest', [
+        'project',
+      ]);
+      request.project = defaultValue1;
+      const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedResponse = [
         [
           'tuple_key_1',
@@ -1734,11 +1973,12 @@ describe('v1.DisksClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.aggregatedList.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.aggregatedList.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -1751,8 +1991,11 @@ describe('v1.DisksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.AggregatedListDisksRequest()
       );
-      request.project = '';
-      const expectedHeaderRequestParams = 'project=';
+      const defaultValue1 = getTypeDefaultValue('AggregatedListDisksRequest', [
+        'project',
+      ]);
+      request.project = defaultValue1;
+      const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedError = new Error('expected');
       client.descriptors.page.aggregatedList.asyncIterate =
         stubAsyncIterationCall(undefined, expectedError);
@@ -1771,11 +2014,12 @@ describe('v1.DisksClient', () => {
         ).getCall(0).args[1],
         request
       );
-      assert.strictEqual(
-        (
-          client.descriptors.page.aggregatedList.asyncIterate as SinonStub
-        ).getCall(0).args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.aggregatedList.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });
@@ -1790,16 +2034,13 @@ describe('v1.DisksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListDisksRequest()
       );
-      request.project = '';
-      request.zone = '';
-      const expectedHeaderRequestParams = 'project=&zone=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListDisksRequest', [
+        'project',
+      ]);
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('ListDisksRequest', ['zone']);
+      request.zone = defaultValue2;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.compute.v1.Disk()),
         generateSampleMessage(new protos.google.cloud.compute.v1.Disk()),
@@ -1808,11 +2049,13 @@ describe('v1.DisksClient', () => {
       client.innerApiCalls.list = stubSimpleCall(expectedResponse);
       const [response] = await client.list(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.list as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (client.innerApiCalls.list as SinonStub).getCall(0)
+        .args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.list as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes list without error using callback', async () => {
@@ -1824,16 +2067,13 @@ describe('v1.DisksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListDisksRequest()
       );
-      request.project = '';
-      request.zone = '';
-      const expectedHeaderRequestParams = 'project=&zone=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListDisksRequest', [
+        'project',
+      ]);
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('ListDisksRequest', ['zone']);
+      request.zone = defaultValue2;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.compute.v1.Disk()),
         generateSampleMessage(new protos.google.cloud.compute.v1.Disk()),
@@ -1857,11 +2097,13 @@ describe('v1.DisksClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.list as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (client.innerApiCalls.list as SinonStub).getCall(0)
+        .args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.list as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes list with error', async () => {
@@ -1873,24 +2115,23 @@ describe('v1.DisksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListDisksRequest()
       );
-      request.project = '';
-      request.zone = '';
-      const expectedHeaderRequestParams = 'project=&zone=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue('ListDisksRequest', [
+        'project',
+      ]);
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('ListDisksRequest', ['zone']);
+      request.zone = defaultValue2;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.list = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.list(request), expectedError);
-      assert(
-        (client.innerApiCalls.list as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (client.innerApiCalls.list as SinonStub).getCall(0)
+        .args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.list as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listStream without error', async () => {
@@ -1902,9 +2143,13 @@ describe('v1.DisksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListDisksRequest()
       );
-      request.project = '';
-      request.zone = '';
-      const expectedHeaderRequestParams = 'project=&zone=';
+      const defaultValue1 = getTypeDefaultValue('ListDisksRequest', [
+        'project',
+      ]);
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('ListDisksRequest', ['zone']);
+      request.zone = defaultValue2;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.compute.v1.Disk()),
         generateSampleMessage(new protos.google.cloud.compute.v1.Disk()),
@@ -1932,10 +2177,12 @@ describe('v1.DisksClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.list, request)
       );
-      assert.strictEqual(
-        (client.descriptors.page.list.createStream as SinonStub).getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.list.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -1948,9 +2195,13 @@ describe('v1.DisksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListDisksRequest()
       );
-      request.project = '';
-      request.zone = '';
-      const expectedHeaderRequestParams = 'project=&zone=';
+      const defaultValue1 = getTypeDefaultValue('ListDisksRequest', [
+        'project',
+      ]);
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('ListDisksRequest', ['zone']);
+      request.zone = defaultValue2;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}`;
       const expectedError = new Error('expected');
       client.descriptors.page.list.createStream = stubPageStreamingCall(
         undefined,
@@ -1975,10 +2226,12 @@ describe('v1.DisksClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.list, request)
       );
-      assert.strictEqual(
-        (client.descriptors.page.list.createStream as SinonStub).getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.list.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -1991,9 +2244,13 @@ describe('v1.DisksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListDisksRequest()
       );
-      request.project = '';
-      request.zone = '';
-      const expectedHeaderRequestParams = 'project=&zone=';
+      const defaultValue1 = getTypeDefaultValue('ListDisksRequest', [
+        'project',
+      ]);
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('ListDisksRequest', ['zone']);
+      request.zone = defaultValue2;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.compute.v1.Disk()),
         generateSampleMessage(new protos.google.cloud.compute.v1.Disk()),
@@ -2012,10 +2269,12 @@ describe('v1.DisksClient', () => {
           .args[1],
         request
       );
-      assert.strictEqual(
-        (client.descriptors.page.list.asyncIterate as SinonStub).getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.list.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -2028,9 +2287,13 @@ describe('v1.DisksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListDisksRequest()
       );
-      request.project = '';
-      request.zone = '';
-      const expectedHeaderRequestParams = 'project=&zone=';
+      const defaultValue1 = getTypeDefaultValue('ListDisksRequest', [
+        'project',
+      ]);
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue('ListDisksRequest', ['zone']);
+      request.zone = defaultValue2;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}`;
       const expectedError = new Error('expected');
       client.descriptors.page.list.asyncIterate = stubAsyncIterationCall(
         undefined,
@@ -2048,10 +2311,12 @@ describe('v1.DisksClient', () => {
           .args[1],
         request
       );
-      assert.strictEqual(
-        (client.descriptors.page.list.asyncIterate as SinonStub).getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.list.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });

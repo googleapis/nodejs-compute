@@ -424,9 +424,9 @@ export class RegionSecurityPoliciesClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        project: request.project || '',
-        region: request.region || '',
-        security_policy: request.securityPolicy || '',
+        project: request.project ?? '',
+        region: request.region ?? '',
+        security_policy: request.securityPolicy ?? '',
       });
     this.initialize();
     return this.innerApiCalls
@@ -547,9 +547,9 @@ export class RegionSecurityPoliciesClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        project: request.project || '',
-        region: request.region || '',
-        security_policy: request.securityPolicy || '',
+        project: request.project ?? '',
+        region: request.region ?? '',
+        security_policy: request.securityPolicy ?? '',
       });
     this.initialize();
     return this.innerApiCalls.get(request, options, callback);
@@ -653,8 +653,8 @@ export class RegionSecurityPoliciesClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        project: request.project || '',
-        region: request.region || '',
+        project: request.project ?? '',
+        region: request.region ?? '',
       });
     this.initialize();
     return this.innerApiCalls
@@ -778,9 +778,9 @@ export class RegionSecurityPoliciesClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        project: request.project || '',
-        region: request.region || '',
-        security_policy: request.securityPolicy || '',
+        project: request.project ?? '',
+        region: request.region ?? '',
+        security_policy: request.securityPolicy ?? '',
       });
     this.initialize();
     return this.innerApiCalls
@@ -899,8 +899,8 @@ export class RegionSecurityPoliciesClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        project: request.project || '',
-        region: request.region || '',
+        project: request.project ?? '',
+        region: request.region ?? '',
       });
     this.initialize();
     return this.innerApiCalls.list(request, options, callback);
@@ -946,8 +946,8 @@ export class RegionSecurityPoliciesClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        project: request.project || '',
-        region: request.region || '',
+        project: request.project ?? '',
+        region: request.region ?? '',
       });
     const defaultCallSettings = this._defaults['list'];
     const callSettings = defaultCallSettings.merge(options);
@@ -1002,8 +1002,8 @@ export class RegionSecurityPoliciesClient {
     options.otherArgs.headers = options.otherArgs.headers || {};
     options.otherArgs.headers['x-goog-request-params'] =
       this._gaxModule.routingHeader.fromParams({
-        project: request.project || '',
-        region: request.region || '',
+        project: request.project ?? '',
+        region: request.region ?? '',
       });
     const defaultCallSettings = this._defaults['list'];
     const callSettings = defaultCallSettings.merge(options);
