@@ -248,17 +248,20 @@ describe('v1.MachineTypesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetMachineTypeRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetMachineTypeRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetMachineTypeRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetMachineTypeRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetMachineTypeRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('GetMachineTypeRequest', [
-        'machineType',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetMachineTypeRequest',
+        ['machineType']
+      );
       request.machineType = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&machine_type=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -285,17 +288,20 @@ describe('v1.MachineTypesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetMachineTypeRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetMachineTypeRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetMachineTypeRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetMachineTypeRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetMachineTypeRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('GetMachineTypeRequest', [
-        'machineType',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetMachineTypeRequest',
+        ['machineType']
+      );
       request.machineType = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&machine_type=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -337,17 +343,20 @@ describe('v1.MachineTypesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetMachineTypeRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetMachineTypeRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetMachineTypeRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetMachineTypeRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetMachineTypeRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('GetMachineTypeRequest', [
-        'machineType',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetMachineTypeRequest',
+        ['machineType']
+      );
       request.machineType = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&machine_type=${defaultValue3}`;
       const expectedError = new Error('expected');
@@ -371,17 +380,20 @@ describe('v1.MachineTypesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetMachineTypeRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetMachineTypeRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetMachineTypeRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetMachineTypeRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetMachineTypeRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('GetMachineTypeRequest', [
-        'machineType',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetMachineTypeRequest',
+        ['machineType']
+      );
       request.machineType = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -400,7 +412,7 @@ describe('v1.MachineTypesClient', () => {
         new protos.google.cloud.compute.v1.AggregatedListMachineTypesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'AggregatedListMachineTypesRequest',
+        '.google.cloud.compute.v1.AggregatedListMachineTypesRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -460,7 +472,7 @@ describe('v1.MachineTypesClient', () => {
         new protos.google.cloud.compute.v1.AggregatedListMachineTypesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'AggregatedListMachineTypesRequest',
+        '.google.cloud.compute.v1.AggregatedListMachineTypesRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -503,13 +515,15 @@ describe('v1.MachineTypesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListMachineTypesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListMachineTypesRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListMachineTypesRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ListMachineTypesRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListMachineTypesRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}`;
       const expectedResponse = [
@@ -538,13 +552,15 @@ describe('v1.MachineTypesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListMachineTypesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListMachineTypesRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListMachineTypesRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ListMachineTypesRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListMachineTypesRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}`;
       const expectedResponse = [
@@ -588,13 +604,15 @@ describe('v1.MachineTypesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListMachineTypesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListMachineTypesRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListMachineTypesRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ListMachineTypesRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListMachineTypesRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}`;
       const expectedError = new Error('expected');
@@ -618,13 +636,15 @@ describe('v1.MachineTypesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListMachineTypesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListMachineTypesRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListMachineTypesRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ListMachineTypesRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListMachineTypesRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}`;
       const expectedResponse = [
@@ -675,13 +695,15 @@ describe('v1.MachineTypesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListMachineTypesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListMachineTypesRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListMachineTypesRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ListMachineTypesRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListMachineTypesRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}`;
       const expectedError = new Error('expected');
@@ -729,13 +751,15 @@ describe('v1.MachineTypesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListMachineTypesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListMachineTypesRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListMachineTypesRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ListMachineTypesRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListMachineTypesRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}`;
       const expectedResponse = [
@@ -774,13 +798,15 @@ describe('v1.MachineTypesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListMachineTypesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListMachineTypesRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListMachineTypesRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ListMachineTypesRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListMachineTypesRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}`;
       const expectedError = new Error('expected');

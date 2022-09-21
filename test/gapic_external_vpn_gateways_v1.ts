@@ -266,12 +266,12 @@ describe('v1.ExternalVpnGatewaysClient', () => {
         new protos.google.cloud.compute.v1.DeleteExternalVpnGatewayRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteExternalVpnGatewayRequest',
+        '.google.cloud.compute.v1.DeleteExternalVpnGatewayRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'DeleteExternalVpnGatewayRequest',
+        '.google.cloud.compute.v1.DeleteExternalVpnGatewayRequest',
         ['externalVpnGateway']
       );
       request.externalVpnGateway = defaultValue2;
@@ -304,12 +304,12 @@ describe('v1.ExternalVpnGatewaysClient', () => {
         new protos.google.cloud.compute.v1.DeleteExternalVpnGatewayRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteExternalVpnGatewayRequest',
+        '.google.cloud.compute.v1.DeleteExternalVpnGatewayRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'DeleteExternalVpnGatewayRequest',
+        '.google.cloud.compute.v1.DeleteExternalVpnGatewayRequest',
         ['externalVpnGateway']
       );
       request.externalVpnGateway = defaultValue2;
@@ -358,12 +358,12 @@ describe('v1.ExternalVpnGatewaysClient', () => {
         new protos.google.cloud.compute.v1.DeleteExternalVpnGatewayRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteExternalVpnGatewayRequest',
+        '.google.cloud.compute.v1.DeleteExternalVpnGatewayRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'DeleteExternalVpnGatewayRequest',
+        '.google.cloud.compute.v1.DeleteExternalVpnGatewayRequest',
         ['externalVpnGateway']
       );
       request.externalVpnGateway = defaultValue2;
@@ -393,12 +393,12 @@ describe('v1.ExternalVpnGatewaysClient', () => {
         new protos.google.cloud.compute.v1.DeleteExternalVpnGatewayRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteExternalVpnGatewayRequest',
+        '.google.cloud.compute.v1.DeleteExternalVpnGatewayRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'DeleteExternalVpnGatewayRequest',
+        '.google.cloud.compute.v1.DeleteExternalVpnGatewayRequest',
         ['externalVpnGateway']
       );
       request.externalVpnGateway = defaultValue2;
@@ -421,12 +421,12 @@ describe('v1.ExternalVpnGatewaysClient', () => {
         new protos.google.cloud.compute.v1.GetExternalVpnGatewayRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetExternalVpnGatewayRequest',
+        '.google.cloud.compute.v1.GetExternalVpnGatewayRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'GetExternalVpnGatewayRequest',
+        '.google.cloud.compute.v1.GetExternalVpnGatewayRequest',
         ['externalVpnGateway']
       );
       request.externalVpnGateway = defaultValue2;
@@ -458,12 +458,12 @@ describe('v1.ExternalVpnGatewaysClient', () => {
         new protos.google.cloud.compute.v1.GetExternalVpnGatewayRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetExternalVpnGatewayRequest',
+        '.google.cloud.compute.v1.GetExternalVpnGatewayRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'GetExternalVpnGatewayRequest',
+        '.google.cloud.compute.v1.GetExternalVpnGatewayRequest',
         ['externalVpnGateway']
       );
       request.externalVpnGateway = defaultValue2;
@@ -510,12 +510,12 @@ describe('v1.ExternalVpnGatewaysClient', () => {
         new protos.google.cloud.compute.v1.GetExternalVpnGatewayRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetExternalVpnGatewayRequest',
+        '.google.cloud.compute.v1.GetExternalVpnGatewayRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'GetExternalVpnGatewayRequest',
+        '.google.cloud.compute.v1.GetExternalVpnGatewayRequest',
         ['externalVpnGateway']
       );
       request.externalVpnGateway = defaultValue2;
@@ -544,12 +544,12 @@ describe('v1.ExternalVpnGatewaysClient', () => {
         new protos.google.cloud.compute.v1.GetExternalVpnGatewayRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetExternalVpnGatewayRequest',
+        '.google.cloud.compute.v1.GetExternalVpnGatewayRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'GetExternalVpnGatewayRequest',
+        '.google.cloud.compute.v1.GetExternalVpnGatewayRequest',
         ['externalVpnGateway']
       );
       request.externalVpnGateway = defaultValue2;
@@ -572,7 +572,7 @@ describe('v1.ExternalVpnGatewaysClient', () => {
         new protos.google.cloud.compute.v1.InsertExternalVpnGatewayRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'InsertExternalVpnGatewayRequest',
+        '.google.cloud.compute.v1.InsertExternalVpnGatewayRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -605,7 +605,7 @@ describe('v1.ExternalVpnGatewaysClient', () => {
         new protos.google.cloud.compute.v1.InsertExternalVpnGatewayRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'InsertExternalVpnGatewayRequest',
+        '.google.cloud.compute.v1.InsertExternalVpnGatewayRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -654,7 +654,7 @@ describe('v1.ExternalVpnGatewaysClient', () => {
         new protos.google.cloud.compute.v1.InsertExternalVpnGatewayRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'InsertExternalVpnGatewayRequest',
+        '.google.cloud.compute.v1.InsertExternalVpnGatewayRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -684,7 +684,7 @@ describe('v1.ExternalVpnGatewaysClient', () => {
         new protos.google.cloud.compute.v1.InsertExternalVpnGatewayRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'InsertExternalVpnGatewayRequest',
+        '.google.cloud.compute.v1.InsertExternalVpnGatewayRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -707,12 +707,12 @@ describe('v1.ExternalVpnGatewaysClient', () => {
         new protos.google.cloud.compute.v1.SetLabelsExternalVpnGatewayRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SetLabelsExternalVpnGatewayRequest',
+        '.google.cloud.compute.v1.SetLabelsExternalVpnGatewayRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'SetLabelsExternalVpnGatewayRequest',
+        '.google.cloud.compute.v1.SetLabelsExternalVpnGatewayRequest',
         ['resource']
       );
       request.resource = defaultValue2;
@@ -745,12 +745,12 @@ describe('v1.ExternalVpnGatewaysClient', () => {
         new protos.google.cloud.compute.v1.SetLabelsExternalVpnGatewayRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SetLabelsExternalVpnGatewayRequest',
+        '.google.cloud.compute.v1.SetLabelsExternalVpnGatewayRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'SetLabelsExternalVpnGatewayRequest',
+        '.google.cloud.compute.v1.SetLabelsExternalVpnGatewayRequest',
         ['resource']
       );
       request.resource = defaultValue2;
@@ -799,12 +799,12 @@ describe('v1.ExternalVpnGatewaysClient', () => {
         new protos.google.cloud.compute.v1.SetLabelsExternalVpnGatewayRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SetLabelsExternalVpnGatewayRequest',
+        '.google.cloud.compute.v1.SetLabelsExternalVpnGatewayRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'SetLabelsExternalVpnGatewayRequest',
+        '.google.cloud.compute.v1.SetLabelsExternalVpnGatewayRequest',
         ['resource']
       );
       request.resource = defaultValue2;
@@ -834,12 +834,12 @@ describe('v1.ExternalVpnGatewaysClient', () => {
         new protos.google.cloud.compute.v1.SetLabelsExternalVpnGatewayRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SetLabelsExternalVpnGatewayRequest',
+        '.google.cloud.compute.v1.SetLabelsExternalVpnGatewayRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'SetLabelsExternalVpnGatewayRequest',
+        '.google.cloud.compute.v1.SetLabelsExternalVpnGatewayRequest',
         ['resource']
       );
       request.resource = defaultValue2;
@@ -862,12 +862,12 @@ describe('v1.ExternalVpnGatewaysClient', () => {
         new protos.google.cloud.compute.v1.TestIamPermissionsExternalVpnGatewayRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'TestIamPermissionsExternalVpnGatewayRequest',
+        '.google.cloud.compute.v1.TestIamPermissionsExternalVpnGatewayRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'TestIamPermissionsExternalVpnGatewayRequest',
+        '.google.cloud.compute.v1.TestIamPermissionsExternalVpnGatewayRequest',
         ['resource']
       );
       request.resource = defaultValue2;
@@ -901,12 +901,12 @@ describe('v1.ExternalVpnGatewaysClient', () => {
         new protos.google.cloud.compute.v1.TestIamPermissionsExternalVpnGatewayRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'TestIamPermissionsExternalVpnGatewayRequest',
+        '.google.cloud.compute.v1.TestIamPermissionsExternalVpnGatewayRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'TestIamPermissionsExternalVpnGatewayRequest',
+        '.google.cloud.compute.v1.TestIamPermissionsExternalVpnGatewayRequest',
         ['resource']
       );
       request.resource = defaultValue2;
@@ -955,12 +955,12 @@ describe('v1.ExternalVpnGatewaysClient', () => {
         new protos.google.cloud.compute.v1.TestIamPermissionsExternalVpnGatewayRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'TestIamPermissionsExternalVpnGatewayRequest',
+        '.google.cloud.compute.v1.TestIamPermissionsExternalVpnGatewayRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'TestIamPermissionsExternalVpnGatewayRequest',
+        '.google.cloud.compute.v1.TestIamPermissionsExternalVpnGatewayRequest',
         ['resource']
       );
       request.resource = defaultValue2;
@@ -993,12 +993,12 @@ describe('v1.ExternalVpnGatewaysClient', () => {
         new protos.google.cloud.compute.v1.TestIamPermissionsExternalVpnGatewayRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'TestIamPermissionsExternalVpnGatewayRequest',
+        '.google.cloud.compute.v1.TestIamPermissionsExternalVpnGatewayRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'TestIamPermissionsExternalVpnGatewayRequest',
+        '.google.cloud.compute.v1.TestIamPermissionsExternalVpnGatewayRequest',
         ['resource']
       );
       request.resource = defaultValue2;
@@ -1021,7 +1021,7 @@ describe('v1.ExternalVpnGatewaysClient', () => {
         new protos.google.cloud.compute.v1.ListExternalVpnGatewaysRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListExternalVpnGatewaysRequest',
+        '.google.cloud.compute.v1.ListExternalVpnGatewaysRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -1061,7 +1061,7 @@ describe('v1.ExternalVpnGatewaysClient', () => {
         new protos.google.cloud.compute.v1.ListExternalVpnGatewaysRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListExternalVpnGatewaysRequest',
+        '.google.cloud.compute.v1.ListExternalVpnGatewaysRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -1116,7 +1116,7 @@ describe('v1.ExternalVpnGatewaysClient', () => {
         new protos.google.cloud.compute.v1.ListExternalVpnGatewaysRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListExternalVpnGatewaysRequest',
+        '.google.cloud.compute.v1.ListExternalVpnGatewaysRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -1145,7 +1145,7 @@ describe('v1.ExternalVpnGatewaysClient', () => {
         new protos.google.cloud.compute.v1.ListExternalVpnGatewaysRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListExternalVpnGatewaysRequest',
+        '.google.cloud.compute.v1.ListExternalVpnGatewaysRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -1208,7 +1208,7 @@ describe('v1.ExternalVpnGatewaysClient', () => {
         new protos.google.cloud.compute.v1.ListExternalVpnGatewaysRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListExternalVpnGatewaysRequest',
+        '.google.cloud.compute.v1.ListExternalVpnGatewaysRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -1262,7 +1262,7 @@ describe('v1.ExternalVpnGatewaysClient', () => {
         new protos.google.cloud.compute.v1.ListExternalVpnGatewaysRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListExternalVpnGatewaysRequest',
+        '.google.cloud.compute.v1.ListExternalVpnGatewaysRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -1313,7 +1313,7 @@ describe('v1.ExternalVpnGatewaysClient', () => {
         new protos.google.cloud.compute.v1.ListExternalVpnGatewaysRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListExternalVpnGatewaysRequest',
+        '.google.cloud.compute.v1.ListExternalVpnGatewaysRequest',
         ['project']
       );
       request.project = defaultValue1;

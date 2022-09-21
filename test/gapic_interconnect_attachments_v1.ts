@@ -262,17 +262,17 @@ describe('v1.InterconnectAttachmentsClient', () => {
         new protos.google.cloud.compute.v1.DeleteInterconnectAttachmentRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteInterconnectAttachmentRequest',
+        '.google.cloud.compute.v1.DeleteInterconnectAttachmentRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'DeleteInterconnectAttachmentRequest',
+        '.google.cloud.compute.v1.DeleteInterconnectAttachmentRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'DeleteInterconnectAttachmentRequest',
+        '.google.cloud.compute.v1.DeleteInterconnectAttachmentRequest',
         ['interconnectAttachment']
       );
       request.interconnectAttachment = defaultValue3;
@@ -304,17 +304,17 @@ describe('v1.InterconnectAttachmentsClient', () => {
         new protos.google.cloud.compute.v1.DeleteInterconnectAttachmentRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteInterconnectAttachmentRequest',
+        '.google.cloud.compute.v1.DeleteInterconnectAttachmentRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'DeleteInterconnectAttachmentRequest',
+        '.google.cloud.compute.v1.DeleteInterconnectAttachmentRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'DeleteInterconnectAttachmentRequest',
+        '.google.cloud.compute.v1.DeleteInterconnectAttachmentRequest',
         ['interconnectAttachment']
       );
       request.interconnectAttachment = defaultValue3;
@@ -362,17 +362,17 @@ describe('v1.InterconnectAttachmentsClient', () => {
         new protos.google.cloud.compute.v1.DeleteInterconnectAttachmentRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteInterconnectAttachmentRequest',
+        '.google.cloud.compute.v1.DeleteInterconnectAttachmentRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'DeleteInterconnectAttachmentRequest',
+        '.google.cloud.compute.v1.DeleteInterconnectAttachmentRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'DeleteInterconnectAttachmentRequest',
+        '.google.cloud.compute.v1.DeleteInterconnectAttachmentRequest',
         ['interconnectAttachment']
       );
       request.interconnectAttachment = defaultValue3;
@@ -401,17 +401,17 @@ describe('v1.InterconnectAttachmentsClient', () => {
         new protos.google.cloud.compute.v1.DeleteInterconnectAttachmentRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteInterconnectAttachmentRequest',
+        '.google.cloud.compute.v1.DeleteInterconnectAttachmentRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'DeleteInterconnectAttachmentRequest',
+        '.google.cloud.compute.v1.DeleteInterconnectAttachmentRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'DeleteInterconnectAttachmentRequest',
+        '.google.cloud.compute.v1.DeleteInterconnectAttachmentRequest',
         ['interconnectAttachment']
       );
       request.interconnectAttachment = defaultValue3;
@@ -433,17 +433,17 @@ describe('v1.InterconnectAttachmentsClient', () => {
         new protos.google.cloud.compute.v1.GetInterconnectAttachmentRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetInterconnectAttachmentRequest',
+        '.google.cloud.compute.v1.GetInterconnectAttachmentRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'GetInterconnectAttachmentRequest',
+        '.google.cloud.compute.v1.GetInterconnectAttachmentRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'GetInterconnectAttachmentRequest',
+        '.google.cloud.compute.v1.GetInterconnectAttachmentRequest',
         ['interconnectAttachment']
       );
       request.interconnectAttachment = defaultValue3;
@@ -474,17 +474,17 @@ describe('v1.InterconnectAttachmentsClient', () => {
         new protos.google.cloud.compute.v1.GetInterconnectAttachmentRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetInterconnectAttachmentRequest',
+        '.google.cloud.compute.v1.GetInterconnectAttachmentRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'GetInterconnectAttachmentRequest',
+        '.google.cloud.compute.v1.GetInterconnectAttachmentRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'GetInterconnectAttachmentRequest',
+        '.google.cloud.compute.v1.GetInterconnectAttachmentRequest',
         ['interconnectAttachment']
       );
       request.interconnectAttachment = defaultValue3;
@@ -530,17 +530,17 @@ describe('v1.InterconnectAttachmentsClient', () => {
         new protos.google.cloud.compute.v1.GetInterconnectAttachmentRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetInterconnectAttachmentRequest',
+        '.google.cloud.compute.v1.GetInterconnectAttachmentRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'GetInterconnectAttachmentRequest',
+        '.google.cloud.compute.v1.GetInterconnectAttachmentRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'GetInterconnectAttachmentRequest',
+        '.google.cloud.compute.v1.GetInterconnectAttachmentRequest',
         ['interconnectAttachment']
       );
       request.interconnectAttachment = defaultValue3;
@@ -568,17 +568,17 @@ describe('v1.InterconnectAttachmentsClient', () => {
         new protos.google.cloud.compute.v1.GetInterconnectAttachmentRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetInterconnectAttachmentRequest',
+        '.google.cloud.compute.v1.GetInterconnectAttachmentRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'GetInterconnectAttachmentRequest',
+        '.google.cloud.compute.v1.GetInterconnectAttachmentRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'GetInterconnectAttachmentRequest',
+        '.google.cloud.compute.v1.GetInterconnectAttachmentRequest',
         ['interconnectAttachment']
       );
       request.interconnectAttachment = defaultValue3;
@@ -600,12 +600,12 @@ describe('v1.InterconnectAttachmentsClient', () => {
         new protos.google.cloud.compute.v1.InsertInterconnectAttachmentRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'InsertInterconnectAttachmentRequest',
+        '.google.cloud.compute.v1.InsertInterconnectAttachmentRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'InsertInterconnectAttachmentRequest',
+        '.google.cloud.compute.v1.InsertInterconnectAttachmentRequest',
         ['region']
       );
       request.region = defaultValue2;
@@ -637,12 +637,12 @@ describe('v1.InterconnectAttachmentsClient', () => {
         new protos.google.cloud.compute.v1.InsertInterconnectAttachmentRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'InsertInterconnectAttachmentRequest',
+        '.google.cloud.compute.v1.InsertInterconnectAttachmentRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'InsertInterconnectAttachmentRequest',
+        '.google.cloud.compute.v1.InsertInterconnectAttachmentRequest',
         ['region']
       );
       request.region = defaultValue2;
@@ -690,12 +690,12 @@ describe('v1.InterconnectAttachmentsClient', () => {
         new protos.google.cloud.compute.v1.InsertInterconnectAttachmentRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'InsertInterconnectAttachmentRequest',
+        '.google.cloud.compute.v1.InsertInterconnectAttachmentRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'InsertInterconnectAttachmentRequest',
+        '.google.cloud.compute.v1.InsertInterconnectAttachmentRequest',
         ['region']
       );
       request.region = defaultValue2;
@@ -724,12 +724,12 @@ describe('v1.InterconnectAttachmentsClient', () => {
         new protos.google.cloud.compute.v1.InsertInterconnectAttachmentRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'InsertInterconnectAttachmentRequest',
+        '.google.cloud.compute.v1.InsertInterconnectAttachmentRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'InsertInterconnectAttachmentRequest',
+        '.google.cloud.compute.v1.InsertInterconnectAttachmentRequest',
         ['region']
       );
       request.region = defaultValue2;
@@ -751,17 +751,17 @@ describe('v1.InterconnectAttachmentsClient', () => {
         new protos.google.cloud.compute.v1.PatchInterconnectAttachmentRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'PatchInterconnectAttachmentRequest',
+        '.google.cloud.compute.v1.PatchInterconnectAttachmentRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'PatchInterconnectAttachmentRequest',
+        '.google.cloud.compute.v1.PatchInterconnectAttachmentRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'PatchInterconnectAttachmentRequest',
+        '.google.cloud.compute.v1.PatchInterconnectAttachmentRequest',
         ['interconnectAttachment']
       );
       request.interconnectAttachment = defaultValue3;
@@ -792,17 +792,17 @@ describe('v1.InterconnectAttachmentsClient', () => {
         new protos.google.cloud.compute.v1.PatchInterconnectAttachmentRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'PatchInterconnectAttachmentRequest',
+        '.google.cloud.compute.v1.PatchInterconnectAttachmentRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'PatchInterconnectAttachmentRequest',
+        '.google.cloud.compute.v1.PatchInterconnectAttachmentRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'PatchInterconnectAttachmentRequest',
+        '.google.cloud.compute.v1.PatchInterconnectAttachmentRequest',
         ['interconnectAttachment']
       );
       request.interconnectAttachment = defaultValue3;
@@ -848,17 +848,17 @@ describe('v1.InterconnectAttachmentsClient', () => {
         new protos.google.cloud.compute.v1.PatchInterconnectAttachmentRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'PatchInterconnectAttachmentRequest',
+        '.google.cloud.compute.v1.PatchInterconnectAttachmentRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'PatchInterconnectAttachmentRequest',
+        '.google.cloud.compute.v1.PatchInterconnectAttachmentRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'PatchInterconnectAttachmentRequest',
+        '.google.cloud.compute.v1.PatchInterconnectAttachmentRequest',
         ['interconnectAttachment']
       );
       request.interconnectAttachment = defaultValue3;
@@ -886,17 +886,17 @@ describe('v1.InterconnectAttachmentsClient', () => {
         new protos.google.cloud.compute.v1.PatchInterconnectAttachmentRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'PatchInterconnectAttachmentRequest',
+        '.google.cloud.compute.v1.PatchInterconnectAttachmentRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'PatchInterconnectAttachmentRequest',
+        '.google.cloud.compute.v1.PatchInterconnectAttachmentRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'PatchInterconnectAttachmentRequest',
+        '.google.cloud.compute.v1.PatchInterconnectAttachmentRequest',
         ['interconnectAttachment']
       );
       request.interconnectAttachment = defaultValue3;
@@ -918,17 +918,17 @@ describe('v1.InterconnectAttachmentsClient', () => {
         new protos.google.cloud.compute.v1.SetLabelsInterconnectAttachmentRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SetLabelsInterconnectAttachmentRequest',
+        '.google.cloud.compute.v1.SetLabelsInterconnectAttachmentRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'SetLabelsInterconnectAttachmentRequest',
+        '.google.cloud.compute.v1.SetLabelsInterconnectAttachmentRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'SetLabelsInterconnectAttachmentRequest',
+        '.google.cloud.compute.v1.SetLabelsInterconnectAttachmentRequest',
         ['resource']
       );
       request.resource = defaultValue3;
@@ -960,17 +960,17 @@ describe('v1.InterconnectAttachmentsClient', () => {
         new protos.google.cloud.compute.v1.SetLabelsInterconnectAttachmentRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SetLabelsInterconnectAttachmentRequest',
+        '.google.cloud.compute.v1.SetLabelsInterconnectAttachmentRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'SetLabelsInterconnectAttachmentRequest',
+        '.google.cloud.compute.v1.SetLabelsInterconnectAttachmentRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'SetLabelsInterconnectAttachmentRequest',
+        '.google.cloud.compute.v1.SetLabelsInterconnectAttachmentRequest',
         ['resource']
       );
       request.resource = defaultValue3;
@@ -1018,17 +1018,17 @@ describe('v1.InterconnectAttachmentsClient', () => {
         new protos.google.cloud.compute.v1.SetLabelsInterconnectAttachmentRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SetLabelsInterconnectAttachmentRequest',
+        '.google.cloud.compute.v1.SetLabelsInterconnectAttachmentRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'SetLabelsInterconnectAttachmentRequest',
+        '.google.cloud.compute.v1.SetLabelsInterconnectAttachmentRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'SetLabelsInterconnectAttachmentRequest',
+        '.google.cloud.compute.v1.SetLabelsInterconnectAttachmentRequest',
         ['resource']
       );
       request.resource = defaultValue3;
@@ -1057,17 +1057,17 @@ describe('v1.InterconnectAttachmentsClient', () => {
         new protos.google.cloud.compute.v1.SetLabelsInterconnectAttachmentRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SetLabelsInterconnectAttachmentRequest',
+        '.google.cloud.compute.v1.SetLabelsInterconnectAttachmentRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'SetLabelsInterconnectAttachmentRequest',
+        '.google.cloud.compute.v1.SetLabelsInterconnectAttachmentRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'SetLabelsInterconnectAttachmentRequest',
+        '.google.cloud.compute.v1.SetLabelsInterconnectAttachmentRequest',
         ['resource']
       );
       request.resource = defaultValue3;
@@ -1089,7 +1089,7 @@ describe('v1.InterconnectAttachmentsClient', () => {
         new protos.google.cloud.compute.v1.AggregatedListInterconnectAttachmentsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'AggregatedListInterconnectAttachmentsRequest',
+        '.google.cloud.compute.v1.AggregatedListInterconnectAttachmentsRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -1153,7 +1153,7 @@ describe('v1.InterconnectAttachmentsClient', () => {
         new protos.google.cloud.compute.v1.AggregatedListInterconnectAttachmentsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'AggregatedListInterconnectAttachmentsRequest',
+        '.google.cloud.compute.v1.AggregatedListInterconnectAttachmentsRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -1201,12 +1201,12 @@ describe('v1.InterconnectAttachmentsClient', () => {
         new protos.google.cloud.compute.v1.ListInterconnectAttachmentsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListInterconnectAttachmentsRequest',
+        '.google.cloud.compute.v1.ListInterconnectAttachmentsRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'ListInterconnectAttachmentsRequest',
+        '.google.cloud.compute.v1.ListInterconnectAttachmentsRequest',
         ['region']
       );
       request.region = defaultValue2;
@@ -1245,12 +1245,12 @@ describe('v1.InterconnectAttachmentsClient', () => {
         new protos.google.cloud.compute.v1.ListInterconnectAttachmentsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListInterconnectAttachmentsRequest',
+        '.google.cloud.compute.v1.ListInterconnectAttachmentsRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'ListInterconnectAttachmentsRequest',
+        '.google.cloud.compute.v1.ListInterconnectAttachmentsRequest',
         ['region']
       );
       request.region = defaultValue2;
@@ -1306,12 +1306,12 @@ describe('v1.InterconnectAttachmentsClient', () => {
         new protos.google.cloud.compute.v1.ListInterconnectAttachmentsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListInterconnectAttachmentsRequest',
+        '.google.cloud.compute.v1.ListInterconnectAttachmentsRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'ListInterconnectAttachmentsRequest',
+        '.google.cloud.compute.v1.ListInterconnectAttachmentsRequest',
         ['region']
       );
       request.region = defaultValue2;
@@ -1339,12 +1339,12 @@ describe('v1.InterconnectAttachmentsClient', () => {
         new protos.google.cloud.compute.v1.ListInterconnectAttachmentsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListInterconnectAttachmentsRequest',
+        '.google.cloud.compute.v1.ListInterconnectAttachmentsRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'ListInterconnectAttachmentsRequest',
+        '.google.cloud.compute.v1.ListInterconnectAttachmentsRequest',
         ['region']
       );
       request.region = defaultValue2;
@@ -1406,12 +1406,12 @@ describe('v1.InterconnectAttachmentsClient', () => {
         new protos.google.cloud.compute.v1.ListInterconnectAttachmentsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListInterconnectAttachmentsRequest',
+        '.google.cloud.compute.v1.ListInterconnectAttachmentsRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'ListInterconnectAttachmentsRequest',
+        '.google.cloud.compute.v1.ListInterconnectAttachmentsRequest',
         ['region']
       );
       request.region = defaultValue2;
@@ -1464,12 +1464,12 @@ describe('v1.InterconnectAttachmentsClient', () => {
         new protos.google.cloud.compute.v1.ListInterconnectAttachmentsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListInterconnectAttachmentsRequest',
+        '.google.cloud.compute.v1.ListInterconnectAttachmentsRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'ListInterconnectAttachmentsRequest',
+        '.google.cloud.compute.v1.ListInterconnectAttachmentsRequest',
         ['region']
       );
       request.region = defaultValue2;
@@ -1519,12 +1519,12 @@ describe('v1.InterconnectAttachmentsClient', () => {
         new protos.google.cloud.compute.v1.ListInterconnectAttachmentsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListInterconnectAttachmentsRequest',
+        '.google.cloud.compute.v1.ListInterconnectAttachmentsRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'ListInterconnectAttachmentsRequest',
+        '.google.cloud.compute.v1.ListInterconnectAttachmentsRequest',
         ['region']
       );
       request.region = defaultValue2;

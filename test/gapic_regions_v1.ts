@@ -248,11 +248,15 @@ describe('v1.RegionsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetRegionRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetRegionRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetRegionRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetRegionRequest', ['region']);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetRegionRequest',
+        ['region']
+      );
       request.region = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
@@ -279,11 +283,15 @@ describe('v1.RegionsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetRegionRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetRegionRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetRegionRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetRegionRequest', ['region']);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetRegionRequest',
+        ['region']
+      );
       request.region = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
@@ -325,11 +333,15 @@ describe('v1.RegionsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetRegionRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetRegionRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetRegionRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetRegionRequest', ['region']);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetRegionRequest',
+        ['region']
+      );
       request.region = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}`;
       const expectedError = new Error('expected');
@@ -353,11 +365,15 @@ describe('v1.RegionsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetRegionRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetRegionRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetRegionRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetRegionRequest', ['region']);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetRegionRequest',
+        ['region']
+      );
       request.region = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -375,9 +391,10 @@ describe('v1.RegionsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListRegionsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListRegionsRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListRegionsRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedResponse = [
@@ -406,9 +423,10 @@ describe('v1.RegionsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListRegionsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListRegionsRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListRegionsRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedResponse = [
@@ -452,9 +470,10 @@ describe('v1.RegionsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListRegionsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListRegionsRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListRegionsRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -478,9 +497,10 @@ describe('v1.RegionsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListRegionsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListRegionsRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListRegionsRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedResponse = [
@@ -528,9 +548,10 @@ describe('v1.RegionsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListRegionsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListRegionsRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListRegionsRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -575,9 +596,10 @@ describe('v1.RegionsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListRegionsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListRegionsRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListRegionsRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedResponse = [
@@ -616,9 +638,10 @@ describe('v1.RegionsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListRegionsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListRegionsRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListRegionsRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedError = new Error('expected');

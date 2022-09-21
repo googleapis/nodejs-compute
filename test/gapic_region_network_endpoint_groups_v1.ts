@@ -277,17 +277,17 @@ describe('v1.RegionNetworkEndpointGroupsClient', () => {
         new protos.google.cloud.compute.v1.DeleteRegionNetworkEndpointGroupRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteRegionNetworkEndpointGroupRequest',
+        '.google.cloud.compute.v1.DeleteRegionNetworkEndpointGroupRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'DeleteRegionNetworkEndpointGroupRequest',
+        '.google.cloud.compute.v1.DeleteRegionNetworkEndpointGroupRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'DeleteRegionNetworkEndpointGroupRequest',
+        '.google.cloud.compute.v1.DeleteRegionNetworkEndpointGroupRequest',
         ['networkEndpointGroup']
       );
       request.networkEndpointGroup = defaultValue3;
@@ -321,17 +321,17 @@ describe('v1.RegionNetworkEndpointGroupsClient', () => {
         new protos.google.cloud.compute.v1.DeleteRegionNetworkEndpointGroupRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteRegionNetworkEndpointGroupRequest',
+        '.google.cloud.compute.v1.DeleteRegionNetworkEndpointGroupRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'DeleteRegionNetworkEndpointGroupRequest',
+        '.google.cloud.compute.v1.DeleteRegionNetworkEndpointGroupRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'DeleteRegionNetworkEndpointGroupRequest',
+        '.google.cloud.compute.v1.DeleteRegionNetworkEndpointGroupRequest',
         ['networkEndpointGroup']
       );
       request.networkEndpointGroup = defaultValue3;
@@ -381,17 +381,17 @@ describe('v1.RegionNetworkEndpointGroupsClient', () => {
         new protos.google.cloud.compute.v1.DeleteRegionNetworkEndpointGroupRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteRegionNetworkEndpointGroupRequest',
+        '.google.cloud.compute.v1.DeleteRegionNetworkEndpointGroupRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'DeleteRegionNetworkEndpointGroupRequest',
+        '.google.cloud.compute.v1.DeleteRegionNetworkEndpointGroupRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'DeleteRegionNetworkEndpointGroupRequest',
+        '.google.cloud.compute.v1.DeleteRegionNetworkEndpointGroupRequest',
         ['networkEndpointGroup']
       );
       request.networkEndpointGroup = defaultValue3;
@@ -422,17 +422,17 @@ describe('v1.RegionNetworkEndpointGroupsClient', () => {
         new protos.google.cloud.compute.v1.DeleteRegionNetworkEndpointGroupRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteRegionNetworkEndpointGroupRequest',
+        '.google.cloud.compute.v1.DeleteRegionNetworkEndpointGroupRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'DeleteRegionNetworkEndpointGroupRequest',
+        '.google.cloud.compute.v1.DeleteRegionNetworkEndpointGroupRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'DeleteRegionNetworkEndpointGroupRequest',
+        '.google.cloud.compute.v1.DeleteRegionNetworkEndpointGroupRequest',
         ['networkEndpointGroup']
       );
       request.networkEndpointGroup = defaultValue3;
@@ -456,17 +456,17 @@ describe('v1.RegionNetworkEndpointGroupsClient', () => {
         new protos.google.cloud.compute.v1.GetRegionNetworkEndpointGroupRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetRegionNetworkEndpointGroupRequest',
+        '.google.cloud.compute.v1.GetRegionNetworkEndpointGroupRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'GetRegionNetworkEndpointGroupRequest',
+        '.google.cloud.compute.v1.GetRegionNetworkEndpointGroupRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'GetRegionNetworkEndpointGroupRequest',
+        '.google.cloud.compute.v1.GetRegionNetworkEndpointGroupRequest',
         ['networkEndpointGroup']
       );
       request.networkEndpointGroup = defaultValue3;
@@ -499,17 +499,17 @@ describe('v1.RegionNetworkEndpointGroupsClient', () => {
         new protos.google.cloud.compute.v1.GetRegionNetworkEndpointGroupRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetRegionNetworkEndpointGroupRequest',
+        '.google.cloud.compute.v1.GetRegionNetworkEndpointGroupRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'GetRegionNetworkEndpointGroupRequest',
+        '.google.cloud.compute.v1.GetRegionNetworkEndpointGroupRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'GetRegionNetworkEndpointGroupRequest',
+        '.google.cloud.compute.v1.GetRegionNetworkEndpointGroupRequest',
         ['networkEndpointGroup']
       );
       request.networkEndpointGroup = defaultValue3;
@@ -557,17 +557,17 @@ describe('v1.RegionNetworkEndpointGroupsClient', () => {
         new protos.google.cloud.compute.v1.GetRegionNetworkEndpointGroupRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetRegionNetworkEndpointGroupRequest',
+        '.google.cloud.compute.v1.GetRegionNetworkEndpointGroupRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'GetRegionNetworkEndpointGroupRequest',
+        '.google.cloud.compute.v1.GetRegionNetworkEndpointGroupRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'GetRegionNetworkEndpointGroupRequest',
+        '.google.cloud.compute.v1.GetRegionNetworkEndpointGroupRequest',
         ['networkEndpointGroup']
       );
       request.networkEndpointGroup = defaultValue3;
@@ -597,17 +597,17 @@ describe('v1.RegionNetworkEndpointGroupsClient', () => {
         new protos.google.cloud.compute.v1.GetRegionNetworkEndpointGroupRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetRegionNetworkEndpointGroupRequest',
+        '.google.cloud.compute.v1.GetRegionNetworkEndpointGroupRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'GetRegionNetworkEndpointGroupRequest',
+        '.google.cloud.compute.v1.GetRegionNetworkEndpointGroupRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'GetRegionNetworkEndpointGroupRequest',
+        '.google.cloud.compute.v1.GetRegionNetworkEndpointGroupRequest',
         ['networkEndpointGroup']
       );
       request.networkEndpointGroup = defaultValue3;
@@ -631,12 +631,12 @@ describe('v1.RegionNetworkEndpointGroupsClient', () => {
         new protos.google.cloud.compute.v1.InsertRegionNetworkEndpointGroupRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'InsertRegionNetworkEndpointGroupRequest',
+        '.google.cloud.compute.v1.InsertRegionNetworkEndpointGroupRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'InsertRegionNetworkEndpointGroupRequest',
+        '.google.cloud.compute.v1.InsertRegionNetworkEndpointGroupRequest',
         ['region']
       );
       request.region = defaultValue2;
@@ -670,12 +670,12 @@ describe('v1.RegionNetworkEndpointGroupsClient', () => {
         new protos.google.cloud.compute.v1.InsertRegionNetworkEndpointGroupRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'InsertRegionNetworkEndpointGroupRequest',
+        '.google.cloud.compute.v1.InsertRegionNetworkEndpointGroupRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'InsertRegionNetworkEndpointGroupRequest',
+        '.google.cloud.compute.v1.InsertRegionNetworkEndpointGroupRequest',
         ['region']
       );
       request.region = defaultValue2;
@@ -725,12 +725,12 @@ describe('v1.RegionNetworkEndpointGroupsClient', () => {
         new protos.google.cloud.compute.v1.InsertRegionNetworkEndpointGroupRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'InsertRegionNetworkEndpointGroupRequest',
+        '.google.cloud.compute.v1.InsertRegionNetworkEndpointGroupRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'InsertRegionNetworkEndpointGroupRequest',
+        '.google.cloud.compute.v1.InsertRegionNetworkEndpointGroupRequest',
         ['region']
       );
       request.region = defaultValue2;
@@ -761,12 +761,12 @@ describe('v1.RegionNetworkEndpointGroupsClient', () => {
         new protos.google.cloud.compute.v1.InsertRegionNetworkEndpointGroupRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'InsertRegionNetworkEndpointGroupRequest',
+        '.google.cloud.compute.v1.InsertRegionNetworkEndpointGroupRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'InsertRegionNetworkEndpointGroupRequest',
+        '.google.cloud.compute.v1.InsertRegionNetworkEndpointGroupRequest',
         ['region']
       );
       request.region = defaultValue2;
@@ -790,12 +790,12 @@ describe('v1.RegionNetworkEndpointGroupsClient', () => {
         new protos.google.cloud.compute.v1.ListRegionNetworkEndpointGroupsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListRegionNetworkEndpointGroupsRequest',
+        '.google.cloud.compute.v1.ListRegionNetworkEndpointGroupsRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'ListRegionNetworkEndpointGroupsRequest',
+        '.google.cloud.compute.v1.ListRegionNetworkEndpointGroupsRequest',
         ['region']
       );
       request.region = defaultValue2;
@@ -836,12 +836,12 @@ describe('v1.RegionNetworkEndpointGroupsClient', () => {
         new protos.google.cloud.compute.v1.ListRegionNetworkEndpointGroupsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListRegionNetworkEndpointGroupsRequest',
+        '.google.cloud.compute.v1.ListRegionNetworkEndpointGroupsRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'ListRegionNetworkEndpointGroupsRequest',
+        '.google.cloud.compute.v1.ListRegionNetworkEndpointGroupsRequest',
         ['region']
       );
       request.region = defaultValue2;
@@ -899,12 +899,12 @@ describe('v1.RegionNetworkEndpointGroupsClient', () => {
         new protos.google.cloud.compute.v1.ListRegionNetworkEndpointGroupsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListRegionNetworkEndpointGroupsRequest',
+        '.google.cloud.compute.v1.ListRegionNetworkEndpointGroupsRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'ListRegionNetworkEndpointGroupsRequest',
+        '.google.cloud.compute.v1.ListRegionNetworkEndpointGroupsRequest',
         ['region']
       );
       request.region = defaultValue2;
@@ -934,12 +934,12 @@ describe('v1.RegionNetworkEndpointGroupsClient', () => {
         new protos.google.cloud.compute.v1.ListRegionNetworkEndpointGroupsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListRegionNetworkEndpointGroupsRequest',
+        '.google.cloud.compute.v1.ListRegionNetworkEndpointGroupsRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'ListRegionNetworkEndpointGroupsRequest',
+        '.google.cloud.compute.v1.ListRegionNetworkEndpointGroupsRequest',
         ['region']
       );
       request.region = defaultValue2;
@@ -1003,12 +1003,12 @@ describe('v1.RegionNetworkEndpointGroupsClient', () => {
         new protos.google.cloud.compute.v1.ListRegionNetworkEndpointGroupsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListRegionNetworkEndpointGroupsRequest',
+        '.google.cloud.compute.v1.ListRegionNetworkEndpointGroupsRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'ListRegionNetworkEndpointGroupsRequest',
+        '.google.cloud.compute.v1.ListRegionNetworkEndpointGroupsRequest',
         ['region']
       );
       request.region = defaultValue2;
@@ -1063,12 +1063,12 @@ describe('v1.RegionNetworkEndpointGroupsClient', () => {
         new protos.google.cloud.compute.v1.ListRegionNetworkEndpointGroupsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListRegionNetworkEndpointGroupsRequest',
+        '.google.cloud.compute.v1.ListRegionNetworkEndpointGroupsRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'ListRegionNetworkEndpointGroupsRequest',
+        '.google.cloud.compute.v1.ListRegionNetworkEndpointGroupsRequest',
         ['region']
       );
       request.region = defaultValue2;
@@ -1120,12 +1120,12 @@ describe('v1.RegionNetworkEndpointGroupsClient', () => {
         new protos.google.cloud.compute.v1.ListRegionNetworkEndpointGroupsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListRegionNetworkEndpointGroupsRequest',
+        '.google.cloud.compute.v1.ListRegionNetworkEndpointGroupsRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'ListRegionNetworkEndpointGroupsRequest',
+        '.google.cloud.compute.v1.ListRegionNetworkEndpointGroupsRequest',
         ['region']
       );
       request.region = defaultValue2;

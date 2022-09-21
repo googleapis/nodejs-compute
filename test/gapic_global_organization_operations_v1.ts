@@ -277,7 +277,7 @@ describe('v1.GlobalOrganizationOperationsClient', () => {
         new protos.google.cloud.compute.v1.DeleteGlobalOrganizationOperationRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteGlobalOrganizationOperationRequest',
+        '.google.cloud.compute.v1.DeleteGlobalOrganizationOperationRequest',
         ['operation']
       );
       request.operation = defaultValue1;
@@ -311,7 +311,7 @@ describe('v1.GlobalOrganizationOperationsClient', () => {
         new protos.google.cloud.compute.v1.DeleteGlobalOrganizationOperationRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteGlobalOrganizationOperationRequest',
+        '.google.cloud.compute.v1.DeleteGlobalOrganizationOperationRequest',
         ['operation']
       );
       request.operation = defaultValue1;
@@ -361,7 +361,7 @@ describe('v1.GlobalOrganizationOperationsClient', () => {
         new protos.google.cloud.compute.v1.DeleteGlobalOrganizationOperationRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteGlobalOrganizationOperationRequest',
+        '.google.cloud.compute.v1.DeleteGlobalOrganizationOperationRequest',
         ['operation']
       );
       request.operation = defaultValue1;
@@ -392,7 +392,7 @@ describe('v1.GlobalOrganizationOperationsClient', () => {
         new protos.google.cloud.compute.v1.DeleteGlobalOrganizationOperationRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteGlobalOrganizationOperationRequest',
+        '.google.cloud.compute.v1.DeleteGlobalOrganizationOperationRequest',
         ['operation']
       );
       request.operation = defaultValue1;
@@ -416,7 +416,7 @@ describe('v1.GlobalOrganizationOperationsClient', () => {
         new protos.google.cloud.compute.v1.GetGlobalOrganizationOperationRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetGlobalOrganizationOperationRequest',
+        '.google.cloud.compute.v1.GetGlobalOrganizationOperationRequest',
         ['operation']
       );
       request.operation = defaultValue1;
@@ -449,7 +449,7 @@ describe('v1.GlobalOrganizationOperationsClient', () => {
         new protos.google.cloud.compute.v1.GetGlobalOrganizationOperationRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetGlobalOrganizationOperationRequest',
+        '.google.cloud.compute.v1.GetGlobalOrganizationOperationRequest',
         ['operation']
       );
       request.operation = defaultValue1;
@@ -497,7 +497,7 @@ describe('v1.GlobalOrganizationOperationsClient', () => {
         new protos.google.cloud.compute.v1.GetGlobalOrganizationOperationRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetGlobalOrganizationOperationRequest',
+        '.google.cloud.compute.v1.GetGlobalOrganizationOperationRequest',
         ['operation']
       );
       request.operation = defaultValue1;
@@ -527,7 +527,7 @@ describe('v1.GlobalOrganizationOperationsClient', () => {
         new protos.google.cloud.compute.v1.GetGlobalOrganizationOperationRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetGlobalOrganizationOperationRequest',
+        '.google.cloud.compute.v1.GetGlobalOrganizationOperationRequest',
         ['operation']
       );
       request.operation = defaultValue1;

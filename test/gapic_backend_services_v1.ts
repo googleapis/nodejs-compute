@@ -251,12 +251,12 @@ describe('v1.BackendServicesClient', () => {
         new protos.google.cloud.compute.v1.AddSignedUrlKeyBackendServiceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'AddSignedUrlKeyBackendServiceRequest',
+        '.google.cloud.compute.v1.AddSignedUrlKeyBackendServiceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'AddSignedUrlKeyBackendServiceRequest',
+        '.google.cloud.compute.v1.AddSignedUrlKeyBackendServiceRequest',
         ['backendService']
       );
       request.backendService = defaultValue2;
@@ -287,12 +287,12 @@ describe('v1.BackendServicesClient', () => {
         new protos.google.cloud.compute.v1.AddSignedUrlKeyBackendServiceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'AddSignedUrlKeyBackendServiceRequest',
+        '.google.cloud.compute.v1.AddSignedUrlKeyBackendServiceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'AddSignedUrlKeyBackendServiceRequest',
+        '.google.cloud.compute.v1.AddSignedUrlKeyBackendServiceRequest',
         ['backendService']
       );
       request.backendService = defaultValue2;
@@ -339,12 +339,12 @@ describe('v1.BackendServicesClient', () => {
         new protos.google.cloud.compute.v1.AddSignedUrlKeyBackendServiceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'AddSignedUrlKeyBackendServiceRequest',
+        '.google.cloud.compute.v1.AddSignedUrlKeyBackendServiceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'AddSignedUrlKeyBackendServiceRequest',
+        '.google.cloud.compute.v1.AddSignedUrlKeyBackendServiceRequest',
         ['backendService']
       );
       request.backendService = defaultValue2;
@@ -375,12 +375,12 @@ describe('v1.BackendServicesClient', () => {
         new protos.google.cloud.compute.v1.AddSignedUrlKeyBackendServiceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'AddSignedUrlKeyBackendServiceRequest',
+        '.google.cloud.compute.v1.AddSignedUrlKeyBackendServiceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'AddSignedUrlKeyBackendServiceRequest',
+        '.google.cloud.compute.v1.AddSignedUrlKeyBackendServiceRequest',
         ['backendService']
       );
       request.backendService = defaultValue2;
@@ -400,13 +400,15 @@ describe('v1.BackendServicesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteBackendServiceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteBackendServiceRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteBackendServiceRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('DeleteBackendServiceRequest', [
-        'backendService',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteBackendServiceRequest',
+        ['backendService']
+      );
       request.backendService = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&backend_service=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
@@ -434,13 +436,15 @@ describe('v1.BackendServicesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteBackendServiceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteBackendServiceRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteBackendServiceRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('DeleteBackendServiceRequest', [
-        'backendService',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteBackendServiceRequest',
+        ['backendService']
+      );
       request.backendService = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&backend_service=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
@@ -484,13 +488,15 @@ describe('v1.BackendServicesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteBackendServiceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteBackendServiceRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteBackendServiceRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('DeleteBackendServiceRequest', [
-        'backendService',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteBackendServiceRequest',
+        ['backendService']
+      );
       request.backendService = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&backend_service=${defaultValue2}`;
       const expectedError = new Error('expected');
@@ -515,13 +521,15 @@ describe('v1.BackendServicesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteBackendServiceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteBackendServiceRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteBackendServiceRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('DeleteBackendServiceRequest', [
-        'backendService',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteBackendServiceRequest',
+        ['backendService']
+      );
       request.backendService = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -540,12 +548,12 @@ describe('v1.BackendServicesClient', () => {
         new protos.google.cloud.compute.v1.DeleteSignedUrlKeyBackendServiceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteSignedUrlKeyBackendServiceRequest',
+        '.google.cloud.compute.v1.DeleteSignedUrlKeyBackendServiceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'DeleteSignedUrlKeyBackendServiceRequest',
+        '.google.cloud.compute.v1.DeleteSignedUrlKeyBackendServiceRequest',
         ['backendService']
       );
       request.backendService = defaultValue2;
@@ -577,12 +585,12 @@ describe('v1.BackendServicesClient', () => {
         new protos.google.cloud.compute.v1.DeleteSignedUrlKeyBackendServiceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteSignedUrlKeyBackendServiceRequest',
+        '.google.cloud.compute.v1.DeleteSignedUrlKeyBackendServiceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'DeleteSignedUrlKeyBackendServiceRequest',
+        '.google.cloud.compute.v1.DeleteSignedUrlKeyBackendServiceRequest',
         ['backendService']
       );
       request.backendService = defaultValue2;
@@ -629,12 +637,12 @@ describe('v1.BackendServicesClient', () => {
         new protos.google.cloud.compute.v1.DeleteSignedUrlKeyBackendServiceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteSignedUrlKeyBackendServiceRequest',
+        '.google.cloud.compute.v1.DeleteSignedUrlKeyBackendServiceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'DeleteSignedUrlKeyBackendServiceRequest',
+        '.google.cloud.compute.v1.DeleteSignedUrlKeyBackendServiceRequest',
         ['backendService']
       );
       request.backendService = defaultValue2;
@@ -665,12 +673,12 @@ describe('v1.BackendServicesClient', () => {
         new protos.google.cloud.compute.v1.DeleteSignedUrlKeyBackendServiceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteSignedUrlKeyBackendServiceRequest',
+        '.google.cloud.compute.v1.DeleteSignedUrlKeyBackendServiceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'DeleteSignedUrlKeyBackendServiceRequest',
+        '.google.cloud.compute.v1.DeleteSignedUrlKeyBackendServiceRequest',
         ['backendService']
       );
       request.backendService = defaultValue2;
@@ -690,13 +698,15 @@ describe('v1.BackendServicesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetBackendServiceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetBackendServiceRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetBackendServiceRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetBackendServiceRequest', [
-        'backendService',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetBackendServiceRequest',
+        ['backendService']
+      );
       request.backendService = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&backend_service=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
@@ -723,13 +733,15 @@ describe('v1.BackendServicesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetBackendServiceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetBackendServiceRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetBackendServiceRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetBackendServiceRequest', [
-        'backendService',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetBackendServiceRequest',
+        ['backendService']
+      );
       request.backendService = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&backend_service=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
@@ -771,13 +783,15 @@ describe('v1.BackendServicesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetBackendServiceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetBackendServiceRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetBackendServiceRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetBackendServiceRequest', [
-        'backendService',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetBackendServiceRequest',
+        ['backendService']
+      );
       request.backendService = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&backend_service=${defaultValue2}`;
       const expectedError = new Error('expected');
@@ -801,13 +815,15 @@ describe('v1.BackendServicesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetBackendServiceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetBackendServiceRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetBackendServiceRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetBackendServiceRequest', [
-        'backendService',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetBackendServiceRequest',
+        ['backendService']
+      );
       request.backendService = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -826,12 +842,12 @@ describe('v1.BackendServicesClient', () => {
         new protos.google.cloud.compute.v1.GetHealthBackendServiceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetHealthBackendServiceRequest',
+        '.google.cloud.compute.v1.GetHealthBackendServiceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'GetHealthBackendServiceRequest',
+        '.google.cloud.compute.v1.GetHealthBackendServiceRequest',
         ['backendService']
       );
       request.backendService = defaultValue2;
@@ -862,12 +878,12 @@ describe('v1.BackendServicesClient', () => {
         new protos.google.cloud.compute.v1.GetHealthBackendServiceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetHealthBackendServiceRequest',
+        '.google.cloud.compute.v1.GetHealthBackendServiceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'GetHealthBackendServiceRequest',
+        '.google.cloud.compute.v1.GetHealthBackendServiceRequest',
         ['backendService']
       );
       request.backendService = defaultValue2;
@@ -914,12 +930,12 @@ describe('v1.BackendServicesClient', () => {
         new protos.google.cloud.compute.v1.GetHealthBackendServiceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetHealthBackendServiceRequest',
+        '.google.cloud.compute.v1.GetHealthBackendServiceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'GetHealthBackendServiceRequest',
+        '.google.cloud.compute.v1.GetHealthBackendServiceRequest',
         ['backendService']
       );
       request.backendService = defaultValue2;
@@ -947,12 +963,12 @@ describe('v1.BackendServicesClient', () => {
         new protos.google.cloud.compute.v1.GetHealthBackendServiceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetHealthBackendServiceRequest',
+        '.google.cloud.compute.v1.GetHealthBackendServiceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'GetHealthBackendServiceRequest',
+        '.google.cloud.compute.v1.GetHealthBackendServiceRequest',
         ['backendService']
       );
       request.backendService = defaultValue2;
@@ -973,12 +989,12 @@ describe('v1.BackendServicesClient', () => {
         new protos.google.cloud.compute.v1.GetIamPolicyBackendServiceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetIamPolicyBackendServiceRequest',
+        '.google.cloud.compute.v1.GetIamPolicyBackendServiceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'GetIamPolicyBackendServiceRequest',
+        '.google.cloud.compute.v1.GetIamPolicyBackendServiceRequest',
         ['resource']
       );
       request.resource = defaultValue2;
@@ -1009,12 +1025,12 @@ describe('v1.BackendServicesClient', () => {
         new protos.google.cloud.compute.v1.GetIamPolicyBackendServiceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetIamPolicyBackendServiceRequest',
+        '.google.cloud.compute.v1.GetIamPolicyBackendServiceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'GetIamPolicyBackendServiceRequest',
+        '.google.cloud.compute.v1.GetIamPolicyBackendServiceRequest',
         ['resource']
       );
       request.resource = defaultValue2;
@@ -1061,12 +1077,12 @@ describe('v1.BackendServicesClient', () => {
         new protos.google.cloud.compute.v1.GetIamPolicyBackendServiceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetIamPolicyBackendServiceRequest',
+        '.google.cloud.compute.v1.GetIamPolicyBackendServiceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'GetIamPolicyBackendServiceRequest',
+        '.google.cloud.compute.v1.GetIamPolicyBackendServiceRequest',
         ['resource']
       );
       request.resource = defaultValue2;
@@ -1097,12 +1113,12 @@ describe('v1.BackendServicesClient', () => {
         new protos.google.cloud.compute.v1.GetIamPolicyBackendServiceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetIamPolicyBackendServiceRequest',
+        '.google.cloud.compute.v1.GetIamPolicyBackendServiceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'GetIamPolicyBackendServiceRequest',
+        '.google.cloud.compute.v1.GetIamPolicyBackendServiceRequest',
         ['resource']
       );
       request.resource = defaultValue2;
@@ -1122,9 +1138,10 @@ describe('v1.BackendServicesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertBackendServiceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('InsertBackendServiceRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.InsertBackendServiceRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1152,9 +1169,10 @@ describe('v1.BackendServicesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertBackendServiceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('InsertBackendServiceRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.InsertBackendServiceRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1198,9 +1216,10 @@ describe('v1.BackendServicesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertBackendServiceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('InsertBackendServiceRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.InsertBackendServiceRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1225,9 +1244,10 @@ describe('v1.BackendServicesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertBackendServiceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('InsertBackendServiceRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.InsertBackendServiceRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1245,13 +1265,15 @@ describe('v1.BackendServicesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchBackendServiceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('PatchBackendServiceRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchBackendServiceRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('PatchBackendServiceRequest', [
-        'backendService',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchBackendServiceRequest',
+        ['backendService']
+      );
       request.backendService = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&backend_service=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
@@ -1278,13 +1300,15 @@ describe('v1.BackendServicesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchBackendServiceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('PatchBackendServiceRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchBackendServiceRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('PatchBackendServiceRequest', [
-        'backendService',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchBackendServiceRequest',
+        ['backendService']
+      );
       request.backendService = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&backend_service=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
@@ -1326,13 +1350,15 @@ describe('v1.BackendServicesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchBackendServiceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('PatchBackendServiceRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchBackendServiceRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('PatchBackendServiceRequest', [
-        'backendService',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchBackendServiceRequest',
+        ['backendService']
+      );
       request.backendService = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&backend_service=${defaultValue2}`;
       const expectedError = new Error('expected');
@@ -1356,13 +1382,15 @@ describe('v1.BackendServicesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchBackendServiceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('PatchBackendServiceRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchBackendServiceRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('PatchBackendServiceRequest', [
-        'backendService',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchBackendServiceRequest',
+        ['backendService']
+      );
       request.backendService = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1381,12 +1409,12 @@ describe('v1.BackendServicesClient', () => {
         new protos.google.cloud.compute.v1.SetEdgeSecurityPolicyBackendServiceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SetEdgeSecurityPolicyBackendServiceRequest',
+        '.google.cloud.compute.v1.SetEdgeSecurityPolicyBackendServiceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'SetEdgeSecurityPolicyBackendServiceRequest',
+        '.google.cloud.compute.v1.SetEdgeSecurityPolicyBackendServiceRequest',
         ['backendService']
       );
       request.backendService = defaultValue2;
@@ -1418,12 +1446,12 @@ describe('v1.BackendServicesClient', () => {
         new protos.google.cloud.compute.v1.SetEdgeSecurityPolicyBackendServiceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SetEdgeSecurityPolicyBackendServiceRequest',
+        '.google.cloud.compute.v1.SetEdgeSecurityPolicyBackendServiceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'SetEdgeSecurityPolicyBackendServiceRequest',
+        '.google.cloud.compute.v1.SetEdgeSecurityPolicyBackendServiceRequest',
         ['backendService']
       );
       request.backendService = defaultValue2;
@@ -1470,12 +1498,12 @@ describe('v1.BackendServicesClient', () => {
         new protos.google.cloud.compute.v1.SetEdgeSecurityPolicyBackendServiceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SetEdgeSecurityPolicyBackendServiceRequest',
+        '.google.cloud.compute.v1.SetEdgeSecurityPolicyBackendServiceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'SetEdgeSecurityPolicyBackendServiceRequest',
+        '.google.cloud.compute.v1.SetEdgeSecurityPolicyBackendServiceRequest',
         ['backendService']
       );
       request.backendService = defaultValue2;
@@ -1509,12 +1537,12 @@ describe('v1.BackendServicesClient', () => {
         new protos.google.cloud.compute.v1.SetEdgeSecurityPolicyBackendServiceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SetEdgeSecurityPolicyBackendServiceRequest',
+        '.google.cloud.compute.v1.SetEdgeSecurityPolicyBackendServiceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'SetEdgeSecurityPolicyBackendServiceRequest',
+        '.google.cloud.compute.v1.SetEdgeSecurityPolicyBackendServiceRequest',
         ['backendService']
       );
       request.backendService = defaultValue2;
@@ -1538,12 +1566,12 @@ describe('v1.BackendServicesClient', () => {
         new protos.google.cloud.compute.v1.SetIamPolicyBackendServiceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SetIamPolicyBackendServiceRequest',
+        '.google.cloud.compute.v1.SetIamPolicyBackendServiceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'SetIamPolicyBackendServiceRequest',
+        '.google.cloud.compute.v1.SetIamPolicyBackendServiceRequest',
         ['resource']
       );
       request.resource = defaultValue2;
@@ -1574,12 +1602,12 @@ describe('v1.BackendServicesClient', () => {
         new protos.google.cloud.compute.v1.SetIamPolicyBackendServiceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SetIamPolicyBackendServiceRequest',
+        '.google.cloud.compute.v1.SetIamPolicyBackendServiceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'SetIamPolicyBackendServiceRequest',
+        '.google.cloud.compute.v1.SetIamPolicyBackendServiceRequest',
         ['resource']
       );
       request.resource = defaultValue2;
@@ -1626,12 +1654,12 @@ describe('v1.BackendServicesClient', () => {
         new protos.google.cloud.compute.v1.SetIamPolicyBackendServiceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SetIamPolicyBackendServiceRequest',
+        '.google.cloud.compute.v1.SetIamPolicyBackendServiceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'SetIamPolicyBackendServiceRequest',
+        '.google.cloud.compute.v1.SetIamPolicyBackendServiceRequest',
         ['resource']
       );
       request.resource = defaultValue2;
@@ -1662,12 +1690,12 @@ describe('v1.BackendServicesClient', () => {
         new protos.google.cloud.compute.v1.SetIamPolicyBackendServiceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SetIamPolicyBackendServiceRequest',
+        '.google.cloud.compute.v1.SetIamPolicyBackendServiceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'SetIamPolicyBackendServiceRequest',
+        '.google.cloud.compute.v1.SetIamPolicyBackendServiceRequest',
         ['resource']
       );
       request.resource = defaultValue2;
@@ -1688,12 +1716,12 @@ describe('v1.BackendServicesClient', () => {
         new protos.google.cloud.compute.v1.SetSecurityPolicyBackendServiceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SetSecurityPolicyBackendServiceRequest',
+        '.google.cloud.compute.v1.SetSecurityPolicyBackendServiceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'SetSecurityPolicyBackendServiceRequest',
+        '.google.cloud.compute.v1.SetSecurityPolicyBackendServiceRequest',
         ['backendService']
       );
       request.backendService = defaultValue2;
@@ -1724,12 +1752,12 @@ describe('v1.BackendServicesClient', () => {
         new protos.google.cloud.compute.v1.SetSecurityPolicyBackendServiceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SetSecurityPolicyBackendServiceRequest',
+        '.google.cloud.compute.v1.SetSecurityPolicyBackendServiceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'SetSecurityPolicyBackendServiceRequest',
+        '.google.cloud.compute.v1.SetSecurityPolicyBackendServiceRequest',
         ['backendService']
       );
       request.backendService = defaultValue2;
@@ -1776,12 +1804,12 @@ describe('v1.BackendServicesClient', () => {
         new protos.google.cloud.compute.v1.SetSecurityPolicyBackendServiceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SetSecurityPolicyBackendServiceRequest',
+        '.google.cloud.compute.v1.SetSecurityPolicyBackendServiceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'SetSecurityPolicyBackendServiceRequest',
+        '.google.cloud.compute.v1.SetSecurityPolicyBackendServiceRequest',
         ['backendService']
       );
       request.backendService = defaultValue2;
@@ -1812,12 +1840,12 @@ describe('v1.BackendServicesClient', () => {
         new protos.google.cloud.compute.v1.SetSecurityPolicyBackendServiceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SetSecurityPolicyBackendServiceRequest',
+        '.google.cloud.compute.v1.SetSecurityPolicyBackendServiceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'SetSecurityPolicyBackendServiceRequest',
+        '.google.cloud.compute.v1.SetSecurityPolicyBackendServiceRequest',
         ['backendService']
       );
       request.backendService = defaultValue2;
@@ -1837,13 +1865,15 @@ describe('v1.BackendServicesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.UpdateBackendServiceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('UpdateBackendServiceRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.UpdateBackendServiceRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('UpdateBackendServiceRequest', [
-        'backendService',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.UpdateBackendServiceRequest',
+        ['backendService']
+      );
       request.backendService = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&backend_service=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
@@ -1871,13 +1901,15 @@ describe('v1.BackendServicesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.UpdateBackendServiceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('UpdateBackendServiceRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.UpdateBackendServiceRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('UpdateBackendServiceRequest', [
-        'backendService',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.UpdateBackendServiceRequest',
+        ['backendService']
+      );
       request.backendService = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&backend_service=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
@@ -1921,13 +1953,15 @@ describe('v1.BackendServicesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.UpdateBackendServiceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('UpdateBackendServiceRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.UpdateBackendServiceRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('UpdateBackendServiceRequest', [
-        'backendService',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.UpdateBackendServiceRequest',
+        ['backendService']
+      );
       request.backendService = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&backend_service=${defaultValue2}`;
       const expectedError = new Error('expected');
@@ -1952,13 +1986,15 @@ describe('v1.BackendServicesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.UpdateBackendServiceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('UpdateBackendServiceRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.UpdateBackendServiceRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('UpdateBackendServiceRequest', [
-        'backendService',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.UpdateBackendServiceRequest',
+        ['backendService']
+      );
       request.backendService = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1977,7 +2013,7 @@ describe('v1.BackendServicesClient', () => {
         new protos.google.cloud.compute.v1.AggregatedListBackendServicesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'AggregatedListBackendServicesRequest',
+        '.google.cloud.compute.v1.AggregatedListBackendServicesRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -2037,7 +2073,7 @@ describe('v1.BackendServicesClient', () => {
         new protos.google.cloud.compute.v1.AggregatedListBackendServicesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'AggregatedListBackendServicesRequest',
+        '.google.cloud.compute.v1.AggregatedListBackendServicesRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -2080,9 +2116,10 @@ describe('v1.BackendServicesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListBackendServicesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListBackendServicesRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListBackendServicesRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedResponse = [
@@ -2117,9 +2154,10 @@ describe('v1.BackendServicesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListBackendServicesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListBackendServicesRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListBackendServicesRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedResponse = [
@@ -2169,9 +2207,10 @@ describe('v1.BackendServicesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListBackendServicesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListBackendServicesRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListBackendServicesRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2195,9 +2234,10 @@ describe('v1.BackendServicesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListBackendServicesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListBackendServicesRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListBackendServicesRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedResponse = [
@@ -2254,9 +2294,10 @@ describe('v1.BackendServicesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListBackendServicesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListBackendServicesRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListBackendServicesRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2304,9 +2345,10 @@ describe('v1.BackendServicesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListBackendServicesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListBackendServicesRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListBackendServicesRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedResponse = [
@@ -2351,9 +2393,10 @@ describe('v1.BackendServicesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListBackendServicesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListBackendServicesRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListBackendServicesRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedError = new Error('expected');

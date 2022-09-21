@@ -249,17 +249,17 @@ describe('v1.InstancesClient', () => {
         new protos.google.cloud.compute.v1.AddAccessConfigInstanceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'AddAccessConfigInstanceRequest',
+        '.google.cloud.compute.v1.AddAccessConfigInstanceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'AddAccessConfigInstanceRequest',
+        '.google.cloud.compute.v1.AddAccessConfigInstanceRequest',
         ['zone']
       );
       request.zone = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'AddAccessConfigInstanceRequest',
+        '.google.cloud.compute.v1.AddAccessConfigInstanceRequest',
         ['instance']
       );
       request.instance = defaultValue3;
@@ -290,17 +290,17 @@ describe('v1.InstancesClient', () => {
         new protos.google.cloud.compute.v1.AddAccessConfigInstanceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'AddAccessConfigInstanceRequest',
+        '.google.cloud.compute.v1.AddAccessConfigInstanceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'AddAccessConfigInstanceRequest',
+        '.google.cloud.compute.v1.AddAccessConfigInstanceRequest',
         ['zone']
       );
       request.zone = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'AddAccessConfigInstanceRequest',
+        '.google.cloud.compute.v1.AddAccessConfigInstanceRequest',
         ['instance']
       );
       request.instance = defaultValue3;
@@ -347,17 +347,17 @@ describe('v1.InstancesClient', () => {
         new protos.google.cloud.compute.v1.AddAccessConfigInstanceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'AddAccessConfigInstanceRequest',
+        '.google.cloud.compute.v1.AddAccessConfigInstanceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'AddAccessConfigInstanceRequest',
+        '.google.cloud.compute.v1.AddAccessConfigInstanceRequest',
         ['zone']
       );
       request.zone = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'AddAccessConfigInstanceRequest',
+        '.google.cloud.compute.v1.AddAccessConfigInstanceRequest',
         ['instance']
       );
       request.instance = defaultValue3;
@@ -388,17 +388,17 @@ describe('v1.InstancesClient', () => {
         new protos.google.cloud.compute.v1.AddAccessConfigInstanceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'AddAccessConfigInstanceRequest',
+        '.google.cloud.compute.v1.AddAccessConfigInstanceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'AddAccessConfigInstanceRequest',
+        '.google.cloud.compute.v1.AddAccessConfigInstanceRequest',
         ['zone']
       );
       request.zone = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'AddAccessConfigInstanceRequest',
+        '.google.cloud.compute.v1.AddAccessConfigInstanceRequest',
         ['instance']
       );
       request.instance = defaultValue3;
@@ -419,17 +419,17 @@ describe('v1.InstancesClient', () => {
         new protos.google.cloud.compute.v1.AddResourcePoliciesInstanceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'AddResourcePoliciesInstanceRequest',
+        '.google.cloud.compute.v1.AddResourcePoliciesInstanceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'AddResourcePoliciesInstanceRequest',
+        '.google.cloud.compute.v1.AddResourcePoliciesInstanceRequest',
         ['zone']
       );
       request.zone = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'AddResourcePoliciesInstanceRequest',
+        '.google.cloud.compute.v1.AddResourcePoliciesInstanceRequest',
         ['instance']
       );
       request.instance = defaultValue3;
@@ -461,17 +461,17 @@ describe('v1.InstancesClient', () => {
         new protos.google.cloud.compute.v1.AddResourcePoliciesInstanceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'AddResourcePoliciesInstanceRequest',
+        '.google.cloud.compute.v1.AddResourcePoliciesInstanceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'AddResourcePoliciesInstanceRequest',
+        '.google.cloud.compute.v1.AddResourcePoliciesInstanceRequest',
         ['zone']
       );
       request.zone = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'AddResourcePoliciesInstanceRequest',
+        '.google.cloud.compute.v1.AddResourcePoliciesInstanceRequest',
         ['instance']
       );
       request.instance = defaultValue3;
@@ -518,17 +518,17 @@ describe('v1.InstancesClient', () => {
         new protos.google.cloud.compute.v1.AddResourcePoliciesInstanceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'AddResourcePoliciesInstanceRequest',
+        '.google.cloud.compute.v1.AddResourcePoliciesInstanceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'AddResourcePoliciesInstanceRequest',
+        '.google.cloud.compute.v1.AddResourcePoliciesInstanceRequest',
         ['zone']
       );
       request.zone = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'AddResourcePoliciesInstanceRequest',
+        '.google.cloud.compute.v1.AddResourcePoliciesInstanceRequest',
         ['instance']
       );
       request.instance = defaultValue3;
@@ -559,17 +559,17 @@ describe('v1.InstancesClient', () => {
         new protos.google.cloud.compute.v1.AddResourcePoliciesInstanceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'AddResourcePoliciesInstanceRequest',
+        '.google.cloud.compute.v1.AddResourcePoliciesInstanceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'AddResourcePoliciesInstanceRequest',
+        '.google.cloud.compute.v1.AddResourcePoliciesInstanceRequest',
         ['zone']
       );
       request.zone = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'AddResourcePoliciesInstanceRequest',
+        '.google.cloud.compute.v1.AddResourcePoliciesInstanceRequest',
         ['instance']
       );
       request.instance = defaultValue3;
@@ -589,17 +589,20 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.AttachDiskInstanceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('AttachDiskInstanceRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.AttachDiskInstanceRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('AttachDiskInstanceRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.AttachDiskInstanceRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('AttachDiskInstanceRequest', [
-        'instance',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.AttachDiskInstanceRequest',
+        ['instance']
+      );
       request.instance = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -627,17 +630,20 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.AttachDiskInstanceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('AttachDiskInstanceRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.AttachDiskInstanceRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('AttachDiskInstanceRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.AttachDiskInstanceRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('AttachDiskInstanceRequest', [
-        'instance',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.AttachDiskInstanceRequest',
+        ['instance']
+      );
       request.instance = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -681,17 +687,20 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.AttachDiskInstanceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('AttachDiskInstanceRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.AttachDiskInstanceRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('AttachDiskInstanceRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.AttachDiskInstanceRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('AttachDiskInstanceRequest', [
-        'instance',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.AttachDiskInstanceRequest',
+        ['instance']
+      );
       request.instance = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
       const expectedError = new Error('expected');
@@ -719,17 +728,20 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.AttachDiskInstanceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('AttachDiskInstanceRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.AttachDiskInstanceRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('AttachDiskInstanceRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.AttachDiskInstanceRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('AttachDiskInstanceRequest', [
-        'instance',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.AttachDiskInstanceRequest',
+        ['instance']
+      );
       request.instance = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -747,13 +759,15 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.BulkInsertInstanceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('BulkInsertInstanceRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.BulkInsertInstanceRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('BulkInsertInstanceRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.BulkInsertInstanceRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
@@ -781,13 +795,15 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.BulkInsertInstanceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('BulkInsertInstanceRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.BulkInsertInstanceRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('BulkInsertInstanceRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.BulkInsertInstanceRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
@@ -831,13 +847,15 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.BulkInsertInstanceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('BulkInsertInstanceRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.BulkInsertInstanceRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('BulkInsertInstanceRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.BulkInsertInstanceRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}`;
       const expectedError = new Error('expected');
@@ -865,13 +883,15 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.BulkInsertInstanceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('BulkInsertInstanceRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.BulkInsertInstanceRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('BulkInsertInstanceRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.BulkInsertInstanceRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -889,17 +909,20 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteInstanceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteInstanceRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteInstanceRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('DeleteInstanceRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteInstanceRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('DeleteInstanceRequest', [
-        'instance',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteInstanceRequest',
+        ['instance']
+      );
       request.instance = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -927,17 +950,20 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteInstanceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteInstanceRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteInstanceRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('DeleteInstanceRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteInstanceRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('DeleteInstanceRequest', [
-        'instance',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteInstanceRequest',
+        ['instance']
+      );
       request.instance = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -981,17 +1007,20 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteInstanceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteInstanceRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteInstanceRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('DeleteInstanceRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteInstanceRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('DeleteInstanceRequest', [
-        'instance',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteInstanceRequest',
+        ['instance']
+      );
       request.instance = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
       const expectedError = new Error('expected');
@@ -1016,17 +1045,20 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteInstanceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteInstanceRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteInstanceRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('DeleteInstanceRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteInstanceRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('DeleteInstanceRequest', [
-        'instance',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteInstanceRequest',
+        ['instance']
+      );
       request.instance = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1045,17 +1077,17 @@ describe('v1.InstancesClient', () => {
         new protos.google.cloud.compute.v1.DeleteAccessConfigInstanceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteAccessConfigInstanceRequest',
+        '.google.cloud.compute.v1.DeleteAccessConfigInstanceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'DeleteAccessConfigInstanceRequest',
+        '.google.cloud.compute.v1.DeleteAccessConfigInstanceRequest',
         ['zone']
       );
       request.zone = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'DeleteAccessConfigInstanceRequest',
+        '.google.cloud.compute.v1.DeleteAccessConfigInstanceRequest',
         ['instance']
       );
       request.instance = defaultValue3;
@@ -1087,17 +1119,17 @@ describe('v1.InstancesClient', () => {
         new protos.google.cloud.compute.v1.DeleteAccessConfigInstanceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteAccessConfigInstanceRequest',
+        '.google.cloud.compute.v1.DeleteAccessConfigInstanceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'DeleteAccessConfigInstanceRequest',
+        '.google.cloud.compute.v1.DeleteAccessConfigInstanceRequest',
         ['zone']
       );
       request.zone = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'DeleteAccessConfigInstanceRequest',
+        '.google.cloud.compute.v1.DeleteAccessConfigInstanceRequest',
         ['instance']
       );
       request.instance = defaultValue3;
@@ -1144,17 +1176,17 @@ describe('v1.InstancesClient', () => {
         new protos.google.cloud.compute.v1.DeleteAccessConfigInstanceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteAccessConfigInstanceRequest',
+        '.google.cloud.compute.v1.DeleteAccessConfigInstanceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'DeleteAccessConfigInstanceRequest',
+        '.google.cloud.compute.v1.DeleteAccessConfigInstanceRequest',
         ['zone']
       );
       request.zone = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'DeleteAccessConfigInstanceRequest',
+        '.google.cloud.compute.v1.DeleteAccessConfigInstanceRequest',
         ['instance']
       );
       request.instance = defaultValue3;
@@ -1185,17 +1217,17 @@ describe('v1.InstancesClient', () => {
         new protos.google.cloud.compute.v1.DeleteAccessConfigInstanceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteAccessConfigInstanceRequest',
+        '.google.cloud.compute.v1.DeleteAccessConfigInstanceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'DeleteAccessConfigInstanceRequest',
+        '.google.cloud.compute.v1.DeleteAccessConfigInstanceRequest',
         ['zone']
       );
       request.zone = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'DeleteAccessConfigInstanceRequest',
+        '.google.cloud.compute.v1.DeleteAccessConfigInstanceRequest',
         ['instance']
       );
       request.instance = defaultValue3;
@@ -1215,17 +1247,20 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DetachDiskInstanceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DetachDiskInstanceRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DetachDiskInstanceRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('DetachDiskInstanceRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DetachDiskInstanceRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('DetachDiskInstanceRequest', [
-        'instance',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DetachDiskInstanceRequest',
+        ['instance']
+      );
       request.instance = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -1253,17 +1288,20 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DetachDiskInstanceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DetachDiskInstanceRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DetachDiskInstanceRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('DetachDiskInstanceRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DetachDiskInstanceRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('DetachDiskInstanceRequest', [
-        'instance',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DetachDiskInstanceRequest',
+        ['instance']
+      );
       request.instance = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -1307,17 +1345,20 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DetachDiskInstanceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DetachDiskInstanceRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DetachDiskInstanceRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('DetachDiskInstanceRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DetachDiskInstanceRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('DetachDiskInstanceRequest', [
-        'instance',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DetachDiskInstanceRequest',
+        ['instance']
+      );
       request.instance = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
       const expectedError = new Error('expected');
@@ -1345,17 +1386,20 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DetachDiskInstanceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DetachDiskInstanceRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DetachDiskInstanceRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('DetachDiskInstanceRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DetachDiskInstanceRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('DetachDiskInstanceRequest', [
-        'instance',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DetachDiskInstanceRequest',
+        ['instance']
+      );
       request.instance = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1373,15 +1417,20 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetInstanceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetInstanceRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetInstanceRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetInstanceRequest', ['zone']);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetInstanceRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('GetInstanceRequest', [
-        'instance',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetInstanceRequest',
+        ['instance']
+      );
       request.instance = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -1408,15 +1457,20 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetInstanceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetInstanceRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetInstanceRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetInstanceRequest', ['zone']);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetInstanceRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('GetInstanceRequest', [
-        'instance',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetInstanceRequest',
+        ['instance']
+      );
       request.instance = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -1458,15 +1512,20 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetInstanceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetInstanceRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetInstanceRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetInstanceRequest', ['zone']);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetInstanceRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('GetInstanceRequest', [
-        'instance',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetInstanceRequest',
+        ['instance']
+      );
       request.instance = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
       const expectedError = new Error('expected');
@@ -1490,15 +1549,20 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetInstanceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetInstanceRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetInstanceRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetInstanceRequest', ['zone']);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetInstanceRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('GetInstanceRequest', [
-        'instance',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetInstanceRequest',
+        ['instance']
+      );
       request.instance = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1517,17 +1581,17 @@ describe('v1.InstancesClient', () => {
         new protos.google.cloud.compute.v1.GetEffectiveFirewallsInstanceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetEffectiveFirewallsInstanceRequest',
+        '.google.cloud.compute.v1.GetEffectiveFirewallsInstanceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'GetEffectiveFirewallsInstanceRequest',
+        '.google.cloud.compute.v1.GetEffectiveFirewallsInstanceRequest',
         ['zone']
       );
       request.zone = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'GetEffectiveFirewallsInstanceRequest',
+        '.google.cloud.compute.v1.GetEffectiveFirewallsInstanceRequest',
         ['instance']
       );
       request.instance = defaultValue3;
@@ -1559,17 +1623,17 @@ describe('v1.InstancesClient', () => {
         new protos.google.cloud.compute.v1.GetEffectiveFirewallsInstanceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetEffectiveFirewallsInstanceRequest',
+        '.google.cloud.compute.v1.GetEffectiveFirewallsInstanceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'GetEffectiveFirewallsInstanceRequest',
+        '.google.cloud.compute.v1.GetEffectiveFirewallsInstanceRequest',
         ['zone']
       );
       request.zone = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'GetEffectiveFirewallsInstanceRequest',
+        '.google.cloud.compute.v1.GetEffectiveFirewallsInstanceRequest',
         ['instance']
       );
       request.instance = defaultValue3;
@@ -1616,17 +1680,17 @@ describe('v1.InstancesClient', () => {
         new protos.google.cloud.compute.v1.GetEffectiveFirewallsInstanceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetEffectiveFirewallsInstanceRequest',
+        '.google.cloud.compute.v1.GetEffectiveFirewallsInstanceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'GetEffectiveFirewallsInstanceRequest',
+        '.google.cloud.compute.v1.GetEffectiveFirewallsInstanceRequest',
         ['zone']
       );
       request.zone = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'GetEffectiveFirewallsInstanceRequest',
+        '.google.cloud.compute.v1.GetEffectiveFirewallsInstanceRequest',
         ['instance']
       );
       request.instance = defaultValue3;
@@ -1660,17 +1724,17 @@ describe('v1.InstancesClient', () => {
         new protos.google.cloud.compute.v1.GetEffectiveFirewallsInstanceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetEffectiveFirewallsInstanceRequest',
+        '.google.cloud.compute.v1.GetEffectiveFirewallsInstanceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'GetEffectiveFirewallsInstanceRequest',
+        '.google.cloud.compute.v1.GetEffectiveFirewallsInstanceRequest',
         ['zone']
       );
       request.zone = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'GetEffectiveFirewallsInstanceRequest',
+        '.google.cloud.compute.v1.GetEffectiveFirewallsInstanceRequest',
         ['instance']
       );
       request.instance = defaultValue3;
@@ -1694,17 +1758,17 @@ describe('v1.InstancesClient', () => {
         new protos.google.cloud.compute.v1.GetGuestAttributesInstanceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetGuestAttributesInstanceRequest',
+        '.google.cloud.compute.v1.GetGuestAttributesInstanceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'GetGuestAttributesInstanceRequest',
+        '.google.cloud.compute.v1.GetGuestAttributesInstanceRequest',
         ['zone']
       );
       request.zone = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'GetGuestAttributesInstanceRequest',
+        '.google.cloud.compute.v1.GetGuestAttributesInstanceRequest',
         ['instance']
       );
       request.instance = defaultValue3;
@@ -1736,17 +1800,17 @@ describe('v1.InstancesClient', () => {
         new protos.google.cloud.compute.v1.GetGuestAttributesInstanceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetGuestAttributesInstanceRequest',
+        '.google.cloud.compute.v1.GetGuestAttributesInstanceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'GetGuestAttributesInstanceRequest',
+        '.google.cloud.compute.v1.GetGuestAttributesInstanceRequest',
         ['zone']
       );
       request.zone = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'GetGuestAttributesInstanceRequest',
+        '.google.cloud.compute.v1.GetGuestAttributesInstanceRequest',
         ['instance']
       );
       request.instance = defaultValue3;
@@ -1793,17 +1857,17 @@ describe('v1.InstancesClient', () => {
         new protos.google.cloud.compute.v1.GetGuestAttributesInstanceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetGuestAttributesInstanceRequest',
+        '.google.cloud.compute.v1.GetGuestAttributesInstanceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'GetGuestAttributesInstanceRequest',
+        '.google.cloud.compute.v1.GetGuestAttributesInstanceRequest',
         ['zone']
       );
       request.zone = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'GetGuestAttributesInstanceRequest',
+        '.google.cloud.compute.v1.GetGuestAttributesInstanceRequest',
         ['instance']
       );
       request.instance = defaultValue3;
@@ -1834,17 +1898,17 @@ describe('v1.InstancesClient', () => {
         new protos.google.cloud.compute.v1.GetGuestAttributesInstanceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetGuestAttributesInstanceRequest',
+        '.google.cloud.compute.v1.GetGuestAttributesInstanceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'GetGuestAttributesInstanceRequest',
+        '.google.cloud.compute.v1.GetGuestAttributesInstanceRequest',
         ['zone']
       );
       request.zone = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'GetGuestAttributesInstanceRequest',
+        '.google.cloud.compute.v1.GetGuestAttributesInstanceRequest',
         ['instance']
       );
       request.instance = defaultValue3;
@@ -1864,17 +1928,20 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetIamPolicyInstanceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetIamPolicyInstanceRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetIamPolicyInstanceRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetIamPolicyInstanceRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetIamPolicyInstanceRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('GetIamPolicyInstanceRequest', [
-        'resource',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetIamPolicyInstanceRequest',
+        ['resource']
+      );
       request.resource = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&resource=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -1902,17 +1969,20 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetIamPolicyInstanceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetIamPolicyInstanceRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetIamPolicyInstanceRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetIamPolicyInstanceRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetIamPolicyInstanceRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('GetIamPolicyInstanceRequest', [
-        'resource',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetIamPolicyInstanceRequest',
+        ['resource']
+      );
       request.resource = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&resource=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -1956,17 +2026,20 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetIamPolicyInstanceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetIamPolicyInstanceRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetIamPolicyInstanceRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetIamPolicyInstanceRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetIamPolicyInstanceRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('GetIamPolicyInstanceRequest', [
-        'resource',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetIamPolicyInstanceRequest',
+        ['resource']
+      );
       request.resource = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&resource=${defaultValue3}`;
       const expectedError = new Error('expected');
@@ -1994,17 +2067,20 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetIamPolicyInstanceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetIamPolicyInstanceRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetIamPolicyInstanceRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetIamPolicyInstanceRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetIamPolicyInstanceRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('GetIamPolicyInstanceRequest', [
-        'resource',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetIamPolicyInstanceRequest',
+        ['resource']
+      );
       request.resource = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -2023,17 +2099,17 @@ describe('v1.InstancesClient', () => {
         new protos.google.cloud.compute.v1.GetScreenshotInstanceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetScreenshotInstanceRequest',
+        '.google.cloud.compute.v1.GetScreenshotInstanceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'GetScreenshotInstanceRequest',
+        '.google.cloud.compute.v1.GetScreenshotInstanceRequest',
         ['zone']
       );
       request.zone = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'GetScreenshotInstanceRequest',
+        '.google.cloud.compute.v1.GetScreenshotInstanceRequest',
         ['instance']
       );
       request.instance = defaultValue3;
@@ -2064,17 +2140,17 @@ describe('v1.InstancesClient', () => {
         new protos.google.cloud.compute.v1.GetScreenshotInstanceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetScreenshotInstanceRequest',
+        '.google.cloud.compute.v1.GetScreenshotInstanceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'GetScreenshotInstanceRequest',
+        '.google.cloud.compute.v1.GetScreenshotInstanceRequest',
         ['zone']
       );
       request.zone = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'GetScreenshotInstanceRequest',
+        '.google.cloud.compute.v1.GetScreenshotInstanceRequest',
         ['instance']
       );
       request.instance = defaultValue3;
@@ -2121,17 +2197,17 @@ describe('v1.InstancesClient', () => {
         new protos.google.cloud.compute.v1.GetScreenshotInstanceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetScreenshotInstanceRequest',
+        '.google.cloud.compute.v1.GetScreenshotInstanceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'GetScreenshotInstanceRequest',
+        '.google.cloud.compute.v1.GetScreenshotInstanceRequest',
         ['zone']
       );
       request.zone = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'GetScreenshotInstanceRequest',
+        '.google.cloud.compute.v1.GetScreenshotInstanceRequest',
         ['instance']
       );
       request.instance = defaultValue3;
@@ -2162,17 +2238,17 @@ describe('v1.InstancesClient', () => {
         new protos.google.cloud.compute.v1.GetScreenshotInstanceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetScreenshotInstanceRequest',
+        '.google.cloud.compute.v1.GetScreenshotInstanceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'GetScreenshotInstanceRequest',
+        '.google.cloud.compute.v1.GetScreenshotInstanceRequest',
         ['zone']
       );
       request.zone = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'GetScreenshotInstanceRequest',
+        '.google.cloud.compute.v1.GetScreenshotInstanceRequest',
         ['instance']
       );
       request.instance = defaultValue3;
@@ -2193,17 +2269,17 @@ describe('v1.InstancesClient', () => {
         new protos.google.cloud.compute.v1.GetSerialPortOutputInstanceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetSerialPortOutputInstanceRequest',
+        '.google.cloud.compute.v1.GetSerialPortOutputInstanceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'GetSerialPortOutputInstanceRequest',
+        '.google.cloud.compute.v1.GetSerialPortOutputInstanceRequest',
         ['zone']
       );
       request.zone = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'GetSerialPortOutputInstanceRequest',
+        '.google.cloud.compute.v1.GetSerialPortOutputInstanceRequest',
         ['instance']
       );
       request.instance = defaultValue3;
@@ -2235,17 +2311,17 @@ describe('v1.InstancesClient', () => {
         new protos.google.cloud.compute.v1.GetSerialPortOutputInstanceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetSerialPortOutputInstanceRequest',
+        '.google.cloud.compute.v1.GetSerialPortOutputInstanceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'GetSerialPortOutputInstanceRequest',
+        '.google.cloud.compute.v1.GetSerialPortOutputInstanceRequest',
         ['zone']
       );
       request.zone = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'GetSerialPortOutputInstanceRequest',
+        '.google.cloud.compute.v1.GetSerialPortOutputInstanceRequest',
         ['instance']
       );
       request.instance = defaultValue3;
@@ -2292,17 +2368,17 @@ describe('v1.InstancesClient', () => {
         new protos.google.cloud.compute.v1.GetSerialPortOutputInstanceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetSerialPortOutputInstanceRequest',
+        '.google.cloud.compute.v1.GetSerialPortOutputInstanceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'GetSerialPortOutputInstanceRequest',
+        '.google.cloud.compute.v1.GetSerialPortOutputInstanceRequest',
         ['zone']
       );
       request.zone = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'GetSerialPortOutputInstanceRequest',
+        '.google.cloud.compute.v1.GetSerialPortOutputInstanceRequest',
         ['instance']
       );
       request.instance = defaultValue3;
@@ -2333,17 +2409,17 @@ describe('v1.InstancesClient', () => {
         new protos.google.cloud.compute.v1.GetSerialPortOutputInstanceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetSerialPortOutputInstanceRequest',
+        '.google.cloud.compute.v1.GetSerialPortOutputInstanceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'GetSerialPortOutputInstanceRequest',
+        '.google.cloud.compute.v1.GetSerialPortOutputInstanceRequest',
         ['zone']
       );
       request.zone = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'GetSerialPortOutputInstanceRequest',
+        '.google.cloud.compute.v1.GetSerialPortOutputInstanceRequest',
         ['instance']
       );
       request.instance = defaultValue3;
@@ -2364,17 +2440,17 @@ describe('v1.InstancesClient', () => {
         new protos.google.cloud.compute.v1.GetShieldedInstanceIdentityInstanceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetShieldedInstanceIdentityInstanceRequest',
+        '.google.cloud.compute.v1.GetShieldedInstanceIdentityInstanceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'GetShieldedInstanceIdentityInstanceRequest',
+        '.google.cloud.compute.v1.GetShieldedInstanceIdentityInstanceRequest',
         ['zone']
       );
       request.zone = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'GetShieldedInstanceIdentityInstanceRequest',
+        '.google.cloud.compute.v1.GetShieldedInstanceIdentityInstanceRequest',
         ['instance']
       );
       request.instance = defaultValue3;
@@ -2406,17 +2482,17 @@ describe('v1.InstancesClient', () => {
         new protos.google.cloud.compute.v1.GetShieldedInstanceIdentityInstanceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetShieldedInstanceIdentityInstanceRequest',
+        '.google.cloud.compute.v1.GetShieldedInstanceIdentityInstanceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'GetShieldedInstanceIdentityInstanceRequest',
+        '.google.cloud.compute.v1.GetShieldedInstanceIdentityInstanceRequest',
         ['zone']
       );
       request.zone = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'GetShieldedInstanceIdentityInstanceRequest',
+        '.google.cloud.compute.v1.GetShieldedInstanceIdentityInstanceRequest',
         ['instance']
       );
       request.instance = defaultValue3;
@@ -2463,17 +2539,17 @@ describe('v1.InstancesClient', () => {
         new protos.google.cloud.compute.v1.GetShieldedInstanceIdentityInstanceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetShieldedInstanceIdentityInstanceRequest',
+        '.google.cloud.compute.v1.GetShieldedInstanceIdentityInstanceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'GetShieldedInstanceIdentityInstanceRequest',
+        '.google.cloud.compute.v1.GetShieldedInstanceIdentityInstanceRequest',
         ['zone']
       );
       request.zone = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'GetShieldedInstanceIdentityInstanceRequest',
+        '.google.cloud.compute.v1.GetShieldedInstanceIdentityInstanceRequest',
         ['instance']
       );
       request.instance = defaultValue3;
@@ -2507,17 +2583,17 @@ describe('v1.InstancesClient', () => {
         new protos.google.cloud.compute.v1.GetShieldedInstanceIdentityInstanceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetShieldedInstanceIdentityInstanceRequest',
+        '.google.cloud.compute.v1.GetShieldedInstanceIdentityInstanceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'GetShieldedInstanceIdentityInstanceRequest',
+        '.google.cloud.compute.v1.GetShieldedInstanceIdentityInstanceRequest',
         ['zone']
       );
       request.zone = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'GetShieldedInstanceIdentityInstanceRequest',
+        '.google.cloud.compute.v1.GetShieldedInstanceIdentityInstanceRequest',
         ['instance']
       );
       request.instance = defaultValue3;
@@ -2540,13 +2616,15 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertInstanceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('InsertInstanceRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.InsertInstanceRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('InsertInstanceRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.InsertInstanceRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
@@ -2574,13 +2652,15 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertInstanceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('InsertInstanceRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.InsertInstanceRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('InsertInstanceRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.InsertInstanceRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
@@ -2624,13 +2704,15 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertInstanceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('InsertInstanceRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.InsertInstanceRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('InsertInstanceRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.InsertInstanceRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}`;
       const expectedError = new Error('expected');
@@ -2655,13 +2737,15 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertInstanceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('InsertInstanceRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.InsertInstanceRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('InsertInstanceRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.InsertInstanceRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -2680,17 +2764,17 @@ describe('v1.InstancesClient', () => {
         new protos.google.cloud.compute.v1.RemoveResourcePoliciesInstanceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'RemoveResourcePoliciesInstanceRequest',
+        '.google.cloud.compute.v1.RemoveResourcePoliciesInstanceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'RemoveResourcePoliciesInstanceRequest',
+        '.google.cloud.compute.v1.RemoveResourcePoliciesInstanceRequest',
         ['zone']
       );
       request.zone = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'RemoveResourcePoliciesInstanceRequest',
+        '.google.cloud.compute.v1.RemoveResourcePoliciesInstanceRequest',
         ['instance']
       );
       request.instance = defaultValue3;
@@ -2722,17 +2806,17 @@ describe('v1.InstancesClient', () => {
         new protos.google.cloud.compute.v1.RemoveResourcePoliciesInstanceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'RemoveResourcePoliciesInstanceRequest',
+        '.google.cloud.compute.v1.RemoveResourcePoliciesInstanceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'RemoveResourcePoliciesInstanceRequest',
+        '.google.cloud.compute.v1.RemoveResourcePoliciesInstanceRequest',
         ['zone']
       );
       request.zone = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'RemoveResourcePoliciesInstanceRequest',
+        '.google.cloud.compute.v1.RemoveResourcePoliciesInstanceRequest',
         ['instance']
       );
       request.instance = defaultValue3;
@@ -2779,17 +2863,17 @@ describe('v1.InstancesClient', () => {
         new protos.google.cloud.compute.v1.RemoveResourcePoliciesInstanceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'RemoveResourcePoliciesInstanceRequest',
+        '.google.cloud.compute.v1.RemoveResourcePoliciesInstanceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'RemoveResourcePoliciesInstanceRequest',
+        '.google.cloud.compute.v1.RemoveResourcePoliciesInstanceRequest',
         ['zone']
       );
       request.zone = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'RemoveResourcePoliciesInstanceRequest',
+        '.google.cloud.compute.v1.RemoveResourcePoliciesInstanceRequest',
         ['instance']
       );
       request.instance = defaultValue3;
@@ -2823,17 +2907,17 @@ describe('v1.InstancesClient', () => {
         new protos.google.cloud.compute.v1.RemoveResourcePoliciesInstanceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'RemoveResourcePoliciesInstanceRequest',
+        '.google.cloud.compute.v1.RemoveResourcePoliciesInstanceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'RemoveResourcePoliciesInstanceRequest',
+        '.google.cloud.compute.v1.RemoveResourcePoliciesInstanceRequest',
         ['zone']
       );
       request.zone = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'RemoveResourcePoliciesInstanceRequest',
+        '.google.cloud.compute.v1.RemoveResourcePoliciesInstanceRequest',
         ['instance']
       );
       request.instance = defaultValue3;
@@ -2856,17 +2940,20 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ResetInstanceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ResetInstanceRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ResetInstanceRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ResetInstanceRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ResetInstanceRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('ResetInstanceRequest', [
-        'instance',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ResetInstanceRequest',
+        ['instance']
+      );
       request.instance = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -2893,17 +2980,20 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ResetInstanceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ResetInstanceRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ResetInstanceRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ResetInstanceRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ResetInstanceRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('ResetInstanceRequest', [
-        'instance',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ResetInstanceRequest',
+        ['instance']
+      );
       request.instance = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -2945,17 +3035,20 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ResetInstanceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ResetInstanceRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ResetInstanceRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ResetInstanceRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ResetInstanceRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('ResetInstanceRequest', [
-        'instance',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ResetInstanceRequest',
+        ['instance']
+      );
       request.instance = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
       const expectedError = new Error('expected');
@@ -2979,17 +3072,20 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ResetInstanceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ResetInstanceRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ResetInstanceRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ResetInstanceRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ResetInstanceRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('ResetInstanceRequest', [
-        'instance',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ResetInstanceRequest',
+        ['instance']
+      );
       request.instance = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -3007,17 +3103,20 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ResumeInstanceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ResumeInstanceRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ResumeInstanceRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ResumeInstanceRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ResumeInstanceRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('ResumeInstanceRequest', [
-        'instance',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ResumeInstanceRequest',
+        ['instance']
+      );
       request.instance = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -3045,17 +3144,20 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ResumeInstanceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ResumeInstanceRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ResumeInstanceRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ResumeInstanceRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ResumeInstanceRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('ResumeInstanceRequest', [
-        'instance',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ResumeInstanceRequest',
+        ['instance']
+      );
       request.instance = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -3099,17 +3201,20 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ResumeInstanceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ResumeInstanceRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ResumeInstanceRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ResumeInstanceRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ResumeInstanceRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('ResumeInstanceRequest', [
-        'instance',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ResumeInstanceRequest',
+        ['instance']
+      );
       request.instance = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
       const expectedError = new Error('expected');
@@ -3134,17 +3239,20 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ResumeInstanceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ResumeInstanceRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ResumeInstanceRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ResumeInstanceRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ResumeInstanceRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('ResumeInstanceRequest', [
-        'instance',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ResumeInstanceRequest',
+        ['instance']
+      );
       request.instance = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -3163,17 +3271,17 @@ describe('v1.InstancesClient', () => {
         new protos.google.cloud.compute.v1.SendDiagnosticInterruptInstanceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SendDiagnosticInterruptInstanceRequest',
+        '.google.cloud.compute.v1.SendDiagnosticInterruptInstanceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'SendDiagnosticInterruptInstanceRequest',
+        '.google.cloud.compute.v1.SendDiagnosticInterruptInstanceRequest',
         ['zone']
       );
       request.zone = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'SendDiagnosticInterruptInstanceRequest',
+        '.google.cloud.compute.v1.SendDiagnosticInterruptInstanceRequest',
         ['instance']
       );
       request.instance = defaultValue3;
@@ -3205,17 +3313,17 @@ describe('v1.InstancesClient', () => {
         new protos.google.cloud.compute.v1.SendDiagnosticInterruptInstanceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SendDiagnosticInterruptInstanceRequest',
+        '.google.cloud.compute.v1.SendDiagnosticInterruptInstanceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'SendDiagnosticInterruptInstanceRequest',
+        '.google.cloud.compute.v1.SendDiagnosticInterruptInstanceRequest',
         ['zone']
       );
       request.zone = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'SendDiagnosticInterruptInstanceRequest',
+        '.google.cloud.compute.v1.SendDiagnosticInterruptInstanceRequest',
         ['instance']
       );
       request.instance = defaultValue3;
@@ -3262,17 +3370,17 @@ describe('v1.InstancesClient', () => {
         new protos.google.cloud.compute.v1.SendDiagnosticInterruptInstanceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SendDiagnosticInterruptInstanceRequest',
+        '.google.cloud.compute.v1.SendDiagnosticInterruptInstanceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'SendDiagnosticInterruptInstanceRequest',
+        '.google.cloud.compute.v1.SendDiagnosticInterruptInstanceRequest',
         ['zone']
       );
       request.zone = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'SendDiagnosticInterruptInstanceRequest',
+        '.google.cloud.compute.v1.SendDiagnosticInterruptInstanceRequest',
         ['instance']
       );
       request.instance = defaultValue3;
@@ -3306,17 +3414,17 @@ describe('v1.InstancesClient', () => {
         new protos.google.cloud.compute.v1.SendDiagnosticInterruptInstanceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SendDiagnosticInterruptInstanceRequest',
+        '.google.cloud.compute.v1.SendDiagnosticInterruptInstanceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'SendDiagnosticInterruptInstanceRequest',
+        '.google.cloud.compute.v1.SendDiagnosticInterruptInstanceRequest',
         ['zone']
       );
       request.zone = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'SendDiagnosticInterruptInstanceRequest',
+        '.google.cloud.compute.v1.SendDiagnosticInterruptInstanceRequest',
         ['instance']
       );
       request.instance = defaultValue3;
@@ -3340,17 +3448,17 @@ describe('v1.InstancesClient', () => {
         new protos.google.cloud.compute.v1.SetDeletionProtectionInstanceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SetDeletionProtectionInstanceRequest',
+        '.google.cloud.compute.v1.SetDeletionProtectionInstanceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'SetDeletionProtectionInstanceRequest',
+        '.google.cloud.compute.v1.SetDeletionProtectionInstanceRequest',
         ['zone']
       );
       request.zone = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'SetDeletionProtectionInstanceRequest',
+        '.google.cloud.compute.v1.SetDeletionProtectionInstanceRequest',
         ['resource']
       );
       request.resource = defaultValue3;
@@ -3382,17 +3490,17 @@ describe('v1.InstancesClient', () => {
         new protos.google.cloud.compute.v1.SetDeletionProtectionInstanceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SetDeletionProtectionInstanceRequest',
+        '.google.cloud.compute.v1.SetDeletionProtectionInstanceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'SetDeletionProtectionInstanceRequest',
+        '.google.cloud.compute.v1.SetDeletionProtectionInstanceRequest',
         ['zone']
       );
       request.zone = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'SetDeletionProtectionInstanceRequest',
+        '.google.cloud.compute.v1.SetDeletionProtectionInstanceRequest',
         ['resource']
       );
       request.resource = defaultValue3;
@@ -3439,17 +3547,17 @@ describe('v1.InstancesClient', () => {
         new protos.google.cloud.compute.v1.SetDeletionProtectionInstanceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SetDeletionProtectionInstanceRequest',
+        '.google.cloud.compute.v1.SetDeletionProtectionInstanceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'SetDeletionProtectionInstanceRequest',
+        '.google.cloud.compute.v1.SetDeletionProtectionInstanceRequest',
         ['zone']
       );
       request.zone = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'SetDeletionProtectionInstanceRequest',
+        '.google.cloud.compute.v1.SetDeletionProtectionInstanceRequest',
         ['resource']
       );
       request.resource = defaultValue3;
@@ -3483,17 +3591,17 @@ describe('v1.InstancesClient', () => {
         new protos.google.cloud.compute.v1.SetDeletionProtectionInstanceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SetDeletionProtectionInstanceRequest',
+        '.google.cloud.compute.v1.SetDeletionProtectionInstanceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'SetDeletionProtectionInstanceRequest',
+        '.google.cloud.compute.v1.SetDeletionProtectionInstanceRequest',
         ['zone']
       );
       request.zone = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'SetDeletionProtectionInstanceRequest',
+        '.google.cloud.compute.v1.SetDeletionProtectionInstanceRequest',
         ['resource']
       );
       request.resource = defaultValue3;
@@ -3517,17 +3625,17 @@ describe('v1.InstancesClient', () => {
         new protos.google.cloud.compute.v1.SetDiskAutoDeleteInstanceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SetDiskAutoDeleteInstanceRequest',
+        '.google.cloud.compute.v1.SetDiskAutoDeleteInstanceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'SetDiskAutoDeleteInstanceRequest',
+        '.google.cloud.compute.v1.SetDiskAutoDeleteInstanceRequest',
         ['zone']
       );
       request.zone = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'SetDiskAutoDeleteInstanceRequest',
+        '.google.cloud.compute.v1.SetDiskAutoDeleteInstanceRequest',
         ['instance']
       );
       request.instance = defaultValue3;
@@ -3558,17 +3666,17 @@ describe('v1.InstancesClient', () => {
         new protos.google.cloud.compute.v1.SetDiskAutoDeleteInstanceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SetDiskAutoDeleteInstanceRequest',
+        '.google.cloud.compute.v1.SetDiskAutoDeleteInstanceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'SetDiskAutoDeleteInstanceRequest',
+        '.google.cloud.compute.v1.SetDiskAutoDeleteInstanceRequest',
         ['zone']
       );
       request.zone = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'SetDiskAutoDeleteInstanceRequest',
+        '.google.cloud.compute.v1.SetDiskAutoDeleteInstanceRequest',
         ['instance']
       );
       request.instance = defaultValue3;
@@ -3615,17 +3723,17 @@ describe('v1.InstancesClient', () => {
         new protos.google.cloud.compute.v1.SetDiskAutoDeleteInstanceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SetDiskAutoDeleteInstanceRequest',
+        '.google.cloud.compute.v1.SetDiskAutoDeleteInstanceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'SetDiskAutoDeleteInstanceRequest',
+        '.google.cloud.compute.v1.SetDiskAutoDeleteInstanceRequest',
         ['zone']
       );
       request.zone = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'SetDiskAutoDeleteInstanceRequest',
+        '.google.cloud.compute.v1.SetDiskAutoDeleteInstanceRequest',
         ['instance']
       );
       request.instance = defaultValue3;
@@ -3656,17 +3764,17 @@ describe('v1.InstancesClient', () => {
         new protos.google.cloud.compute.v1.SetDiskAutoDeleteInstanceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SetDiskAutoDeleteInstanceRequest',
+        '.google.cloud.compute.v1.SetDiskAutoDeleteInstanceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'SetDiskAutoDeleteInstanceRequest',
+        '.google.cloud.compute.v1.SetDiskAutoDeleteInstanceRequest',
         ['zone']
       );
       request.zone = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'SetDiskAutoDeleteInstanceRequest',
+        '.google.cloud.compute.v1.SetDiskAutoDeleteInstanceRequest',
         ['instance']
       );
       request.instance = defaultValue3;
@@ -3686,17 +3794,20 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetIamPolicyInstanceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SetIamPolicyInstanceRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetIamPolicyInstanceRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('SetIamPolicyInstanceRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetIamPolicyInstanceRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('SetIamPolicyInstanceRequest', [
-        'resource',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetIamPolicyInstanceRequest',
+        ['resource']
+      );
       request.resource = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&resource=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -3724,17 +3835,20 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetIamPolicyInstanceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SetIamPolicyInstanceRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetIamPolicyInstanceRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('SetIamPolicyInstanceRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetIamPolicyInstanceRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('SetIamPolicyInstanceRequest', [
-        'resource',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetIamPolicyInstanceRequest',
+        ['resource']
+      );
       request.resource = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&resource=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -3778,17 +3892,20 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetIamPolicyInstanceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SetIamPolicyInstanceRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetIamPolicyInstanceRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('SetIamPolicyInstanceRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetIamPolicyInstanceRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('SetIamPolicyInstanceRequest', [
-        'resource',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetIamPolicyInstanceRequest',
+        ['resource']
+      );
       request.resource = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&resource=${defaultValue3}`;
       const expectedError = new Error('expected');
@@ -3816,17 +3933,20 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetIamPolicyInstanceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SetIamPolicyInstanceRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetIamPolicyInstanceRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('SetIamPolicyInstanceRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetIamPolicyInstanceRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('SetIamPolicyInstanceRequest', [
-        'resource',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetIamPolicyInstanceRequest',
+        ['resource']
+      );
       request.resource = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -3844,17 +3964,20 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetLabelsInstanceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SetLabelsInstanceRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetLabelsInstanceRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('SetLabelsInstanceRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetLabelsInstanceRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('SetLabelsInstanceRequest', [
-        'instance',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetLabelsInstanceRequest',
+        ['instance']
+      );
       request.instance = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -3882,17 +4005,20 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetLabelsInstanceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SetLabelsInstanceRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetLabelsInstanceRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('SetLabelsInstanceRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetLabelsInstanceRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('SetLabelsInstanceRequest', [
-        'instance',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetLabelsInstanceRequest',
+        ['instance']
+      );
       request.instance = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -3936,17 +4062,20 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetLabelsInstanceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SetLabelsInstanceRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetLabelsInstanceRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('SetLabelsInstanceRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetLabelsInstanceRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('SetLabelsInstanceRequest', [
-        'instance',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetLabelsInstanceRequest',
+        ['instance']
+      );
       request.instance = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
       const expectedError = new Error('expected');
@@ -3971,17 +4100,20 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetLabelsInstanceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SetLabelsInstanceRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetLabelsInstanceRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('SetLabelsInstanceRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetLabelsInstanceRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('SetLabelsInstanceRequest', [
-        'instance',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetLabelsInstanceRequest',
+        ['instance']
+      );
       request.instance = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -4000,17 +4132,17 @@ describe('v1.InstancesClient', () => {
         new protos.google.cloud.compute.v1.SetMachineResourcesInstanceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SetMachineResourcesInstanceRequest',
+        '.google.cloud.compute.v1.SetMachineResourcesInstanceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'SetMachineResourcesInstanceRequest',
+        '.google.cloud.compute.v1.SetMachineResourcesInstanceRequest',
         ['zone']
       );
       request.zone = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'SetMachineResourcesInstanceRequest',
+        '.google.cloud.compute.v1.SetMachineResourcesInstanceRequest',
         ['instance']
       );
       request.instance = defaultValue3;
@@ -4042,17 +4174,17 @@ describe('v1.InstancesClient', () => {
         new protos.google.cloud.compute.v1.SetMachineResourcesInstanceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SetMachineResourcesInstanceRequest',
+        '.google.cloud.compute.v1.SetMachineResourcesInstanceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'SetMachineResourcesInstanceRequest',
+        '.google.cloud.compute.v1.SetMachineResourcesInstanceRequest',
         ['zone']
       );
       request.zone = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'SetMachineResourcesInstanceRequest',
+        '.google.cloud.compute.v1.SetMachineResourcesInstanceRequest',
         ['instance']
       );
       request.instance = defaultValue3;
@@ -4099,17 +4231,17 @@ describe('v1.InstancesClient', () => {
         new protos.google.cloud.compute.v1.SetMachineResourcesInstanceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SetMachineResourcesInstanceRequest',
+        '.google.cloud.compute.v1.SetMachineResourcesInstanceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'SetMachineResourcesInstanceRequest',
+        '.google.cloud.compute.v1.SetMachineResourcesInstanceRequest',
         ['zone']
       );
       request.zone = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'SetMachineResourcesInstanceRequest',
+        '.google.cloud.compute.v1.SetMachineResourcesInstanceRequest',
         ['instance']
       );
       request.instance = defaultValue3;
@@ -4140,17 +4272,17 @@ describe('v1.InstancesClient', () => {
         new protos.google.cloud.compute.v1.SetMachineResourcesInstanceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SetMachineResourcesInstanceRequest',
+        '.google.cloud.compute.v1.SetMachineResourcesInstanceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'SetMachineResourcesInstanceRequest',
+        '.google.cloud.compute.v1.SetMachineResourcesInstanceRequest',
         ['zone']
       );
       request.zone = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'SetMachineResourcesInstanceRequest',
+        '.google.cloud.compute.v1.SetMachineResourcesInstanceRequest',
         ['instance']
       );
       request.instance = defaultValue3;
@@ -4171,17 +4303,17 @@ describe('v1.InstancesClient', () => {
         new protos.google.cloud.compute.v1.SetMachineTypeInstanceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SetMachineTypeInstanceRequest',
+        '.google.cloud.compute.v1.SetMachineTypeInstanceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'SetMachineTypeInstanceRequest',
+        '.google.cloud.compute.v1.SetMachineTypeInstanceRequest',
         ['zone']
       );
       request.zone = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'SetMachineTypeInstanceRequest',
+        '.google.cloud.compute.v1.SetMachineTypeInstanceRequest',
         ['instance']
       );
       request.instance = defaultValue3;
@@ -4212,17 +4344,17 @@ describe('v1.InstancesClient', () => {
         new protos.google.cloud.compute.v1.SetMachineTypeInstanceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SetMachineTypeInstanceRequest',
+        '.google.cloud.compute.v1.SetMachineTypeInstanceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'SetMachineTypeInstanceRequest',
+        '.google.cloud.compute.v1.SetMachineTypeInstanceRequest',
         ['zone']
       );
       request.zone = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'SetMachineTypeInstanceRequest',
+        '.google.cloud.compute.v1.SetMachineTypeInstanceRequest',
         ['instance']
       );
       request.instance = defaultValue3;
@@ -4269,17 +4401,17 @@ describe('v1.InstancesClient', () => {
         new protos.google.cloud.compute.v1.SetMachineTypeInstanceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SetMachineTypeInstanceRequest',
+        '.google.cloud.compute.v1.SetMachineTypeInstanceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'SetMachineTypeInstanceRequest',
+        '.google.cloud.compute.v1.SetMachineTypeInstanceRequest',
         ['zone']
       );
       request.zone = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'SetMachineTypeInstanceRequest',
+        '.google.cloud.compute.v1.SetMachineTypeInstanceRequest',
         ['instance']
       );
       request.instance = defaultValue3;
@@ -4310,17 +4442,17 @@ describe('v1.InstancesClient', () => {
         new protos.google.cloud.compute.v1.SetMachineTypeInstanceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SetMachineTypeInstanceRequest',
+        '.google.cloud.compute.v1.SetMachineTypeInstanceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'SetMachineTypeInstanceRequest',
+        '.google.cloud.compute.v1.SetMachineTypeInstanceRequest',
         ['zone']
       );
       request.zone = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'SetMachineTypeInstanceRequest',
+        '.google.cloud.compute.v1.SetMachineTypeInstanceRequest',
         ['instance']
       );
       request.instance = defaultValue3;
@@ -4340,17 +4472,20 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetMetadataInstanceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SetMetadataInstanceRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetMetadataInstanceRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('SetMetadataInstanceRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetMetadataInstanceRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('SetMetadataInstanceRequest', [
-        'instance',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetMetadataInstanceRequest',
+        ['instance']
+      );
       request.instance = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -4378,17 +4513,20 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetMetadataInstanceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SetMetadataInstanceRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetMetadataInstanceRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('SetMetadataInstanceRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetMetadataInstanceRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('SetMetadataInstanceRequest', [
-        'instance',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetMetadataInstanceRequest',
+        ['instance']
+      );
       request.instance = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -4432,17 +4570,20 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetMetadataInstanceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SetMetadataInstanceRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetMetadataInstanceRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('SetMetadataInstanceRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetMetadataInstanceRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('SetMetadataInstanceRequest', [
-        'instance',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetMetadataInstanceRequest',
+        ['instance']
+      );
       request.instance = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
       const expectedError = new Error('expected');
@@ -4470,17 +4611,20 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetMetadataInstanceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SetMetadataInstanceRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetMetadataInstanceRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('SetMetadataInstanceRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetMetadataInstanceRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('SetMetadataInstanceRequest', [
-        'instance',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetMetadataInstanceRequest',
+        ['instance']
+      );
       request.instance = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -4499,17 +4643,17 @@ describe('v1.InstancesClient', () => {
         new protos.google.cloud.compute.v1.SetMinCpuPlatformInstanceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SetMinCpuPlatformInstanceRequest',
+        '.google.cloud.compute.v1.SetMinCpuPlatformInstanceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'SetMinCpuPlatformInstanceRequest',
+        '.google.cloud.compute.v1.SetMinCpuPlatformInstanceRequest',
         ['zone']
       );
       request.zone = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'SetMinCpuPlatformInstanceRequest',
+        '.google.cloud.compute.v1.SetMinCpuPlatformInstanceRequest',
         ['instance']
       );
       request.instance = defaultValue3;
@@ -4540,17 +4684,17 @@ describe('v1.InstancesClient', () => {
         new protos.google.cloud.compute.v1.SetMinCpuPlatformInstanceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SetMinCpuPlatformInstanceRequest',
+        '.google.cloud.compute.v1.SetMinCpuPlatformInstanceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'SetMinCpuPlatformInstanceRequest',
+        '.google.cloud.compute.v1.SetMinCpuPlatformInstanceRequest',
         ['zone']
       );
       request.zone = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'SetMinCpuPlatformInstanceRequest',
+        '.google.cloud.compute.v1.SetMinCpuPlatformInstanceRequest',
         ['instance']
       );
       request.instance = defaultValue3;
@@ -4597,17 +4741,17 @@ describe('v1.InstancesClient', () => {
         new protos.google.cloud.compute.v1.SetMinCpuPlatformInstanceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SetMinCpuPlatformInstanceRequest',
+        '.google.cloud.compute.v1.SetMinCpuPlatformInstanceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'SetMinCpuPlatformInstanceRequest',
+        '.google.cloud.compute.v1.SetMinCpuPlatformInstanceRequest',
         ['zone']
       );
       request.zone = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'SetMinCpuPlatformInstanceRequest',
+        '.google.cloud.compute.v1.SetMinCpuPlatformInstanceRequest',
         ['instance']
       );
       request.instance = defaultValue3;
@@ -4638,17 +4782,17 @@ describe('v1.InstancesClient', () => {
         new protos.google.cloud.compute.v1.SetMinCpuPlatformInstanceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SetMinCpuPlatformInstanceRequest',
+        '.google.cloud.compute.v1.SetMinCpuPlatformInstanceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'SetMinCpuPlatformInstanceRequest',
+        '.google.cloud.compute.v1.SetMinCpuPlatformInstanceRequest',
         ['zone']
       );
       request.zone = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'SetMinCpuPlatformInstanceRequest',
+        '.google.cloud.compute.v1.SetMinCpuPlatformInstanceRequest',
         ['instance']
       );
       request.instance = defaultValue3;
@@ -4669,17 +4813,17 @@ describe('v1.InstancesClient', () => {
         new protos.google.cloud.compute.v1.SetSchedulingInstanceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SetSchedulingInstanceRequest',
+        '.google.cloud.compute.v1.SetSchedulingInstanceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'SetSchedulingInstanceRequest',
+        '.google.cloud.compute.v1.SetSchedulingInstanceRequest',
         ['zone']
       );
       request.zone = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'SetSchedulingInstanceRequest',
+        '.google.cloud.compute.v1.SetSchedulingInstanceRequest',
         ['instance']
       );
       request.instance = defaultValue3;
@@ -4710,17 +4854,17 @@ describe('v1.InstancesClient', () => {
         new protos.google.cloud.compute.v1.SetSchedulingInstanceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SetSchedulingInstanceRequest',
+        '.google.cloud.compute.v1.SetSchedulingInstanceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'SetSchedulingInstanceRequest',
+        '.google.cloud.compute.v1.SetSchedulingInstanceRequest',
         ['zone']
       );
       request.zone = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'SetSchedulingInstanceRequest',
+        '.google.cloud.compute.v1.SetSchedulingInstanceRequest',
         ['instance']
       );
       request.instance = defaultValue3;
@@ -4767,17 +4911,17 @@ describe('v1.InstancesClient', () => {
         new protos.google.cloud.compute.v1.SetSchedulingInstanceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SetSchedulingInstanceRequest',
+        '.google.cloud.compute.v1.SetSchedulingInstanceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'SetSchedulingInstanceRequest',
+        '.google.cloud.compute.v1.SetSchedulingInstanceRequest',
         ['zone']
       );
       request.zone = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'SetSchedulingInstanceRequest',
+        '.google.cloud.compute.v1.SetSchedulingInstanceRequest',
         ['instance']
       );
       request.instance = defaultValue3;
@@ -4808,17 +4952,17 @@ describe('v1.InstancesClient', () => {
         new protos.google.cloud.compute.v1.SetSchedulingInstanceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SetSchedulingInstanceRequest',
+        '.google.cloud.compute.v1.SetSchedulingInstanceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'SetSchedulingInstanceRequest',
+        '.google.cloud.compute.v1.SetSchedulingInstanceRequest',
         ['zone']
       );
       request.zone = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'SetSchedulingInstanceRequest',
+        '.google.cloud.compute.v1.SetSchedulingInstanceRequest',
         ['instance']
       );
       request.instance = defaultValue3;
@@ -4839,17 +4983,17 @@ describe('v1.InstancesClient', () => {
         new protos.google.cloud.compute.v1.SetServiceAccountInstanceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SetServiceAccountInstanceRequest',
+        '.google.cloud.compute.v1.SetServiceAccountInstanceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'SetServiceAccountInstanceRequest',
+        '.google.cloud.compute.v1.SetServiceAccountInstanceRequest',
         ['zone']
       );
       request.zone = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'SetServiceAccountInstanceRequest',
+        '.google.cloud.compute.v1.SetServiceAccountInstanceRequest',
         ['instance']
       );
       request.instance = defaultValue3;
@@ -4880,17 +5024,17 @@ describe('v1.InstancesClient', () => {
         new protos.google.cloud.compute.v1.SetServiceAccountInstanceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SetServiceAccountInstanceRequest',
+        '.google.cloud.compute.v1.SetServiceAccountInstanceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'SetServiceAccountInstanceRequest',
+        '.google.cloud.compute.v1.SetServiceAccountInstanceRequest',
         ['zone']
       );
       request.zone = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'SetServiceAccountInstanceRequest',
+        '.google.cloud.compute.v1.SetServiceAccountInstanceRequest',
         ['instance']
       );
       request.instance = defaultValue3;
@@ -4937,17 +5081,17 @@ describe('v1.InstancesClient', () => {
         new protos.google.cloud.compute.v1.SetServiceAccountInstanceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SetServiceAccountInstanceRequest',
+        '.google.cloud.compute.v1.SetServiceAccountInstanceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'SetServiceAccountInstanceRequest',
+        '.google.cloud.compute.v1.SetServiceAccountInstanceRequest',
         ['zone']
       );
       request.zone = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'SetServiceAccountInstanceRequest',
+        '.google.cloud.compute.v1.SetServiceAccountInstanceRequest',
         ['instance']
       );
       request.instance = defaultValue3;
@@ -4978,17 +5122,17 @@ describe('v1.InstancesClient', () => {
         new protos.google.cloud.compute.v1.SetServiceAccountInstanceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SetServiceAccountInstanceRequest',
+        '.google.cloud.compute.v1.SetServiceAccountInstanceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'SetServiceAccountInstanceRequest',
+        '.google.cloud.compute.v1.SetServiceAccountInstanceRequest',
         ['zone']
       );
       request.zone = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'SetServiceAccountInstanceRequest',
+        '.google.cloud.compute.v1.SetServiceAccountInstanceRequest',
         ['instance']
       );
       request.instance = defaultValue3;
@@ -5009,17 +5153,17 @@ describe('v1.InstancesClient', () => {
         new protos.google.cloud.compute.v1.SetShieldedInstanceIntegrityPolicyInstanceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SetShieldedInstanceIntegrityPolicyInstanceRequest',
+        '.google.cloud.compute.v1.SetShieldedInstanceIntegrityPolicyInstanceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'SetShieldedInstanceIntegrityPolicyInstanceRequest',
+        '.google.cloud.compute.v1.SetShieldedInstanceIntegrityPolicyInstanceRequest',
         ['zone']
       );
       request.zone = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'SetShieldedInstanceIntegrityPolicyInstanceRequest',
+        '.google.cloud.compute.v1.SetShieldedInstanceIntegrityPolicyInstanceRequest',
         ['instance']
       );
       request.instance = defaultValue3;
@@ -5053,17 +5197,17 @@ describe('v1.InstancesClient', () => {
         new protos.google.cloud.compute.v1.SetShieldedInstanceIntegrityPolicyInstanceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SetShieldedInstanceIntegrityPolicyInstanceRequest',
+        '.google.cloud.compute.v1.SetShieldedInstanceIntegrityPolicyInstanceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'SetShieldedInstanceIntegrityPolicyInstanceRequest',
+        '.google.cloud.compute.v1.SetShieldedInstanceIntegrityPolicyInstanceRequest',
         ['zone']
       );
       request.zone = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'SetShieldedInstanceIntegrityPolicyInstanceRequest',
+        '.google.cloud.compute.v1.SetShieldedInstanceIntegrityPolicyInstanceRequest',
         ['instance']
       );
       request.instance = defaultValue3;
@@ -5110,17 +5254,17 @@ describe('v1.InstancesClient', () => {
         new protos.google.cloud.compute.v1.SetShieldedInstanceIntegrityPolicyInstanceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SetShieldedInstanceIntegrityPolicyInstanceRequest',
+        '.google.cloud.compute.v1.SetShieldedInstanceIntegrityPolicyInstanceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'SetShieldedInstanceIntegrityPolicyInstanceRequest',
+        '.google.cloud.compute.v1.SetShieldedInstanceIntegrityPolicyInstanceRequest',
         ['zone']
       );
       request.zone = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'SetShieldedInstanceIntegrityPolicyInstanceRequest',
+        '.google.cloud.compute.v1.SetShieldedInstanceIntegrityPolicyInstanceRequest',
         ['instance']
       );
       request.instance = defaultValue3;
@@ -5154,17 +5298,17 @@ describe('v1.InstancesClient', () => {
         new protos.google.cloud.compute.v1.SetShieldedInstanceIntegrityPolicyInstanceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SetShieldedInstanceIntegrityPolicyInstanceRequest',
+        '.google.cloud.compute.v1.SetShieldedInstanceIntegrityPolicyInstanceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'SetShieldedInstanceIntegrityPolicyInstanceRequest',
+        '.google.cloud.compute.v1.SetShieldedInstanceIntegrityPolicyInstanceRequest',
         ['zone']
       );
       request.zone = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'SetShieldedInstanceIntegrityPolicyInstanceRequest',
+        '.google.cloud.compute.v1.SetShieldedInstanceIntegrityPolicyInstanceRequest',
         ['instance']
       );
       request.instance = defaultValue3;
@@ -5187,17 +5331,20 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetTagsInstanceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SetTagsInstanceRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetTagsInstanceRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('SetTagsInstanceRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetTagsInstanceRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('SetTagsInstanceRequest', [
-        'instance',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetTagsInstanceRequest',
+        ['instance']
+      );
       request.instance = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -5225,17 +5372,20 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetTagsInstanceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SetTagsInstanceRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetTagsInstanceRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('SetTagsInstanceRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetTagsInstanceRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('SetTagsInstanceRequest', [
-        'instance',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetTagsInstanceRequest',
+        ['instance']
+      );
       request.instance = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -5279,17 +5429,20 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetTagsInstanceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SetTagsInstanceRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetTagsInstanceRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('SetTagsInstanceRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetTagsInstanceRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('SetTagsInstanceRequest', [
-        'instance',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetTagsInstanceRequest',
+        ['instance']
+      );
       request.instance = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
       const expectedError = new Error('expected');
@@ -5314,17 +5467,20 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetTagsInstanceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SetTagsInstanceRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetTagsInstanceRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('SetTagsInstanceRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetTagsInstanceRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('SetTagsInstanceRequest', [
-        'instance',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetTagsInstanceRequest',
+        ['instance']
+      );
       request.instance = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -5343,17 +5499,17 @@ describe('v1.InstancesClient', () => {
         new protos.google.cloud.compute.v1.SimulateMaintenanceEventInstanceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SimulateMaintenanceEventInstanceRequest',
+        '.google.cloud.compute.v1.SimulateMaintenanceEventInstanceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'SimulateMaintenanceEventInstanceRequest',
+        '.google.cloud.compute.v1.SimulateMaintenanceEventInstanceRequest',
         ['zone']
       );
       request.zone = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'SimulateMaintenanceEventInstanceRequest',
+        '.google.cloud.compute.v1.SimulateMaintenanceEventInstanceRequest',
         ['instance']
       );
       request.instance = defaultValue3;
@@ -5385,17 +5541,17 @@ describe('v1.InstancesClient', () => {
         new protos.google.cloud.compute.v1.SimulateMaintenanceEventInstanceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SimulateMaintenanceEventInstanceRequest',
+        '.google.cloud.compute.v1.SimulateMaintenanceEventInstanceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'SimulateMaintenanceEventInstanceRequest',
+        '.google.cloud.compute.v1.SimulateMaintenanceEventInstanceRequest',
         ['zone']
       );
       request.zone = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'SimulateMaintenanceEventInstanceRequest',
+        '.google.cloud.compute.v1.SimulateMaintenanceEventInstanceRequest',
         ['instance']
       );
       request.instance = defaultValue3;
@@ -5442,17 +5598,17 @@ describe('v1.InstancesClient', () => {
         new protos.google.cloud.compute.v1.SimulateMaintenanceEventInstanceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SimulateMaintenanceEventInstanceRequest',
+        '.google.cloud.compute.v1.SimulateMaintenanceEventInstanceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'SimulateMaintenanceEventInstanceRequest',
+        '.google.cloud.compute.v1.SimulateMaintenanceEventInstanceRequest',
         ['zone']
       );
       request.zone = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'SimulateMaintenanceEventInstanceRequest',
+        '.google.cloud.compute.v1.SimulateMaintenanceEventInstanceRequest',
         ['instance']
       );
       request.instance = defaultValue3;
@@ -5486,17 +5642,17 @@ describe('v1.InstancesClient', () => {
         new protos.google.cloud.compute.v1.SimulateMaintenanceEventInstanceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SimulateMaintenanceEventInstanceRequest',
+        '.google.cloud.compute.v1.SimulateMaintenanceEventInstanceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'SimulateMaintenanceEventInstanceRequest',
+        '.google.cloud.compute.v1.SimulateMaintenanceEventInstanceRequest',
         ['zone']
       );
       request.zone = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'SimulateMaintenanceEventInstanceRequest',
+        '.google.cloud.compute.v1.SimulateMaintenanceEventInstanceRequest',
         ['instance']
       );
       request.instance = defaultValue3;
@@ -5519,17 +5675,20 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.StartInstanceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('StartInstanceRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.StartInstanceRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('StartInstanceRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.StartInstanceRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('StartInstanceRequest', [
-        'instance',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.StartInstanceRequest',
+        ['instance']
+      );
       request.instance = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -5556,17 +5715,20 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.StartInstanceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('StartInstanceRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.StartInstanceRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('StartInstanceRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.StartInstanceRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('StartInstanceRequest', [
-        'instance',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.StartInstanceRequest',
+        ['instance']
+      );
       request.instance = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -5608,17 +5770,20 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.StartInstanceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('StartInstanceRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.StartInstanceRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('StartInstanceRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.StartInstanceRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('StartInstanceRequest', [
-        'instance',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.StartInstanceRequest',
+        ['instance']
+      );
       request.instance = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
       const expectedError = new Error('expected');
@@ -5642,17 +5807,20 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.StartInstanceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('StartInstanceRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.StartInstanceRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('StartInstanceRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.StartInstanceRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('StartInstanceRequest', [
-        'instance',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.StartInstanceRequest',
+        ['instance']
+      );
       request.instance = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -5671,17 +5839,17 @@ describe('v1.InstancesClient', () => {
         new protos.google.cloud.compute.v1.StartWithEncryptionKeyInstanceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'StartWithEncryptionKeyInstanceRequest',
+        '.google.cloud.compute.v1.StartWithEncryptionKeyInstanceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'StartWithEncryptionKeyInstanceRequest',
+        '.google.cloud.compute.v1.StartWithEncryptionKeyInstanceRequest',
         ['zone']
       );
       request.zone = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'StartWithEncryptionKeyInstanceRequest',
+        '.google.cloud.compute.v1.StartWithEncryptionKeyInstanceRequest',
         ['instance']
       );
       request.instance = defaultValue3;
@@ -5713,17 +5881,17 @@ describe('v1.InstancesClient', () => {
         new protos.google.cloud.compute.v1.StartWithEncryptionKeyInstanceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'StartWithEncryptionKeyInstanceRequest',
+        '.google.cloud.compute.v1.StartWithEncryptionKeyInstanceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'StartWithEncryptionKeyInstanceRequest',
+        '.google.cloud.compute.v1.StartWithEncryptionKeyInstanceRequest',
         ['zone']
       );
       request.zone = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'StartWithEncryptionKeyInstanceRequest',
+        '.google.cloud.compute.v1.StartWithEncryptionKeyInstanceRequest',
         ['instance']
       );
       request.instance = defaultValue3;
@@ -5770,17 +5938,17 @@ describe('v1.InstancesClient', () => {
         new protos.google.cloud.compute.v1.StartWithEncryptionKeyInstanceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'StartWithEncryptionKeyInstanceRequest',
+        '.google.cloud.compute.v1.StartWithEncryptionKeyInstanceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'StartWithEncryptionKeyInstanceRequest',
+        '.google.cloud.compute.v1.StartWithEncryptionKeyInstanceRequest',
         ['zone']
       );
       request.zone = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'StartWithEncryptionKeyInstanceRequest',
+        '.google.cloud.compute.v1.StartWithEncryptionKeyInstanceRequest',
         ['instance']
       );
       request.instance = defaultValue3;
@@ -5814,17 +5982,17 @@ describe('v1.InstancesClient', () => {
         new protos.google.cloud.compute.v1.StartWithEncryptionKeyInstanceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'StartWithEncryptionKeyInstanceRequest',
+        '.google.cloud.compute.v1.StartWithEncryptionKeyInstanceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'StartWithEncryptionKeyInstanceRequest',
+        '.google.cloud.compute.v1.StartWithEncryptionKeyInstanceRequest',
         ['zone']
       );
       request.zone = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'StartWithEncryptionKeyInstanceRequest',
+        '.google.cloud.compute.v1.StartWithEncryptionKeyInstanceRequest',
         ['instance']
       );
       request.instance = defaultValue3;
@@ -5847,17 +6015,20 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.StopInstanceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('StopInstanceRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.StopInstanceRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('StopInstanceRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.StopInstanceRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('StopInstanceRequest', [
-        'instance',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.StopInstanceRequest',
+        ['instance']
+      );
       request.instance = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -5884,17 +6055,20 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.StopInstanceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('StopInstanceRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.StopInstanceRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('StopInstanceRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.StopInstanceRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('StopInstanceRequest', [
-        'instance',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.StopInstanceRequest',
+        ['instance']
+      );
       request.instance = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -5936,17 +6110,20 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.StopInstanceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('StopInstanceRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.StopInstanceRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('StopInstanceRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.StopInstanceRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('StopInstanceRequest', [
-        'instance',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.StopInstanceRequest',
+        ['instance']
+      );
       request.instance = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
       const expectedError = new Error('expected');
@@ -5970,17 +6147,20 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.StopInstanceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('StopInstanceRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.StopInstanceRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('StopInstanceRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.StopInstanceRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('StopInstanceRequest', [
-        'instance',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.StopInstanceRequest',
+        ['instance']
+      );
       request.instance = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -5998,17 +6178,20 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SuspendInstanceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SuspendInstanceRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SuspendInstanceRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('SuspendInstanceRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SuspendInstanceRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('SuspendInstanceRequest', [
-        'instance',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SuspendInstanceRequest',
+        ['instance']
+      );
       request.instance = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -6036,17 +6219,20 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SuspendInstanceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SuspendInstanceRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SuspendInstanceRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('SuspendInstanceRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SuspendInstanceRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('SuspendInstanceRequest', [
-        'instance',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SuspendInstanceRequest',
+        ['instance']
+      );
       request.instance = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -6090,17 +6276,20 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SuspendInstanceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SuspendInstanceRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SuspendInstanceRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('SuspendInstanceRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SuspendInstanceRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('SuspendInstanceRequest', [
-        'instance',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SuspendInstanceRequest',
+        ['instance']
+      );
       request.instance = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
       const expectedError = new Error('expected');
@@ -6125,17 +6314,20 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SuspendInstanceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SuspendInstanceRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SuspendInstanceRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('SuspendInstanceRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SuspendInstanceRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('SuspendInstanceRequest', [
-        'instance',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SuspendInstanceRequest',
+        ['instance']
+      );
       request.instance = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -6154,17 +6346,17 @@ describe('v1.InstancesClient', () => {
         new protos.google.cloud.compute.v1.TestIamPermissionsInstanceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'TestIamPermissionsInstanceRequest',
+        '.google.cloud.compute.v1.TestIamPermissionsInstanceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'TestIamPermissionsInstanceRequest',
+        '.google.cloud.compute.v1.TestIamPermissionsInstanceRequest',
         ['zone']
       );
       request.zone = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'TestIamPermissionsInstanceRequest',
+        '.google.cloud.compute.v1.TestIamPermissionsInstanceRequest',
         ['resource']
       );
       request.resource = defaultValue3;
@@ -6196,17 +6388,17 @@ describe('v1.InstancesClient', () => {
         new protos.google.cloud.compute.v1.TestIamPermissionsInstanceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'TestIamPermissionsInstanceRequest',
+        '.google.cloud.compute.v1.TestIamPermissionsInstanceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'TestIamPermissionsInstanceRequest',
+        '.google.cloud.compute.v1.TestIamPermissionsInstanceRequest',
         ['zone']
       );
       request.zone = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'TestIamPermissionsInstanceRequest',
+        '.google.cloud.compute.v1.TestIamPermissionsInstanceRequest',
         ['resource']
       );
       request.resource = defaultValue3;
@@ -6253,17 +6445,17 @@ describe('v1.InstancesClient', () => {
         new protos.google.cloud.compute.v1.TestIamPermissionsInstanceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'TestIamPermissionsInstanceRequest',
+        '.google.cloud.compute.v1.TestIamPermissionsInstanceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'TestIamPermissionsInstanceRequest',
+        '.google.cloud.compute.v1.TestIamPermissionsInstanceRequest',
         ['zone']
       );
       request.zone = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'TestIamPermissionsInstanceRequest',
+        '.google.cloud.compute.v1.TestIamPermissionsInstanceRequest',
         ['resource']
       );
       request.resource = defaultValue3;
@@ -6294,17 +6486,17 @@ describe('v1.InstancesClient', () => {
         new protos.google.cloud.compute.v1.TestIamPermissionsInstanceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'TestIamPermissionsInstanceRequest',
+        '.google.cloud.compute.v1.TestIamPermissionsInstanceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'TestIamPermissionsInstanceRequest',
+        '.google.cloud.compute.v1.TestIamPermissionsInstanceRequest',
         ['zone']
       );
       request.zone = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'TestIamPermissionsInstanceRequest',
+        '.google.cloud.compute.v1.TestIamPermissionsInstanceRequest',
         ['resource']
       );
       request.resource = defaultValue3;
@@ -6324,17 +6516,20 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.UpdateInstanceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('UpdateInstanceRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.UpdateInstanceRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('UpdateInstanceRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.UpdateInstanceRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('UpdateInstanceRequest', [
-        'instance',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.UpdateInstanceRequest',
+        ['instance']
+      );
       request.instance = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -6362,17 +6557,20 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.UpdateInstanceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('UpdateInstanceRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.UpdateInstanceRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('UpdateInstanceRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.UpdateInstanceRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('UpdateInstanceRequest', [
-        'instance',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.UpdateInstanceRequest',
+        ['instance']
+      );
       request.instance = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -6416,17 +6614,20 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.UpdateInstanceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('UpdateInstanceRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.UpdateInstanceRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('UpdateInstanceRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.UpdateInstanceRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('UpdateInstanceRequest', [
-        'instance',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.UpdateInstanceRequest',
+        ['instance']
+      );
       request.instance = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&instance=${defaultValue3}`;
       const expectedError = new Error('expected');
@@ -6451,17 +6652,20 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.UpdateInstanceRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('UpdateInstanceRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.UpdateInstanceRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('UpdateInstanceRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.UpdateInstanceRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('UpdateInstanceRequest', [
-        'instance',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.UpdateInstanceRequest',
+        ['instance']
+      );
       request.instance = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -6480,17 +6684,17 @@ describe('v1.InstancesClient', () => {
         new protos.google.cloud.compute.v1.UpdateAccessConfigInstanceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateAccessConfigInstanceRequest',
+        '.google.cloud.compute.v1.UpdateAccessConfigInstanceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'UpdateAccessConfigInstanceRequest',
+        '.google.cloud.compute.v1.UpdateAccessConfigInstanceRequest',
         ['zone']
       );
       request.zone = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'UpdateAccessConfigInstanceRequest',
+        '.google.cloud.compute.v1.UpdateAccessConfigInstanceRequest',
         ['instance']
       );
       request.instance = defaultValue3;
@@ -6522,17 +6726,17 @@ describe('v1.InstancesClient', () => {
         new protos.google.cloud.compute.v1.UpdateAccessConfigInstanceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateAccessConfigInstanceRequest',
+        '.google.cloud.compute.v1.UpdateAccessConfigInstanceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'UpdateAccessConfigInstanceRequest',
+        '.google.cloud.compute.v1.UpdateAccessConfigInstanceRequest',
         ['zone']
       );
       request.zone = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'UpdateAccessConfigInstanceRequest',
+        '.google.cloud.compute.v1.UpdateAccessConfigInstanceRequest',
         ['instance']
       );
       request.instance = defaultValue3;
@@ -6579,17 +6783,17 @@ describe('v1.InstancesClient', () => {
         new protos.google.cloud.compute.v1.UpdateAccessConfigInstanceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateAccessConfigInstanceRequest',
+        '.google.cloud.compute.v1.UpdateAccessConfigInstanceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'UpdateAccessConfigInstanceRequest',
+        '.google.cloud.compute.v1.UpdateAccessConfigInstanceRequest',
         ['zone']
       );
       request.zone = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'UpdateAccessConfigInstanceRequest',
+        '.google.cloud.compute.v1.UpdateAccessConfigInstanceRequest',
         ['instance']
       );
       request.instance = defaultValue3;
@@ -6620,17 +6824,17 @@ describe('v1.InstancesClient', () => {
         new protos.google.cloud.compute.v1.UpdateAccessConfigInstanceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateAccessConfigInstanceRequest',
+        '.google.cloud.compute.v1.UpdateAccessConfigInstanceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'UpdateAccessConfigInstanceRequest',
+        '.google.cloud.compute.v1.UpdateAccessConfigInstanceRequest',
         ['zone']
       );
       request.zone = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'UpdateAccessConfigInstanceRequest',
+        '.google.cloud.compute.v1.UpdateAccessConfigInstanceRequest',
         ['instance']
       );
       request.instance = defaultValue3;
@@ -6651,17 +6855,17 @@ describe('v1.InstancesClient', () => {
         new protos.google.cloud.compute.v1.UpdateDisplayDeviceInstanceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateDisplayDeviceInstanceRequest',
+        '.google.cloud.compute.v1.UpdateDisplayDeviceInstanceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'UpdateDisplayDeviceInstanceRequest',
+        '.google.cloud.compute.v1.UpdateDisplayDeviceInstanceRequest',
         ['zone']
       );
       request.zone = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'UpdateDisplayDeviceInstanceRequest',
+        '.google.cloud.compute.v1.UpdateDisplayDeviceInstanceRequest',
         ['instance']
       );
       request.instance = defaultValue3;
@@ -6693,17 +6897,17 @@ describe('v1.InstancesClient', () => {
         new protos.google.cloud.compute.v1.UpdateDisplayDeviceInstanceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateDisplayDeviceInstanceRequest',
+        '.google.cloud.compute.v1.UpdateDisplayDeviceInstanceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'UpdateDisplayDeviceInstanceRequest',
+        '.google.cloud.compute.v1.UpdateDisplayDeviceInstanceRequest',
         ['zone']
       );
       request.zone = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'UpdateDisplayDeviceInstanceRequest',
+        '.google.cloud.compute.v1.UpdateDisplayDeviceInstanceRequest',
         ['instance']
       );
       request.instance = defaultValue3;
@@ -6750,17 +6954,17 @@ describe('v1.InstancesClient', () => {
         new protos.google.cloud.compute.v1.UpdateDisplayDeviceInstanceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateDisplayDeviceInstanceRequest',
+        '.google.cloud.compute.v1.UpdateDisplayDeviceInstanceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'UpdateDisplayDeviceInstanceRequest',
+        '.google.cloud.compute.v1.UpdateDisplayDeviceInstanceRequest',
         ['zone']
       );
       request.zone = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'UpdateDisplayDeviceInstanceRequest',
+        '.google.cloud.compute.v1.UpdateDisplayDeviceInstanceRequest',
         ['instance']
       );
       request.instance = defaultValue3;
@@ -6791,17 +6995,17 @@ describe('v1.InstancesClient', () => {
         new protos.google.cloud.compute.v1.UpdateDisplayDeviceInstanceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateDisplayDeviceInstanceRequest',
+        '.google.cloud.compute.v1.UpdateDisplayDeviceInstanceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'UpdateDisplayDeviceInstanceRequest',
+        '.google.cloud.compute.v1.UpdateDisplayDeviceInstanceRequest',
         ['zone']
       );
       request.zone = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'UpdateDisplayDeviceInstanceRequest',
+        '.google.cloud.compute.v1.UpdateDisplayDeviceInstanceRequest',
         ['instance']
       );
       request.instance = defaultValue3;
@@ -6822,17 +7026,17 @@ describe('v1.InstancesClient', () => {
         new protos.google.cloud.compute.v1.UpdateNetworkInterfaceInstanceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateNetworkInterfaceInstanceRequest',
+        '.google.cloud.compute.v1.UpdateNetworkInterfaceInstanceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'UpdateNetworkInterfaceInstanceRequest',
+        '.google.cloud.compute.v1.UpdateNetworkInterfaceInstanceRequest',
         ['zone']
       );
       request.zone = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'UpdateNetworkInterfaceInstanceRequest',
+        '.google.cloud.compute.v1.UpdateNetworkInterfaceInstanceRequest',
         ['instance']
       );
       request.instance = defaultValue3;
@@ -6864,17 +7068,17 @@ describe('v1.InstancesClient', () => {
         new protos.google.cloud.compute.v1.UpdateNetworkInterfaceInstanceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateNetworkInterfaceInstanceRequest',
+        '.google.cloud.compute.v1.UpdateNetworkInterfaceInstanceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'UpdateNetworkInterfaceInstanceRequest',
+        '.google.cloud.compute.v1.UpdateNetworkInterfaceInstanceRequest',
         ['zone']
       );
       request.zone = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'UpdateNetworkInterfaceInstanceRequest',
+        '.google.cloud.compute.v1.UpdateNetworkInterfaceInstanceRequest',
         ['instance']
       );
       request.instance = defaultValue3;
@@ -6921,17 +7125,17 @@ describe('v1.InstancesClient', () => {
         new protos.google.cloud.compute.v1.UpdateNetworkInterfaceInstanceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateNetworkInterfaceInstanceRequest',
+        '.google.cloud.compute.v1.UpdateNetworkInterfaceInstanceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'UpdateNetworkInterfaceInstanceRequest',
+        '.google.cloud.compute.v1.UpdateNetworkInterfaceInstanceRequest',
         ['zone']
       );
       request.zone = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'UpdateNetworkInterfaceInstanceRequest',
+        '.google.cloud.compute.v1.UpdateNetworkInterfaceInstanceRequest',
         ['instance']
       );
       request.instance = defaultValue3;
@@ -6965,17 +7169,17 @@ describe('v1.InstancesClient', () => {
         new protos.google.cloud.compute.v1.UpdateNetworkInterfaceInstanceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateNetworkInterfaceInstanceRequest',
+        '.google.cloud.compute.v1.UpdateNetworkInterfaceInstanceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'UpdateNetworkInterfaceInstanceRequest',
+        '.google.cloud.compute.v1.UpdateNetworkInterfaceInstanceRequest',
         ['zone']
       );
       request.zone = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'UpdateNetworkInterfaceInstanceRequest',
+        '.google.cloud.compute.v1.UpdateNetworkInterfaceInstanceRequest',
         ['instance']
       );
       request.instance = defaultValue3;
@@ -6999,17 +7203,17 @@ describe('v1.InstancesClient', () => {
         new protos.google.cloud.compute.v1.UpdateShieldedInstanceConfigInstanceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateShieldedInstanceConfigInstanceRequest',
+        '.google.cloud.compute.v1.UpdateShieldedInstanceConfigInstanceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'UpdateShieldedInstanceConfigInstanceRequest',
+        '.google.cloud.compute.v1.UpdateShieldedInstanceConfigInstanceRequest',
         ['zone']
       );
       request.zone = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'UpdateShieldedInstanceConfigInstanceRequest',
+        '.google.cloud.compute.v1.UpdateShieldedInstanceConfigInstanceRequest',
         ['instance']
       );
       request.instance = defaultValue3;
@@ -7041,17 +7245,17 @@ describe('v1.InstancesClient', () => {
         new protos.google.cloud.compute.v1.UpdateShieldedInstanceConfigInstanceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateShieldedInstanceConfigInstanceRequest',
+        '.google.cloud.compute.v1.UpdateShieldedInstanceConfigInstanceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'UpdateShieldedInstanceConfigInstanceRequest',
+        '.google.cloud.compute.v1.UpdateShieldedInstanceConfigInstanceRequest',
         ['zone']
       );
       request.zone = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'UpdateShieldedInstanceConfigInstanceRequest',
+        '.google.cloud.compute.v1.UpdateShieldedInstanceConfigInstanceRequest',
         ['instance']
       );
       request.instance = defaultValue3;
@@ -7098,17 +7302,17 @@ describe('v1.InstancesClient', () => {
         new protos.google.cloud.compute.v1.UpdateShieldedInstanceConfigInstanceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateShieldedInstanceConfigInstanceRequest',
+        '.google.cloud.compute.v1.UpdateShieldedInstanceConfigInstanceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'UpdateShieldedInstanceConfigInstanceRequest',
+        '.google.cloud.compute.v1.UpdateShieldedInstanceConfigInstanceRequest',
         ['zone']
       );
       request.zone = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'UpdateShieldedInstanceConfigInstanceRequest',
+        '.google.cloud.compute.v1.UpdateShieldedInstanceConfigInstanceRequest',
         ['instance']
       );
       request.instance = defaultValue3;
@@ -7142,17 +7346,17 @@ describe('v1.InstancesClient', () => {
         new protos.google.cloud.compute.v1.UpdateShieldedInstanceConfigInstanceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateShieldedInstanceConfigInstanceRequest',
+        '.google.cloud.compute.v1.UpdateShieldedInstanceConfigInstanceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'UpdateShieldedInstanceConfigInstanceRequest',
+        '.google.cloud.compute.v1.UpdateShieldedInstanceConfigInstanceRequest',
         ['zone']
       );
       request.zone = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'UpdateShieldedInstanceConfigInstanceRequest',
+        '.google.cloud.compute.v1.UpdateShieldedInstanceConfigInstanceRequest',
         ['instance']
       );
       request.instance = defaultValue3;
@@ -7176,7 +7380,7 @@ describe('v1.InstancesClient', () => {
         new protos.google.cloud.compute.v1.AggregatedListInstancesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'AggregatedListInstancesRequest',
+        '.google.cloud.compute.v1.AggregatedListInstancesRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -7236,7 +7440,7 @@ describe('v1.InstancesClient', () => {
         new protos.google.cloud.compute.v1.AggregatedListInstancesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'AggregatedListInstancesRequest',
+        '.google.cloud.compute.v1.AggregatedListInstancesRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -7279,13 +7483,15 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListInstancesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListInstancesRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListInstancesRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ListInstancesRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListInstancesRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}`;
       const expectedResponse = [
@@ -7314,13 +7520,15 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListInstancesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListInstancesRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListInstancesRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ListInstancesRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListInstancesRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}`;
       const expectedResponse = [
@@ -7364,13 +7572,15 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListInstancesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListInstancesRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListInstancesRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ListInstancesRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListInstancesRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}`;
       const expectedError = new Error('expected');
@@ -7394,13 +7604,15 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListInstancesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListInstancesRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListInstancesRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ListInstancesRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListInstancesRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}`;
       const expectedResponse = [
@@ -7451,13 +7663,15 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListInstancesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListInstancesRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListInstancesRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ListInstancesRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListInstancesRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}`;
       const expectedError = new Error('expected');
@@ -7505,13 +7719,15 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListInstancesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListInstancesRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListInstancesRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ListInstancesRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListInstancesRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}`;
       const expectedResponse = [
@@ -7550,13 +7766,15 @@ describe('v1.InstancesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListInstancesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListInstancesRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListInstancesRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ListInstancesRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListInstancesRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}`;
       const expectedError = new Error('expected');
@@ -7597,17 +7815,17 @@ describe('v1.InstancesClient', () => {
         new protos.google.cloud.compute.v1.ListReferrersInstancesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListReferrersInstancesRequest',
+        '.google.cloud.compute.v1.ListReferrersInstancesRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'ListReferrersInstancesRequest',
+        '.google.cloud.compute.v1.ListReferrersInstancesRequest',
         ['zone']
       );
       request.zone = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'ListReferrersInstancesRequest',
+        '.google.cloud.compute.v1.ListReferrersInstancesRequest',
         ['instance']
       );
       request.instance = defaultValue3;
@@ -7640,17 +7858,17 @@ describe('v1.InstancesClient', () => {
         new protos.google.cloud.compute.v1.ListReferrersInstancesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListReferrersInstancesRequest',
+        '.google.cloud.compute.v1.ListReferrersInstancesRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'ListReferrersInstancesRequest',
+        '.google.cloud.compute.v1.ListReferrersInstancesRequest',
         ['zone']
       );
       request.zone = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'ListReferrersInstancesRequest',
+        '.google.cloud.compute.v1.ListReferrersInstancesRequest',
         ['instance']
       );
       request.instance = defaultValue3;
@@ -7699,17 +7917,17 @@ describe('v1.InstancesClient', () => {
         new protos.google.cloud.compute.v1.ListReferrersInstancesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListReferrersInstancesRequest',
+        '.google.cloud.compute.v1.ListReferrersInstancesRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'ListReferrersInstancesRequest',
+        '.google.cloud.compute.v1.ListReferrersInstancesRequest',
         ['zone']
       );
       request.zone = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'ListReferrersInstancesRequest',
+        '.google.cloud.compute.v1.ListReferrersInstancesRequest',
         ['instance']
       );
       request.instance = defaultValue3;
@@ -7740,17 +7958,17 @@ describe('v1.InstancesClient', () => {
         new protos.google.cloud.compute.v1.ListReferrersInstancesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListReferrersInstancesRequest',
+        '.google.cloud.compute.v1.ListReferrersInstancesRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'ListReferrersInstancesRequest',
+        '.google.cloud.compute.v1.ListReferrersInstancesRequest',
         ['zone']
       );
       request.zone = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'ListReferrersInstancesRequest',
+        '.google.cloud.compute.v1.ListReferrersInstancesRequest',
         ['instance']
       );
       request.instance = defaultValue3;
@@ -7804,17 +8022,17 @@ describe('v1.InstancesClient', () => {
         new protos.google.cloud.compute.v1.ListReferrersInstancesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListReferrersInstancesRequest',
+        '.google.cloud.compute.v1.ListReferrersInstancesRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'ListReferrersInstancesRequest',
+        '.google.cloud.compute.v1.ListReferrersInstancesRequest',
         ['zone']
       );
       request.zone = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'ListReferrersInstancesRequest',
+        '.google.cloud.compute.v1.ListReferrersInstancesRequest',
         ['instance']
       );
       request.instance = defaultValue3;
@@ -7863,17 +8081,17 @@ describe('v1.InstancesClient', () => {
         new protos.google.cloud.compute.v1.ListReferrersInstancesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListReferrersInstancesRequest',
+        '.google.cloud.compute.v1.ListReferrersInstancesRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'ListReferrersInstancesRequest',
+        '.google.cloud.compute.v1.ListReferrersInstancesRequest',
         ['zone']
       );
       request.zone = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'ListReferrersInstancesRequest',
+        '.google.cloud.compute.v1.ListReferrersInstancesRequest',
         ['instance']
       );
       request.instance = defaultValue3;
@@ -7916,17 +8134,17 @@ describe('v1.InstancesClient', () => {
         new protos.google.cloud.compute.v1.ListReferrersInstancesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListReferrersInstancesRequest',
+        '.google.cloud.compute.v1.ListReferrersInstancesRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'ListReferrersInstancesRequest',
+        '.google.cloud.compute.v1.ListReferrersInstancesRequest',
         ['zone']
       );
       request.zone = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'ListReferrersInstancesRequest',
+        '.google.cloud.compute.v1.ListReferrersInstancesRequest',
         ['instance']
       );
       request.instance = defaultValue3;

@@ -260,17 +260,17 @@ describe('v1.RegionSslCertificatesClient', () => {
         new protos.google.cloud.compute.v1.DeleteRegionSslCertificateRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteRegionSslCertificateRequest',
+        '.google.cloud.compute.v1.DeleteRegionSslCertificateRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'DeleteRegionSslCertificateRequest',
+        '.google.cloud.compute.v1.DeleteRegionSslCertificateRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'DeleteRegionSslCertificateRequest',
+        '.google.cloud.compute.v1.DeleteRegionSslCertificateRequest',
         ['sslCertificate']
       );
       request.sslCertificate = defaultValue3;
@@ -302,17 +302,17 @@ describe('v1.RegionSslCertificatesClient', () => {
         new protos.google.cloud.compute.v1.DeleteRegionSslCertificateRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteRegionSslCertificateRequest',
+        '.google.cloud.compute.v1.DeleteRegionSslCertificateRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'DeleteRegionSslCertificateRequest',
+        '.google.cloud.compute.v1.DeleteRegionSslCertificateRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'DeleteRegionSslCertificateRequest',
+        '.google.cloud.compute.v1.DeleteRegionSslCertificateRequest',
         ['sslCertificate']
       );
       request.sslCertificate = defaultValue3;
@@ -360,17 +360,17 @@ describe('v1.RegionSslCertificatesClient', () => {
         new protos.google.cloud.compute.v1.DeleteRegionSslCertificateRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteRegionSslCertificateRequest',
+        '.google.cloud.compute.v1.DeleteRegionSslCertificateRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'DeleteRegionSslCertificateRequest',
+        '.google.cloud.compute.v1.DeleteRegionSslCertificateRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'DeleteRegionSslCertificateRequest',
+        '.google.cloud.compute.v1.DeleteRegionSslCertificateRequest',
         ['sslCertificate']
       );
       request.sslCertificate = defaultValue3;
@@ -399,17 +399,17 @@ describe('v1.RegionSslCertificatesClient', () => {
         new protos.google.cloud.compute.v1.DeleteRegionSslCertificateRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteRegionSslCertificateRequest',
+        '.google.cloud.compute.v1.DeleteRegionSslCertificateRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'DeleteRegionSslCertificateRequest',
+        '.google.cloud.compute.v1.DeleteRegionSslCertificateRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'DeleteRegionSslCertificateRequest',
+        '.google.cloud.compute.v1.DeleteRegionSslCertificateRequest',
         ['sslCertificate']
       );
       request.sslCertificate = defaultValue3;
@@ -431,17 +431,17 @@ describe('v1.RegionSslCertificatesClient', () => {
         new protos.google.cloud.compute.v1.GetRegionSslCertificateRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetRegionSslCertificateRequest',
+        '.google.cloud.compute.v1.GetRegionSslCertificateRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'GetRegionSslCertificateRequest',
+        '.google.cloud.compute.v1.GetRegionSslCertificateRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'GetRegionSslCertificateRequest',
+        '.google.cloud.compute.v1.GetRegionSslCertificateRequest',
         ['sslCertificate']
       );
       request.sslCertificate = defaultValue3;
@@ -472,17 +472,17 @@ describe('v1.RegionSslCertificatesClient', () => {
         new protos.google.cloud.compute.v1.GetRegionSslCertificateRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetRegionSslCertificateRequest',
+        '.google.cloud.compute.v1.GetRegionSslCertificateRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'GetRegionSslCertificateRequest',
+        '.google.cloud.compute.v1.GetRegionSslCertificateRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'GetRegionSslCertificateRequest',
+        '.google.cloud.compute.v1.GetRegionSslCertificateRequest',
         ['sslCertificate']
       );
       request.sslCertificate = defaultValue3;
@@ -528,17 +528,17 @@ describe('v1.RegionSslCertificatesClient', () => {
         new protos.google.cloud.compute.v1.GetRegionSslCertificateRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetRegionSslCertificateRequest',
+        '.google.cloud.compute.v1.GetRegionSslCertificateRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'GetRegionSslCertificateRequest',
+        '.google.cloud.compute.v1.GetRegionSslCertificateRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'GetRegionSslCertificateRequest',
+        '.google.cloud.compute.v1.GetRegionSslCertificateRequest',
         ['sslCertificate']
       );
       request.sslCertificate = defaultValue3;
@@ -566,17 +566,17 @@ describe('v1.RegionSslCertificatesClient', () => {
         new protos.google.cloud.compute.v1.GetRegionSslCertificateRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetRegionSslCertificateRequest',
+        '.google.cloud.compute.v1.GetRegionSslCertificateRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'GetRegionSslCertificateRequest',
+        '.google.cloud.compute.v1.GetRegionSslCertificateRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'GetRegionSslCertificateRequest',
+        '.google.cloud.compute.v1.GetRegionSslCertificateRequest',
         ['sslCertificate']
       );
       request.sslCertificate = defaultValue3;
@@ -598,12 +598,12 @@ describe('v1.RegionSslCertificatesClient', () => {
         new protos.google.cloud.compute.v1.InsertRegionSslCertificateRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'InsertRegionSslCertificateRequest',
+        '.google.cloud.compute.v1.InsertRegionSslCertificateRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'InsertRegionSslCertificateRequest',
+        '.google.cloud.compute.v1.InsertRegionSslCertificateRequest',
         ['region']
       );
       request.region = defaultValue2;
@@ -635,12 +635,12 @@ describe('v1.RegionSslCertificatesClient', () => {
         new protos.google.cloud.compute.v1.InsertRegionSslCertificateRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'InsertRegionSslCertificateRequest',
+        '.google.cloud.compute.v1.InsertRegionSslCertificateRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'InsertRegionSslCertificateRequest',
+        '.google.cloud.compute.v1.InsertRegionSslCertificateRequest',
         ['region']
       );
       request.region = defaultValue2;
@@ -688,12 +688,12 @@ describe('v1.RegionSslCertificatesClient', () => {
         new protos.google.cloud.compute.v1.InsertRegionSslCertificateRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'InsertRegionSslCertificateRequest',
+        '.google.cloud.compute.v1.InsertRegionSslCertificateRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'InsertRegionSslCertificateRequest',
+        '.google.cloud.compute.v1.InsertRegionSslCertificateRequest',
         ['region']
       );
       request.region = defaultValue2;
@@ -722,12 +722,12 @@ describe('v1.RegionSslCertificatesClient', () => {
         new protos.google.cloud.compute.v1.InsertRegionSslCertificateRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'InsertRegionSslCertificateRequest',
+        '.google.cloud.compute.v1.InsertRegionSslCertificateRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'InsertRegionSslCertificateRequest',
+        '.google.cloud.compute.v1.InsertRegionSslCertificateRequest',
         ['region']
       );
       request.region = defaultValue2;
@@ -749,12 +749,12 @@ describe('v1.RegionSslCertificatesClient', () => {
         new protos.google.cloud.compute.v1.ListRegionSslCertificatesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListRegionSslCertificatesRequest',
+        '.google.cloud.compute.v1.ListRegionSslCertificatesRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'ListRegionSslCertificatesRequest',
+        '.google.cloud.compute.v1.ListRegionSslCertificatesRequest',
         ['region']
       );
       request.region = defaultValue2;
@@ -793,12 +793,12 @@ describe('v1.RegionSslCertificatesClient', () => {
         new protos.google.cloud.compute.v1.ListRegionSslCertificatesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListRegionSslCertificatesRequest',
+        '.google.cloud.compute.v1.ListRegionSslCertificatesRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'ListRegionSslCertificatesRequest',
+        '.google.cloud.compute.v1.ListRegionSslCertificatesRequest',
         ['region']
       );
       request.region = defaultValue2;
@@ -852,12 +852,12 @@ describe('v1.RegionSslCertificatesClient', () => {
         new protos.google.cloud.compute.v1.ListRegionSslCertificatesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListRegionSslCertificatesRequest',
+        '.google.cloud.compute.v1.ListRegionSslCertificatesRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'ListRegionSslCertificatesRequest',
+        '.google.cloud.compute.v1.ListRegionSslCertificatesRequest',
         ['region']
       );
       request.region = defaultValue2;
@@ -885,12 +885,12 @@ describe('v1.RegionSslCertificatesClient', () => {
         new protos.google.cloud.compute.v1.ListRegionSslCertificatesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListRegionSslCertificatesRequest',
+        '.google.cloud.compute.v1.ListRegionSslCertificatesRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'ListRegionSslCertificatesRequest',
+        '.google.cloud.compute.v1.ListRegionSslCertificatesRequest',
         ['region']
       );
       request.region = defaultValue2;
@@ -951,12 +951,12 @@ describe('v1.RegionSslCertificatesClient', () => {
         new protos.google.cloud.compute.v1.ListRegionSslCertificatesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListRegionSslCertificatesRequest',
+        '.google.cloud.compute.v1.ListRegionSslCertificatesRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'ListRegionSslCertificatesRequest',
+        '.google.cloud.compute.v1.ListRegionSslCertificatesRequest',
         ['region']
       );
       request.region = defaultValue2;
@@ -1008,12 +1008,12 @@ describe('v1.RegionSslCertificatesClient', () => {
         new protos.google.cloud.compute.v1.ListRegionSslCertificatesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListRegionSslCertificatesRequest',
+        '.google.cloud.compute.v1.ListRegionSslCertificatesRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'ListRegionSslCertificatesRequest',
+        '.google.cloud.compute.v1.ListRegionSslCertificatesRequest',
         ['region']
       );
       request.region = defaultValue2;
@@ -1062,12 +1062,12 @@ describe('v1.RegionSslCertificatesClient', () => {
         new protos.google.cloud.compute.v1.ListRegionSslCertificatesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListRegionSslCertificatesRequest',
+        '.google.cloud.compute.v1.ListRegionSslCertificatesRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'ListRegionSslCertificatesRequest',
+        '.google.cloud.compute.v1.ListRegionSslCertificatesRequest',
         ['region']
       );
       request.region = defaultValue2;

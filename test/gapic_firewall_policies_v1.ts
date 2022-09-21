@@ -251,7 +251,7 @@ describe('v1.FirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.AddAssociationFirewallPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'AddAssociationFirewallPolicyRequest',
+        '.google.cloud.compute.v1.AddAssociationFirewallPolicyRequest',
         ['firewallPolicy']
       );
       request.firewallPolicy = defaultValue1;
@@ -282,7 +282,7 @@ describe('v1.FirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.AddAssociationFirewallPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'AddAssociationFirewallPolicyRequest',
+        '.google.cloud.compute.v1.AddAssociationFirewallPolicyRequest',
         ['firewallPolicy']
       );
       request.firewallPolicy = defaultValue1;
@@ -329,7 +329,7 @@ describe('v1.FirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.AddAssociationFirewallPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'AddAssociationFirewallPolicyRequest',
+        '.google.cloud.compute.v1.AddAssociationFirewallPolicyRequest',
         ['firewallPolicy']
       );
       request.firewallPolicy = defaultValue1;
@@ -360,7 +360,7 @@ describe('v1.FirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.AddAssociationFirewallPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'AddAssociationFirewallPolicyRequest',
+        '.google.cloud.compute.v1.AddAssociationFirewallPolicyRequest',
         ['firewallPolicy']
       );
       request.firewallPolicy = defaultValue1;
@@ -381,7 +381,7 @@ describe('v1.FirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.AddRuleFirewallPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'AddRuleFirewallPolicyRequest',
+        '.google.cloud.compute.v1.AddRuleFirewallPolicyRequest',
         ['firewallPolicy']
       );
       request.firewallPolicy = defaultValue1;
@@ -412,7 +412,7 @@ describe('v1.FirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.AddRuleFirewallPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'AddRuleFirewallPolicyRequest',
+        '.google.cloud.compute.v1.AddRuleFirewallPolicyRequest',
         ['firewallPolicy']
       );
       request.firewallPolicy = defaultValue1;
@@ -459,7 +459,7 @@ describe('v1.FirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.AddRuleFirewallPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'AddRuleFirewallPolicyRequest',
+        '.google.cloud.compute.v1.AddRuleFirewallPolicyRequest',
         ['firewallPolicy']
       );
       request.firewallPolicy = defaultValue1;
@@ -487,7 +487,7 @@ describe('v1.FirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.AddRuleFirewallPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'AddRuleFirewallPolicyRequest',
+        '.google.cloud.compute.v1.AddRuleFirewallPolicyRequest',
         ['firewallPolicy']
       );
       request.firewallPolicy = defaultValue1;
@@ -508,7 +508,7 @@ describe('v1.FirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.CloneRulesFirewallPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CloneRulesFirewallPolicyRequest',
+        '.google.cloud.compute.v1.CloneRulesFirewallPolicyRequest',
         ['firewallPolicy']
       );
       request.firewallPolicy = defaultValue1;
@@ -539,7 +539,7 @@ describe('v1.FirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.CloneRulesFirewallPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CloneRulesFirewallPolicyRequest',
+        '.google.cloud.compute.v1.CloneRulesFirewallPolicyRequest',
         ['firewallPolicy']
       );
       request.firewallPolicy = defaultValue1;
@@ -586,7 +586,7 @@ describe('v1.FirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.CloneRulesFirewallPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CloneRulesFirewallPolicyRequest',
+        '.google.cloud.compute.v1.CloneRulesFirewallPolicyRequest',
         ['firewallPolicy']
       );
       request.firewallPolicy = defaultValue1;
@@ -617,7 +617,7 @@ describe('v1.FirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.CloneRulesFirewallPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CloneRulesFirewallPolicyRequest',
+        '.google.cloud.compute.v1.CloneRulesFirewallPolicyRequest',
         ['firewallPolicy']
       );
       request.firewallPolicy = defaultValue1;
@@ -637,9 +637,10 @@ describe('v1.FirewallPoliciesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteFirewallPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteFirewallPolicyRequest', [
-        'firewallPolicy',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteFirewallPolicyRequest',
+        ['firewallPolicy']
+      );
       request.firewallPolicy = defaultValue1;
       const expectedHeaderRequestParams = `firewall_policy=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -667,9 +668,10 @@ describe('v1.FirewallPoliciesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteFirewallPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteFirewallPolicyRequest', [
-        'firewallPolicy',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteFirewallPolicyRequest',
+        ['firewallPolicy']
+      );
       request.firewallPolicy = defaultValue1;
       const expectedHeaderRequestParams = `firewall_policy=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -713,9 +715,10 @@ describe('v1.FirewallPoliciesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteFirewallPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteFirewallPolicyRequest', [
-        'firewallPolicy',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteFirewallPolicyRequest',
+        ['firewallPolicy']
+      );
       request.firewallPolicy = defaultValue1;
       const expectedHeaderRequestParams = `firewall_policy=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -740,9 +743,10 @@ describe('v1.FirewallPoliciesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteFirewallPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteFirewallPolicyRequest', [
-        'firewallPolicy',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteFirewallPolicyRequest',
+        ['firewallPolicy']
+      );
       request.firewallPolicy = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -760,9 +764,10 @@ describe('v1.FirewallPoliciesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetFirewallPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetFirewallPolicyRequest', [
-        'firewallPolicy',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetFirewallPolicyRequest',
+        ['firewallPolicy']
+      );
       request.firewallPolicy = defaultValue1;
       const expectedHeaderRequestParams = `firewall_policy=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -789,9 +794,10 @@ describe('v1.FirewallPoliciesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetFirewallPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetFirewallPolicyRequest', [
-        'firewallPolicy',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetFirewallPolicyRequest',
+        ['firewallPolicy']
+      );
       request.firewallPolicy = defaultValue1;
       const expectedHeaderRequestParams = `firewall_policy=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -833,9 +839,10 @@ describe('v1.FirewallPoliciesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetFirewallPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetFirewallPolicyRequest', [
-        'firewallPolicy',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetFirewallPolicyRequest',
+        ['firewallPolicy']
+      );
       request.firewallPolicy = defaultValue1;
       const expectedHeaderRequestParams = `firewall_policy=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -859,9 +866,10 @@ describe('v1.FirewallPoliciesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetFirewallPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetFirewallPolicyRequest', [
-        'firewallPolicy',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetFirewallPolicyRequest',
+        ['firewallPolicy']
+      );
       request.firewallPolicy = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -880,7 +888,7 @@ describe('v1.FirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.GetAssociationFirewallPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetAssociationFirewallPolicyRequest',
+        '.google.cloud.compute.v1.GetAssociationFirewallPolicyRequest',
         ['firewallPolicy']
       );
       request.firewallPolicy = defaultValue1;
@@ -911,7 +919,7 @@ describe('v1.FirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.GetAssociationFirewallPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetAssociationFirewallPolicyRequest',
+        '.google.cloud.compute.v1.GetAssociationFirewallPolicyRequest',
         ['firewallPolicy']
       );
       request.firewallPolicy = defaultValue1;
@@ -958,7 +966,7 @@ describe('v1.FirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.GetAssociationFirewallPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetAssociationFirewallPolicyRequest',
+        '.google.cloud.compute.v1.GetAssociationFirewallPolicyRequest',
         ['firewallPolicy']
       );
       request.firewallPolicy = defaultValue1;
@@ -989,7 +997,7 @@ describe('v1.FirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.GetAssociationFirewallPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetAssociationFirewallPolicyRequest',
+        '.google.cloud.compute.v1.GetAssociationFirewallPolicyRequest',
         ['firewallPolicy']
       );
       request.firewallPolicy = defaultValue1;
@@ -1010,7 +1018,7 @@ describe('v1.FirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.GetIamPolicyFirewallPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetIamPolicyFirewallPolicyRequest',
+        '.google.cloud.compute.v1.GetIamPolicyFirewallPolicyRequest',
         ['resource']
       );
       request.resource = defaultValue1;
@@ -1041,7 +1049,7 @@ describe('v1.FirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.GetIamPolicyFirewallPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetIamPolicyFirewallPolicyRequest',
+        '.google.cloud.compute.v1.GetIamPolicyFirewallPolicyRequest',
         ['resource']
       );
       request.resource = defaultValue1;
@@ -1088,7 +1096,7 @@ describe('v1.FirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.GetIamPolicyFirewallPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetIamPolicyFirewallPolicyRequest',
+        '.google.cloud.compute.v1.GetIamPolicyFirewallPolicyRequest',
         ['resource']
       );
       request.resource = defaultValue1;
@@ -1119,7 +1127,7 @@ describe('v1.FirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.GetIamPolicyFirewallPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetIamPolicyFirewallPolicyRequest',
+        '.google.cloud.compute.v1.GetIamPolicyFirewallPolicyRequest',
         ['resource']
       );
       request.resource = defaultValue1;
@@ -1140,7 +1148,7 @@ describe('v1.FirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.GetRuleFirewallPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetRuleFirewallPolicyRequest',
+        '.google.cloud.compute.v1.GetRuleFirewallPolicyRequest',
         ['firewallPolicy']
       );
       request.firewallPolicy = defaultValue1;
@@ -1171,7 +1179,7 @@ describe('v1.FirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.GetRuleFirewallPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetRuleFirewallPolicyRequest',
+        '.google.cloud.compute.v1.GetRuleFirewallPolicyRequest',
         ['firewallPolicy']
       );
       request.firewallPolicy = defaultValue1;
@@ -1218,7 +1226,7 @@ describe('v1.FirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.GetRuleFirewallPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetRuleFirewallPolicyRequest',
+        '.google.cloud.compute.v1.GetRuleFirewallPolicyRequest',
         ['firewallPolicy']
       );
       request.firewallPolicy = defaultValue1;
@@ -1246,7 +1254,7 @@ describe('v1.FirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.GetRuleFirewallPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetRuleFirewallPolicyRequest',
+        '.google.cloud.compute.v1.GetRuleFirewallPolicyRequest',
         ['firewallPolicy']
       );
       request.firewallPolicy = defaultValue1;
@@ -1429,9 +1437,10 @@ describe('v1.FirewallPoliciesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.MoveFirewallPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('MoveFirewallPolicyRequest', [
-        'firewallPolicy',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.MoveFirewallPolicyRequest',
+        ['firewallPolicy']
+      );
       request.firewallPolicy = defaultValue1;
       const expectedHeaderRequestParams = `firewall_policy=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1458,9 +1467,10 @@ describe('v1.FirewallPoliciesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.MoveFirewallPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('MoveFirewallPolicyRequest', [
-        'firewallPolicy',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.MoveFirewallPolicyRequest',
+        ['firewallPolicy']
+      );
       request.firewallPolicy = defaultValue1;
       const expectedHeaderRequestParams = `firewall_policy=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1502,9 +1512,10 @@ describe('v1.FirewallPoliciesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.MoveFirewallPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('MoveFirewallPolicyRequest', [
-        'firewallPolicy',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.MoveFirewallPolicyRequest',
+        ['firewallPolicy']
+      );
       request.firewallPolicy = defaultValue1;
       const expectedHeaderRequestParams = `firewall_policy=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1528,9 +1539,10 @@ describe('v1.FirewallPoliciesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.MoveFirewallPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('MoveFirewallPolicyRequest', [
-        'firewallPolicy',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.MoveFirewallPolicyRequest',
+        ['firewallPolicy']
+      );
       request.firewallPolicy = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1548,9 +1560,10 @@ describe('v1.FirewallPoliciesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchFirewallPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('PatchFirewallPolicyRequest', [
-        'firewallPolicy',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchFirewallPolicyRequest',
+        ['firewallPolicy']
+      );
       request.firewallPolicy = defaultValue1;
       const expectedHeaderRequestParams = `firewall_policy=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1577,9 +1590,10 @@ describe('v1.FirewallPoliciesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchFirewallPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('PatchFirewallPolicyRequest', [
-        'firewallPolicy',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchFirewallPolicyRequest',
+        ['firewallPolicy']
+      );
       request.firewallPolicy = defaultValue1;
       const expectedHeaderRequestParams = `firewall_policy=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1621,9 +1635,10 @@ describe('v1.FirewallPoliciesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchFirewallPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('PatchFirewallPolicyRequest', [
-        'firewallPolicy',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchFirewallPolicyRequest',
+        ['firewallPolicy']
+      );
       request.firewallPolicy = defaultValue1;
       const expectedHeaderRequestParams = `firewall_policy=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1647,9 +1662,10 @@ describe('v1.FirewallPoliciesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchFirewallPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('PatchFirewallPolicyRequest', [
-        'firewallPolicy',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchFirewallPolicyRequest',
+        ['firewallPolicy']
+      );
       request.firewallPolicy = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1668,7 +1684,7 @@ describe('v1.FirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.PatchRuleFirewallPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'PatchRuleFirewallPolicyRequest',
+        '.google.cloud.compute.v1.PatchRuleFirewallPolicyRequest',
         ['firewallPolicy']
       );
       request.firewallPolicy = defaultValue1;
@@ -1699,7 +1715,7 @@ describe('v1.FirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.PatchRuleFirewallPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'PatchRuleFirewallPolicyRequest',
+        '.google.cloud.compute.v1.PatchRuleFirewallPolicyRequest',
         ['firewallPolicy']
       );
       request.firewallPolicy = defaultValue1;
@@ -1746,7 +1762,7 @@ describe('v1.FirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.PatchRuleFirewallPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'PatchRuleFirewallPolicyRequest',
+        '.google.cloud.compute.v1.PatchRuleFirewallPolicyRequest',
         ['firewallPolicy']
       );
       request.firewallPolicy = defaultValue1;
@@ -1774,7 +1790,7 @@ describe('v1.FirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.PatchRuleFirewallPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'PatchRuleFirewallPolicyRequest',
+        '.google.cloud.compute.v1.PatchRuleFirewallPolicyRequest',
         ['firewallPolicy']
       );
       request.firewallPolicy = defaultValue1;
@@ -1795,7 +1811,7 @@ describe('v1.FirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.RemoveAssociationFirewallPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'RemoveAssociationFirewallPolicyRequest',
+        '.google.cloud.compute.v1.RemoveAssociationFirewallPolicyRequest',
         ['firewallPolicy']
       );
       request.firewallPolicy = defaultValue1;
@@ -1826,7 +1842,7 @@ describe('v1.FirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.RemoveAssociationFirewallPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'RemoveAssociationFirewallPolicyRequest',
+        '.google.cloud.compute.v1.RemoveAssociationFirewallPolicyRequest',
         ['firewallPolicy']
       );
       request.firewallPolicy = defaultValue1;
@@ -1873,7 +1889,7 @@ describe('v1.FirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.RemoveAssociationFirewallPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'RemoveAssociationFirewallPolicyRequest',
+        '.google.cloud.compute.v1.RemoveAssociationFirewallPolicyRequest',
         ['firewallPolicy']
       );
       request.firewallPolicy = defaultValue1;
@@ -1904,7 +1920,7 @@ describe('v1.FirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.RemoveAssociationFirewallPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'RemoveAssociationFirewallPolicyRequest',
+        '.google.cloud.compute.v1.RemoveAssociationFirewallPolicyRequest',
         ['firewallPolicy']
       );
       request.firewallPolicy = defaultValue1;
@@ -1925,7 +1941,7 @@ describe('v1.FirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.RemoveRuleFirewallPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'RemoveRuleFirewallPolicyRequest',
+        '.google.cloud.compute.v1.RemoveRuleFirewallPolicyRequest',
         ['firewallPolicy']
       );
       request.firewallPolicy = defaultValue1;
@@ -1956,7 +1972,7 @@ describe('v1.FirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.RemoveRuleFirewallPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'RemoveRuleFirewallPolicyRequest',
+        '.google.cloud.compute.v1.RemoveRuleFirewallPolicyRequest',
         ['firewallPolicy']
       );
       request.firewallPolicy = defaultValue1;
@@ -2003,7 +2019,7 @@ describe('v1.FirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.RemoveRuleFirewallPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'RemoveRuleFirewallPolicyRequest',
+        '.google.cloud.compute.v1.RemoveRuleFirewallPolicyRequest',
         ['firewallPolicy']
       );
       request.firewallPolicy = defaultValue1;
@@ -2034,7 +2050,7 @@ describe('v1.FirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.RemoveRuleFirewallPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'RemoveRuleFirewallPolicyRequest',
+        '.google.cloud.compute.v1.RemoveRuleFirewallPolicyRequest',
         ['firewallPolicy']
       );
       request.firewallPolicy = defaultValue1;
@@ -2055,7 +2071,7 @@ describe('v1.FirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.SetIamPolicyFirewallPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SetIamPolicyFirewallPolicyRequest',
+        '.google.cloud.compute.v1.SetIamPolicyFirewallPolicyRequest',
         ['resource']
       );
       request.resource = defaultValue1;
@@ -2086,7 +2102,7 @@ describe('v1.FirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.SetIamPolicyFirewallPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SetIamPolicyFirewallPolicyRequest',
+        '.google.cloud.compute.v1.SetIamPolicyFirewallPolicyRequest',
         ['resource']
       );
       request.resource = defaultValue1;
@@ -2133,7 +2149,7 @@ describe('v1.FirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.SetIamPolicyFirewallPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SetIamPolicyFirewallPolicyRequest',
+        '.google.cloud.compute.v1.SetIamPolicyFirewallPolicyRequest',
         ['resource']
       );
       request.resource = defaultValue1;
@@ -2164,7 +2180,7 @@ describe('v1.FirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.SetIamPolicyFirewallPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SetIamPolicyFirewallPolicyRequest',
+        '.google.cloud.compute.v1.SetIamPolicyFirewallPolicyRequest',
         ['resource']
       );
       request.resource = defaultValue1;
@@ -2185,7 +2201,7 @@ describe('v1.FirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.TestIamPermissionsFirewallPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'TestIamPermissionsFirewallPolicyRequest',
+        '.google.cloud.compute.v1.TestIamPermissionsFirewallPolicyRequest',
         ['resource']
       );
       request.resource = defaultValue1;
@@ -2217,7 +2233,7 @@ describe('v1.FirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.TestIamPermissionsFirewallPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'TestIamPermissionsFirewallPolicyRequest',
+        '.google.cloud.compute.v1.TestIamPermissionsFirewallPolicyRequest',
         ['resource']
       );
       request.resource = defaultValue1;
@@ -2264,7 +2280,7 @@ describe('v1.FirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.TestIamPermissionsFirewallPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'TestIamPermissionsFirewallPolicyRequest',
+        '.google.cloud.compute.v1.TestIamPermissionsFirewallPolicyRequest',
         ['resource']
       );
       request.resource = defaultValue1;
@@ -2295,7 +2311,7 @@ describe('v1.FirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.TestIamPermissionsFirewallPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'TestIamPermissionsFirewallPolicyRequest',
+        '.google.cloud.compute.v1.TestIamPermissionsFirewallPolicyRequest',
         ['resource']
       );
       request.resource = defaultValue1;

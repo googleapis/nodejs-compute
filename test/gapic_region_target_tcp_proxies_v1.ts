@@ -262,17 +262,17 @@ describe('v1.RegionTargetTcpProxiesClient', () => {
         new protos.google.cloud.compute.v1.DeleteRegionTargetTcpProxyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteRegionTargetTcpProxyRequest',
+        '.google.cloud.compute.v1.DeleteRegionTargetTcpProxyRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'DeleteRegionTargetTcpProxyRequest',
+        '.google.cloud.compute.v1.DeleteRegionTargetTcpProxyRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'DeleteRegionTargetTcpProxyRequest',
+        '.google.cloud.compute.v1.DeleteRegionTargetTcpProxyRequest',
         ['targetTcpProxy']
       );
       request.targetTcpProxy = defaultValue3;
@@ -304,17 +304,17 @@ describe('v1.RegionTargetTcpProxiesClient', () => {
         new protos.google.cloud.compute.v1.DeleteRegionTargetTcpProxyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteRegionTargetTcpProxyRequest',
+        '.google.cloud.compute.v1.DeleteRegionTargetTcpProxyRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'DeleteRegionTargetTcpProxyRequest',
+        '.google.cloud.compute.v1.DeleteRegionTargetTcpProxyRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'DeleteRegionTargetTcpProxyRequest',
+        '.google.cloud.compute.v1.DeleteRegionTargetTcpProxyRequest',
         ['targetTcpProxy']
       );
       request.targetTcpProxy = defaultValue3;
@@ -362,17 +362,17 @@ describe('v1.RegionTargetTcpProxiesClient', () => {
         new protos.google.cloud.compute.v1.DeleteRegionTargetTcpProxyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteRegionTargetTcpProxyRequest',
+        '.google.cloud.compute.v1.DeleteRegionTargetTcpProxyRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'DeleteRegionTargetTcpProxyRequest',
+        '.google.cloud.compute.v1.DeleteRegionTargetTcpProxyRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'DeleteRegionTargetTcpProxyRequest',
+        '.google.cloud.compute.v1.DeleteRegionTargetTcpProxyRequest',
         ['targetTcpProxy']
       );
       request.targetTcpProxy = defaultValue3;
@@ -401,17 +401,17 @@ describe('v1.RegionTargetTcpProxiesClient', () => {
         new protos.google.cloud.compute.v1.DeleteRegionTargetTcpProxyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteRegionTargetTcpProxyRequest',
+        '.google.cloud.compute.v1.DeleteRegionTargetTcpProxyRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'DeleteRegionTargetTcpProxyRequest',
+        '.google.cloud.compute.v1.DeleteRegionTargetTcpProxyRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'DeleteRegionTargetTcpProxyRequest',
+        '.google.cloud.compute.v1.DeleteRegionTargetTcpProxyRequest',
         ['targetTcpProxy']
       );
       request.targetTcpProxy = defaultValue3;
@@ -433,17 +433,17 @@ describe('v1.RegionTargetTcpProxiesClient', () => {
         new protos.google.cloud.compute.v1.GetRegionTargetTcpProxyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetRegionTargetTcpProxyRequest',
+        '.google.cloud.compute.v1.GetRegionTargetTcpProxyRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'GetRegionTargetTcpProxyRequest',
+        '.google.cloud.compute.v1.GetRegionTargetTcpProxyRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'GetRegionTargetTcpProxyRequest',
+        '.google.cloud.compute.v1.GetRegionTargetTcpProxyRequest',
         ['targetTcpProxy']
       );
       request.targetTcpProxy = defaultValue3;
@@ -474,17 +474,17 @@ describe('v1.RegionTargetTcpProxiesClient', () => {
         new protos.google.cloud.compute.v1.GetRegionTargetTcpProxyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetRegionTargetTcpProxyRequest',
+        '.google.cloud.compute.v1.GetRegionTargetTcpProxyRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'GetRegionTargetTcpProxyRequest',
+        '.google.cloud.compute.v1.GetRegionTargetTcpProxyRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'GetRegionTargetTcpProxyRequest',
+        '.google.cloud.compute.v1.GetRegionTargetTcpProxyRequest',
         ['targetTcpProxy']
       );
       request.targetTcpProxy = defaultValue3;
@@ -530,17 +530,17 @@ describe('v1.RegionTargetTcpProxiesClient', () => {
         new protos.google.cloud.compute.v1.GetRegionTargetTcpProxyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetRegionTargetTcpProxyRequest',
+        '.google.cloud.compute.v1.GetRegionTargetTcpProxyRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'GetRegionTargetTcpProxyRequest',
+        '.google.cloud.compute.v1.GetRegionTargetTcpProxyRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'GetRegionTargetTcpProxyRequest',
+        '.google.cloud.compute.v1.GetRegionTargetTcpProxyRequest',
         ['targetTcpProxy']
       );
       request.targetTcpProxy = defaultValue3;
@@ -568,17 +568,17 @@ describe('v1.RegionTargetTcpProxiesClient', () => {
         new protos.google.cloud.compute.v1.GetRegionTargetTcpProxyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetRegionTargetTcpProxyRequest',
+        '.google.cloud.compute.v1.GetRegionTargetTcpProxyRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'GetRegionTargetTcpProxyRequest',
+        '.google.cloud.compute.v1.GetRegionTargetTcpProxyRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'GetRegionTargetTcpProxyRequest',
+        '.google.cloud.compute.v1.GetRegionTargetTcpProxyRequest',
         ['targetTcpProxy']
       );
       request.targetTcpProxy = defaultValue3;
@@ -600,12 +600,12 @@ describe('v1.RegionTargetTcpProxiesClient', () => {
         new protos.google.cloud.compute.v1.InsertRegionTargetTcpProxyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'InsertRegionTargetTcpProxyRequest',
+        '.google.cloud.compute.v1.InsertRegionTargetTcpProxyRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'InsertRegionTargetTcpProxyRequest',
+        '.google.cloud.compute.v1.InsertRegionTargetTcpProxyRequest',
         ['region']
       );
       request.region = defaultValue2;
@@ -637,12 +637,12 @@ describe('v1.RegionTargetTcpProxiesClient', () => {
         new protos.google.cloud.compute.v1.InsertRegionTargetTcpProxyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'InsertRegionTargetTcpProxyRequest',
+        '.google.cloud.compute.v1.InsertRegionTargetTcpProxyRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'InsertRegionTargetTcpProxyRequest',
+        '.google.cloud.compute.v1.InsertRegionTargetTcpProxyRequest',
         ['region']
       );
       request.region = defaultValue2;
@@ -690,12 +690,12 @@ describe('v1.RegionTargetTcpProxiesClient', () => {
         new protos.google.cloud.compute.v1.InsertRegionTargetTcpProxyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'InsertRegionTargetTcpProxyRequest',
+        '.google.cloud.compute.v1.InsertRegionTargetTcpProxyRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'InsertRegionTargetTcpProxyRequest',
+        '.google.cloud.compute.v1.InsertRegionTargetTcpProxyRequest',
         ['region']
       );
       request.region = defaultValue2;
@@ -724,12 +724,12 @@ describe('v1.RegionTargetTcpProxiesClient', () => {
         new protos.google.cloud.compute.v1.InsertRegionTargetTcpProxyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'InsertRegionTargetTcpProxyRequest',
+        '.google.cloud.compute.v1.InsertRegionTargetTcpProxyRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'InsertRegionTargetTcpProxyRequest',
+        '.google.cloud.compute.v1.InsertRegionTargetTcpProxyRequest',
         ['region']
       );
       request.region = defaultValue2;
@@ -751,12 +751,12 @@ describe('v1.RegionTargetTcpProxiesClient', () => {
         new protos.google.cloud.compute.v1.ListRegionTargetTcpProxiesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListRegionTargetTcpProxiesRequest',
+        '.google.cloud.compute.v1.ListRegionTargetTcpProxiesRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'ListRegionTargetTcpProxiesRequest',
+        '.google.cloud.compute.v1.ListRegionTargetTcpProxiesRequest',
         ['region']
       );
       request.region = defaultValue2;
@@ -795,12 +795,12 @@ describe('v1.RegionTargetTcpProxiesClient', () => {
         new protos.google.cloud.compute.v1.ListRegionTargetTcpProxiesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListRegionTargetTcpProxiesRequest',
+        '.google.cloud.compute.v1.ListRegionTargetTcpProxiesRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'ListRegionTargetTcpProxiesRequest',
+        '.google.cloud.compute.v1.ListRegionTargetTcpProxiesRequest',
         ['region']
       );
       request.region = defaultValue2;
@@ -854,12 +854,12 @@ describe('v1.RegionTargetTcpProxiesClient', () => {
         new protos.google.cloud.compute.v1.ListRegionTargetTcpProxiesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListRegionTargetTcpProxiesRequest',
+        '.google.cloud.compute.v1.ListRegionTargetTcpProxiesRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'ListRegionTargetTcpProxiesRequest',
+        '.google.cloud.compute.v1.ListRegionTargetTcpProxiesRequest',
         ['region']
       );
       request.region = defaultValue2;
@@ -887,12 +887,12 @@ describe('v1.RegionTargetTcpProxiesClient', () => {
         new protos.google.cloud.compute.v1.ListRegionTargetTcpProxiesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListRegionTargetTcpProxiesRequest',
+        '.google.cloud.compute.v1.ListRegionTargetTcpProxiesRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'ListRegionTargetTcpProxiesRequest',
+        '.google.cloud.compute.v1.ListRegionTargetTcpProxiesRequest',
         ['region']
       );
       request.region = defaultValue2;
@@ -953,12 +953,12 @@ describe('v1.RegionTargetTcpProxiesClient', () => {
         new protos.google.cloud.compute.v1.ListRegionTargetTcpProxiesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListRegionTargetTcpProxiesRequest',
+        '.google.cloud.compute.v1.ListRegionTargetTcpProxiesRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'ListRegionTargetTcpProxiesRequest',
+        '.google.cloud.compute.v1.ListRegionTargetTcpProxiesRequest',
         ['region']
       );
       request.region = defaultValue2;
@@ -1010,12 +1010,12 @@ describe('v1.RegionTargetTcpProxiesClient', () => {
         new protos.google.cloud.compute.v1.ListRegionTargetTcpProxiesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListRegionTargetTcpProxiesRequest',
+        '.google.cloud.compute.v1.ListRegionTargetTcpProxiesRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'ListRegionTargetTcpProxiesRequest',
+        '.google.cloud.compute.v1.ListRegionTargetTcpProxiesRequest',
         ['region']
       );
       request.region = defaultValue2;
@@ -1064,12 +1064,12 @@ describe('v1.RegionTargetTcpProxiesClient', () => {
         new protos.google.cloud.compute.v1.ListRegionTargetTcpProxiesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListRegionTargetTcpProxiesRequest',
+        '.google.cloud.compute.v1.ListRegionTargetTcpProxiesRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'ListRegionTargetTcpProxiesRequest',
+        '.google.cloud.compute.v1.ListRegionTargetTcpProxiesRequest',
         ['region']
       );
       request.region = defaultValue2;

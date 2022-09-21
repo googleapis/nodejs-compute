@@ -250,17 +250,20 @@ describe('v1.ZoneOperationsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteZoneOperationRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteZoneOperationRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteZoneOperationRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('DeleteZoneOperationRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteZoneOperationRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('DeleteZoneOperationRequest', [
-        'operation',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteZoneOperationRequest',
+        ['operation']
+      );
       request.operation = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&operation=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -288,17 +291,20 @@ describe('v1.ZoneOperationsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteZoneOperationRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteZoneOperationRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteZoneOperationRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('DeleteZoneOperationRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteZoneOperationRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('DeleteZoneOperationRequest', [
-        'operation',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteZoneOperationRequest',
+        ['operation']
+      );
       request.operation = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&operation=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -342,17 +348,20 @@ describe('v1.ZoneOperationsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteZoneOperationRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteZoneOperationRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteZoneOperationRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('DeleteZoneOperationRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteZoneOperationRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('DeleteZoneOperationRequest', [
-        'operation',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteZoneOperationRequest',
+        ['operation']
+      );
       request.operation = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&operation=${defaultValue3}`;
       const expectedError = new Error('expected');
@@ -377,17 +386,20 @@ describe('v1.ZoneOperationsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteZoneOperationRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteZoneOperationRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteZoneOperationRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('DeleteZoneOperationRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteZoneOperationRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('DeleteZoneOperationRequest', [
-        'operation',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteZoneOperationRequest',
+        ['operation']
+      );
       request.operation = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -405,17 +417,20 @@ describe('v1.ZoneOperationsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetZoneOperationRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetZoneOperationRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetZoneOperationRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetZoneOperationRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetZoneOperationRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('GetZoneOperationRequest', [
-        'operation',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetZoneOperationRequest',
+        ['operation']
+      );
       request.operation = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&operation=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -442,17 +457,20 @@ describe('v1.ZoneOperationsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetZoneOperationRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetZoneOperationRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetZoneOperationRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetZoneOperationRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetZoneOperationRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('GetZoneOperationRequest', [
-        'operation',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetZoneOperationRequest',
+        ['operation']
+      );
       request.operation = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&operation=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -494,17 +512,20 @@ describe('v1.ZoneOperationsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetZoneOperationRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetZoneOperationRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetZoneOperationRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetZoneOperationRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetZoneOperationRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('GetZoneOperationRequest', [
-        'operation',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetZoneOperationRequest',
+        ['operation']
+      );
       request.operation = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&operation=${defaultValue3}`;
       const expectedError = new Error('expected');
@@ -528,17 +549,20 @@ describe('v1.ZoneOperationsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetZoneOperationRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetZoneOperationRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetZoneOperationRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetZoneOperationRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetZoneOperationRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('GetZoneOperationRequest', [
-        'operation',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetZoneOperationRequest',
+        ['operation']
+      );
       request.operation = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -556,17 +580,20 @@ describe('v1.ZoneOperationsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.WaitZoneOperationRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('WaitZoneOperationRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.WaitZoneOperationRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('WaitZoneOperationRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.WaitZoneOperationRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('WaitZoneOperationRequest', [
-        'operation',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.WaitZoneOperationRequest',
+        ['operation']
+      );
       request.operation = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&operation=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -593,17 +620,20 @@ describe('v1.ZoneOperationsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.WaitZoneOperationRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('WaitZoneOperationRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.WaitZoneOperationRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('WaitZoneOperationRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.WaitZoneOperationRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('WaitZoneOperationRequest', [
-        'operation',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.WaitZoneOperationRequest',
+        ['operation']
+      );
       request.operation = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&operation=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -645,17 +675,20 @@ describe('v1.ZoneOperationsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.WaitZoneOperationRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('WaitZoneOperationRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.WaitZoneOperationRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('WaitZoneOperationRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.WaitZoneOperationRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('WaitZoneOperationRequest', [
-        'operation',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.WaitZoneOperationRequest',
+        ['operation']
+      );
       request.operation = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&operation=${defaultValue3}`;
       const expectedError = new Error('expected');
@@ -679,17 +712,20 @@ describe('v1.ZoneOperationsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.WaitZoneOperationRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('WaitZoneOperationRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.WaitZoneOperationRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('WaitZoneOperationRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.WaitZoneOperationRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('WaitZoneOperationRequest', [
-        'operation',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.WaitZoneOperationRequest',
+        ['operation']
+      );
       request.operation = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -707,13 +743,15 @@ describe('v1.ZoneOperationsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListZoneOperationsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListZoneOperationsRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListZoneOperationsRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ListZoneOperationsRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListZoneOperationsRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}`;
       const expectedResponse = [
@@ -742,13 +780,15 @@ describe('v1.ZoneOperationsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListZoneOperationsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListZoneOperationsRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListZoneOperationsRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ListZoneOperationsRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListZoneOperationsRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}`;
       const expectedResponse = [
@@ -792,13 +832,15 @@ describe('v1.ZoneOperationsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListZoneOperationsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListZoneOperationsRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListZoneOperationsRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ListZoneOperationsRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListZoneOperationsRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}`;
       const expectedError = new Error('expected');
@@ -822,13 +864,15 @@ describe('v1.ZoneOperationsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListZoneOperationsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListZoneOperationsRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListZoneOperationsRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ListZoneOperationsRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListZoneOperationsRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}`;
       const expectedResponse = [
@@ -879,13 +923,15 @@ describe('v1.ZoneOperationsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListZoneOperationsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListZoneOperationsRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListZoneOperationsRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ListZoneOperationsRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListZoneOperationsRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}`;
       const expectedError = new Error('expected');
@@ -933,13 +979,15 @@ describe('v1.ZoneOperationsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListZoneOperationsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListZoneOperationsRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListZoneOperationsRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ListZoneOperationsRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListZoneOperationsRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}`;
       const expectedResponse = [
@@ -978,13 +1026,15 @@ describe('v1.ZoneOperationsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListZoneOperationsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListZoneOperationsRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListZoneOperationsRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ListZoneOperationsRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListZoneOperationsRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}`;
       const expectedError = new Error('expected');

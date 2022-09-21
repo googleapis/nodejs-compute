@@ -248,17 +248,20 @@ describe('v1.SubnetworksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteSubnetworkRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteSubnetworkRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteSubnetworkRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('DeleteSubnetworkRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteSubnetworkRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('DeleteSubnetworkRequest', [
-        'subnetwork',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteSubnetworkRequest',
+        ['subnetwork']
+      );
       request.subnetwork = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&subnetwork=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -286,17 +289,20 @@ describe('v1.SubnetworksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteSubnetworkRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteSubnetworkRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteSubnetworkRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('DeleteSubnetworkRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteSubnetworkRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('DeleteSubnetworkRequest', [
-        'subnetwork',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteSubnetworkRequest',
+        ['subnetwork']
+      );
       request.subnetwork = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&subnetwork=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -340,17 +346,20 @@ describe('v1.SubnetworksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteSubnetworkRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteSubnetworkRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteSubnetworkRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('DeleteSubnetworkRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteSubnetworkRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('DeleteSubnetworkRequest', [
-        'subnetwork',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteSubnetworkRequest',
+        ['subnetwork']
+      );
       request.subnetwork = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&subnetwork=${defaultValue3}`;
       const expectedError = new Error('expected');
@@ -375,17 +384,20 @@ describe('v1.SubnetworksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteSubnetworkRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteSubnetworkRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteSubnetworkRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('DeleteSubnetworkRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteSubnetworkRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('DeleteSubnetworkRequest', [
-        'subnetwork',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteSubnetworkRequest',
+        ['subnetwork']
+      );
       request.subnetwork = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -404,17 +416,17 @@ describe('v1.SubnetworksClient', () => {
         new protos.google.cloud.compute.v1.ExpandIpCidrRangeSubnetworkRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ExpandIpCidrRangeSubnetworkRequest',
+        '.google.cloud.compute.v1.ExpandIpCidrRangeSubnetworkRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'ExpandIpCidrRangeSubnetworkRequest',
+        '.google.cloud.compute.v1.ExpandIpCidrRangeSubnetworkRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'ExpandIpCidrRangeSubnetworkRequest',
+        '.google.cloud.compute.v1.ExpandIpCidrRangeSubnetworkRequest',
         ['subnetwork']
       );
       request.subnetwork = defaultValue3;
@@ -445,17 +457,17 @@ describe('v1.SubnetworksClient', () => {
         new protos.google.cloud.compute.v1.ExpandIpCidrRangeSubnetworkRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ExpandIpCidrRangeSubnetworkRequest',
+        '.google.cloud.compute.v1.ExpandIpCidrRangeSubnetworkRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'ExpandIpCidrRangeSubnetworkRequest',
+        '.google.cloud.compute.v1.ExpandIpCidrRangeSubnetworkRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'ExpandIpCidrRangeSubnetworkRequest',
+        '.google.cloud.compute.v1.ExpandIpCidrRangeSubnetworkRequest',
         ['subnetwork']
       );
       request.subnetwork = defaultValue3;
@@ -502,17 +514,17 @@ describe('v1.SubnetworksClient', () => {
         new protos.google.cloud.compute.v1.ExpandIpCidrRangeSubnetworkRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ExpandIpCidrRangeSubnetworkRequest',
+        '.google.cloud.compute.v1.ExpandIpCidrRangeSubnetworkRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'ExpandIpCidrRangeSubnetworkRequest',
+        '.google.cloud.compute.v1.ExpandIpCidrRangeSubnetworkRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'ExpandIpCidrRangeSubnetworkRequest',
+        '.google.cloud.compute.v1.ExpandIpCidrRangeSubnetworkRequest',
         ['subnetwork']
       );
       request.subnetwork = defaultValue3;
@@ -543,17 +555,17 @@ describe('v1.SubnetworksClient', () => {
         new protos.google.cloud.compute.v1.ExpandIpCidrRangeSubnetworkRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ExpandIpCidrRangeSubnetworkRequest',
+        '.google.cloud.compute.v1.ExpandIpCidrRangeSubnetworkRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'ExpandIpCidrRangeSubnetworkRequest',
+        '.google.cloud.compute.v1.ExpandIpCidrRangeSubnetworkRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'ExpandIpCidrRangeSubnetworkRequest',
+        '.google.cloud.compute.v1.ExpandIpCidrRangeSubnetworkRequest',
         ['subnetwork']
       );
       request.subnetwork = defaultValue3;
@@ -573,17 +585,20 @@ describe('v1.SubnetworksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetSubnetworkRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetSubnetworkRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetSubnetworkRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetSubnetworkRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetSubnetworkRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('GetSubnetworkRequest', [
-        'subnetwork',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetSubnetworkRequest',
+        ['subnetwork']
+      );
       request.subnetwork = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&subnetwork=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -610,17 +625,20 @@ describe('v1.SubnetworksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetSubnetworkRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetSubnetworkRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetSubnetworkRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetSubnetworkRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetSubnetworkRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('GetSubnetworkRequest', [
-        'subnetwork',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetSubnetworkRequest',
+        ['subnetwork']
+      );
       request.subnetwork = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&subnetwork=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -662,17 +680,20 @@ describe('v1.SubnetworksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetSubnetworkRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetSubnetworkRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetSubnetworkRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetSubnetworkRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetSubnetworkRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('GetSubnetworkRequest', [
-        'subnetwork',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetSubnetworkRequest',
+        ['subnetwork']
+      );
       request.subnetwork = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&subnetwork=${defaultValue3}`;
       const expectedError = new Error('expected');
@@ -696,17 +717,20 @@ describe('v1.SubnetworksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetSubnetworkRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetSubnetworkRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetSubnetworkRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetSubnetworkRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetSubnetworkRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('GetSubnetworkRequest', [
-        'subnetwork',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetSubnetworkRequest',
+        ['subnetwork']
+      );
       request.subnetwork = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -725,17 +749,17 @@ describe('v1.SubnetworksClient', () => {
         new protos.google.cloud.compute.v1.GetIamPolicySubnetworkRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetIamPolicySubnetworkRequest',
+        '.google.cloud.compute.v1.GetIamPolicySubnetworkRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'GetIamPolicySubnetworkRequest',
+        '.google.cloud.compute.v1.GetIamPolicySubnetworkRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'GetIamPolicySubnetworkRequest',
+        '.google.cloud.compute.v1.GetIamPolicySubnetworkRequest',
         ['resource']
       );
       request.resource = defaultValue3;
@@ -766,17 +790,17 @@ describe('v1.SubnetworksClient', () => {
         new protos.google.cloud.compute.v1.GetIamPolicySubnetworkRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetIamPolicySubnetworkRequest',
+        '.google.cloud.compute.v1.GetIamPolicySubnetworkRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'GetIamPolicySubnetworkRequest',
+        '.google.cloud.compute.v1.GetIamPolicySubnetworkRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'GetIamPolicySubnetworkRequest',
+        '.google.cloud.compute.v1.GetIamPolicySubnetworkRequest',
         ['resource']
       );
       request.resource = defaultValue3;
@@ -823,17 +847,17 @@ describe('v1.SubnetworksClient', () => {
         new protos.google.cloud.compute.v1.GetIamPolicySubnetworkRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetIamPolicySubnetworkRequest',
+        '.google.cloud.compute.v1.GetIamPolicySubnetworkRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'GetIamPolicySubnetworkRequest',
+        '.google.cloud.compute.v1.GetIamPolicySubnetworkRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'GetIamPolicySubnetworkRequest',
+        '.google.cloud.compute.v1.GetIamPolicySubnetworkRequest',
         ['resource']
       );
       request.resource = defaultValue3;
@@ -864,17 +888,17 @@ describe('v1.SubnetworksClient', () => {
         new protos.google.cloud.compute.v1.GetIamPolicySubnetworkRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetIamPolicySubnetworkRequest',
+        '.google.cloud.compute.v1.GetIamPolicySubnetworkRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'GetIamPolicySubnetworkRequest',
+        '.google.cloud.compute.v1.GetIamPolicySubnetworkRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'GetIamPolicySubnetworkRequest',
+        '.google.cloud.compute.v1.GetIamPolicySubnetworkRequest',
         ['resource']
       );
       request.resource = defaultValue3;
@@ -894,13 +918,15 @@ describe('v1.SubnetworksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertSubnetworkRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('InsertSubnetworkRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.InsertSubnetworkRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('InsertSubnetworkRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.InsertSubnetworkRequest',
+        ['region']
+      );
       request.region = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
@@ -928,13 +954,15 @@ describe('v1.SubnetworksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertSubnetworkRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('InsertSubnetworkRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.InsertSubnetworkRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('InsertSubnetworkRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.InsertSubnetworkRequest',
+        ['region']
+      );
       request.region = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
@@ -978,13 +1006,15 @@ describe('v1.SubnetworksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertSubnetworkRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('InsertSubnetworkRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.InsertSubnetworkRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('InsertSubnetworkRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.InsertSubnetworkRequest',
+        ['region']
+      );
       request.region = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}`;
       const expectedError = new Error('expected');
@@ -1009,13 +1039,15 @@ describe('v1.SubnetworksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertSubnetworkRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('InsertSubnetworkRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.InsertSubnetworkRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('InsertSubnetworkRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.InsertSubnetworkRequest',
+        ['region']
+      );
       request.region = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1033,17 +1065,20 @@ describe('v1.SubnetworksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchSubnetworkRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('PatchSubnetworkRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchSubnetworkRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('PatchSubnetworkRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchSubnetworkRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('PatchSubnetworkRequest', [
-        'subnetwork',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchSubnetworkRequest',
+        ['subnetwork']
+      );
       request.subnetwork = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&subnetwork=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -1070,17 +1105,20 @@ describe('v1.SubnetworksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchSubnetworkRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('PatchSubnetworkRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchSubnetworkRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('PatchSubnetworkRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchSubnetworkRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('PatchSubnetworkRequest', [
-        'subnetwork',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchSubnetworkRequest',
+        ['subnetwork']
+      );
       request.subnetwork = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&subnetwork=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -1122,17 +1160,20 @@ describe('v1.SubnetworksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchSubnetworkRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('PatchSubnetworkRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchSubnetworkRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('PatchSubnetworkRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchSubnetworkRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('PatchSubnetworkRequest', [
-        'subnetwork',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchSubnetworkRequest',
+        ['subnetwork']
+      );
       request.subnetwork = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&subnetwork=${defaultValue3}`;
       const expectedError = new Error('expected');
@@ -1156,17 +1197,20 @@ describe('v1.SubnetworksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchSubnetworkRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('PatchSubnetworkRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchSubnetworkRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('PatchSubnetworkRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchSubnetworkRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('PatchSubnetworkRequest', [
-        'subnetwork',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchSubnetworkRequest',
+        ['subnetwork']
+      );
       request.subnetwork = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1185,17 +1229,17 @@ describe('v1.SubnetworksClient', () => {
         new protos.google.cloud.compute.v1.SetIamPolicySubnetworkRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SetIamPolicySubnetworkRequest',
+        '.google.cloud.compute.v1.SetIamPolicySubnetworkRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'SetIamPolicySubnetworkRequest',
+        '.google.cloud.compute.v1.SetIamPolicySubnetworkRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'SetIamPolicySubnetworkRequest',
+        '.google.cloud.compute.v1.SetIamPolicySubnetworkRequest',
         ['resource']
       );
       request.resource = defaultValue3;
@@ -1226,17 +1270,17 @@ describe('v1.SubnetworksClient', () => {
         new protos.google.cloud.compute.v1.SetIamPolicySubnetworkRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SetIamPolicySubnetworkRequest',
+        '.google.cloud.compute.v1.SetIamPolicySubnetworkRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'SetIamPolicySubnetworkRequest',
+        '.google.cloud.compute.v1.SetIamPolicySubnetworkRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'SetIamPolicySubnetworkRequest',
+        '.google.cloud.compute.v1.SetIamPolicySubnetworkRequest',
         ['resource']
       );
       request.resource = defaultValue3;
@@ -1283,17 +1327,17 @@ describe('v1.SubnetworksClient', () => {
         new protos.google.cloud.compute.v1.SetIamPolicySubnetworkRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SetIamPolicySubnetworkRequest',
+        '.google.cloud.compute.v1.SetIamPolicySubnetworkRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'SetIamPolicySubnetworkRequest',
+        '.google.cloud.compute.v1.SetIamPolicySubnetworkRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'SetIamPolicySubnetworkRequest',
+        '.google.cloud.compute.v1.SetIamPolicySubnetworkRequest',
         ['resource']
       );
       request.resource = defaultValue3;
@@ -1324,17 +1368,17 @@ describe('v1.SubnetworksClient', () => {
         new protos.google.cloud.compute.v1.SetIamPolicySubnetworkRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SetIamPolicySubnetworkRequest',
+        '.google.cloud.compute.v1.SetIamPolicySubnetworkRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'SetIamPolicySubnetworkRequest',
+        '.google.cloud.compute.v1.SetIamPolicySubnetworkRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'SetIamPolicySubnetworkRequest',
+        '.google.cloud.compute.v1.SetIamPolicySubnetworkRequest',
         ['resource']
       );
       request.resource = defaultValue3;
@@ -1355,17 +1399,17 @@ describe('v1.SubnetworksClient', () => {
         new protos.google.cloud.compute.v1.SetPrivateIpGoogleAccessSubnetworkRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SetPrivateIpGoogleAccessSubnetworkRequest',
+        '.google.cloud.compute.v1.SetPrivateIpGoogleAccessSubnetworkRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'SetPrivateIpGoogleAccessSubnetworkRequest',
+        '.google.cloud.compute.v1.SetPrivateIpGoogleAccessSubnetworkRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'SetPrivateIpGoogleAccessSubnetworkRequest',
+        '.google.cloud.compute.v1.SetPrivateIpGoogleAccessSubnetworkRequest',
         ['subnetwork']
       );
       request.subnetwork = defaultValue3;
@@ -1397,17 +1441,17 @@ describe('v1.SubnetworksClient', () => {
         new protos.google.cloud.compute.v1.SetPrivateIpGoogleAccessSubnetworkRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SetPrivateIpGoogleAccessSubnetworkRequest',
+        '.google.cloud.compute.v1.SetPrivateIpGoogleAccessSubnetworkRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'SetPrivateIpGoogleAccessSubnetworkRequest',
+        '.google.cloud.compute.v1.SetPrivateIpGoogleAccessSubnetworkRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'SetPrivateIpGoogleAccessSubnetworkRequest',
+        '.google.cloud.compute.v1.SetPrivateIpGoogleAccessSubnetworkRequest',
         ['subnetwork']
       );
       request.subnetwork = defaultValue3;
@@ -1454,17 +1498,17 @@ describe('v1.SubnetworksClient', () => {
         new protos.google.cloud.compute.v1.SetPrivateIpGoogleAccessSubnetworkRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SetPrivateIpGoogleAccessSubnetworkRequest',
+        '.google.cloud.compute.v1.SetPrivateIpGoogleAccessSubnetworkRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'SetPrivateIpGoogleAccessSubnetworkRequest',
+        '.google.cloud.compute.v1.SetPrivateIpGoogleAccessSubnetworkRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'SetPrivateIpGoogleAccessSubnetworkRequest',
+        '.google.cloud.compute.v1.SetPrivateIpGoogleAccessSubnetworkRequest',
         ['subnetwork']
       );
       request.subnetwork = defaultValue3;
@@ -1498,17 +1542,17 @@ describe('v1.SubnetworksClient', () => {
         new protos.google.cloud.compute.v1.SetPrivateIpGoogleAccessSubnetworkRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SetPrivateIpGoogleAccessSubnetworkRequest',
+        '.google.cloud.compute.v1.SetPrivateIpGoogleAccessSubnetworkRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'SetPrivateIpGoogleAccessSubnetworkRequest',
+        '.google.cloud.compute.v1.SetPrivateIpGoogleAccessSubnetworkRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'SetPrivateIpGoogleAccessSubnetworkRequest',
+        '.google.cloud.compute.v1.SetPrivateIpGoogleAccessSubnetworkRequest',
         ['subnetwork']
       );
       request.subnetwork = defaultValue3;
@@ -1532,17 +1576,17 @@ describe('v1.SubnetworksClient', () => {
         new protos.google.cloud.compute.v1.TestIamPermissionsSubnetworkRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'TestIamPermissionsSubnetworkRequest',
+        '.google.cloud.compute.v1.TestIamPermissionsSubnetworkRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'TestIamPermissionsSubnetworkRequest',
+        '.google.cloud.compute.v1.TestIamPermissionsSubnetworkRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'TestIamPermissionsSubnetworkRequest',
+        '.google.cloud.compute.v1.TestIamPermissionsSubnetworkRequest',
         ['resource']
       );
       request.resource = defaultValue3;
@@ -1574,17 +1618,17 @@ describe('v1.SubnetworksClient', () => {
         new protos.google.cloud.compute.v1.TestIamPermissionsSubnetworkRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'TestIamPermissionsSubnetworkRequest',
+        '.google.cloud.compute.v1.TestIamPermissionsSubnetworkRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'TestIamPermissionsSubnetworkRequest',
+        '.google.cloud.compute.v1.TestIamPermissionsSubnetworkRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'TestIamPermissionsSubnetworkRequest',
+        '.google.cloud.compute.v1.TestIamPermissionsSubnetworkRequest',
         ['resource']
       );
       request.resource = defaultValue3;
@@ -1631,17 +1675,17 @@ describe('v1.SubnetworksClient', () => {
         new protos.google.cloud.compute.v1.TestIamPermissionsSubnetworkRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'TestIamPermissionsSubnetworkRequest',
+        '.google.cloud.compute.v1.TestIamPermissionsSubnetworkRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'TestIamPermissionsSubnetworkRequest',
+        '.google.cloud.compute.v1.TestIamPermissionsSubnetworkRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'TestIamPermissionsSubnetworkRequest',
+        '.google.cloud.compute.v1.TestIamPermissionsSubnetworkRequest',
         ['resource']
       );
       request.resource = defaultValue3;
@@ -1672,17 +1716,17 @@ describe('v1.SubnetworksClient', () => {
         new protos.google.cloud.compute.v1.TestIamPermissionsSubnetworkRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'TestIamPermissionsSubnetworkRequest',
+        '.google.cloud.compute.v1.TestIamPermissionsSubnetworkRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'TestIamPermissionsSubnetworkRequest',
+        '.google.cloud.compute.v1.TestIamPermissionsSubnetworkRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'TestIamPermissionsSubnetworkRequest',
+        '.google.cloud.compute.v1.TestIamPermissionsSubnetworkRequest',
         ['resource']
       );
       request.resource = defaultValue3;
@@ -1703,7 +1747,7 @@ describe('v1.SubnetworksClient', () => {
         new protos.google.cloud.compute.v1.AggregatedListSubnetworksRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'AggregatedListSubnetworksRequest',
+        '.google.cloud.compute.v1.AggregatedListSubnetworksRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -1763,7 +1807,7 @@ describe('v1.SubnetworksClient', () => {
         new protos.google.cloud.compute.v1.AggregatedListSubnetworksRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'AggregatedListSubnetworksRequest',
+        '.google.cloud.compute.v1.AggregatedListSubnetworksRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -1806,13 +1850,15 @@ describe('v1.SubnetworksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListSubnetworksRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListSubnetworksRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListSubnetworksRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ListSubnetworksRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListSubnetworksRequest',
+        ['region']
+      );
       request.region = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}`;
       const expectedResponse = [
@@ -1841,13 +1887,15 @@ describe('v1.SubnetworksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListSubnetworksRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListSubnetworksRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListSubnetworksRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ListSubnetworksRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListSubnetworksRequest',
+        ['region']
+      );
       request.region = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}`;
       const expectedResponse = [
@@ -1891,13 +1939,15 @@ describe('v1.SubnetworksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListSubnetworksRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListSubnetworksRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListSubnetworksRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ListSubnetworksRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListSubnetworksRequest',
+        ['region']
+      );
       request.region = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}`;
       const expectedError = new Error('expected');
@@ -1921,13 +1971,15 @@ describe('v1.SubnetworksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListSubnetworksRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListSubnetworksRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListSubnetworksRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ListSubnetworksRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListSubnetworksRequest',
+        ['region']
+      );
       request.region = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}`;
       const expectedResponse = [
@@ -1978,13 +2030,15 @@ describe('v1.SubnetworksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListSubnetworksRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListSubnetworksRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListSubnetworksRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ListSubnetworksRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListSubnetworksRequest',
+        ['region']
+      );
       request.region = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}`;
       const expectedError = new Error('expected');
@@ -2032,13 +2086,15 @@ describe('v1.SubnetworksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListSubnetworksRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListSubnetworksRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListSubnetworksRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ListSubnetworksRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListSubnetworksRequest',
+        ['region']
+      );
       request.region = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}`;
       const expectedResponse = [
@@ -2077,13 +2133,15 @@ describe('v1.SubnetworksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListSubnetworksRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListSubnetworksRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListSubnetworksRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ListSubnetworksRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListSubnetworksRequest',
+        ['region']
+      );
       request.region = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}`;
       const expectedError = new Error('expected');
@@ -2124,7 +2182,7 @@ describe('v1.SubnetworksClient', () => {
         new protos.google.cloud.compute.v1.ListUsableSubnetworksRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListUsableSubnetworksRequest',
+        '.google.cloud.compute.v1.ListUsableSubnetworksRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -2163,7 +2221,7 @@ describe('v1.SubnetworksClient', () => {
         new protos.google.cloud.compute.v1.ListUsableSubnetworksRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListUsableSubnetworksRequest',
+        '.google.cloud.compute.v1.ListUsableSubnetworksRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -2218,7 +2276,7 @@ describe('v1.SubnetworksClient', () => {
         new protos.google.cloud.compute.v1.ListUsableSubnetworksRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListUsableSubnetworksRequest',
+        '.google.cloud.compute.v1.ListUsableSubnetworksRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -2249,7 +2307,7 @@ describe('v1.SubnetworksClient', () => {
         new protos.google.cloud.compute.v1.ListUsableSubnetworksRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListUsableSubnetworksRequest',
+        '.google.cloud.compute.v1.ListUsableSubnetworksRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -2309,7 +2367,7 @@ describe('v1.SubnetworksClient', () => {
         new protos.google.cloud.compute.v1.ListUsableSubnetworksRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListUsableSubnetworksRequest',
+        '.google.cloud.compute.v1.ListUsableSubnetworksRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -2360,7 +2418,7 @@ describe('v1.SubnetworksClient', () => {
         new protos.google.cloud.compute.v1.ListUsableSubnetworksRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListUsableSubnetworksRequest',
+        '.google.cloud.compute.v1.ListUsableSubnetworksRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -2409,7 +2467,7 @@ describe('v1.SubnetworksClient', () => {
         new protos.google.cloud.compute.v1.ListUsableSubnetworksRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListUsableSubnetworksRequest',
+        '.google.cloud.compute.v1.ListUsableSubnetworksRequest',
         ['project']
       );
       request.project = defaultValue1;

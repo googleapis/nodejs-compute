@@ -260,17 +260,17 @@ describe('v1.RegionBackendServicesClient', () => {
         new protos.google.cloud.compute.v1.DeleteRegionBackendServiceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteRegionBackendServiceRequest',
+        '.google.cloud.compute.v1.DeleteRegionBackendServiceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'DeleteRegionBackendServiceRequest',
+        '.google.cloud.compute.v1.DeleteRegionBackendServiceRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'DeleteRegionBackendServiceRequest',
+        '.google.cloud.compute.v1.DeleteRegionBackendServiceRequest',
         ['backendService']
       );
       request.backendService = defaultValue3;
@@ -302,17 +302,17 @@ describe('v1.RegionBackendServicesClient', () => {
         new protos.google.cloud.compute.v1.DeleteRegionBackendServiceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteRegionBackendServiceRequest',
+        '.google.cloud.compute.v1.DeleteRegionBackendServiceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'DeleteRegionBackendServiceRequest',
+        '.google.cloud.compute.v1.DeleteRegionBackendServiceRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'DeleteRegionBackendServiceRequest',
+        '.google.cloud.compute.v1.DeleteRegionBackendServiceRequest',
         ['backendService']
       );
       request.backendService = defaultValue3;
@@ -360,17 +360,17 @@ describe('v1.RegionBackendServicesClient', () => {
         new protos.google.cloud.compute.v1.DeleteRegionBackendServiceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteRegionBackendServiceRequest',
+        '.google.cloud.compute.v1.DeleteRegionBackendServiceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'DeleteRegionBackendServiceRequest',
+        '.google.cloud.compute.v1.DeleteRegionBackendServiceRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'DeleteRegionBackendServiceRequest',
+        '.google.cloud.compute.v1.DeleteRegionBackendServiceRequest',
         ['backendService']
       );
       request.backendService = defaultValue3;
@@ -399,17 +399,17 @@ describe('v1.RegionBackendServicesClient', () => {
         new protos.google.cloud.compute.v1.DeleteRegionBackendServiceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteRegionBackendServiceRequest',
+        '.google.cloud.compute.v1.DeleteRegionBackendServiceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'DeleteRegionBackendServiceRequest',
+        '.google.cloud.compute.v1.DeleteRegionBackendServiceRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'DeleteRegionBackendServiceRequest',
+        '.google.cloud.compute.v1.DeleteRegionBackendServiceRequest',
         ['backendService']
       );
       request.backendService = defaultValue3;
@@ -431,17 +431,17 @@ describe('v1.RegionBackendServicesClient', () => {
         new protos.google.cloud.compute.v1.GetRegionBackendServiceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetRegionBackendServiceRequest',
+        '.google.cloud.compute.v1.GetRegionBackendServiceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'GetRegionBackendServiceRequest',
+        '.google.cloud.compute.v1.GetRegionBackendServiceRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'GetRegionBackendServiceRequest',
+        '.google.cloud.compute.v1.GetRegionBackendServiceRequest',
         ['backendService']
       );
       request.backendService = defaultValue3;
@@ -472,17 +472,17 @@ describe('v1.RegionBackendServicesClient', () => {
         new protos.google.cloud.compute.v1.GetRegionBackendServiceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetRegionBackendServiceRequest',
+        '.google.cloud.compute.v1.GetRegionBackendServiceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'GetRegionBackendServiceRequest',
+        '.google.cloud.compute.v1.GetRegionBackendServiceRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'GetRegionBackendServiceRequest',
+        '.google.cloud.compute.v1.GetRegionBackendServiceRequest',
         ['backendService']
       );
       request.backendService = defaultValue3;
@@ -528,17 +528,17 @@ describe('v1.RegionBackendServicesClient', () => {
         new protos.google.cloud.compute.v1.GetRegionBackendServiceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetRegionBackendServiceRequest',
+        '.google.cloud.compute.v1.GetRegionBackendServiceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'GetRegionBackendServiceRequest',
+        '.google.cloud.compute.v1.GetRegionBackendServiceRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'GetRegionBackendServiceRequest',
+        '.google.cloud.compute.v1.GetRegionBackendServiceRequest',
         ['backendService']
       );
       request.backendService = defaultValue3;
@@ -566,17 +566,17 @@ describe('v1.RegionBackendServicesClient', () => {
         new protos.google.cloud.compute.v1.GetRegionBackendServiceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetRegionBackendServiceRequest',
+        '.google.cloud.compute.v1.GetRegionBackendServiceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'GetRegionBackendServiceRequest',
+        '.google.cloud.compute.v1.GetRegionBackendServiceRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'GetRegionBackendServiceRequest',
+        '.google.cloud.compute.v1.GetRegionBackendServiceRequest',
         ['backendService']
       );
       request.backendService = defaultValue3;
@@ -598,17 +598,17 @@ describe('v1.RegionBackendServicesClient', () => {
         new protos.google.cloud.compute.v1.GetHealthRegionBackendServiceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetHealthRegionBackendServiceRequest',
+        '.google.cloud.compute.v1.GetHealthRegionBackendServiceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'GetHealthRegionBackendServiceRequest',
+        '.google.cloud.compute.v1.GetHealthRegionBackendServiceRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'GetHealthRegionBackendServiceRequest',
+        '.google.cloud.compute.v1.GetHealthRegionBackendServiceRequest',
         ['backendService']
       );
       request.backendService = defaultValue3;
@@ -640,17 +640,17 @@ describe('v1.RegionBackendServicesClient', () => {
         new protos.google.cloud.compute.v1.GetHealthRegionBackendServiceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetHealthRegionBackendServiceRequest',
+        '.google.cloud.compute.v1.GetHealthRegionBackendServiceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'GetHealthRegionBackendServiceRequest',
+        '.google.cloud.compute.v1.GetHealthRegionBackendServiceRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'GetHealthRegionBackendServiceRequest',
+        '.google.cloud.compute.v1.GetHealthRegionBackendServiceRequest',
         ['backendService']
       );
       request.backendService = defaultValue3;
@@ -698,17 +698,17 @@ describe('v1.RegionBackendServicesClient', () => {
         new protos.google.cloud.compute.v1.GetHealthRegionBackendServiceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetHealthRegionBackendServiceRequest',
+        '.google.cloud.compute.v1.GetHealthRegionBackendServiceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'GetHealthRegionBackendServiceRequest',
+        '.google.cloud.compute.v1.GetHealthRegionBackendServiceRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'GetHealthRegionBackendServiceRequest',
+        '.google.cloud.compute.v1.GetHealthRegionBackendServiceRequest',
         ['backendService']
       );
       request.backendService = defaultValue3;
@@ -737,17 +737,17 @@ describe('v1.RegionBackendServicesClient', () => {
         new protos.google.cloud.compute.v1.GetHealthRegionBackendServiceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetHealthRegionBackendServiceRequest',
+        '.google.cloud.compute.v1.GetHealthRegionBackendServiceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'GetHealthRegionBackendServiceRequest',
+        '.google.cloud.compute.v1.GetHealthRegionBackendServiceRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'GetHealthRegionBackendServiceRequest',
+        '.google.cloud.compute.v1.GetHealthRegionBackendServiceRequest',
         ['backendService']
       );
       request.backendService = defaultValue3;
@@ -769,17 +769,17 @@ describe('v1.RegionBackendServicesClient', () => {
         new protos.google.cloud.compute.v1.GetIamPolicyRegionBackendServiceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetIamPolicyRegionBackendServiceRequest',
+        '.google.cloud.compute.v1.GetIamPolicyRegionBackendServiceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'GetIamPolicyRegionBackendServiceRequest',
+        '.google.cloud.compute.v1.GetIamPolicyRegionBackendServiceRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'GetIamPolicyRegionBackendServiceRequest',
+        '.google.cloud.compute.v1.GetIamPolicyRegionBackendServiceRequest',
         ['resource']
       );
       request.resource = defaultValue3;
@@ -811,17 +811,17 @@ describe('v1.RegionBackendServicesClient', () => {
         new protos.google.cloud.compute.v1.GetIamPolicyRegionBackendServiceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetIamPolicyRegionBackendServiceRequest',
+        '.google.cloud.compute.v1.GetIamPolicyRegionBackendServiceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'GetIamPolicyRegionBackendServiceRequest',
+        '.google.cloud.compute.v1.GetIamPolicyRegionBackendServiceRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'GetIamPolicyRegionBackendServiceRequest',
+        '.google.cloud.compute.v1.GetIamPolicyRegionBackendServiceRequest',
         ['resource']
       );
       request.resource = defaultValue3;
@@ -869,17 +869,17 @@ describe('v1.RegionBackendServicesClient', () => {
         new protos.google.cloud.compute.v1.GetIamPolicyRegionBackendServiceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetIamPolicyRegionBackendServiceRequest',
+        '.google.cloud.compute.v1.GetIamPolicyRegionBackendServiceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'GetIamPolicyRegionBackendServiceRequest',
+        '.google.cloud.compute.v1.GetIamPolicyRegionBackendServiceRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'GetIamPolicyRegionBackendServiceRequest',
+        '.google.cloud.compute.v1.GetIamPolicyRegionBackendServiceRequest',
         ['resource']
       );
       request.resource = defaultValue3;
@@ -911,17 +911,17 @@ describe('v1.RegionBackendServicesClient', () => {
         new protos.google.cloud.compute.v1.GetIamPolicyRegionBackendServiceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetIamPolicyRegionBackendServiceRequest',
+        '.google.cloud.compute.v1.GetIamPolicyRegionBackendServiceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'GetIamPolicyRegionBackendServiceRequest',
+        '.google.cloud.compute.v1.GetIamPolicyRegionBackendServiceRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'GetIamPolicyRegionBackendServiceRequest',
+        '.google.cloud.compute.v1.GetIamPolicyRegionBackendServiceRequest',
         ['resource']
       );
       request.resource = defaultValue3;
@@ -943,12 +943,12 @@ describe('v1.RegionBackendServicesClient', () => {
         new protos.google.cloud.compute.v1.InsertRegionBackendServiceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'InsertRegionBackendServiceRequest',
+        '.google.cloud.compute.v1.InsertRegionBackendServiceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'InsertRegionBackendServiceRequest',
+        '.google.cloud.compute.v1.InsertRegionBackendServiceRequest',
         ['region']
       );
       request.region = defaultValue2;
@@ -980,12 +980,12 @@ describe('v1.RegionBackendServicesClient', () => {
         new protos.google.cloud.compute.v1.InsertRegionBackendServiceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'InsertRegionBackendServiceRequest',
+        '.google.cloud.compute.v1.InsertRegionBackendServiceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'InsertRegionBackendServiceRequest',
+        '.google.cloud.compute.v1.InsertRegionBackendServiceRequest',
         ['region']
       );
       request.region = defaultValue2;
@@ -1033,12 +1033,12 @@ describe('v1.RegionBackendServicesClient', () => {
         new protos.google.cloud.compute.v1.InsertRegionBackendServiceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'InsertRegionBackendServiceRequest',
+        '.google.cloud.compute.v1.InsertRegionBackendServiceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'InsertRegionBackendServiceRequest',
+        '.google.cloud.compute.v1.InsertRegionBackendServiceRequest',
         ['region']
       );
       request.region = defaultValue2;
@@ -1067,12 +1067,12 @@ describe('v1.RegionBackendServicesClient', () => {
         new protos.google.cloud.compute.v1.InsertRegionBackendServiceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'InsertRegionBackendServiceRequest',
+        '.google.cloud.compute.v1.InsertRegionBackendServiceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'InsertRegionBackendServiceRequest',
+        '.google.cloud.compute.v1.InsertRegionBackendServiceRequest',
         ['region']
       );
       request.region = defaultValue2;
@@ -1094,17 +1094,17 @@ describe('v1.RegionBackendServicesClient', () => {
         new protos.google.cloud.compute.v1.PatchRegionBackendServiceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'PatchRegionBackendServiceRequest',
+        '.google.cloud.compute.v1.PatchRegionBackendServiceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'PatchRegionBackendServiceRequest',
+        '.google.cloud.compute.v1.PatchRegionBackendServiceRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'PatchRegionBackendServiceRequest',
+        '.google.cloud.compute.v1.PatchRegionBackendServiceRequest',
         ['backendService']
       );
       request.backendService = defaultValue3;
@@ -1135,17 +1135,17 @@ describe('v1.RegionBackendServicesClient', () => {
         new protos.google.cloud.compute.v1.PatchRegionBackendServiceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'PatchRegionBackendServiceRequest',
+        '.google.cloud.compute.v1.PatchRegionBackendServiceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'PatchRegionBackendServiceRequest',
+        '.google.cloud.compute.v1.PatchRegionBackendServiceRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'PatchRegionBackendServiceRequest',
+        '.google.cloud.compute.v1.PatchRegionBackendServiceRequest',
         ['backendService']
       );
       request.backendService = defaultValue3;
@@ -1191,17 +1191,17 @@ describe('v1.RegionBackendServicesClient', () => {
         new protos.google.cloud.compute.v1.PatchRegionBackendServiceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'PatchRegionBackendServiceRequest',
+        '.google.cloud.compute.v1.PatchRegionBackendServiceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'PatchRegionBackendServiceRequest',
+        '.google.cloud.compute.v1.PatchRegionBackendServiceRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'PatchRegionBackendServiceRequest',
+        '.google.cloud.compute.v1.PatchRegionBackendServiceRequest',
         ['backendService']
       );
       request.backendService = defaultValue3;
@@ -1229,17 +1229,17 @@ describe('v1.RegionBackendServicesClient', () => {
         new protos.google.cloud.compute.v1.PatchRegionBackendServiceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'PatchRegionBackendServiceRequest',
+        '.google.cloud.compute.v1.PatchRegionBackendServiceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'PatchRegionBackendServiceRequest',
+        '.google.cloud.compute.v1.PatchRegionBackendServiceRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'PatchRegionBackendServiceRequest',
+        '.google.cloud.compute.v1.PatchRegionBackendServiceRequest',
         ['backendService']
       );
       request.backendService = defaultValue3;
@@ -1261,17 +1261,17 @@ describe('v1.RegionBackendServicesClient', () => {
         new protos.google.cloud.compute.v1.SetIamPolicyRegionBackendServiceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SetIamPolicyRegionBackendServiceRequest',
+        '.google.cloud.compute.v1.SetIamPolicyRegionBackendServiceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'SetIamPolicyRegionBackendServiceRequest',
+        '.google.cloud.compute.v1.SetIamPolicyRegionBackendServiceRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'SetIamPolicyRegionBackendServiceRequest',
+        '.google.cloud.compute.v1.SetIamPolicyRegionBackendServiceRequest',
         ['resource']
       );
       request.resource = defaultValue3;
@@ -1303,17 +1303,17 @@ describe('v1.RegionBackendServicesClient', () => {
         new protos.google.cloud.compute.v1.SetIamPolicyRegionBackendServiceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SetIamPolicyRegionBackendServiceRequest',
+        '.google.cloud.compute.v1.SetIamPolicyRegionBackendServiceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'SetIamPolicyRegionBackendServiceRequest',
+        '.google.cloud.compute.v1.SetIamPolicyRegionBackendServiceRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'SetIamPolicyRegionBackendServiceRequest',
+        '.google.cloud.compute.v1.SetIamPolicyRegionBackendServiceRequest',
         ['resource']
       );
       request.resource = defaultValue3;
@@ -1361,17 +1361,17 @@ describe('v1.RegionBackendServicesClient', () => {
         new protos.google.cloud.compute.v1.SetIamPolicyRegionBackendServiceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SetIamPolicyRegionBackendServiceRequest',
+        '.google.cloud.compute.v1.SetIamPolicyRegionBackendServiceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'SetIamPolicyRegionBackendServiceRequest',
+        '.google.cloud.compute.v1.SetIamPolicyRegionBackendServiceRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'SetIamPolicyRegionBackendServiceRequest',
+        '.google.cloud.compute.v1.SetIamPolicyRegionBackendServiceRequest',
         ['resource']
       );
       request.resource = defaultValue3;
@@ -1403,17 +1403,17 @@ describe('v1.RegionBackendServicesClient', () => {
         new protos.google.cloud.compute.v1.SetIamPolicyRegionBackendServiceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SetIamPolicyRegionBackendServiceRequest',
+        '.google.cloud.compute.v1.SetIamPolicyRegionBackendServiceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'SetIamPolicyRegionBackendServiceRequest',
+        '.google.cloud.compute.v1.SetIamPolicyRegionBackendServiceRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'SetIamPolicyRegionBackendServiceRequest',
+        '.google.cloud.compute.v1.SetIamPolicyRegionBackendServiceRequest',
         ['resource']
       );
       request.resource = defaultValue3;
@@ -1435,17 +1435,17 @@ describe('v1.RegionBackendServicesClient', () => {
         new protos.google.cloud.compute.v1.UpdateRegionBackendServiceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateRegionBackendServiceRequest',
+        '.google.cloud.compute.v1.UpdateRegionBackendServiceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'UpdateRegionBackendServiceRequest',
+        '.google.cloud.compute.v1.UpdateRegionBackendServiceRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'UpdateRegionBackendServiceRequest',
+        '.google.cloud.compute.v1.UpdateRegionBackendServiceRequest',
         ['backendService']
       );
       request.backendService = defaultValue3;
@@ -1477,17 +1477,17 @@ describe('v1.RegionBackendServicesClient', () => {
         new protos.google.cloud.compute.v1.UpdateRegionBackendServiceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateRegionBackendServiceRequest',
+        '.google.cloud.compute.v1.UpdateRegionBackendServiceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'UpdateRegionBackendServiceRequest',
+        '.google.cloud.compute.v1.UpdateRegionBackendServiceRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'UpdateRegionBackendServiceRequest',
+        '.google.cloud.compute.v1.UpdateRegionBackendServiceRequest',
         ['backendService']
       );
       request.backendService = defaultValue3;
@@ -1535,17 +1535,17 @@ describe('v1.RegionBackendServicesClient', () => {
         new protos.google.cloud.compute.v1.UpdateRegionBackendServiceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateRegionBackendServiceRequest',
+        '.google.cloud.compute.v1.UpdateRegionBackendServiceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'UpdateRegionBackendServiceRequest',
+        '.google.cloud.compute.v1.UpdateRegionBackendServiceRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'UpdateRegionBackendServiceRequest',
+        '.google.cloud.compute.v1.UpdateRegionBackendServiceRequest',
         ['backendService']
       );
       request.backendService = defaultValue3;
@@ -1574,17 +1574,17 @@ describe('v1.RegionBackendServicesClient', () => {
         new protos.google.cloud.compute.v1.UpdateRegionBackendServiceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateRegionBackendServiceRequest',
+        '.google.cloud.compute.v1.UpdateRegionBackendServiceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'UpdateRegionBackendServiceRequest',
+        '.google.cloud.compute.v1.UpdateRegionBackendServiceRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'UpdateRegionBackendServiceRequest',
+        '.google.cloud.compute.v1.UpdateRegionBackendServiceRequest',
         ['backendService']
       );
       request.backendService = defaultValue3;
@@ -1606,12 +1606,12 @@ describe('v1.RegionBackendServicesClient', () => {
         new protos.google.cloud.compute.v1.ListRegionBackendServicesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListRegionBackendServicesRequest',
+        '.google.cloud.compute.v1.ListRegionBackendServicesRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'ListRegionBackendServicesRequest',
+        '.google.cloud.compute.v1.ListRegionBackendServicesRequest',
         ['region']
       );
       request.region = defaultValue2;
@@ -1650,12 +1650,12 @@ describe('v1.RegionBackendServicesClient', () => {
         new protos.google.cloud.compute.v1.ListRegionBackendServicesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListRegionBackendServicesRequest',
+        '.google.cloud.compute.v1.ListRegionBackendServicesRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'ListRegionBackendServicesRequest',
+        '.google.cloud.compute.v1.ListRegionBackendServicesRequest',
         ['region']
       );
       request.region = defaultValue2;
@@ -1709,12 +1709,12 @@ describe('v1.RegionBackendServicesClient', () => {
         new protos.google.cloud.compute.v1.ListRegionBackendServicesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListRegionBackendServicesRequest',
+        '.google.cloud.compute.v1.ListRegionBackendServicesRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'ListRegionBackendServicesRequest',
+        '.google.cloud.compute.v1.ListRegionBackendServicesRequest',
         ['region']
       );
       request.region = defaultValue2;
@@ -1742,12 +1742,12 @@ describe('v1.RegionBackendServicesClient', () => {
         new protos.google.cloud.compute.v1.ListRegionBackendServicesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListRegionBackendServicesRequest',
+        '.google.cloud.compute.v1.ListRegionBackendServicesRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'ListRegionBackendServicesRequest',
+        '.google.cloud.compute.v1.ListRegionBackendServicesRequest',
         ['region']
       );
       request.region = defaultValue2;
@@ -1808,12 +1808,12 @@ describe('v1.RegionBackendServicesClient', () => {
         new protos.google.cloud.compute.v1.ListRegionBackendServicesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListRegionBackendServicesRequest',
+        '.google.cloud.compute.v1.ListRegionBackendServicesRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'ListRegionBackendServicesRequest',
+        '.google.cloud.compute.v1.ListRegionBackendServicesRequest',
         ['region']
       );
       request.region = defaultValue2;
@@ -1865,12 +1865,12 @@ describe('v1.RegionBackendServicesClient', () => {
         new protos.google.cloud.compute.v1.ListRegionBackendServicesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListRegionBackendServicesRequest',
+        '.google.cloud.compute.v1.ListRegionBackendServicesRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'ListRegionBackendServicesRequest',
+        '.google.cloud.compute.v1.ListRegionBackendServicesRequest',
         ['region']
       );
       request.region = defaultValue2;
@@ -1919,12 +1919,12 @@ describe('v1.RegionBackendServicesClient', () => {
         new protos.google.cloud.compute.v1.ListRegionBackendServicesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListRegionBackendServicesRequest',
+        '.google.cloud.compute.v1.ListRegionBackendServicesRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'ListRegionBackendServicesRequest',
+        '.google.cloud.compute.v1.ListRegionBackendServicesRequest',
         ['region']
       );
       request.region = defaultValue2;

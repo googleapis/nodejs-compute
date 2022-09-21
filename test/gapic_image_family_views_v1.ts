@@ -187,17 +187,20 @@ describe('v1.ImageFamilyViewsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetImageFamilyViewRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetImageFamilyViewRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetImageFamilyViewRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetImageFamilyViewRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetImageFamilyViewRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('GetImageFamilyViewRequest', [
-        'family',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetImageFamilyViewRequest',
+        ['family']
+      );
       request.family = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&family=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -224,17 +227,20 @@ describe('v1.ImageFamilyViewsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetImageFamilyViewRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetImageFamilyViewRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetImageFamilyViewRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetImageFamilyViewRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetImageFamilyViewRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('GetImageFamilyViewRequest', [
-        'family',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetImageFamilyViewRequest',
+        ['family']
+      );
       request.family = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&family=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -276,17 +282,20 @@ describe('v1.ImageFamilyViewsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetImageFamilyViewRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetImageFamilyViewRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetImageFamilyViewRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetImageFamilyViewRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetImageFamilyViewRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('GetImageFamilyViewRequest', [
-        'family',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetImageFamilyViewRequest',
+        ['family']
+      );
       request.family = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&family=${defaultValue3}`;
       const expectedError = new Error('expected');
@@ -310,17 +319,20 @@ describe('v1.ImageFamilyViewsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetImageFamilyViewRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetImageFamilyViewRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetImageFamilyViewRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetImageFamilyViewRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetImageFamilyViewRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('GetImageFamilyViewRequest', [
-        'family',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetImageFamilyViewRequest',
+        ['family']
+      );
       request.family = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
       client.close();

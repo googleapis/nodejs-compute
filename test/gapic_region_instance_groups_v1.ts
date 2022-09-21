@@ -260,17 +260,17 @@ describe('v1.RegionInstanceGroupsClient', () => {
         new protos.google.cloud.compute.v1.GetRegionInstanceGroupRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetRegionInstanceGroupRequest',
+        '.google.cloud.compute.v1.GetRegionInstanceGroupRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'GetRegionInstanceGroupRequest',
+        '.google.cloud.compute.v1.GetRegionInstanceGroupRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'GetRegionInstanceGroupRequest',
+        '.google.cloud.compute.v1.GetRegionInstanceGroupRequest',
         ['instanceGroup']
       );
       request.instanceGroup = defaultValue3;
@@ -301,17 +301,17 @@ describe('v1.RegionInstanceGroupsClient', () => {
         new protos.google.cloud.compute.v1.GetRegionInstanceGroupRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetRegionInstanceGroupRequest',
+        '.google.cloud.compute.v1.GetRegionInstanceGroupRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'GetRegionInstanceGroupRequest',
+        '.google.cloud.compute.v1.GetRegionInstanceGroupRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'GetRegionInstanceGroupRequest',
+        '.google.cloud.compute.v1.GetRegionInstanceGroupRequest',
         ['instanceGroup']
       );
       request.instanceGroup = defaultValue3;
@@ -357,17 +357,17 @@ describe('v1.RegionInstanceGroupsClient', () => {
         new protos.google.cloud.compute.v1.GetRegionInstanceGroupRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetRegionInstanceGroupRequest',
+        '.google.cloud.compute.v1.GetRegionInstanceGroupRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'GetRegionInstanceGroupRequest',
+        '.google.cloud.compute.v1.GetRegionInstanceGroupRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'GetRegionInstanceGroupRequest',
+        '.google.cloud.compute.v1.GetRegionInstanceGroupRequest',
         ['instanceGroup']
       );
       request.instanceGroup = defaultValue3;
@@ -395,17 +395,17 @@ describe('v1.RegionInstanceGroupsClient', () => {
         new protos.google.cloud.compute.v1.GetRegionInstanceGroupRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetRegionInstanceGroupRequest',
+        '.google.cloud.compute.v1.GetRegionInstanceGroupRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'GetRegionInstanceGroupRequest',
+        '.google.cloud.compute.v1.GetRegionInstanceGroupRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'GetRegionInstanceGroupRequest',
+        '.google.cloud.compute.v1.GetRegionInstanceGroupRequest',
         ['instanceGroup']
       );
       request.instanceGroup = defaultValue3;
@@ -427,17 +427,17 @@ describe('v1.RegionInstanceGroupsClient', () => {
         new protos.google.cloud.compute.v1.SetNamedPortsRegionInstanceGroupRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SetNamedPortsRegionInstanceGroupRequest',
+        '.google.cloud.compute.v1.SetNamedPortsRegionInstanceGroupRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'SetNamedPortsRegionInstanceGroupRequest',
+        '.google.cloud.compute.v1.SetNamedPortsRegionInstanceGroupRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'SetNamedPortsRegionInstanceGroupRequest',
+        '.google.cloud.compute.v1.SetNamedPortsRegionInstanceGroupRequest',
         ['instanceGroup']
       );
       request.instanceGroup = defaultValue3;
@@ -469,17 +469,17 @@ describe('v1.RegionInstanceGroupsClient', () => {
         new protos.google.cloud.compute.v1.SetNamedPortsRegionInstanceGroupRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SetNamedPortsRegionInstanceGroupRequest',
+        '.google.cloud.compute.v1.SetNamedPortsRegionInstanceGroupRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'SetNamedPortsRegionInstanceGroupRequest',
+        '.google.cloud.compute.v1.SetNamedPortsRegionInstanceGroupRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'SetNamedPortsRegionInstanceGroupRequest',
+        '.google.cloud.compute.v1.SetNamedPortsRegionInstanceGroupRequest',
         ['instanceGroup']
       );
       request.instanceGroup = defaultValue3;
@@ -527,17 +527,17 @@ describe('v1.RegionInstanceGroupsClient', () => {
         new protos.google.cloud.compute.v1.SetNamedPortsRegionInstanceGroupRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SetNamedPortsRegionInstanceGroupRequest',
+        '.google.cloud.compute.v1.SetNamedPortsRegionInstanceGroupRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'SetNamedPortsRegionInstanceGroupRequest',
+        '.google.cloud.compute.v1.SetNamedPortsRegionInstanceGroupRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'SetNamedPortsRegionInstanceGroupRequest',
+        '.google.cloud.compute.v1.SetNamedPortsRegionInstanceGroupRequest',
         ['instanceGroup']
       );
       request.instanceGroup = defaultValue3;
@@ -569,17 +569,17 @@ describe('v1.RegionInstanceGroupsClient', () => {
         new protos.google.cloud.compute.v1.SetNamedPortsRegionInstanceGroupRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SetNamedPortsRegionInstanceGroupRequest',
+        '.google.cloud.compute.v1.SetNamedPortsRegionInstanceGroupRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'SetNamedPortsRegionInstanceGroupRequest',
+        '.google.cloud.compute.v1.SetNamedPortsRegionInstanceGroupRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'SetNamedPortsRegionInstanceGroupRequest',
+        '.google.cloud.compute.v1.SetNamedPortsRegionInstanceGroupRequest',
         ['instanceGroup']
       );
       request.instanceGroup = defaultValue3;
@@ -601,12 +601,12 @@ describe('v1.RegionInstanceGroupsClient', () => {
         new protos.google.cloud.compute.v1.ListRegionInstanceGroupsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListRegionInstanceGroupsRequest',
+        '.google.cloud.compute.v1.ListRegionInstanceGroupsRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'ListRegionInstanceGroupsRequest',
+        '.google.cloud.compute.v1.ListRegionInstanceGroupsRequest',
         ['region']
       );
       request.region = defaultValue2;
@@ -645,12 +645,12 @@ describe('v1.RegionInstanceGroupsClient', () => {
         new protos.google.cloud.compute.v1.ListRegionInstanceGroupsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListRegionInstanceGroupsRequest',
+        '.google.cloud.compute.v1.ListRegionInstanceGroupsRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'ListRegionInstanceGroupsRequest',
+        '.google.cloud.compute.v1.ListRegionInstanceGroupsRequest',
         ['region']
       );
       request.region = defaultValue2;
@@ -704,12 +704,12 @@ describe('v1.RegionInstanceGroupsClient', () => {
         new protos.google.cloud.compute.v1.ListRegionInstanceGroupsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListRegionInstanceGroupsRequest',
+        '.google.cloud.compute.v1.ListRegionInstanceGroupsRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'ListRegionInstanceGroupsRequest',
+        '.google.cloud.compute.v1.ListRegionInstanceGroupsRequest',
         ['region']
       );
       request.region = defaultValue2;
@@ -737,12 +737,12 @@ describe('v1.RegionInstanceGroupsClient', () => {
         new protos.google.cloud.compute.v1.ListRegionInstanceGroupsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListRegionInstanceGroupsRequest',
+        '.google.cloud.compute.v1.ListRegionInstanceGroupsRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'ListRegionInstanceGroupsRequest',
+        '.google.cloud.compute.v1.ListRegionInstanceGroupsRequest',
         ['region']
       );
       request.region = defaultValue2;
@@ -803,12 +803,12 @@ describe('v1.RegionInstanceGroupsClient', () => {
         new protos.google.cloud.compute.v1.ListRegionInstanceGroupsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListRegionInstanceGroupsRequest',
+        '.google.cloud.compute.v1.ListRegionInstanceGroupsRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'ListRegionInstanceGroupsRequest',
+        '.google.cloud.compute.v1.ListRegionInstanceGroupsRequest',
         ['region']
       );
       request.region = defaultValue2;
@@ -860,12 +860,12 @@ describe('v1.RegionInstanceGroupsClient', () => {
         new protos.google.cloud.compute.v1.ListRegionInstanceGroupsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListRegionInstanceGroupsRequest',
+        '.google.cloud.compute.v1.ListRegionInstanceGroupsRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'ListRegionInstanceGroupsRequest',
+        '.google.cloud.compute.v1.ListRegionInstanceGroupsRequest',
         ['region']
       );
       request.region = defaultValue2;
@@ -914,12 +914,12 @@ describe('v1.RegionInstanceGroupsClient', () => {
         new protos.google.cloud.compute.v1.ListRegionInstanceGroupsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListRegionInstanceGroupsRequest',
+        '.google.cloud.compute.v1.ListRegionInstanceGroupsRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'ListRegionInstanceGroupsRequest',
+        '.google.cloud.compute.v1.ListRegionInstanceGroupsRequest',
         ['region']
       );
       request.region = defaultValue2;
@@ -963,17 +963,17 @@ describe('v1.RegionInstanceGroupsClient', () => {
         new protos.google.cloud.compute.v1.ListInstancesRegionInstanceGroupsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListInstancesRegionInstanceGroupsRequest',
+        '.google.cloud.compute.v1.ListInstancesRegionInstanceGroupsRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'ListInstancesRegionInstanceGroupsRequest',
+        '.google.cloud.compute.v1.ListInstancesRegionInstanceGroupsRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'ListInstancesRegionInstanceGroupsRequest',
+        '.google.cloud.compute.v1.ListInstancesRegionInstanceGroupsRequest',
         ['instanceGroup']
       );
       request.instanceGroup = defaultValue3;
@@ -1013,17 +1013,17 @@ describe('v1.RegionInstanceGroupsClient', () => {
         new protos.google.cloud.compute.v1.ListInstancesRegionInstanceGroupsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListInstancesRegionInstanceGroupsRequest',
+        '.google.cloud.compute.v1.ListInstancesRegionInstanceGroupsRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'ListInstancesRegionInstanceGroupsRequest',
+        '.google.cloud.compute.v1.ListInstancesRegionInstanceGroupsRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'ListInstancesRegionInstanceGroupsRequest',
+        '.google.cloud.compute.v1.ListInstancesRegionInstanceGroupsRequest',
         ['instanceGroup']
       );
       request.instanceGroup = defaultValue3;
@@ -1081,17 +1081,17 @@ describe('v1.RegionInstanceGroupsClient', () => {
         new protos.google.cloud.compute.v1.ListInstancesRegionInstanceGroupsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListInstancesRegionInstanceGroupsRequest',
+        '.google.cloud.compute.v1.ListInstancesRegionInstanceGroupsRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'ListInstancesRegionInstanceGroupsRequest',
+        '.google.cloud.compute.v1.ListInstancesRegionInstanceGroupsRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'ListInstancesRegionInstanceGroupsRequest',
+        '.google.cloud.compute.v1.ListInstancesRegionInstanceGroupsRequest',
         ['instanceGroup']
       );
       request.instanceGroup = defaultValue3;
@@ -1123,17 +1123,17 @@ describe('v1.RegionInstanceGroupsClient', () => {
         new protos.google.cloud.compute.v1.ListInstancesRegionInstanceGroupsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListInstancesRegionInstanceGroupsRequest',
+        '.google.cloud.compute.v1.ListInstancesRegionInstanceGroupsRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'ListInstancesRegionInstanceGroupsRequest',
+        '.google.cloud.compute.v1.ListInstancesRegionInstanceGroupsRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'ListInstancesRegionInstanceGroupsRequest',
+        '.google.cloud.compute.v1.ListInstancesRegionInstanceGroupsRequest',
         ['instanceGroup']
       );
       request.instanceGroup = defaultValue3;
@@ -1195,17 +1195,17 @@ describe('v1.RegionInstanceGroupsClient', () => {
         new protos.google.cloud.compute.v1.ListInstancesRegionInstanceGroupsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListInstancesRegionInstanceGroupsRequest',
+        '.google.cloud.compute.v1.ListInstancesRegionInstanceGroupsRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'ListInstancesRegionInstanceGroupsRequest',
+        '.google.cloud.compute.v1.ListInstancesRegionInstanceGroupsRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'ListInstancesRegionInstanceGroupsRequest',
+        '.google.cloud.compute.v1.ListInstancesRegionInstanceGroupsRequest',
         ['instanceGroup']
       );
       request.instanceGroup = defaultValue3;
@@ -1256,17 +1256,17 @@ describe('v1.RegionInstanceGroupsClient', () => {
         new protos.google.cloud.compute.v1.ListInstancesRegionInstanceGroupsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListInstancesRegionInstanceGroupsRequest',
+        '.google.cloud.compute.v1.ListInstancesRegionInstanceGroupsRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'ListInstancesRegionInstanceGroupsRequest',
+        '.google.cloud.compute.v1.ListInstancesRegionInstanceGroupsRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'ListInstancesRegionInstanceGroupsRequest',
+        '.google.cloud.compute.v1.ListInstancesRegionInstanceGroupsRequest',
         ['instanceGroup']
       );
       request.instanceGroup = defaultValue3;
@@ -1317,17 +1317,17 @@ describe('v1.RegionInstanceGroupsClient', () => {
         new protos.google.cloud.compute.v1.ListInstancesRegionInstanceGroupsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListInstancesRegionInstanceGroupsRequest',
+        '.google.cloud.compute.v1.ListInstancesRegionInstanceGroupsRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'ListInstancesRegionInstanceGroupsRequest',
+        '.google.cloud.compute.v1.ListInstancesRegionInstanceGroupsRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'ListInstancesRegionInstanceGroupsRequest',
+        '.google.cloud.compute.v1.ListInstancesRegionInstanceGroupsRequest',
         ['instanceGroup']
       );
       request.instanceGroup = defaultValue3;

@@ -250,17 +250,20 @@ describe('v1.AcceleratorTypesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetAcceleratorTypeRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetAcceleratorTypeRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetAcceleratorTypeRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetAcceleratorTypeRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetAcceleratorTypeRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('GetAcceleratorTypeRequest', [
-        'acceleratorType',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetAcceleratorTypeRequest',
+        ['acceleratorType']
+      );
       request.acceleratorType = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&accelerator_type=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -287,17 +290,20 @@ describe('v1.AcceleratorTypesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetAcceleratorTypeRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetAcceleratorTypeRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetAcceleratorTypeRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetAcceleratorTypeRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetAcceleratorTypeRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('GetAcceleratorTypeRequest', [
-        'acceleratorType',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetAcceleratorTypeRequest',
+        ['acceleratorType']
+      );
       request.acceleratorType = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&accelerator_type=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -339,17 +345,20 @@ describe('v1.AcceleratorTypesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetAcceleratorTypeRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetAcceleratorTypeRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetAcceleratorTypeRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetAcceleratorTypeRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetAcceleratorTypeRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('GetAcceleratorTypeRequest', [
-        'acceleratorType',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetAcceleratorTypeRequest',
+        ['acceleratorType']
+      );
       request.acceleratorType = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&accelerator_type=${defaultValue3}`;
       const expectedError = new Error('expected');
@@ -373,17 +382,20 @@ describe('v1.AcceleratorTypesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetAcceleratorTypeRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetAcceleratorTypeRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetAcceleratorTypeRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetAcceleratorTypeRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetAcceleratorTypeRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('GetAcceleratorTypeRequest', [
-        'acceleratorType',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetAcceleratorTypeRequest',
+        ['acceleratorType']
+      );
       request.acceleratorType = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -402,7 +414,7 @@ describe('v1.AcceleratorTypesClient', () => {
         new protos.google.cloud.compute.v1.AggregatedListAcceleratorTypesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'AggregatedListAcceleratorTypesRequest',
+        '.google.cloud.compute.v1.AggregatedListAcceleratorTypesRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -462,7 +474,7 @@ describe('v1.AcceleratorTypesClient', () => {
         new protos.google.cloud.compute.v1.AggregatedListAcceleratorTypesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'AggregatedListAcceleratorTypesRequest',
+        '.google.cloud.compute.v1.AggregatedListAcceleratorTypesRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -505,13 +517,15 @@ describe('v1.AcceleratorTypesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListAcceleratorTypesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListAcceleratorTypesRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListAcceleratorTypesRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ListAcceleratorTypesRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListAcceleratorTypesRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}`;
       const expectedResponse = [
@@ -546,13 +560,15 @@ describe('v1.AcceleratorTypesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListAcceleratorTypesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListAcceleratorTypesRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListAcceleratorTypesRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ListAcceleratorTypesRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListAcceleratorTypesRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}`;
       const expectedResponse = [
@@ -602,13 +618,15 @@ describe('v1.AcceleratorTypesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListAcceleratorTypesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListAcceleratorTypesRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListAcceleratorTypesRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ListAcceleratorTypesRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListAcceleratorTypesRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}`;
       const expectedError = new Error('expected');
@@ -632,13 +650,15 @@ describe('v1.AcceleratorTypesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListAcceleratorTypesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListAcceleratorTypesRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListAcceleratorTypesRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ListAcceleratorTypesRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListAcceleratorTypesRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}`;
       const expectedResponse = [
@@ -695,13 +715,15 @@ describe('v1.AcceleratorTypesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListAcceleratorTypesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListAcceleratorTypesRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListAcceleratorTypesRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ListAcceleratorTypesRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListAcceleratorTypesRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}`;
       const expectedError = new Error('expected');
@@ -749,13 +771,15 @@ describe('v1.AcceleratorTypesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListAcceleratorTypesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListAcceleratorTypesRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListAcceleratorTypesRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ListAcceleratorTypesRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListAcceleratorTypesRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}`;
       const expectedResponse = [
@@ -800,13 +824,15 @@ describe('v1.AcceleratorTypesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListAcceleratorTypesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListAcceleratorTypesRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListAcceleratorTypesRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ListAcceleratorTypesRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListAcceleratorTypesRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}`;
       const expectedError = new Error('expected');

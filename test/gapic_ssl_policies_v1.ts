@@ -248,13 +248,15 @@ describe('v1.SslPoliciesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteSslPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteSslPolicyRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteSslPolicyRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('DeleteSslPolicyRequest', [
-        'sslPolicy',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteSslPolicyRequest',
+        ['sslPolicy']
+      );
       request.sslPolicy = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&ssl_policy=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
@@ -282,13 +284,15 @@ describe('v1.SslPoliciesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteSslPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteSslPolicyRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteSslPolicyRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('DeleteSslPolicyRequest', [
-        'sslPolicy',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteSslPolicyRequest',
+        ['sslPolicy']
+      );
       request.sslPolicy = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&ssl_policy=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
@@ -332,13 +336,15 @@ describe('v1.SslPoliciesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteSslPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteSslPolicyRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteSslPolicyRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('DeleteSslPolicyRequest', [
-        'sslPolicy',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteSslPolicyRequest',
+        ['sslPolicy']
+      );
       request.sslPolicy = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&ssl_policy=${defaultValue2}`;
       const expectedError = new Error('expected');
@@ -363,13 +369,15 @@ describe('v1.SslPoliciesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteSslPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteSslPolicyRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteSslPolicyRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('DeleteSslPolicyRequest', [
-        'sslPolicy',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteSslPolicyRequest',
+        ['sslPolicy']
+      );
       request.sslPolicy = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -387,13 +395,15 @@ describe('v1.SslPoliciesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetSslPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetSslPolicyRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetSslPolicyRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetSslPolicyRequest', [
-        'sslPolicy',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetSslPolicyRequest',
+        ['sslPolicy']
+      );
       request.sslPolicy = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&ssl_policy=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
@@ -420,13 +430,15 @@ describe('v1.SslPoliciesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetSslPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetSslPolicyRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetSslPolicyRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetSslPolicyRequest', [
-        'sslPolicy',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetSslPolicyRequest',
+        ['sslPolicy']
+      );
       request.sslPolicy = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&ssl_policy=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
@@ -468,13 +480,15 @@ describe('v1.SslPoliciesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetSslPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetSslPolicyRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetSslPolicyRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetSslPolicyRequest', [
-        'sslPolicy',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetSslPolicyRequest',
+        ['sslPolicy']
+      );
       request.sslPolicy = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&ssl_policy=${defaultValue2}`;
       const expectedError = new Error('expected');
@@ -498,13 +512,15 @@ describe('v1.SslPoliciesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetSslPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetSslPolicyRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetSslPolicyRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetSslPolicyRequest', [
-        'sslPolicy',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetSslPolicyRequest',
+        ['sslPolicy']
+      );
       request.sslPolicy = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -522,9 +538,10 @@ describe('v1.SslPoliciesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertSslPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('InsertSslPolicyRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.InsertSslPolicyRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -552,9 +569,10 @@ describe('v1.SslPoliciesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertSslPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('InsertSslPolicyRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.InsertSslPolicyRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -598,9 +616,10 @@ describe('v1.SslPoliciesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertSslPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('InsertSslPolicyRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.InsertSslPolicyRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -625,9 +644,10 @@ describe('v1.SslPoliciesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertSslPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('InsertSslPolicyRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.InsertSslPolicyRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -646,7 +666,7 @@ describe('v1.SslPoliciesClient', () => {
         new protos.google.cloud.compute.v1.ListAvailableFeaturesSslPoliciesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListAvailableFeaturesSslPoliciesRequest',
+        '.google.cloud.compute.v1.ListAvailableFeaturesSslPoliciesRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -678,7 +698,7 @@ describe('v1.SslPoliciesClient', () => {
         new protos.google.cloud.compute.v1.ListAvailableFeaturesSslPoliciesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListAvailableFeaturesSslPoliciesRequest',
+        '.google.cloud.compute.v1.ListAvailableFeaturesSslPoliciesRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -725,7 +745,7 @@ describe('v1.SslPoliciesClient', () => {
         new protos.google.cloud.compute.v1.ListAvailableFeaturesSslPoliciesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListAvailableFeaturesSslPoliciesRequest',
+        '.google.cloud.compute.v1.ListAvailableFeaturesSslPoliciesRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -759,7 +779,7 @@ describe('v1.SslPoliciesClient', () => {
         new protos.google.cloud.compute.v1.ListAvailableFeaturesSslPoliciesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListAvailableFeaturesSslPoliciesRequest',
+        '.google.cloud.compute.v1.ListAvailableFeaturesSslPoliciesRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -782,13 +802,15 @@ describe('v1.SslPoliciesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchSslPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('PatchSslPolicyRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchSslPolicyRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('PatchSslPolicyRequest', [
-        'sslPolicy',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchSslPolicyRequest',
+        ['sslPolicy']
+      );
       request.sslPolicy = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&ssl_policy=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
@@ -815,13 +837,15 @@ describe('v1.SslPoliciesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchSslPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('PatchSslPolicyRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchSslPolicyRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('PatchSslPolicyRequest', [
-        'sslPolicy',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchSslPolicyRequest',
+        ['sslPolicy']
+      );
       request.sslPolicy = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&ssl_policy=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
@@ -863,13 +887,15 @@ describe('v1.SslPoliciesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchSslPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('PatchSslPolicyRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchSslPolicyRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('PatchSslPolicyRequest', [
-        'sslPolicy',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchSslPolicyRequest',
+        ['sslPolicy']
+      );
       request.sslPolicy = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&ssl_policy=${defaultValue2}`;
       const expectedError = new Error('expected');
@@ -893,13 +919,15 @@ describe('v1.SslPoliciesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchSslPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('PatchSslPolicyRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchSslPolicyRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('PatchSslPolicyRequest', [
-        'sslPolicy',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchSslPolicyRequest',
+        ['sslPolicy']
+      );
       request.sslPolicy = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -918,7 +946,7 @@ describe('v1.SslPoliciesClient', () => {
         new protos.google.cloud.compute.v1.AggregatedListSslPoliciesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'AggregatedListSslPoliciesRequest',
+        '.google.cloud.compute.v1.AggregatedListSslPoliciesRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -978,7 +1006,7 @@ describe('v1.SslPoliciesClient', () => {
         new protos.google.cloud.compute.v1.AggregatedListSslPoliciesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'AggregatedListSslPoliciesRequest',
+        '.google.cloud.compute.v1.AggregatedListSslPoliciesRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -1021,9 +1049,10 @@ describe('v1.SslPoliciesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListSslPoliciesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListSslPoliciesRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListSslPoliciesRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedResponse = [
@@ -1052,9 +1081,10 @@ describe('v1.SslPoliciesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListSslPoliciesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListSslPoliciesRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListSslPoliciesRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedResponse = [
@@ -1098,9 +1128,10 @@ describe('v1.SslPoliciesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListSslPoliciesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListSslPoliciesRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListSslPoliciesRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1124,9 +1155,10 @@ describe('v1.SslPoliciesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListSslPoliciesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListSslPoliciesRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListSslPoliciesRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedResponse = [
@@ -1177,9 +1209,10 @@ describe('v1.SslPoliciesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListSslPoliciesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListSslPoliciesRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListSslPoliciesRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1227,9 +1260,10 @@ describe('v1.SslPoliciesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListSslPoliciesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListSslPoliciesRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListSslPoliciesRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedResponse = [
@@ -1268,9 +1302,10 @@ describe('v1.SslPoliciesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListSslPoliciesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListSslPoliciesRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListSslPoliciesRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedError = new Error('expected');

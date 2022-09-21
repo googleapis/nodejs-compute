@@ -251,17 +251,17 @@ describe('v1.RegionAutoscalersClient', () => {
         new protos.google.cloud.compute.v1.DeleteRegionAutoscalerRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteRegionAutoscalerRequest',
+        '.google.cloud.compute.v1.DeleteRegionAutoscalerRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'DeleteRegionAutoscalerRequest',
+        '.google.cloud.compute.v1.DeleteRegionAutoscalerRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'DeleteRegionAutoscalerRequest',
+        '.google.cloud.compute.v1.DeleteRegionAutoscalerRequest',
         ['autoscaler']
       );
       request.autoscaler = defaultValue3;
@@ -292,17 +292,17 @@ describe('v1.RegionAutoscalersClient', () => {
         new protos.google.cloud.compute.v1.DeleteRegionAutoscalerRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteRegionAutoscalerRequest',
+        '.google.cloud.compute.v1.DeleteRegionAutoscalerRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'DeleteRegionAutoscalerRequest',
+        '.google.cloud.compute.v1.DeleteRegionAutoscalerRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'DeleteRegionAutoscalerRequest',
+        '.google.cloud.compute.v1.DeleteRegionAutoscalerRequest',
         ['autoscaler']
       );
       request.autoscaler = defaultValue3;
@@ -349,17 +349,17 @@ describe('v1.RegionAutoscalersClient', () => {
         new protos.google.cloud.compute.v1.DeleteRegionAutoscalerRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteRegionAutoscalerRequest',
+        '.google.cloud.compute.v1.DeleteRegionAutoscalerRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'DeleteRegionAutoscalerRequest',
+        '.google.cloud.compute.v1.DeleteRegionAutoscalerRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'DeleteRegionAutoscalerRequest',
+        '.google.cloud.compute.v1.DeleteRegionAutoscalerRequest',
         ['autoscaler']
       );
       request.autoscaler = defaultValue3;
@@ -387,17 +387,17 @@ describe('v1.RegionAutoscalersClient', () => {
         new protos.google.cloud.compute.v1.DeleteRegionAutoscalerRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteRegionAutoscalerRequest',
+        '.google.cloud.compute.v1.DeleteRegionAutoscalerRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'DeleteRegionAutoscalerRequest',
+        '.google.cloud.compute.v1.DeleteRegionAutoscalerRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'DeleteRegionAutoscalerRequest',
+        '.google.cloud.compute.v1.DeleteRegionAutoscalerRequest',
         ['autoscaler']
       );
       request.autoscaler = defaultValue3;
@@ -417,17 +417,20 @@ describe('v1.RegionAutoscalersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetRegionAutoscalerRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetRegionAutoscalerRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetRegionAutoscalerRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetRegionAutoscalerRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetRegionAutoscalerRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('GetRegionAutoscalerRequest', [
-        'autoscaler',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetRegionAutoscalerRequest',
+        ['autoscaler']
+      );
       request.autoscaler = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&autoscaler=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -454,17 +457,20 @@ describe('v1.RegionAutoscalersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetRegionAutoscalerRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetRegionAutoscalerRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetRegionAutoscalerRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetRegionAutoscalerRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetRegionAutoscalerRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('GetRegionAutoscalerRequest', [
-        'autoscaler',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetRegionAutoscalerRequest',
+        ['autoscaler']
+      );
       request.autoscaler = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&autoscaler=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -506,17 +512,20 @@ describe('v1.RegionAutoscalersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetRegionAutoscalerRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetRegionAutoscalerRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetRegionAutoscalerRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetRegionAutoscalerRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetRegionAutoscalerRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('GetRegionAutoscalerRequest', [
-        'autoscaler',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetRegionAutoscalerRequest',
+        ['autoscaler']
+      );
       request.autoscaler = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&autoscaler=${defaultValue3}`;
       const expectedError = new Error('expected');
@@ -540,17 +549,20 @@ describe('v1.RegionAutoscalersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetRegionAutoscalerRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetRegionAutoscalerRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetRegionAutoscalerRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetRegionAutoscalerRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetRegionAutoscalerRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('GetRegionAutoscalerRequest', [
-        'autoscaler',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetRegionAutoscalerRequest',
+        ['autoscaler']
+      );
       request.autoscaler = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -569,12 +581,12 @@ describe('v1.RegionAutoscalersClient', () => {
         new protos.google.cloud.compute.v1.InsertRegionAutoscalerRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'InsertRegionAutoscalerRequest',
+        '.google.cloud.compute.v1.InsertRegionAutoscalerRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'InsertRegionAutoscalerRequest',
+        '.google.cloud.compute.v1.InsertRegionAutoscalerRequest',
         ['region']
       );
       request.region = defaultValue2;
@@ -605,12 +617,12 @@ describe('v1.RegionAutoscalersClient', () => {
         new protos.google.cloud.compute.v1.InsertRegionAutoscalerRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'InsertRegionAutoscalerRequest',
+        '.google.cloud.compute.v1.InsertRegionAutoscalerRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'InsertRegionAutoscalerRequest',
+        '.google.cloud.compute.v1.InsertRegionAutoscalerRequest',
         ['region']
       );
       request.region = defaultValue2;
@@ -657,12 +669,12 @@ describe('v1.RegionAutoscalersClient', () => {
         new protos.google.cloud.compute.v1.InsertRegionAutoscalerRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'InsertRegionAutoscalerRequest',
+        '.google.cloud.compute.v1.InsertRegionAutoscalerRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'InsertRegionAutoscalerRequest',
+        '.google.cloud.compute.v1.InsertRegionAutoscalerRequest',
         ['region']
       );
       request.region = defaultValue2;
@@ -690,12 +702,12 @@ describe('v1.RegionAutoscalersClient', () => {
         new protos.google.cloud.compute.v1.InsertRegionAutoscalerRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'InsertRegionAutoscalerRequest',
+        '.google.cloud.compute.v1.InsertRegionAutoscalerRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'InsertRegionAutoscalerRequest',
+        '.google.cloud.compute.v1.InsertRegionAutoscalerRequest',
         ['region']
       );
       request.region = defaultValue2;
@@ -716,12 +728,12 @@ describe('v1.RegionAutoscalersClient', () => {
         new protos.google.cloud.compute.v1.PatchRegionAutoscalerRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'PatchRegionAutoscalerRequest',
+        '.google.cloud.compute.v1.PatchRegionAutoscalerRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'PatchRegionAutoscalerRequest',
+        '.google.cloud.compute.v1.PatchRegionAutoscalerRequest',
         ['region']
       );
       request.region = defaultValue2;
@@ -751,12 +763,12 @@ describe('v1.RegionAutoscalersClient', () => {
         new protos.google.cloud.compute.v1.PatchRegionAutoscalerRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'PatchRegionAutoscalerRequest',
+        '.google.cloud.compute.v1.PatchRegionAutoscalerRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'PatchRegionAutoscalerRequest',
+        '.google.cloud.compute.v1.PatchRegionAutoscalerRequest',
         ['region']
       );
       request.region = defaultValue2;
@@ -801,12 +813,12 @@ describe('v1.RegionAutoscalersClient', () => {
         new protos.google.cloud.compute.v1.PatchRegionAutoscalerRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'PatchRegionAutoscalerRequest',
+        '.google.cloud.compute.v1.PatchRegionAutoscalerRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'PatchRegionAutoscalerRequest',
+        '.google.cloud.compute.v1.PatchRegionAutoscalerRequest',
         ['region']
       );
       request.region = defaultValue2;
@@ -833,12 +845,12 @@ describe('v1.RegionAutoscalersClient', () => {
         new protos.google.cloud.compute.v1.PatchRegionAutoscalerRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'PatchRegionAutoscalerRequest',
+        '.google.cloud.compute.v1.PatchRegionAutoscalerRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'PatchRegionAutoscalerRequest',
+        '.google.cloud.compute.v1.PatchRegionAutoscalerRequest',
         ['region']
       );
       request.region = defaultValue2;
@@ -859,12 +871,12 @@ describe('v1.RegionAutoscalersClient', () => {
         new protos.google.cloud.compute.v1.UpdateRegionAutoscalerRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateRegionAutoscalerRequest',
+        '.google.cloud.compute.v1.UpdateRegionAutoscalerRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'UpdateRegionAutoscalerRequest',
+        '.google.cloud.compute.v1.UpdateRegionAutoscalerRequest',
         ['region']
       );
       request.region = defaultValue2;
@@ -895,12 +907,12 @@ describe('v1.RegionAutoscalersClient', () => {
         new protos.google.cloud.compute.v1.UpdateRegionAutoscalerRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateRegionAutoscalerRequest',
+        '.google.cloud.compute.v1.UpdateRegionAutoscalerRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'UpdateRegionAutoscalerRequest',
+        '.google.cloud.compute.v1.UpdateRegionAutoscalerRequest',
         ['region']
       );
       request.region = defaultValue2;
@@ -947,12 +959,12 @@ describe('v1.RegionAutoscalersClient', () => {
         new protos.google.cloud.compute.v1.UpdateRegionAutoscalerRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateRegionAutoscalerRequest',
+        '.google.cloud.compute.v1.UpdateRegionAutoscalerRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'UpdateRegionAutoscalerRequest',
+        '.google.cloud.compute.v1.UpdateRegionAutoscalerRequest',
         ['region']
       );
       request.region = defaultValue2;
@@ -980,12 +992,12 @@ describe('v1.RegionAutoscalersClient', () => {
         new protos.google.cloud.compute.v1.UpdateRegionAutoscalerRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateRegionAutoscalerRequest',
+        '.google.cloud.compute.v1.UpdateRegionAutoscalerRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'UpdateRegionAutoscalerRequest',
+        '.google.cloud.compute.v1.UpdateRegionAutoscalerRequest',
         ['region']
       );
       request.region = defaultValue2;
@@ -1006,12 +1018,12 @@ describe('v1.RegionAutoscalersClient', () => {
         new protos.google.cloud.compute.v1.ListRegionAutoscalersRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListRegionAutoscalersRequest',
+        '.google.cloud.compute.v1.ListRegionAutoscalersRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'ListRegionAutoscalersRequest',
+        '.google.cloud.compute.v1.ListRegionAutoscalersRequest',
         ['region']
       );
       request.region = defaultValue2;
@@ -1043,12 +1055,12 @@ describe('v1.RegionAutoscalersClient', () => {
         new protos.google.cloud.compute.v1.ListRegionAutoscalersRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListRegionAutoscalersRequest',
+        '.google.cloud.compute.v1.ListRegionAutoscalersRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'ListRegionAutoscalersRequest',
+        '.google.cloud.compute.v1.ListRegionAutoscalersRequest',
         ['region']
       );
       request.region = defaultValue2;
@@ -1095,12 +1107,12 @@ describe('v1.RegionAutoscalersClient', () => {
         new protos.google.cloud.compute.v1.ListRegionAutoscalersRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListRegionAutoscalersRequest',
+        '.google.cloud.compute.v1.ListRegionAutoscalersRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'ListRegionAutoscalersRequest',
+        '.google.cloud.compute.v1.ListRegionAutoscalersRequest',
         ['region']
       );
       request.region = defaultValue2;
@@ -1127,12 +1139,12 @@ describe('v1.RegionAutoscalersClient', () => {
         new protos.google.cloud.compute.v1.ListRegionAutoscalersRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListRegionAutoscalersRequest',
+        '.google.cloud.compute.v1.ListRegionAutoscalersRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'ListRegionAutoscalersRequest',
+        '.google.cloud.compute.v1.ListRegionAutoscalersRequest',
         ['region']
       );
       request.region = defaultValue2;
@@ -1186,12 +1198,12 @@ describe('v1.RegionAutoscalersClient', () => {
         new protos.google.cloud.compute.v1.ListRegionAutoscalersRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListRegionAutoscalersRequest',
+        '.google.cloud.compute.v1.ListRegionAutoscalersRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'ListRegionAutoscalersRequest',
+        '.google.cloud.compute.v1.ListRegionAutoscalersRequest',
         ['region']
       );
       request.region = defaultValue2;
@@ -1242,12 +1254,12 @@ describe('v1.RegionAutoscalersClient', () => {
         new protos.google.cloud.compute.v1.ListRegionAutoscalersRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListRegionAutoscalersRequest',
+        '.google.cloud.compute.v1.ListRegionAutoscalersRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'ListRegionAutoscalersRequest',
+        '.google.cloud.compute.v1.ListRegionAutoscalersRequest',
         ['region']
       );
       request.region = defaultValue2;
@@ -1289,12 +1301,12 @@ describe('v1.RegionAutoscalersClient', () => {
         new protos.google.cloud.compute.v1.ListRegionAutoscalersRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListRegionAutoscalersRequest',
+        '.google.cloud.compute.v1.ListRegionAutoscalersRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'ListRegionAutoscalersRequest',
+        '.google.cloud.compute.v1.ListRegionAutoscalersRequest',
         ['region']
       );
       request.region = defaultValue2;

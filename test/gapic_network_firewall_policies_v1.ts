@@ -262,12 +262,12 @@ describe('v1.NetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.AddAssociationNetworkFirewallPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'AddAssociationNetworkFirewallPolicyRequest',
+        '.google.cloud.compute.v1.AddAssociationNetworkFirewallPolicyRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'AddAssociationNetworkFirewallPolicyRequest',
+        '.google.cloud.compute.v1.AddAssociationNetworkFirewallPolicyRequest',
         ['firewallPolicy']
       );
       request.firewallPolicy = defaultValue2;
@@ -299,12 +299,12 @@ describe('v1.NetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.AddAssociationNetworkFirewallPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'AddAssociationNetworkFirewallPolicyRequest',
+        '.google.cloud.compute.v1.AddAssociationNetworkFirewallPolicyRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'AddAssociationNetworkFirewallPolicyRequest',
+        '.google.cloud.compute.v1.AddAssociationNetworkFirewallPolicyRequest',
         ['firewallPolicy']
       );
       request.firewallPolicy = defaultValue2;
@@ -352,12 +352,12 @@ describe('v1.NetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.AddAssociationNetworkFirewallPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'AddAssociationNetworkFirewallPolicyRequest',
+        '.google.cloud.compute.v1.AddAssociationNetworkFirewallPolicyRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'AddAssociationNetworkFirewallPolicyRequest',
+        '.google.cloud.compute.v1.AddAssociationNetworkFirewallPolicyRequest',
         ['firewallPolicy']
       );
       request.firewallPolicy = defaultValue2;
@@ -389,12 +389,12 @@ describe('v1.NetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.AddAssociationNetworkFirewallPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'AddAssociationNetworkFirewallPolicyRequest',
+        '.google.cloud.compute.v1.AddAssociationNetworkFirewallPolicyRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'AddAssociationNetworkFirewallPolicyRequest',
+        '.google.cloud.compute.v1.AddAssociationNetworkFirewallPolicyRequest',
         ['firewallPolicy']
       );
       request.firewallPolicy = defaultValue2;
@@ -416,12 +416,12 @@ describe('v1.NetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.AddRuleNetworkFirewallPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'AddRuleNetworkFirewallPolicyRequest',
+        '.google.cloud.compute.v1.AddRuleNetworkFirewallPolicyRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'AddRuleNetworkFirewallPolicyRequest',
+        '.google.cloud.compute.v1.AddRuleNetworkFirewallPolicyRequest',
         ['firewallPolicy']
       );
       request.firewallPolicy = defaultValue2;
@@ -453,12 +453,12 @@ describe('v1.NetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.AddRuleNetworkFirewallPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'AddRuleNetworkFirewallPolicyRequest',
+        '.google.cloud.compute.v1.AddRuleNetworkFirewallPolicyRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'AddRuleNetworkFirewallPolicyRequest',
+        '.google.cloud.compute.v1.AddRuleNetworkFirewallPolicyRequest',
         ['firewallPolicy']
       );
       request.firewallPolicy = defaultValue2;
@@ -506,12 +506,12 @@ describe('v1.NetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.AddRuleNetworkFirewallPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'AddRuleNetworkFirewallPolicyRequest',
+        '.google.cloud.compute.v1.AddRuleNetworkFirewallPolicyRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'AddRuleNetworkFirewallPolicyRequest',
+        '.google.cloud.compute.v1.AddRuleNetworkFirewallPolicyRequest',
         ['firewallPolicy']
       );
       request.firewallPolicy = defaultValue2;
@@ -540,12 +540,12 @@ describe('v1.NetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.AddRuleNetworkFirewallPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'AddRuleNetworkFirewallPolicyRequest',
+        '.google.cloud.compute.v1.AddRuleNetworkFirewallPolicyRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'AddRuleNetworkFirewallPolicyRequest',
+        '.google.cloud.compute.v1.AddRuleNetworkFirewallPolicyRequest',
         ['firewallPolicy']
       );
       request.firewallPolicy = defaultValue2;
@@ -567,12 +567,12 @@ describe('v1.NetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.CloneRulesNetworkFirewallPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CloneRulesNetworkFirewallPolicyRequest',
+        '.google.cloud.compute.v1.CloneRulesNetworkFirewallPolicyRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'CloneRulesNetworkFirewallPolicyRequest',
+        '.google.cloud.compute.v1.CloneRulesNetworkFirewallPolicyRequest',
         ['firewallPolicy']
       );
       request.firewallPolicy = defaultValue2;
@@ -604,12 +604,12 @@ describe('v1.NetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.CloneRulesNetworkFirewallPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CloneRulesNetworkFirewallPolicyRequest',
+        '.google.cloud.compute.v1.CloneRulesNetworkFirewallPolicyRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'CloneRulesNetworkFirewallPolicyRequest',
+        '.google.cloud.compute.v1.CloneRulesNetworkFirewallPolicyRequest',
         ['firewallPolicy']
       );
       request.firewallPolicy = defaultValue2;
@@ -657,12 +657,12 @@ describe('v1.NetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.CloneRulesNetworkFirewallPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CloneRulesNetworkFirewallPolicyRequest',
+        '.google.cloud.compute.v1.CloneRulesNetworkFirewallPolicyRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'CloneRulesNetworkFirewallPolicyRequest',
+        '.google.cloud.compute.v1.CloneRulesNetworkFirewallPolicyRequest',
         ['firewallPolicy']
       );
       request.firewallPolicy = defaultValue2;
@@ -694,12 +694,12 @@ describe('v1.NetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.CloneRulesNetworkFirewallPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CloneRulesNetworkFirewallPolicyRequest',
+        '.google.cloud.compute.v1.CloneRulesNetworkFirewallPolicyRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'CloneRulesNetworkFirewallPolicyRequest',
+        '.google.cloud.compute.v1.CloneRulesNetworkFirewallPolicyRequest',
         ['firewallPolicy']
       );
       request.firewallPolicy = defaultValue2;
@@ -721,12 +721,12 @@ describe('v1.NetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.DeleteNetworkFirewallPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteNetworkFirewallPolicyRequest',
+        '.google.cloud.compute.v1.DeleteNetworkFirewallPolicyRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'DeleteNetworkFirewallPolicyRequest',
+        '.google.cloud.compute.v1.DeleteNetworkFirewallPolicyRequest',
         ['firewallPolicy']
       );
       request.firewallPolicy = defaultValue2;
@@ -758,12 +758,12 @@ describe('v1.NetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.DeleteNetworkFirewallPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteNetworkFirewallPolicyRequest',
+        '.google.cloud.compute.v1.DeleteNetworkFirewallPolicyRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'DeleteNetworkFirewallPolicyRequest',
+        '.google.cloud.compute.v1.DeleteNetworkFirewallPolicyRequest',
         ['firewallPolicy']
       );
       request.firewallPolicy = defaultValue2;
@@ -811,12 +811,12 @@ describe('v1.NetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.DeleteNetworkFirewallPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteNetworkFirewallPolicyRequest',
+        '.google.cloud.compute.v1.DeleteNetworkFirewallPolicyRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'DeleteNetworkFirewallPolicyRequest',
+        '.google.cloud.compute.v1.DeleteNetworkFirewallPolicyRequest',
         ['firewallPolicy']
       );
       request.firewallPolicy = defaultValue2;
@@ -845,12 +845,12 @@ describe('v1.NetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.DeleteNetworkFirewallPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteNetworkFirewallPolicyRequest',
+        '.google.cloud.compute.v1.DeleteNetworkFirewallPolicyRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'DeleteNetworkFirewallPolicyRequest',
+        '.google.cloud.compute.v1.DeleteNetworkFirewallPolicyRequest',
         ['firewallPolicy']
       );
       request.firewallPolicy = defaultValue2;
@@ -872,12 +872,12 @@ describe('v1.NetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.GetNetworkFirewallPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetNetworkFirewallPolicyRequest',
+        '.google.cloud.compute.v1.GetNetworkFirewallPolicyRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'GetNetworkFirewallPolicyRequest',
+        '.google.cloud.compute.v1.GetNetworkFirewallPolicyRequest',
         ['firewallPolicy']
       );
       request.firewallPolicy = defaultValue2;
@@ -908,12 +908,12 @@ describe('v1.NetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.GetNetworkFirewallPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetNetworkFirewallPolicyRequest',
+        '.google.cloud.compute.v1.GetNetworkFirewallPolicyRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'GetNetworkFirewallPolicyRequest',
+        '.google.cloud.compute.v1.GetNetworkFirewallPolicyRequest',
         ['firewallPolicy']
       );
       request.firewallPolicy = defaultValue2;
@@ -959,12 +959,12 @@ describe('v1.NetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.GetNetworkFirewallPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetNetworkFirewallPolicyRequest',
+        '.google.cloud.compute.v1.GetNetworkFirewallPolicyRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'GetNetworkFirewallPolicyRequest',
+        '.google.cloud.compute.v1.GetNetworkFirewallPolicyRequest',
         ['firewallPolicy']
       );
       request.firewallPolicy = defaultValue2;
@@ -992,12 +992,12 @@ describe('v1.NetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.GetNetworkFirewallPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetNetworkFirewallPolicyRequest',
+        '.google.cloud.compute.v1.GetNetworkFirewallPolicyRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'GetNetworkFirewallPolicyRequest',
+        '.google.cloud.compute.v1.GetNetworkFirewallPolicyRequest',
         ['firewallPolicy']
       );
       request.firewallPolicy = defaultValue2;
@@ -1019,12 +1019,12 @@ describe('v1.NetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.GetAssociationNetworkFirewallPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetAssociationNetworkFirewallPolicyRequest',
+        '.google.cloud.compute.v1.GetAssociationNetworkFirewallPolicyRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'GetAssociationNetworkFirewallPolicyRequest',
+        '.google.cloud.compute.v1.GetAssociationNetworkFirewallPolicyRequest',
         ['firewallPolicy']
       );
       request.firewallPolicy = defaultValue2;
@@ -1056,12 +1056,12 @@ describe('v1.NetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.GetAssociationNetworkFirewallPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetAssociationNetworkFirewallPolicyRequest',
+        '.google.cloud.compute.v1.GetAssociationNetworkFirewallPolicyRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'GetAssociationNetworkFirewallPolicyRequest',
+        '.google.cloud.compute.v1.GetAssociationNetworkFirewallPolicyRequest',
         ['firewallPolicy']
       );
       request.firewallPolicy = defaultValue2;
@@ -1109,12 +1109,12 @@ describe('v1.NetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.GetAssociationNetworkFirewallPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetAssociationNetworkFirewallPolicyRequest',
+        '.google.cloud.compute.v1.GetAssociationNetworkFirewallPolicyRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'GetAssociationNetworkFirewallPolicyRequest',
+        '.google.cloud.compute.v1.GetAssociationNetworkFirewallPolicyRequest',
         ['firewallPolicy']
       );
       request.firewallPolicy = defaultValue2;
@@ -1146,12 +1146,12 @@ describe('v1.NetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.GetAssociationNetworkFirewallPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetAssociationNetworkFirewallPolicyRequest',
+        '.google.cloud.compute.v1.GetAssociationNetworkFirewallPolicyRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'GetAssociationNetworkFirewallPolicyRequest',
+        '.google.cloud.compute.v1.GetAssociationNetworkFirewallPolicyRequest',
         ['firewallPolicy']
       );
       request.firewallPolicy = defaultValue2;
@@ -1173,12 +1173,12 @@ describe('v1.NetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.GetIamPolicyNetworkFirewallPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetIamPolicyNetworkFirewallPolicyRequest',
+        '.google.cloud.compute.v1.GetIamPolicyNetworkFirewallPolicyRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'GetIamPolicyNetworkFirewallPolicyRequest',
+        '.google.cloud.compute.v1.GetIamPolicyNetworkFirewallPolicyRequest',
         ['resource']
       );
       request.resource = defaultValue2;
@@ -1210,12 +1210,12 @@ describe('v1.NetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.GetIamPolicyNetworkFirewallPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetIamPolicyNetworkFirewallPolicyRequest',
+        '.google.cloud.compute.v1.GetIamPolicyNetworkFirewallPolicyRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'GetIamPolicyNetworkFirewallPolicyRequest',
+        '.google.cloud.compute.v1.GetIamPolicyNetworkFirewallPolicyRequest',
         ['resource']
       );
       request.resource = defaultValue2;
@@ -1263,12 +1263,12 @@ describe('v1.NetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.GetIamPolicyNetworkFirewallPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetIamPolicyNetworkFirewallPolicyRequest',
+        '.google.cloud.compute.v1.GetIamPolicyNetworkFirewallPolicyRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'GetIamPolicyNetworkFirewallPolicyRequest',
+        '.google.cloud.compute.v1.GetIamPolicyNetworkFirewallPolicyRequest',
         ['resource']
       );
       request.resource = defaultValue2;
@@ -1300,12 +1300,12 @@ describe('v1.NetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.GetIamPolicyNetworkFirewallPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetIamPolicyNetworkFirewallPolicyRequest',
+        '.google.cloud.compute.v1.GetIamPolicyNetworkFirewallPolicyRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'GetIamPolicyNetworkFirewallPolicyRequest',
+        '.google.cloud.compute.v1.GetIamPolicyNetworkFirewallPolicyRequest',
         ['resource']
       );
       request.resource = defaultValue2;
@@ -1327,12 +1327,12 @@ describe('v1.NetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.GetRuleNetworkFirewallPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetRuleNetworkFirewallPolicyRequest',
+        '.google.cloud.compute.v1.GetRuleNetworkFirewallPolicyRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'GetRuleNetworkFirewallPolicyRequest',
+        '.google.cloud.compute.v1.GetRuleNetworkFirewallPolicyRequest',
         ['firewallPolicy']
       );
       request.firewallPolicy = defaultValue2;
@@ -1364,12 +1364,12 @@ describe('v1.NetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.GetRuleNetworkFirewallPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetRuleNetworkFirewallPolicyRequest',
+        '.google.cloud.compute.v1.GetRuleNetworkFirewallPolicyRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'GetRuleNetworkFirewallPolicyRequest',
+        '.google.cloud.compute.v1.GetRuleNetworkFirewallPolicyRequest',
         ['firewallPolicy']
       );
       request.firewallPolicy = defaultValue2;
@@ -1417,12 +1417,12 @@ describe('v1.NetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.GetRuleNetworkFirewallPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetRuleNetworkFirewallPolicyRequest',
+        '.google.cloud.compute.v1.GetRuleNetworkFirewallPolicyRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'GetRuleNetworkFirewallPolicyRequest',
+        '.google.cloud.compute.v1.GetRuleNetworkFirewallPolicyRequest',
         ['firewallPolicy']
       );
       request.firewallPolicy = defaultValue2;
@@ -1451,12 +1451,12 @@ describe('v1.NetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.GetRuleNetworkFirewallPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetRuleNetworkFirewallPolicyRequest',
+        '.google.cloud.compute.v1.GetRuleNetworkFirewallPolicyRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'GetRuleNetworkFirewallPolicyRequest',
+        '.google.cloud.compute.v1.GetRuleNetworkFirewallPolicyRequest',
         ['firewallPolicy']
       );
       request.firewallPolicy = defaultValue2;
@@ -1478,7 +1478,7 @@ describe('v1.NetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.InsertNetworkFirewallPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'InsertNetworkFirewallPolicyRequest',
+        '.google.cloud.compute.v1.InsertNetworkFirewallPolicyRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -1510,7 +1510,7 @@ describe('v1.NetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.InsertNetworkFirewallPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'InsertNetworkFirewallPolicyRequest',
+        '.google.cloud.compute.v1.InsertNetworkFirewallPolicyRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -1558,7 +1558,7 @@ describe('v1.NetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.InsertNetworkFirewallPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'InsertNetworkFirewallPolicyRequest',
+        '.google.cloud.compute.v1.InsertNetworkFirewallPolicyRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -1587,7 +1587,7 @@ describe('v1.NetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.InsertNetworkFirewallPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'InsertNetworkFirewallPolicyRequest',
+        '.google.cloud.compute.v1.InsertNetworkFirewallPolicyRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -1609,12 +1609,12 @@ describe('v1.NetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.PatchNetworkFirewallPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'PatchNetworkFirewallPolicyRequest',
+        '.google.cloud.compute.v1.PatchNetworkFirewallPolicyRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'PatchNetworkFirewallPolicyRequest',
+        '.google.cloud.compute.v1.PatchNetworkFirewallPolicyRequest',
         ['firewallPolicy']
       );
       request.firewallPolicy = defaultValue2;
@@ -1645,12 +1645,12 @@ describe('v1.NetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.PatchNetworkFirewallPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'PatchNetworkFirewallPolicyRequest',
+        '.google.cloud.compute.v1.PatchNetworkFirewallPolicyRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'PatchNetworkFirewallPolicyRequest',
+        '.google.cloud.compute.v1.PatchNetworkFirewallPolicyRequest',
         ['firewallPolicy']
       );
       request.firewallPolicy = defaultValue2;
@@ -1696,12 +1696,12 @@ describe('v1.NetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.PatchNetworkFirewallPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'PatchNetworkFirewallPolicyRequest',
+        '.google.cloud.compute.v1.PatchNetworkFirewallPolicyRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'PatchNetworkFirewallPolicyRequest',
+        '.google.cloud.compute.v1.PatchNetworkFirewallPolicyRequest',
         ['firewallPolicy']
       );
       request.firewallPolicy = defaultValue2;
@@ -1729,12 +1729,12 @@ describe('v1.NetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.PatchNetworkFirewallPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'PatchNetworkFirewallPolicyRequest',
+        '.google.cloud.compute.v1.PatchNetworkFirewallPolicyRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'PatchNetworkFirewallPolicyRequest',
+        '.google.cloud.compute.v1.PatchNetworkFirewallPolicyRequest',
         ['firewallPolicy']
       );
       request.firewallPolicy = defaultValue2;
@@ -1756,12 +1756,12 @@ describe('v1.NetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.PatchRuleNetworkFirewallPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'PatchRuleNetworkFirewallPolicyRequest',
+        '.google.cloud.compute.v1.PatchRuleNetworkFirewallPolicyRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'PatchRuleNetworkFirewallPolicyRequest',
+        '.google.cloud.compute.v1.PatchRuleNetworkFirewallPolicyRequest',
         ['firewallPolicy']
       );
       request.firewallPolicy = defaultValue2;
@@ -1793,12 +1793,12 @@ describe('v1.NetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.PatchRuleNetworkFirewallPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'PatchRuleNetworkFirewallPolicyRequest',
+        '.google.cloud.compute.v1.PatchRuleNetworkFirewallPolicyRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'PatchRuleNetworkFirewallPolicyRequest',
+        '.google.cloud.compute.v1.PatchRuleNetworkFirewallPolicyRequest',
         ['firewallPolicy']
       );
       request.firewallPolicy = defaultValue2;
@@ -1846,12 +1846,12 @@ describe('v1.NetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.PatchRuleNetworkFirewallPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'PatchRuleNetworkFirewallPolicyRequest',
+        '.google.cloud.compute.v1.PatchRuleNetworkFirewallPolicyRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'PatchRuleNetworkFirewallPolicyRequest',
+        '.google.cloud.compute.v1.PatchRuleNetworkFirewallPolicyRequest',
         ['firewallPolicy']
       );
       request.firewallPolicy = defaultValue2;
@@ -1880,12 +1880,12 @@ describe('v1.NetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.PatchRuleNetworkFirewallPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'PatchRuleNetworkFirewallPolicyRequest',
+        '.google.cloud.compute.v1.PatchRuleNetworkFirewallPolicyRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'PatchRuleNetworkFirewallPolicyRequest',
+        '.google.cloud.compute.v1.PatchRuleNetworkFirewallPolicyRequest',
         ['firewallPolicy']
       );
       request.firewallPolicy = defaultValue2;
@@ -1907,12 +1907,12 @@ describe('v1.NetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.RemoveAssociationNetworkFirewallPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'RemoveAssociationNetworkFirewallPolicyRequest',
+        '.google.cloud.compute.v1.RemoveAssociationNetworkFirewallPolicyRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'RemoveAssociationNetworkFirewallPolicyRequest',
+        '.google.cloud.compute.v1.RemoveAssociationNetworkFirewallPolicyRequest',
         ['firewallPolicy']
       );
       request.firewallPolicy = defaultValue2;
@@ -1944,12 +1944,12 @@ describe('v1.NetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.RemoveAssociationNetworkFirewallPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'RemoveAssociationNetworkFirewallPolicyRequest',
+        '.google.cloud.compute.v1.RemoveAssociationNetworkFirewallPolicyRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'RemoveAssociationNetworkFirewallPolicyRequest',
+        '.google.cloud.compute.v1.RemoveAssociationNetworkFirewallPolicyRequest',
         ['firewallPolicy']
       );
       request.firewallPolicy = defaultValue2;
@@ -1997,12 +1997,12 @@ describe('v1.NetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.RemoveAssociationNetworkFirewallPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'RemoveAssociationNetworkFirewallPolicyRequest',
+        '.google.cloud.compute.v1.RemoveAssociationNetworkFirewallPolicyRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'RemoveAssociationNetworkFirewallPolicyRequest',
+        '.google.cloud.compute.v1.RemoveAssociationNetworkFirewallPolicyRequest',
         ['firewallPolicy']
       );
       request.firewallPolicy = defaultValue2;
@@ -2034,12 +2034,12 @@ describe('v1.NetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.RemoveAssociationNetworkFirewallPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'RemoveAssociationNetworkFirewallPolicyRequest',
+        '.google.cloud.compute.v1.RemoveAssociationNetworkFirewallPolicyRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'RemoveAssociationNetworkFirewallPolicyRequest',
+        '.google.cloud.compute.v1.RemoveAssociationNetworkFirewallPolicyRequest',
         ['firewallPolicy']
       );
       request.firewallPolicy = defaultValue2;
@@ -2061,12 +2061,12 @@ describe('v1.NetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.RemoveRuleNetworkFirewallPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'RemoveRuleNetworkFirewallPolicyRequest',
+        '.google.cloud.compute.v1.RemoveRuleNetworkFirewallPolicyRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'RemoveRuleNetworkFirewallPolicyRequest',
+        '.google.cloud.compute.v1.RemoveRuleNetworkFirewallPolicyRequest',
         ['firewallPolicy']
       );
       request.firewallPolicy = defaultValue2;
@@ -2098,12 +2098,12 @@ describe('v1.NetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.RemoveRuleNetworkFirewallPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'RemoveRuleNetworkFirewallPolicyRequest',
+        '.google.cloud.compute.v1.RemoveRuleNetworkFirewallPolicyRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'RemoveRuleNetworkFirewallPolicyRequest',
+        '.google.cloud.compute.v1.RemoveRuleNetworkFirewallPolicyRequest',
         ['firewallPolicy']
       );
       request.firewallPolicy = defaultValue2;
@@ -2151,12 +2151,12 @@ describe('v1.NetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.RemoveRuleNetworkFirewallPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'RemoveRuleNetworkFirewallPolicyRequest',
+        '.google.cloud.compute.v1.RemoveRuleNetworkFirewallPolicyRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'RemoveRuleNetworkFirewallPolicyRequest',
+        '.google.cloud.compute.v1.RemoveRuleNetworkFirewallPolicyRequest',
         ['firewallPolicy']
       );
       request.firewallPolicy = defaultValue2;
@@ -2188,12 +2188,12 @@ describe('v1.NetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.RemoveRuleNetworkFirewallPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'RemoveRuleNetworkFirewallPolicyRequest',
+        '.google.cloud.compute.v1.RemoveRuleNetworkFirewallPolicyRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'RemoveRuleNetworkFirewallPolicyRequest',
+        '.google.cloud.compute.v1.RemoveRuleNetworkFirewallPolicyRequest',
         ['firewallPolicy']
       );
       request.firewallPolicy = defaultValue2;
@@ -2215,12 +2215,12 @@ describe('v1.NetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.SetIamPolicyNetworkFirewallPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SetIamPolicyNetworkFirewallPolicyRequest',
+        '.google.cloud.compute.v1.SetIamPolicyNetworkFirewallPolicyRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'SetIamPolicyNetworkFirewallPolicyRequest',
+        '.google.cloud.compute.v1.SetIamPolicyNetworkFirewallPolicyRequest',
         ['resource']
       );
       request.resource = defaultValue2;
@@ -2252,12 +2252,12 @@ describe('v1.NetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.SetIamPolicyNetworkFirewallPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SetIamPolicyNetworkFirewallPolicyRequest',
+        '.google.cloud.compute.v1.SetIamPolicyNetworkFirewallPolicyRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'SetIamPolicyNetworkFirewallPolicyRequest',
+        '.google.cloud.compute.v1.SetIamPolicyNetworkFirewallPolicyRequest',
         ['resource']
       );
       request.resource = defaultValue2;
@@ -2305,12 +2305,12 @@ describe('v1.NetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.SetIamPolicyNetworkFirewallPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SetIamPolicyNetworkFirewallPolicyRequest',
+        '.google.cloud.compute.v1.SetIamPolicyNetworkFirewallPolicyRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'SetIamPolicyNetworkFirewallPolicyRequest',
+        '.google.cloud.compute.v1.SetIamPolicyNetworkFirewallPolicyRequest',
         ['resource']
       );
       request.resource = defaultValue2;
@@ -2342,12 +2342,12 @@ describe('v1.NetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.SetIamPolicyNetworkFirewallPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SetIamPolicyNetworkFirewallPolicyRequest',
+        '.google.cloud.compute.v1.SetIamPolicyNetworkFirewallPolicyRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'SetIamPolicyNetworkFirewallPolicyRequest',
+        '.google.cloud.compute.v1.SetIamPolicyNetworkFirewallPolicyRequest',
         ['resource']
       );
       request.resource = defaultValue2;
@@ -2369,12 +2369,12 @@ describe('v1.NetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.TestIamPermissionsNetworkFirewallPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'TestIamPermissionsNetworkFirewallPolicyRequest',
+        '.google.cloud.compute.v1.TestIamPermissionsNetworkFirewallPolicyRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'TestIamPermissionsNetworkFirewallPolicyRequest',
+        '.google.cloud.compute.v1.TestIamPermissionsNetworkFirewallPolicyRequest',
         ['resource']
       );
       request.resource = defaultValue2;
@@ -2407,12 +2407,12 @@ describe('v1.NetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.TestIamPermissionsNetworkFirewallPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'TestIamPermissionsNetworkFirewallPolicyRequest',
+        '.google.cloud.compute.v1.TestIamPermissionsNetworkFirewallPolicyRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'TestIamPermissionsNetworkFirewallPolicyRequest',
+        '.google.cloud.compute.v1.TestIamPermissionsNetworkFirewallPolicyRequest',
         ['resource']
       );
       request.resource = defaultValue2;
@@ -2460,12 +2460,12 @@ describe('v1.NetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.TestIamPermissionsNetworkFirewallPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'TestIamPermissionsNetworkFirewallPolicyRequest',
+        '.google.cloud.compute.v1.TestIamPermissionsNetworkFirewallPolicyRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'TestIamPermissionsNetworkFirewallPolicyRequest',
+        '.google.cloud.compute.v1.TestIamPermissionsNetworkFirewallPolicyRequest',
         ['resource']
       );
       request.resource = defaultValue2;
@@ -2497,12 +2497,12 @@ describe('v1.NetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.TestIamPermissionsNetworkFirewallPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'TestIamPermissionsNetworkFirewallPolicyRequest',
+        '.google.cloud.compute.v1.TestIamPermissionsNetworkFirewallPolicyRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'TestIamPermissionsNetworkFirewallPolicyRequest',
+        '.google.cloud.compute.v1.TestIamPermissionsNetworkFirewallPolicyRequest',
         ['resource']
       );
       request.resource = defaultValue2;
@@ -2524,7 +2524,7 @@ describe('v1.NetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.ListNetworkFirewallPoliciesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListNetworkFirewallPoliciesRequest',
+        '.google.cloud.compute.v1.ListNetworkFirewallPoliciesRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -2563,7 +2563,7 @@ describe('v1.NetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.ListNetworkFirewallPoliciesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListNetworkFirewallPoliciesRequest',
+        '.google.cloud.compute.v1.ListNetworkFirewallPoliciesRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -2617,7 +2617,7 @@ describe('v1.NetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.ListNetworkFirewallPoliciesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListNetworkFirewallPoliciesRequest',
+        '.google.cloud.compute.v1.ListNetworkFirewallPoliciesRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -2645,7 +2645,7 @@ describe('v1.NetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.ListNetworkFirewallPoliciesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListNetworkFirewallPoliciesRequest',
+        '.google.cloud.compute.v1.ListNetworkFirewallPoliciesRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -2706,7 +2706,7 @@ describe('v1.NetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.ListNetworkFirewallPoliciesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListNetworkFirewallPoliciesRequest',
+        '.google.cloud.compute.v1.ListNetworkFirewallPoliciesRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -2758,7 +2758,7 @@ describe('v1.NetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.ListNetworkFirewallPoliciesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListNetworkFirewallPoliciesRequest',
+        '.google.cloud.compute.v1.ListNetworkFirewallPoliciesRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -2807,7 +2807,7 @@ describe('v1.NetworkFirewallPoliciesClient', () => {
         new protos.google.cloud.compute.v1.ListNetworkFirewallPoliciesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListNetworkFirewallPoliciesRequest',
+        '.google.cloud.compute.v1.ListNetworkFirewallPoliciesRequest',
         ['project']
       );
       request.project = defaultValue1;

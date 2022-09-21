@@ -251,12 +251,12 @@ describe('v1.TargetHttpProxiesClient', () => {
         new protos.google.cloud.compute.v1.DeleteTargetHttpProxyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteTargetHttpProxyRequest',
+        '.google.cloud.compute.v1.DeleteTargetHttpProxyRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'DeleteTargetHttpProxyRequest',
+        '.google.cloud.compute.v1.DeleteTargetHttpProxyRequest',
         ['targetHttpProxy']
       );
       request.targetHttpProxy = defaultValue2;
@@ -287,12 +287,12 @@ describe('v1.TargetHttpProxiesClient', () => {
         new protos.google.cloud.compute.v1.DeleteTargetHttpProxyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteTargetHttpProxyRequest',
+        '.google.cloud.compute.v1.DeleteTargetHttpProxyRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'DeleteTargetHttpProxyRequest',
+        '.google.cloud.compute.v1.DeleteTargetHttpProxyRequest',
         ['targetHttpProxy']
       );
       request.targetHttpProxy = defaultValue2;
@@ -339,12 +339,12 @@ describe('v1.TargetHttpProxiesClient', () => {
         new protos.google.cloud.compute.v1.DeleteTargetHttpProxyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteTargetHttpProxyRequest',
+        '.google.cloud.compute.v1.DeleteTargetHttpProxyRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'DeleteTargetHttpProxyRequest',
+        '.google.cloud.compute.v1.DeleteTargetHttpProxyRequest',
         ['targetHttpProxy']
       );
       request.targetHttpProxy = defaultValue2;
@@ -372,12 +372,12 @@ describe('v1.TargetHttpProxiesClient', () => {
         new protos.google.cloud.compute.v1.DeleteTargetHttpProxyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteTargetHttpProxyRequest',
+        '.google.cloud.compute.v1.DeleteTargetHttpProxyRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'DeleteTargetHttpProxyRequest',
+        '.google.cloud.compute.v1.DeleteTargetHttpProxyRequest',
         ['targetHttpProxy']
       );
       request.targetHttpProxy = defaultValue2;
@@ -397,13 +397,15 @@ describe('v1.TargetHttpProxiesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetTargetHttpProxyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetTargetHttpProxyRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetTargetHttpProxyRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetTargetHttpProxyRequest', [
-        'targetHttpProxy',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetTargetHttpProxyRequest',
+        ['targetHttpProxy']
+      );
       request.targetHttpProxy = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&target_http_proxy=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
@@ -430,13 +432,15 @@ describe('v1.TargetHttpProxiesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetTargetHttpProxyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetTargetHttpProxyRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetTargetHttpProxyRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetTargetHttpProxyRequest', [
-        'targetHttpProxy',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetTargetHttpProxyRequest',
+        ['targetHttpProxy']
+      );
       request.targetHttpProxy = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&target_http_proxy=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
@@ -478,13 +482,15 @@ describe('v1.TargetHttpProxiesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetTargetHttpProxyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetTargetHttpProxyRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetTargetHttpProxyRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetTargetHttpProxyRequest', [
-        'targetHttpProxy',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetTargetHttpProxyRequest',
+        ['targetHttpProxy']
+      );
       request.targetHttpProxy = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&target_http_proxy=${defaultValue2}`;
       const expectedError = new Error('expected');
@@ -508,13 +514,15 @@ describe('v1.TargetHttpProxiesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetTargetHttpProxyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetTargetHttpProxyRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetTargetHttpProxyRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetTargetHttpProxyRequest', [
-        'targetHttpProxy',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetTargetHttpProxyRequest',
+        ['targetHttpProxy']
+      );
       request.targetHttpProxy = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -533,7 +541,7 @@ describe('v1.TargetHttpProxiesClient', () => {
         new protos.google.cloud.compute.v1.InsertTargetHttpProxyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'InsertTargetHttpProxyRequest',
+        '.google.cloud.compute.v1.InsertTargetHttpProxyRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -564,7 +572,7 @@ describe('v1.TargetHttpProxiesClient', () => {
         new protos.google.cloud.compute.v1.InsertTargetHttpProxyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'InsertTargetHttpProxyRequest',
+        '.google.cloud.compute.v1.InsertTargetHttpProxyRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -611,7 +619,7 @@ describe('v1.TargetHttpProxiesClient', () => {
         new protos.google.cloud.compute.v1.InsertTargetHttpProxyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'InsertTargetHttpProxyRequest',
+        '.google.cloud.compute.v1.InsertTargetHttpProxyRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -639,7 +647,7 @@ describe('v1.TargetHttpProxiesClient', () => {
         new protos.google.cloud.compute.v1.InsertTargetHttpProxyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'InsertTargetHttpProxyRequest',
+        '.google.cloud.compute.v1.InsertTargetHttpProxyRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -659,13 +667,15 @@ describe('v1.TargetHttpProxiesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchTargetHttpProxyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('PatchTargetHttpProxyRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchTargetHttpProxyRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('PatchTargetHttpProxyRequest', [
-        'targetHttpProxy',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchTargetHttpProxyRequest',
+        ['targetHttpProxy']
+      );
       request.targetHttpProxy = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&target_http_proxy=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
@@ -692,13 +702,15 @@ describe('v1.TargetHttpProxiesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchTargetHttpProxyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('PatchTargetHttpProxyRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchTargetHttpProxyRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('PatchTargetHttpProxyRequest', [
-        'targetHttpProxy',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchTargetHttpProxyRequest',
+        ['targetHttpProxy']
+      );
       request.targetHttpProxy = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&target_http_proxy=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
@@ -740,13 +752,15 @@ describe('v1.TargetHttpProxiesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchTargetHttpProxyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('PatchTargetHttpProxyRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchTargetHttpProxyRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('PatchTargetHttpProxyRequest', [
-        'targetHttpProxy',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchTargetHttpProxyRequest',
+        ['targetHttpProxy']
+      );
       request.targetHttpProxy = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&target_http_proxy=${defaultValue2}`;
       const expectedError = new Error('expected');
@@ -770,13 +784,15 @@ describe('v1.TargetHttpProxiesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchTargetHttpProxyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('PatchTargetHttpProxyRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchTargetHttpProxyRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('PatchTargetHttpProxyRequest', [
-        'targetHttpProxy',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchTargetHttpProxyRequest',
+        ['targetHttpProxy']
+      );
       request.targetHttpProxy = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -795,12 +811,12 @@ describe('v1.TargetHttpProxiesClient', () => {
         new protos.google.cloud.compute.v1.SetUrlMapTargetHttpProxyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SetUrlMapTargetHttpProxyRequest',
+        '.google.cloud.compute.v1.SetUrlMapTargetHttpProxyRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'SetUrlMapTargetHttpProxyRequest',
+        '.google.cloud.compute.v1.SetUrlMapTargetHttpProxyRequest',
         ['targetHttpProxy']
       );
       request.targetHttpProxy = defaultValue2;
@@ -831,12 +847,12 @@ describe('v1.TargetHttpProxiesClient', () => {
         new protos.google.cloud.compute.v1.SetUrlMapTargetHttpProxyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SetUrlMapTargetHttpProxyRequest',
+        '.google.cloud.compute.v1.SetUrlMapTargetHttpProxyRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'SetUrlMapTargetHttpProxyRequest',
+        '.google.cloud.compute.v1.SetUrlMapTargetHttpProxyRequest',
         ['targetHttpProxy']
       );
       request.targetHttpProxy = defaultValue2;
@@ -883,12 +899,12 @@ describe('v1.TargetHttpProxiesClient', () => {
         new protos.google.cloud.compute.v1.SetUrlMapTargetHttpProxyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SetUrlMapTargetHttpProxyRequest',
+        '.google.cloud.compute.v1.SetUrlMapTargetHttpProxyRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'SetUrlMapTargetHttpProxyRequest',
+        '.google.cloud.compute.v1.SetUrlMapTargetHttpProxyRequest',
         ['targetHttpProxy']
       );
       request.targetHttpProxy = defaultValue2;
@@ -916,12 +932,12 @@ describe('v1.TargetHttpProxiesClient', () => {
         new protos.google.cloud.compute.v1.SetUrlMapTargetHttpProxyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SetUrlMapTargetHttpProxyRequest',
+        '.google.cloud.compute.v1.SetUrlMapTargetHttpProxyRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'SetUrlMapTargetHttpProxyRequest',
+        '.google.cloud.compute.v1.SetUrlMapTargetHttpProxyRequest',
         ['targetHttpProxy']
       );
       request.targetHttpProxy = defaultValue2;
@@ -942,7 +958,7 @@ describe('v1.TargetHttpProxiesClient', () => {
         new protos.google.cloud.compute.v1.AggregatedListTargetHttpProxiesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'AggregatedListTargetHttpProxiesRequest',
+        '.google.cloud.compute.v1.AggregatedListTargetHttpProxiesRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -1002,7 +1018,7 @@ describe('v1.TargetHttpProxiesClient', () => {
         new protos.google.cloud.compute.v1.AggregatedListTargetHttpProxiesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'AggregatedListTargetHttpProxiesRequest',
+        '.google.cloud.compute.v1.AggregatedListTargetHttpProxiesRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -1046,7 +1062,7 @@ describe('v1.TargetHttpProxiesClient', () => {
         new protos.google.cloud.compute.v1.ListTargetHttpProxiesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListTargetHttpProxiesRequest',
+        '.google.cloud.compute.v1.ListTargetHttpProxiesRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -1084,7 +1100,7 @@ describe('v1.TargetHttpProxiesClient', () => {
         new protos.google.cloud.compute.v1.ListTargetHttpProxiesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListTargetHttpProxiesRequest',
+        '.google.cloud.compute.v1.ListTargetHttpProxiesRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -1137,7 +1153,7 @@ describe('v1.TargetHttpProxiesClient', () => {
         new protos.google.cloud.compute.v1.ListTargetHttpProxiesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListTargetHttpProxiesRequest',
+        '.google.cloud.compute.v1.ListTargetHttpProxiesRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -1164,7 +1180,7 @@ describe('v1.TargetHttpProxiesClient', () => {
         new protos.google.cloud.compute.v1.ListTargetHttpProxiesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListTargetHttpProxiesRequest',
+        '.google.cloud.compute.v1.ListTargetHttpProxiesRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -1224,7 +1240,7 @@ describe('v1.TargetHttpProxiesClient', () => {
         new protos.google.cloud.compute.v1.ListTargetHttpProxiesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListTargetHttpProxiesRequest',
+        '.google.cloud.compute.v1.ListTargetHttpProxiesRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -1275,7 +1291,7 @@ describe('v1.TargetHttpProxiesClient', () => {
         new protos.google.cloud.compute.v1.ListTargetHttpProxiesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListTargetHttpProxiesRequest',
+        '.google.cloud.compute.v1.ListTargetHttpProxiesRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -1323,7 +1339,7 @@ describe('v1.TargetHttpProxiesClient', () => {
         new protos.google.cloud.compute.v1.ListTargetHttpProxiesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListTargetHttpProxiesRequest',
+        '.google.cloud.compute.v1.ListTargetHttpProxiesRequest',
         ['project']
       );
       request.project = defaultValue1;

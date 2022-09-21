@@ -185,13 +185,15 @@ describe('v1.LicenseCodesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetLicenseCodeRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetLicenseCodeRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetLicenseCodeRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetLicenseCodeRequest', [
-        'licenseCode',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetLicenseCodeRequest',
+        ['licenseCode']
+      );
       request.licenseCode = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&license_code=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
@@ -218,13 +220,15 @@ describe('v1.LicenseCodesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetLicenseCodeRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetLicenseCodeRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetLicenseCodeRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetLicenseCodeRequest', [
-        'licenseCode',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetLicenseCodeRequest',
+        ['licenseCode']
+      );
       request.licenseCode = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&license_code=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
@@ -266,13 +270,15 @@ describe('v1.LicenseCodesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetLicenseCodeRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetLicenseCodeRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetLicenseCodeRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetLicenseCodeRequest', [
-        'licenseCode',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetLicenseCodeRequest',
+        ['licenseCode']
+      );
       request.licenseCode = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&license_code=${defaultValue2}`;
       const expectedError = new Error('expected');
@@ -296,13 +302,15 @@ describe('v1.LicenseCodesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetLicenseCodeRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetLicenseCodeRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetLicenseCodeRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetLicenseCodeRequest', [
-        'licenseCode',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetLicenseCodeRequest',
+        ['licenseCode']
+      );
       request.licenseCode = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -321,12 +329,12 @@ describe('v1.LicenseCodesClient', () => {
         new protos.google.cloud.compute.v1.TestIamPermissionsLicenseCodeRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'TestIamPermissionsLicenseCodeRequest',
+        '.google.cloud.compute.v1.TestIamPermissionsLicenseCodeRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'TestIamPermissionsLicenseCodeRequest',
+        '.google.cloud.compute.v1.TestIamPermissionsLicenseCodeRequest',
         ['resource']
       );
       request.resource = defaultValue2;
@@ -358,12 +366,12 @@ describe('v1.LicenseCodesClient', () => {
         new protos.google.cloud.compute.v1.TestIamPermissionsLicenseCodeRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'TestIamPermissionsLicenseCodeRequest',
+        '.google.cloud.compute.v1.TestIamPermissionsLicenseCodeRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'TestIamPermissionsLicenseCodeRequest',
+        '.google.cloud.compute.v1.TestIamPermissionsLicenseCodeRequest',
         ['resource']
       );
       request.resource = defaultValue2;
@@ -410,12 +418,12 @@ describe('v1.LicenseCodesClient', () => {
         new protos.google.cloud.compute.v1.TestIamPermissionsLicenseCodeRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'TestIamPermissionsLicenseCodeRequest',
+        '.google.cloud.compute.v1.TestIamPermissionsLicenseCodeRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'TestIamPermissionsLicenseCodeRequest',
+        '.google.cloud.compute.v1.TestIamPermissionsLicenseCodeRequest',
         ['resource']
       );
       request.resource = defaultValue2;
@@ -446,12 +454,12 @@ describe('v1.LicenseCodesClient', () => {
         new protos.google.cloud.compute.v1.TestIamPermissionsLicenseCodeRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'TestIamPermissionsLicenseCodeRequest',
+        '.google.cloud.compute.v1.TestIamPermissionsLicenseCodeRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'TestIamPermissionsLicenseCodeRequest',
+        '.google.cloud.compute.v1.TestIamPermissionsLicenseCodeRequest',
         ['resource']
       );
       request.resource = defaultValue2;

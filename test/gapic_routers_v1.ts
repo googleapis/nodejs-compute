@@ -248,17 +248,20 @@ describe('v1.RoutersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteRouterRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteRouterRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteRouterRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('DeleteRouterRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteRouterRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('DeleteRouterRequest', [
-        'router',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteRouterRequest',
+        ['router']
+      );
       request.router = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&router=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -286,17 +289,20 @@ describe('v1.RoutersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteRouterRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteRouterRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteRouterRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('DeleteRouterRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteRouterRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('DeleteRouterRequest', [
-        'router',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteRouterRequest',
+        ['router']
+      );
       request.router = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&router=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -340,17 +346,20 @@ describe('v1.RoutersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteRouterRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteRouterRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteRouterRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('DeleteRouterRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteRouterRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('DeleteRouterRequest', [
-        'router',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteRouterRequest',
+        ['router']
+      );
       request.router = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&router=${defaultValue3}`;
       const expectedError = new Error('expected');
@@ -375,17 +384,20 @@ describe('v1.RoutersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteRouterRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteRouterRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteRouterRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('DeleteRouterRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteRouterRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('DeleteRouterRequest', [
-        'router',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteRouterRequest',
+        ['router']
+      );
       request.router = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -403,13 +415,20 @@ describe('v1.RoutersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetRouterRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetRouterRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetRouterRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetRouterRequest', ['region']);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetRouterRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('GetRouterRequest', ['router']);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetRouterRequest',
+        ['router']
+      );
       request.router = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&router=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -436,13 +455,20 @@ describe('v1.RoutersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetRouterRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetRouterRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetRouterRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetRouterRequest', ['region']);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetRouterRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('GetRouterRequest', ['router']);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetRouterRequest',
+        ['router']
+      );
       request.router = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&router=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -484,13 +510,20 @@ describe('v1.RoutersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetRouterRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetRouterRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetRouterRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetRouterRequest', ['region']);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetRouterRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('GetRouterRequest', ['router']);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetRouterRequest',
+        ['router']
+      );
       request.router = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&router=${defaultValue3}`;
       const expectedError = new Error('expected');
@@ -514,13 +547,20 @@ describe('v1.RoutersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetRouterRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetRouterRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetRouterRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetRouterRequest', ['region']);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetRouterRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('GetRouterRequest', ['router']);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetRouterRequest',
+        ['router']
+      );
       request.router = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -539,17 +579,17 @@ describe('v1.RoutersClient', () => {
         new protos.google.cloud.compute.v1.GetRouterStatusRouterRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetRouterStatusRouterRequest',
+        '.google.cloud.compute.v1.GetRouterStatusRouterRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'GetRouterStatusRouterRequest',
+        '.google.cloud.compute.v1.GetRouterStatusRouterRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'GetRouterStatusRouterRequest',
+        '.google.cloud.compute.v1.GetRouterStatusRouterRequest',
         ['router']
       );
       request.router = defaultValue3;
@@ -580,17 +620,17 @@ describe('v1.RoutersClient', () => {
         new protos.google.cloud.compute.v1.GetRouterStatusRouterRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetRouterStatusRouterRequest',
+        '.google.cloud.compute.v1.GetRouterStatusRouterRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'GetRouterStatusRouterRequest',
+        '.google.cloud.compute.v1.GetRouterStatusRouterRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'GetRouterStatusRouterRequest',
+        '.google.cloud.compute.v1.GetRouterStatusRouterRequest',
         ['router']
       );
       request.router = defaultValue3;
@@ -637,17 +677,17 @@ describe('v1.RoutersClient', () => {
         new protos.google.cloud.compute.v1.GetRouterStatusRouterRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetRouterStatusRouterRequest',
+        '.google.cloud.compute.v1.GetRouterStatusRouterRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'GetRouterStatusRouterRequest',
+        '.google.cloud.compute.v1.GetRouterStatusRouterRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'GetRouterStatusRouterRequest',
+        '.google.cloud.compute.v1.GetRouterStatusRouterRequest',
         ['router']
       );
       request.router = defaultValue3;
@@ -678,17 +718,17 @@ describe('v1.RoutersClient', () => {
         new protos.google.cloud.compute.v1.GetRouterStatusRouterRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetRouterStatusRouterRequest',
+        '.google.cloud.compute.v1.GetRouterStatusRouterRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'GetRouterStatusRouterRequest',
+        '.google.cloud.compute.v1.GetRouterStatusRouterRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'GetRouterStatusRouterRequest',
+        '.google.cloud.compute.v1.GetRouterStatusRouterRequest',
         ['router']
       );
       request.router = defaultValue3;
@@ -708,13 +748,15 @@ describe('v1.RoutersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertRouterRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('InsertRouterRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.InsertRouterRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('InsertRouterRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.InsertRouterRequest',
+        ['region']
+      );
       request.region = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
@@ -742,13 +784,15 @@ describe('v1.RoutersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertRouterRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('InsertRouterRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.InsertRouterRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('InsertRouterRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.InsertRouterRequest',
+        ['region']
+      );
       request.region = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
@@ -792,13 +836,15 @@ describe('v1.RoutersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertRouterRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('InsertRouterRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.InsertRouterRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('InsertRouterRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.InsertRouterRequest',
+        ['region']
+      );
       request.region = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}`;
       const expectedError = new Error('expected');
@@ -823,13 +869,15 @@ describe('v1.RoutersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertRouterRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('InsertRouterRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.InsertRouterRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('InsertRouterRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.InsertRouterRequest',
+        ['region']
+      );
       request.region = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -847,17 +895,20 @@ describe('v1.RoutersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchRouterRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('PatchRouterRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchRouterRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('PatchRouterRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchRouterRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('PatchRouterRequest', [
-        'router',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchRouterRequest',
+        ['router']
+      );
       request.router = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&router=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -884,17 +935,20 @@ describe('v1.RoutersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchRouterRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('PatchRouterRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchRouterRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('PatchRouterRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchRouterRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('PatchRouterRequest', [
-        'router',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchRouterRequest',
+        ['router']
+      );
       request.router = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&router=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -936,17 +990,20 @@ describe('v1.RoutersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchRouterRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('PatchRouterRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchRouterRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('PatchRouterRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchRouterRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('PatchRouterRequest', [
-        'router',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchRouterRequest',
+        ['router']
+      );
       request.router = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&router=${defaultValue3}`;
       const expectedError = new Error('expected');
@@ -970,17 +1027,20 @@ describe('v1.RoutersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchRouterRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('PatchRouterRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchRouterRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('PatchRouterRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchRouterRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('PatchRouterRequest', [
-        'router',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchRouterRequest',
+        ['router']
+      );
       request.router = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -998,17 +1058,20 @@ describe('v1.RoutersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PreviewRouterRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('PreviewRouterRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PreviewRouterRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('PreviewRouterRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PreviewRouterRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('PreviewRouterRequest', [
-        'router',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PreviewRouterRequest',
+        ['router']
+      );
       request.router = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&router=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -1036,17 +1099,20 @@ describe('v1.RoutersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PreviewRouterRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('PreviewRouterRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PreviewRouterRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('PreviewRouterRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PreviewRouterRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('PreviewRouterRequest', [
-        'router',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PreviewRouterRequest',
+        ['router']
+      );
       request.router = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&router=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -1090,17 +1156,20 @@ describe('v1.RoutersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PreviewRouterRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('PreviewRouterRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PreviewRouterRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('PreviewRouterRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PreviewRouterRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('PreviewRouterRequest', [
-        'router',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PreviewRouterRequest',
+        ['router']
+      );
       request.router = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&router=${defaultValue3}`;
       const expectedError = new Error('expected');
@@ -1125,17 +1194,20 @@ describe('v1.RoutersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PreviewRouterRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('PreviewRouterRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PreviewRouterRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('PreviewRouterRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PreviewRouterRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('PreviewRouterRequest', [
-        'router',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PreviewRouterRequest',
+        ['router']
+      );
       request.router = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1153,17 +1225,20 @@ describe('v1.RoutersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.UpdateRouterRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('UpdateRouterRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.UpdateRouterRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('UpdateRouterRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.UpdateRouterRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('UpdateRouterRequest', [
-        'router',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.UpdateRouterRequest',
+        ['router']
+      );
       request.router = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&router=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -1191,17 +1266,20 @@ describe('v1.RoutersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.UpdateRouterRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('UpdateRouterRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.UpdateRouterRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('UpdateRouterRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.UpdateRouterRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('UpdateRouterRequest', [
-        'router',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.UpdateRouterRequest',
+        ['router']
+      );
       request.router = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&router=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -1245,17 +1323,20 @@ describe('v1.RoutersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.UpdateRouterRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('UpdateRouterRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.UpdateRouterRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('UpdateRouterRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.UpdateRouterRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('UpdateRouterRequest', [
-        'router',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.UpdateRouterRequest',
+        ['router']
+      );
       request.router = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&router=${defaultValue3}`;
       const expectedError = new Error('expected');
@@ -1280,17 +1361,20 @@ describe('v1.RoutersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.UpdateRouterRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('UpdateRouterRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.UpdateRouterRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('UpdateRouterRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.UpdateRouterRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('UpdateRouterRequest', [
-        'router',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.UpdateRouterRequest',
+        ['router']
+      );
       request.router = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1309,7 +1393,7 @@ describe('v1.RoutersClient', () => {
         new protos.google.cloud.compute.v1.AggregatedListRoutersRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'AggregatedListRoutersRequest',
+        '.google.cloud.compute.v1.AggregatedListRoutersRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -1369,7 +1453,7 @@ describe('v1.RoutersClient', () => {
         new protos.google.cloud.compute.v1.AggregatedListRoutersRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'AggregatedListRoutersRequest',
+        '.google.cloud.compute.v1.AggregatedListRoutersRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -1413,17 +1497,17 @@ describe('v1.RoutersClient', () => {
         new protos.google.cloud.compute.v1.GetNatMappingInfoRoutersRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetNatMappingInfoRoutersRequest',
+        '.google.cloud.compute.v1.GetNatMappingInfoRoutersRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'GetNatMappingInfoRoutersRequest',
+        '.google.cloud.compute.v1.GetNatMappingInfoRoutersRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'GetNatMappingInfoRoutersRequest',
+        '.google.cloud.compute.v1.GetNatMappingInfoRoutersRequest',
         ['router']
       );
       request.router = defaultValue3;
@@ -1462,17 +1546,17 @@ describe('v1.RoutersClient', () => {
         new protos.google.cloud.compute.v1.GetNatMappingInfoRoutersRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetNatMappingInfoRoutersRequest',
+        '.google.cloud.compute.v1.GetNatMappingInfoRoutersRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'GetNatMappingInfoRoutersRequest',
+        '.google.cloud.compute.v1.GetNatMappingInfoRoutersRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'GetNatMappingInfoRoutersRequest',
+        '.google.cloud.compute.v1.GetNatMappingInfoRoutersRequest',
         ['router']
       );
       request.router = defaultValue3;
@@ -1529,17 +1613,17 @@ describe('v1.RoutersClient', () => {
         new protos.google.cloud.compute.v1.GetNatMappingInfoRoutersRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetNatMappingInfoRoutersRequest',
+        '.google.cloud.compute.v1.GetNatMappingInfoRoutersRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'GetNatMappingInfoRoutersRequest',
+        '.google.cloud.compute.v1.GetNatMappingInfoRoutersRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'GetNatMappingInfoRoutersRequest',
+        '.google.cloud.compute.v1.GetNatMappingInfoRoutersRequest',
         ['router']
       );
       request.router = defaultValue3;
@@ -1570,17 +1654,17 @@ describe('v1.RoutersClient', () => {
         new protos.google.cloud.compute.v1.GetNatMappingInfoRoutersRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetNatMappingInfoRoutersRequest',
+        '.google.cloud.compute.v1.GetNatMappingInfoRoutersRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'GetNatMappingInfoRoutersRequest',
+        '.google.cloud.compute.v1.GetNatMappingInfoRoutersRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'GetNatMappingInfoRoutersRequest',
+        '.google.cloud.compute.v1.GetNatMappingInfoRoutersRequest',
         ['router']
       );
       request.router = defaultValue3;
@@ -1641,17 +1725,17 @@ describe('v1.RoutersClient', () => {
         new protos.google.cloud.compute.v1.GetNatMappingInfoRoutersRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetNatMappingInfoRoutersRequest',
+        '.google.cloud.compute.v1.GetNatMappingInfoRoutersRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'GetNatMappingInfoRoutersRequest',
+        '.google.cloud.compute.v1.GetNatMappingInfoRoutersRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'GetNatMappingInfoRoutersRequest',
+        '.google.cloud.compute.v1.GetNatMappingInfoRoutersRequest',
         ['router']
       );
       request.router = defaultValue3;
@@ -1701,17 +1785,17 @@ describe('v1.RoutersClient', () => {
         new protos.google.cloud.compute.v1.GetNatMappingInfoRoutersRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetNatMappingInfoRoutersRequest',
+        '.google.cloud.compute.v1.GetNatMappingInfoRoutersRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'GetNatMappingInfoRoutersRequest',
+        '.google.cloud.compute.v1.GetNatMappingInfoRoutersRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'GetNatMappingInfoRoutersRequest',
+        '.google.cloud.compute.v1.GetNatMappingInfoRoutersRequest',
         ['router']
       );
       request.router = defaultValue3;
@@ -1761,17 +1845,17 @@ describe('v1.RoutersClient', () => {
         new protos.google.cloud.compute.v1.GetNatMappingInfoRoutersRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetNatMappingInfoRoutersRequest',
+        '.google.cloud.compute.v1.GetNatMappingInfoRoutersRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'GetNatMappingInfoRoutersRequest',
+        '.google.cloud.compute.v1.GetNatMappingInfoRoutersRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'GetNatMappingInfoRoutersRequest',
+        '.google.cloud.compute.v1.GetNatMappingInfoRoutersRequest',
         ['router']
       );
       request.router = defaultValue3;
@@ -1813,13 +1897,15 @@ describe('v1.RoutersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListRoutersRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListRoutersRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListRoutersRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ListRoutersRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListRoutersRequest',
+        ['region']
+      );
       request.region = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}`;
       const expectedResponse = [
@@ -1848,13 +1934,15 @@ describe('v1.RoutersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListRoutersRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListRoutersRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListRoutersRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ListRoutersRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListRoutersRequest',
+        ['region']
+      );
       request.region = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}`;
       const expectedResponse = [
@@ -1898,13 +1986,15 @@ describe('v1.RoutersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListRoutersRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListRoutersRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListRoutersRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ListRoutersRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListRoutersRequest',
+        ['region']
+      );
       request.region = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}`;
       const expectedError = new Error('expected');
@@ -1928,13 +2018,15 @@ describe('v1.RoutersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListRoutersRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListRoutersRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListRoutersRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ListRoutersRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListRoutersRequest',
+        ['region']
+      );
       request.region = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}`;
       const expectedResponse = [
@@ -1982,13 +2074,15 @@ describe('v1.RoutersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListRoutersRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListRoutersRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListRoutersRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ListRoutersRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListRoutersRequest',
+        ['region']
+      );
       request.region = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}`;
       const expectedError = new Error('expected');
@@ -2033,13 +2127,15 @@ describe('v1.RoutersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListRoutersRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListRoutersRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListRoutersRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ListRoutersRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListRoutersRequest',
+        ['region']
+      );
       request.region = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}`;
       const expectedResponse = [
@@ -2078,13 +2174,15 @@ describe('v1.RoutersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListRoutersRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListRoutersRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListRoutersRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ListRoutersRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListRoutersRequest',
+        ['region']
+      );
       request.region = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}`;
       const expectedError = new Error('expected');

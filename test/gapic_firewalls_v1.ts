@@ -248,13 +248,15 @@ describe('v1.FirewallsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteFirewallRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteFirewallRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteFirewallRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('DeleteFirewallRequest', [
-        'firewall',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteFirewallRequest',
+        ['firewall']
+      );
       request.firewall = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&firewall=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
@@ -282,13 +284,15 @@ describe('v1.FirewallsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteFirewallRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteFirewallRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteFirewallRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('DeleteFirewallRequest', [
-        'firewall',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteFirewallRequest',
+        ['firewall']
+      );
       request.firewall = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&firewall=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
@@ -332,13 +336,15 @@ describe('v1.FirewallsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteFirewallRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteFirewallRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteFirewallRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('DeleteFirewallRequest', [
-        'firewall',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteFirewallRequest',
+        ['firewall']
+      );
       request.firewall = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&firewall=${defaultValue2}`;
       const expectedError = new Error('expected');
@@ -363,13 +369,15 @@ describe('v1.FirewallsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteFirewallRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteFirewallRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteFirewallRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('DeleteFirewallRequest', [
-        'firewall',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteFirewallRequest',
+        ['firewall']
+      );
       request.firewall = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -387,13 +395,15 @@ describe('v1.FirewallsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetFirewallRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetFirewallRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetFirewallRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetFirewallRequest', [
-        'firewall',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetFirewallRequest',
+        ['firewall']
+      );
       request.firewall = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&firewall=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
@@ -420,13 +430,15 @@ describe('v1.FirewallsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetFirewallRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetFirewallRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetFirewallRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetFirewallRequest', [
-        'firewall',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetFirewallRequest',
+        ['firewall']
+      );
       request.firewall = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&firewall=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
@@ -468,13 +480,15 @@ describe('v1.FirewallsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetFirewallRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetFirewallRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetFirewallRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetFirewallRequest', [
-        'firewall',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetFirewallRequest',
+        ['firewall']
+      );
       request.firewall = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&firewall=${defaultValue2}`;
       const expectedError = new Error('expected');
@@ -498,13 +512,15 @@ describe('v1.FirewallsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetFirewallRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetFirewallRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetFirewallRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetFirewallRequest', [
-        'firewall',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetFirewallRequest',
+        ['firewall']
+      );
       request.firewall = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -522,9 +538,10 @@ describe('v1.FirewallsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertFirewallRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('InsertFirewallRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.InsertFirewallRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -552,9 +569,10 @@ describe('v1.FirewallsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertFirewallRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('InsertFirewallRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.InsertFirewallRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -598,9 +616,10 @@ describe('v1.FirewallsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertFirewallRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('InsertFirewallRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.InsertFirewallRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -625,9 +644,10 @@ describe('v1.FirewallsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertFirewallRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('InsertFirewallRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.InsertFirewallRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -645,13 +665,15 @@ describe('v1.FirewallsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchFirewallRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('PatchFirewallRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchFirewallRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('PatchFirewallRequest', [
-        'firewall',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchFirewallRequest',
+        ['firewall']
+      );
       request.firewall = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&firewall=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
@@ -678,13 +700,15 @@ describe('v1.FirewallsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchFirewallRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('PatchFirewallRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchFirewallRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('PatchFirewallRequest', [
-        'firewall',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchFirewallRequest',
+        ['firewall']
+      );
       request.firewall = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&firewall=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
@@ -726,13 +750,15 @@ describe('v1.FirewallsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchFirewallRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('PatchFirewallRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchFirewallRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('PatchFirewallRequest', [
-        'firewall',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchFirewallRequest',
+        ['firewall']
+      );
       request.firewall = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&firewall=${defaultValue2}`;
       const expectedError = new Error('expected');
@@ -756,13 +782,15 @@ describe('v1.FirewallsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchFirewallRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('PatchFirewallRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchFirewallRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('PatchFirewallRequest', [
-        'firewall',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchFirewallRequest',
+        ['firewall']
+      );
       request.firewall = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -780,13 +808,15 @@ describe('v1.FirewallsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.UpdateFirewallRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('UpdateFirewallRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.UpdateFirewallRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('UpdateFirewallRequest', [
-        'firewall',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.UpdateFirewallRequest',
+        ['firewall']
+      );
       request.firewall = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&firewall=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
@@ -814,13 +844,15 @@ describe('v1.FirewallsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.UpdateFirewallRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('UpdateFirewallRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.UpdateFirewallRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('UpdateFirewallRequest', [
-        'firewall',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.UpdateFirewallRequest',
+        ['firewall']
+      );
       request.firewall = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&firewall=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
@@ -864,13 +896,15 @@ describe('v1.FirewallsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.UpdateFirewallRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('UpdateFirewallRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.UpdateFirewallRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('UpdateFirewallRequest', [
-        'firewall',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.UpdateFirewallRequest',
+        ['firewall']
+      );
       request.firewall = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&firewall=${defaultValue2}`;
       const expectedError = new Error('expected');
@@ -895,13 +929,15 @@ describe('v1.FirewallsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.UpdateFirewallRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('UpdateFirewallRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.UpdateFirewallRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('UpdateFirewallRequest', [
-        'firewall',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.UpdateFirewallRequest',
+        ['firewall']
+      );
       request.firewall = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -919,9 +955,10 @@ describe('v1.FirewallsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListFirewallsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListFirewallsRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListFirewallsRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedResponse = [
@@ -950,9 +987,10 @@ describe('v1.FirewallsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListFirewallsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListFirewallsRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListFirewallsRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedResponse = [
@@ -996,9 +1034,10 @@ describe('v1.FirewallsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListFirewallsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListFirewallsRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListFirewallsRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1022,9 +1061,10 @@ describe('v1.FirewallsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListFirewallsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListFirewallsRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListFirewallsRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedResponse = [
@@ -1075,9 +1115,10 @@ describe('v1.FirewallsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListFirewallsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListFirewallsRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListFirewallsRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1125,9 +1166,10 @@ describe('v1.FirewallsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListFirewallsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListFirewallsRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListFirewallsRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedResponse = [
@@ -1166,9 +1208,10 @@ describe('v1.FirewallsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListFirewallsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListFirewallsRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListFirewallsRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedError = new Error('expected');

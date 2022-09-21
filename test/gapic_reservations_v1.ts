@@ -248,17 +248,20 @@ describe('v1.ReservationsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteReservationRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteReservationRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteReservationRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('DeleteReservationRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteReservationRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('DeleteReservationRequest', [
-        'reservation',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteReservationRequest',
+        ['reservation']
+      );
       request.reservation = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&reservation=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -286,17 +289,20 @@ describe('v1.ReservationsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteReservationRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteReservationRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteReservationRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('DeleteReservationRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteReservationRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('DeleteReservationRequest', [
-        'reservation',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteReservationRequest',
+        ['reservation']
+      );
       request.reservation = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&reservation=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -340,17 +346,20 @@ describe('v1.ReservationsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteReservationRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteReservationRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteReservationRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('DeleteReservationRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteReservationRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('DeleteReservationRequest', [
-        'reservation',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteReservationRequest',
+        ['reservation']
+      );
       request.reservation = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&reservation=${defaultValue3}`;
       const expectedError = new Error('expected');
@@ -375,17 +384,20 @@ describe('v1.ReservationsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteReservationRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteReservationRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteReservationRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('DeleteReservationRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteReservationRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('DeleteReservationRequest', [
-        'reservation',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteReservationRequest',
+        ['reservation']
+      );
       request.reservation = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -403,17 +415,20 @@ describe('v1.ReservationsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetReservationRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetReservationRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetReservationRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetReservationRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetReservationRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('GetReservationRequest', [
-        'reservation',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetReservationRequest',
+        ['reservation']
+      );
       request.reservation = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&reservation=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -440,17 +455,20 @@ describe('v1.ReservationsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetReservationRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetReservationRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetReservationRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetReservationRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetReservationRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('GetReservationRequest', [
-        'reservation',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetReservationRequest',
+        ['reservation']
+      );
       request.reservation = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&reservation=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -492,17 +510,20 @@ describe('v1.ReservationsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetReservationRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetReservationRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetReservationRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetReservationRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetReservationRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('GetReservationRequest', [
-        'reservation',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetReservationRequest',
+        ['reservation']
+      );
       request.reservation = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&reservation=${defaultValue3}`;
       const expectedError = new Error('expected');
@@ -526,17 +547,20 @@ describe('v1.ReservationsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetReservationRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetReservationRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetReservationRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetReservationRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetReservationRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('GetReservationRequest', [
-        'reservation',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetReservationRequest',
+        ['reservation']
+      );
       request.reservation = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -555,17 +579,17 @@ describe('v1.ReservationsClient', () => {
         new protos.google.cloud.compute.v1.GetIamPolicyReservationRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetIamPolicyReservationRequest',
+        '.google.cloud.compute.v1.GetIamPolicyReservationRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'GetIamPolicyReservationRequest',
+        '.google.cloud.compute.v1.GetIamPolicyReservationRequest',
         ['zone']
       );
       request.zone = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'GetIamPolicyReservationRequest',
+        '.google.cloud.compute.v1.GetIamPolicyReservationRequest',
         ['resource']
       );
       request.resource = defaultValue3;
@@ -596,17 +620,17 @@ describe('v1.ReservationsClient', () => {
         new protos.google.cloud.compute.v1.GetIamPolicyReservationRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetIamPolicyReservationRequest',
+        '.google.cloud.compute.v1.GetIamPolicyReservationRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'GetIamPolicyReservationRequest',
+        '.google.cloud.compute.v1.GetIamPolicyReservationRequest',
         ['zone']
       );
       request.zone = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'GetIamPolicyReservationRequest',
+        '.google.cloud.compute.v1.GetIamPolicyReservationRequest',
         ['resource']
       );
       request.resource = defaultValue3;
@@ -653,17 +677,17 @@ describe('v1.ReservationsClient', () => {
         new protos.google.cloud.compute.v1.GetIamPolicyReservationRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetIamPolicyReservationRequest',
+        '.google.cloud.compute.v1.GetIamPolicyReservationRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'GetIamPolicyReservationRequest',
+        '.google.cloud.compute.v1.GetIamPolicyReservationRequest',
         ['zone']
       );
       request.zone = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'GetIamPolicyReservationRequest',
+        '.google.cloud.compute.v1.GetIamPolicyReservationRequest',
         ['resource']
       );
       request.resource = defaultValue3;
@@ -694,17 +718,17 @@ describe('v1.ReservationsClient', () => {
         new protos.google.cloud.compute.v1.GetIamPolicyReservationRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetIamPolicyReservationRequest',
+        '.google.cloud.compute.v1.GetIamPolicyReservationRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'GetIamPolicyReservationRequest',
+        '.google.cloud.compute.v1.GetIamPolicyReservationRequest',
         ['zone']
       );
       request.zone = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'GetIamPolicyReservationRequest',
+        '.google.cloud.compute.v1.GetIamPolicyReservationRequest',
         ['resource']
       );
       request.resource = defaultValue3;
@@ -724,13 +748,15 @@ describe('v1.ReservationsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertReservationRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('InsertReservationRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.InsertReservationRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('InsertReservationRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.InsertReservationRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
@@ -758,13 +784,15 @@ describe('v1.ReservationsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertReservationRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('InsertReservationRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.InsertReservationRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('InsertReservationRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.InsertReservationRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
@@ -808,13 +836,15 @@ describe('v1.ReservationsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertReservationRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('InsertReservationRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.InsertReservationRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('InsertReservationRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.InsertReservationRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}`;
       const expectedError = new Error('expected');
@@ -839,13 +869,15 @@ describe('v1.ReservationsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertReservationRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('InsertReservationRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.InsertReservationRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('InsertReservationRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.InsertReservationRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -863,17 +895,20 @@ describe('v1.ReservationsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ResizeReservationRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ResizeReservationRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ResizeReservationRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ResizeReservationRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ResizeReservationRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('ResizeReservationRequest', [
-        'reservation',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ResizeReservationRequest',
+        ['reservation']
+      );
       request.reservation = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&reservation=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -901,17 +936,20 @@ describe('v1.ReservationsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ResizeReservationRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ResizeReservationRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ResizeReservationRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ResizeReservationRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ResizeReservationRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('ResizeReservationRequest', [
-        'reservation',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ResizeReservationRequest',
+        ['reservation']
+      );
       request.reservation = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&reservation=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -955,17 +993,20 @@ describe('v1.ReservationsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ResizeReservationRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ResizeReservationRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ResizeReservationRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ResizeReservationRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ResizeReservationRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('ResizeReservationRequest', [
-        'reservation',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ResizeReservationRequest',
+        ['reservation']
+      );
       request.reservation = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&reservation=${defaultValue3}`;
       const expectedError = new Error('expected');
@@ -990,17 +1031,20 @@ describe('v1.ReservationsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ResizeReservationRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ResizeReservationRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ResizeReservationRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ResizeReservationRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ResizeReservationRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('ResizeReservationRequest', [
-        'reservation',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ResizeReservationRequest',
+        ['reservation']
+      );
       request.reservation = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1019,17 +1063,17 @@ describe('v1.ReservationsClient', () => {
         new protos.google.cloud.compute.v1.SetIamPolicyReservationRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SetIamPolicyReservationRequest',
+        '.google.cloud.compute.v1.SetIamPolicyReservationRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'SetIamPolicyReservationRequest',
+        '.google.cloud.compute.v1.SetIamPolicyReservationRequest',
         ['zone']
       );
       request.zone = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'SetIamPolicyReservationRequest',
+        '.google.cloud.compute.v1.SetIamPolicyReservationRequest',
         ['resource']
       );
       request.resource = defaultValue3;
@@ -1060,17 +1104,17 @@ describe('v1.ReservationsClient', () => {
         new protos.google.cloud.compute.v1.SetIamPolicyReservationRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SetIamPolicyReservationRequest',
+        '.google.cloud.compute.v1.SetIamPolicyReservationRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'SetIamPolicyReservationRequest',
+        '.google.cloud.compute.v1.SetIamPolicyReservationRequest',
         ['zone']
       );
       request.zone = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'SetIamPolicyReservationRequest',
+        '.google.cloud.compute.v1.SetIamPolicyReservationRequest',
         ['resource']
       );
       request.resource = defaultValue3;
@@ -1117,17 +1161,17 @@ describe('v1.ReservationsClient', () => {
         new protos.google.cloud.compute.v1.SetIamPolicyReservationRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SetIamPolicyReservationRequest',
+        '.google.cloud.compute.v1.SetIamPolicyReservationRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'SetIamPolicyReservationRequest',
+        '.google.cloud.compute.v1.SetIamPolicyReservationRequest',
         ['zone']
       );
       request.zone = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'SetIamPolicyReservationRequest',
+        '.google.cloud.compute.v1.SetIamPolicyReservationRequest',
         ['resource']
       );
       request.resource = defaultValue3;
@@ -1158,17 +1202,17 @@ describe('v1.ReservationsClient', () => {
         new protos.google.cloud.compute.v1.SetIamPolicyReservationRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SetIamPolicyReservationRequest',
+        '.google.cloud.compute.v1.SetIamPolicyReservationRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'SetIamPolicyReservationRequest',
+        '.google.cloud.compute.v1.SetIamPolicyReservationRequest',
         ['zone']
       );
       request.zone = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'SetIamPolicyReservationRequest',
+        '.google.cloud.compute.v1.SetIamPolicyReservationRequest',
         ['resource']
       );
       request.resource = defaultValue3;
@@ -1189,17 +1233,17 @@ describe('v1.ReservationsClient', () => {
         new protos.google.cloud.compute.v1.TestIamPermissionsReservationRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'TestIamPermissionsReservationRequest',
+        '.google.cloud.compute.v1.TestIamPermissionsReservationRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'TestIamPermissionsReservationRequest',
+        '.google.cloud.compute.v1.TestIamPermissionsReservationRequest',
         ['zone']
       );
       request.zone = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'TestIamPermissionsReservationRequest',
+        '.google.cloud.compute.v1.TestIamPermissionsReservationRequest',
         ['resource']
       );
       request.resource = defaultValue3;
@@ -1231,17 +1275,17 @@ describe('v1.ReservationsClient', () => {
         new protos.google.cloud.compute.v1.TestIamPermissionsReservationRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'TestIamPermissionsReservationRequest',
+        '.google.cloud.compute.v1.TestIamPermissionsReservationRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'TestIamPermissionsReservationRequest',
+        '.google.cloud.compute.v1.TestIamPermissionsReservationRequest',
         ['zone']
       );
       request.zone = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'TestIamPermissionsReservationRequest',
+        '.google.cloud.compute.v1.TestIamPermissionsReservationRequest',
         ['resource']
       );
       request.resource = defaultValue3;
@@ -1288,17 +1332,17 @@ describe('v1.ReservationsClient', () => {
         new protos.google.cloud.compute.v1.TestIamPermissionsReservationRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'TestIamPermissionsReservationRequest',
+        '.google.cloud.compute.v1.TestIamPermissionsReservationRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'TestIamPermissionsReservationRequest',
+        '.google.cloud.compute.v1.TestIamPermissionsReservationRequest',
         ['zone']
       );
       request.zone = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'TestIamPermissionsReservationRequest',
+        '.google.cloud.compute.v1.TestIamPermissionsReservationRequest',
         ['resource']
       );
       request.resource = defaultValue3;
@@ -1329,17 +1373,17 @@ describe('v1.ReservationsClient', () => {
         new protos.google.cloud.compute.v1.TestIamPermissionsReservationRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'TestIamPermissionsReservationRequest',
+        '.google.cloud.compute.v1.TestIamPermissionsReservationRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'TestIamPermissionsReservationRequest',
+        '.google.cloud.compute.v1.TestIamPermissionsReservationRequest',
         ['zone']
       );
       request.zone = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'TestIamPermissionsReservationRequest',
+        '.google.cloud.compute.v1.TestIamPermissionsReservationRequest',
         ['resource']
       );
       request.resource = defaultValue3;
@@ -1359,17 +1403,20 @@ describe('v1.ReservationsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.UpdateReservationRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('UpdateReservationRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.UpdateReservationRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('UpdateReservationRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.UpdateReservationRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('UpdateReservationRequest', [
-        'reservation',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.UpdateReservationRequest',
+        ['reservation']
+      );
       request.reservation = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&reservation=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -1397,17 +1444,20 @@ describe('v1.ReservationsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.UpdateReservationRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('UpdateReservationRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.UpdateReservationRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('UpdateReservationRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.UpdateReservationRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('UpdateReservationRequest', [
-        'reservation',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.UpdateReservationRequest',
+        ['reservation']
+      );
       request.reservation = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&reservation=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -1451,17 +1501,20 @@ describe('v1.ReservationsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.UpdateReservationRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('UpdateReservationRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.UpdateReservationRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('UpdateReservationRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.UpdateReservationRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('UpdateReservationRequest', [
-        'reservation',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.UpdateReservationRequest',
+        ['reservation']
+      );
       request.reservation = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&reservation=${defaultValue3}`;
       const expectedError = new Error('expected');
@@ -1486,17 +1539,20 @@ describe('v1.ReservationsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.UpdateReservationRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('UpdateReservationRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.UpdateReservationRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('UpdateReservationRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.UpdateReservationRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('UpdateReservationRequest', [
-        'reservation',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.UpdateReservationRequest',
+        ['reservation']
+      );
       request.reservation = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1515,7 +1571,7 @@ describe('v1.ReservationsClient', () => {
         new protos.google.cloud.compute.v1.AggregatedListReservationsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'AggregatedListReservationsRequest',
+        '.google.cloud.compute.v1.AggregatedListReservationsRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -1575,7 +1631,7 @@ describe('v1.ReservationsClient', () => {
         new protos.google.cloud.compute.v1.AggregatedListReservationsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'AggregatedListReservationsRequest',
+        '.google.cloud.compute.v1.AggregatedListReservationsRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -1618,13 +1674,15 @@ describe('v1.ReservationsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListReservationsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListReservationsRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListReservationsRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ListReservationsRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListReservationsRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}`;
       const expectedResponse = [
@@ -1653,13 +1711,15 @@ describe('v1.ReservationsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListReservationsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListReservationsRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListReservationsRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ListReservationsRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListReservationsRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}`;
       const expectedResponse = [
@@ -1703,13 +1763,15 @@ describe('v1.ReservationsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListReservationsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListReservationsRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListReservationsRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ListReservationsRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListReservationsRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}`;
       const expectedError = new Error('expected');
@@ -1733,13 +1795,15 @@ describe('v1.ReservationsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListReservationsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListReservationsRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListReservationsRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ListReservationsRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListReservationsRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}`;
       const expectedResponse = [
@@ -1790,13 +1854,15 @@ describe('v1.ReservationsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListReservationsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListReservationsRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListReservationsRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ListReservationsRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListReservationsRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}`;
       const expectedError = new Error('expected');
@@ -1844,13 +1910,15 @@ describe('v1.ReservationsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListReservationsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListReservationsRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListReservationsRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ListReservationsRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListReservationsRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}`;
       const expectedResponse = [
@@ -1889,13 +1957,15 @@ describe('v1.ReservationsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListReservationsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListReservationsRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListReservationsRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ListReservationsRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListReservationsRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}`;
       const expectedError = new Error('expected');

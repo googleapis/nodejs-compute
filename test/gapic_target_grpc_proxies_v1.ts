@@ -251,12 +251,12 @@ describe('v1.TargetGrpcProxiesClient', () => {
         new protos.google.cloud.compute.v1.DeleteTargetGrpcProxyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteTargetGrpcProxyRequest',
+        '.google.cloud.compute.v1.DeleteTargetGrpcProxyRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'DeleteTargetGrpcProxyRequest',
+        '.google.cloud.compute.v1.DeleteTargetGrpcProxyRequest',
         ['targetGrpcProxy']
       );
       request.targetGrpcProxy = defaultValue2;
@@ -287,12 +287,12 @@ describe('v1.TargetGrpcProxiesClient', () => {
         new protos.google.cloud.compute.v1.DeleteTargetGrpcProxyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteTargetGrpcProxyRequest',
+        '.google.cloud.compute.v1.DeleteTargetGrpcProxyRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'DeleteTargetGrpcProxyRequest',
+        '.google.cloud.compute.v1.DeleteTargetGrpcProxyRequest',
         ['targetGrpcProxy']
       );
       request.targetGrpcProxy = defaultValue2;
@@ -339,12 +339,12 @@ describe('v1.TargetGrpcProxiesClient', () => {
         new protos.google.cloud.compute.v1.DeleteTargetGrpcProxyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteTargetGrpcProxyRequest',
+        '.google.cloud.compute.v1.DeleteTargetGrpcProxyRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'DeleteTargetGrpcProxyRequest',
+        '.google.cloud.compute.v1.DeleteTargetGrpcProxyRequest',
         ['targetGrpcProxy']
       );
       request.targetGrpcProxy = defaultValue2;
@@ -372,12 +372,12 @@ describe('v1.TargetGrpcProxiesClient', () => {
         new protos.google.cloud.compute.v1.DeleteTargetGrpcProxyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteTargetGrpcProxyRequest',
+        '.google.cloud.compute.v1.DeleteTargetGrpcProxyRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'DeleteTargetGrpcProxyRequest',
+        '.google.cloud.compute.v1.DeleteTargetGrpcProxyRequest',
         ['targetGrpcProxy']
       );
       request.targetGrpcProxy = defaultValue2;
@@ -397,13 +397,15 @@ describe('v1.TargetGrpcProxiesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetTargetGrpcProxyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetTargetGrpcProxyRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetTargetGrpcProxyRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetTargetGrpcProxyRequest', [
-        'targetGrpcProxy',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetTargetGrpcProxyRequest',
+        ['targetGrpcProxy']
+      );
       request.targetGrpcProxy = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&target_grpc_proxy=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
@@ -430,13 +432,15 @@ describe('v1.TargetGrpcProxiesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetTargetGrpcProxyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetTargetGrpcProxyRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetTargetGrpcProxyRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetTargetGrpcProxyRequest', [
-        'targetGrpcProxy',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetTargetGrpcProxyRequest',
+        ['targetGrpcProxy']
+      );
       request.targetGrpcProxy = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&target_grpc_proxy=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
@@ -478,13 +482,15 @@ describe('v1.TargetGrpcProxiesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetTargetGrpcProxyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetTargetGrpcProxyRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetTargetGrpcProxyRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetTargetGrpcProxyRequest', [
-        'targetGrpcProxy',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetTargetGrpcProxyRequest',
+        ['targetGrpcProxy']
+      );
       request.targetGrpcProxy = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&target_grpc_proxy=${defaultValue2}`;
       const expectedError = new Error('expected');
@@ -508,13 +514,15 @@ describe('v1.TargetGrpcProxiesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetTargetGrpcProxyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetTargetGrpcProxyRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetTargetGrpcProxyRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetTargetGrpcProxyRequest', [
-        'targetGrpcProxy',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetTargetGrpcProxyRequest',
+        ['targetGrpcProxy']
+      );
       request.targetGrpcProxy = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -533,7 +541,7 @@ describe('v1.TargetGrpcProxiesClient', () => {
         new protos.google.cloud.compute.v1.InsertTargetGrpcProxyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'InsertTargetGrpcProxyRequest',
+        '.google.cloud.compute.v1.InsertTargetGrpcProxyRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -564,7 +572,7 @@ describe('v1.TargetGrpcProxiesClient', () => {
         new protos.google.cloud.compute.v1.InsertTargetGrpcProxyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'InsertTargetGrpcProxyRequest',
+        '.google.cloud.compute.v1.InsertTargetGrpcProxyRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -611,7 +619,7 @@ describe('v1.TargetGrpcProxiesClient', () => {
         new protos.google.cloud.compute.v1.InsertTargetGrpcProxyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'InsertTargetGrpcProxyRequest',
+        '.google.cloud.compute.v1.InsertTargetGrpcProxyRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -639,7 +647,7 @@ describe('v1.TargetGrpcProxiesClient', () => {
         new protos.google.cloud.compute.v1.InsertTargetGrpcProxyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'InsertTargetGrpcProxyRequest',
+        '.google.cloud.compute.v1.InsertTargetGrpcProxyRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -659,13 +667,15 @@ describe('v1.TargetGrpcProxiesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchTargetGrpcProxyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('PatchTargetGrpcProxyRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchTargetGrpcProxyRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('PatchTargetGrpcProxyRequest', [
-        'targetGrpcProxy',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchTargetGrpcProxyRequest',
+        ['targetGrpcProxy']
+      );
       request.targetGrpcProxy = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&target_grpc_proxy=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
@@ -692,13 +702,15 @@ describe('v1.TargetGrpcProxiesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchTargetGrpcProxyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('PatchTargetGrpcProxyRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchTargetGrpcProxyRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('PatchTargetGrpcProxyRequest', [
-        'targetGrpcProxy',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchTargetGrpcProxyRequest',
+        ['targetGrpcProxy']
+      );
       request.targetGrpcProxy = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&target_grpc_proxy=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
@@ -740,13 +752,15 @@ describe('v1.TargetGrpcProxiesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchTargetGrpcProxyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('PatchTargetGrpcProxyRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchTargetGrpcProxyRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('PatchTargetGrpcProxyRequest', [
-        'targetGrpcProxy',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchTargetGrpcProxyRequest',
+        ['targetGrpcProxy']
+      );
       request.targetGrpcProxy = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&target_grpc_proxy=${defaultValue2}`;
       const expectedError = new Error('expected');
@@ -770,13 +784,15 @@ describe('v1.TargetGrpcProxiesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchTargetGrpcProxyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('PatchTargetGrpcProxyRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchTargetGrpcProxyRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('PatchTargetGrpcProxyRequest', [
-        'targetGrpcProxy',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchTargetGrpcProxyRequest',
+        ['targetGrpcProxy']
+      );
       request.targetGrpcProxy = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -795,7 +811,7 @@ describe('v1.TargetGrpcProxiesClient', () => {
         new protos.google.cloud.compute.v1.ListTargetGrpcProxiesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListTargetGrpcProxiesRequest',
+        '.google.cloud.compute.v1.ListTargetGrpcProxiesRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -833,7 +849,7 @@ describe('v1.TargetGrpcProxiesClient', () => {
         new protos.google.cloud.compute.v1.ListTargetGrpcProxiesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListTargetGrpcProxiesRequest',
+        '.google.cloud.compute.v1.ListTargetGrpcProxiesRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -886,7 +902,7 @@ describe('v1.TargetGrpcProxiesClient', () => {
         new protos.google.cloud.compute.v1.ListTargetGrpcProxiesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListTargetGrpcProxiesRequest',
+        '.google.cloud.compute.v1.ListTargetGrpcProxiesRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -913,7 +929,7 @@ describe('v1.TargetGrpcProxiesClient', () => {
         new protos.google.cloud.compute.v1.ListTargetGrpcProxiesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListTargetGrpcProxiesRequest',
+        '.google.cloud.compute.v1.ListTargetGrpcProxiesRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -973,7 +989,7 @@ describe('v1.TargetGrpcProxiesClient', () => {
         new protos.google.cloud.compute.v1.ListTargetGrpcProxiesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListTargetGrpcProxiesRequest',
+        '.google.cloud.compute.v1.ListTargetGrpcProxiesRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -1024,7 +1040,7 @@ describe('v1.TargetGrpcProxiesClient', () => {
         new protos.google.cloud.compute.v1.ListTargetGrpcProxiesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListTargetGrpcProxiesRequest',
+        '.google.cloud.compute.v1.ListTargetGrpcProxiesRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -1072,7 +1088,7 @@ describe('v1.TargetGrpcProxiesClient', () => {
         new protos.google.cloud.compute.v1.ListTargetGrpcProxiesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListTargetGrpcProxiesRequest',
+        '.google.cloud.compute.v1.ListTargetGrpcProxiesRequest',
         ['project']
       );
       request.project = defaultValue1;

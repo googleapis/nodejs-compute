@@ -188,17 +188,20 @@ describe('v1small.RegionOperationsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1small.GetRegionOperationRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetRegionOperationRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1small.GetRegionOperationRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetRegionOperationRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1small.GetRegionOperationRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('GetRegionOperationRequest', [
-        'operation',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1small.GetRegionOperationRequest',
+        ['operation']
+      );
       request.operation = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&operation=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -225,17 +228,20 @@ describe('v1small.RegionOperationsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1small.GetRegionOperationRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetRegionOperationRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1small.GetRegionOperationRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetRegionOperationRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1small.GetRegionOperationRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('GetRegionOperationRequest', [
-        'operation',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1small.GetRegionOperationRequest',
+        ['operation']
+      );
       request.operation = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&operation=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -277,17 +283,20 @@ describe('v1small.RegionOperationsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1small.GetRegionOperationRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetRegionOperationRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1small.GetRegionOperationRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetRegionOperationRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1small.GetRegionOperationRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('GetRegionOperationRequest', [
-        'operation',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1small.GetRegionOperationRequest',
+        ['operation']
+      );
       request.operation = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&operation=${defaultValue3}`;
       const expectedError = new Error('expected');
@@ -311,17 +320,20 @@ describe('v1small.RegionOperationsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1small.GetRegionOperationRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetRegionOperationRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1small.GetRegionOperationRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetRegionOperationRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1small.GetRegionOperationRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('GetRegionOperationRequest', [
-        'operation',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1small.GetRegionOperationRequest',
+        ['operation']
+      );
       request.operation = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -339,17 +351,20 @@ describe('v1small.RegionOperationsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1small.WaitRegionOperationRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('WaitRegionOperationRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1small.WaitRegionOperationRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('WaitRegionOperationRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1small.WaitRegionOperationRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('WaitRegionOperationRequest', [
-        'operation',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1small.WaitRegionOperationRequest',
+        ['operation']
+      );
       request.operation = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&operation=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -376,17 +391,20 @@ describe('v1small.RegionOperationsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1small.WaitRegionOperationRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('WaitRegionOperationRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1small.WaitRegionOperationRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('WaitRegionOperationRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1small.WaitRegionOperationRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('WaitRegionOperationRequest', [
-        'operation',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1small.WaitRegionOperationRequest',
+        ['operation']
+      );
       request.operation = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&operation=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -428,17 +446,20 @@ describe('v1small.RegionOperationsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1small.WaitRegionOperationRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('WaitRegionOperationRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1small.WaitRegionOperationRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('WaitRegionOperationRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1small.WaitRegionOperationRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('WaitRegionOperationRequest', [
-        'operation',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1small.WaitRegionOperationRequest',
+        ['operation']
+      );
       request.operation = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&operation=${defaultValue3}`;
       const expectedError = new Error('expected');
@@ -462,17 +483,20 @@ describe('v1small.RegionOperationsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1small.WaitRegionOperationRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('WaitRegionOperationRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1small.WaitRegionOperationRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('WaitRegionOperationRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1small.WaitRegionOperationRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('WaitRegionOperationRequest', [
-        'operation',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1small.WaitRegionOperationRequest',
+        ['operation']
+      );
       request.operation = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
       client.close();

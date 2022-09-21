@@ -248,13 +248,15 @@ describe('v1.NetworksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.AddPeeringNetworkRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('AddPeeringNetworkRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.AddPeeringNetworkRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('AddPeeringNetworkRequest', [
-        'network',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.AddPeeringNetworkRequest',
+        ['network']
+      );
       request.network = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&network=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
@@ -282,13 +284,15 @@ describe('v1.NetworksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.AddPeeringNetworkRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('AddPeeringNetworkRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.AddPeeringNetworkRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('AddPeeringNetworkRequest', [
-        'network',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.AddPeeringNetworkRequest',
+        ['network']
+      );
       request.network = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&network=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
@@ -332,13 +336,15 @@ describe('v1.NetworksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.AddPeeringNetworkRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('AddPeeringNetworkRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.AddPeeringNetworkRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('AddPeeringNetworkRequest', [
-        'network',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.AddPeeringNetworkRequest',
+        ['network']
+      );
       request.network = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&network=${defaultValue2}`;
       const expectedError = new Error('expected');
@@ -366,13 +372,15 @@ describe('v1.NetworksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.AddPeeringNetworkRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('AddPeeringNetworkRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.AddPeeringNetworkRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('AddPeeringNetworkRequest', [
-        'network',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.AddPeeringNetworkRequest',
+        ['network']
+      );
       request.network = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -390,13 +398,15 @@ describe('v1.NetworksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteNetworkRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteNetworkRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteNetworkRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('DeleteNetworkRequest', [
-        'network',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteNetworkRequest',
+        ['network']
+      );
       request.network = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&network=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
@@ -424,13 +434,15 @@ describe('v1.NetworksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteNetworkRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteNetworkRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteNetworkRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('DeleteNetworkRequest', [
-        'network',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteNetworkRequest',
+        ['network']
+      );
       request.network = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&network=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
@@ -474,13 +486,15 @@ describe('v1.NetworksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteNetworkRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteNetworkRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteNetworkRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('DeleteNetworkRequest', [
-        'network',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteNetworkRequest',
+        ['network']
+      );
       request.network = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&network=${defaultValue2}`;
       const expectedError = new Error('expected');
@@ -505,13 +519,15 @@ describe('v1.NetworksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteNetworkRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteNetworkRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteNetworkRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('DeleteNetworkRequest', [
-        'network',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteNetworkRequest',
+        ['network']
+      );
       request.network = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -529,13 +545,15 @@ describe('v1.NetworksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetNetworkRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetNetworkRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetNetworkRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetNetworkRequest', [
-        'network',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetNetworkRequest',
+        ['network']
+      );
       request.network = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&network=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
@@ -562,13 +580,15 @@ describe('v1.NetworksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetNetworkRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetNetworkRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetNetworkRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetNetworkRequest', [
-        'network',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetNetworkRequest',
+        ['network']
+      );
       request.network = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&network=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
@@ -610,13 +630,15 @@ describe('v1.NetworksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetNetworkRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetNetworkRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetNetworkRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetNetworkRequest', [
-        'network',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetNetworkRequest',
+        ['network']
+      );
       request.network = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&network=${defaultValue2}`;
       const expectedError = new Error('expected');
@@ -640,13 +662,15 @@ describe('v1.NetworksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetNetworkRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetNetworkRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetNetworkRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetNetworkRequest', [
-        'network',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetNetworkRequest',
+        ['network']
+      );
       request.network = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -665,12 +689,12 @@ describe('v1.NetworksClient', () => {
         new protos.google.cloud.compute.v1.GetEffectiveFirewallsNetworkRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetEffectiveFirewallsNetworkRequest',
+        '.google.cloud.compute.v1.GetEffectiveFirewallsNetworkRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'GetEffectiveFirewallsNetworkRequest',
+        '.google.cloud.compute.v1.GetEffectiveFirewallsNetworkRequest',
         ['network']
       );
       request.network = defaultValue2;
@@ -702,12 +726,12 @@ describe('v1.NetworksClient', () => {
         new protos.google.cloud.compute.v1.GetEffectiveFirewallsNetworkRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetEffectiveFirewallsNetworkRequest',
+        '.google.cloud.compute.v1.GetEffectiveFirewallsNetworkRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'GetEffectiveFirewallsNetworkRequest',
+        '.google.cloud.compute.v1.GetEffectiveFirewallsNetworkRequest',
         ['network']
       );
       request.network = defaultValue2;
@@ -754,12 +778,12 @@ describe('v1.NetworksClient', () => {
         new protos.google.cloud.compute.v1.GetEffectiveFirewallsNetworkRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetEffectiveFirewallsNetworkRequest',
+        '.google.cloud.compute.v1.GetEffectiveFirewallsNetworkRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'GetEffectiveFirewallsNetworkRequest',
+        '.google.cloud.compute.v1.GetEffectiveFirewallsNetworkRequest',
         ['network']
       );
       request.network = defaultValue2;
@@ -793,12 +817,12 @@ describe('v1.NetworksClient', () => {
         new protos.google.cloud.compute.v1.GetEffectiveFirewallsNetworkRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetEffectiveFirewallsNetworkRequest',
+        '.google.cloud.compute.v1.GetEffectiveFirewallsNetworkRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'GetEffectiveFirewallsNetworkRequest',
+        '.google.cloud.compute.v1.GetEffectiveFirewallsNetworkRequest',
         ['network']
       );
       request.network = defaultValue2;
@@ -821,9 +845,10 @@ describe('v1.NetworksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertNetworkRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('InsertNetworkRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.InsertNetworkRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -851,9 +876,10 @@ describe('v1.NetworksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertNetworkRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('InsertNetworkRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.InsertNetworkRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -897,9 +923,10 @@ describe('v1.NetworksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertNetworkRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('InsertNetworkRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.InsertNetworkRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -924,9 +951,10 @@ describe('v1.NetworksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertNetworkRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('InsertNetworkRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.InsertNetworkRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -944,13 +972,15 @@ describe('v1.NetworksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchNetworkRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('PatchNetworkRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchNetworkRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('PatchNetworkRequest', [
-        'network',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchNetworkRequest',
+        ['network']
+      );
       request.network = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&network=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
@@ -977,13 +1007,15 @@ describe('v1.NetworksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchNetworkRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('PatchNetworkRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchNetworkRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('PatchNetworkRequest', [
-        'network',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchNetworkRequest',
+        ['network']
+      );
       request.network = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&network=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
@@ -1025,13 +1057,15 @@ describe('v1.NetworksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchNetworkRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('PatchNetworkRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchNetworkRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('PatchNetworkRequest', [
-        'network',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchNetworkRequest',
+        ['network']
+      );
       request.network = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&network=${defaultValue2}`;
       const expectedError = new Error('expected');
@@ -1055,13 +1089,15 @@ describe('v1.NetworksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchNetworkRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('PatchNetworkRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchNetworkRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('PatchNetworkRequest', [
-        'network',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchNetworkRequest',
+        ['network']
+      );
       request.network = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1079,13 +1115,15 @@ describe('v1.NetworksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.RemovePeeringNetworkRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('RemovePeeringNetworkRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.RemovePeeringNetworkRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('RemovePeeringNetworkRequest', [
-        'network',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.RemovePeeringNetworkRequest',
+        ['network']
+      );
       request.network = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&network=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
@@ -1113,13 +1151,15 @@ describe('v1.NetworksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.RemovePeeringNetworkRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('RemovePeeringNetworkRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.RemovePeeringNetworkRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('RemovePeeringNetworkRequest', [
-        'network',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.RemovePeeringNetworkRequest',
+        ['network']
+      );
       request.network = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&network=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
@@ -1163,13 +1203,15 @@ describe('v1.NetworksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.RemovePeeringNetworkRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('RemovePeeringNetworkRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.RemovePeeringNetworkRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('RemovePeeringNetworkRequest', [
-        'network',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.RemovePeeringNetworkRequest',
+        ['network']
+      );
       request.network = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&network=${defaultValue2}`;
       const expectedError = new Error('expected');
@@ -1197,13 +1239,15 @@ describe('v1.NetworksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.RemovePeeringNetworkRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('RemovePeeringNetworkRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.RemovePeeringNetworkRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('RemovePeeringNetworkRequest', [
-        'network',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.RemovePeeringNetworkRequest',
+        ['network']
+      );
       request.network = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1222,12 +1266,12 @@ describe('v1.NetworksClient', () => {
         new protos.google.cloud.compute.v1.SwitchToCustomModeNetworkRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SwitchToCustomModeNetworkRequest',
+        '.google.cloud.compute.v1.SwitchToCustomModeNetworkRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'SwitchToCustomModeNetworkRequest',
+        '.google.cloud.compute.v1.SwitchToCustomModeNetworkRequest',
         ['network']
       );
       request.network = defaultValue2;
@@ -1259,12 +1303,12 @@ describe('v1.NetworksClient', () => {
         new protos.google.cloud.compute.v1.SwitchToCustomModeNetworkRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SwitchToCustomModeNetworkRequest',
+        '.google.cloud.compute.v1.SwitchToCustomModeNetworkRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'SwitchToCustomModeNetworkRequest',
+        '.google.cloud.compute.v1.SwitchToCustomModeNetworkRequest',
         ['network']
       );
       request.network = defaultValue2;
@@ -1311,12 +1355,12 @@ describe('v1.NetworksClient', () => {
         new protos.google.cloud.compute.v1.SwitchToCustomModeNetworkRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SwitchToCustomModeNetworkRequest',
+        '.google.cloud.compute.v1.SwitchToCustomModeNetworkRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'SwitchToCustomModeNetworkRequest',
+        '.google.cloud.compute.v1.SwitchToCustomModeNetworkRequest',
         ['network']
       );
       request.network = defaultValue2;
@@ -1347,12 +1391,12 @@ describe('v1.NetworksClient', () => {
         new protos.google.cloud.compute.v1.SwitchToCustomModeNetworkRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SwitchToCustomModeNetworkRequest',
+        '.google.cloud.compute.v1.SwitchToCustomModeNetworkRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'SwitchToCustomModeNetworkRequest',
+        '.google.cloud.compute.v1.SwitchToCustomModeNetworkRequest',
         ['network']
       );
       request.network = defaultValue2;
@@ -1372,13 +1416,15 @@ describe('v1.NetworksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.UpdatePeeringNetworkRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('UpdatePeeringNetworkRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.UpdatePeeringNetworkRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('UpdatePeeringNetworkRequest', [
-        'network',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.UpdatePeeringNetworkRequest',
+        ['network']
+      );
       request.network = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&network=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
@@ -1406,13 +1452,15 @@ describe('v1.NetworksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.UpdatePeeringNetworkRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('UpdatePeeringNetworkRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.UpdatePeeringNetworkRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('UpdatePeeringNetworkRequest', [
-        'network',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.UpdatePeeringNetworkRequest',
+        ['network']
+      );
       request.network = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&network=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
@@ -1456,13 +1504,15 @@ describe('v1.NetworksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.UpdatePeeringNetworkRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('UpdatePeeringNetworkRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.UpdatePeeringNetworkRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('UpdatePeeringNetworkRequest', [
-        'network',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.UpdatePeeringNetworkRequest',
+        ['network']
+      );
       request.network = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&network=${defaultValue2}`;
       const expectedError = new Error('expected');
@@ -1490,13 +1540,15 @@ describe('v1.NetworksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.UpdatePeeringNetworkRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('UpdatePeeringNetworkRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.UpdatePeeringNetworkRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('UpdatePeeringNetworkRequest', [
-        'network',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.UpdatePeeringNetworkRequest',
+        ['network']
+      );
       request.network = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1514,9 +1566,10 @@ describe('v1.NetworksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListNetworksRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListNetworksRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListNetworksRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedResponse = [
@@ -1545,9 +1598,10 @@ describe('v1.NetworksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListNetworksRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListNetworksRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListNetworksRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedResponse = [
@@ -1591,9 +1645,10 @@ describe('v1.NetworksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListNetworksRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListNetworksRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListNetworksRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1617,9 +1672,10 @@ describe('v1.NetworksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListNetworksRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListNetworksRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListNetworksRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedResponse = [
@@ -1670,9 +1726,10 @@ describe('v1.NetworksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListNetworksRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListNetworksRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListNetworksRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1720,9 +1777,10 @@ describe('v1.NetworksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListNetworksRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListNetworksRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListNetworksRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedResponse = [
@@ -1761,9 +1819,10 @@ describe('v1.NetworksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListNetworksRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListNetworksRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListNetworksRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1804,12 +1863,12 @@ describe('v1.NetworksClient', () => {
         new protos.google.cloud.compute.v1.ListPeeringRoutesNetworksRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListPeeringRoutesNetworksRequest',
+        '.google.cloud.compute.v1.ListPeeringRoutesNetworksRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'ListPeeringRoutesNetworksRequest',
+        '.google.cloud.compute.v1.ListPeeringRoutesNetworksRequest',
         ['network']
       );
       request.network = defaultValue2;
@@ -1848,12 +1907,12 @@ describe('v1.NetworksClient', () => {
         new protos.google.cloud.compute.v1.ListPeeringRoutesNetworksRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListPeeringRoutesNetworksRequest',
+        '.google.cloud.compute.v1.ListPeeringRoutesNetworksRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'ListPeeringRoutesNetworksRequest',
+        '.google.cloud.compute.v1.ListPeeringRoutesNetworksRequest',
         ['network']
       );
       request.network = defaultValue2;
@@ -1910,12 +1969,12 @@ describe('v1.NetworksClient', () => {
         new protos.google.cloud.compute.v1.ListPeeringRoutesNetworksRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListPeeringRoutesNetworksRequest',
+        '.google.cloud.compute.v1.ListPeeringRoutesNetworksRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'ListPeeringRoutesNetworksRequest',
+        '.google.cloud.compute.v1.ListPeeringRoutesNetworksRequest',
         ['network']
       );
       request.network = defaultValue2;
@@ -1946,12 +2005,12 @@ describe('v1.NetworksClient', () => {
         new protos.google.cloud.compute.v1.ListPeeringRoutesNetworksRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListPeeringRoutesNetworksRequest',
+        '.google.cloud.compute.v1.ListPeeringRoutesNetworksRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'ListPeeringRoutesNetworksRequest',
+        '.google.cloud.compute.v1.ListPeeringRoutesNetworksRequest',
         ['network']
       );
       request.network = defaultValue2;
@@ -2012,12 +2071,12 @@ describe('v1.NetworksClient', () => {
         new protos.google.cloud.compute.v1.ListPeeringRoutesNetworksRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListPeeringRoutesNetworksRequest',
+        '.google.cloud.compute.v1.ListPeeringRoutesNetworksRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'ListPeeringRoutesNetworksRequest',
+        '.google.cloud.compute.v1.ListPeeringRoutesNetworksRequest',
         ['network']
       );
       request.network = defaultValue2;
@@ -2067,12 +2126,12 @@ describe('v1.NetworksClient', () => {
         new protos.google.cloud.compute.v1.ListPeeringRoutesNetworksRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListPeeringRoutesNetworksRequest',
+        '.google.cloud.compute.v1.ListPeeringRoutesNetworksRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'ListPeeringRoutesNetworksRequest',
+        '.google.cloud.compute.v1.ListPeeringRoutesNetworksRequest',
         ['network']
       );
       request.network = defaultValue2;
@@ -2122,12 +2181,12 @@ describe('v1.NetworksClient', () => {
         new protos.google.cloud.compute.v1.ListPeeringRoutesNetworksRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListPeeringRoutesNetworksRequest',
+        '.google.cloud.compute.v1.ListPeeringRoutesNetworksRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'ListPeeringRoutesNetworksRequest',
+        '.google.cloud.compute.v1.ListPeeringRoutesNetworksRequest',
         ['network']
       );
       request.network = defaultValue2;

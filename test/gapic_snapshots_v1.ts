@@ -248,13 +248,15 @@ describe('v1.SnapshotsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteSnapshotRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteSnapshotRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteSnapshotRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('DeleteSnapshotRequest', [
-        'snapshot',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteSnapshotRequest',
+        ['snapshot']
+      );
       request.snapshot = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&snapshot=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
@@ -282,13 +284,15 @@ describe('v1.SnapshotsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteSnapshotRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteSnapshotRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteSnapshotRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('DeleteSnapshotRequest', [
-        'snapshot',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteSnapshotRequest',
+        ['snapshot']
+      );
       request.snapshot = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&snapshot=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
@@ -332,13 +336,15 @@ describe('v1.SnapshotsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteSnapshotRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteSnapshotRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteSnapshotRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('DeleteSnapshotRequest', [
-        'snapshot',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteSnapshotRequest',
+        ['snapshot']
+      );
       request.snapshot = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&snapshot=${defaultValue2}`;
       const expectedError = new Error('expected');
@@ -363,13 +369,15 @@ describe('v1.SnapshotsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteSnapshotRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteSnapshotRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteSnapshotRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('DeleteSnapshotRequest', [
-        'snapshot',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteSnapshotRequest',
+        ['snapshot']
+      );
       request.snapshot = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -387,13 +395,15 @@ describe('v1.SnapshotsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetSnapshotRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetSnapshotRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetSnapshotRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetSnapshotRequest', [
-        'snapshot',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetSnapshotRequest',
+        ['snapshot']
+      );
       request.snapshot = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&snapshot=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
@@ -420,13 +430,15 @@ describe('v1.SnapshotsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetSnapshotRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetSnapshotRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetSnapshotRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetSnapshotRequest', [
-        'snapshot',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetSnapshotRequest',
+        ['snapshot']
+      );
       request.snapshot = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&snapshot=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
@@ -468,13 +480,15 @@ describe('v1.SnapshotsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetSnapshotRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetSnapshotRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetSnapshotRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetSnapshotRequest', [
-        'snapshot',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetSnapshotRequest',
+        ['snapshot']
+      );
       request.snapshot = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&snapshot=${defaultValue2}`;
       const expectedError = new Error('expected');
@@ -498,13 +512,15 @@ describe('v1.SnapshotsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetSnapshotRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetSnapshotRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetSnapshotRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetSnapshotRequest', [
-        'snapshot',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetSnapshotRequest',
+        ['snapshot']
+      );
       request.snapshot = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -522,13 +538,15 @@ describe('v1.SnapshotsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetIamPolicySnapshotRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetIamPolicySnapshotRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetIamPolicySnapshotRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetIamPolicySnapshotRequest', [
-        'resource',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetIamPolicySnapshotRequest',
+        ['resource']
+      );
       request.resource = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&resource=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
@@ -556,13 +574,15 @@ describe('v1.SnapshotsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetIamPolicySnapshotRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetIamPolicySnapshotRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetIamPolicySnapshotRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetIamPolicySnapshotRequest', [
-        'resource',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetIamPolicySnapshotRequest',
+        ['resource']
+      );
       request.resource = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&resource=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
@@ -606,13 +626,15 @@ describe('v1.SnapshotsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetIamPolicySnapshotRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetIamPolicySnapshotRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetIamPolicySnapshotRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetIamPolicySnapshotRequest', [
-        'resource',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetIamPolicySnapshotRequest',
+        ['resource']
+      );
       request.resource = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&resource=${defaultValue2}`;
       const expectedError = new Error('expected');
@@ -640,13 +662,15 @@ describe('v1.SnapshotsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetIamPolicySnapshotRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetIamPolicySnapshotRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetIamPolicySnapshotRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetIamPolicySnapshotRequest', [
-        'resource',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetIamPolicySnapshotRequest',
+        ['resource']
+      );
       request.resource = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -664,9 +688,10 @@ describe('v1.SnapshotsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertSnapshotRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('InsertSnapshotRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.InsertSnapshotRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -694,9 +719,10 @@ describe('v1.SnapshotsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertSnapshotRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('InsertSnapshotRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.InsertSnapshotRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -740,9 +766,10 @@ describe('v1.SnapshotsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertSnapshotRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('InsertSnapshotRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.InsertSnapshotRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -767,9 +794,10 @@ describe('v1.SnapshotsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertSnapshotRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('InsertSnapshotRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.InsertSnapshotRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -787,13 +815,15 @@ describe('v1.SnapshotsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetIamPolicySnapshotRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SetIamPolicySnapshotRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetIamPolicySnapshotRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('SetIamPolicySnapshotRequest', [
-        'resource',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetIamPolicySnapshotRequest',
+        ['resource']
+      );
       request.resource = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&resource=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
@@ -821,13 +851,15 @@ describe('v1.SnapshotsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetIamPolicySnapshotRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SetIamPolicySnapshotRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetIamPolicySnapshotRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('SetIamPolicySnapshotRequest', [
-        'resource',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetIamPolicySnapshotRequest',
+        ['resource']
+      );
       request.resource = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&resource=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
@@ -871,13 +903,15 @@ describe('v1.SnapshotsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetIamPolicySnapshotRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SetIamPolicySnapshotRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetIamPolicySnapshotRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('SetIamPolicySnapshotRequest', [
-        'resource',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetIamPolicySnapshotRequest',
+        ['resource']
+      );
       request.resource = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&resource=${defaultValue2}`;
       const expectedError = new Error('expected');
@@ -905,13 +939,15 @@ describe('v1.SnapshotsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetIamPolicySnapshotRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SetIamPolicySnapshotRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetIamPolicySnapshotRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('SetIamPolicySnapshotRequest', [
-        'resource',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetIamPolicySnapshotRequest',
+        ['resource']
+      );
       request.resource = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -929,13 +965,15 @@ describe('v1.SnapshotsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetLabelsSnapshotRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SetLabelsSnapshotRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetLabelsSnapshotRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('SetLabelsSnapshotRequest', [
-        'resource',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetLabelsSnapshotRequest',
+        ['resource']
+      );
       request.resource = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&resource=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
@@ -963,13 +1001,15 @@ describe('v1.SnapshotsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetLabelsSnapshotRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SetLabelsSnapshotRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetLabelsSnapshotRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('SetLabelsSnapshotRequest', [
-        'resource',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetLabelsSnapshotRequest',
+        ['resource']
+      );
       request.resource = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&resource=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
@@ -1013,13 +1053,15 @@ describe('v1.SnapshotsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetLabelsSnapshotRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SetLabelsSnapshotRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetLabelsSnapshotRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('SetLabelsSnapshotRequest', [
-        'resource',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetLabelsSnapshotRequest',
+        ['resource']
+      );
       request.resource = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&resource=${defaultValue2}`;
       const expectedError = new Error('expected');
@@ -1044,13 +1086,15 @@ describe('v1.SnapshotsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetLabelsSnapshotRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SetLabelsSnapshotRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetLabelsSnapshotRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('SetLabelsSnapshotRequest', [
-        'resource',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetLabelsSnapshotRequest',
+        ['resource']
+      );
       request.resource = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1069,12 +1113,12 @@ describe('v1.SnapshotsClient', () => {
         new protos.google.cloud.compute.v1.TestIamPermissionsSnapshotRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'TestIamPermissionsSnapshotRequest',
+        '.google.cloud.compute.v1.TestIamPermissionsSnapshotRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'TestIamPermissionsSnapshotRequest',
+        '.google.cloud.compute.v1.TestIamPermissionsSnapshotRequest',
         ['resource']
       );
       request.resource = defaultValue2;
@@ -1106,12 +1150,12 @@ describe('v1.SnapshotsClient', () => {
         new protos.google.cloud.compute.v1.TestIamPermissionsSnapshotRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'TestIamPermissionsSnapshotRequest',
+        '.google.cloud.compute.v1.TestIamPermissionsSnapshotRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'TestIamPermissionsSnapshotRequest',
+        '.google.cloud.compute.v1.TestIamPermissionsSnapshotRequest',
         ['resource']
       );
       request.resource = defaultValue2;
@@ -1158,12 +1202,12 @@ describe('v1.SnapshotsClient', () => {
         new protos.google.cloud.compute.v1.TestIamPermissionsSnapshotRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'TestIamPermissionsSnapshotRequest',
+        '.google.cloud.compute.v1.TestIamPermissionsSnapshotRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'TestIamPermissionsSnapshotRequest',
+        '.google.cloud.compute.v1.TestIamPermissionsSnapshotRequest',
         ['resource']
       );
       request.resource = defaultValue2;
@@ -1194,12 +1238,12 @@ describe('v1.SnapshotsClient', () => {
         new protos.google.cloud.compute.v1.TestIamPermissionsSnapshotRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'TestIamPermissionsSnapshotRequest',
+        '.google.cloud.compute.v1.TestIamPermissionsSnapshotRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'TestIamPermissionsSnapshotRequest',
+        '.google.cloud.compute.v1.TestIamPermissionsSnapshotRequest',
         ['resource']
       );
       request.resource = defaultValue2;
@@ -1219,9 +1263,10 @@ describe('v1.SnapshotsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListSnapshotsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListSnapshotsRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListSnapshotsRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedResponse = [
@@ -1250,9 +1295,10 @@ describe('v1.SnapshotsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListSnapshotsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListSnapshotsRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListSnapshotsRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedResponse = [
@@ -1296,9 +1342,10 @@ describe('v1.SnapshotsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListSnapshotsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListSnapshotsRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListSnapshotsRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1322,9 +1369,10 @@ describe('v1.SnapshotsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListSnapshotsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListSnapshotsRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListSnapshotsRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedResponse = [
@@ -1375,9 +1423,10 @@ describe('v1.SnapshotsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListSnapshotsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListSnapshotsRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListSnapshotsRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1425,9 +1474,10 @@ describe('v1.SnapshotsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListSnapshotsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListSnapshotsRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListSnapshotsRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedResponse = [
@@ -1466,9 +1516,10 @@ describe('v1.SnapshotsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListSnapshotsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListSnapshotsRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListSnapshotsRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedError = new Error('expected');

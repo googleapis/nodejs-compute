@@ -251,17 +251,17 @@ describe('v1.RegionSslPoliciesClient', () => {
         new protos.google.cloud.compute.v1.DeleteRegionSslPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteRegionSslPolicyRequest',
+        '.google.cloud.compute.v1.DeleteRegionSslPolicyRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'DeleteRegionSslPolicyRequest',
+        '.google.cloud.compute.v1.DeleteRegionSslPolicyRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'DeleteRegionSslPolicyRequest',
+        '.google.cloud.compute.v1.DeleteRegionSslPolicyRequest',
         ['sslPolicy']
       );
       request.sslPolicy = defaultValue3;
@@ -292,17 +292,17 @@ describe('v1.RegionSslPoliciesClient', () => {
         new protos.google.cloud.compute.v1.DeleteRegionSslPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteRegionSslPolicyRequest',
+        '.google.cloud.compute.v1.DeleteRegionSslPolicyRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'DeleteRegionSslPolicyRequest',
+        '.google.cloud.compute.v1.DeleteRegionSslPolicyRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'DeleteRegionSslPolicyRequest',
+        '.google.cloud.compute.v1.DeleteRegionSslPolicyRequest',
         ['sslPolicy']
       );
       request.sslPolicy = defaultValue3;
@@ -349,17 +349,17 @@ describe('v1.RegionSslPoliciesClient', () => {
         new protos.google.cloud.compute.v1.DeleteRegionSslPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteRegionSslPolicyRequest',
+        '.google.cloud.compute.v1.DeleteRegionSslPolicyRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'DeleteRegionSslPolicyRequest',
+        '.google.cloud.compute.v1.DeleteRegionSslPolicyRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'DeleteRegionSslPolicyRequest',
+        '.google.cloud.compute.v1.DeleteRegionSslPolicyRequest',
         ['sslPolicy']
       );
       request.sslPolicy = defaultValue3;
@@ -387,17 +387,17 @@ describe('v1.RegionSslPoliciesClient', () => {
         new protos.google.cloud.compute.v1.DeleteRegionSslPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteRegionSslPolicyRequest',
+        '.google.cloud.compute.v1.DeleteRegionSslPolicyRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'DeleteRegionSslPolicyRequest',
+        '.google.cloud.compute.v1.DeleteRegionSslPolicyRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'DeleteRegionSslPolicyRequest',
+        '.google.cloud.compute.v1.DeleteRegionSslPolicyRequest',
         ['sslPolicy']
       );
       request.sslPolicy = defaultValue3;
@@ -417,17 +417,20 @@ describe('v1.RegionSslPoliciesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetRegionSslPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetRegionSslPolicyRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetRegionSslPolicyRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetRegionSslPolicyRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetRegionSslPolicyRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('GetRegionSslPolicyRequest', [
-        'sslPolicy',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetRegionSslPolicyRequest',
+        ['sslPolicy']
+      );
       request.sslPolicy = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&ssl_policy=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -454,17 +457,20 @@ describe('v1.RegionSslPoliciesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetRegionSslPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetRegionSslPolicyRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetRegionSslPolicyRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetRegionSslPolicyRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetRegionSslPolicyRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('GetRegionSslPolicyRequest', [
-        'sslPolicy',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetRegionSslPolicyRequest',
+        ['sslPolicy']
+      );
       request.sslPolicy = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&ssl_policy=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -506,17 +512,20 @@ describe('v1.RegionSslPoliciesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetRegionSslPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetRegionSslPolicyRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetRegionSslPolicyRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetRegionSslPolicyRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetRegionSslPolicyRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('GetRegionSslPolicyRequest', [
-        'sslPolicy',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetRegionSslPolicyRequest',
+        ['sslPolicy']
+      );
       request.sslPolicy = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&ssl_policy=${defaultValue3}`;
       const expectedError = new Error('expected');
@@ -540,17 +549,20 @@ describe('v1.RegionSslPoliciesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetRegionSslPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetRegionSslPolicyRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetRegionSslPolicyRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetRegionSslPolicyRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetRegionSslPolicyRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('GetRegionSslPolicyRequest', [
-        'sslPolicy',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetRegionSslPolicyRequest',
+        ['sslPolicy']
+      );
       request.sslPolicy = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -569,12 +581,12 @@ describe('v1.RegionSslPoliciesClient', () => {
         new protos.google.cloud.compute.v1.InsertRegionSslPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'InsertRegionSslPolicyRequest',
+        '.google.cloud.compute.v1.InsertRegionSslPolicyRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'InsertRegionSslPolicyRequest',
+        '.google.cloud.compute.v1.InsertRegionSslPolicyRequest',
         ['region']
       );
       request.region = defaultValue2;
@@ -605,12 +617,12 @@ describe('v1.RegionSslPoliciesClient', () => {
         new protos.google.cloud.compute.v1.InsertRegionSslPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'InsertRegionSslPolicyRequest',
+        '.google.cloud.compute.v1.InsertRegionSslPolicyRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'InsertRegionSslPolicyRequest',
+        '.google.cloud.compute.v1.InsertRegionSslPolicyRequest',
         ['region']
       );
       request.region = defaultValue2;
@@ -657,12 +669,12 @@ describe('v1.RegionSslPoliciesClient', () => {
         new protos.google.cloud.compute.v1.InsertRegionSslPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'InsertRegionSslPolicyRequest',
+        '.google.cloud.compute.v1.InsertRegionSslPolicyRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'InsertRegionSslPolicyRequest',
+        '.google.cloud.compute.v1.InsertRegionSslPolicyRequest',
         ['region']
       );
       request.region = defaultValue2;
@@ -690,12 +702,12 @@ describe('v1.RegionSslPoliciesClient', () => {
         new protos.google.cloud.compute.v1.InsertRegionSslPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'InsertRegionSslPolicyRequest',
+        '.google.cloud.compute.v1.InsertRegionSslPolicyRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'InsertRegionSslPolicyRequest',
+        '.google.cloud.compute.v1.InsertRegionSslPolicyRequest',
         ['region']
       );
       request.region = defaultValue2;
@@ -716,12 +728,12 @@ describe('v1.RegionSslPoliciesClient', () => {
         new protos.google.cloud.compute.v1.ListAvailableFeaturesRegionSslPoliciesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListAvailableFeaturesRegionSslPoliciesRequest',
+        '.google.cloud.compute.v1.ListAvailableFeaturesRegionSslPoliciesRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'ListAvailableFeaturesRegionSslPoliciesRequest',
+        '.google.cloud.compute.v1.ListAvailableFeaturesRegionSslPoliciesRequest',
         ['region']
       );
       request.region = defaultValue2;
@@ -753,12 +765,12 @@ describe('v1.RegionSslPoliciesClient', () => {
         new protos.google.cloud.compute.v1.ListAvailableFeaturesRegionSslPoliciesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListAvailableFeaturesRegionSslPoliciesRequest',
+        '.google.cloud.compute.v1.ListAvailableFeaturesRegionSslPoliciesRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'ListAvailableFeaturesRegionSslPoliciesRequest',
+        '.google.cloud.compute.v1.ListAvailableFeaturesRegionSslPoliciesRequest',
         ['region']
       );
       request.region = defaultValue2;
@@ -805,12 +817,12 @@ describe('v1.RegionSslPoliciesClient', () => {
         new protos.google.cloud.compute.v1.ListAvailableFeaturesRegionSslPoliciesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListAvailableFeaturesRegionSslPoliciesRequest',
+        '.google.cloud.compute.v1.ListAvailableFeaturesRegionSslPoliciesRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'ListAvailableFeaturesRegionSslPoliciesRequest',
+        '.google.cloud.compute.v1.ListAvailableFeaturesRegionSslPoliciesRequest',
         ['region']
       );
       request.region = defaultValue2;
@@ -844,12 +856,12 @@ describe('v1.RegionSslPoliciesClient', () => {
         new protos.google.cloud.compute.v1.ListAvailableFeaturesRegionSslPoliciesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListAvailableFeaturesRegionSslPoliciesRequest',
+        '.google.cloud.compute.v1.ListAvailableFeaturesRegionSslPoliciesRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'ListAvailableFeaturesRegionSslPoliciesRequest',
+        '.google.cloud.compute.v1.ListAvailableFeaturesRegionSslPoliciesRequest',
         ['region']
       );
       request.region = defaultValue2;
@@ -872,17 +884,20 @@ describe('v1.RegionSslPoliciesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchRegionSslPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('PatchRegionSslPolicyRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchRegionSslPolicyRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('PatchRegionSslPolicyRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchRegionSslPolicyRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('PatchRegionSslPolicyRequest', [
-        'sslPolicy',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchRegionSslPolicyRequest',
+        ['sslPolicy']
+      );
       request.sslPolicy = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&ssl_policy=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -909,17 +924,20 @@ describe('v1.RegionSslPoliciesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchRegionSslPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('PatchRegionSslPolicyRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchRegionSslPolicyRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('PatchRegionSslPolicyRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchRegionSslPolicyRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('PatchRegionSslPolicyRequest', [
-        'sslPolicy',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchRegionSslPolicyRequest',
+        ['sslPolicy']
+      );
       request.sslPolicy = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&ssl_policy=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -961,17 +979,20 @@ describe('v1.RegionSslPoliciesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchRegionSslPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('PatchRegionSslPolicyRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchRegionSslPolicyRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('PatchRegionSslPolicyRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchRegionSslPolicyRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('PatchRegionSslPolicyRequest', [
-        'sslPolicy',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchRegionSslPolicyRequest',
+        ['sslPolicy']
+      );
       request.sslPolicy = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&ssl_policy=${defaultValue3}`;
       const expectedError = new Error('expected');
@@ -995,17 +1016,20 @@ describe('v1.RegionSslPoliciesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchRegionSslPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('PatchRegionSslPolicyRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchRegionSslPolicyRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('PatchRegionSslPolicyRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchRegionSslPolicyRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('PatchRegionSslPolicyRequest', [
-        'sslPolicy',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchRegionSslPolicyRequest',
+        ['sslPolicy']
+      );
       request.sslPolicy = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1024,12 +1048,12 @@ describe('v1.RegionSslPoliciesClient', () => {
         new protos.google.cloud.compute.v1.ListRegionSslPoliciesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListRegionSslPoliciesRequest',
+        '.google.cloud.compute.v1.ListRegionSslPoliciesRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'ListRegionSslPoliciesRequest',
+        '.google.cloud.compute.v1.ListRegionSslPoliciesRequest',
         ['region']
       );
       request.region = defaultValue2;
@@ -1061,12 +1085,12 @@ describe('v1.RegionSslPoliciesClient', () => {
         new protos.google.cloud.compute.v1.ListRegionSslPoliciesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListRegionSslPoliciesRequest',
+        '.google.cloud.compute.v1.ListRegionSslPoliciesRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'ListRegionSslPoliciesRequest',
+        '.google.cloud.compute.v1.ListRegionSslPoliciesRequest',
         ['region']
       );
       request.region = defaultValue2;
@@ -1113,12 +1137,12 @@ describe('v1.RegionSslPoliciesClient', () => {
         new protos.google.cloud.compute.v1.ListRegionSslPoliciesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListRegionSslPoliciesRequest',
+        '.google.cloud.compute.v1.ListRegionSslPoliciesRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'ListRegionSslPoliciesRequest',
+        '.google.cloud.compute.v1.ListRegionSslPoliciesRequest',
         ['region']
       );
       request.region = defaultValue2;
@@ -1145,12 +1169,12 @@ describe('v1.RegionSslPoliciesClient', () => {
         new protos.google.cloud.compute.v1.ListRegionSslPoliciesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListRegionSslPoliciesRequest',
+        '.google.cloud.compute.v1.ListRegionSslPoliciesRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'ListRegionSslPoliciesRequest',
+        '.google.cloud.compute.v1.ListRegionSslPoliciesRequest',
         ['region']
       );
       request.region = defaultValue2;
@@ -1204,12 +1228,12 @@ describe('v1.RegionSslPoliciesClient', () => {
         new protos.google.cloud.compute.v1.ListRegionSslPoliciesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListRegionSslPoliciesRequest',
+        '.google.cloud.compute.v1.ListRegionSslPoliciesRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'ListRegionSslPoliciesRequest',
+        '.google.cloud.compute.v1.ListRegionSslPoliciesRequest',
         ['region']
       );
       request.region = defaultValue2;
@@ -1260,12 +1284,12 @@ describe('v1.RegionSslPoliciesClient', () => {
         new protos.google.cloud.compute.v1.ListRegionSslPoliciesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListRegionSslPoliciesRequest',
+        '.google.cloud.compute.v1.ListRegionSslPoliciesRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'ListRegionSslPoliciesRequest',
+        '.google.cloud.compute.v1.ListRegionSslPoliciesRequest',
         ['region']
       );
       request.region = defaultValue2;
@@ -1307,12 +1331,12 @@ describe('v1.RegionSslPoliciesClient', () => {
         new protos.google.cloud.compute.v1.ListRegionSslPoliciesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListRegionSslPoliciesRequest',
+        '.google.cloud.compute.v1.ListRegionSslPoliciesRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'ListRegionSslPoliciesRequest',
+        '.google.cloud.compute.v1.ListRegionSslPoliciesRequest',
         ['region']
       );
       request.region = defaultValue2;

@@ -250,13 +250,15 @@ describe('v1.MachineImagesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteMachineImageRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteMachineImageRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteMachineImageRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('DeleteMachineImageRequest', [
-        'machineImage',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteMachineImageRequest',
+        ['machineImage']
+      );
       request.machineImage = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&machine_image=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
@@ -284,13 +286,15 @@ describe('v1.MachineImagesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteMachineImageRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteMachineImageRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteMachineImageRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('DeleteMachineImageRequest', [
-        'machineImage',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteMachineImageRequest',
+        ['machineImage']
+      );
       request.machineImage = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&machine_image=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
@@ -334,13 +338,15 @@ describe('v1.MachineImagesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteMachineImageRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteMachineImageRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteMachineImageRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('DeleteMachineImageRequest', [
-        'machineImage',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteMachineImageRequest',
+        ['machineImage']
+      );
       request.machineImage = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&machine_image=${defaultValue2}`;
       const expectedError = new Error('expected');
@@ -365,13 +371,15 @@ describe('v1.MachineImagesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteMachineImageRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteMachineImageRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteMachineImageRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('DeleteMachineImageRequest', [
-        'machineImage',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteMachineImageRequest',
+        ['machineImage']
+      );
       request.machineImage = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -389,13 +397,15 @@ describe('v1.MachineImagesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetMachineImageRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetMachineImageRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetMachineImageRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetMachineImageRequest', [
-        'machineImage',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetMachineImageRequest',
+        ['machineImage']
+      );
       request.machineImage = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&machine_image=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
@@ -422,13 +432,15 @@ describe('v1.MachineImagesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetMachineImageRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetMachineImageRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetMachineImageRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetMachineImageRequest', [
-        'machineImage',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetMachineImageRequest',
+        ['machineImage']
+      );
       request.machineImage = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&machine_image=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
@@ -470,13 +482,15 @@ describe('v1.MachineImagesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetMachineImageRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetMachineImageRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetMachineImageRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetMachineImageRequest', [
-        'machineImage',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetMachineImageRequest',
+        ['machineImage']
+      );
       request.machineImage = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&machine_image=${defaultValue2}`;
       const expectedError = new Error('expected');
@@ -500,13 +514,15 @@ describe('v1.MachineImagesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetMachineImageRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetMachineImageRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetMachineImageRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetMachineImageRequest', [
-        'machineImage',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetMachineImageRequest',
+        ['machineImage']
+      );
       request.machineImage = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -525,12 +541,12 @@ describe('v1.MachineImagesClient', () => {
         new protos.google.cloud.compute.v1.GetIamPolicyMachineImageRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetIamPolicyMachineImageRequest',
+        '.google.cloud.compute.v1.GetIamPolicyMachineImageRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'GetIamPolicyMachineImageRequest',
+        '.google.cloud.compute.v1.GetIamPolicyMachineImageRequest',
         ['resource']
       );
       request.resource = defaultValue2;
@@ -561,12 +577,12 @@ describe('v1.MachineImagesClient', () => {
         new protos.google.cloud.compute.v1.GetIamPolicyMachineImageRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetIamPolicyMachineImageRequest',
+        '.google.cloud.compute.v1.GetIamPolicyMachineImageRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'GetIamPolicyMachineImageRequest',
+        '.google.cloud.compute.v1.GetIamPolicyMachineImageRequest',
         ['resource']
       );
       request.resource = defaultValue2;
@@ -613,12 +629,12 @@ describe('v1.MachineImagesClient', () => {
         new protos.google.cloud.compute.v1.GetIamPolicyMachineImageRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetIamPolicyMachineImageRequest',
+        '.google.cloud.compute.v1.GetIamPolicyMachineImageRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'GetIamPolicyMachineImageRequest',
+        '.google.cloud.compute.v1.GetIamPolicyMachineImageRequest',
         ['resource']
       );
       request.resource = defaultValue2;
@@ -649,12 +665,12 @@ describe('v1.MachineImagesClient', () => {
         new protos.google.cloud.compute.v1.GetIamPolicyMachineImageRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetIamPolicyMachineImageRequest',
+        '.google.cloud.compute.v1.GetIamPolicyMachineImageRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'GetIamPolicyMachineImageRequest',
+        '.google.cloud.compute.v1.GetIamPolicyMachineImageRequest',
         ['resource']
       );
       request.resource = defaultValue2;
@@ -674,9 +690,10 @@ describe('v1.MachineImagesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertMachineImageRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('InsertMachineImageRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.InsertMachineImageRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -704,9 +721,10 @@ describe('v1.MachineImagesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertMachineImageRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('InsertMachineImageRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.InsertMachineImageRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -750,9 +768,10 @@ describe('v1.MachineImagesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertMachineImageRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('InsertMachineImageRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.InsertMachineImageRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -777,9 +796,10 @@ describe('v1.MachineImagesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertMachineImageRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('InsertMachineImageRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.InsertMachineImageRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -798,12 +818,12 @@ describe('v1.MachineImagesClient', () => {
         new protos.google.cloud.compute.v1.SetIamPolicyMachineImageRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SetIamPolicyMachineImageRequest',
+        '.google.cloud.compute.v1.SetIamPolicyMachineImageRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'SetIamPolicyMachineImageRequest',
+        '.google.cloud.compute.v1.SetIamPolicyMachineImageRequest',
         ['resource']
       );
       request.resource = defaultValue2;
@@ -834,12 +854,12 @@ describe('v1.MachineImagesClient', () => {
         new protos.google.cloud.compute.v1.SetIamPolicyMachineImageRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SetIamPolicyMachineImageRequest',
+        '.google.cloud.compute.v1.SetIamPolicyMachineImageRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'SetIamPolicyMachineImageRequest',
+        '.google.cloud.compute.v1.SetIamPolicyMachineImageRequest',
         ['resource']
       );
       request.resource = defaultValue2;
@@ -886,12 +906,12 @@ describe('v1.MachineImagesClient', () => {
         new protos.google.cloud.compute.v1.SetIamPolicyMachineImageRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SetIamPolicyMachineImageRequest',
+        '.google.cloud.compute.v1.SetIamPolicyMachineImageRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'SetIamPolicyMachineImageRequest',
+        '.google.cloud.compute.v1.SetIamPolicyMachineImageRequest',
         ['resource']
       );
       request.resource = defaultValue2;
@@ -922,12 +942,12 @@ describe('v1.MachineImagesClient', () => {
         new protos.google.cloud.compute.v1.SetIamPolicyMachineImageRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SetIamPolicyMachineImageRequest',
+        '.google.cloud.compute.v1.SetIamPolicyMachineImageRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'SetIamPolicyMachineImageRequest',
+        '.google.cloud.compute.v1.SetIamPolicyMachineImageRequest',
         ['resource']
       );
       request.resource = defaultValue2;
@@ -948,12 +968,12 @@ describe('v1.MachineImagesClient', () => {
         new protos.google.cloud.compute.v1.TestIamPermissionsMachineImageRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'TestIamPermissionsMachineImageRequest',
+        '.google.cloud.compute.v1.TestIamPermissionsMachineImageRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'TestIamPermissionsMachineImageRequest',
+        '.google.cloud.compute.v1.TestIamPermissionsMachineImageRequest',
         ['resource']
       );
       request.resource = defaultValue2;
@@ -985,12 +1005,12 @@ describe('v1.MachineImagesClient', () => {
         new protos.google.cloud.compute.v1.TestIamPermissionsMachineImageRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'TestIamPermissionsMachineImageRequest',
+        '.google.cloud.compute.v1.TestIamPermissionsMachineImageRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'TestIamPermissionsMachineImageRequest',
+        '.google.cloud.compute.v1.TestIamPermissionsMachineImageRequest',
         ['resource']
       );
       request.resource = defaultValue2;
@@ -1037,12 +1057,12 @@ describe('v1.MachineImagesClient', () => {
         new protos.google.cloud.compute.v1.TestIamPermissionsMachineImageRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'TestIamPermissionsMachineImageRequest',
+        '.google.cloud.compute.v1.TestIamPermissionsMachineImageRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'TestIamPermissionsMachineImageRequest',
+        '.google.cloud.compute.v1.TestIamPermissionsMachineImageRequest',
         ['resource']
       );
       request.resource = defaultValue2;
@@ -1073,12 +1093,12 @@ describe('v1.MachineImagesClient', () => {
         new protos.google.cloud.compute.v1.TestIamPermissionsMachineImageRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'TestIamPermissionsMachineImageRequest',
+        '.google.cloud.compute.v1.TestIamPermissionsMachineImageRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'TestIamPermissionsMachineImageRequest',
+        '.google.cloud.compute.v1.TestIamPermissionsMachineImageRequest',
         ['resource']
       );
       request.resource = defaultValue2;
@@ -1098,9 +1118,10 @@ describe('v1.MachineImagesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListMachineImagesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListMachineImagesRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListMachineImagesRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedResponse = [
@@ -1135,9 +1156,10 @@ describe('v1.MachineImagesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListMachineImagesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListMachineImagesRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListMachineImagesRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedResponse = [
@@ -1187,9 +1209,10 @@ describe('v1.MachineImagesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListMachineImagesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListMachineImagesRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListMachineImagesRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1213,9 +1236,10 @@ describe('v1.MachineImagesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListMachineImagesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListMachineImagesRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListMachineImagesRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedResponse = [
@@ -1272,9 +1296,10 @@ describe('v1.MachineImagesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListMachineImagesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListMachineImagesRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListMachineImagesRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1322,9 +1347,10 @@ describe('v1.MachineImagesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListMachineImagesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListMachineImagesRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListMachineImagesRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedResponse = [
@@ -1369,9 +1395,10 @@ describe('v1.MachineImagesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListMachineImagesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListMachineImagesRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListMachineImagesRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedError = new Error('expected');

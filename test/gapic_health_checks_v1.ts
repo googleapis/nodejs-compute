@@ -248,13 +248,15 @@ describe('v1.HealthChecksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteHealthCheckRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteHealthCheckRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteHealthCheckRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('DeleteHealthCheckRequest', [
-        'healthCheck',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteHealthCheckRequest',
+        ['healthCheck']
+      );
       request.healthCheck = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&health_check=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
@@ -282,13 +284,15 @@ describe('v1.HealthChecksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteHealthCheckRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteHealthCheckRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteHealthCheckRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('DeleteHealthCheckRequest', [
-        'healthCheck',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteHealthCheckRequest',
+        ['healthCheck']
+      );
       request.healthCheck = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&health_check=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
@@ -332,13 +336,15 @@ describe('v1.HealthChecksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteHealthCheckRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteHealthCheckRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteHealthCheckRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('DeleteHealthCheckRequest', [
-        'healthCheck',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteHealthCheckRequest',
+        ['healthCheck']
+      );
       request.healthCheck = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&health_check=${defaultValue2}`;
       const expectedError = new Error('expected');
@@ -363,13 +369,15 @@ describe('v1.HealthChecksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteHealthCheckRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteHealthCheckRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteHealthCheckRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('DeleteHealthCheckRequest', [
-        'healthCheck',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteHealthCheckRequest',
+        ['healthCheck']
+      );
       request.healthCheck = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -387,13 +395,15 @@ describe('v1.HealthChecksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetHealthCheckRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetHealthCheckRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetHealthCheckRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetHealthCheckRequest', [
-        'healthCheck',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetHealthCheckRequest',
+        ['healthCheck']
+      );
       request.healthCheck = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&health_check=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
@@ -420,13 +430,15 @@ describe('v1.HealthChecksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetHealthCheckRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetHealthCheckRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetHealthCheckRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetHealthCheckRequest', [
-        'healthCheck',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetHealthCheckRequest',
+        ['healthCheck']
+      );
       request.healthCheck = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&health_check=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
@@ -468,13 +480,15 @@ describe('v1.HealthChecksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetHealthCheckRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetHealthCheckRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetHealthCheckRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetHealthCheckRequest', [
-        'healthCheck',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetHealthCheckRequest',
+        ['healthCheck']
+      );
       request.healthCheck = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&health_check=${defaultValue2}`;
       const expectedError = new Error('expected');
@@ -498,13 +512,15 @@ describe('v1.HealthChecksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetHealthCheckRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetHealthCheckRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetHealthCheckRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetHealthCheckRequest', [
-        'healthCheck',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetHealthCheckRequest',
+        ['healthCheck']
+      );
       request.healthCheck = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -522,9 +538,10 @@ describe('v1.HealthChecksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertHealthCheckRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('InsertHealthCheckRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.InsertHealthCheckRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -552,9 +569,10 @@ describe('v1.HealthChecksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertHealthCheckRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('InsertHealthCheckRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.InsertHealthCheckRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -598,9 +616,10 @@ describe('v1.HealthChecksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertHealthCheckRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('InsertHealthCheckRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.InsertHealthCheckRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -625,9 +644,10 @@ describe('v1.HealthChecksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertHealthCheckRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('InsertHealthCheckRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.InsertHealthCheckRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -645,13 +665,15 @@ describe('v1.HealthChecksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchHealthCheckRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('PatchHealthCheckRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchHealthCheckRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('PatchHealthCheckRequest', [
-        'healthCheck',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchHealthCheckRequest',
+        ['healthCheck']
+      );
       request.healthCheck = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&health_check=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
@@ -678,13 +700,15 @@ describe('v1.HealthChecksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchHealthCheckRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('PatchHealthCheckRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchHealthCheckRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('PatchHealthCheckRequest', [
-        'healthCheck',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchHealthCheckRequest',
+        ['healthCheck']
+      );
       request.healthCheck = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&health_check=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
@@ -726,13 +750,15 @@ describe('v1.HealthChecksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchHealthCheckRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('PatchHealthCheckRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchHealthCheckRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('PatchHealthCheckRequest', [
-        'healthCheck',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchHealthCheckRequest',
+        ['healthCheck']
+      );
       request.healthCheck = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&health_check=${defaultValue2}`;
       const expectedError = new Error('expected');
@@ -756,13 +782,15 @@ describe('v1.HealthChecksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchHealthCheckRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('PatchHealthCheckRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchHealthCheckRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('PatchHealthCheckRequest', [
-        'healthCheck',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchHealthCheckRequest',
+        ['healthCheck']
+      );
       request.healthCheck = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -780,13 +808,15 @@ describe('v1.HealthChecksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.UpdateHealthCheckRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('UpdateHealthCheckRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.UpdateHealthCheckRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('UpdateHealthCheckRequest', [
-        'healthCheck',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.UpdateHealthCheckRequest',
+        ['healthCheck']
+      );
       request.healthCheck = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&health_check=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
@@ -814,13 +844,15 @@ describe('v1.HealthChecksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.UpdateHealthCheckRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('UpdateHealthCheckRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.UpdateHealthCheckRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('UpdateHealthCheckRequest', [
-        'healthCheck',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.UpdateHealthCheckRequest',
+        ['healthCheck']
+      );
       request.healthCheck = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&health_check=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
@@ -864,13 +896,15 @@ describe('v1.HealthChecksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.UpdateHealthCheckRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('UpdateHealthCheckRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.UpdateHealthCheckRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('UpdateHealthCheckRequest', [
-        'healthCheck',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.UpdateHealthCheckRequest',
+        ['healthCheck']
+      );
       request.healthCheck = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&health_check=${defaultValue2}`;
       const expectedError = new Error('expected');
@@ -895,13 +929,15 @@ describe('v1.HealthChecksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.UpdateHealthCheckRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('UpdateHealthCheckRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.UpdateHealthCheckRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('UpdateHealthCheckRequest', [
-        'healthCheck',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.UpdateHealthCheckRequest',
+        ['healthCheck']
+      );
       request.healthCheck = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -920,7 +956,7 @@ describe('v1.HealthChecksClient', () => {
         new protos.google.cloud.compute.v1.AggregatedListHealthChecksRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'AggregatedListHealthChecksRequest',
+        '.google.cloud.compute.v1.AggregatedListHealthChecksRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -980,7 +1016,7 @@ describe('v1.HealthChecksClient', () => {
         new protos.google.cloud.compute.v1.AggregatedListHealthChecksRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'AggregatedListHealthChecksRequest',
+        '.google.cloud.compute.v1.AggregatedListHealthChecksRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -1023,9 +1059,10 @@ describe('v1.HealthChecksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListHealthChecksRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListHealthChecksRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListHealthChecksRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedResponse = [
@@ -1054,9 +1091,10 @@ describe('v1.HealthChecksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListHealthChecksRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListHealthChecksRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListHealthChecksRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedResponse = [
@@ -1100,9 +1138,10 @@ describe('v1.HealthChecksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListHealthChecksRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListHealthChecksRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListHealthChecksRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1126,9 +1165,10 @@ describe('v1.HealthChecksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListHealthChecksRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListHealthChecksRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListHealthChecksRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedResponse = [
@@ -1179,9 +1219,10 @@ describe('v1.HealthChecksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListHealthChecksRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListHealthChecksRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListHealthChecksRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1229,9 +1270,10 @@ describe('v1.HealthChecksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListHealthChecksRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListHealthChecksRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListHealthChecksRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedResponse = [
@@ -1270,9 +1312,10 @@ describe('v1.HealthChecksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListHealthChecksRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListHealthChecksRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListHealthChecksRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedError = new Error('expected');

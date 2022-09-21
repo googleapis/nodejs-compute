@@ -248,17 +248,20 @@ describe('v1.VpnGatewaysClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteVpnGatewayRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteVpnGatewayRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteVpnGatewayRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('DeleteVpnGatewayRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteVpnGatewayRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('DeleteVpnGatewayRequest', [
-        'vpnGateway',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteVpnGatewayRequest',
+        ['vpnGateway']
+      );
       request.vpnGateway = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&vpn_gateway=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -286,17 +289,20 @@ describe('v1.VpnGatewaysClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteVpnGatewayRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteVpnGatewayRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteVpnGatewayRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('DeleteVpnGatewayRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteVpnGatewayRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('DeleteVpnGatewayRequest', [
-        'vpnGateway',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteVpnGatewayRequest',
+        ['vpnGateway']
+      );
       request.vpnGateway = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&vpn_gateway=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -340,17 +346,20 @@ describe('v1.VpnGatewaysClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteVpnGatewayRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteVpnGatewayRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteVpnGatewayRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('DeleteVpnGatewayRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteVpnGatewayRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('DeleteVpnGatewayRequest', [
-        'vpnGateway',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteVpnGatewayRequest',
+        ['vpnGateway']
+      );
       request.vpnGateway = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&vpn_gateway=${defaultValue3}`;
       const expectedError = new Error('expected');
@@ -375,17 +384,20 @@ describe('v1.VpnGatewaysClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteVpnGatewayRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteVpnGatewayRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteVpnGatewayRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('DeleteVpnGatewayRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteVpnGatewayRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('DeleteVpnGatewayRequest', [
-        'vpnGateway',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteVpnGatewayRequest',
+        ['vpnGateway']
+      );
       request.vpnGateway = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -403,17 +415,20 @@ describe('v1.VpnGatewaysClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetVpnGatewayRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetVpnGatewayRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetVpnGatewayRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetVpnGatewayRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetVpnGatewayRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('GetVpnGatewayRequest', [
-        'vpnGateway',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetVpnGatewayRequest',
+        ['vpnGateway']
+      );
       request.vpnGateway = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&vpn_gateway=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -440,17 +455,20 @@ describe('v1.VpnGatewaysClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetVpnGatewayRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetVpnGatewayRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetVpnGatewayRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetVpnGatewayRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetVpnGatewayRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('GetVpnGatewayRequest', [
-        'vpnGateway',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetVpnGatewayRequest',
+        ['vpnGateway']
+      );
       request.vpnGateway = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&vpn_gateway=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -492,17 +510,20 @@ describe('v1.VpnGatewaysClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetVpnGatewayRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetVpnGatewayRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetVpnGatewayRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetVpnGatewayRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetVpnGatewayRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('GetVpnGatewayRequest', [
-        'vpnGateway',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetVpnGatewayRequest',
+        ['vpnGateway']
+      );
       request.vpnGateway = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&vpn_gateway=${defaultValue3}`;
       const expectedError = new Error('expected');
@@ -526,17 +547,20 @@ describe('v1.VpnGatewaysClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetVpnGatewayRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetVpnGatewayRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetVpnGatewayRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetVpnGatewayRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetVpnGatewayRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('GetVpnGatewayRequest', [
-        'vpnGateway',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetVpnGatewayRequest',
+        ['vpnGateway']
+      );
       request.vpnGateway = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -554,17 +578,20 @@ describe('v1.VpnGatewaysClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetStatusVpnGatewayRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetStatusVpnGatewayRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetStatusVpnGatewayRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetStatusVpnGatewayRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetStatusVpnGatewayRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('GetStatusVpnGatewayRequest', [
-        'vpnGateway',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetStatusVpnGatewayRequest',
+        ['vpnGateway']
+      );
       request.vpnGateway = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&vpn_gateway=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -592,17 +619,20 @@ describe('v1.VpnGatewaysClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetStatusVpnGatewayRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetStatusVpnGatewayRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetStatusVpnGatewayRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetStatusVpnGatewayRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetStatusVpnGatewayRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('GetStatusVpnGatewayRequest', [
-        'vpnGateway',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetStatusVpnGatewayRequest',
+        ['vpnGateway']
+      );
       request.vpnGateway = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&vpn_gateway=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -646,17 +676,20 @@ describe('v1.VpnGatewaysClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetStatusVpnGatewayRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetStatusVpnGatewayRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetStatusVpnGatewayRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetStatusVpnGatewayRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetStatusVpnGatewayRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('GetStatusVpnGatewayRequest', [
-        'vpnGateway',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetStatusVpnGatewayRequest',
+        ['vpnGateway']
+      );
       request.vpnGateway = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&vpn_gateway=${defaultValue3}`;
       const expectedError = new Error('expected');
@@ -681,17 +714,20 @@ describe('v1.VpnGatewaysClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetStatusVpnGatewayRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetStatusVpnGatewayRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetStatusVpnGatewayRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetStatusVpnGatewayRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetStatusVpnGatewayRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('GetStatusVpnGatewayRequest', [
-        'vpnGateway',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetStatusVpnGatewayRequest',
+        ['vpnGateway']
+      );
       request.vpnGateway = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -709,13 +745,15 @@ describe('v1.VpnGatewaysClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertVpnGatewayRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('InsertVpnGatewayRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.InsertVpnGatewayRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('InsertVpnGatewayRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.InsertVpnGatewayRequest',
+        ['region']
+      );
       request.region = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
@@ -743,13 +781,15 @@ describe('v1.VpnGatewaysClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertVpnGatewayRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('InsertVpnGatewayRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.InsertVpnGatewayRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('InsertVpnGatewayRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.InsertVpnGatewayRequest',
+        ['region']
+      );
       request.region = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
@@ -793,13 +833,15 @@ describe('v1.VpnGatewaysClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertVpnGatewayRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('InsertVpnGatewayRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.InsertVpnGatewayRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('InsertVpnGatewayRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.InsertVpnGatewayRequest',
+        ['region']
+      );
       request.region = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}`;
       const expectedError = new Error('expected');
@@ -824,13 +866,15 @@ describe('v1.VpnGatewaysClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertVpnGatewayRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('InsertVpnGatewayRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.InsertVpnGatewayRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('InsertVpnGatewayRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.InsertVpnGatewayRequest',
+        ['region']
+      );
       request.region = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -848,17 +892,20 @@ describe('v1.VpnGatewaysClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetLabelsVpnGatewayRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SetLabelsVpnGatewayRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetLabelsVpnGatewayRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('SetLabelsVpnGatewayRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetLabelsVpnGatewayRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('SetLabelsVpnGatewayRequest', [
-        'resource',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetLabelsVpnGatewayRequest',
+        ['resource']
+      );
       request.resource = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&resource=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -886,17 +933,20 @@ describe('v1.VpnGatewaysClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetLabelsVpnGatewayRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SetLabelsVpnGatewayRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetLabelsVpnGatewayRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('SetLabelsVpnGatewayRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetLabelsVpnGatewayRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('SetLabelsVpnGatewayRequest', [
-        'resource',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetLabelsVpnGatewayRequest',
+        ['resource']
+      );
       request.resource = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&resource=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -940,17 +990,20 @@ describe('v1.VpnGatewaysClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetLabelsVpnGatewayRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SetLabelsVpnGatewayRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetLabelsVpnGatewayRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('SetLabelsVpnGatewayRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetLabelsVpnGatewayRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('SetLabelsVpnGatewayRequest', [
-        'resource',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetLabelsVpnGatewayRequest',
+        ['resource']
+      );
       request.resource = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&resource=${defaultValue3}`;
       const expectedError = new Error('expected');
@@ -975,17 +1028,20 @@ describe('v1.VpnGatewaysClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetLabelsVpnGatewayRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SetLabelsVpnGatewayRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetLabelsVpnGatewayRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('SetLabelsVpnGatewayRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetLabelsVpnGatewayRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('SetLabelsVpnGatewayRequest', [
-        'resource',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetLabelsVpnGatewayRequest',
+        ['resource']
+      );
       request.resource = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1004,17 +1060,17 @@ describe('v1.VpnGatewaysClient', () => {
         new protos.google.cloud.compute.v1.TestIamPermissionsVpnGatewayRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'TestIamPermissionsVpnGatewayRequest',
+        '.google.cloud.compute.v1.TestIamPermissionsVpnGatewayRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'TestIamPermissionsVpnGatewayRequest',
+        '.google.cloud.compute.v1.TestIamPermissionsVpnGatewayRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'TestIamPermissionsVpnGatewayRequest',
+        '.google.cloud.compute.v1.TestIamPermissionsVpnGatewayRequest',
         ['resource']
       );
       request.resource = defaultValue3;
@@ -1046,17 +1102,17 @@ describe('v1.VpnGatewaysClient', () => {
         new protos.google.cloud.compute.v1.TestIamPermissionsVpnGatewayRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'TestIamPermissionsVpnGatewayRequest',
+        '.google.cloud.compute.v1.TestIamPermissionsVpnGatewayRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'TestIamPermissionsVpnGatewayRequest',
+        '.google.cloud.compute.v1.TestIamPermissionsVpnGatewayRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'TestIamPermissionsVpnGatewayRequest',
+        '.google.cloud.compute.v1.TestIamPermissionsVpnGatewayRequest',
         ['resource']
       );
       request.resource = defaultValue3;
@@ -1103,17 +1159,17 @@ describe('v1.VpnGatewaysClient', () => {
         new protos.google.cloud.compute.v1.TestIamPermissionsVpnGatewayRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'TestIamPermissionsVpnGatewayRequest',
+        '.google.cloud.compute.v1.TestIamPermissionsVpnGatewayRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'TestIamPermissionsVpnGatewayRequest',
+        '.google.cloud.compute.v1.TestIamPermissionsVpnGatewayRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'TestIamPermissionsVpnGatewayRequest',
+        '.google.cloud.compute.v1.TestIamPermissionsVpnGatewayRequest',
         ['resource']
       );
       request.resource = defaultValue3;
@@ -1144,17 +1200,17 @@ describe('v1.VpnGatewaysClient', () => {
         new protos.google.cloud.compute.v1.TestIamPermissionsVpnGatewayRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'TestIamPermissionsVpnGatewayRequest',
+        '.google.cloud.compute.v1.TestIamPermissionsVpnGatewayRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'TestIamPermissionsVpnGatewayRequest',
+        '.google.cloud.compute.v1.TestIamPermissionsVpnGatewayRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'TestIamPermissionsVpnGatewayRequest',
+        '.google.cloud.compute.v1.TestIamPermissionsVpnGatewayRequest',
         ['resource']
       );
       request.resource = defaultValue3;
@@ -1175,7 +1231,7 @@ describe('v1.VpnGatewaysClient', () => {
         new protos.google.cloud.compute.v1.AggregatedListVpnGatewaysRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'AggregatedListVpnGatewaysRequest',
+        '.google.cloud.compute.v1.AggregatedListVpnGatewaysRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -1235,7 +1291,7 @@ describe('v1.VpnGatewaysClient', () => {
         new protos.google.cloud.compute.v1.AggregatedListVpnGatewaysRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'AggregatedListVpnGatewaysRequest',
+        '.google.cloud.compute.v1.AggregatedListVpnGatewaysRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -1278,13 +1334,15 @@ describe('v1.VpnGatewaysClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListVpnGatewaysRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListVpnGatewaysRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListVpnGatewaysRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ListVpnGatewaysRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListVpnGatewaysRequest',
+        ['region']
+      );
       request.region = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}`;
       const expectedResponse = [
@@ -1313,13 +1371,15 @@ describe('v1.VpnGatewaysClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListVpnGatewaysRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListVpnGatewaysRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListVpnGatewaysRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ListVpnGatewaysRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListVpnGatewaysRequest',
+        ['region']
+      );
       request.region = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}`;
       const expectedResponse = [
@@ -1363,13 +1423,15 @@ describe('v1.VpnGatewaysClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListVpnGatewaysRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListVpnGatewaysRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListVpnGatewaysRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ListVpnGatewaysRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListVpnGatewaysRequest',
+        ['region']
+      );
       request.region = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}`;
       const expectedError = new Error('expected');
@@ -1393,13 +1455,15 @@ describe('v1.VpnGatewaysClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListVpnGatewaysRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListVpnGatewaysRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListVpnGatewaysRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ListVpnGatewaysRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListVpnGatewaysRequest',
+        ['region']
+      );
       request.region = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}`;
       const expectedResponse = [
@@ -1450,13 +1514,15 @@ describe('v1.VpnGatewaysClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListVpnGatewaysRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListVpnGatewaysRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListVpnGatewaysRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ListVpnGatewaysRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListVpnGatewaysRequest',
+        ['region']
+      );
       request.region = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}`;
       const expectedError = new Error('expected');
@@ -1504,13 +1570,15 @@ describe('v1.VpnGatewaysClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListVpnGatewaysRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListVpnGatewaysRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListVpnGatewaysRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ListVpnGatewaysRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListVpnGatewaysRequest',
+        ['region']
+      );
       request.region = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}`;
       const expectedResponse = [
@@ -1549,13 +1617,15 @@ describe('v1.VpnGatewaysClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListVpnGatewaysRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListVpnGatewaysRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListVpnGatewaysRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ListVpnGatewaysRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListVpnGatewaysRequest',
+        ['region']
+      );
       request.region = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}`;
       const expectedError = new Error('expected');

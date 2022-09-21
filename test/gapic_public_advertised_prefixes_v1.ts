@@ -262,12 +262,12 @@ describe('v1.PublicAdvertisedPrefixesClient', () => {
         new protos.google.cloud.compute.v1.DeletePublicAdvertisedPrefixeRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeletePublicAdvertisedPrefixeRequest',
+        '.google.cloud.compute.v1.DeletePublicAdvertisedPrefixeRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'DeletePublicAdvertisedPrefixeRequest',
+        '.google.cloud.compute.v1.DeletePublicAdvertisedPrefixeRequest',
         ['publicAdvertisedPrefix']
       );
       request.publicAdvertisedPrefix = defaultValue2;
@@ -299,12 +299,12 @@ describe('v1.PublicAdvertisedPrefixesClient', () => {
         new protos.google.cloud.compute.v1.DeletePublicAdvertisedPrefixeRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeletePublicAdvertisedPrefixeRequest',
+        '.google.cloud.compute.v1.DeletePublicAdvertisedPrefixeRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'DeletePublicAdvertisedPrefixeRequest',
+        '.google.cloud.compute.v1.DeletePublicAdvertisedPrefixeRequest',
         ['publicAdvertisedPrefix']
       );
       request.publicAdvertisedPrefix = defaultValue2;
@@ -352,12 +352,12 @@ describe('v1.PublicAdvertisedPrefixesClient', () => {
         new protos.google.cloud.compute.v1.DeletePublicAdvertisedPrefixeRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeletePublicAdvertisedPrefixeRequest',
+        '.google.cloud.compute.v1.DeletePublicAdvertisedPrefixeRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'DeletePublicAdvertisedPrefixeRequest',
+        '.google.cloud.compute.v1.DeletePublicAdvertisedPrefixeRequest',
         ['publicAdvertisedPrefix']
       );
       request.publicAdvertisedPrefix = defaultValue2;
@@ -386,12 +386,12 @@ describe('v1.PublicAdvertisedPrefixesClient', () => {
         new protos.google.cloud.compute.v1.DeletePublicAdvertisedPrefixeRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeletePublicAdvertisedPrefixeRequest',
+        '.google.cloud.compute.v1.DeletePublicAdvertisedPrefixeRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'DeletePublicAdvertisedPrefixeRequest',
+        '.google.cloud.compute.v1.DeletePublicAdvertisedPrefixeRequest',
         ['publicAdvertisedPrefix']
       );
       request.publicAdvertisedPrefix = defaultValue2;
@@ -413,12 +413,12 @@ describe('v1.PublicAdvertisedPrefixesClient', () => {
         new protos.google.cloud.compute.v1.GetPublicAdvertisedPrefixeRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetPublicAdvertisedPrefixeRequest',
+        '.google.cloud.compute.v1.GetPublicAdvertisedPrefixeRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'GetPublicAdvertisedPrefixeRequest',
+        '.google.cloud.compute.v1.GetPublicAdvertisedPrefixeRequest',
         ['publicAdvertisedPrefix']
       );
       request.publicAdvertisedPrefix = defaultValue2;
@@ -449,12 +449,12 @@ describe('v1.PublicAdvertisedPrefixesClient', () => {
         new protos.google.cloud.compute.v1.GetPublicAdvertisedPrefixeRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetPublicAdvertisedPrefixeRequest',
+        '.google.cloud.compute.v1.GetPublicAdvertisedPrefixeRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'GetPublicAdvertisedPrefixeRequest',
+        '.google.cloud.compute.v1.GetPublicAdvertisedPrefixeRequest',
         ['publicAdvertisedPrefix']
       );
       request.publicAdvertisedPrefix = defaultValue2;
@@ -500,12 +500,12 @@ describe('v1.PublicAdvertisedPrefixesClient', () => {
         new protos.google.cloud.compute.v1.GetPublicAdvertisedPrefixeRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetPublicAdvertisedPrefixeRequest',
+        '.google.cloud.compute.v1.GetPublicAdvertisedPrefixeRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'GetPublicAdvertisedPrefixeRequest',
+        '.google.cloud.compute.v1.GetPublicAdvertisedPrefixeRequest',
         ['publicAdvertisedPrefix']
       );
       request.publicAdvertisedPrefix = defaultValue2;
@@ -533,12 +533,12 @@ describe('v1.PublicAdvertisedPrefixesClient', () => {
         new protos.google.cloud.compute.v1.GetPublicAdvertisedPrefixeRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetPublicAdvertisedPrefixeRequest',
+        '.google.cloud.compute.v1.GetPublicAdvertisedPrefixeRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'GetPublicAdvertisedPrefixeRequest',
+        '.google.cloud.compute.v1.GetPublicAdvertisedPrefixeRequest',
         ['publicAdvertisedPrefix']
       );
       request.publicAdvertisedPrefix = defaultValue2;
@@ -560,7 +560,7 @@ describe('v1.PublicAdvertisedPrefixesClient', () => {
         new protos.google.cloud.compute.v1.InsertPublicAdvertisedPrefixeRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'InsertPublicAdvertisedPrefixeRequest',
+        '.google.cloud.compute.v1.InsertPublicAdvertisedPrefixeRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -592,7 +592,7 @@ describe('v1.PublicAdvertisedPrefixesClient', () => {
         new protos.google.cloud.compute.v1.InsertPublicAdvertisedPrefixeRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'InsertPublicAdvertisedPrefixeRequest',
+        '.google.cloud.compute.v1.InsertPublicAdvertisedPrefixeRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -640,7 +640,7 @@ describe('v1.PublicAdvertisedPrefixesClient', () => {
         new protos.google.cloud.compute.v1.InsertPublicAdvertisedPrefixeRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'InsertPublicAdvertisedPrefixeRequest',
+        '.google.cloud.compute.v1.InsertPublicAdvertisedPrefixeRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -669,7 +669,7 @@ describe('v1.PublicAdvertisedPrefixesClient', () => {
         new protos.google.cloud.compute.v1.InsertPublicAdvertisedPrefixeRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'InsertPublicAdvertisedPrefixeRequest',
+        '.google.cloud.compute.v1.InsertPublicAdvertisedPrefixeRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -691,12 +691,12 @@ describe('v1.PublicAdvertisedPrefixesClient', () => {
         new protos.google.cloud.compute.v1.PatchPublicAdvertisedPrefixeRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'PatchPublicAdvertisedPrefixeRequest',
+        '.google.cloud.compute.v1.PatchPublicAdvertisedPrefixeRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'PatchPublicAdvertisedPrefixeRequest',
+        '.google.cloud.compute.v1.PatchPublicAdvertisedPrefixeRequest',
         ['publicAdvertisedPrefix']
       );
       request.publicAdvertisedPrefix = defaultValue2;
@@ -727,12 +727,12 @@ describe('v1.PublicAdvertisedPrefixesClient', () => {
         new protos.google.cloud.compute.v1.PatchPublicAdvertisedPrefixeRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'PatchPublicAdvertisedPrefixeRequest',
+        '.google.cloud.compute.v1.PatchPublicAdvertisedPrefixeRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'PatchPublicAdvertisedPrefixeRequest',
+        '.google.cloud.compute.v1.PatchPublicAdvertisedPrefixeRequest',
         ['publicAdvertisedPrefix']
       );
       request.publicAdvertisedPrefix = defaultValue2;
@@ -778,12 +778,12 @@ describe('v1.PublicAdvertisedPrefixesClient', () => {
         new protos.google.cloud.compute.v1.PatchPublicAdvertisedPrefixeRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'PatchPublicAdvertisedPrefixeRequest',
+        '.google.cloud.compute.v1.PatchPublicAdvertisedPrefixeRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'PatchPublicAdvertisedPrefixeRequest',
+        '.google.cloud.compute.v1.PatchPublicAdvertisedPrefixeRequest',
         ['publicAdvertisedPrefix']
       );
       request.publicAdvertisedPrefix = defaultValue2;
@@ -811,12 +811,12 @@ describe('v1.PublicAdvertisedPrefixesClient', () => {
         new protos.google.cloud.compute.v1.PatchPublicAdvertisedPrefixeRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'PatchPublicAdvertisedPrefixeRequest',
+        '.google.cloud.compute.v1.PatchPublicAdvertisedPrefixeRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'PatchPublicAdvertisedPrefixeRequest',
+        '.google.cloud.compute.v1.PatchPublicAdvertisedPrefixeRequest',
         ['publicAdvertisedPrefix']
       );
       request.publicAdvertisedPrefix = defaultValue2;
@@ -838,7 +838,7 @@ describe('v1.PublicAdvertisedPrefixesClient', () => {
         new protos.google.cloud.compute.v1.ListPublicAdvertisedPrefixesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListPublicAdvertisedPrefixesRequest',
+        '.google.cloud.compute.v1.ListPublicAdvertisedPrefixesRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -877,7 +877,7 @@ describe('v1.PublicAdvertisedPrefixesClient', () => {
         new protos.google.cloud.compute.v1.ListPublicAdvertisedPrefixesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListPublicAdvertisedPrefixesRequest',
+        '.google.cloud.compute.v1.ListPublicAdvertisedPrefixesRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -933,7 +933,7 @@ describe('v1.PublicAdvertisedPrefixesClient', () => {
         new protos.google.cloud.compute.v1.ListPublicAdvertisedPrefixesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListPublicAdvertisedPrefixesRequest',
+        '.google.cloud.compute.v1.ListPublicAdvertisedPrefixesRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -961,7 +961,7 @@ describe('v1.PublicAdvertisedPrefixesClient', () => {
         new protos.google.cloud.compute.v1.ListPublicAdvertisedPrefixesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListPublicAdvertisedPrefixesRequest',
+        '.google.cloud.compute.v1.ListPublicAdvertisedPrefixesRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -1023,7 +1023,7 @@ describe('v1.PublicAdvertisedPrefixesClient', () => {
         new protos.google.cloud.compute.v1.ListPublicAdvertisedPrefixesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListPublicAdvertisedPrefixesRequest',
+        '.google.cloud.compute.v1.ListPublicAdvertisedPrefixesRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -1076,7 +1076,7 @@ describe('v1.PublicAdvertisedPrefixesClient', () => {
         new protos.google.cloud.compute.v1.ListPublicAdvertisedPrefixesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListPublicAdvertisedPrefixesRequest',
+        '.google.cloud.compute.v1.ListPublicAdvertisedPrefixesRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -1126,7 +1126,7 @@ describe('v1.PublicAdvertisedPrefixesClient', () => {
         new protos.google.cloud.compute.v1.ListPublicAdvertisedPrefixesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListPublicAdvertisedPrefixesRequest',
+        '.google.cloud.compute.v1.ListPublicAdvertisedPrefixesRequest',
         ['project']
       );
       request.project = defaultValue1;

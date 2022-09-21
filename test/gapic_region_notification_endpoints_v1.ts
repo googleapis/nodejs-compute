@@ -277,17 +277,17 @@ describe('v1.RegionNotificationEndpointsClient', () => {
         new protos.google.cloud.compute.v1.DeleteRegionNotificationEndpointRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteRegionNotificationEndpointRequest',
+        '.google.cloud.compute.v1.DeleteRegionNotificationEndpointRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'DeleteRegionNotificationEndpointRequest',
+        '.google.cloud.compute.v1.DeleteRegionNotificationEndpointRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'DeleteRegionNotificationEndpointRequest',
+        '.google.cloud.compute.v1.DeleteRegionNotificationEndpointRequest',
         ['notificationEndpoint']
       );
       request.notificationEndpoint = defaultValue3;
@@ -321,17 +321,17 @@ describe('v1.RegionNotificationEndpointsClient', () => {
         new protos.google.cloud.compute.v1.DeleteRegionNotificationEndpointRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteRegionNotificationEndpointRequest',
+        '.google.cloud.compute.v1.DeleteRegionNotificationEndpointRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'DeleteRegionNotificationEndpointRequest',
+        '.google.cloud.compute.v1.DeleteRegionNotificationEndpointRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'DeleteRegionNotificationEndpointRequest',
+        '.google.cloud.compute.v1.DeleteRegionNotificationEndpointRequest',
         ['notificationEndpoint']
       );
       request.notificationEndpoint = defaultValue3;
@@ -381,17 +381,17 @@ describe('v1.RegionNotificationEndpointsClient', () => {
         new protos.google.cloud.compute.v1.DeleteRegionNotificationEndpointRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteRegionNotificationEndpointRequest',
+        '.google.cloud.compute.v1.DeleteRegionNotificationEndpointRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'DeleteRegionNotificationEndpointRequest',
+        '.google.cloud.compute.v1.DeleteRegionNotificationEndpointRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'DeleteRegionNotificationEndpointRequest',
+        '.google.cloud.compute.v1.DeleteRegionNotificationEndpointRequest',
         ['notificationEndpoint']
       );
       request.notificationEndpoint = defaultValue3;
@@ -422,17 +422,17 @@ describe('v1.RegionNotificationEndpointsClient', () => {
         new protos.google.cloud.compute.v1.DeleteRegionNotificationEndpointRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteRegionNotificationEndpointRequest',
+        '.google.cloud.compute.v1.DeleteRegionNotificationEndpointRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'DeleteRegionNotificationEndpointRequest',
+        '.google.cloud.compute.v1.DeleteRegionNotificationEndpointRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'DeleteRegionNotificationEndpointRequest',
+        '.google.cloud.compute.v1.DeleteRegionNotificationEndpointRequest',
         ['notificationEndpoint']
       );
       request.notificationEndpoint = defaultValue3;
@@ -456,17 +456,17 @@ describe('v1.RegionNotificationEndpointsClient', () => {
         new protos.google.cloud.compute.v1.GetRegionNotificationEndpointRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetRegionNotificationEndpointRequest',
+        '.google.cloud.compute.v1.GetRegionNotificationEndpointRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'GetRegionNotificationEndpointRequest',
+        '.google.cloud.compute.v1.GetRegionNotificationEndpointRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'GetRegionNotificationEndpointRequest',
+        '.google.cloud.compute.v1.GetRegionNotificationEndpointRequest',
         ['notificationEndpoint']
       );
       request.notificationEndpoint = defaultValue3;
@@ -499,17 +499,17 @@ describe('v1.RegionNotificationEndpointsClient', () => {
         new protos.google.cloud.compute.v1.GetRegionNotificationEndpointRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetRegionNotificationEndpointRequest',
+        '.google.cloud.compute.v1.GetRegionNotificationEndpointRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'GetRegionNotificationEndpointRequest',
+        '.google.cloud.compute.v1.GetRegionNotificationEndpointRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'GetRegionNotificationEndpointRequest',
+        '.google.cloud.compute.v1.GetRegionNotificationEndpointRequest',
         ['notificationEndpoint']
       );
       request.notificationEndpoint = defaultValue3;
@@ -557,17 +557,17 @@ describe('v1.RegionNotificationEndpointsClient', () => {
         new protos.google.cloud.compute.v1.GetRegionNotificationEndpointRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetRegionNotificationEndpointRequest',
+        '.google.cloud.compute.v1.GetRegionNotificationEndpointRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'GetRegionNotificationEndpointRequest',
+        '.google.cloud.compute.v1.GetRegionNotificationEndpointRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'GetRegionNotificationEndpointRequest',
+        '.google.cloud.compute.v1.GetRegionNotificationEndpointRequest',
         ['notificationEndpoint']
       );
       request.notificationEndpoint = defaultValue3;
@@ -597,17 +597,17 @@ describe('v1.RegionNotificationEndpointsClient', () => {
         new protos.google.cloud.compute.v1.GetRegionNotificationEndpointRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetRegionNotificationEndpointRequest',
+        '.google.cloud.compute.v1.GetRegionNotificationEndpointRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'GetRegionNotificationEndpointRequest',
+        '.google.cloud.compute.v1.GetRegionNotificationEndpointRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'GetRegionNotificationEndpointRequest',
+        '.google.cloud.compute.v1.GetRegionNotificationEndpointRequest',
         ['notificationEndpoint']
       );
       request.notificationEndpoint = defaultValue3;
@@ -631,12 +631,12 @@ describe('v1.RegionNotificationEndpointsClient', () => {
         new protos.google.cloud.compute.v1.InsertRegionNotificationEndpointRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'InsertRegionNotificationEndpointRequest',
+        '.google.cloud.compute.v1.InsertRegionNotificationEndpointRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'InsertRegionNotificationEndpointRequest',
+        '.google.cloud.compute.v1.InsertRegionNotificationEndpointRequest',
         ['region']
       );
       request.region = defaultValue2;
@@ -670,12 +670,12 @@ describe('v1.RegionNotificationEndpointsClient', () => {
         new protos.google.cloud.compute.v1.InsertRegionNotificationEndpointRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'InsertRegionNotificationEndpointRequest',
+        '.google.cloud.compute.v1.InsertRegionNotificationEndpointRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'InsertRegionNotificationEndpointRequest',
+        '.google.cloud.compute.v1.InsertRegionNotificationEndpointRequest',
         ['region']
       );
       request.region = defaultValue2;
@@ -725,12 +725,12 @@ describe('v1.RegionNotificationEndpointsClient', () => {
         new protos.google.cloud.compute.v1.InsertRegionNotificationEndpointRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'InsertRegionNotificationEndpointRequest',
+        '.google.cloud.compute.v1.InsertRegionNotificationEndpointRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'InsertRegionNotificationEndpointRequest',
+        '.google.cloud.compute.v1.InsertRegionNotificationEndpointRequest',
         ['region']
       );
       request.region = defaultValue2;
@@ -761,12 +761,12 @@ describe('v1.RegionNotificationEndpointsClient', () => {
         new protos.google.cloud.compute.v1.InsertRegionNotificationEndpointRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'InsertRegionNotificationEndpointRequest',
+        '.google.cloud.compute.v1.InsertRegionNotificationEndpointRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'InsertRegionNotificationEndpointRequest',
+        '.google.cloud.compute.v1.InsertRegionNotificationEndpointRequest',
         ['region']
       );
       request.region = defaultValue2;
@@ -790,12 +790,12 @@ describe('v1.RegionNotificationEndpointsClient', () => {
         new protos.google.cloud.compute.v1.ListRegionNotificationEndpointsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListRegionNotificationEndpointsRequest',
+        '.google.cloud.compute.v1.ListRegionNotificationEndpointsRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'ListRegionNotificationEndpointsRequest',
+        '.google.cloud.compute.v1.ListRegionNotificationEndpointsRequest',
         ['region']
       );
       request.region = defaultValue2;
@@ -836,12 +836,12 @@ describe('v1.RegionNotificationEndpointsClient', () => {
         new protos.google.cloud.compute.v1.ListRegionNotificationEndpointsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListRegionNotificationEndpointsRequest',
+        '.google.cloud.compute.v1.ListRegionNotificationEndpointsRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'ListRegionNotificationEndpointsRequest',
+        '.google.cloud.compute.v1.ListRegionNotificationEndpointsRequest',
         ['region']
       );
       request.region = defaultValue2;
@@ -899,12 +899,12 @@ describe('v1.RegionNotificationEndpointsClient', () => {
         new protos.google.cloud.compute.v1.ListRegionNotificationEndpointsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListRegionNotificationEndpointsRequest',
+        '.google.cloud.compute.v1.ListRegionNotificationEndpointsRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'ListRegionNotificationEndpointsRequest',
+        '.google.cloud.compute.v1.ListRegionNotificationEndpointsRequest',
         ['region']
       );
       request.region = defaultValue2;
@@ -934,12 +934,12 @@ describe('v1.RegionNotificationEndpointsClient', () => {
         new protos.google.cloud.compute.v1.ListRegionNotificationEndpointsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListRegionNotificationEndpointsRequest',
+        '.google.cloud.compute.v1.ListRegionNotificationEndpointsRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'ListRegionNotificationEndpointsRequest',
+        '.google.cloud.compute.v1.ListRegionNotificationEndpointsRequest',
         ['region']
       );
       request.region = defaultValue2;
@@ -1003,12 +1003,12 @@ describe('v1.RegionNotificationEndpointsClient', () => {
         new protos.google.cloud.compute.v1.ListRegionNotificationEndpointsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListRegionNotificationEndpointsRequest',
+        '.google.cloud.compute.v1.ListRegionNotificationEndpointsRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'ListRegionNotificationEndpointsRequest',
+        '.google.cloud.compute.v1.ListRegionNotificationEndpointsRequest',
         ['region']
       );
       request.region = defaultValue2;
@@ -1063,12 +1063,12 @@ describe('v1.RegionNotificationEndpointsClient', () => {
         new protos.google.cloud.compute.v1.ListRegionNotificationEndpointsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListRegionNotificationEndpointsRequest',
+        '.google.cloud.compute.v1.ListRegionNotificationEndpointsRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'ListRegionNotificationEndpointsRequest',
+        '.google.cloud.compute.v1.ListRegionNotificationEndpointsRequest',
         ['region']
       );
       request.region = defaultValue2;
@@ -1120,12 +1120,12 @@ describe('v1.RegionNotificationEndpointsClient', () => {
         new protos.google.cloud.compute.v1.ListRegionNotificationEndpointsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListRegionNotificationEndpointsRequest',
+        '.google.cloud.compute.v1.ListRegionNotificationEndpointsRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'ListRegionNotificationEndpointsRequest',
+        '.google.cloud.compute.v1.ListRegionNotificationEndpointsRequest',
         ['region']
       );
       request.region = defaultValue2;

@@ -250,13 +250,15 @@ describe('v1.TargetSslProxiesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteTargetSslProxyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteTargetSslProxyRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteTargetSslProxyRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('DeleteTargetSslProxyRequest', [
-        'targetSslProxy',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteTargetSslProxyRequest',
+        ['targetSslProxy']
+      );
       request.targetSslProxy = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&target_ssl_proxy=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
@@ -284,13 +286,15 @@ describe('v1.TargetSslProxiesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteTargetSslProxyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteTargetSslProxyRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteTargetSslProxyRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('DeleteTargetSslProxyRequest', [
-        'targetSslProxy',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteTargetSslProxyRequest',
+        ['targetSslProxy']
+      );
       request.targetSslProxy = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&target_ssl_proxy=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
@@ -334,13 +338,15 @@ describe('v1.TargetSslProxiesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteTargetSslProxyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteTargetSslProxyRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteTargetSslProxyRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('DeleteTargetSslProxyRequest', [
-        'targetSslProxy',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteTargetSslProxyRequest',
+        ['targetSslProxy']
+      );
       request.targetSslProxy = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&target_ssl_proxy=${defaultValue2}`;
       const expectedError = new Error('expected');
@@ -365,13 +371,15 @@ describe('v1.TargetSslProxiesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteTargetSslProxyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteTargetSslProxyRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteTargetSslProxyRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('DeleteTargetSslProxyRequest', [
-        'targetSslProxy',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteTargetSslProxyRequest',
+        ['targetSslProxy']
+      );
       request.targetSslProxy = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -389,13 +397,15 @@ describe('v1.TargetSslProxiesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetTargetSslProxyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetTargetSslProxyRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetTargetSslProxyRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetTargetSslProxyRequest', [
-        'targetSslProxy',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetTargetSslProxyRequest',
+        ['targetSslProxy']
+      );
       request.targetSslProxy = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&target_ssl_proxy=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
@@ -422,13 +432,15 @@ describe('v1.TargetSslProxiesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetTargetSslProxyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetTargetSslProxyRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetTargetSslProxyRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetTargetSslProxyRequest', [
-        'targetSslProxy',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetTargetSslProxyRequest',
+        ['targetSslProxy']
+      );
       request.targetSslProxy = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&target_ssl_proxy=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
@@ -470,13 +482,15 @@ describe('v1.TargetSslProxiesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetTargetSslProxyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetTargetSslProxyRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetTargetSslProxyRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetTargetSslProxyRequest', [
-        'targetSslProxy',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetTargetSslProxyRequest',
+        ['targetSslProxy']
+      );
       request.targetSslProxy = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&target_ssl_proxy=${defaultValue2}`;
       const expectedError = new Error('expected');
@@ -500,13 +514,15 @@ describe('v1.TargetSslProxiesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetTargetSslProxyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetTargetSslProxyRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetTargetSslProxyRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetTargetSslProxyRequest', [
-        'targetSslProxy',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetTargetSslProxyRequest',
+        ['targetSslProxy']
+      );
       request.targetSslProxy = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -524,9 +540,10 @@ describe('v1.TargetSslProxiesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertTargetSslProxyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('InsertTargetSslProxyRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.InsertTargetSslProxyRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -554,9 +571,10 @@ describe('v1.TargetSslProxiesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertTargetSslProxyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('InsertTargetSslProxyRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.InsertTargetSslProxyRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -600,9 +618,10 @@ describe('v1.TargetSslProxiesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertTargetSslProxyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('InsertTargetSslProxyRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.InsertTargetSslProxyRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -627,9 +646,10 @@ describe('v1.TargetSslProxiesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertTargetSslProxyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('InsertTargetSslProxyRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.InsertTargetSslProxyRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -648,12 +668,12 @@ describe('v1.TargetSslProxiesClient', () => {
         new protos.google.cloud.compute.v1.SetBackendServiceTargetSslProxyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SetBackendServiceTargetSslProxyRequest',
+        '.google.cloud.compute.v1.SetBackendServiceTargetSslProxyRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'SetBackendServiceTargetSslProxyRequest',
+        '.google.cloud.compute.v1.SetBackendServiceTargetSslProxyRequest',
         ['targetSslProxy']
       );
       request.targetSslProxy = defaultValue2;
@@ -684,12 +704,12 @@ describe('v1.TargetSslProxiesClient', () => {
         new protos.google.cloud.compute.v1.SetBackendServiceTargetSslProxyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SetBackendServiceTargetSslProxyRequest',
+        '.google.cloud.compute.v1.SetBackendServiceTargetSslProxyRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'SetBackendServiceTargetSslProxyRequest',
+        '.google.cloud.compute.v1.SetBackendServiceTargetSslProxyRequest',
         ['targetSslProxy']
       );
       request.targetSslProxy = defaultValue2;
@@ -736,12 +756,12 @@ describe('v1.TargetSslProxiesClient', () => {
         new protos.google.cloud.compute.v1.SetBackendServiceTargetSslProxyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SetBackendServiceTargetSslProxyRequest',
+        '.google.cloud.compute.v1.SetBackendServiceTargetSslProxyRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'SetBackendServiceTargetSslProxyRequest',
+        '.google.cloud.compute.v1.SetBackendServiceTargetSslProxyRequest',
         ['targetSslProxy']
       );
       request.targetSslProxy = defaultValue2;
@@ -772,12 +792,12 @@ describe('v1.TargetSslProxiesClient', () => {
         new protos.google.cloud.compute.v1.SetBackendServiceTargetSslProxyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SetBackendServiceTargetSslProxyRequest',
+        '.google.cloud.compute.v1.SetBackendServiceTargetSslProxyRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'SetBackendServiceTargetSslProxyRequest',
+        '.google.cloud.compute.v1.SetBackendServiceTargetSslProxyRequest',
         ['targetSslProxy']
       );
       request.targetSslProxy = defaultValue2;
@@ -798,12 +818,12 @@ describe('v1.TargetSslProxiesClient', () => {
         new protos.google.cloud.compute.v1.SetCertificateMapTargetSslProxyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SetCertificateMapTargetSslProxyRequest',
+        '.google.cloud.compute.v1.SetCertificateMapTargetSslProxyRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'SetCertificateMapTargetSslProxyRequest',
+        '.google.cloud.compute.v1.SetCertificateMapTargetSslProxyRequest',
         ['targetSslProxy']
       );
       request.targetSslProxy = defaultValue2;
@@ -834,12 +854,12 @@ describe('v1.TargetSslProxiesClient', () => {
         new protos.google.cloud.compute.v1.SetCertificateMapTargetSslProxyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SetCertificateMapTargetSslProxyRequest',
+        '.google.cloud.compute.v1.SetCertificateMapTargetSslProxyRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'SetCertificateMapTargetSslProxyRequest',
+        '.google.cloud.compute.v1.SetCertificateMapTargetSslProxyRequest',
         ['targetSslProxy']
       );
       request.targetSslProxy = defaultValue2;
@@ -886,12 +906,12 @@ describe('v1.TargetSslProxiesClient', () => {
         new protos.google.cloud.compute.v1.SetCertificateMapTargetSslProxyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SetCertificateMapTargetSslProxyRequest',
+        '.google.cloud.compute.v1.SetCertificateMapTargetSslProxyRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'SetCertificateMapTargetSslProxyRequest',
+        '.google.cloud.compute.v1.SetCertificateMapTargetSslProxyRequest',
         ['targetSslProxy']
       );
       request.targetSslProxy = defaultValue2;
@@ -922,12 +942,12 @@ describe('v1.TargetSslProxiesClient', () => {
         new protos.google.cloud.compute.v1.SetCertificateMapTargetSslProxyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SetCertificateMapTargetSslProxyRequest',
+        '.google.cloud.compute.v1.SetCertificateMapTargetSslProxyRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'SetCertificateMapTargetSslProxyRequest',
+        '.google.cloud.compute.v1.SetCertificateMapTargetSslProxyRequest',
         ['targetSslProxy']
       );
       request.targetSslProxy = defaultValue2;
@@ -948,12 +968,12 @@ describe('v1.TargetSslProxiesClient', () => {
         new protos.google.cloud.compute.v1.SetProxyHeaderTargetSslProxyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SetProxyHeaderTargetSslProxyRequest',
+        '.google.cloud.compute.v1.SetProxyHeaderTargetSslProxyRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'SetProxyHeaderTargetSslProxyRequest',
+        '.google.cloud.compute.v1.SetProxyHeaderTargetSslProxyRequest',
         ['targetSslProxy']
       );
       request.targetSslProxy = defaultValue2;
@@ -984,12 +1004,12 @@ describe('v1.TargetSslProxiesClient', () => {
         new protos.google.cloud.compute.v1.SetProxyHeaderTargetSslProxyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SetProxyHeaderTargetSslProxyRequest',
+        '.google.cloud.compute.v1.SetProxyHeaderTargetSslProxyRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'SetProxyHeaderTargetSslProxyRequest',
+        '.google.cloud.compute.v1.SetProxyHeaderTargetSslProxyRequest',
         ['targetSslProxy']
       );
       request.targetSslProxy = defaultValue2;
@@ -1036,12 +1056,12 @@ describe('v1.TargetSslProxiesClient', () => {
         new protos.google.cloud.compute.v1.SetProxyHeaderTargetSslProxyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SetProxyHeaderTargetSslProxyRequest',
+        '.google.cloud.compute.v1.SetProxyHeaderTargetSslProxyRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'SetProxyHeaderTargetSslProxyRequest',
+        '.google.cloud.compute.v1.SetProxyHeaderTargetSslProxyRequest',
         ['targetSslProxy']
       );
       request.targetSslProxy = defaultValue2;
@@ -1072,12 +1092,12 @@ describe('v1.TargetSslProxiesClient', () => {
         new protos.google.cloud.compute.v1.SetProxyHeaderTargetSslProxyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SetProxyHeaderTargetSslProxyRequest',
+        '.google.cloud.compute.v1.SetProxyHeaderTargetSslProxyRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'SetProxyHeaderTargetSslProxyRequest',
+        '.google.cloud.compute.v1.SetProxyHeaderTargetSslProxyRequest',
         ['targetSslProxy']
       );
       request.targetSslProxy = defaultValue2;
@@ -1098,12 +1118,12 @@ describe('v1.TargetSslProxiesClient', () => {
         new protos.google.cloud.compute.v1.SetSslCertificatesTargetSslProxyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SetSslCertificatesTargetSslProxyRequest',
+        '.google.cloud.compute.v1.SetSslCertificatesTargetSslProxyRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'SetSslCertificatesTargetSslProxyRequest',
+        '.google.cloud.compute.v1.SetSslCertificatesTargetSslProxyRequest',
         ['targetSslProxy']
       );
       request.targetSslProxy = defaultValue2;
@@ -1135,12 +1155,12 @@ describe('v1.TargetSslProxiesClient', () => {
         new protos.google.cloud.compute.v1.SetSslCertificatesTargetSslProxyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SetSslCertificatesTargetSslProxyRequest',
+        '.google.cloud.compute.v1.SetSslCertificatesTargetSslProxyRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'SetSslCertificatesTargetSslProxyRequest',
+        '.google.cloud.compute.v1.SetSslCertificatesTargetSslProxyRequest',
         ['targetSslProxy']
       );
       request.targetSslProxy = defaultValue2;
@@ -1187,12 +1207,12 @@ describe('v1.TargetSslProxiesClient', () => {
         new protos.google.cloud.compute.v1.SetSslCertificatesTargetSslProxyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SetSslCertificatesTargetSslProxyRequest',
+        '.google.cloud.compute.v1.SetSslCertificatesTargetSslProxyRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'SetSslCertificatesTargetSslProxyRequest',
+        '.google.cloud.compute.v1.SetSslCertificatesTargetSslProxyRequest',
         ['targetSslProxy']
       );
       request.targetSslProxy = defaultValue2;
@@ -1223,12 +1243,12 @@ describe('v1.TargetSslProxiesClient', () => {
         new protos.google.cloud.compute.v1.SetSslCertificatesTargetSslProxyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SetSslCertificatesTargetSslProxyRequest',
+        '.google.cloud.compute.v1.SetSslCertificatesTargetSslProxyRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'SetSslCertificatesTargetSslProxyRequest',
+        '.google.cloud.compute.v1.SetSslCertificatesTargetSslProxyRequest',
         ['targetSslProxy']
       );
       request.targetSslProxy = defaultValue2;
@@ -1249,12 +1269,12 @@ describe('v1.TargetSslProxiesClient', () => {
         new protos.google.cloud.compute.v1.SetSslPolicyTargetSslProxyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SetSslPolicyTargetSslProxyRequest',
+        '.google.cloud.compute.v1.SetSslPolicyTargetSslProxyRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'SetSslPolicyTargetSslProxyRequest',
+        '.google.cloud.compute.v1.SetSslPolicyTargetSslProxyRequest',
         ['targetSslProxy']
       );
       request.targetSslProxy = defaultValue2;
@@ -1285,12 +1305,12 @@ describe('v1.TargetSslProxiesClient', () => {
         new protos.google.cloud.compute.v1.SetSslPolicyTargetSslProxyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SetSslPolicyTargetSslProxyRequest',
+        '.google.cloud.compute.v1.SetSslPolicyTargetSslProxyRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'SetSslPolicyTargetSslProxyRequest',
+        '.google.cloud.compute.v1.SetSslPolicyTargetSslProxyRequest',
         ['targetSslProxy']
       );
       request.targetSslProxy = defaultValue2;
@@ -1337,12 +1357,12 @@ describe('v1.TargetSslProxiesClient', () => {
         new protos.google.cloud.compute.v1.SetSslPolicyTargetSslProxyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SetSslPolicyTargetSslProxyRequest',
+        '.google.cloud.compute.v1.SetSslPolicyTargetSslProxyRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'SetSslPolicyTargetSslProxyRequest',
+        '.google.cloud.compute.v1.SetSslPolicyTargetSslProxyRequest',
         ['targetSslProxy']
       );
       request.targetSslProxy = defaultValue2;
@@ -1373,12 +1393,12 @@ describe('v1.TargetSslProxiesClient', () => {
         new protos.google.cloud.compute.v1.SetSslPolicyTargetSslProxyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SetSslPolicyTargetSslProxyRequest',
+        '.google.cloud.compute.v1.SetSslPolicyTargetSslProxyRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'SetSslPolicyTargetSslProxyRequest',
+        '.google.cloud.compute.v1.SetSslPolicyTargetSslProxyRequest',
         ['targetSslProxy']
       );
       request.targetSslProxy = defaultValue2;
@@ -1398,9 +1418,10 @@ describe('v1.TargetSslProxiesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListTargetSslProxiesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListTargetSslProxiesRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListTargetSslProxiesRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedResponse = [
@@ -1435,9 +1456,10 @@ describe('v1.TargetSslProxiesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListTargetSslProxiesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListTargetSslProxiesRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListTargetSslProxiesRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedResponse = [
@@ -1487,9 +1509,10 @@ describe('v1.TargetSslProxiesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListTargetSslProxiesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListTargetSslProxiesRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListTargetSslProxiesRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1513,9 +1536,10 @@ describe('v1.TargetSslProxiesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListTargetSslProxiesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListTargetSslProxiesRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListTargetSslProxiesRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedResponse = [
@@ -1572,9 +1596,10 @@ describe('v1.TargetSslProxiesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListTargetSslProxiesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListTargetSslProxiesRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListTargetSslProxiesRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1622,9 +1647,10 @@ describe('v1.TargetSslProxiesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListTargetSslProxiesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListTargetSslProxiesRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListTargetSslProxiesRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedResponse = [
@@ -1669,9 +1695,10 @@ describe('v1.TargetSslProxiesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListTargetSslProxiesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListTargetSslProxiesRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListTargetSslProxiesRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedError = new Error('expected');

@@ -249,7 +249,7 @@ describe('v1.ProjectsClient', () => {
         new protos.google.cloud.compute.v1.DisableXpnHostProjectRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DisableXpnHostProjectRequest',
+        '.google.cloud.compute.v1.DisableXpnHostProjectRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -280,7 +280,7 @@ describe('v1.ProjectsClient', () => {
         new protos.google.cloud.compute.v1.DisableXpnHostProjectRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DisableXpnHostProjectRequest',
+        '.google.cloud.compute.v1.DisableXpnHostProjectRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -327,7 +327,7 @@ describe('v1.ProjectsClient', () => {
         new protos.google.cloud.compute.v1.DisableXpnHostProjectRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DisableXpnHostProjectRequest',
+        '.google.cloud.compute.v1.DisableXpnHostProjectRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -358,7 +358,7 @@ describe('v1.ProjectsClient', () => {
         new protos.google.cloud.compute.v1.DisableXpnHostProjectRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DisableXpnHostProjectRequest',
+        '.google.cloud.compute.v1.DisableXpnHostProjectRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -379,7 +379,7 @@ describe('v1.ProjectsClient', () => {
         new protos.google.cloud.compute.v1.DisableXpnResourceProjectRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DisableXpnResourceProjectRequest',
+        '.google.cloud.compute.v1.DisableXpnResourceProjectRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -411,7 +411,7 @@ describe('v1.ProjectsClient', () => {
         new protos.google.cloud.compute.v1.DisableXpnResourceProjectRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DisableXpnResourceProjectRequest',
+        '.google.cloud.compute.v1.DisableXpnResourceProjectRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -458,7 +458,7 @@ describe('v1.ProjectsClient', () => {
         new protos.google.cloud.compute.v1.DisableXpnResourceProjectRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DisableXpnResourceProjectRequest',
+        '.google.cloud.compute.v1.DisableXpnResourceProjectRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -489,7 +489,7 @@ describe('v1.ProjectsClient', () => {
         new protos.google.cloud.compute.v1.DisableXpnResourceProjectRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DisableXpnResourceProjectRequest',
+        '.google.cloud.compute.v1.DisableXpnResourceProjectRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -509,9 +509,10 @@ describe('v1.ProjectsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.EnableXpnHostProjectRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('EnableXpnHostProjectRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.EnableXpnHostProjectRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -539,9 +540,10 @@ describe('v1.ProjectsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.EnableXpnHostProjectRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('EnableXpnHostProjectRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.EnableXpnHostProjectRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -585,9 +587,10 @@ describe('v1.ProjectsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.EnableXpnHostProjectRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('EnableXpnHostProjectRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.EnableXpnHostProjectRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -615,9 +618,10 @@ describe('v1.ProjectsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.EnableXpnHostProjectRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('EnableXpnHostProjectRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.EnableXpnHostProjectRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -636,7 +640,7 @@ describe('v1.ProjectsClient', () => {
         new protos.google.cloud.compute.v1.EnableXpnResourceProjectRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'EnableXpnResourceProjectRequest',
+        '.google.cloud.compute.v1.EnableXpnResourceProjectRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -667,7 +671,7 @@ describe('v1.ProjectsClient', () => {
         new protos.google.cloud.compute.v1.EnableXpnResourceProjectRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'EnableXpnResourceProjectRequest',
+        '.google.cloud.compute.v1.EnableXpnResourceProjectRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -714,7 +718,7 @@ describe('v1.ProjectsClient', () => {
         new protos.google.cloud.compute.v1.EnableXpnResourceProjectRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'EnableXpnResourceProjectRequest',
+        '.google.cloud.compute.v1.EnableXpnResourceProjectRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -745,7 +749,7 @@ describe('v1.ProjectsClient', () => {
         new protos.google.cloud.compute.v1.EnableXpnResourceProjectRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'EnableXpnResourceProjectRequest',
+        '.google.cloud.compute.v1.EnableXpnResourceProjectRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -765,9 +769,10 @@ describe('v1.ProjectsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetProjectRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetProjectRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetProjectRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -794,9 +799,10 @@ describe('v1.ProjectsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetProjectRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetProjectRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetProjectRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -838,9 +844,10 @@ describe('v1.ProjectsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetProjectRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetProjectRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetProjectRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -864,9 +871,10 @@ describe('v1.ProjectsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetProjectRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetProjectRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetProjectRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -884,9 +892,10 @@ describe('v1.ProjectsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetXpnHostProjectRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetXpnHostProjectRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetXpnHostProjectRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -914,9 +923,10 @@ describe('v1.ProjectsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetXpnHostProjectRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetXpnHostProjectRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetXpnHostProjectRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -960,9 +970,10 @@ describe('v1.ProjectsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetXpnHostProjectRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetXpnHostProjectRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetXpnHostProjectRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -990,9 +1001,10 @@ describe('v1.ProjectsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetXpnHostProjectRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetXpnHostProjectRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetXpnHostProjectRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1010,9 +1022,10 @@ describe('v1.ProjectsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.MoveDiskProjectRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('MoveDiskProjectRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.MoveDiskProjectRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1040,9 +1053,10 @@ describe('v1.ProjectsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.MoveDiskProjectRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('MoveDiskProjectRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.MoveDiskProjectRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1086,9 +1100,10 @@ describe('v1.ProjectsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.MoveDiskProjectRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('MoveDiskProjectRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.MoveDiskProjectRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1113,9 +1128,10 @@ describe('v1.ProjectsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.MoveDiskProjectRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('MoveDiskProjectRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.MoveDiskProjectRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1133,9 +1149,10 @@ describe('v1.ProjectsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.MoveInstanceProjectRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('MoveInstanceProjectRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.MoveInstanceProjectRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1163,9 +1180,10 @@ describe('v1.ProjectsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.MoveInstanceProjectRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('MoveInstanceProjectRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.MoveInstanceProjectRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1209,9 +1227,10 @@ describe('v1.ProjectsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.MoveInstanceProjectRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('MoveInstanceProjectRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.MoveInstanceProjectRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1239,9 +1258,10 @@ describe('v1.ProjectsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.MoveInstanceProjectRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('MoveInstanceProjectRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.MoveInstanceProjectRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1260,7 +1280,7 @@ describe('v1.ProjectsClient', () => {
         new protos.google.cloud.compute.v1.SetCommonInstanceMetadataProjectRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SetCommonInstanceMetadataProjectRequest',
+        '.google.cloud.compute.v1.SetCommonInstanceMetadataProjectRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -1292,7 +1312,7 @@ describe('v1.ProjectsClient', () => {
         new protos.google.cloud.compute.v1.SetCommonInstanceMetadataProjectRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SetCommonInstanceMetadataProjectRequest',
+        '.google.cloud.compute.v1.SetCommonInstanceMetadataProjectRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -1339,7 +1359,7 @@ describe('v1.ProjectsClient', () => {
         new protos.google.cloud.compute.v1.SetCommonInstanceMetadataProjectRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SetCommonInstanceMetadataProjectRequest',
+        '.google.cloud.compute.v1.SetCommonInstanceMetadataProjectRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -1373,7 +1393,7 @@ describe('v1.ProjectsClient', () => {
         new protos.google.cloud.compute.v1.SetCommonInstanceMetadataProjectRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SetCommonInstanceMetadataProjectRequest',
+        '.google.cloud.compute.v1.SetCommonInstanceMetadataProjectRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -1397,7 +1417,7 @@ describe('v1.ProjectsClient', () => {
         new protos.google.cloud.compute.v1.SetDefaultNetworkTierProjectRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SetDefaultNetworkTierProjectRequest',
+        '.google.cloud.compute.v1.SetDefaultNetworkTierProjectRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -1429,7 +1449,7 @@ describe('v1.ProjectsClient', () => {
         new protos.google.cloud.compute.v1.SetDefaultNetworkTierProjectRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SetDefaultNetworkTierProjectRequest',
+        '.google.cloud.compute.v1.SetDefaultNetworkTierProjectRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -1476,7 +1496,7 @@ describe('v1.ProjectsClient', () => {
         new protos.google.cloud.compute.v1.SetDefaultNetworkTierProjectRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SetDefaultNetworkTierProjectRequest',
+        '.google.cloud.compute.v1.SetDefaultNetworkTierProjectRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -1510,7 +1530,7 @@ describe('v1.ProjectsClient', () => {
         new protos.google.cloud.compute.v1.SetDefaultNetworkTierProjectRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SetDefaultNetworkTierProjectRequest',
+        '.google.cloud.compute.v1.SetDefaultNetworkTierProjectRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -1534,7 +1554,7 @@ describe('v1.ProjectsClient', () => {
         new protos.google.cloud.compute.v1.SetUsageExportBucketProjectRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SetUsageExportBucketProjectRequest',
+        '.google.cloud.compute.v1.SetUsageExportBucketProjectRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -1566,7 +1586,7 @@ describe('v1.ProjectsClient', () => {
         new protos.google.cloud.compute.v1.SetUsageExportBucketProjectRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SetUsageExportBucketProjectRequest',
+        '.google.cloud.compute.v1.SetUsageExportBucketProjectRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -1613,7 +1633,7 @@ describe('v1.ProjectsClient', () => {
         new protos.google.cloud.compute.v1.SetUsageExportBucketProjectRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SetUsageExportBucketProjectRequest',
+        '.google.cloud.compute.v1.SetUsageExportBucketProjectRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -1644,7 +1664,7 @@ describe('v1.ProjectsClient', () => {
         new protos.google.cloud.compute.v1.SetUsageExportBucketProjectRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SetUsageExportBucketProjectRequest',
+        '.google.cloud.compute.v1.SetUsageExportBucketProjectRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -1665,7 +1685,7 @@ describe('v1.ProjectsClient', () => {
         new protos.google.cloud.compute.v1.GetXpnResourcesProjectsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetXpnResourcesProjectsRequest',
+        '.google.cloud.compute.v1.GetXpnResourcesProjectsRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -1704,7 +1724,7 @@ describe('v1.ProjectsClient', () => {
         new protos.google.cloud.compute.v1.GetXpnResourcesProjectsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetXpnResourcesProjectsRequest',
+        '.google.cloud.compute.v1.GetXpnResourcesProjectsRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -1759,7 +1779,7 @@ describe('v1.ProjectsClient', () => {
         new protos.google.cloud.compute.v1.GetXpnResourcesProjectsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetXpnResourcesProjectsRequest',
+        '.google.cloud.compute.v1.GetXpnResourcesProjectsRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -1790,7 +1810,7 @@ describe('v1.ProjectsClient', () => {
         new protos.google.cloud.compute.v1.GetXpnResourcesProjectsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetXpnResourcesProjectsRequest',
+        '.google.cloud.compute.v1.GetXpnResourcesProjectsRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -1850,7 +1870,7 @@ describe('v1.ProjectsClient', () => {
         new protos.google.cloud.compute.v1.GetXpnResourcesProjectsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetXpnResourcesProjectsRequest',
+        '.google.cloud.compute.v1.GetXpnResourcesProjectsRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -1899,7 +1919,7 @@ describe('v1.ProjectsClient', () => {
         new protos.google.cloud.compute.v1.GetXpnResourcesProjectsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetXpnResourcesProjectsRequest',
+        '.google.cloud.compute.v1.GetXpnResourcesProjectsRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -1948,7 +1968,7 @@ describe('v1.ProjectsClient', () => {
         new protos.google.cloud.compute.v1.GetXpnResourcesProjectsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetXpnResourcesProjectsRequest',
+        '.google.cloud.compute.v1.GetXpnResourcesProjectsRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -1989,9 +2009,10 @@ describe('v1.ProjectsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListXpnHostsProjectsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListXpnHostsProjectsRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListXpnHostsProjectsRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedResponse = [
@@ -2021,9 +2042,10 @@ describe('v1.ProjectsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListXpnHostsProjectsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListXpnHostsProjectsRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListXpnHostsProjectsRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedResponse = [
@@ -2069,9 +2091,10 @@ describe('v1.ProjectsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListXpnHostsProjectsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListXpnHostsProjectsRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListXpnHostsProjectsRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2099,9 +2122,10 @@ describe('v1.ProjectsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListXpnHostsProjectsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListXpnHostsProjectsRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListXpnHostsProjectsRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedResponse = [
@@ -2152,9 +2176,10 @@ describe('v1.ProjectsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListXpnHostsProjectsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListXpnHostsProjectsRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListXpnHostsProjectsRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -2202,9 +2227,10 @@ describe('v1.ProjectsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListXpnHostsProjectsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListXpnHostsProjectsRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListXpnHostsProjectsRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedResponse = [
@@ -2244,9 +2270,10 @@ describe('v1.ProjectsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListXpnHostsProjectsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListXpnHostsProjectsRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListXpnHostsProjectsRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedError = new Error('expected');

@@ -262,17 +262,17 @@ describe('v1.RegionHealthCheckServicesClient', () => {
         new protos.google.cloud.compute.v1.DeleteRegionHealthCheckServiceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteRegionHealthCheckServiceRequest',
+        '.google.cloud.compute.v1.DeleteRegionHealthCheckServiceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'DeleteRegionHealthCheckServiceRequest',
+        '.google.cloud.compute.v1.DeleteRegionHealthCheckServiceRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'DeleteRegionHealthCheckServiceRequest',
+        '.google.cloud.compute.v1.DeleteRegionHealthCheckServiceRequest',
         ['healthCheckService']
       );
       request.healthCheckService = defaultValue3;
@@ -304,17 +304,17 @@ describe('v1.RegionHealthCheckServicesClient', () => {
         new protos.google.cloud.compute.v1.DeleteRegionHealthCheckServiceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteRegionHealthCheckServiceRequest',
+        '.google.cloud.compute.v1.DeleteRegionHealthCheckServiceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'DeleteRegionHealthCheckServiceRequest',
+        '.google.cloud.compute.v1.DeleteRegionHealthCheckServiceRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'DeleteRegionHealthCheckServiceRequest',
+        '.google.cloud.compute.v1.DeleteRegionHealthCheckServiceRequest',
         ['healthCheckService']
       );
       request.healthCheckService = defaultValue3;
@@ -362,17 +362,17 @@ describe('v1.RegionHealthCheckServicesClient', () => {
         new protos.google.cloud.compute.v1.DeleteRegionHealthCheckServiceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteRegionHealthCheckServiceRequest',
+        '.google.cloud.compute.v1.DeleteRegionHealthCheckServiceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'DeleteRegionHealthCheckServiceRequest',
+        '.google.cloud.compute.v1.DeleteRegionHealthCheckServiceRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'DeleteRegionHealthCheckServiceRequest',
+        '.google.cloud.compute.v1.DeleteRegionHealthCheckServiceRequest',
         ['healthCheckService']
       );
       request.healthCheckService = defaultValue3;
@@ -401,17 +401,17 @@ describe('v1.RegionHealthCheckServicesClient', () => {
         new protos.google.cloud.compute.v1.DeleteRegionHealthCheckServiceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteRegionHealthCheckServiceRequest',
+        '.google.cloud.compute.v1.DeleteRegionHealthCheckServiceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'DeleteRegionHealthCheckServiceRequest',
+        '.google.cloud.compute.v1.DeleteRegionHealthCheckServiceRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'DeleteRegionHealthCheckServiceRequest',
+        '.google.cloud.compute.v1.DeleteRegionHealthCheckServiceRequest',
         ['healthCheckService']
       );
       request.healthCheckService = defaultValue3;
@@ -433,17 +433,17 @@ describe('v1.RegionHealthCheckServicesClient', () => {
         new protos.google.cloud.compute.v1.GetRegionHealthCheckServiceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetRegionHealthCheckServiceRequest',
+        '.google.cloud.compute.v1.GetRegionHealthCheckServiceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'GetRegionHealthCheckServiceRequest',
+        '.google.cloud.compute.v1.GetRegionHealthCheckServiceRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'GetRegionHealthCheckServiceRequest',
+        '.google.cloud.compute.v1.GetRegionHealthCheckServiceRequest',
         ['healthCheckService']
       );
       request.healthCheckService = defaultValue3;
@@ -474,17 +474,17 @@ describe('v1.RegionHealthCheckServicesClient', () => {
         new protos.google.cloud.compute.v1.GetRegionHealthCheckServiceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetRegionHealthCheckServiceRequest',
+        '.google.cloud.compute.v1.GetRegionHealthCheckServiceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'GetRegionHealthCheckServiceRequest',
+        '.google.cloud.compute.v1.GetRegionHealthCheckServiceRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'GetRegionHealthCheckServiceRequest',
+        '.google.cloud.compute.v1.GetRegionHealthCheckServiceRequest',
         ['healthCheckService']
       );
       request.healthCheckService = defaultValue3;
@@ -530,17 +530,17 @@ describe('v1.RegionHealthCheckServicesClient', () => {
         new protos.google.cloud.compute.v1.GetRegionHealthCheckServiceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetRegionHealthCheckServiceRequest',
+        '.google.cloud.compute.v1.GetRegionHealthCheckServiceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'GetRegionHealthCheckServiceRequest',
+        '.google.cloud.compute.v1.GetRegionHealthCheckServiceRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'GetRegionHealthCheckServiceRequest',
+        '.google.cloud.compute.v1.GetRegionHealthCheckServiceRequest',
         ['healthCheckService']
       );
       request.healthCheckService = defaultValue3;
@@ -568,17 +568,17 @@ describe('v1.RegionHealthCheckServicesClient', () => {
         new protos.google.cloud.compute.v1.GetRegionHealthCheckServiceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetRegionHealthCheckServiceRequest',
+        '.google.cloud.compute.v1.GetRegionHealthCheckServiceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'GetRegionHealthCheckServiceRequest',
+        '.google.cloud.compute.v1.GetRegionHealthCheckServiceRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'GetRegionHealthCheckServiceRequest',
+        '.google.cloud.compute.v1.GetRegionHealthCheckServiceRequest',
         ['healthCheckService']
       );
       request.healthCheckService = defaultValue3;
@@ -600,12 +600,12 @@ describe('v1.RegionHealthCheckServicesClient', () => {
         new protos.google.cloud.compute.v1.InsertRegionHealthCheckServiceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'InsertRegionHealthCheckServiceRequest',
+        '.google.cloud.compute.v1.InsertRegionHealthCheckServiceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'InsertRegionHealthCheckServiceRequest',
+        '.google.cloud.compute.v1.InsertRegionHealthCheckServiceRequest',
         ['region']
       );
       request.region = defaultValue2;
@@ -637,12 +637,12 @@ describe('v1.RegionHealthCheckServicesClient', () => {
         new protos.google.cloud.compute.v1.InsertRegionHealthCheckServiceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'InsertRegionHealthCheckServiceRequest',
+        '.google.cloud.compute.v1.InsertRegionHealthCheckServiceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'InsertRegionHealthCheckServiceRequest',
+        '.google.cloud.compute.v1.InsertRegionHealthCheckServiceRequest',
         ['region']
       );
       request.region = defaultValue2;
@@ -690,12 +690,12 @@ describe('v1.RegionHealthCheckServicesClient', () => {
         new protos.google.cloud.compute.v1.InsertRegionHealthCheckServiceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'InsertRegionHealthCheckServiceRequest',
+        '.google.cloud.compute.v1.InsertRegionHealthCheckServiceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'InsertRegionHealthCheckServiceRequest',
+        '.google.cloud.compute.v1.InsertRegionHealthCheckServiceRequest',
         ['region']
       );
       request.region = defaultValue2;
@@ -724,12 +724,12 @@ describe('v1.RegionHealthCheckServicesClient', () => {
         new protos.google.cloud.compute.v1.InsertRegionHealthCheckServiceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'InsertRegionHealthCheckServiceRequest',
+        '.google.cloud.compute.v1.InsertRegionHealthCheckServiceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'InsertRegionHealthCheckServiceRequest',
+        '.google.cloud.compute.v1.InsertRegionHealthCheckServiceRequest',
         ['region']
       );
       request.region = defaultValue2;
@@ -751,17 +751,17 @@ describe('v1.RegionHealthCheckServicesClient', () => {
         new protos.google.cloud.compute.v1.PatchRegionHealthCheckServiceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'PatchRegionHealthCheckServiceRequest',
+        '.google.cloud.compute.v1.PatchRegionHealthCheckServiceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'PatchRegionHealthCheckServiceRequest',
+        '.google.cloud.compute.v1.PatchRegionHealthCheckServiceRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'PatchRegionHealthCheckServiceRequest',
+        '.google.cloud.compute.v1.PatchRegionHealthCheckServiceRequest',
         ['healthCheckService']
       );
       request.healthCheckService = defaultValue3;
@@ -792,17 +792,17 @@ describe('v1.RegionHealthCheckServicesClient', () => {
         new protos.google.cloud.compute.v1.PatchRegionHealthCheckServiceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'PatchRegionHealthCheckServiceRequest',
+        '.google.cloud.compute.v1.PatchRegionHealthCheckServiceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'PatchRegionHealthCheckServiceRequest',
+        '.google.cloud.compute.v1.PatchRegionHealthCheckServiceRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'PatchRegionHealthCheckServiceRequest',
+        '.google.cloud.compute.v1.PatchRegionHealthCheckServiceRequest',
         ['healthCheckService']
       );
       request.healthCheckService = defaultValue3;
@@ -848,17 +848,17 @@ describe('v1.RegionHealthCheckServicesClient', () => {
         new protos.google.cloud.compute.v1.PatchRegionHealthCheckServiceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'PatchRegionHealthCheckServiceRequest',
+        '.google.cloud.compute.v1.PatchRegionHealthCheckServiceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'PatchRegionHealthCheckServiceRequest',
+        '.google.cloud.compute.v1.PatchRegionHealthCheckServiceRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'PatchRegionHealthCheckServiceRequest',
+        '.google.cloud.compute.v1.PatchRegionHealthCheckServiceRequest',
         ['healthCheckService']
       );
       request.healthCheckService = defaultValue3;
@@ -886,17 +886,17 @@ describe('v1.RegionHealthCheckServicesClient', () => {
         new protos.google.cloud.compute.v1.PatchRegionHealthCheckServiceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'PatchRegionHealthCheckServiceRequest',
+        '.google.cloud.compute.v1.PatchRegionHealthCheckServiceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'PatchRegionHealthCheckServiceRequest',
+        '.google.cloud.compute.v1.PatchRegionHealthCheckServiceRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'PatchRegionHealthCheckServiceRequest',
+        '.google.cloud.compute.v1.PatchRegionHealthCheckServiceRequest',
         ['healthCheckService']
       );
       request.healthCheckService = defaultValue3;
@@ -918,12 +918,12 @@ describe('v1.RegionHealthCheckServicesClient', () => {
         new protos.google.cloud.compute.v1.ListRegionHealthCheckServicesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListRegionHealthCheckServicesRequest',
+        '.google.cloud.compute.v1.ListRegionHealthCheckServicesRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'ListRegionHealthCheckServicesRequest',
+        '.google.cloud.compute.v1.ListRegionHealthCheckServicesRequest',
         ['region']
       );
       request.region = defaultValue2;
@@ -962,12 +962,12 @@ describe('v1.RegionHealthCheckServicesClient', () => {
         new protos.google.cloud.compute.v1.ListRegionHealthCheckServicesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListRegionHealthCheckServicesRequest',
+        '.google.cloud.compute.v1.ListRegionHealthCheckServicesRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'ListRegionHealthCheckServicesRequest',
+        '.google.cloud.compute.v1.ListRegionHealthCheckServicesRequest',
         ['region']
       );
       request.region = defaultValue2;
@@ -1021,12 +1021,12 @@ describe('v1.RegionHealthCheckServicesClient', () => {
         new protos.google.cloud.compute.v1.ListRegionHealthCheckServicesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListRegionHealthCheckServicesRequest',
+        '.google.cloud.compute.v1.ListRegionHealthCheckServicesRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'ListRegionHealthCheckServicesRequest',
+        '.google.cloud.compute.v1.ListRegionHealthCheckServicesRequest',
         ['region']
       );
       request.region = defaultValue2;
@@ -1054,12 +1054,12 @@ describe('v1.RegionHealthCheckServicesClient', () => {
         new protos.google.cloud.compute.v1.ListRegionHealthCheckServicesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListRegionHealthCheckServicesRequest',
+        '.google.cloud.compute.v1.ListRegionHealthCheckServicesRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'ListRegionHealthCheckServicesRequest',
+        '.google.cloud.compute.v1.ListRegionHealthCheckServicesRequest',
         ['region']
       );
       request.region = defaultValue2;
@@ -1121,12 +1121,12 @@ describe('v1.RegionHealthCheckServicesClient', () => {
         new protos.google.cloud.compute.v1.ListRegionHealthCheckServicesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListRegionHealthCheckServicesRequest',
+        '.google.cloud.compute.v1.ListRegionHealthCheckServicesRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'ListRegionHealthCheckServicesRequest',
+        '.google.cloud.compute.v1.ListRegionHealthCheckServicesRequest',
         ['region']
       );
       request.region = defaultValue2;
@@ -1179,12 +1179,12 @@ describe('v1.RegionHealthCheckServicesClient', () => {
         new protos.google.cloud.compute.v1.ListRegionHealthCheckServicesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListRegionHealthCheckServicesRequest',
+        '.google.cloud.compute.v1.ListRegionHealthCheckServicesRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'ListRegionHealthCheckServicesRequest',
+        '.google.cloud.compute.v1.ListRegionHealthCheckServicesRequest',
         ['region']
       );
       request.region = defaultValue2;
@@ -1234,12 +1234,12 @@ describe('v1.RegionHealthCheckServicesClient', () => {
         new protos.google.cloud.compute.v1.ListRegionHealthCheckServicesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListRegionHealthCheckServicesRequest',
+        '.google.cloud.compute.v1.ListRegionHealthCheckServicesRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'ListRegionHealthCheckServicesRequest',
+        '.google.cloud.compute.v1.ListRegionHealthCheckServicesRequest',
         ['region']
       );
       request.region = defaultValue2;

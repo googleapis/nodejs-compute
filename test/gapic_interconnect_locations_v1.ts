@@ -260,12 +260,12 @@ describe('v1.InterconnectLocationsClient', () => {
         new protos.google.cloud.compute.v1.GetInterconnectLocationRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetInterconnectLocationRequest',
+        '.google.cloud.compute.v1.GetInterconnectLocationRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'GetInterconnectLocationRequest',
+        '.google.cloud.compute.v1.GetInterconnectLocationRequest',
         ['interconnectLocation']
       );
       request.interconnectLocation = defaultValue2;
@@ -296,12 +296,12 @@ describe('v1.InterconnectLocationsClient', () => {
         new protos.google.cloud.compute.v1.GetInterconnectLocationRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetInterconnectLocationRequest',
+        '.google.cloud.compute.v1.GetInterconnectLocationRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'GetInterconnectLocationRequest',
+        '.google.cloud.compute.v1.GetInterconnectLocationRequest',
         ['interconnectLocation']
       );
       request.interconnectLocation = defaultValue2;
@@ -347,12 +347,12 @@ describe('v1.InterconnectLocationsClient', () => {
         new protos.google.cloud.compute.v1.GetInterconnectLocationRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetInterconnectLocationRequest',
+        '.google.cloud.compute.v1.GetInterconnectLocationRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'GetInterconnectLocationRequest',
+        '.google.cloud.compute.v1.GetInterconnectLocationRequest',
         ['interconnectLocation']
       );
       request.interconnectLocation = defaultValue2;
@@ -380,12 +380,12 @@ describe('v1.InterconnectLocationsClient', () => {
         new protos.google.cloud.compute.v1.GetInterconnectLocationRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetInterconnectLocationRequest',
+        '.google.cloud.compute.v1.GetInterconnectLocationRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'GetInterconnectLocationRequest',
+        '.google.cloud.compute.v1.GetInterconnectLocationRequest',
         ['interconnectLocation']
       );
       request.interconnectLocation = defaultValue2;
@@ -407,7 +407,7 @@ describe('v1.InterconnectLocationsClient', () => {
         new protos.google.cloud.compute.v1.ListInterconnectLocationsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListInterconnectLocationsRequest',
+        '.google.cloud.compute.v1.ListInterconnectLocationsRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -446,7 +446,7 @@ describe('v1.InterconnectLocationsClient', () => {
         new protos.google.cloud.compute.v1.ListInterconnectLocationsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListInterconnectLocationsRequest',
+        '.google.cloud.compute.v1.ListInterconnectLocationsRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -502,7 +502,7 @@ describe('v1.InterconnectLocationsClient', () => {
         new protos.google.cloud.compute.v1.ListInterconnectLocationsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListInterconnectLocationsRequest',
+        '.google.cloud.compute.v1.ListInterconnectLocationsRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -530,7 +530,7 @@ describe('v1.InterconnectLocationsClient', () => {
         new protos.google.cloud.compute.v1.ListInterconnectLocationsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListInterconnectLocationsRequest',
+        '.google.cloud.compute.v1.ListInterconnectLocationsRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -592,7 +592,7 @@ describe('v1.InterconnectLocationsClient', () => {
         new protos.google.cloud.compute.v1.ListInterconnectLocationsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListInterconnectLocationsRequest',
+        '.google.cloud.compute.v1.ListInterconnectLocationsRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -645,7 +645,7 @@ describe('v1.InterconnectLocationsClient', () => {
         new protos.google.cloud.compute.v1.ListInterconnectLocationsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListInterconnectLocationsRequest',
+        '.google.cloud.compute.v1.ListInterconnectLocationsRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -695,7 +695,7 @@ describe('v1.InterconnectLocationsClient', () => {
         new protos.google.cloud.compute.v1.ListInterconnectLocationsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListInterconnectLocationsRequest',
+        '.google.cloud.compute.v1.ListInterconnectLocationsRequest',
         ['project']
       );
       request.project = defaultValue1;

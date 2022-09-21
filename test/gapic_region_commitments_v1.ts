@@ -250,17 +250,20 @@ describe('v1.RegionCommitmentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetRegionCommitmentRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetRegionCommitmentRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetRegionCommitmentRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetRegionCommitmentRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetRegionCommitmentRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('GetRegionCommitmentRequest', [
-        'commitment',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetRegionCommitmentRequest',
+        ['commitment']
+      );
       request.commitment = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&commitment=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -287,17 +290,20 @@ describe('v1.RegionCommitmentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetRegionCommitmentRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetRegionCommitmentRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetRegionCommitmentRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetRegionCommitmentRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetRegionCommitmentRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('GetRegionCommitmentRequest', [
-        'commitment',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetRegionCommitmentRequest',
+        ['commitment']
+      );
       request.commitment = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&commitment=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -339,17 +345,20 @@ describe('v1.RegionCommitmentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetRegionCommitmentRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetRegionCommitmentRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetRegionCommitmentRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetRegionCommitmentRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetRegionCommitmentRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('GetRegionCommitmentRequest', [
-        'commitment',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetRegionCommitmentRequest',
+        ['commitment']
+      );
       request.commitment = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&commitment=${defaultValue3}`;
       const expectedError = new Error('expected');
@@ -373,17 +382,20 @@ describe('v1.RegionCommitmentsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetRegionCommitmentRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetRegionCommitmentRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetRegionCommitmentRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetRegionCommitmentRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetRegionCommitmentRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('GetRegionCommitmentRequest', [
-        'commitment',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetRegionCommitmentRequest',
+        ['commitment']
+      );
       request.commitment = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -402,12 +414,12 @@ describe('v1.RegionCommitmentsClient', () => {
         new protos.google.cloud.compute.v1.InsertRegionCommitmentRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'InsertRegionCommitmentRequest',
+        '.google.cloud.compute.v1.InsertRegionCommitmentRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'InsertRegionCommitmentRequest',
+        '.google.cloud.compute.v1.InsertRegionCommitmentRequest',
         ['region']
       );
       request.region = defaultValue2;
@@ -438,12 +450,12 @@ describe('v1.RegionCommitmentsClient', () => {
         new protos.google.cloud.compute.v1.InsertRegionCommitmentRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'InsertRegionCommitmentRequest',
+        '.google.cloud.compute.v1.InsertRegionCommitmentRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'InsertRegionCommitmentRequest',
+        '.google.cloud.compute.v1.InsertRegionCommitmentRequest',
         ['region']
       );
       request.region = defaultValue2;
@@ -490,12 +502,12 @@ describe('v1.RegionCommitmentsClient', () => {
         new protos.google.cloud.compute.v1.InsertRegionCommitmentRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'InsertRegionCommitmentRequest',
+        '.google.cloud.compute.v1.InsertRegionCommitmentRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'InsertRegionCommitmentRequest',
+        '.google.cloud.compute.v1.InsertRegionCommitmentRequest',
         ['region']
       );
       request.region = defaultValue2;
@@ -523,12 +535,12 @@ describe('v1.RegionCommitmentsClient', () => {
         new protos.google.cloud.compute.v1.InsertRegionCommitmentRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'InsertRegionCommitmentRequest',
+        '.google.cloud.compute.v1.InsertRegionCommitmentRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'InsertRegionCommitmentRequest',
+        '.google.cloud.compute.v1.InsertRegionCommitmentRequest',
         ['region']
       );
       request.region = defaultValue2;
@@ -549,17 +561,17 @@ describe('v1.RegionCommitmentsClient', () => {
         new protos.google.cloud.compute.v1.UpdateRegionCommitmentRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateRegionCommitmentRequest',
+        '.google.cloud.compute.v1.UpdateRegionCommitmentRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'UpdateRegionCommitmentRequest',
+        '.google.cloud.compute.v1.UpdateRegionCommitmentRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'UpdateRegionCommitmentRequest',
+        '.google.cloud.compute.v1.UpdateRegionCommitmentRequest',
         ['commitment']
       );
       request.commitment = defaultValue3;
@@ -590,17 +602,17 @@ describe('v1.RegionCommitmentsClient', () => {
         new protos.google.cloud.compute.v1.UpdateRegionCommitmentRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateRegionCommitmentRequest',
+        '.google.cloud.compute.v1.UpdateRegionCommitmentRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'UpdateRegionCommitmentRequest',
+        '.google.cloud.compute.v1.UpdateRegionCommitmentRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'UpdateRegionCommitmentRequest',
+        '.google.cloud.compute.v1.UpdateRegionCommitmentRequest',
         ['commitment']
       );
       request.commitment = defaultValue3;
@@ -647,17 +659,17 @@ describe('v1.RegionCommitmentsClient', () => {
         new protos.google.cloud.compute.v1.UpdateRegionCommitmentRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateRegionCommitmentRequest',
+        '.google.cloud.compute.v1.UpdateRegionCommitmentRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'UpdateRegionCommitmentRequest',
+        '.google.cloud.compute.v1.UpdateRegionCommitmentRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'UpdateRegionCommitmentRequest',
+        '.google.cloud.compute.v1.UpdateRegionCommitmentRequest',
         ['commitment']
       );
       request.commitment = defaultValue3;
@@ -685,17 +697,17 @@ describe('v1.RegionCommitmentsClient', () => {
         new protos.google.cloud.compute.v1.UpdateRegionCommitmentRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'UpdateRegionCommitmentRequest',
+        '.google.cloud.compute.v1.UpdateRegionCommitmentRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'UpdateRegionCommitmentRequest',
+        '.google.cloud.compute.v1.UpdateRegionCommitmentRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'UpdateRegionCommitmentRequest',
+        '.google.cloud.compute.v1.UpdateRegionCommitmentRequest',
         ['commitment']
       );
       request.commitment = defaultValue3;
@@ -716,7 +728,7 @@ describe('v1.RegionCommitmentsClient', () => {
         new protos.google.cloud.compute.v1.AggregatedListRegionCommitmentsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'AggregatedListRegionCommitmentsRequest',
+        '.google.cloud.compute.v1.AggregatedListRegionCommitmentsRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -776,7 +788,7 @@ describe('v1.RegionCommitmentsClient', () => {
         new protos.google.cloud.compute.v1.AggregatedListRegionCommitmentsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'AggregatedListRegionCommitmentsRequest',
+        '.google.cloud.compute.v1.AggregatedListRegionCommitmentsRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -820,12 +832,12 @@ describe('v1.RegionCommitmentsClient', () => {
         new protos.google.cloud.compute.v1.ListRegionCommitmentsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListRegionCommitmentsRequest',
+        '.google.cloud.compute.v1.ListRegionCommitmentsRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'ListRegionCommitmentsRequest',
+        '.google.cloud.compute.v1.ListRegionCommitmentsRequest',
         ['region']
       );
       request.region = defaultValue2;
@@ -857,12 +869,12 @@ describe('v1.RegionCommitmentsClient', () => {
         new protos.google.cloud.compute.v1.ListRegionCommitmentsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListRegionCommitmentsRequest',
+        '.google.cloud.compute.v1.ListRegionCommitmentsRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'ListRegionCommitmentsRequest',
+        '.google.cloud.compute.v1.ListRegionCommitmentsRequest',
         ['region']
       );
       request.region = defaultValue2;
@@ -909,12 +921,12 @@ describe('v1.RegionCommitmentsClient', () => {
         new protos.google.cloud.compute.v1.ListRegionCommitmentsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListRegionCommitmentsRequest',
+        '.google.cloud.compute.v1.ListRegionCommitmentsRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'ListRegionCommitmentsRequest',
+        '.google.cloud.compute.v1.ListRegionCommitmentsRequest',
         ['region']
       );
       request.region = defaultValue2;
@@ -941,12 +953,12 @@ describe('v1.RegionCommitmentsClient', () => {
         new protos.google.cloud.compute.v1.ListRegionCommitmentsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListRegionCommitmentsRequest',
+        '.google.cloud.compute.v1.ListRegionCommitmentsRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'ListRegionCommitmentsRequest',
+        '.google.cloud.compute.v1.ListRegionCommitmentsRequest',
         ['region']
       );
       request.region = defaultValue2;
@@ -1000,12 +1012,12 @@ describe('v1.RegionCommitmentsClient', () => {
         new protos.google.cloud.compute.v1.ListRegionCommitmentsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListRegionCommitmentsRequest',
+        '.google.cloud.compute.v1.ListRegionCommitmentsRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'ListRegionCommitmentsRequest',
+        '.google.cloud.compute.v1.ListRegionCommitmentsRequest',
         ['region']
       );
       request.region = defaultValue2;
@@ -1056,12 +1068,12 @@ describe('v1.RegionCommitmentsClient', () => {
         new protos.google.cloud.compute.v1.ListRegionCommitmentsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListRegionCommitmentsRequest',
+        '.google.cloud.compute.v1.ListRegionCommitmentsRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'ListRegionCommitmentsRequest',
+        '.google.cloud.compute.v1.ListRegionCommitmentsRequest',
         ['region']
       );
       request.region = defaultValue2;
@@ -1103,12 +1115,12 @@ describe('v1.RegionCommitmentsClient', () => {
         new protos.google.cloud.compute.v1.ListRegionCommitmentsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListRegionCommitmentsRequest',
+        '.google.cloud.compute.v1.ListRegionCommitmentsRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'ListRegionCommitmentsRequest',
+        '.google.cloud.compute.v1.ListRegionCommitmentsRequest',
         ['region']
       );
       request.region = defaultValue2;

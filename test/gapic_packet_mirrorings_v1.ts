@@ -251,17 +251,17 @@ describe('v1.PacketMirroringsClient', () => {
         new protos.google.cloud.compute.v1.DeletePacketMirroringRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeletePacketMirroringRequest',
+        '.google.cloud.compute.v1.DeletePacketMirroringRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'DeletePacketMirroringRequest',
+        '.google.cloud.compute.v1.DeletePacketMirroringRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'DeletePacketMirroringRequest',
+        '.google.cloud.compute.v1.DeletePacketMirroringRequest',
         ['packetMirroring']
       );
       request.packetMirroring = defaultValue3;
@@ -292,17 +292,17 @@ describe('v1.PacketMirroringsClient', () => {
         new protos.google.cloud.compute.v1.DeletePacketMirroringRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeletePacketMirroringRequest',
+        '.google.cloud.compute.v1.DeletePacketMirroringRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'DeletePacketMirroringRequest',
+        '.google.cloud.compute.v1.DeletePacketMirroringRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'DeletePacketMirroringRequest',
+        '.google.cloud.compute.v1.DeletePacketMirroringRequest',
         ['packetMirroring']
       );
       request.packetMirroring = defaultValue3;
@@ -349,17 +349,17 @@ describe('v1.PacketMirroringsClient', () => {
         new protos.google.cloud.compute.v1.DeletePacketMirroringRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeletePacketMirroringRequest',
+        '.google.cloud.compute.v1.DeletePacketMirroringRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'DeletePacketMirroringRequest',
+        '.google.cloud.compute.v1.DeletePacketMirroringRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'DeletePacketMirroringRequest',
+        '.google.cloud.compute.v1.DeletePacketMirroringRequest',
         ['packetMirroring']
       );
       request.packetMirroring = defaultValue3;
@@ -387,17 +387,17 @@ describe('v1.PacketMirroringsClient', () => {
         new protos.google.cloud.compute.v1.DeletePacketMirroringRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeletePacketMirroringRequest',
+        '.google.cloud.compute.v1.DeletePacketMirroringRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'DeletePacketMirroringRequest',
+        '.google.cloud.compute.v1.DeletePacketMirroringRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'DeletePacketMirroringRequest',
+        '.google.cloud.compute.v1.DeletePacketMirroringRequest',
         ['packetMirroring']
       );
       request.packetMirroring = defaultValue3;
@@ -417,17 +417,20 @@ describe('v1.PacketMirroringsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetPacketMirroringRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetPacketMirroringRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetPacketMirroringRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetPacketMirroringRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetPacketMirroringRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('GetPacketMirroringRequest', [
-        'packetMirroring',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetPacketMirroringRequest',
+        ['packetMirroring']
+      );
       request.packetMirroring = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&packet_mirroring=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -454,17 +457,20 @@ describe('v1.PacketMirroringsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetPacketMirroringRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetPacketMirroringRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetPacketMirroringRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetPacketMirroringRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetPacketMirroringRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('GetPacketMirroringRequest', [
-        'packetMirroring',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetPacketMirroringRequest',
+        ['packetMirroring']
+      );
       request.packetMirroring = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&packet_mirroring=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -506,17 +512,20 @@ describe('v1.PacketMirroringsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetPacketMirroringRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetPacketMirroringRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetPacketMirroringRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetPacketMirroringRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetPacketMirroringRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('GetPacketMirroringRequest', [
-        'packetMirroring',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetPacketMirroringRequest',
+        ['packetMirroring']
+      );
       request.packetMirroring = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&packet_mirroring=${defaultValue3}`;
       const expectedError = new Error('expected');
@@ -540,17 +549,20 @@ describe('v1.PacketMirroringsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetPacketMirroringRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetPacketMirroringRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetPacketMirroringRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetPacketMirroringRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetPacketMirroringRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('GetPacketMirroringRequest', [
-        'packetMirroring',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetPacketMirroringRequest',
+        ['packetMirroring']
+      );
       request.packetMirroring = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -569,12 +581,12 @@ describe('v1.PacketMirroringsClient', () => {
         new protos.google.cloud.compute.v1.InsertPacketMirroringRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'InsertPacketMirroringRequest',
+        '.google.cloud.compute.v1.InsertPacketMirroringRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'InsertPacketMirroringRequest',
+        '.google.cloud.compute.v1.InsertPacketMirroringRequest',
         ['region']
       );
       request.region = defaultValue2;
@@ -605,12 +617,12 @@ describe('v1.PacketMirroringsClient', () => {
         new protos.google.cloud.compute.v1.InsertPacketMirroringRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'InsertPacketMirroringRequest',
+        '.google.cloud.compute.v1.InsertPacketMirroringRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'InsertPacketMirroringRequest',
+        '.google.cloud.compute.v1.InsertPacketMirroringRequest',
         ['region']
       );
       request.region = defaultValue2;
@@ -657,12 +669,12 @@ describe('v1.PacketMirroringsClient', () => {
         new protos.google.cloud.compute.v1.InsertPacketMirroringRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'InsertPacketMirroringRequest',
+        '.google.cloud.compute.v1.InsertPacketMirroringRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'InsertPacketMirroringRequest',
+        '.google.cloud.compute.v1.InsertPacketMirroringRequest',
         ['region']
       );
       request.region = defaultValue2;
@@ -690,12 +702,12 @@ describe('v1.PacketMirroringsClient', () => {
         new protos.google.cloud.compute.v1.InsertPacketMirroringRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'InsertPacketMirroringRequest',
+        '.google.cloud.compute.v1.InsertPacketMirroringRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'InsertPacketMirroringRequest',
+        '.google.cloud.compute.v1.InsertPacketMirroringRequest',
         ['region']
       );
       request.region = defaultValue2;
@@ -715,17 +727,20 @@ describe('v1.PacketMirroringsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchPacketMirroringRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('PatchPacketMirroringRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchPacketMirroringRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('PatchPacketMirroringRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchPacketMirroringRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('PatchPacketMirroringRequest', [
-        'packetMirroring',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchPacketMirroringRequest',
+        ['packetMirroring']
+      );
       request.packetMirroring = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&packet_mirroring=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -752,17 +767,20 @@ describe('v1.PacketMirroringsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchPacketMirroringRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('PatchPacketMirroringRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchPacketMirroringRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('PatchPacketMirroringRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchPacketMirroringRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('PatchPacketMirroringRequest', [
-        'packetMirroring',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchPacketMirroringRequest',
+        ['packetMirroring']
+      );
       request.packetMirroring = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&packet_mirroring=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -804,17 +822,20 @@ describe('v1.PacketMirroringsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchPacketMirroringRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('PatchPacketMirroringRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchPacketMirroringRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('PatchPacketMirroringRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchPacketMirroringRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('PatchPacketMirroringRequest', [
-        'packetMirroring',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchPacketMirroringRequest',
+        ['packetMirroring']
+      );
       request.packetMirroring = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&packet_mirroring=${defaultValue3}`;
       const expectedError = new Error('expected');
@@ -838,17 +859,20 @@ describe('v1.PacketMirroringsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchPacketMirroringRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('PatchPacketMirroringRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchPacketMirroringRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('PatchPacketMirroringRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchPacketMirroringRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('PatchPacketMirroringRequest', [
-        'packetMirroring',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchPacketMirroringRequest',
+        ['packetMirroring']
+      );
       request.packetMirroring = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -867,17 +891,17 @@ describe('v1.PacketMirroringsClient', () => {
         new protos.google.cloud.compute.v1.TestIamPermissionsPacketMirroringRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'TestIamPermissionsPacketMirroringRequest',
+        '.google.cloud.compute.v1.TestIamPermissionsPacketMirroringRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'TestIamPermissionsPacketMirroringRequest',
+        '.google.cloud.compute.v1.TestIamPermissionsPacketMirroringRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'TestIamPermissionsPacketMirroringRequest',
+        '.google.cloud.compute.v1.TestIamPermissionsPacketMirroringRequest',
         ['resource']
       );
       request.resource = defaultValue3;
@@ -909,17 +933,17 @@ describe('v1.PacketMirroringsClient', () => {
         new protos.google.cloud.compute.v1.TestIamPermissionsPacketMirroringRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'TestIamPermissionsPacketMirroringRequest',
+        '.google.cloud.compute.v1.TestIamPermissionsPacketMirroringRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'TestIamPermissionsPacketMirroringRequest',
+        '.google.cloud.compute.v1.TestIamPermissionsPacketMirroringRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'TestIamPermissionsPacketMirroringRequest',
+        '.google.cloud.compute.v1.TestIamPermissionsPacketMirroringRequest',
         ['resource']
       );
       request.resource = defaultValue3;
@@ -966,17 +990,17 @@ describe('v1.PacketMirroringsClient', () => {
         new protos.google.cloud.compute.v1.TestIamPermissionsPacketMirroringRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'TestIamPermissionsPacketMirroringRequest',
+        '.google.cloud.compute.v1.TestIamPermissionsPacketMirroringRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'TestIamPermissionsPacketMirroringRequest',
+        '.google.cloud.compute.v1.TestIamPermissionsPacketMirroringRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'TestIamPermissionsPacketMirroringRequest',
+        '.google.cloud.compute.v1.TestIamPermissionsPacketMirroringRequest',
         ['resource']
       );
       request.resource = defaultValue3;
@@ -1007,17 +1031,17 @@ describe('v1.PacketMirroringsClient', () => {
         new protos.google.cloud.compute.v1.TestIamPermissionsPacketMirroringRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'TestIamPermissionsPacketMirroringRequest',
+        '.google.cloud.compute.v1.TestIamPermissionsPacketMirroringRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'TestIamPermissionsPacketMirroringRequest',
+        '.google.cloud.compute.v1.TestIamPermissionsPacketMirroringRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'TestIamPermissionsPacketMirroringRequest',
+        '.google.cloud.compute.v1.TestIamPermissionsPacketMirroringRequest',
         ['resource']
       );
       request.resource = defaultValue3;
@@ -1038,7 +1062,7 @@ describe('v1.PacketMirroringsClient', () => {
         new protos.google.cloud.compute.v1.AggregatedListPacketMirroringsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'AggregatedListPacketMirroringsRequest',
+        '.google.cloud.compute.v1.AggregatedListPacketMirroringsRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -1098,7 +1122,7 @@ describe('v1.PacketMirroringsClient', () => {
         new protos.google.cloud.compute.v1.AggregatedListPacketMirroringsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'AggregatedListPacketMirroringsRequest',
+        '.google.cloud.compute.v1.AggregatedListPacketMirroringsRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -1141,13 +1165,15 @@ describe('v1.PacketMirroringsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListPacketMirroringsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListPacketMirroringsRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListPacketMirroringsRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ListPacketMirroringsRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListPacketMirroringsRequest',
+        ['region']
+      );
       request.region = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}`;
       const expectedResponse = [
@@ -1182,13 +1208,15 @@ describe('v1.PacketMirroringsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListPacketMirroringsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListPacketMirroringsRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListPacketMirroringsRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ListPacketMirroringsRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListPacketMirroringsRequest',
+        ['region']
+      );
       request.region = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}`;
       const expectedResponse = [
@@ -1238,13 +1266,15 @@ describe('v1.PacketMirroringsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListPacketMirroringsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListPacketMirroringsRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListPacketMirroringsRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ListPacketMirroringsRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListPacketMirroringsRequest',
+        ['region']
+      );
       request.region = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}`;
       const expectedError = new Error('expected');
@@ -1268,13 +1298,15 @@ describe('v1.PacketMirroringsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListPacketMirroringsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListPacketMirroringsRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListPacketMirroringsRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ListPacketMirroringsRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListPacketMirroringsRequest',
+        ['region']
+      );
       request.region = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}`;
       const expectedResponse = [
@@ -1331,13 +1363,15 @@ describe('v1.PacketMirroringsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListPacketMirroringsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListPacketMirroringsRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListPacketMirroringsRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ListPacketMirroringsRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListPacketMirroringsRequest',
+        ['region']
+      );
       request.region = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}`;
       const expectedError = new Error('expected');
@@ -1385,13 +1419,15 @@ describe('v1.PacketMirroringsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListPacketMirroringsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListPacketMirroringsRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListPacketMirroringsRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ListPacketMirroringsRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListPacketMirroringsRequest',
+        ['region']
+      );
       request.region = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}`;
       const expectedResponse = [
@@ -1436,13 +1472,15 @@ describe('v1.PacketMirroringsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListPacketMirroringsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListPacketMirroringsRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListPacketMirroringsRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ListPacketMirroringsRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListPacketMirroringsRequest',
+        ['region']
+      );
       request.region = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}`;
       const expectedError = new Error('expected');

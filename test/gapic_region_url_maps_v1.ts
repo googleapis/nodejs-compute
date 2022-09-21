@@ -250,17 +250,20 @@ describe('v1.RegionUrlMapsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteRegionUrlMapRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteRegionUrlMapRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteRegionUrlMapRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('DeleteRegionUrlMapRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteRegionUrlMapRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('DeleteRegionUrlMapRequest', [
-        'urlMap',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteRegionUrlMapRequest',
+        ['urlMap']
+      );
       request.urlMap = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&url_map=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -288,17 +291,20 @@ describe('v1.RegionUrlMapsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteRegionUrlMapRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteRegionUrlMapRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteRegionUrlMapRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('DeleteRegionUrlMapRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteRegionUrlMapRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('DeleteRegionUrlMapRequest', [
-        'urlMap',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteRegionUrlMapRequest',
+        ['urlMap']
+      );
       request.urlMap = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&url_map=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -342,17 +348,20 @@ describe('v1.RegionUrlMapsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteRegionUrlMapRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteRegionUrlMapRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteRegionUrlMapRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('DeleteRegionUrlMapRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteRegionUrlMapRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('DeleteRegionUrlMapRequest', [
-        'urlMap',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteRegionUrlMapRequest',
+        ['urlMap']
+      );
       request.urlMap = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&url_map=${defaultValue3}`;
       const expectedError = new Error('expected');
@@ -377,17 +386,20 @@ describe('v1.RegionUrlMapsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteRegionUrlMapRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteRegionUrlMapRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteRegionUrlMapRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('DeleteRegionUrlMapRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteRegionUrlMapRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('DeleteRegionUrlMapRequest', [
-        'urlMap',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteRegionUrlMapRequest',
+        ['urlMap']
+      );
       request.urlMap = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -405,17 +417,20 @@ describe('v1.RegionUrlMapsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetRegionUrlMapRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetRegionUrlMapRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetRegionUrlMapRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetRegionUrlMapRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetRegionUrlMapRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('GetRegionUrlMapRequest', [
-        'urlMap',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetRegionUrlMapRequest',
+        ['urlMap']
+      );
       request.urlMap = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&url_map=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -442,17 +457,20 @@ describe('v1.RegionUrlMapsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetRegionUrlMapRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetRegionUrlMapRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetRegionUrlMapRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetRegionUrlMapRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetRegionUrlMapRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('GetRegionUrlMapRequest', [
-        'urlMap',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetRegionUrlMapRequest',
+        ['urlMap']
+      );
       request.urlMap = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&url_map=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -494,17 +512,20 @@ describe('v1.RegionUrlMapsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetRegionUrlMapRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetRegionUrlMapRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetRegionUrlMapRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetRegionUrlMapRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetRegionUrlMapRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('GetRegionUrlMapRequest', [
-        'urlMap',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetRegionUrlMapRequest',
+        ['urlMap']
+      );
       request.urlMap = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&url_map=${defaultValue3}`;
       const expectedError = new Error('expected');
@@ -528,17 +549,20 @@ describe('v1.RegionUrlMapsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetRegionUrlMapRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetRegionUrlMapRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetRegionUrlMapRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetRegionUrlMapRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetRegionUrlMapRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('GetRegionUrlMapRequest', [
-        'urlMap',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetRegionUrlMapRequest',
+        ['urlMap']
+      );
       request.urlMap = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -556,13 +580,15 @@ describe('v1.RegionUrlMapsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertRegionUrlMapRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('InsertRegionUrlMapRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.InsertRegionUrlMapRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('InsertRegionUrlMapRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.InsertRegionUrlMapRequest',
+        ['region']
+      );
       request.region = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
@@ -590,13 +616,15 @@ describe('v1.RegionUrlMapsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertRegionUrlMapRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('InsertRegionUrlMapRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.InsertRegionUrlMapRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('InsertRegionUrlMapRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.InsertRegionUrlMapRequest',
+        ['region']
+      );
       request.region = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
@@ -640,13 +668,15 @@ describe('v1.RegionUrlMapsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertRegionUrlMapRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('InsertRegionUrlMapRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.InsertRegionUrlMapRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('InsertRegionUrlMapRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.InsertRegionUrlMapRequest',
+        ['region']
+      );
       request.region = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}`;
       const expectedError = new Error('expected');
@@ -671,13 +701,15 @@ describe('v1.RegionUrlMapsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertRegionUrlMapRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('InsertRegionUrlMapRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.InsertRegionUrlMapRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('InsertRegionUrlMapRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.InsertRegionUrlMapRequest',
+        ['region']
+      );
       request.region = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -695,17 +727,20 @@ describe('v1.RegionUrlMapsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchRegionUrlMapRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('PatchRegionUrlMapRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchRegionUrlMapRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('PatchRegionUrlMapRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchRegionUrlMapRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('PatchRegionUrlMapRequest', [
-        'urlMap',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchRegionUrlMapRequest',
+        ['urlMap']
+      );
       request.urlMap = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&url_map=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -732,17 +767,20 @@ describe('v1.RegionUrlMapsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchRegionUrlMapRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('PatchRegionUrlMapRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchRegionUrlMapRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('PatchRegionUrlMapRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchRegionUrlMapRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('PatchRegionUrlMapRequest', [
-        'urlMap',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchRegionUrlMapRequest',
+        ['urlMap']
+      );
       request.urlMap = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&url_map=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -784,17 +822,20 @@ describe('v1.RegionUrlMapsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchRegionUrlMapRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('PatchRegionUrlMapRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchRegionUrlMapRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('PatchRegionUrlMapRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchRegionUrlMapRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('PatchRegionUrlMapRequest', [
-        'urlMap',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchRegionUrlMapRequest',
+        ['urlMap']
+      );
       request.urlMap = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&url_map=${defaultValue3}`;
       const expectedError = new Error('expected');
@@ -818,17 +859,20 @@ describe('v1.RegionUrlMapsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchRegionUrlMapRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('PatchRegionUrlMapRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchRegionUrlMapRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('PatchRegionUrlMapRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchRegionUrlMapRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('PatchRegionUrlMapRequest', [
-        'urlMap',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchRegionUrlMapRequest',
+        ['urlMap']
+      );
       request.urlMap = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -846,17 +890,20 @@ describe('v1.RegionUrlMapsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.UpdateRegionUrlMapRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('UpdateRegionUrlMapRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.UpdateRegionUrlMapRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('UpdateRegionUrlMapRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.UpdateRegionUrlMapRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('UpdateRegionUrlMapRequest', [
-        'urlMap',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.UpdateRegionUrlMapRequest',
+        ['urlMap']
+      );
       request.urlMap = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&url_map=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -884,17 +931,20 @@ describe('v1.RegionUrlMapsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.UpdateRegionUrlMapRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('UpdateRegionUrlMapRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.UpdateRegionUrlMapRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('UpdateRegionUrlMapRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.UpdateRegionUrlMapRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('UpdateRegionUrlMapRequest', [
-        'urlMap',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.UpdateRegionUrlMapRequest',
+        ['urlMap']
+      );
       request.urlMap = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&url_map=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -938,17 +988,20 @@ describe('v1.RegionUrlMapsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.UpdateRegionUrlMapRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('UpdateRegionUrlMapRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.UpdateRegionUrlMapRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('UpdateRegionUrlMapRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.UpdateRegionUrlMapRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('UpdateRegionUrlMapRequest', [
-        'urlMap',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.UpdateRegionUrlMapRequest',
+        ['urlMap']
+      );
       request.urlMap = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&url_map=${defaultValue3}`;
       const expectedError = new Error('expected');
@@ -973,17 +1026,20 @@ describe('v1.RegionUrlMapsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.UpdateRegionUrlMapRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('UpdateRegionUrlMapRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.UpdateRegionUrlMapRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('UpdateRegionUrlMapRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.UpdateRegionUrlMapRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('UpdateRegionUrlMapRequest', [
-        'urlMap',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.UpdateRegionUrlMapRequest',
+        ['urlMap']
+      );
       request.urlMap = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1001,17 +1057,20 @@ describe('v1.RegionUrlMapsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ValidateRegionUrlMapRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ValidateRegionUrlMapRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ValidateRegionUrlMapRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ValidateRegionUrlMapRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ValidateRegionUrlMapRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('ValidateRegionUrlMapRequest', [
-        'urlMap',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ValidateRegionUrlMapRequest',
+        ['urlMap']
+      );
       request.urlMap = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&url_map=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -1039,17 +1098,20 @@ describe('v1.RegionUrlMapsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ValidateRegionUrlMapRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ValidateRegionUrlMapRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ValidateRegionUrlMapRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ValidateRegionUrlMapRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ValidateRegionUrlMapRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('ValidateRegionUrlMapRequest', [
-        'urlMap',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ValidateRegionUrlMapRequest',
+        ['urlMap']
+      );
       request.urlMap = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&url_map=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -1093,17 +1155,20 @@ describe('v1.RegionUrlMapsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ValidateRegionUrlMapRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ValidateRegionUrlMapRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ValidateRegionUrlMapRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ValidateRegionUrlMapRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ValidateRegionUrlMapRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('ValidateRegionUrlMapRequest', [
-        'urlMap',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ValidateRegionUrlMapRequest',
+        ['urlMap']
+      );
       request.urlMap = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&url_map=${defaultValue3}`;
       const expectedError = new Error('expected');
@@ -1128,17 +1193,20 @@ describe('v1.RegionUrlMapsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ValidateRegionUrlMapRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ValidateRegionUrlMapRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ValidateRegionUrlMapRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ValidateRegionUrlMapRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ValidateRegionUrlMapRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('ValidateRegionUrlMapRequest', [
-        'urlMap',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ValidateRegionUrlMapRequest',
+        ['urlMap']
+      );
       request.urlMap = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1156,13 +1224,15 @@ describe('v1.RegionUrlMapsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListRegionUrlMapsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListRegionUrlMapsRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListRegionUrlMapsRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ListRegionUrlMapsRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListRegionUrlMapsRequest',
+        ['region']
+      );
       request.region = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}`;
       const expectedResponse = [
@@ -1191,13 +1261,15 @@ describe('v1.RegionUrlMapsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListRegionUrlMapsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListRegionUrlMapsRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListRegionUrlMapsRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ListRegionUrlMapsRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListRegionUrlMapsRequest',
+        ['region']
+      );
       request.region = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}`;
       const expectedResponse = [
@@ -1241,13 +1313,15 @@ describe('v1.RegionUrlMapsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListRegionUrlMapsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListRegionUrlMapsRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListRegionUrlMapsRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ListRegionUrlMapsRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListRegionUrlMapsRequest',
+        ['region']
+      );
       request.region = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}`;
       const expectedError = new Error('expected');
@@ -1271,13 +1345,15 @@ describe('v1.RegionUrlMapsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListRegionUrlMapsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListRegionUrlMapsRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListRegionUrlMapsRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ListRegionUrlMapsRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListRegionUrlMapsRequest',
+        ['region']
+      );
       request.region = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}`;
       const expectedResponse = [
@@ -1325,13 +1401,15 @@ describe('v1.RegionUrlMapsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListRegionUrlMapsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListRegionUrlMapsRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListRegionUrlMapsRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ListRegionUrlMapsRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListRegionUrlMapsRequest',
+        ['region']
+      );
       request.region = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}`;
       const expectedError = new Error('expected');
@@ -1376,13 +1454,15 @@ describe('v1.RegionUrlMapsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListRegionUrlMapsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListRegionUrlMapsRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListRegionUrlMapsRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ListRegionUrlMapsRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListRegionUrlMapsRequest',
+        ['region']
+      );
       request.region = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}`;
       const expectedResponse = [
@@ -1421,13 +1501,15 @@ describe('v1.RegionUrlMapsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListRegionUrlMapsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListRegionUrlMapsRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListRegionUrlMapsRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ListRegionUrlMapsRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListRegionUrlMapsRequest',
+        ['region']
+      );
       request.region = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}`;
       const expectedError = new Error('expected');

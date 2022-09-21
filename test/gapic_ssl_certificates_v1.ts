@@ -250,13 +250,15 @@ describe('v1.SslCertificatesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteSslCertificateRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteSslCertificateRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteSslCertificateRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('DeleteSslCertificateRequest', [
-        'sslCertificate',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteSslCertificateRequest',
+        ['sslCertificate']
+      );
       request.sslCertificate = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&ssl_certificate=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
@@ -284,13 +286,15 @@ describe('v1.SslCertificatesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteSslCertificateRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteSslCertificateRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteSslCertificateRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('DeleteSslCertificateRequest', [
-        'sslCertificate',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteSslCertificateRequest',
+        ['sslCertificate']
+      );
       request.sslCertificate = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&ssl_certificate=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
@@ -334,13 +338,15 @@ describe('v1.SslCertificatesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteSslCertificateRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteSslCertificateRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteSslCertificateRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('DeleteSslCertificateRequest', [
-        'sslCertificate',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteSslCertificateRequest',
+        ['sslCertificate']
+      );
       request.sslCertificate = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&ssl_certificate=${defaultValue2}`;
       const expectedError = new Error('expected');
@@ -365,13 +371,15 @@ describe('v1.SslCertificatesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteSslCertificateRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteSslCertificateRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteSslCertificateRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('DeleteSslCertificateRequest', [
-        'sslCertificate',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteSslCertificateRequest',
+        ['sslCertificate']
+      );
       request.sslCertificate = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -389,13 +397,15 @@ describe('v1.SslCertificatesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetSslCertificateRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetSslCertificateRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetSslCertificateRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetSslCertificateRequest', [
-        'sslCertificate',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetSslCertificateRequest',
+        ['sslCertificate']
+      );
       request.sslCertificate = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&ssl_certificate=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
@@ -422,13 +432,15 @@ describe('v1.SslCertificatesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetSslCertificateRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetSslCertificateRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetSslCertificateRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetSslCertificateRequest', [
-        'sslCertificate',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetSslCertificateRequest',
+        ['sslCertificate']
+      );
       request.sslCertificate = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&ssl_certificate=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
@@ -470,13 +482,15 @@ describe('v1.SslCertificatesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetSslCertificateRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetSslCertificateRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetSslCertificateRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetSslCertificateRequest', [
-        'sslCertificate',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetSslCertificateRequest',
+        ['sslCertificate']
+      );
       request.sslCertificate = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&ssl_certificate=${defaultValue2}`;
       const expectedError = new Error('expected');
@@ -500,13 +514,15 @@ describe('v1.SslCertificatesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetSslCertificateRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetSslCertificateRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetSslCertificateRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetSslCertificateRequest', [
-        'sslCertificate',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetSslCertificateRequest',
+        ['sslCertificate']
+      );
       request.sslCertificate = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -524,9 +540,10 @@ describe('v1.SslCertificatesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertSslCertificateRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('InsertSslCertificateRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.InsertSslCertificateRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -554,9 +571,10 @@ describe('v1.SslCertificatesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertSslCertificateRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('InsertSslCertificateRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.InsertSslCertificateRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -600,9 +618,10 @@ describe('v1.SslCertificatesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertSslCertificateRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('InsertSslCertificateRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.InsertSslCertificateRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -627,9 +646,10 @@ describe('v1.SslCertificatesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertSslCertificateRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('InsertSslCertificateRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.InsertSslCertificateRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -648,7 +668,7 @@ describe('v1.SslCertificatesClient', () => {
         new protos.google.cloud.compute.v1.AggregatedListSslCertificatesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'AggregatedListSslCertificatesRequest',
+        '.google.cloud.compute.v1.AggregatedListSslCertificatesRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -708,7 +728,7 @@ describe('v1.SslCertificatesClient', () => {
         new protos.google.cloud.compute.v1.AggregatedListSslCertificatesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'AggregatedListSslCertificatesRequest',
+        '.google.cloud.compute.v1.AggregatedListSslCertificatesRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -751,9 +771,10 @@ describe('v1.SslCertificatesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListSslCertificatesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListSslCertificatesRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListSslCertificatesRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedResponse = [
@@ -788,9 +809,10 @@ describe('v1.SslCertificatesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListSslCertificatesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListSslCertificatesRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListSslCertificatesRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedResponse = [
@@ -840,9 +862,10 @@ describe('v1.SslCertificatesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListSslCertificatesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListSslCertificatesRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListSslCertificatesRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -866,9 +889,10 @@ describe('v1.SslCertificatesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListSslCertificatesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListSslCertificatesRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListSslCertificatesRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedResponse = [
@@ -925,9 +949,10 @@ describe('v1.SslCertificatesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListSslCertificatesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListSslCertificatesRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListSslCertificatesRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -975,9 +1000,10 @@ describe('v1.SslCertificatesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListSslCertificatesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListSslCertificatesRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListSslCertificatesRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedResponse = [
@@ -1022,9 +1048,10 @@ describe('v1.SslCertificatesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListSslCertificatesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListSslCertificatesRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListSslCertificatesRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedError = new Error('expected');

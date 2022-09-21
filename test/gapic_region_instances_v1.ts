@@ -188,12 +188,12 @@ describe('v1.RegionInstancesClient', () => {
         new protos.google.cloud.compute.v1.BulkInsertRegionInstanceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'BulkInsertRegionInstanceRequest',
+        '.google.cloud.compute.v1.BulkInsertRegionInstanceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'BulkInsertRegionInstanceRequest',
+        '.google.cloud.compute.v1.BulkInsertRegionInstanceRequest',
         ['region']
       );
       request.region = defaultValue2;
@@ -224,12 +224,12 @@ describe('v1.RegionInstancesClient', () => {
         new protos.google.cloud.compute.v1.BulkInsertRegionInstanceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'BulkInsertRegionInstanceRequest',
+        '.google.cloud.compute.v1.BulkInsertRegionInstanceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'BulkInsertRegionInstanceRequest',
+        '.google.cloud.compute.v1.BulkInsertRegionInstanceRequest',
         ['region']
       );
       request.region = defaultValue2;
@@ -276,12 +276,12 @@ describe('v1.RegionInstancesClient', () => {
         new protos.google.cloud.compute.v1.BulkInsertRegionInstanceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'BulkInsertRegionInstanceRequest',
+        '.google.cloud.compute.v1.BulkInsertRegionInstanceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'BulkInsertRegionInstanceRequest',
+        '.google.cloud.compute.v1.BulkInsertRegionInstanceRequest',
         ['region']
       );
       request.region = defaultValue2;
@@ -312,12 +312,12 @@ describe('v1.RegionInstancesClient', () => {
         new protos.google.cloud.compute.v1.BulkInsertRegionInstanceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'BulkInsertRegionInstanceRequest',
+        '.google.cloud.compute.v1.BulkInsertRegionInstanceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'BulkInsertRegionInstanceRequest',
+        '.google.cloud.compute.v1.BulkInsertRegionInstanceRequest',
         ['region']
       );
       request.region = defaultValue2;

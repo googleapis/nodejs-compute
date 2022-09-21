@@ -248,13 +248,15 @@ describe('v1.LicensesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteLicenseRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteLicenseRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteLicenseRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('DeleteLicenseRequest', [
-        'license',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteLicenseRequest',
+        ['license']
+      );
       request.license = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&license=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
@@ -282,13 +284,15 @@ describe('v1.LicensesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteLicenseRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteLicenseRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteLicenseRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('DeleteLicenseRequest', [
-        'license',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteLicenseRequest',
+        ['license']
+      );
       request.license = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&license=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
@@ -332,13 +336,15 @@ describe('v1.LicensesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteLicenseRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteLicenseRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteLicenseRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('DeleteLicenseRequest', [
-        'license',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteLicenseRequest',
+        ['license']
+      );
       request.license = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&license=${defaultValue2}`;
       const expectedError = new Error('expected');
@@ -363,13 +369,15 @@ describe('v1.LicensesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteLicenseRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteLicenseRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteLicenseRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('DeleteLicenseRequest', [
-        'license',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteLicenseRequest',
+        ['license']
+      );
       request.license = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -387,13 +395,15 @@ describe('v1.LicensesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetLicenseRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetLicenseRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetLicenseRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetLicenseRequest', [
-        'license',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetLicenseRequest',
+        ['license']
+      );
       request.license = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&license=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
@@ -420,13 +430,15 @@ describe('v1.LicensesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetLicenseRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetLicenseRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetLicenseRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetLicenseRequest', [
-        'license',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetLicenseRequest',
+        ['license']
+      );
       request.license = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&license=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
@@ -468,13 +480,15 @@ describe('v1.LicensesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetLicenseRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetLicenseRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetLicenseRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetLicenseRequest', [
-        'license',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetLicenseRequest',
+        ['license']
+      );
       request.license = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&license=${defaultValue2}`;
       const expectedError = new Error('expected');
@@ -498,13 +512,15 @@ describe('v1.LicensesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetLicenseRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetLicenseRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetLicenseRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetLicenseRequest', [
-        'license',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetLicenseRequest',
+        ['license']
+      );
       request.license = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -522,13 +538,15 @@ describe('v1.LicensesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetIamPolicyLicenseRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetIamPolicyLicenseRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetIamPolicyLicenseRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetIamPolicyLicenseRequest', [
-        'resource',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetIamPolicyLicenseRequest',
+        ['resource']
+      );
       request.resource = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&resource=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
@@ -556,13 +574,15 @@ describe('v1.LicensesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetIamPolicyLicenseRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetIamPolicyLicenseRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetIamPolicyLicenseRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetIamPolicyLicenseRequest', [
-        'resource',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetIamPolicyLicenseRequest',
+        ['resource']
+      );
       request.resource = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&resource=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
@@ -606,13 +626,15 @@ describe('v1.LicensesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetIamPolicyLicenseRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetIamPolicyLicenseRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetIamPolicyLicenseRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetIamPolicyLicenseRequest', [
-        'resource',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetIamPolicyLicenseRequest',
+        ['resource']
+      );
       request.resource = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&resource=${defaultValue2}`;
       const expectedError = new Error('expected');
@@ -640,13 +662,15 @@ describe('v1.LicensesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetIamPolicyLicenseRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetIamPolicyLicenseRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetIamPolicyLicenseRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetIamPolicyLicenseRequest', [
-        'resource',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetIamPolicyLicenseRequest',
+        ['resource']
+      );
       request.resource = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -664,9 +688,10 @@ describe('v1.LicensesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertLicenseRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('InsertLicenseRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.InsertLicenseRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -694,9 +719,10 @@ describe('v1.LicensesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertLicenseRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('InsertLicenseRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.InsertLicenseRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -740,9 +766,10 @@ describe('v1.LicensesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertLicenseRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('InsertLicenseRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.InsertLicenseRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -767,9 +794,10 @@ describe('v1.LicensesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertLicenseRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('InsertLicenseRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.InsertLicenseRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -787,13 +815,15 @@ describe('v1.LicensesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetIamPolicyLicenseRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SetIamPolicyLicenseRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetIamPolicyLicenseRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('SetIamPolicyLicenseRequest', [
-        'resource',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetIamPolicyLicenseRequest',
+        ['resource']
+      );
       request.resource = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&resource=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
@@ -821,13 +851,15 @@ describe('v1.LicensesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetIamPolicyLicenseRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SetIamPolicyLicenseRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetIamPolicyLicenseRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('SetIamPolicyLicenseRequest', [
-        'resource',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetIamPolicyLicenseRequest',
+        ['resource']
+      );
       request.resource = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&resource=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
@@ -871,13 +903,15 @@ describe('v1.LicensesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetIamPolicyLicenseRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SetIamPolicyLicenseRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetIamPolicyLicenseRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('SetIamPolicyLicenseRequest', [
-        'resource',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetIamPolicyLicenseRequest',
+        ['resource']
+      );
       request.resource = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&resource=${defaultValue2}`;
       const expectedError = new Error('expected');
@@ -905,13 +939,15 @@ describe('v1.LicensesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetIamPolicyLicenseRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SetIamPolicyLicenseRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetIamPolicyLicenseRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('SetIamPolicyLicenseRequest', [
-        'resource',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetIamPolicyLicenseRequest',
+        ['resource']
+      );
       request.resource = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -930,12 +966,12 @@ describe('v1.LicensesClient', () => {
         new protos.google.cloud.compute.v1.TestIamPermissionsLicenseRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'TestIamPermissionsLicenseRequest',
+        '.google.cloud.compute.v1.TestIamPermissionsLicenseRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'TestIamPermissionsLicenseRequest',
+        '.google.cloud.compute.v1.TestIamPermissionsLicenseRequest',
         ['resource']
       );
       request.resource = defaultValue2;
@@ -967,12 +1003,12 @@ describe('v1.LicensesClient', () => {
         new protos.google.cloud.compute.v1.TestIamPermissionsLicenseRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'TestIamPermissionsLicenseRequest',
+        '.google.cloud.compute.v1.TestIamPermissionsLicenseRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'TestIamPermissionsLicenseRequest',
+        '.google.cloud.compute.v1.TestIamPermissionsLicenseRequest',
         ['resource']
       );
       request.resource = defaultValue2;
@@ -1019,12 +1055,12 @@ describe('v1.LicensesClient', () => {
         new protos.google.cloud.compute.v1.TestIamPermissionsLicenseRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'TestIamPermissionsLicenseRequest',
+        '.google.cloud.compute.v1.TestIamPermissionsLicenseRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'TestIamPermissionsLicenseRequest',
+        '.google.cloud.compute.v1.TestIamPermissionsLicenseRequest',
         ['resource']
       );
       request.resource = defaultValue2;
@@ -1055,12 +1091,12 @@ describe('v1.LicensesClient', () => {
         new protos.google.cloud.compute.v1.TestIamPermissionsLicenseRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'TestIamPermissionsLicenseRequest',
+        '.google.cloud.compute.v1.TestIamPermissionsLicenseRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'TestIamPermissionsLicenseRequest',
+        '.google.cloud.compute.v1.TestIamPermissionsLicenseRequest',
         ['resource']
       );
       request.resource = defaultValue2;
@@ -1080,9 +1116,10 @@ describe('v1.LicensesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListLicensesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListLicensesRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListLicensesRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedResponse = [
@@ -1111,9 +1148,10 @@ describe('v1.LicensesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListLicensesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListLicensesRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListLicensesRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedResponse = [
@@ -1157,9 +1195,10 @@ describe('v1.LicensesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListLicensesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListLicensesRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListLicensesRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1183,9 +1222,10 @@ describe('v1.LicensesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListLicensesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListLicensesRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListLicensesRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedResponse = [
@@ -1236,9 +1276,10 @@ describe('v1.LicensesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListLicensesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListLicensesRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListLicensesRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1286,9 +1327,10 @@ describe('v1.LicensesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListLicensesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListLicensesRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListLicensesRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedResponse = [
@@ -1327,9 +1369,10 @@ describe('v1.LicensesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListLicensesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListLicensesRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListLicensesRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedError = new Error('expected');

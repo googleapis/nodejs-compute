@@ -249,17 +249,17 @@ describe('v1.RegionDisksClient', () => {
         new protos.google.cloud.compute.v1.AddResourcePoliciesRegionDiskRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'AddResourcePoliciesRegionDiskRequest',
+        '.google.cloud.compute.v1.AddResourcePoliciesRegionDiskRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'AddResourcePoliciesRegionDiskRequest',
+        '.google.cloud.compute.v1.AddResourcePoliciesRegionDiskRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'AddResourcePoliciesRegionDiskRequest',
+        '.google.cloud.compute.v1.AddResourcePoliciesRegionDiskRequest',
         ['disk']
       );
       request.disk = defaultValue3;
@@ -291,17 +291,17 @@ describe('v1.RegionDisksClient', () => {
         new protos.google.cloud.compute.v1.AddResourcePoliciesRegionDiskRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'AddResourcePoliciesRegionDiskRequest',
+        '.google.cloud.compute.v1.AddResourcePoliciesRegionDiskRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'AddResourcePoliciesRegionDiskRequest',
+        '.google.cloud.compute.v1.AddResourcePoliciesRegionDiskRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'AddResourcePoliciesRegionDiskRequest',
+        '.google.cloud.compute.v1.AddResourcePoliciesRegionDiskRequest',
         ['disk']
       );
       request.disk = defaultValue3;
@@ -348,17 +348,17 @@ describe('v1.RegionDisksClient', () => {
         new protos.google.cloud.compute.v1.AddResourcePoliciesRegionDiskRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'AddResourcePoliciesRegionDiskRequest',
+        '.google.cloud.compute.v1.AddResourcePoliciesRegionDiskRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'AddResourcePoliciesRegionDiskRequest',
+        '.google.cloud.compute.v1.AddResourcePoliciesRegionDiskRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'AddResourcePoliciesRegionDiskRequest',
+        '.google.cloud.compute.v1.AddResourcePoliciesRegionDiskRequest',
         ['disk']
       );
       request.disk = defaultValue3;
@@ -389,17 +389,17 @@ describe('v1.RegionDisksClient', () => {
         new protos.google.cloud.compute.v1.AddResourcePoliciesRegionDiskRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'AddResourcePoliciesRegionDiskRequest',
+        '.google.cloud.compute.v1.AddResourcePoliciesRegionDiskRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'AddResourcePoliciesRegionDiskRequest',
+        '.google.cloud.compute.v1.AddResourcePoliciesRegionDiskRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'AddResourcePoliciesRegionDiskRequest',
+        '.google.cloud.compute.v1.AddResourcePoliciesRegionDiskRequest',
         ['disk']
       );
       request.disk = defaultValue3;
@@ -420,17 +420,17 @@ describe('v1.RegionDisksClient', () => {
         new protos.google.cloud.compute.v1.CreateSnapshotRegionDiskRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateSnapshotRegionDiskRequest',
+        '.google.cloud.compute.v1.CreateSnapshotRegionDiskRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'CreateSnapshotRegionDiskRequest',
+        '.google.cloud.compute.v1.CreateSnapshotRegionDiskRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'CreateSnapshotRegionDiskRequest',
+        '.google.cloud.compute.v1.CreateSnapshotRegionDiskRequest',
         ['disk']
       );
       request.disk = defaultValue3;
@@ -461,17 +461,17 @@ describe('v1.RegionDisksClient', () => {
         new protos.google.cloud.compute.v1.CreateSnapshotRegionDiskRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateSnapshotRegionDiskRequest',
+        '.google.cloud.compute.v1.CreateSnapshotRegionDiskRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'CreateSnapshotRegionDiskRequest',
+        '.google.cloud.compute.v1.CreateSnapshotRegionDiskRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'CreateSnapshotRegionDiskRequest',
+        '.google.cloud.compute.v1.CreateSnapshotRegionDiskRequest',
         ['disk']
       );
       request.disk = defaultValue3;
@@ -518,17 +518,17 @@ describe('v1.RegionDisksClient', () => {
         new protos.google.cloud.compute.v1.CreateSnapshotRegionDiskRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateSnapshotRegionDiskRequest',
+        '.google.cloud.compute.v1.CreateSnapshotRegionDiskRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'CreateSnapshotRegionDiskRequest',
+        '.google.cloud.compute.v1.CreateSnapshotRegionDiskRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'CreateSnapshotRegionDiskRequest',
+        '.google.cloud.compute.v1.CreateSnapshotRegionDiskRequest',
         ['disk']
       );
       request.disk = defaultValue3;
@@ -559,17 +559,17 @@ describe('v1.RegionDisksClient', () => {
         new protos.google.cloud.compute.v1.CreateSnapshotRegionDiskRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'CreateSnapshotRegionDiskRequest',
+        '.google.cloud.compute.v1.CreateSnapshotRegionDiskRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'CreateSnapshotRegionDiskRequest',
+        '.google.cloud.compute.v1.CreateSnapshotRegionDiskRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'CreateSnapshotRegionDiskRequest',
+        '.google.cloud.compute.v1.CreateSnapshotRegionDiskRequest',
         ['disk']
       );
       request.disk = defaultValue3;
@@ -589,17 +589,20 @@ describe('v1.RegionDisksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteRegionDiskRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteRegionDiskRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteRegionDiskRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('DeleteRegionDiskRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteRegionDiskRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('DeleteRegionDiskRequest', [
-        'disk',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteRegionDiskRequest',
+        ['disk']
+      );
       request.disk = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&disk=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -627,17 +630,20 @@ describe('v1.RegionDisksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteRegionDiskRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteRegionDiskRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteRegionDiskRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('DeleteRegionDiskRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteRegionDiskRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('DeleteRegionDiskRequest', [
-        'disk',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteRegionDiskRequest',
+        ['disk']
+      );
       request.disk = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&disk=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -681,17 +687,20 @@ describe('v1.RegionDisksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteRegionDiskRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteRegionDiskRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteRegionDiskRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('DeleteRegionDiskRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteRegionDiskRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('DeleteRegionDiskRequest', [
-        'disk',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteRegionDiskRequest',
+        ['disk']
+      );
       request.disk = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&disk=${defaultValue3}`;
       const expectedError = new Error('expected');
@@ -716,17 +725,20 @@ describe('v1.RegionDisksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteRegionDiskRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteRegionDiskRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteRegionDiskRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('DeleteRegionDiskRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteRegionDiskRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('DeleteRegionDiskRequest', [
-        'disk',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteRegionDiskRequest',
+        ['disk']
+      );
       request.disk = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -744,17 +756,20 @@ describe('v1.RegionDisksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetRegionDiskRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetRegionDiskRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetRegionDiskRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetRegionDiskRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetRegionDiskRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('GetRegionDiskRequest', [
-        'disk',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetRegionDiskRequest',
+        ['disk']
+      );
       request.disk = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&disk=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -781,17 +796,20 @@ describe('v1.RegionDisksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetRegionDiskRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetRegionDiskRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetRegionDiskRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetRegionDiskRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetRegionDiskRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('GetRegionDiskRequest', [
-        'disk',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetRegionDiskRequest',
+        ['disk']
+      );
       request.disk = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&disk=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -833,17 +851,20 @@ describe('v1.RegionDisksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetRegionDiskRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetRegionDiskRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetRegionDiskRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetRegionDiskRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetRegionDiskRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('GetRegionDiskRequest', [
-        'disk',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetRegionDiskRequest',
+        ['disk']
+      );
       request.disk = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&disk=${defaultValue3}`;
       const expectedError = new Error('expected');
@@ -867,17 +888,20 @@ describe('v1.RegionDisksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetRegionDiskRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetRegionDiskRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetRegionDiskRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetRegionDiskRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetRegionDiskRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('GetRegionDiskRequest', [
-        'disk',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetRegionDiskRequest',
+        ['disk']
+      );
       request.disk = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -896,17 +920,17 @@ describe('v1.RegionDisksClient', () => {
         new protos.google.cloud.compute.v1.GetIamPolicyRegionDiskRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetIamPolicyRegionDiskRequest',
+        '.google.cloud.compute.v1.GetIamPolicyRegionDiskRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'GetIamPolicyRegionDiskRequest',
+        '.google.cloud.compute.v1.GetIamPolicyRegionDiskRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'GetIamPolicyRegionDiskRequest',
+        '.google.cloud.compute.v1.GetIamPolicyRegionDiskRequest',
         ['resource']
       );
       request.resource = defaultValue3;
@@ -937,17 +961,17 @@ describe('v1.RegionDisksClient', () => {
         new protos.google.cloud.compute.v1.GetIamPolicyRegionDiskRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetIamPolicyRegionDiskRequest',
+        '.google.cloud.compute.v1.GetIamPolicyRegionDiskRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'GetIamPolicyRegionDiskRequest',
+        '.google.cloud.compute.v1.GetIamPolicyRegionDiskRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'GetIamPolicyRegionDiskRequest',
+        '.google.cloud.compute.v1.GetIamPolicyRegionDiskRequest',
         ['resource']
       );
       request.resource = defaultValue3;
@@ -994,17 +1018,17 @@ describe('v1.RegionDisksClient', () => {
         new protos.google.cloud.compute.v1.GetIamPolicyRegionDiskRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetIamPolicyRegionDiskRequest',
+        '.google.cloud.compute.v1.GetIamPolicyRegionDiskRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'GetIamPolicyRegionDiskRequest',
+        '.google.cloud.compute.v1.GetIamPolicyRegionDiskRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'GetIamPolicyRegionDiskRequest',
+        '.google.cloud.compute.v1.GetIamPolicyRegionDiskRequest',
         ['resource']
       );
       request.resource = defaultValue3;
@@ -1035,17 +1059,17 @@ describe('v1.RegionDisksClient', () => {
         new protos.google.cloud.compute.v1.GetIamPolicyRegionDiskRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetIamPolicyRegionDiskRequest',
+        '.google.cloud.compute.v1.GetIamPolicyRegionDiskRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'GetIamPolicyRegionDiskRequest',
+        '.google.cloud.compute.v1.GetIamPolicyRegionDiskRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'GetIamPolicyRegionDiskRequest',
+        '.google.cloud.compute.v1.GetIamPolicyRegionDiskRequest',
         ['resource']
       );
       request.resource = defaultValue3;
@@ -1065,13 +1089,15 @@ describe('v1.RegionDisksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertRegionDiskRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('InsertRegionDiskRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.InsertRegionDiskRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('InsertRegionDiskRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.InsertRegionDiskRequest',
+        ['region']
+      );
       request.region = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
@@ -1099,13 +1125,15 @@ describe('v1.RegionDisksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertRegionDiskRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('InsertRegionDiskRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.InsertRegionDiskRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('InsertRegionDiskRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.InsertRegionDiskRequest',
+        ['region']
+      );
       request.region = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
@@ -1149,13 +1177,15 @@ describe('v1.RegionDisksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertRegionDiskRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('InsertRegionDiskRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.InsertRegionDiskRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('InsertRegionDiskRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.InsertRegionDiskRequest',
+        ['region']
+      );
       request.region = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}`;
       const expectedError = new Error('expected');
@@ -1180,13 +1210,15 @@ describe('v1.RegionDisksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertRegionDiskRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('InsertRegionDiskRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.InsertRegionDiskRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('InsertRegionDiskRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.InsertRegionDiskRequest',
+        ['region']
+      );
       request.region = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1205,17 +1237,17 @@ describe('v1.RegionDisksClient', () => {
         new protos.google.cloud.compute.v1.RemoveResourcePoliciesRegionDiskRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'RemoveResourcePoliciesRegionDiskRequest',
+        '.google.cloud.compute.v1.RemoveResourcePoliciesRegionDiskRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'RemoveResourcePoliciesRegionDiskRequest',
+        '.google.cloud.compute.v1.RemoveResourcePoliciesRegionDiskRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'RemoveResourcePoliciesRegionDiskRequest',
+        '.google.cloud.compute.v1.RemoveResourcePoliciesRegionDiskRequest',
         ['disk']
       );
       request.disk = defaultValue3;
@@ -1247,17 +1279,17 @@ describe('v1.RegionDisksClient', () => {
         new protos.google.cloud.compute.v1.RemoveResourcePoliciesRegionDiskRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'RemoveResourcePoliciesRegionDiskRequest',
+        '.google.cloud.compute.v1.RemoveResourcePoliciesRegionDiskRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'RemoveResourcePoliciesRegionDiskRequest',
+        '.google.cloud.compute.v1.RemoveResourcePoliciesRegionDiskRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'RemoveResourcePoliciesRegionDiskRequest',
+        '.google.cloud.compute.v1.RemoveResourcePoliciesRegionDiskRequest',
         ['disk']
       );
       request.disk = defaultValue3;
@@ -1304,17 +1336,17 @@ describe('v1.RegionDisksClient', () => {
         new protos.google.cloud.compute.v1.RemoveResourcePoliciesRegionDiskRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'RemoveResourcePoliciesRegionDiskRequest',
+        '.google.cloud.compute.v1.RemoveResourcePoliciesRegionDiskRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'RemoveResourcePoliciesRegionDiskRequest',
+        '.google.cloud.compute.v1.RemoveResourcePoliciesRegionDiskRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'RemoveResourcePoliciesRegionDiskRequest',
+        '.google.cloud.compute.v1.RemoveResourcePoliciesRegionDiskRequest',
         ['disk']
       );
       request.disk = defaultValue3;
@@ -1348,17 +1380,17 @@ describe('v1.RegionDisksClient', () => {
         new protos.google.cloud.compute.v1.RemoveResourcePoliciesRegionDiskRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'RemoveResourcePoliciesRegionDiskRequest',
+        '.google.cloud.compute.v1.RemoveResourcePoliciesRegionDiskRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'RemoveResourcePoliciesRegionDiskRequest',
+        '.google.cloud.compute.v1.RemoveResourcePoliciesRegionDiskRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'RemoveResourcePoliciesRegionDiskRequest',
+        '.google.cloud.compute.v1.RemoveResourcePoliciesRegionDiskRequest',
         ['disk']
       );
       request.disk = defaultValue3;
@@ -1381,17 +1413,20 @@ describe('v1.RegionDisksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ResizeRegionDiskRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ResizeRegionDiskRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ResizeRegionDiskRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ResizeRegionDiskRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ResizeRegionDiskRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('ResizeRegionDiskRequest', [
-        'disk',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ResizeRegionDiskRequest',
+        ['disk']
+      );
       request.disk = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&disk=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -1419,17 +1454,20 @@ describe('v1.RegionDisksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ResizeRegionDiskRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ResizeRegionDiskRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ResizeRegionDiskRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ResizeRegionDiskRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ResizeRegionDiskRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('ResizeRegionDiskRequest', [
-        'disk',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ResizeRegionDiskRequest',
+        ['disk']
+      );
       request.disk = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&disk=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -1473,17 +1511,20 @@ describe('v1.RegionDisksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ResizeRegionDiskRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ResizeRegionDiskRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ResizeRegionDiskRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ResizeRegionDiskRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ResizeRegionDiskRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('ResizeRegionDiskRequest', [
-        'disk',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ResizeRegionDiskRequest',
+        ['disk']
+      );
       request.disk = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&disk=${defaultValue3}`;
       const expectedError = new Error('expected');
@@ -1508,17 +1549,20 @@ describe('v1.RegionDisksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ResizeRegionDiskRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ResizeRegionDiskRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ResizeRegionDiskRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ResizeRegionDiskRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ResizeRegionDiskRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('ResizeRegionDiskRequest', [
-        'disk',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ResizeRegionDiskRequest',
+        ['disk']
+      );
       request.disk = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1537,17 +1581,17 @@ describe('v1.RegionDisksClient', () => {
         new protos.google.cloud.compute.v1.SetIamPolicyRegionDiskRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SetIamPolicyRegionDiskRequest',
+        '.google.cloud.compute.v1.SetIamPolicyRegionDiskRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'SetIamPolicyRegionDiskRequest',
+        '.google.cloud.compute.v1.SetIamPolicyRegionDiskRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'SetIamPolicyRegionDiskRequest',
+        '.google.cloud.compute.v1.SetIamPolicyRegionDiskRequest',
         ['resource']
       );
       request.resource = defaultValue3;
@@ -1578,17 +1622,17 @@ describe('v1.RegionDisksClient', () => {
         new protos.google.cloud.compute.v1.SetIamPolicyRegionDiskRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SetIamPolicyRegionDiskRequest',
+        '.google.cloud.compute.v1.SetIamPolicyRegionDiskRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'SetIamPolicyRegionDiskRequest',
+        '.google.cloud.compute.v1.SetIamPolicyRegionDiskRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'SetIamPolicyRegionDiskRequest',
+        '.google.cloud.compute.v1.SetIamPolicyRegionDiskRequest',
         ['resource']
       );
       request.resource = defaultValue3;
@@ -1635,17 +1679,17 @@ describe('v1.RegionDisksClient', () => {
         new protos.google.cloud.compute.v1.SetIamPolicyRegionDiskRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SetIamPolicyRegionDiskRequest',
+        '.google.cloud.compute.v1.SetIamPolicyRegionDiskRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'SetIamPolicyRegionDiskRequest',
+        '.google.cloud.compute.v1.SetIamPolicyRegionDiskRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'SetIamPolicyRegionDiskRequest',
+        '.google.cloud.compute.v1.SetIamPolicyRegionDiskRequest',
         ['resource']
       );
       request.resource = defaultValue3;
@@ -1676,17 +1720,17 @@ describe('v1.RegionDisksClient', () => {
         new protos.google.cloud.compute.v1.SetIamPolicyRegionDiskRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SetIamPolicyRegionDiskRequest',
+        '.google.cloud.compute.v1.SetIamPolicyRegionDiskRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'SetIamPolicyRegionDiskRequest',
+        '.google.cloud.compute.v1.SetIamPolicyRegionDiskRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'SetIamPolicyRegionDiskRequest',
+        '.google.cloud.compute.v1.SetIamPolicyRegionDiskRequest',
         ['resource']
       );
       request.resource = defaultValue3;
@@ -1706,17 +1750,20 @@ describe('v1.RegionDisksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetLabelsRegionDiskRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SetLabelsRegionDiskRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetLabelsRegionDiskRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('SetLabelsRegionDiskRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetLabelsRegionDiskRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('SetLabelsRegionDiskRequest', [
-        'resource',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetLabelsRegionDiskRequest',
+        ['resource']
+      );
       request.resource = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&resource=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -1744,17 +1791,20 @@ describe('v1.RegionDisksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetLabelsRegionDiskRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SetLabelsRegionDiskRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetLabelsRegionDiskRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('SetLabelsRegionDiskRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetLabelsRegionDiskRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('SetLabelsRegionDiskRequest', [
-        'resource',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetLabelsRegionDiskRequest',
+        ['resource']
+      );
       request.resource = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&resource=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -1798,17 +1848,20 @@ describe('v1.RegionDisksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetLabelsRegionDiskRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SetLabelsRegionDiskRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetLabelsRegionDiskRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('SetLabelsRegionDiskRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetLabelsRegionDiskRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('SetLabelsRegionDiskRequest', [
-        'resource',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetLabelsRegionDiskRequest',
+        ['resource']
+      );
       request.resource = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&resource=${defaultValue3}`;
       const expectedError = new Error('expected');
@@ -1833,17 +1886,20 @@ describe('v1.RegionDisksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetLabelsRegionDiskRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SetLabelsRegionDiskRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetLabelsRegionDiskRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('SetLabelsRegionDiskRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetLabelsRegionDiskRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('SetLabelsRegionDiskRequest', [
-        'resource',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetLabelsRegionDiskRequest',
+        ['resource']
+      );
       request.resource = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1862,17 +1918,17 @@ describe('v1.RegionDisksClient', () => {
         new protos.google.cloud.compute.v1.TestIamPermissionsRegionDiskRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'TestIamPermissionsRegionDiskRequest',
+        '.google.cloud.compute.v1.TestIamPermissionsRegionDiskRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'TestIamPermissionsRegionDiskRequest',
+        '.google.cloud.compute.v1.TestIamPermissionsRegionDiskRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'TestIamPermissionsRegionDiskRequest',
+        '.google.cloud.compute.v1.TestIamPermissionsRegionDiskRequest',
         ['resource']
       );
       request.resource = defaultValue3;
@@ -1904,17 +1960,17 @@ describe('v1.RegionDisksClient', () => {
         new protos.google.cloud.compute.v1.TestIamPermissionsRegionDiskRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'TestIamPermissionsRegionDiskRequest',
+        '.google.cloud.compute.v1.TestIamPermissionsRegionDiskRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'TestIamPermissionsRegionDiskRequest',
+        '.google.cloud.compute.v1.TestIamPermissionsRegionDiskRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'TestIamPermissionsRegionDiskRequest',
+        '.google.cloud.compute.v1.TestIamPermissionsRegionDiskRequest',
         ['resource']
       );
       request.resource = defaultValue3;
@@ -1961,17 +2017,17 @@ describe('v1.RegionDisksClient', () => {
         new protos.google.cloud.compute.v1.TestIamPermissionsRegionDiskRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'TestIamPermissionsRegionDiskRequest',
+        '.google.cloud.compute.v1.TestIamPermissionsRegionDiskRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'TestIamPermissionsRegionDiskRequest',
+        '.google.cloud.compute.v1.TestIamPermissionsRegionDiskRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'TestIamPermissionsRegionDiskRequest',
+        '.google.cloud.compute.v1.TestIamPermissionsRegionDiskRequest',
         ['resource']
       );
       request.resource = defaultValue3;
@@ -2002,17 +2058,17 @@ describe('v1.RegionDisksClient', () => {
         new protos.google.cloud.compute.v1.TestIamPermissionsRegionDiskRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'TestIamPermissionsRegionDiskRequest',
+        '.google.cloud.compute.v1.TestIamPermissionsRegionDiskRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'TestIamPermissionsRegionDiskRequest',
+        '.google.cloud.compute.v1.TestIamPermissionsRegionDiskRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'TestIamPermissionsRegionDiskRequest',
+        '.google.cloud.compute.v1.TestIamPermissionsRegionDiskRequest',
         ['resource']
       );
       request.resource = defaultValue3;
@@ -2032,13 +2088,15 @@ describe('v1.RegionDisksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListRegionDisksRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListRegionDisksRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListRegionDisksRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ListRegionDisksRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListRegionDisksRequest',
+        ['region']
+      );
       request.region = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}`;
       const expectedResponse = [
@@ -2067,13 +2125,15 @@ describe('v1.RegionDisksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListRegionDisksRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListRegionDisksRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListRegionDisksRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ListRegionDisksRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListRegionDisksRequest',
+        ['region']
+      );
       request.region = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}`;
       const expectedResponse = [
@@ -2117,13 +2177,15 @@ describe('v1.RegionDisksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListRegionDisksRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListRegionDisksRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListRegionDisksRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ListRegionDisksRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListRegionDisksRequest',
+        ['region']
+      );
       request.region = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}`;
       const expectedError = new Error('expected');
@@ -2147,13 +2209,15 @@ describe('v1.RegionDisksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListRegionDisksRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListRegionDisksRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListRegionDisksRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ListRegionDisksRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListRegionDisksRequest',
+        ['region']
+      );
       request.region = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}`;
       const expectedResponse = [
@@ -2201,13 +2265,15 @@ describe('v1.RegionDisksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListRegionDisksRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListRegionDisksRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListRegionDisksRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ListRegionDisksRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListRegionDisksRequest',
+        ['region']
+      );
       request.region = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}`;
       const expectedError = new Error('expected');
@@ -2252,13 +2318,15 @@ describe('v1.RegionDisksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListRegionDisksRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListRegionDisksRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListRegionDisksRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ListRegionDisksRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListRegionDisksRequest',
+        ['region']
+      );
       request.region = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}`;
       const expectedResponse = [
@@ -2297,13 +2365,15 @@ describe('v1.RegionDisksClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListRegionDisksRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListRegionDisksRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListRegionDisksRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ListRegionDisksRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListRegionDisksRequest',
+        ['region']
+      );
       request.region = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}`;
       const expectedError = new Error('expected');

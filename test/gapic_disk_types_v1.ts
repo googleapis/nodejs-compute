@@ -248,15 +248,20 @@ describe('v1.DiskTypesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetDiskTypeRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetDiskTypeRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetDiskTypeRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetDiskTypeRequest', ['zone']);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetDiskTypeRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('GetDiskTypeRequest', [
-        'diskType',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetDiskTypeRequest',
+        ['diskType']
+      );
       request.diskType = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&disk_type=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -283,15 +288,20 @@ describe('v1.DiskTypesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetDiskTypeRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetDiskTypeRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetDiskTypeRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetDiskTypeRequest', ['zone']);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetDiskTypeRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('GetDiskTypeRequest', [
-        'diskType',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetDiskTypeRequest',
+        ['diskType']
+      );
       request.diskType = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&disk_type=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -333,15 +343,20 @@ describe('v1.DiskTypesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetDiskTypeRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetDiskTypeRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetDiskTypeRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetDiskTypeRequest', ['zone']);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetDiskTypeRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('GetDiskTypeRequest', [
-        'diskType',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetDiskTypeRequest',
+        ['diskType']
+      );
       request.diskType = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&disk_type=${defaultValue3}`;
       const expectedError = new Error('expected');
@@ -365,15 +380,20 @@ describe('v1.DiskTypesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetDiskTypeRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetDiskTypeRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetDiskTypeRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetDiskTypeRequest', ['zone']);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetDiskTypeRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('GetDiskTypeRequest', [
-        'diskType',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetDiskTypeRequest',
+        ['diskType']
+      );
       request.diskType = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -392,7 +412,7 @@ describe('v1.DiskTypesClient', () => {
         new protos.google.cloud.compute.v1.AggregatedListDiskTypesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'AggregatedListDiskTypesRequest',
+        '.google.cloud.compute.v1.AggregatedListDiskTypesRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -452,7 +472,7 @@ describe('v1.DiskTypesClient', () => {
         new protos.google.cloud.compute.v1.AggregatedListDiskTypesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'AggregatedListDiskTypesRequest',
+        '.google.cloud.compute.v1.AggregatedListDiskTypesRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -495,13 +515,15 @@ describe('v1.DiskTypesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListDiskTypesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListDiskTypesRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListDiskTypesRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ListDiskTypesRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListDiskTypesRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}`;
       const expectedResponse = [
@@ -530,13 +552,15 @@ describe('v1.DiskTypesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListDiskTypesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListDiskTypesRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListDiskTypesRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ListDiskTypesRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListDiskTypesRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}`;
       const expectedResponse = [
@@ -580,13 +604,15 @@ describe('v1.DiskTypesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListDiskTypesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListDiskTypesRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListDiskTypesRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ListDiskTypesRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListDiskTypesRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}`;
       const expectedError = new Error('expected');
@@ -610,13 +636,15 @@ describe('v1.DiskTypesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListDiskTypesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListDiskTypesRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListDiskTypesRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ListDiskTypesRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListDiskTypesRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}`;
       const expectedResponse = [
@@ -667,13 +695,15 @@ describe('v1.DiskTypesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListDiskTypesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListDiskTypesRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListDiskTypesRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ListDiskTypesRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListDiskTypesRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}`;
       const expectedError = new Error('expected');
@@ -721,13 +751,15 @@ describe('v1.DiskTypesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListDiskTypesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListDiskTypesRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListDiskTypesRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ListDiskTypesRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListDiskTypesRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}`;
       const expectedResponse = [
@@ -766,13 +798,15 @@ describe('v1.DiskTypesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListDiskTypesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListDiskTypesRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListDiskTypesRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ListDiskTypesRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListDiskTypesRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}`;
       const expectedError = new Error('expected');

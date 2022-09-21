@@ -277,12 +277,12 @@ describe('v1.GlobalNetworkEndpointGroupsClient', () => {
         new protos.google.cloud.compute.v1.AttachNetworkEndpointsGlobalNetworkEndpointGroupRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'AttachNetworkEndpointsGlobalNetworkEndpointGroupRequest',
+        '.google.cloud.compute.v1.AttachNetworkEndpointsGlobalNetworkEndpointGroupRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'AttachNetworkEndpointsGlobalNetworkEndpointGroupRequest',
+        '.google.cloud.compute.v1.AttachNetworkEndpointsGlobalNetworkEndpointGroupRequest',
         ['networkEndpointGroup']
       );
       request.networkEndpointGroup = defaultValue2;
@@ -317,12 +317,12 @@ describe('v1.GlobalNetworkEndpointGroupsClient', () => {
         new protos.google.cloud.compute.v1.AttachNetworkEndpointsGlobalNetworkEndpointGroupRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'AttachNetworkEndpointsGlobalNetworkEndpointGroupRequest',
+        '.google.cloud.compute.v1.AttachNetworkEndpointsGlobalNetworkEndpointGroupRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'AttachNetworkEndpointsGlobalNetworkEndpointGroupRequest',
+        '.google.cloud.compute.v1.AttachNetworkEndpointsGlobalNetworkEndpointGroupRequest',
         ['networkEndpointGroup']
       );
       request.networkEndpointGroup = defaultValue2;
@@ -372,12 +372,12 @@ describe('v1.GlobalNetworkEndpointGroupsClient', () => {
         new protos.google.cloud.compute.v1.AttachNetworkEndpointsGlobalNetworkEndpointGroupRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'AttachNetworkEndpointsGlobalNetworkEndpointGroupRequest',
+        '.google.cloud.compute.v1.AttachNetworkEndpointsGlobalNetworkEndpointGroupRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'AttachNetworkEndpointsGlobalNetworkEndpointGroupRequest',
+        '.google.cloud.compute.v1.AttachNetworkEndpointsGlobalNetworkEndpointGroupRequest',
         ['networkEndpointGroup']
       );
       request.networkEndpointGroup = defaultValue2;
@@ -414,12 +414,12 @@ describe('v1.GlobalNetworkEndpointGroupsClient', () => {
         new protos.google.cloud.compute.v1.AttachNetworkEndpointsGlobalNetworkEndpointGroupRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'AttachNetworkEndpointsGlobalNetworkEndpointGroupRequest',
+        '.google.cloud.compute.v1.AttachNetworkEndpointsGlobalNetworkEndpointGroupRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'AttachNetworkEndpointsGlobalNetworkEndpointGroupRequest',
+        '.google.cloud.compute.v1.AttachNetworkEndpointsGlobalNetworkEndpointGroupRequest',
         ['networkEndpointGroup']
       );
       request.networkEndpointGroup = defaultValue2;
@@ -446,12 +446,12 @@ describe('v1.GlobalNetworkEndpointGroupsClient', () => {
         new protos.google.cloud.compute.v1.DeleteGlobalNetworkEndpointGroupRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteGlobalNetworkEndpointGroupRequest',
+        '.google.cloud.compute.v1.DeleteGlobalNetworkEndpointGroupRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'DeleteGlobalNetworkEndpointGroupRequest',
+        '.google.cloud.compute.v1.DeleteGlobalNetworkEndpointGroupRequest',
         ['networkEndpointGroup']
       );
       request.networkEndpointGroup = defaultValue2;
@@ -485,12 +485,12 @@ describe('v1.GlobalNetworkEndpointGroupsClient', () => {
         new protos.google.cloud.compute.v1.DeleteGlobalNetworkEndpointGroupRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteGlobalNetworkEndpointGroupRequest',
+        '.google.cloud.compute.v1.DeleteGlobalNetworkEndpointGroupRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'DeleteGlobalNetworkEndpointGroupRequest',
+        '.google.cloud.compute.v1.DeleteGlobalNetworkEndpointGroupRequest',
         ['networkEndpointGroup']
       );
       request.networkEndpointGroup = defaultValue2;
@@ -540,12 +540,12 @@ describe('v1.GlobalNetworkEndpointGroupsClient', () => {
         new protos.google.cloud.compute.v1.DeleteGlobalNetworkEndpointGroupRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteGlobalNetworkEndpointGroupRequest',
+        '.google.cloud.compute.v1.DeleteGlobalNetworkEndpointGroupRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'DeleteGlobalNetworkEndpointGroupRequest',
+        '.google.cloud.compute.v1.DeleteGlobalNetworkEndpointGroupRequest',
         ['networkEndpointGroup']
       );
       request.networkEndpointGroup = defaultValue2;
@@ -576,12 +576,12 @@ describe('v1.GlobalNetworkEndpointGroupsClient', () => {
         new protos.google.cloud.compute.v1.DeleteGlobalNetworkEndpointGroupRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteGlobalNetworkEndpointGroupRequest',
+        '.google.cloud.compute.v1.DeleteGlobalNetworkEndpointGroupRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'DeleteGlobalNetworkEndpointGroupRequest',
+        '.google.cloud.compute.v1.DeleteGlobalNetworkEndpointGroupRequest',
         ['networkEndpointGroup']
       );
       request.networkEndpointGroup = defaultValue2;
@@ -605,12 +605,12 @@ describe('v1.GlobalNetworkEndpointGroupsClient', () => {
         new protos.google.cloud.compute.v1.DetachNetworkEndpointsGlobalNetworkEndpointGroupRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DetachNetworkEndpointsGlobalNetworkEndpointGroupRequest',
+        '.google.cloud.compute.v1.DetachNetworkEndpointsGlobalNetworkEndpointGroupRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'DetachNetworkEndpointsGlobalNetworkEndpointGroupRequest',
+        '.google.cloud.compute.v1.DetachNetworkEndpointsGlobalNetworkEndpointGroupRequest',
         ['networkEndpointGroup']
       );
       request.networkEndpointGroup = defaultValue2;
@@ -645,12 +645,12 @@ describe('v1.GlobalNetworkEndpointGroupsClient', () => {
         new protos.google.cloud.compute.v1.DetachNetworkEndpointsGlobalNetworkEndpointGroupRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DetachNetworkEndpointsGlobalNetworkEndpointGroupRequest',
+        '.google.cloud.compute.v1.DetachNetworkEndpointsGlobalNetworkEndpointGroupRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'DetachNetworkEndpointsGlobalNetworkEndpointGroupRequest',
+        '.google.cloud.compute.v1.DetachNetworkEndpointsGlobalNetworkEndpointGroupRequest',
         ['networkEndpointGroup']
       );
       request.networkEndpointGroup = defaultValue2;
@@ -700,12 +700,12 @@ describe('v1.GlobalNetworkEndpointGroupsClient', () => {
         new protos.google.cloud.compute.v1.DetachNetworkEndpointsGlobalNetworkEndpointGroupRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DetachNetworkEndpointsGlobalNetworkEndpointGroupRequest',
+        '.google.cloud.compute.v1.DetachNetworkEndpointsGlobalNetworkEndpointGroupRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'DetachNetworkEndpointsGlobalNetworkEndpointGroupRequest',
+        '.google.cloud.compute.v1.DetachNetworkEndpointsGlobalNetworkEndpointGroupRequest',
         ['networkEndpointGroup']
       );
       request.networkEndpointGroup = defaultValue2;
@@ -742,12 +742,12 @@ describe('v1.GlobalNetworkEndpointGroupsClient', () => {
         new protos.google.cloud.compute.v1.DetachNetworkEndpointsGlobalNetworkEndpointGroupRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DetachNetworkEndpointsGlobalNetworkEndpointGroupRequest',
+        '.google.cloud.compute.v1.DetachNetworkEndpointsGlobalNetworkEndpointGroupRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'DetachNetworkEndpointsGlobalNetworkEndpointGroupRequest',
+        '.google.cloud.compute.v1.DetachNetworkEndpointsGlobalNetworkEndpointGroupRequest',
         ['networkEndpointGroup']
       );
       request.networkEndpointGroup = defaultValue2;
@@ -774,12 +774,12 @@ describe('v1.GlobalNetworkEndpointGroupsClient', () => {
         new protos.google.cloud.compute.v1.GetGlobalNetworkEndpointGroupRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetGlobalNetworkEndpointGroupRequest',
+        '.google.cloud.compute.v1.GetGlobalNetworkEndpointGroupRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'GetGlobalNetworkEndpointGroupRequest',
+        '.google.cloud.compute.v1.GetGlobalNetworkEndpointGroupRequest',
         ['networkEndpointGroup']
       );
       request.networkEndpointGroup = defaultValue2;
@@ -812,12 +812,12 @@ describe('v1.GlobalNetworkEndpointGroupsClient', () => {
         new protos.google.cloud.compute.v1.GetGlobalNetworkEndpointGroupRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetGlobalNetworkEndpointGroupRequest',
+        '.google.cloud.compute.v1.GetGlobalNetworkEndpointGroupRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'GetGlobalNetworkEndpointGroupRequest',
+        '.google.cloud.compute.v1.GetGlobalNetworkEndpointGroupRequest',
         ['networkEndpointGroup']
       );
       request.networkEndpointGroup = defaultValue2;
@@ -865,12 +865,12 @@ describe('v1.GlobalNetworkEndpointGroupsClient', () => {
         new protos.google.cloud.compute.v1.GetGlobalNetworkEndpointGroupRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetGlobalNetworkEndpointGroupRequest',
+        '.google.cloud.compute.v1.GetGlobalNetworkEndpointGroupRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'GetGlobalNetworkEndpointGroupRequest',
+        '.google.cloud.compute.v1.GetGlobalNetworkEndpointGroupRequest',
         ['networkEndpointGroup']
       );
       request.networkEndpointGroup = defaultValue2;
@@ -900,12 +900,12 @@ describe('v1.GlobalNetworkEndpointGroupsClient', () => {
         new protos.google.cloud.compute.v1.GetGlobalNetworkEndpointGroupRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetGlobalNetworkEndpointGroupRequest',
+        '.google.cloud.compute.v1.GetGlobalNetworkEndpointGroupRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'GetGlobalNetworkEndpointGroupRequest',
+        '.google.cloud.compute.v1.GetGlobalNetworkEndpointGroupRequest',
         ['networkEndpointGroup']
       );
       request.networkEndpointGroup = defaultValue2;
@@ -929,7 +929,7 @@ describe('v1.GlobalNetworkEndpointGroupsClient', () => {
         new protos.google.cloud.compute.v1.InsertGlobalNetworkEndpointGroupRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'InsertGlobalNetworkEndpointGroupRequest',
+        '.google.cloud.compute.v1.InsertGlobalNetworkEndpointGroupRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -963,7 +963,7 @@ describe('v1.GlobalNetworkEndpointGroupsClient', () => {
         new protos.google.cloud.compute.v1.InsertGlobalNetworkEndpointGroupRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'InsertGlobalNetworkEndpointGroupRequest',
+        '.google.cloud.compute.v1.InsertGlobalNetworkEndpointGroupRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -1013,7 +1013,7 @@ describe('v1.GlobalNetworkEndpointGroupsClient', () => {
         new protos.google.cloud.compute.v1.InsertGlobalNetworkEndpointGroupRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'InsertGlobalNetworkEndpointGroupRequest',
+        '.google.cloud.compute.v1.InsertGlobalNetworkEndpointGroupRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -1044,7 +1044,7 @@ describe('v1.GlobalNetworkEndpointGroupsClient', () => {
         new protos.google.cloud.compute.v1.InsertGlobalNetworkEndpointGroupRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'InsertGlobalNetworkEndpointGroupRequest',
+        '.google.cloud.compute.v1.InsertGlobalNetworkEndpointGroupRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -1068,7 +1068,7 @@ describe('v1.GlobalNetworkEndpointGroupsClient', () => {
         new protos.google.cloud.compute.v1.ListGlobalNetworkEndpointGroupsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListGlobalNetworkEndpointGroupsRequest',
+        '.google.cloud.compute.v1.ListGlobalNetworkEndpointGroupsRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -1109,7 +1109,7 @@ describe('v1.GlobalNetworkEndpointGroupsClient', () => {
         new protos.google.cloud.compute.v1.ListGlobalNetworkEndpointGroupsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListGlobalNetworkEndpointGroupsRequest',
+        '.google.cloud.compute.v1.ListGlobalNetworkEndpointGroupsRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -1167,7 +1167,7 @@ describe('v1.GlobalNetworkEndpointGroupsClient', () => {
         new protos.google.cloud.compute.v1.ListGlobalNetworkEndpointGroupsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListGlobalNetworkEndpointGroupsRequest',
+        '.google.cloud.compute.v1.ListGlobalNetworkEndpointGroupsRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -1197,7 +1197,7 @@ describe('v1.GlobalNetworkEndpointGroupsClient', () => {
         new protos.google.cloud.compute.v1.ListGlobalNetworkEndpointGroupsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListGlobalNetworkEndpointGroupsRequest',
+        '.google.cloud.compute.v1.ListGlobalNetworkEndpointGroupsRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -1261,7 +1261,7 @@ describe('v1.GlobalNetworkEndpointGroupsClient', () => {
         new protos.google.cloud.compute.v1.ListGlobalNetworkEndpointGroupsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListGlobalNetworkEndpointGroupsRequest',
+        '.google.cloud.compute.v1.ListGlobalNetworkEndpointGroupsRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -1316,7 +1316,7 @@ describe('v1.GlobalNetworkEndpointGroupsClient', () => {
         new protos.google.cloud.compute.v1.ListGlobalNetworkEndpointGroupsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListGlobalNetworkEndpointGroupsRequest',
+        '.google.cloud.compute.v1.ListGlobalNetworkEndpointGroupsRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -1368,7 +1368,7 @@ describe('v1.GlobalNetworkEndpointGroupsClient', () => {
         new protos.google.cloud.compute.v1.ListGlobalNetworkEndpointGroupsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListGlobalNetworkEndpointGroupsRequest',
+        '.google.cloud.compute.v1.ListGlobalNetworkEndpointGroupsRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -1415,12 +1415,12 @@ describe('v1.GlobalNetworkEndpointGroupsClient', () => {
         new protos.google.cloud.compute.v1.ListNetworkEndpointsGlobalNetworkEndpointGroupsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListNetworkEndpointsGlobalNetworkEndpointGroupsRequest',
+        '.google.cloud.compute.v1.ListNetworkEndpointsGlobalNetworkEndpointGroupsRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'ListNetworkEndpointsGlobalNetworkEndpointGroupsRequest',
+        '.google.cloud.compute.v1.ListNetworkEndpointsGlobalNetworkEndpointGroupsRequest',
         ['networkEndpointGroup']
       );
       request.networkEndpointGroup = defaultValue2;
@@ -1463,12 +1463,12 @@ describe('v1.GlobalNetworkEndpointGroupsClient', () => {
         new protos.google.cloud.compute.v1.ListNetworkEndpointsGlobalNetworkEndpointGroupsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListNetworkEndpointsGlobalNetworkEndpointGroupsRequest',
+        '.google.cloud.compute.v1.ListNetworkEndpointsGlobalNetworkEndpointGroupsRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'ListNetworkEndpointsGlobalNetworkEndpointGroupsRequest',
+        '.google.cloud.compute.v1.ListNetworkEndpointsGlobalNetworkEndpointGroupsRequest',
         ['networkEndpointGroup']
       );
       request.networkEndpointGroup = defaultValue2;
@@ -1528,12 +1528,12 @@ describe('v1.GlobalNetworkEndpointGroupsClient', () => {
         new protos.google.cloud.compute.v1.ListNetworkEndpointsGlobalNetworkEndpointGroupsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListNetworkEndpointsGlobalNetworkEndpointGroupsRequest',
+        '.google.cloud.compute.v1.ListNetworkEndpointsGlobalNetworkEndpointGroupsRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'ListNetworkEndpointsGlobalNetworkEndpointGroupsRequest',
+        '.google.cloud.compute.v1.ListNetworkEndpointsGlobalNetworkEndpointGroupsRequest',
         ['networkEndpointGroup']
       );
       request.networkEndpointGroup = defaultValue2;
@@ -1567,12 +1567,12 @@ describe('v1.GlobalNetworkEndpointGroupsClient', () => {
         new protos.google.cloud.compute.v1.ListNetworkEndpointsGlobalNetworkEndpointGroupsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListNetworkEndpointsGlobalNetworkEndpointGroupsRequest',
+        '.google.cloud.compute.v1.ListNetworkEndpointsGlobalNetworkEndpointGroupsRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'ListNetworkEndpointsGlobalNetworkEndpointGroupsRequest',
+        '.google.cloud.compute.v1.ListNetworkEndpointsGlobalNetworkEndpointGroupsRequest',
         ['networkEndpointGroup']
       );
       request.networkEndpointGroup = defaultValue2;
@@ -1638,12 +1638,12 @@ describe('v1.GlobalNetworkEndpointGroupsClient', () => {
         new protos.google.cloud.compute.v1.ListNetworkEndpointsGlobalNetworkEndpointGroupsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListNetworkEndpointsGlobalNetworkEndpointGroupsRequest',
+        '.google.cloud.compute.v1.ListNetworkEndpointsGlobalNetworkEndpointGroupsRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'ListNetworkEndpointsGlobalNetworkEndpointGroupsRequest',
+        '.google.cloud.compute.v1.ListNetworkEndpointsGlobalNetworkEndpointGroupsRequest',
         ['networkEndpointGroup']
       );
       request.networkEndpointGroup = defaultValue2;
@@ -1698,12 +1698,12 @@ describe('v1.GlobalNetworkEndpointGroupsClient', () => {
         new protos.google.cloud.compute.v1.ListNetworkEndpointsGlobalNetworkEndpointGroupsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListNetworkEndpointsGlobalNetworkEndpointGroupsRequest',
+        '.google.cloud.compute.v1.ListNetworkEndpointsGlobalNetworkEndpointGroupsRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'ListNetworkEndpointsGlobalNetworkEndpointGroupsRequest',
+        '.google.cloud.compute.v1.ListNetworkEndpointsGlobalNetworkEndpointGroupsRequest',
         ['networkEndpointGroup']
       );
       request.networkEndpointGroup = defaultValue2;
@@ -1756,12 +1756,12 @@ describe('v1.GlobalNetworkEndpointGroupsClient', () => {
         new protos.google.cloud.compute.v1.ListNetworkEndpointsGlobalNetworkEndpointGroupsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListNetworkEndpointsGlobalNetworkEndpointGroupsRequest',
+        '.google.cloud.compute.v1.ListNetworkEndpointsGlobalNetworkEndpointGroupsRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'ListNetworkEndpointsGlobalNetworkEndpointGroupsRequest',
+        '.google.cloud.compute.v1.ListNetworkEndpointsGlobalNetworkEndpointGroupsRequest',
         ['networkEndpointGroup']
       );
       request.networkEndpointGroup = defaultValue2;

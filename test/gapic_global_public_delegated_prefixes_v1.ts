@@ -277,12 +277,12 @@ describe('v1.GlobalPublicDelegatedPrefixesClient', () => {
         new protos.google.cloud.compute.v1.DeleteGlobalPublicDelegatedPrefixeRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteGlobalPublicDelegatedPrefixeRequest',
+        '.google.cloud.compute.v1.DeleteGlobalPublicDelegatedPrefixeRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'DeleteGlobalPublicDelegatedPrefixeRequest',
+        '.google.cloud.compute.v1.DeleteGlobalPublicDelegatedPrefixeRequest',
         ['publicDelegatedPrefix']
       );
       request.publicDelegatedPrefix = defaultValue2;
@@ -316,12 +316,12 @@ describe('v1.GlobalPublicDelegatedPrefixesClient', () => {
         new protos.google.cloud.compute.v1.DeleteGlobalPublicDelegatedPrefixeRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteGlobalPublicDelegatedPrefixeRequest',
+        '.google.cloud.compute.v1.DeleteGlobalPublicDelegatedPrefixeRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'DeleteGlobalPublicDelegatedPrefixeRequest',
+        '.google.cloud.compute.v1.DeleteGlobalPublicDelegatedPrefixeRequest',
         ['publicDelegatedPrefix']
       );
       request.publicDelegatedPrefix = defaultValue2;
@@ -371,12 +371,12 @@ describe('v1.GlobalPublicDelegatedPrefixesClient', () => {
         new protos.google.cloud.compute.v1.DeleteGlobalPublicDelegatedPrefixeRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteGlobalPublicDelegatedPrefixeRequest',
+        '.google.cloud.compute.v1.DeleteGlobalPublicDelegatedPrefixeRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'DeleteGlobalPublicDelegatedPrefixeRequest',
+        '.google.cloud.compute.v1.DeleteGlobalPublicDelegatedPrefixeRequest',
         ['publicDelegatedPrefix']
       );
       request.publicDelegatedPrefix = defaultValue2;
@@ -407,12 +407,12 @@ describe('v1.GlobalPublicDelegatedPrefixesClient', () => {
         new protos.google.cloud.compute.v1.DeleteGlobalPublicDelegatedPrefixeRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteGlobalPublicDelegatedPrefixeRequest',
+        '.google.cloud.compute.v1.DeleteGlobalPublicDelegatedPrefixeRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'DeleteGlobalPublicDelegatedPrefixeRequest',
+        '.google.cloud.compute.v1.DeleteGlobalPublicDelegatedPrefixeRequest',
         ['publicDelegatedPrefix']
       );
       request.publicDelegatedPrefix = defaultValue2;
@@ -436,12 +436,12 @@ describe('v1.GlobalPublicDelegatedPrefixesClient', () => {
         new protos.google.cloud.compute.v1.GetGlobalPublicDelegatedPrefixeRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetGlobalPublicDelegatedPrefixeRequest',
+        '.google.cloud.compute.v1.GetGlobalPublicDelegatedPrefixeRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'GetGlobalPublicDelegatedPrefixeRequest',
+        '.google.cloud.compute.v1.GetGlobalPublicDelegatedPrefixeRequest',
         ['publicDelegatedPrefix']
       );
       request.publicDelegatedPrefix = defaultValue2;
@@ -474,12 +474,12 @@ describe('v1.GlobalPublicDelegatedPrefixesClient', () => {
         new protos.google.cloud.compute.v1.GetGlobalPublicDelegatedPrefixeRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetGlobalPublicDelegatedPrefixeRequest',
+        '.google.cloud.compute.v1.GetGlobalPublicDelegatedPrefixeRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'GetGlobalPublicDelegatedPrefixeRequest',
+        '.google.cloud.compute.v1.GetGlobalPublicDelegatedPrefixeRequest',
         ['publicDelegatedPrefix']
       );
       request.publicDelegatedPrefix = defaultValue2;
@@ -527,12 +527,12 @@ describe('v1.GlobalPublicDelegatedPrefixesClient', () => {
         new protos.google.cloud.compute.v1.GetGlobalPublicDelegatedPrefixeRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetGlobalPublicDelegatedPrefixeRequest',
+        '.google.cloud.compute.v1.GetGlobalPublicDelegatedPrefixeRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'GetGlobalPublicDelegatedPrefixeRequest',
+        '.google.cloud.compute.v1.GetGlobalPublicDelegatedPrefixeRequest',
         ['publicDelegatedPrefix']
       );
       request.publicDelegatedPrefix = defaultValue2;
@@ -562,12 +562,12 @@ describe('v1.GlobalPublicDelegatedPrefixesClient', () => {
         new protos.google.cloud.compute.v1.GetGlobalPublicDelegatedPrefixeRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetGlobalPublicDelegatedPrefixeRequest',
+        '.google.cloud.compute.v1.GetGlobalPublicDelegatedPrefixeRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'GetGlobalPublicDelegatedPrefixeRequest',
+        '.google.cloud.compute.v1.GetGlobalPublicDelegatedPrefixeRequest',
         ['publicDelegatedPrefix']
       );
       request.publicDelegatedPrefix = defaultValue2;
@@ -591,7 +591,7 @@ describe('v1.GlobalPublicDelegatedPrefixesClient', () => {
         new protos.google.cloud.compute.v1.InsertGlobalPublicDelegatedPrefixeRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'InsertGlobalPublicDelegatedPrefixeRequest',
+        '.google.cloud.compute.v1.InsertGlobalPublicDelegatedPrefixeRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -625,7 +625,7 @@ describe('v1.GlobalPublicDelegatedPrefixesClient', () => {
         new protos.google.cloud.compute.v1.InsertGlobalPublicDelegatedPrefixeRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'InsertGlobalPublicDelegatedPrefixeRequest',
+        '.google.cloud.compute.v1.InsertGlobalPublicDelegatedPrefixeRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -675,7 +675,7 @@ describe('v1.GlobalPublicDelegatedPrefixesClient', () => {
         new protos.google.cloud.compute.v1.InsertGlobalPublicDelegatedPrefixeRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'InsertGlobalPublicDelegatedPrefixeRequest',
+        '.google.cloud.compute.v1.InsertGlobalPublicDelegatedPrefixeRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -706,7 +706,7 @@ describe('v1.GlobalPublicDelegatedPrefixesClient', () => {
         new protos.google.cloud.compute.v1.InsertGlobalPublicDelegatedPrefixeRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'InsertGlobalPublicDelegatedPrefixeRequest',
+        '.google.cloud.compute.v1.InsertGlobalPublicDelegatedPrefixeRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -730,12 +730,12 @@ describe('v1.GlobalPublicDelegatedPrefixesClient', () => {
         new protos.google.cloud.compute.v1.PatchGlobalPublicDelegatedPrefixeRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'PatchGlobalPublicDelegatedPrefixeRequest',
+        '.google.cloud.compute.v1.PatchGlobalPublicDelegatedPrefixeRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'PatchGlobalPublicDelegatedPrefixeRequest',
+        '.google.cloud.compute.v1.PatchGlobalPublicDelegatedPrefixeRequest',
         ['publicDelegatedPrefix']
       );
       request.publicDelegatedPrefix = defaultValue2;
@@ -768,12 +768,12 @@ describe('v1.GlobalPublicDelegatedPrefixesClient', () => {
         new protos.google.cloud.compute.v1.PatchGlobalPublicDelegatedPrefixeRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'PatchGlobalPublicDelegatedPrefixeRequest',
+        '.google.cloud.compute.v1.PatchGlobalPublicDelegatedPrefixeRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'PatchGlobalPublicDelegatedPrefixeRequest',
+        '.google.cloud.compute.v1.PatchGlobalPublicDelegatedPrefixeRequest',
         ['publicDelegatedPrefix']
       );
       request.publicDelegatedPrefix = defaultValue2;
@@ -821,12 +821,12 @@ describe('v1.GlobalPublicDelegatedPrefixesClient', () => {
         new protos.google.cloud.compute.v1.PatchGlobalPublicDelegatedPrefixeRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'PatchGlobalPublicDelegatedPrefixeRequest',
+        '.google.cloud.compute.v1.PatchGlobalPublicDelegatedPrefixeRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'PatchGlobalPublicDelegatedPrefixeRequest',
+        '.google.cloud.compute.v1.PatchGlobalPublicDelegatedPrefixeRequest',
         ['publicDelegatedPrefix']
       );
       request.publicDelegatedPrefix = defaultValue2;
@@ -856,12 +856,12 @@ describe('v1.GlobalPublicDelegatedPrefixesClient', () => {
         new protos.google.cloud.compute.v1.PatchGlobalPublicDelegatedPrefixeRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'PatchGlobalPublicDelegatedPrefixeRequest',
+        '.google.cloud.compute.v1.PatchGlobalPublicDelegatedPrefixeRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'PatchGlobalPublicDelegatedPrefixeRequest',
+        '.google.cloud.compute.v1.PatchGlobalPublicDelegatedPrefixeRequest',
         ['publicDelegatedPrefix']
       );
       request.publicDelegatedPrefix = defaultValue2;
@@ -885,7 +885,7 @@ describe('v1.GlobalPublicDelegatedPrefixesClient', () => {
         new protos.google.cloud.compute.v1.ListGlobalPublicDelegatedPrefixesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListGlobalPublicDelegatedPrefixesRequest',
+        '.google.cloud.compute.v1.ListGlobalPublicDelegatedPrefixesRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -926,7 +926,7 @@ describe('v1.GlobalPublicDelegatedPrefixesClient', () => {
         new protos.google.cloud.compute.v1.ListGlobalPublicDelegatedPrefixesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListGlobalPublicDelegatedPrefixesRequest',
+        '.google.cloud.compute.v1.ListGlobalPublicDelegatedPrefixesRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -984,7 +984,7 @@ describe('v1.GlobalPublicDelegatedPrefixesClient', () => {
         new protos.google.cloud.compute.v1.ListGlobalPublicDelegatedPrefixesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListGlobalPublicDelegatedPrefixesRequest',
+        '.google.cloud.compute.v1.ListGlobalPublicDelegatedPrefixesRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -1014,7 +1014,7 @@ describe('v1.GlobalPublicDelegatedPrefixesClient', () => {
         new protos.google.cloud.compute.v1.ListGlobalPublicDelegatedPrefixesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListGlobalPublicDelegatedPrefixesRequest',
+        '.google.cloud.compute.v1.ListGlobalPublicDelegatedPrefixesRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -1078,7 +1078,7 @@ describe('v1.GlobalPublicDelegatedPrefixesClient', () => {
         new protos.google.cloud.compute.v1.ListGlobalPublicDelegatedPrefixesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListGlobalPublicDelegatedPrefixesRequest',
+        '.google.cloud.compute.v1.ListGlobalPublicDelegatedPrefixesRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -1133,7 +1133,7 @@ describe('v1.GlobalPublicDelegatedPrefixesClient', () => {
         new protos.google.cloud.compute.v1.ListGlobalPublicDelegatedPrefixesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListGlobalPublicDelegatedPrefixesRequest',
+        '.google.cloud.compute.v1.ListGlobalPublicDelegatedPrefixesRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -1185,7 +1185,7 @@ describe('v1.GlobalPublicDelegatedPrefixesClient', () => {
         new protos.google.cloud.compute.v1.ListGlobalPublicDelegatedPrefixesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListGlobalPublicDelegatedPrefixesRequest',
+        '.google.cloud.compute.v1.ListGlobalPublicDelegatedPrefixesRequest',
         ['project']
       );
       request.project = defaultValue1;

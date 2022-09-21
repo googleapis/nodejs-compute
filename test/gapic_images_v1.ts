@@ -248,13 +248,15 @@ describe('v1.ImagesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteImageRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteImageRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteImageRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('DeleteImageRequest', [
-        'image',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteImageRequest',
+        ['image']
+      );
       request.image = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&image=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
@@ -282,13 +284,15 @@ describe('v1.ImagesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteImageRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteImageRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteImageRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('DeleteImageRequest', [
-        'image',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteImageRequest',
+        ['image']
+      );
       request.image = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&image=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
@@ -332,13 +336,15 @@ describe('v1.ImagesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteImageRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteImageRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteImageRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('DeleteImageRequest', [
-        'image',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteImageRequest',
+        ['image']
+      );
       request.image = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&image=${defaultValue2}`;
       const expectedError = new Error('expected');
@@ -363,13 +369,15 @@ describe('v1.ImagesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteImageRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteImageRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteImageRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('DeleteImageRequest', [
-        'image',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteImageRequest',
+        ['image']
+      );
       request.image = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -387,13 +395,15 @@ describe('v1.ImagesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeprecateImageRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeprecateImageRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeprecateImageRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('DeprecateImageRequest', [
-        'image',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeprecateImageRequest',
+        ['image']
+      );
       request.image = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&image=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
@@ -421,13 +431,15 @@ describe('v1.ImagesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeprecateImageRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeprecateImageRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeprecateImageRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('DeprecateImageRequest', [
-        'image',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeprecateImageRequest',
+        ['image']
+      );
       request.image = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&image=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
@@ -471,13 +483,15 @@ describe('v1.ImagesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeprecateImageRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeprecateImageRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeprecateImageRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('DeprecateImageRequest', [
-        'image',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeprecateImageRequest',
+        ['image']
+      );
       request.image = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&image=${defaultValue2}`;
       const expectedError = new Error('expected');
@@ -502,13 +516,15 @@ describe('v1.ImagesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeprecateImageRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeprecateImageRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeprecateImageRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('DeprecateImageRequest', [
-        'image',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeprecateImageRequest',
+        ['image']
+      );
       request.image = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -526,9 +542,15 @@ describe('v1.ImagesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetImageRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetImageRequest', ['project']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetImageRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetImageRequest', ['image']);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetImageRequest',
+        ['image']
+      );
       request.image = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&image=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
@@ -555,9 +577,15 @@ describe('v1.ImagesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetImageRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetImageRequest', ['project']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetImageRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetImageRequest', ['image']);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetImageRequest',
+        ['image']
+      );
       request.image = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&image=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
@@ -599,9 +627,15 @@ describe('v1.ImagesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetImageRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetImageRequest', ['project']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetImageRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetImageRequest', ['image']);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetImageRequest',
+        ['image']
+      );
       request.image = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&image=${defaultValue2}`;
       const expectedError = new Error('expected');
@@ -625,9 +659,15 @@ describe('v1.ImagesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetImageRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetImageRequest', ['project']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetImageRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetImageRequest', ['image']);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetImageRequest',
+        ['image']
+      );
       request.image = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -645,13 +685,15 @@ describe('v1.ImagesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetFromFamilyImageRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetFromFamilyImageRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetFromFamilyImageRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetFromFamilyImageRequest', [
-        'family',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetFromFamilyImageRequest',
+        ['family']
+      );
       request.family = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&family=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
@@ -679,13 +721,15 @@ describe('v1.ImagesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetFromFamilyImageRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetFromFamilyImageRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetFromFamilyImageRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetFromFamilyImageRequest', [
-        'family',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetFromFamilyImageRequest',
+        ['family']
+      );
       request.family = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&family=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
@@ -729,13 +773,15 @@ describe('v1.ImagesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetFromFamilyImageRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetFromFamilyImageRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetFromFamilyImageRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetFromFamilyImageRequest', [
-        'family',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetFromFamilyImageRequest',
+        ['family']
+      );
       request.family = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&family=${defaultValue2}`;
       const expectedError = new Error('expected');
@@ -763,13 +809,15 @@ describe('v1.ImagesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetFromFamilyImageRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetFromFamilyImageRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetFromFamilyImageRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetFromFamilyImageRequest', [
-        'family',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetFromFamilyImageRequest',
+        ['family']
+      );
       request.family = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -787,13 +835,15 @@ describe('v1.ImagesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetIamPolicyImageRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetIamPolicyImageRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetIamPolicyImageRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetIamPolicyImageRequest', [
-        'resource',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetIamPolicyImageRequest',
+        ['resource']
+      );
       request.resource = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&resource=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
@@ -821,13 +871,15 @@ describe('v1.ImagesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetIamPolicyImageRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetIamPolicyImageRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetIamPolicyImageRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetIamPolicyImageRequest', [
-        'resource',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetIamPolicyImageRequest',
+        ['resource']
+      );
       request.resource = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&resource=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
@@ -871,13 +923,15 @@ describe('v1.ImagesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetIamPolicyImageRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetIamPolicyImageRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetIamPolicyImageRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetIamPolicyImageRequest', [
-        'resource',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetIamPolicyImageRequest',
+        ['resource']
+      );
       request.resource = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&resource=${defaultValue2}`;
       const expectedError = new Error('expected');
@@ -905,13 +959,15 @@ describe('v1.ImagesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetIamPolicyImageRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetIamPolicyImageRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetIamPolicyImageRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetIamPolicyImageRequest', [
-        'resource',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetIamPolicyImageRequest',
+        ['resource']
+      );
       request.resource = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -929,9 +985,10 @@ describe('v1.ImagesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertImageRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('InsertImageRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.InsertImageRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -959,9 +1016,10 @@ describe('v1.ImagesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertImageRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('InsertImageRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.InsertImageRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -1005,9 +1063,10 @@ describe('v1.ImagesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertImageRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('InsertImageRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.InsertImageRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1032,9 +1091,10 @@ describe('v1.ImagesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertImageRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('InsertImageRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.InsertImageRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1052,11 +1112,15 @@ describe('v1.ImagesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchImageRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('PatchImageRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchImageRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('PatchImageRequest', ['image']);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchImageRequest',
+        ['image']
+      );
       request.image = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&image=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
@@ -1083,11 +1147,15 @@ describe('v1.ImagesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchImageRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('PatchImageRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchImageRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('PatchImageRequest', ['image']);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchImageRequest',
+        ['image']
+      );
       request.image = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&image=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
@@ -1129,11 +1197,15 @@ describe('v1.ImagesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchImageRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('PatchImageRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchImageRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('PatchImageRequest', ['image']);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchImageRequest',
+        ['image']
+      );
       request.image = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&image=${defaultValue2}`;
       const expectedError = new Error('expected');
@@ -1157,11 +1229,15 @@ describe('v1.ImagesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchImageRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('PatchImageRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchImageRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('PatchImageRequest', ['image']);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchImageRequest',
+        ['image']
+      );
       request.image = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1179,13 +1255,15 @@ describe('v1.ImagesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetIamPolicyImageRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SetIamPolicyImageRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetIamPolicyImageRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('SetIamPolicyImageRequest', [
-        'resource',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetIamPolicyImageRequest',
+        ['resource']
+      );
       request.resource = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&resource=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
@@ -1213,13 +1291,15 @@ describe('v1.ImagesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetIamPolicyImageRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SetIamPolicyImageRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetIamPolicyImageRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('SetIamPolicyImageRequest', [
-        'resource',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetIamPolicyImageRequest',
+        ['resource']
+      );
       request.resource = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&resource=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
@@ -1263,13 +1343,15 @@ describe('v1.ImagesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetIamPolicyImageRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SetIamPolicyImageRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetIamPolicyImageRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('SetIamPolicyImageRequest', [
-        'resource',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetIamPolicyImageRequest',
+        ['resource']
+      );
       request.resource = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&resource=${defaultValue2}`;
       const expectedError = new Error('expected');
@@ -1297,13 +1379,15 @@ describe('v1.ImagesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetIamPolicyImageRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SetIamPolicyImageRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetIamPolicyImageRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('SetIamPolicyImageRequest', [
-        'resource',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetIamPolicyImageRequest',
+        ['resource']
+      );
       request.resource = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1321,13 +1405,15 @@ describe('v1.ImagesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetLabelsImageRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SetLabelsImageRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetLabelsImageRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('SetLabelsImageRequest', [
-        'resource',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetLabelsImageRequest',
+        ['resource']
+      );
       request.resource = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&resource=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
@@ -1355,13 +1441,15 @@ describe('v1.ImagesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetLabelsImageRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SetLabelsImageRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetLabelsImageRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('SetLabelsImageRequest', [
-        'resource',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetLabelsImageRequest',
+        ['resource']
+      );
       request.resource = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&resource=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
@@ -1405,13 +1493,15 @@ describe('v1.ImagesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetLabelsImageRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SetLabelsImageRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetLabelsImageRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('SetLabelsImageRequest', [
-        'resource',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetLabelsImageRequest',
+        ['resource']
+      );
       request.resource = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&resource=${defaultValue2}`;
       const expectedError = new Error('expected');
@@ -1436,13 +1526,15 @@ describe('v1.ImagesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetLabelsImageRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SetLabelsImageRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetLabelsImageRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('SetLabelsImageRequest', [
-        'resource',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetLabelsImageRequest',
+        ['resource']
+      );
       request.resource = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1461,12 +1553,12 @@ describe('v1.ImagesClient', () => {
         new protos.google.cloud.compute.v1.TestIamPermissionsImageRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'TestIamPermissionsImageRequest',
+        '.google.cloud.compute.v1.TestIamPermissionsImageRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'TestIamPermissionsImageRequest',
+        '.google.cloud.compute.v1.TestIamPermissionsImageRequest',
         ['resource']
       );
       request.resource = defaultValue2;
@@ -1498,12 +1590,12 @@ describe('v1.ImagesClient', () => {
         new protos.google.cloud.compute.v1.TestIamPermissionsImageRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'TestIamPermissionsImageRequest',
+        '.google.cloud.compute.v1.TestIamPermissionsImageRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'TestIamPermissionsImageRequest',
+        '.google.cloud.compute.v1.TestIamPermissionsImageRequest',
         ['resource']
       );
       request.resource = defaultValue2;
@@ -1550,12 +1642,12 @@ describe('v1.ImagesClient', () => {
         new protos.google.cloud.compute.v1.TestIamPermissionsImageRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'TestIamPermissionsImageRequest',
+        '.google.cloud.compute.v1.TestIamPermissionsImageRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'TestIamPermissionsImageRequest',
+        '.google.cloud.compute.v1.TestIamPermissionsImageRequest',
         ['resource']
       );
       request.resource = defaultValue2;
@@ -1586,12 +1678,12 @@ describe('v1.ImagesClient', () => {
         new protos.google.cloud.compute.v1.TestIamPermissionsImageRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'TestIamPermissionsImageRequest',
+        '.google.cloud.compute.v1.TestIamPermissionsImageRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'TestIamPermissionsImageRequest',
+        '.google.cloud.compute.v1.TestIamPermissionsImageRequest',
         ['resource']
       );
       request.resource = defaultValue2;
@@ -1611,9 +1703,10 @@ describe('v1.ImagesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListImagesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListImagesRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListImagesRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedResponse = [
@@ -1642,9 +1735,10 @@ describe('v1.ImagesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListImagesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListImagesRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListImagesRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedResponse = [
@@ -1688,9 +1782,10 @@ describe('v1.ImagesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListImagesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListImagesRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListImagesRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1714,9 +1809,10 @@ describe('v1.ImagesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListImagesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListImagesRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListImagesRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedResponse = [
@@ -1764,9 +1860,10 @@ describe('v1.ImagesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListImagesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListImagesRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListImagesRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1811,9 +1908,10 @@ describe('v1.ImagesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListImagesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListImagesRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListImagesRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedResponse = [
@@ -1852,9 +1950,10 @@ describe('v1.ImagesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListImagesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListImagesRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListImagesRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedError = new Error('expected');

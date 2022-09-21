@@ -248,17 +248,20 @@ describe('v1.NodeGroupsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.AddNodesNodeGroupRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('AddNodesNodeGroupRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.AddNodesNodeGroupRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('AddNodesNodeGroupRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.AddNodesNodeGroupRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('AddNodesNodeGroupRequest', [
-        'nodeGroup',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.AddNodesNodeGroupRequest',
+        ['nodeGroup']
+      );
       request.nodeGroup = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&node_group=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -286,17 +289,20 @@ describe('v1.NodeGroupsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.AddNodesNodeGroupRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('AddNodesNodeGroupRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.AddNodesNodeGroupRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('AddNodesNodeGroupRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.AddNodesNodeGroupRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('AddNodesNodeGroupRequest', [
-        'nodeGroup',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.AddNodesNodeGroupRequest',
+        ['nodeGroup']
+      );
       request.nodeGroup = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&node_group=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -340,17 +346,20 @@ describe('v1.NodeGroupsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.AddNodesNodeGroupRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('AddNodesNodeGroupRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.AddNodesNodeGroupRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('AddNodesNodeGroupRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.AddNodesNodeGroupRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('AddNodesNodeGroupRequest', [
-        'nodeGroup',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.AddNodesNodeGroupRequest',
+        ['nodeGroup']
+      );
       request.nodeGroup = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&node_group=${defaultValue3}`;
       const expectedError = new Error('expected');
@@ -375,17 +384,20 @@ describe('v1.NodeGroupsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.AddNodesNodeGroupRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('AddNodesNodeGroupRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.AddNodesNodeGroupRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('AddNodesNodeGroupRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.AddNodesNodeGroupRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('AddNodesNodeGroupRequest', [
-        'nodeGroup',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.AddNodesNodeGroupRequest',
+        ['nodeGroup']
+      );
       request.nodeGroup = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -403,17 +415,20 @@ describe('v1.NodeGroupsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteNodeGroupRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteNodeGroupRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteNodeGroupRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('DeleteNodeGroupRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteNodeGroupRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('DeleteNodeGroupRequest', [
-        'nodeGroup',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteNodeGroupRequest',
+        ['nodeGroup']
+      );
       request.nodeGroup = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&node_group=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -441,17 +456,20 @@ describe('v1.NodeGroupsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteNodeGroupRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteNodeGroupRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteNodeGroupRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('DeleteNodeGroupRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteNodeGroupRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('DeleteNodeGroupRequest', [
-        'nodeGroup',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteNodeGroupRequest',
+        ['nodeGroup']
+      );
       request.nodeGroup = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&node_group=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -495,17 +513,20 @@ describe('v1.NodeGroupsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteNodeGroupRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteNodeGroupRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteNodeGroupRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('DeleteNodeGroupRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteNodeGroupRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('DeleteNodeGroupRequest', [
-        'nodeGroup',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteNodeGroupRequest',
+        ['nodeGroup']
+      );
       request.nodeGroup = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&node_group=${defaultValue3}`;
       const expectedError = new Error('expected');
@@ -530,17 +551,20 @@ describe('v1.NodeGroupsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteNodeGroupRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteNodeGroupRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteNodeGroupRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('DeleteNodeGroupRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteNodeGroupRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('DeleteNodeGroupRequest', [
-        'nodeGroup',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteNodeGroupRequest',
+        ['nodeGroup']
+      );
       request.nodeGroup = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -558,17 +582,20 @@ describe('v1.NodeGroupsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteNodesNodeGroupRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteNodesNodeGroupRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteNodesNodeGroupRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('DeleteNodesNodeGroupRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteNodesNodeGroupRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('DeleteNodesNodeGroupRequest', [
-        'nodeGroup',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteNodesNodeGroupRequest',
+        ['nodeGroup']
+      );
       request.nodeGroup = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&node_group=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -596,17 +623,20 @@ describe('v1.NodeGroupsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteNodesNodeGroupRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteNodesNodeGroupRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteNodesNodeGroupRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('DeleteNodesNodeGroupRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteNodesNodeGroupRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('DeleteNodesNodeGroupRequest', [
-        'nodeGroup',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteNodesNodeGroupRequest',
+        ['nodeGroup']
+      );
       request.nodeGroup = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&node_group=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -650,17 +680,20 @@ describe('v1.NodeGroupsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteNodesNodeGroupRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteNodesNodeGroupRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteNodesNodeGroupRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('DeleteNodesNodeGroupRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteNodesNodeGroupRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('DeleteNodesNodeGroupRequest', [
-        'nodeGroup',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteNodesNodeGroupRequest',
+        ['nodeGroup']
+      );
       request.nodeGroup = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&node_group=${defaultValue3}`;
       const expectedError = new Error('expected');
@@ -688,17 +721,20 @@ describe('v1.NodeGroupsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteNodesNodeGroupRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteNodesNodeGroupRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteNodesNodeGroupRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('DeleteNodesNodeGroupRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteNodesNodeGroupRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('DeleteNodesNodeGroupRequest', [
-        'nodeGroup',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteNodesNodeGroupRequest',
+        ['nodeGroup']
+      );
       request.nodeGroup = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -716,17 +752,20 @@ describe('v1.NodeGroupsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetNodeGroupRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetNodeGroupRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetNodeGroupRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetNodeGroupRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetNodeGroupRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('GetNodeGroupRequest', [
-        'nodeGroup',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetNodeGroupRequest',
+        ['nodeGroup']
+      );
       request.nodeGroup = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&node_group=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -753,17 +792,20 @@ describe('v1.NodeGroupsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetNodeGroupRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetNodeGroupRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetNodeGroupRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetNodeGroupRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetNodeGroupRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('GetNodeGroupRequest', [
-        'nodeGroup',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetNodeGroupRequest',
+        ['nodeGroup']
+      );
       request.nodeGroup = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&node_group=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -805,17 +847,20 @@ describe('v1.NodeGroupsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetNodeGroupRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetNodeGroupRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetNodeGroupRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetNodeGroupRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetNodeGroupRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('GetNodeGroupRequest', [
-        'nodeGroup',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetNodeGroupRequest',
+        ['nodeGroup']
+      );
       request.nodeGroup = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&node_group=${defaultValue3}`;
       const expectedError = new Error('expected');
@@ -839,17 +884,20 @@ describe('v1.NodeGroupsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetNodeGroupRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetNodeGroupRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetNodeGroupRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetNodeGroupRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetNodeGroupRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('GetNodeGroupRequest', [
-        'nodeGroup',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetNodeGroupRequest',
+        ['nodeGroup']
+      );
       request.nodeGroup = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -868,17 +916,17 @@ describe('v1.NodeGroupsClient', () => {
         new protos.google.cloud.compute.v1.GetIamPolicyNodeGroupRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetIamPolicyNodeGroupRequest',
+        '.google.cloud.compute.v1.GetIamPolicyNodeGroupRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'GetIamPolicyNodeGroupRequest',
+        '.google.cloud.compute.v1.GetIamPolicyNodeGroupRequest',
         ['zone']
       );
       request.zone = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'GetIamPolicyNodeGroupRequest',
+        '.google.cloud.compute.v1.GetIamPolicyNodeGroupRequest',
         ['resource']
       );
       request.resource = defaultValue3;
@@ -909,17 +957,17 @@ describe('v1.NodeGroupsClient', () => {
         new protos.google.cloud.compute.v1.GetIamPolicyNodeGroupRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetIamPolicyNodeGroupRequest',
+        '.google.cloud.compute.v1.GetIamPolicyNodeGroupRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'GetIamPolicyNodeGroupRequest',
+        '.google.cloud.compute.v1.GetIamPolicyNodeGroupRequest',
         ['zone']
       );
       request.zone = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'GetIamPolicyNodeGroupRequest',
+        '.google.cloud.compute.v1.GetIamPolicyNodeGroupRequest',
         ['resource']
       );
       request.resource = defaultValue3;
@@ -966,17 +1014,17 @@ describe('v1.NodeGroupsClient', () => {
         new protos.google.cloud.compute.v1.GetIamPolicyNodeGroupRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetIamPolicyNodeGroupRequest',
+        '.google.cloud.compute.v1.GetIamPolicyNodeGroupRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'GetIamPolicyNodeGroupRequest',
+        '.google.cloud.compute.v1.GetIamPolicyNodeGroupRequest',
         ['zone']
       );
       request.zone = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'GetIamPolicyNodeGroupRequest',
+        '.google.cloud.compute.v1.GetIamPolicyNodeGroupRequest',
         ['resource']
       );
       request.resource = defaultValue3;
@@ -1007,17 +1055,17 @@ describe('v1.NodeGroupsClient', () => {
         new protos.google.cloud.compute.v1.GetIamPolicyNodeGroupRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetIamPolicyNodeGroupRequest',
+        '.google.cloud.compute.v1.GetIamPolicyNodeGroupRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'GetIamPolicyNodeGroupRequest',
+        '.google.cloud.compute.v1.GetIamPolicyNodeGroupRequest',
         ['zone']
       );
       request.zone = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'GetIamPolicyNodeGroupRequest',
+        '.google.cloud.compute.v1.GetIamPolicyNodeGroupRequest',
         ['resource']
       );
       request.resource = defaultValue3;
@@ -1037,13 +1085,15 @@ describe('v1.NodeGroupsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertNodeGroupRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('InsertNodeGroupRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.InsertNodeGroupRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('InsertNodeGroupRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.InsertNodeGroupRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
@@ -1071,13 +1121,15 @@ describe('v1.NodeGroupsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertNodeGroupRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('InsertNodeGroupRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.InsertNodeGroupRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('InsertNodeGroupRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.InsertNodeGroupRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
@@ -1121,13 +1173,15 @@ describe('v1.NodeGroupsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertNodeGroupRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('InsertNodeGroupRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.InsertNodeGroupRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('InsertNodeGroupRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.InsertNodeGroupRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}`;
       const expectedError = new Error('expected');
@@ -1152,13 +1206,15 @@ describe('v1.NodeGroupsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertNodeGroupRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('InsertNodeGroupRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.InsertNodeGroupRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('InsertNodeGroupRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.InsertNodeGroupRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1176,17 +1232,20 @@ describe('v1.NodeGroupsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchNodeGroupRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('PatchNodeGroupRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchNodeGroupRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('PatchNodeGroupRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchNodeGroupRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('PatchNodeGroupRequest', [
-        'nodeGroup',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchNodeGroupRequest',
+        ['nodeGroup']
+      );
       request.nodeGroup = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&node_group=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -1213,17 +1272,20 @@ describe('v1.NodeGroupsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchNodeGroupRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('PatchNodeGroupRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchNodeGroupRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('PatchNodeGroupRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchNodeGroupRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('PatchNodeGroupRequest', [
-        'nodeGroup',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchNodeGroupRequest',
+        ['nodeGroup']
+      );
       request.nodeGroup = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&node_group=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -1265,17 +1327,20 @@ describe('v1.NodeGroupsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchNodeGroupRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('PatchNodeGroupRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchNodeGroupRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('PatchNodeGroupRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchNodeGroupRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('PatchNodeGroupRequest', [
-        'nodeGroup',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchNodeGroupRequest',
+        ['nodeGroup']
+      );
       request.nodeGroup = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&node_group=${defaultValue3}`;
       const expectedError = new Error('expected');
@@ -1299,17 +1364,20 @@ describe('v1.NodeGroupsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchNodeGroupRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('PatchNodeGroupRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchNodeGroupRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('PatchNodeGroupRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchNodeGroupRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('PatchNodeGroupRequest', [
-        'nodeGroup',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchNodeGroupRequest',
+        ['nodeGroup']
+      );
       request.nodeGroup = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1328,17 +1396,17 @@ describe('v1.NodeGroupsClient', () => {
         new protos.google.cloud.compute.v1.SetIamPolicyNodeGroupRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SetIamPolicyNodeGroupRequest',
+        '.google.cloud.compute.v1.SetIamPolicyNodeGroupRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'SetIamPolicyNodeGroupRequest',
+        '.google.cloud.compute.v1.SetIamPolicyNodeGroupRequest',
         ['zone']
       );
       request.zone = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'SetIamPolicyNodeGroupRequest',
+        '.google.cloud.compute.v1.SetIamPolicyNodeGroupRequest',
         ['resource']
       );
       request.resource = defaultValue3;
@@ -1369,17 +1437,17 @@ describe('v1.NodeGroupsClient', () => {
         new protos.google.cloud.compute.v1.SetIamPolicyNodeGroupRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SetIamPolicyNodeGroupRequest',
+        '.google.cloud.compute.v1.SetIamPolicyNodeGroupRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'SetIamPolicyNodeGroupRequest',
+        '.google.cloud.compute.v1.SetIamPolicyNodeGroupRequest',
         ['zone']
       );
       request.zone = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'SetIamPolicyNodeGroupRequest',
+        '.google.cloud.compute.v1.SetIamPolicyNodeGroupRequest',
         ['resource']
       );
       request.resource = defaultValue3;
@@ -1426,17 +1494,17 @@ describe('v1.NodeGroupsClient', () => {
         new protos.google.cloud.compute.v1.SetIamPolicyNodeGroupRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SetIamPolicyNodeGroupRequest',
+        '.google.cloud.compute.v1.SetIamPolicyNodeGroupRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'SetIamPolicyNodeGroupRequest',
+        '.google.cloud.compute.v1.SetIamPolicyNodeGroupRequest',
         ['zone']
       );
       request.zone = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'SetIamPolicyNodeGroupRequest',
+        '.google.cloud.compute.v1.SetIamPolicyNodeGroupRequest',
         ['resource']
       );
       request.resource = defaultValue3;
@@ -1467,17 +1535,17 @@ describe('v1.NodeGroupsClient', () => {
         new protos.google.cloud.compute.v1.SetIamPolicyNodeGroupRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SetIamPolicyNodeGroupRequest',
+        '.google.cloud.compute.v1.SetIamPolicyNodeGroupRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'SetIamPolicyNodeGroupRequest',
+        '.google.cloud.compute.v1.SetIamPolicyNodeGroupRequest',
         ['zone']
       );
       request.zone = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'SetIamPolicyNodeGroupRequest',
+        '.google.cloud.compute.v1.SetIamPolicyNodeGroupRequest',
         ['resource']
       );
       request.resource = defaultValue3;
@@ -1498,17 +1566,17 @@ describe('v1.NodeGroupsClient', () => {
         new protos.google.cloud.compute.v1.SetNodeTemplateNodeGroupRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SetNodeTemplateNodeGroupRequest',
+        '.google.cloud.compute.v1.SetNodeTemplateNodeGroupRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'SetNodeTemplateNodeGroupRequest',
+        '.google.cloud.compute.v1.SetNodeTemplateNodeGroupRequest',
         ['zone']
       );
       request.zone = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'SetNodeTemplateNodeGroupRequest',
+        '.google.cloud.compute.v1.SetNodeTemplateNodeGroupRequest',
         ['nodeGroup']
       );
       request.nodeGroup = defaultValue3;
@@ -1539,17 +1607,17 @@ describe('v1.NodeGroupsClient', () => {
         new protos.google.cloud.compute.v1.SetNodeTemplateNodeGroupRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SetNodeTemplateNodeGroupRequest',
+        '.google.cloud.compute.v1.SetNodeTemplateNodeGroupRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'SetNodeTemplateNodeGroupRequest',
+        '.google.cloud.compute.v1.SetNodeTemplateNodeGroupRequest',
         ['zone']
       );
       request.zone = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'SetNodeTemplateNodeGroupRequest',
+        '.google.cloud.compute.v1.SetNodeTemplateNodeGroupRequest',
         ['nodeGroup']
       );
       request.nodeGroup = defaultValue3;
@@ -1596,17 +1664,17 @@ describe('v1.NodeGroupsClient', () => {
         new protos.google.cloud.compute.v1.SetNodeTemplateNodeGroupRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SetNodeTemplateNodeGroupRequest',
+        '.google.cloud.compute.v1.SetNodeTemplateNodeGroupRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'SetNodeTemplateNodeGroupRequest',
+        '.google.cloud.compute.v1.SetNodeTemplateNodeGroupRequest',
         ['zone']
       );
       request.zone = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'SetNodeTemplateNodeGroupRequest',
+        '.google.cloud.compute.v1.SetNodeTemplateNodeGroupRequest',
         ['nodeGroup']
       );
       request.nodeGroup = defaultValue3;
@@ -1637,17 +1705,17 @@ describe('v1.NodeGroupsClient', () => {
         new protos.google.cloud.compute.v1.SetNodeTemplateNodeGroupRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SetNodeTemplateNodeGroupRequest',
+        '.google.cloud.compute.v1.SetNodeTemplateNodeGroupRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'SetNodeTemplateNodeGroupRequest',
+        '.google.cloud.compute.v1.SetNodeTemplateNodeGroupRequest',
         ['zone']
       );
       request.zone = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'SetNodeTemplateNodeGroupRequest',
+        '.google.cloud.compute.v1.SetNodeTemplateNodeGroupRequest',
         ['nodeGroup']
       );
       request.nodeGroup = defaultValue3;
@@ -1668,17 +1736,17 @@ describe('v1.NodeGroupsClient', () => {
         new protos.google.cloud.compute.v1.TestIamPermissionsNodeGroupRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'TestIamPermissionsNodeGroupRequest',
+        '.google.cloud.compute.v1.TestIamPermissionsNodeGroupRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'TestIamPermissionsNodeGroupRequest',
+        '.google.cloud.compute.v1.TestIamPermissionsNodeGroupRequest',
         ['zone']
       );
       request.zone = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'TestIamPermissionsNodeGroupRequest',
+        '.google.cloud.compute.v1.TestIamPermissionsNodeGroupRequest',
         ['resource']
       );
       request.resource = defaultValue3;
@@ -1710,17 +1778,17 @@ describe('v1.NodeGroupsClient', () => {
         new protos.google.cloud.compute.v1.TestIamPermissionsNodeGroupRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'TestIamPermissionsNodeGroupRequest',
+        '.google.cloud.compute.v1.TestIamPermissionsNodeGroupRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'TestIamPermissionsNodeGroupRequest',
+        '.google.cloud.compute.v1.TestIamPermissionsNodeGroupRequest',
         ['zone']
       );
       request.zone = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'TestIamPermissionsNodeGroupRequest',
+        '.google.cloud.compute.v1.TestIamPermissionsNodeGroupRequest',
         ['resource']
       );
       request.resource = defaultValue3;
@@ -1767,17 +1835,17 @@ describe('v1.NodeGroupsClient', () => {
         new protos.google.cloud.compute.v1.TestIamPermissionsNodeGroupRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'TestIamPermissionsNodeGroupRequest',
+        '.google.cloud.compute.v1.TestIamPermissionsNodeGroupRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'TestIamPermissionsNodeGroupRequest',
+        '.google.cloud.compute.v1.TestIamPermissionsNodeGroupRequest',
         ['zone']
       );
       request.zone = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'TestIamPermissionsNodeGroupRequest',
+        '.google.cloud.compute.v1.TestIamPermissionsNodeGroupRequest',
         ['resource']
       );
       request.resource = defaultValue3;
@@ -1808,17 +1876,17 @@ describe('v1.NodeGroupsClient', () => {
         new protos.google.cloud.compute.v1.TestIamPermissionsNodeGroupRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'TestIamPermissionsNodeGroupRequest',
+        '.google.cloud.compute.v1.TestIamPermissionsNodeGroupRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'TestIamPermissionsNodeGroupRequest',
+        '.google.cloud.compute.v1.TestIamPermissionsNodeGroupRequest',
         ['zone']
       );
       request.zone = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'TestIamPermissionsNodeGroupRequest',
+        '.google.cloud.compute.v1.TestIamPermissionsNodeGroupRequest',
         ['resource']
       );
       request.resource = defaultValue3;
@@ -1839,7 +1907,7 @@ describe('v1.NodeGroupsClient', () => {
         new protos.google.cloud.compute.v1.AggregatedListNodeGroupsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'AggregatedListNodeGroupsRequest',
+        '.google.cloud.compute.v1.AggregatedListNodeGroupsRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -1899,7 +1967,7 @@ describe('v1.NodeGroupsClient', () => {
         new protos.google.cloud.compute.v1.AggregatedListNodeGroupsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'AggregatedListNodeGroupsRequest',
+        '.google.cloud.compute.v1.AggregatedListNodeGroupsRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -1942,13 +2010,15 @@ describe('v1.NodeGroupsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListNodeGroupsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListNodeGroupsRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListNodeGroupsRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ListNodeGroupsRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListNodeGroupsRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}`;
       const expectedResponse = [
@@ -1977,13 +2047,15 @@ describe('v1.NodeGroupsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListNodeGroupsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListNodeGroupsRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListNodeGroupsRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ListNodeGroupsRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListNodeGroupsRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}`;
       const expectedResponse = [
@@ -2027,13 +2099,15 @@ describe('v1.NodeGroupsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListNodeGroupsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListNodeGroupsRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListNodeGroupsRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ListNodeGroupsRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListNodeGroupsRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}`;
       const expectedError = new Error('expected');
@@ -2057,13 +2131,15 @@ describe('v1.NodeGroupsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListNodeGroupsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListNodeGroupsRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListNodeGroupsRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ListNodeGroupsRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListNodeGroupsRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}`;
       const expectedResponse = [
@@ -2114,13 +2190,15 @@ describe('v1.NodeGroupsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListNodeGroupsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListNodeGroupsRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListNodeGroupsRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ListNodeGroupsRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListNodeGroupsRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}`;
       const expectedError = new Error('expected');
@@ -2168,13 +2246,15 @@ describe('v1.NodeGroupsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListNodeGroupsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListNodeGroupsRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListNodeGroupsRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ListNodeGroupsRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListNodeGroupsRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}`;
       const expectedResponse = [
@@ -2213,13 +2293,15 @@ describe('v1.NodeGroupsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListNodeGroupsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListNodeGroupsRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListNodeGroupsRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ListNodeGroupsRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListNodeGroupsRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}`;
       const expectedError = new Error('expected');
@@ -2259,17 +2341,20 @@ describe('v1.NodeGroupsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListNodesNodeGroupsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListNodesNodeGroupsRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListNodesNodeGroupsRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ListNodesNodeGroupsRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListNodesNodeGroupsRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('ListNodesNodeGroupsRequest', [
-        'nodeGroup',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListNodesNodeGroupsRequest',
+        ['nodeGroup']
+      );
       request.nodeGroup = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&node_group=${defaultValue3}`;
       const expectedResponse = [
@@ -2305,17 +2390,20 @@ describe('v1.NodeGroupsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListNodesNodeGroupsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListNodesNodeGroupsRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListNodesNodeGroupsRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ListNodesNodeGroupsRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListNodesNodeGroupsRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('ListNodesNodeGroupsRequest', [
-        'nodeGroup',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListNodesNodeGroupsRequest',
+        ['nodeGroup']
+      );
       request.nodeGroup = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&node_group=${defaultValue3}`;
       const expectedResponse = [
@@ -2367,17 +2455,20 @@ describe('v1.NodeGroupsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListNodesNodeGroupsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListNodesNodeGroupsRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListNodesNodeGroupsRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ListNodesNodeGroupsRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListNodesNodeGroupsRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('ListNodesNodeGroupsRequest', [
-        'nodeGroup',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListNodesNodeGroupsRequest',
+        ['nodeGroup']
+      );
       request.nodeGroup = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&node_group=${defaultValue3}`;
       const expectedError = new Error('expected');
@@ -2402,17 +2493,20 @@ describe('v1.NodeGroupsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListNodesNodeGroupsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListNodesNodeGroupsRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListNodesNodeGroupsRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ListNodesNodeGroupsRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListNodesNodeGroupsRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('ListNodesNodeGroupsRequest', [
-        'nodeGroup',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListNodesNodeGroupsRequest',
+        ['nodeGroup']
+      );
       request.nodeGroup = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&node_group=${defaultValue3}`;
       const expectedResponse = [
@@ -2469,17 +2563,20 @@ describe('v1.NodeGroupsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListNodesNodeGroupsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListNodesNodeGroupsRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListNodesNodeGroupsRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ListNodesNodeGroupsRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListNodesNodeGroupsRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('ListNodesNodeGroupsRequest', [
-        'nodeGroup',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListNodesNodeGroupsRequest',
+        ['nodeGroup']
+      );
       request.nodeGroup = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&node_group=${defaultValue3}`;
       const expectedError = new Error('expected');
@@ -2527,17 +2624,20 @@ describe('v1.NodeGroupsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListNodesNodeGroupsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListNodesNodeGroupsRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListNodesNodeGroupsRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ListNodesNodeGroupsRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListNodesNodeGroupsRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('ListNodesNodeGroupsRequest', [
-        'nodeGroup',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListNodesNodeGroupsRequest',
+        ['nodeGroup']
+      );
       request.nodeGroup = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&node_group=${defaultValue3}`;
       const expectedResponse = [
@@ -2582,17 +2682,20 @@ describe('v1.NodeGroupsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListNodesNodeGroupsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListNodesNodeGroupsRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListNodesNodeGroupsRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ListNodesNodeGroupsRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListNodesNodeGroupsRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('ListNodesNodeGroupsRequest', [
-        'nodeGroup',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListNodesNodeGroupsRequest',
+        ['nodeGroup']
+      );
       request.nodeGroup = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&node_group=${defaultValue3}`;
       const expectedError = new Error('expected');

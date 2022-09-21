@@ -277,17 +277,17 @@ describe('v1.NetworkEdgeSecurityServicesClient', () => {
         new protos.google.cloud.compute.v1.DeleteNetworkEdgeSecurityServiceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteNetworkEdgeSecurityServiceRequest',
+        '.google.cloud.compute.v1.DeleteNetworkEdgeSecurityServiceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'DeleteNetworkEdgeSecurityServiceRequest',
+        '.google.cloud.compute.v1.DeleteNetworkEdgeSecurityServiceRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'DeleteNetworkEdgeSecurityServiceRequest',
+        '.google.cloud.compute.v1.DeleteNetworkEdgeSecurityServiceRequest',
         ['networkEdgeSecurityService']
       );
       request.networkEdgeSecurityService = defaultValue3;
@@ -321,17 +321,17 @@ describe('v1.NetworkEdgeSecurityServicesClient', () => {
         new protos.google.cloud.compute.v1.DeleteNetworkEdgeSecurityServiceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteNetworkEdgeSecurityServiceRequest',
+        '.google.cloud.compute.v1.DeleteNetworkEdgeSecurityServiceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'DeleteNetworkEdgeSecurityServiceRequest',
+        '.google.cloud.compute.v1.DeleteNetworkEdgeSecurityServiceRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'DeleteNetworkEdgeSecurityServiceRequest',
+        '.google.cloud.compute.v1.DeleteNetworkEdgeSecurityServiceRequest',
         ['networkEdgeSecurityService']
       );
       request.networkEdgeSecurityService = defaultValue3;
@@ -381,17 +381,17 @@ describe('v1.NetworkEdgeSecurityServicesClient', () => {
         new protos.google.cloud.compute.v1.DeleteNetworkEdgeSecurityServiceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteNetworkEdgeSecurityServiceRequest',
+        '.google.cloud.compute.v1.DeleteNetworkEdgeSecurityServiceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'DeleteNetworkEdgeSecurityServiceRequest',
+        '.google.cloud.compute.v1.DeleteNetworkEdgeSecurityServiceRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'DeleteNetworkEdgeSecurityServiceRequest',
+        '.google.cloud.compute.v1.DeleteNetworkEdgeSecurityServiceRequest',
         ['networkEdgeSecurityService']
       );
       request.networkEdgeSecurityService = defaultValue3;
@@ -422,17 +422,17 @@ describe('v1.NetworkEdgeSecurityServicesClient', () => {
         new protos.google.cloud.compute.v1.DeleteNetworkEdgeSecurityServiceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteNetworkEdgeSecurityServiceRequest',
+        '.google.cloud.compute.v1.DeleteNetworkEdgeSecurityServiceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'DeleteNetworkEdgeSecurityServiceRequest',
+        '.google.cloud.compute.v1.DeleteNetworkEdgeSecurityServiceRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'DeleteNetworkEdgeSecurityServiceRequest',
+        '.google.cloud.compute.v1.DeleteNetworkEdgeSecurityServiceRequest',
         ['networkEdgeSecurityService']
       );
       request.networkEdgeSecurityService = defaultValue3;
@@ -456,17 +456,17 @@ describe('v1.NetworkEdgeSecurityServicesClient', () => {
         new protos.google.cloud.compute.v1.GetNetworkEdgeSecurityServiceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetNetworkEdgeSecurityServiceRequest',
+        '.google.cloud.compute.v1.GetNetworkEdgeSecurityServiceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'GetNetworkEdgeSecurityServiceRequest',
+        '.google.cloud.compute.v1.GetNetworkEdgeSecurityServiceRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'GetNetworkEdgeSecurityServiceRequest',
+        '.google.cloud.compute.v1.GetNetworkEdgeSecurityServiceRequest',
         ['networkEdgeSecurityService']
       );
       request.networkEdgeSecurityService = defaultValue3;
@@ -499,17 +499,17 @@ describe('v1.NetworkEdgeSecurityServicesClient', () => {
         new protos.google.cloud.compute.v1.GetNetworkEdgeSecurityServiceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetNetworkEdgeSecurityServiceRequest',
+        '.google.cloud.compute.v1.GetNetworkEdgeSecurityServiceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'GetNetworkEdgeSecurityServiceRequest',
+        '.google.cloud.compute.v1.GetNetworkEdgeSecurityServiceRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'GetNetworkEdgeSecurityServiceRequest',
+        '.google.cloud.compute.v1.GetNetworkEdgeSecurityServiceRequest',
         ['networkEdgeSecurityService']
       );
       request.networkEdgeSecurityService = defaultValue3;
@@ -557,17 +557,17 @@ describe('v1.NetworkEdgeSecurityServicesClient', () => {
         new protos.google.cloud.compute.v1.GetNetworkEdgeSecurityServiceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetNetworkEdgeSecurityServiceRequest',
+        '.google.cloud.compute.v1.GetNetworkEdgeSecurityServiceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'GetNetworkEdgeSecurityServiceRequest',
+        '.google.cloud.compute.v1.GetNetworkEdgeSecurityServiceRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'GetNetworkEdgeSecurityServiceRequest',
+        '.google.cloud.compute.v1.GetNetworkEdgeSecurityServiceRequest',
         ['networkEdgeSecurityService']
       );
       request.networkEdgeSecurityService = defaultValue3;
@@ -597,17 +597,17 @@ describe('v1.NetworkEdgeSecurityServicesClient', () => {
         new protos.google.cloud.compute.v1.GetNetworkEdgeSecurityServiceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetNetworkEdgeSecurityServiceRequest',
+        '.google.cloud.compute.v1.GetNetworkEdgeSecurityServiceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'GetNetworkEdgeSecurityServiceRequest',
+        '.google.cloud.compute.v1.GetNetworkEdgeSecurityServiceRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'GetNetworkEdgeSecurityServiceRequest',
+        '.google.cloud.compute.v1.GetNetworkEdgeSecurityServiceRequest',
         ['networkEdgeSecurityService']
       );
       request.networkEdgeSecurityService = defaultValue3;
@@ -631,12 +631,12 @@ describe('v1.NetworkEdgeSecurityServicesClient', () => {
         new protos.google.cloud.compute.v1.InsertNetworkEdgeSecurityServiceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'InsertNetworkEdgeSecurityServiceRequest',
+        '.google.cloud.compute.v1.InsertNetworkEdgeSecurityServiceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'InsertNetworkEdgeSecurityServiceRequest',
+        '.google.cloud.compute.v1.InsertNetworkEdgeSecurityServiceRequest',
         ['region']
       );
       request.region = defaultValue2;
@@ -670,12 +670,12 @@ describe('v1.NetworkEdgeSecurityServicesClient', () => {
         new protos.google.cloud.compute.v1.InsertNetworkEdgeSecurityServiceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'InsertNetworkEdgeSecurityServiceRequest',
+        '.google.cloud.compute.v1.InsertNetworkEdgeSecurityServiceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'InsertNetworkEdgeSecurityServiceRequest',
+        '.google.cloud.compute.v1.InsertNetworkEdgeSecurityServiceRequest',
         ['region']
       );
       request.region = defaultValue2;
@@ -725,12 +725,12 @@ describe('v1.NetworkEdgeSecurityServicesClient', () => {
         new protos.google.cloud.compute.v1.InsertNetworkEdgeSecurityServiceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'InsertNetworkEdgeSecurityServiceRequest',
+        '.google.cloud.compute.v1.InsertNetworkEdgeSecurityServiceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'InsertNetworkEdgeSecurityServiceRequest',
+        '.google.cloud.compute.v1.InsertNetworkEdgeSecurityServiceRequest',
         ['region']
       );
       request.region = defaultValue2;
@@ -761,12 +761,12 @@ describe('v1.NetworkEdgeSecurityServicesClient', () => {
         new protos.google.cloud.compute.v1.InsertNetworkEdgeSecurityServiceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'InsertNetworkEdgeSecurityServiceRequest',
+        '.google.cloud.compute.v1.InsertNetworkEdgeSecurityServiceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'InsertNetworkEdgeSecurityServiceRequest',
+        '.google.cloud.compute.v1.InsertNetworkEdgeSecurityServiceRequest',
         ['region']
       );
       request.region = defaultValue2;
@@ -790,17 +790,17 @@ describe('v1.NetworkEdgeSecurityServicesClient', () => {
         new protos.google.cloud.compute.v1.PatchNetworkEdgeSecurityServiceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'PatchNetworkEdgeSecurityServiceRequest',
+        '.google.cloud.compute.v1.PatchNetworkEdgeSecurityServiceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'PatchNetworkEdgeSecurityServiceRequest',
+        '.google.cloud.compute.v1.PatchNetworkEdgeSecurityServiceRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'PatchNetworkEdgeSecurityServiceRequest',
+        '.google.cloud.compute.v1.PatchNetworkEdgeSecurityServiceRequest',
         ['networkEdgeSecurityService']
       );
       request.networkEdgeSecurityService = defaultValue3;
@@ -833,17 +833,17 @@ describe('v1.NetworkEdgeSecurityServicesClient', () => {
         new protos.google.cloud.compute.v1.PatchNetworkEdgeSecurityServiceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'PatchNetworkEdgeSecurityServiceRequest',
+        '.google.cloud.compute.v1.PatchNetworkEdgeSecurityServiceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'PatchNetworkEdgeSecurityServiceRequest',
+        '.google.cloud.compute.v1.PatchNetworkEdgeSecurityServiceRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'PatchNetworkEdgeSecurityServiceRequest',
+        '.google.cloud.compute.v1.PatchNetworkEdgeSecurityServiceRequest',
         ['networkEdgeSecurityService']
       );
       request.networkEdgeSecurityService = defaultValue3;
@@ -891,17 +891,17 @@ describe('v1.NetworkEdgeSecurityServicesClient', () => {
         new protos.google.cloud.compute.v1.PatchNetworkEdgeSecurityServiceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'PatchNetworkEdgeSecurityServiceRequest',
+        '.google.cloud.compute.v1.PatchNetworkEdgeSecurityServiceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'PatchNetworkEdgeSecurityServiceRequest',
+        '.google.cloud.compute.v1.PatchNetworkEdgeSecurityServiceRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'PatchNetworkEdgeSecurityServiceRequest',
+        '.google.cloud.compute.v1.PatchNetworkEdgeSecurityServiceRequest',
         ['networkEdgeSecurityService']
       );
       request.networkEdgeSecurityService = defaultValue3;
@@ -931,17 +931,17 @@ describe('v1.NetworkEdgeSecurityServicesClient', () => {
         new protos.google.cloud.compute.v1.PatchNetworkEdgeSecurityServiceRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'PatchNetworkEdgeSecurityServiceRequest',
+        '.google.cloud.compute.v1.PatchNetworkEdgeSecurityServiceRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'PatchNetworkEdgeSecurityServiceRequest',
+        '.google.cloud.compute.v1.PatchNetworkEdgeSecurityServiceRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'PatchNetworkEdgeSecurityServiceRequest',
+        '.google.cloud.compute.v1.PatchNetworkEdgeSecurityServiceRequest',
         ['networkEdgeSecurityService']
       );
       request.networkEdgeSecurityService = defaultValue3;
@@ -965,7 +965,7 @@ describe('v1.NetworkEdgeSecurityServicesClient', () => {
         new protos.google.cloud.compute.v1.AggregatedListNetworkEdgeSecurityServicesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'AggregatedListNetworkEdgeSecurityServicesRequest',
+        '.google.cloud.compute.v1.AggregatedListNetworkEdgeSecurityServicesRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -1031,7 +1031,7 @@ describe('v1.NetworkEdgeSecurityServicesClient', () => {
         new protos.google.cloud.compute.v1.AggregatedListNetworkEdgeSecurityServicesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'AggregatedListNetworkEdgeSecurityServicesRequest',
+        '.google.cloud.compute.v1.AggregatedListNetworkEdgeSecurityServicesRequest',
         ['project']
       );
       request.project = defaultValue1;

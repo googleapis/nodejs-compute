@@ -248,13 +248,15 @@ describe('v1.UrlMapsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteUrlMapRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteUrlMapRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteUrlMapRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('DeleteUrlMapRequest', [
-        'urlMap',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteUrlMapRequest',
+        ['urlMap']
+      );
       request.urlMap = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&url_map=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
@@ -282,13 +284,15 @@ describe('v1.UrlMapsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteUrlMapRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteUrlMapRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteUrlMapRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('DeleteUrlMapRequest', [
-        'urlMap',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteUrlMapRequest',
+        ['urlMap']
+      );
       request.urlMap = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&url_map=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
@@ -332,13 +336,15 @@ describe('v1.UrlMapsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteUrlMapRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteUrlMapRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteUrlMapRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('DeleteUrlMapRequest', [
-        'urlMap',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteUrlMapRequest',
+        ['urlMap']
+      );
       request.urlMap = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&url_map=${defaultValue2}`;
       const expectedError = new Error('expected');
@@ -363,13 +369,15 @@ describe('v1.UrlMapsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteUrlMapRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteUrlMapRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteUrlMapRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('DeleteUrlMapRequest', [
-        'urlMap',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteUrlMapRequest',
+        ['urlMap']
+      );
       request.urlMap = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -387,11 +395,15 @@ describe('v1.UrlMapsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetUrlMapRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetUrlMapRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetUrlMapRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetUrlMapRequest', ['urlMap']);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetUrlMapRequest',
+        ['urlMap']
+      );
       request.urlMap = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&url_map=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
@@ -418,11 +430,15 @@ describe('v1.UrlMapsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetUrlMapRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetUrlMapRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetUrlMapRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetUrlMapRequest', ['urlMap']);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetUrlMapRequest',
+        ['urlMap']
+      );
       request.urlMap = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&url_map=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
@@ -464,11 +480,15 @@ describe('v1.UrlMapsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetUrlMapRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetUrlMapRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetUrlMapRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetUrlMapRequest', ['urlMap']);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetUrlMapRequest',
+        ['urlMap']
+      );
       request.urlMap = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&url_map=${defaultValue2}`;
       const expectedError = new Error('expected');
@@ -492,11 +512,15 @@ describe('v1.UrlMapsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetUrlMapRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetUrlMapRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetUrlMapRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetUrlMapRequest', ['urlMap']);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetUrlMapRequest',
+        ['urlMap']
+      );
       request.urlMap = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -514,9 +538,10 @@ describe('v1.UrlMapsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertUrlMapRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('InsertUrlMapRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.InsertUrlMapRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -544,9 +569,10 @@ describe('v1.UrlMapsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertUrlMapRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('InsertUrlMapRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.InsertUrlMapRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -590,9 +616,10 @@ describe('v1.UrlMapsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertUrlMapRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('InsertUrlMapRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.InsertUrlMapRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -617,9 +644,10 @@ describe('v1.UrlMapsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertUrlMapRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('InsertUrlMapRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.InsertUrlMapRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -638,12 +666,12 @@ describe('v1.UrlMapsClient', () => {
         new protos.google.cloud.compute.v1.InvalidateCacheUrlMapRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'InvalidateCacheUrlMapRequest',
+        '.google.cloud.compute.v1.InvalidateCacheUrlMapRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'InvalidateCacheUrlMapRequest',
+        '.google.cloud.compute.v1.InvalidateCacheUrlMapRequest',
         ['urlMap']
       );
       request.urlMap = defaultValue2;
@@ -674,12 +702,12 @@ describe('v1.UrlMapsClient', () => {
         new protos.google.cloud.compute.v1.InvalidateCacheUrlMapRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'InvalidateCacheUrlMapRequest',
+        '.google.cloud.compute.v1.InvalidateCacheUrlMapRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'InvalidateCacheUrlMapRequest',
+        '.google.cloud.compute.v1.InvalidateCacheUrlMapRequest',
         ['urlMap']
       );
       request.urlMap = defaultValue2;
@@ -726,12 +754,12 @@ describe('v1.UrlMapsClient', () => {
         new protos.google.cloud.compute.v1.InvalidateCacheUrlMapRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'InvalidateCacheUrlMapRequest',
+        '.google.cloud.compute.v1.InvalidateCacheUrlMapRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'InvalidateCacheUrlMapRequest',
+        '.google.cloud.compute.v1.InvalidateCacheUrlMapRequest',
         ['urlMap']
       );
       request.urlMap = defaultValue2;
@@ -762,12 +790,12 @@ describe('v1.UrlMapsClient', () => {
         new protos.google.cloud.compute.v1.InvalidateCacheUrlMapRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'InvalidateCacheUrlMapRequest',
+        '.google.cloud.compute.v1.InvalidateCacheUrlMapRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'InvalidateCacheUrlMapRequest',
+        '.google.cloud.compute.v1.InvalidateCacheUrlMapRequest',
         ['urlMap']
       );
       request.urlMap = defaultValue2;
@@ -787,13 +815,15 @@ describe('v1.UrlMapsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchUrlMapRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('PatchUrlMapRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchUrlMapRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('PatchUrlMapRequest', [
-        'urlMap',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchUrlMapRequest',
+        ['urlMap']
+      );
       request.urlMap = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&url_map=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
@@ -820,13 +850,15 @@ describe('v1.UrlMapsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchUrlMapRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('PatchUrlMapRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchUrlMapRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('PatchUrlMapRequest', [
-        'urlMap',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchUrlMapRequest',
+        ['urlMap']
+      );
       request.urlMap = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&url_map=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
@@ -868,13 +900,15 @@ describe('v1.UrlMapsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchUrlMapRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('PatchUrlMapRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchUrlMapRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('PatchUrlMapRequest', [
-        'urlMap',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchUrlMapRequest',
+        ['urlMap']
+      );
       request.urlMap = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&url_map=${defaultValue2}`;
       const expectedError = new Error('expected');
@@ -898,13 +932,15 @@ describe('v1.UrlMapsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchUrlMapRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('PatchUrlMapRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchUrlMapRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('PatchUrlMapRequest', [
-        'urlMap',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchUrlMapRequest',
+        ['urlMap']
+      );
       request.urlMap = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -922,13 +958,15 @@ describe('v1.UrlMapsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.UpdateUrlMapRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('UpdateUrlMapRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.UpdateUrlMapRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('UpdateUrlMapRequest', [
-        'urlMap',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.UpdateUrlMapRequest',
+        ['urlMap']
+      );
       request.urlMap = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&url_map=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
@@ -956,13 +994,15 @@ describe('v1.UrlMapsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.UpdateUrlMapRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('UpdateUrlMapRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.UpdateUrlMapRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('UpdateUrlMapRequest', [
-        'urlMap',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.UpdateUrlMapRequest',
+        ['urlMap']
+      );
       request.urlMap = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&url_map=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
@@ -1006,13 +1046,15 @@ describe('v1.UrlMapsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.UpdateUrlMapRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('UpdateUrlMapRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.UpdateUrlMapRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('UpdateUrlMapRequest', [
-        'urlMap',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.UpdateUrlMapRequest',
+        ['urlMap']
+      );
       request.urlMap = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&url_map=${defaultValue2}`;
       const expectedError = new Error('expected');
@@ -1037,13 +1079,15 @@ describe('v1.UrlMapsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.UpdateUrlMapRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('UpdateUrlMapRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.UpdateUrlMapRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('UpdateUrlMapRequest', [
-        'urlMap',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.UpdateUrlMapRequest',
+        ['urlMap']
+      );
       request.urlMap = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1061,13 +1105,15 @@ describe('v1.UrlMapsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ValidateUrlMapRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ValidateUrlMapRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ValidateUrlMapRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ValidateUrlMapRequest', [
-        'urlMap',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ValidateUrlMapRequest',
+        ['urlMap']
+      );
       request.urlMap = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&url_map=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
@@ -1095,13 +1141,15 @@ describe('v1.UrlMapsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ValidateUrlMapRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ValidateUrlMapRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ValidateUrlMapRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ValidateUrlMapRequest', [
-        'urlMap',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ValidateUrlMapRequest',
+        ['urlMap']
+      );
       request.urlMap = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&url_map=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
@@ -1145,13 +1193,15 @@ describe('v1.UrlMapsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ValidateUrlMapRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ValidateUrlMapRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ValidateUrlMapRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ValidateUrlMapRequest', [
-        'urlMap',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ValidateUrlMapRequest',
+        ['urlMap']
+      );
       request.urlMap = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&url_map=${defaultValue2}`;
       const expectedError = new Error('expected');
@@ -1176,13 +1226,15 @@ describe('v1.UrlMapsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ValidateUrlMapRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ValidateUrlMapRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ValidateUrlMapRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ValidateUrlMapRequest', [
-        'urlMap',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ValidateUrlMapRequest',
+        ['urlMap']
+      );
       request.urlMap = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1201,7 +1253,7 @@ describe('v1.UrlMapsClient', () => {
         new protos.google.cloud.compute.v1.AggregatedListUrlMapsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'AggregatedListUrlMapsRequest',
+        '.google.cloud.compute.v1.AggregatedListUrlMapsRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -1261,7 +1313,7 @@ describe('v1.UrlMapsClient', () => {
         new protos.google.cloud.compute.v1.AggregatedListUrlMapsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'AggregatedListUrlMapsRequest',
+        '.google.cloud.compute.v1.AggregatedListUrlMapsRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -1304,9 +1356,10 @@ describe('v1.UrlMapsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListUrlMapsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListUrlMapsRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListUrlMapsRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedResponse = [
@@ -1335,9 +1388,10 @@ describe('v1.UrlMapsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListUrlMapsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListUrlMapsRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListUrlMapsRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedResponse = [
@@ -1381,9 +1435,10 @@ describe('v1.UrlMapsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListUrlMapsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListUrlMapsRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListUrlMapsRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1407,9 +1462,10 @@ describe('v1.UrlMapsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListUrlMapsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListUrlMapsRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListUrlMapsRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedResponse = [
@@ -1457,9 +1513,10 @@ describe('v1.UrlMapsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListUrlMapsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListUrlMapsRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListUrlMapsRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1504,9 +1561,10 @@ describe('v1.UrlMapsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListUrlMapsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListUrlMapsRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListUrlMapsRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedResponse = [
@@ -1545,9 +1603,10 @@ describe('v1.UrlMapsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListUrlMapsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListUrlMapsRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListUrlMapsRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedError = new Error('expected');

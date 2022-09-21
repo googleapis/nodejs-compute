@@ -248,17 +248,20 @@ describe('v1.AddressesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteAddressRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteAddressRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteAddressRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('DeleteAddressRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteAddressRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('DeleteAddressRequest', [
-        'address',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteAddressRequest',
+        ['address']
+      );
       request.address = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&address=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -286,17 +289,20 @@ describe('v1.AddressesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteAddressRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteAddressRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteAddressRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('DeleteAddressRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteAddressRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('DeleteAddressRequest', [
-        'address',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteAddressRequest',
+        ['address']
+      );
       request.address = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&address=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -340,17 +346,20 @@ describe('v1.AddressesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteAddressRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteAddressRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteAddressRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('DeleteAddressRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteAddressRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('DeleteAddressRequest', [
-        'address',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteAddressRequest',
+        ['address']
+      );
       request.address = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&address=${defaultValue3}`;
       const expectedError = new Error('expected');
@@ -375,17 +384,20 @@ describe('v1.AddressesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteAddressRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteAddressRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteAddressRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('DeleteAddressRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteAddressRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('DeleteAddressRequest', [
-        'address',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteAddressRequest',
+        ['address']
+      );
       request.address = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -403,17 +415,20 @@ describe('v1.AddressesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetAddressRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetAddressRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetAddressRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetAddressRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetAddressRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('GetAddressRequest', [
-        'address',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetAddressRequest',
+        ['address']
+      );
       request.address = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&address=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -440,17 +455,20 @@ describe('v1.AddressesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetAddressRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetAddressRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetAddressRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetAddressRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetAddressRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('GetAddressRequest', [
-        'address',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetAddressRequest',
+        ['address']
+      );
       request.address = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&address=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -492,17 +510,20 @@ describe('v1.AddressesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetAddressRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetAddressRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetAddressRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetAddressRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetAddressRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('GetAddressRequest', [
-        'address',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetAddressRequest',
+        ['address']
+      );
       request.address = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&address=${defaultValue3}`;
       const expectedError = new Error('expected');
@@ -526,17 +547,20 @@ describe('v1.AddressesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetAddressRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetAddressRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetAddressRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetAddressRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetAddressRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('GetAddressRequest', [
-        'address',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetAddressRequest',
+        ['address']
+      );
       request.address = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -554,13 +578,15 @@ describe('v1.AddressesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertAddressRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('InsertAddressRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.InsertAddressRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('InsertAddressRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.InsertAddressRequest',
+        ['region']
+      );
       request.region = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
@@ -588,13 +614,15 @@ describe('v1.AddressesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertAddressRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('InsertAddressRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.InsertAddressRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('InsertAddressRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.InsertAddressRequest',
+        ['region']
+      );
       request.region = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
@@ -638,13 +666,15 @@ describe('v1.AddressesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertAddressRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('InsertAddressRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.InsertAddressRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('InsertAddressRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.InsertAddressRequest',
+        ['region']
+      );
       request.region = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}`;
       const expectedError = new Error('expected');
@@ -669,13 +699,15 @@ describe('v1.AddressesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertAddressRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('InsertAddressRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.InsertAddressRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('InsertAddressRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.InsertAddressRequest',
+        ['region']
+      );
       request.region = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -693,17 +725,20 @@ describe('v1.AddressesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetLabelsAddressRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SetLabelsAddressRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetLabelsAddressRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('SetLabelsAddressRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetLabelsAddressRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('SetLabelsAddressRequest', [
-        'resource',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetLabelsAddressRequest',
+        ['resource']
+      );
       request.resource = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&resource=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -731,17 +766,20 @@ describe('v1.AddressesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetLabelsAddressRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SetLabelsAddressRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetLabelsAddressRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('SetLabelsAddressRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetLabelsAddressRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('SetLabelsAddressRequest', [
-        'resource',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetLabelsAddressRequest',
+        ['resource']
+      );
       request.resource = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&resource=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -785,17 +823,20 @@ describe('v1.AddressesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetLabelsAddressRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SetLabelsAddressRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetLabelsAddressRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('SetLabelsAddressRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetLabelsAddressRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('SetLabelsAddressRequest', [
-        'resource',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetLabelsAddressRequest',
+        ['resource']
+      );
       request.resource = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&resource=${defaultValue3}`;
       const expectedError = new Error('expected');
@@ -820,17 +861,20 @@ describe('v1.AddressesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetLabelsAddressRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SetLabelsAddressRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetLabelsAddressRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('SetLabelsAddressRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetLabelsAddressRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('SetLabelsAddressRequest', [
-        'resource',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetLabelsAddressRequest',
+        ['resource']
+      );
       request.resource = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -849,7 +893,7 @@ describe('v1.AddressesClient', () => {
         new protos.google.cloud.compute.v1.AggregatedListAddressesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'AggregatedListAddressesRequest',
+        '.google.cloud.compute.v1.AggregatedListAddressesRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -909,7 +953,7 @@ describe('v1.AddressesClient', () => {
         new protos.google.cloud.compute.v1.AggregatedListAddressesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'AggregatedListAddressesRequest',
+        '.google.cloud.compute.v1.AggregatedListAddressesRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -952,13 +996,15 @@ describe('v1.AddressesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListAddressesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListAddressesRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListAddressesRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ListAddressesRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListAddressesRequest',
+        ['region']
+      );
       request.region = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}`;
       const expectedResponse = [
@@ -987,13 +1033,15 @@ describe('v1.AddressesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListAddressesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListAddressesRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListAddressesRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ListAddressesRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListAddressesRequest',
+        ['region']
+      );
       request.region = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}`;
       const expectedResponse = [
@@ -1037,13 +1085,15 @@ describe('v1.AddressesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListAddressesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListAddressesRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListAddressesRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ListAddressesRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListAddressesRequest',
+        ['region']
+      );
       request.region = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}`;
       const expectedError = new Error('expected');
@@ -1067,13 +1117,15 @@ describe('v1.AddressesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListAddressesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListAddressesRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListAddressesRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ListAddressesRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListAddressesRequest',
+        ['region']
+      );
       request.region = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}`;
       const expectedResponse = [
@@ -1124,13 +1176,15 @@ describe('v1.AddressesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListAddressesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListAddressesRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListAddressesRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ListAddressesRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListAddressesRequest',
+        ['region']
+      );
       request.region = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}`;
       const expectedError = new Error('expected');
@@ -1178,13 +1232,15 @@ describe('v1.AddressesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListAddressesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListAddressesRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListAddressesRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ListAddressesRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListAddressesRequest',
+        ['region']
+      );
       request.region = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}`;
       const expectedResponse = [
@@ -1223,13 +1279,15 @@ describe('v1.AddressesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListAddressesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListAddressesRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListAddressesRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ListAddressesRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListAddressesRequest',
+        ['region']
+      );
       request.region = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}`;
       const expectedError = new Error('expected');

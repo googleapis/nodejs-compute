@@ -250,13 +250,15 @@ describe('v1.InterconnectsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteInterconnectRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteInterconnectRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteInterconnectRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('DeleteInterconnectRequest', [
-        'interconnect',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteInterconnectRequest',
+        ['interconnect']
+      );
       request.interconnect = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&interconnect=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
@@ -284,13 +286,15 @@ describe('v1.InterconnectsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteInterconnectRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteInterconnectRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteInterconnectRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('DeleteInterconnectRequest', [
-        'interconnect',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteInterconnectRequest',
+        ['interconnect']
+      );
       request.interconnect = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&interconnect=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
@@ -334,13 +338,15 @@ describe('v1.InterconnectsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteInterconnectRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteInterconnectRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteInterconnectRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('DeleteInterconnectRequest', [
-        'interconnect',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteInterconnectRequest',
+        ['interconnect']
+      );
       request.interconnect = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&interconnect=${defaultValue2}`;
       const expectedError = new Error('expected');
@@ -365,13 +371,15 @@ describe('v1.InterconnectsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteInterconnectRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteInterconnectRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteInterconnectRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('DeleteInterconnectRequest', [
-        'interconnect',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteInterconnectRequest',
+        ['interconnect']
+      );
       request.interconnect = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -389,13 +397,15 @@ describe('v1.InterconnectsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetInterconnectRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetInterconnectRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetInterconnectRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetInterconnectRequest', [
-        'interconnect',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetInterconnectRequest',
+        ['interconnect']
+      );
       request.interconnect = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&interconnect=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
@@ -422,13 +432,15 @@ describe('v1.InterconnectsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetInterconnectRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetInterconnectRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetInterconnectRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetInterconnectRequest', [
-        'interconnect',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetInterconnectRequest',
+        ['interconnect']
+      );
       request.interconnect = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&interconnect=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
@@ -470,13 +482,15 @@ describe('v1.InterconnectsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetInterconnectRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetInterconnectRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetInterconnectRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetInterconnectRequest', [
-        'interconnect',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetInterconnectRequest',
+        ['interconnect']
+      );
       request.interconnect = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&interconnect=${defaultValue2}`;
       const expectedError = new Error('expected');
@@ -500,13 +514,15 @@ describe('v1.InterconnectsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetInterconnectRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetInterconnectRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetInterconnectRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetInterconnectRequest', [
-        'interconnect',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetInterconnectRequest',
+        ['interconnect']
+      );
       request.interconnect = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -525,12 +541,12 @@ describe('v1.InterconnectsClient', () => {
         new protos.google.cloud.compute.v1.GetDiagnosticsInterconnectRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetDiagnosticsInterconnectRequest',
+        '.google.cloud.compute.v1.GetDiagnosticsInterconnectRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'GetDiagnosticsInterconnectRequest',
+        '.google.cloud.compute.v1.GetDiagnosticsInterconnectRequest',
         ['interconnect']
       );
       request.interconnect = defaultValue2;
@@ -561,12 +577,12 @@ describe('v1.InterconnectsClient', () => {
         new protos.google.cloud.compute.v1.GetDiagnosticsInterconnectRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetDiagnosticsInterconnectRequest',
+        '.google.cloud.compute.v1.GetDiagnosticsInterconnectRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'GetDiagnosticsInterconnectRequest',
+        '.google.cloud.compute.v1.GetDiagnosticsInterconnectRequest',
         ['interconnect']
       );
       request.interconnect = defaultValue2;
@@ -613,12 +629,12 @@ describe('v1.InterconnectsClient', () => {
         new protos.google.cloud.compute.v1.GetDiagnosticsInterconnectRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetDiagnosticsInterconnectRequest',
+        '.google.cloud.compute.v1.GetDiagnosticsInterconnectRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'GetDiagnosticsInterconnectRequest',
+        '.google.cloud.compute.v1.GetDiagnosticsInterconnectRequest',
         ['interconnect']
       );
       request.interconnect = defaultValue2;
@@ -649,12 +665,12 @@ describe('v1.InterconnectsClient', () => {
         new protos.google.cloud.compute.v1.GetDiagnosticsInterconnectRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetDiagnosticsInterconnectRequest',
+        '.google.cloud.compute.v1.GetDiagnosticsInterconnectRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'GetDiagnosticsInterconnectRequest',
+        '.google.cloud.compute.v1.GetDiagnosticsInterconnectRequest',
         ['interconnect']
       );
       request.interconnect = defaultValue2;
@@ -674,9 +690,10 @@ describe('v1.InterconnectsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertInterconnectRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('InsertInterconnectRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.InsertInterconnectRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -704,9 +721,10 @@ describe('v1.InterconnectsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertInterconnectRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('InsertInterconnectRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.InsertInterconnectRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -750,9 +768,10 @@ describe('v1.InterconnectsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertInterconnectRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('InsertInterconnectRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.InsertInterconnectRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -777,9 +796,10 @@ describe('v1.InterconnectsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertInterconnectRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('InsertInterconnectRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.InsertInterconnectRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -797,13 +817,15 @@ describe('v1.InterconnectsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchInterconnectRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('PatchInterconnectRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchInterconnectRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('PatchInterconnectRequest', [
-        'interconnect',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchInterconnectRequest',
+        ['interconnect']
+      );
       request.interconnect = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&interconnect=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
@@ -830,13 +852,15 @@ describe('v1.InterconnectsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchInterconnectRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('PatchInterconnectRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchInterconnectRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('PatchInterconnectRequest', [
-        'interconnect',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchInterconnectRequest',
+        ['interconnect']
+      );
       request.interconnect = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&interconnect=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
@@ -878,13 +902,15 @@ describe('v1.InterconnectsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchInterconnectRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('PatchInterconnectRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchInterconnectRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('PatchInterconnectRequest', [
-        'interconnect',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchInterconnectRequest',
+        ['interconnect']
+      );
       request.interconnect = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&interconnect=${defaultValue2}`;
       const expectedError = new Error('expected');
@@ -908,13 +934,15 @@ describe('v1.InterconnectsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchInterconnectRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('PatchInterconnectRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchInterconnectRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('PatchInterconnectRequest', [
-        'interconnect',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchInterconnectRequest',
+        ['interconnect']
+      );
       request.interconnect = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -933,12 +961,12 @@ describe('v1.InterconnectsClient', () => {
         new protos.google.cloud.compute.v1.SetLabelsInterconnectRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SetLabelsInterconnectRequest',
+        '.google.cloud.compute.v1.SetLabelsInterconnectRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'SetLabelsInterconnectRequest',
+        '.google.cloud.compute.v1.SetLabelsInterconnectRequest',
         ['resource']
       );
       request.resource = defaultValue2;
@@ -969,12 +997,12 @@ describe('v1.InterconnectsClient', () => {
         new protos.google.cloud.compute.v1.SetLabelsInterconnectRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SetLabelsInterconnectRequest',
+        '.google.cloud.compute.v1.SetLabelsInterconnectRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'SetLabelsInterconnectRequest',
+        '.google.cloud.compute.v1.SetLabelsInterconnectRequest',
         ['resource']
       );
       request.resource = defaultValue2;
@@ -1021,12 +1049,12 @@ describe('v1.InterconnectsClient', () => {
         new protos.google.cloud.compute.v1.SetLabelsInterconnectRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SetLabelsInterconnectRequest',
+        '.google.cloud.compute.v1.SetLabelsInterconnectRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'SetLabelsInterconnectRequest',
+        '.google.cloud.compute.v1.SetLabelsInterconnectRequest',
         ['resource']
       );
       request.resource = defaultValue2;
@@ -1054,12 +1082,12 @@ describe('v1.InterconnectsClient', () => {
         new protos.google.cloud.compute.v1.SetLabelsInterconnectRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SetLabelsInterconnectRequest',
+        '.google.cloud.compute.v1.SetLabelsInterconnectRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'SetLabelsInterconnectRequest',
+        '.google.cloud.compute.v1.SetLabelsInterconnectRequest',
         ['resource']
       );
       request.resource = defaultValue2;
@@ -1079,9 +1107,10 @@ describe('v1.InterconnectsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListInterconnectsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListInterconnectsRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListInterconnectsRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedResponse = [
@@ -1116,9 +1145,10 @@ describe('v1.InterconnectsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListInterconnectsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListInterconnectsRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListInterconnectsRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedResponse = [
@@ -1168,9 +1198,10 @@ describe('v1.InterconnectsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListInterconnectsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListInterconnectsRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListInterconnectsRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1194,9 +1225,10 @@ describe('v1.InterconnectsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListInterconnectsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListInterconnectsRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListInterconnectsRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedResponse = [
@@ -1253,9 +1285,10 @@ describe('v1.InterconnectsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListInterconnectsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListInterconnectsRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListInterconnectsRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1303,9 +1336,10 @@ describe('v1.InterconnectsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListInterconnectsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListInterconnectsRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListInterconnectsRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedResponse = [
@@ -1350,9 +1384,10 @@ describe('v1.InterconnectsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListInterconnectsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListInterconnectsRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListInterconnectsRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedError = new Error('expected');

@@ -250,17 +250,20 @@ describe('v1.ResourcePoliciesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteResourcePolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteResourcePolicyRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteResourcePolicyRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('DeleteResourcePolicyRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteResourcePolicyRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('DeleteResourcePolicyRequest', [
-        'resourcePolicy',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteResourcePolicyRequest',
+        ['resourcePolicy']
+      );
       request.resourcePolicy = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&resource_policy=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -288,17 +291,20 @@ describe('v1.ResourcePoliciesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteResourcePolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteResourcePolicyRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteResourcePolicyRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('DeleteResourcePolicyRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteResourcePolicyRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('DeleteResourcePolicyRequest', [
-        'resourcePolicy',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteResourcePolicyRequest',
+        ['resourcePolicy']
+      );
       request.resourcePolicy = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&resource_policy=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -342,17 +348,20 @@ describe('v1.ResourcePoliciesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteResourcePolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteResourcePolicyRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteResourcePolicyRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('DeleteResourcePolicyRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteResourcePolicyRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('DeleteResourcePolicyRequest', [
-        'resourcePolicy',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteResourcePolicyRequest',
+        ['resourcePolicy']
+      );
       request.resourcePolicy = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&resource_policy=${defaultValue3}`;
       const expectedError = new Error('expected');
@@ -377,17 +386,20 @@ describe('v1.ResourcePoliciesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteResourcePolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteResourcePolicyRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteResourcePolicyRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('DeleteResourcePolicyRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteResourcePolicyRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('DeleteResourcePolicyRequest', [
-        'resourcePolicy',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteResourcePolicyRequest',
+        ['resourcePolicy']
+      );
       request.resourcePolicy = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -405,17 +417,20 @@ describe('v1.ResourcePoliciesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetResourcePolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetResourcePolicyRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetResourcePolicyRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetResourcePolicyRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetResourcePolicyRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('GetResourcePolicyRequest', [
-        'resourcePolicy',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetResourcePolicyRequest',
+        ['resourcePolicy']
+      );
       request.resourcePolicy = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&resource_policy=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -442,17 +457,20 @@ describe('v1.ResourcePoliciesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetResourcePolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetResourcePolicyRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetResourcePolicyRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetResourcePolicyRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetResourcePolicyRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('GetResourcePolicyRequest', [
-        'resourcePolicy',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetResourcePolicyRequest',
+        ['resourcePolicy']
+      );
       request.resourcePolicy = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&resource_policy=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -494,17 +512,20 @@ describe('v1.ResourcePoliciesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetResourcePolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetResourcePolicyRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetResourcePolicyRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetResourcePolicyRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetResourcePolicyRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('GetResourcePolicyRequest', [
-        'resourcePolicy',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetResourcePolicyRequest',
+        ['resourcePolicy']
+      );
       request.resourcePolicy = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&resource_policy=${defaultValue3}`;
       const expectedError = new Error('expected');
@@ -528,17 +549,20 @@ describe('v1.ResourcePoliciesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetResourcePolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetResourcePolicyRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetResourcePolicyRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetResourcePolicyRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetResourcePolicyRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('GetResourcePolicyRequest', [
-        'resourcePolicy',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetResourcePolicyRequest',
+        ['resourcePolicy']
+      );
       request.resourcePolicy = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -557,17 +581,17 @@ describe('v1.ResourcePoliciesClient', () => {
         new protos.google.cloud.compute.v1.GetIamPolicyResourcePolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetIamPolicyResourcePolicyRequest',
+        '.google.cloud.compute.v1.GetIamPolicyResourcePolicyRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'GetIamPolicyResourcePolicyRequest',
+        '.google.cloud.compute.v1.GetIamPolicyResourcePolicyRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'GetIamPolicyResourcePolicyRequest',
+        '.google.cloud.compute.v1.GetIamPolicyResourcePolicyRequest',
         ['resource']
       );
       request.resource = defaultValue3;
@@ -598,17 +622,17 @@ describe('v1.ResourcePoliciesClient', () => {
         new protos.google.cloud.compute.v1.GetIamPolicyResourcePolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetIamPolicyResourcePolicyRequest',
+        '.google.cloud.compute.v1.GetIamPolicyResourcePolicyRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'GetIamPolicyResourcePolicyRequest',
+        '.google.cloud.compute.v1.GetIamPolicyResourcePolicyRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'GetIamPolicyResourcePolicyRequest',
+        '.google.cloud.compute.v1.GetIamPolicyResourcePolicyRequest',
         ['resource']
       );
       request.resource = defaultValue3;
@@ -655,17 +679,17 @@ describe('v1.ResourcePoliciesClient', () => {
         new protos.google.cloud.compute.v1.GetIamPolicyResourcePolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetIamPolicyResourcePolicyRequest',
+        '.google.cloud.compute.v1.GetIamPolicyResourcePolicyRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'GetIamPolicyResourcePolicyRequest',
+        '.google.cloud.compute.v1.GetIamPolicyResourcePolicyRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'GetIamPolicyResourcePolicyRequest',
+        '.google.cloud.compute.v1.GetIamPolicyResourcePolicyRequest',
         ['resource']
       );
       request.resource = defaultValue3;
@@ -696,17 +720,17 @@ describe('v1.ResourcePoliciesClient', () => {
         new protos.google.cloud.compute.v1.GetIamPolicyResourcePolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetIamPolicyResourcePolicyRequest',
+        '.google.cloud.compute.v1.GetIamPolicyResourcePolicyRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'GetIamPolicyResourcePolicyRequest',
+        '.google.cloud.compute.v1.GetIamPolicyResourcePolicyRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'GetIamPolicyResourcePolicyRequest',
+        '.google.cloud.compute.v1.GetIamPolicyResourcePolicyRequest',
         ['resource']
       );
       request.resource = defaultValue3;
@@ -726,13 +750,15 @@ describe('v1.ResourcePoliciesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertResourcePolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('InsertResourcePolicyRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.InsertResourcePolicyRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('InsertResourcePolicyRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.InsertResourcePolicyRequest',
+        ['region']
+      );
       request.region = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
@@ -760,13 +786,15 @@ describe('v1.ResourcePoliciesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertResourcePolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('InsertResourcePolicyRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.InsertResourcePolicyRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('InsertResourcePolicyRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.InsertResourcePolicyRequest',
+        ['region']
+      );
       request.region = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
@@ -810,13 +838,15 @@ describe('v1.ResourcePoliciesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertResourcePolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('InsertResourcePolicyRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.InsertResourcePolicyRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('InsertResourcePolicyRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.InsertResourcePolicyRequest',
+        ['region']
+      );
       request.region = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}`;
       const expectedError = new Error('expected');
@@ -841,13 +871,15 @@ describe('v1.ResourcePoliciesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertResourcePolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('InsertResourcePolicyRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.InsertResourcePolicyRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('InsertResourcePolicyRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.InsertResourcePolicyRequest',
+        ['region']
+      );
       request.region = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -866,17 +898,17 @@ describe('v1.ResourcePoliciesClient', () => {
         new protos.google.cloud.compute.v1.SetIamPolicyResourcePolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SetIamPolicyResourcePolicyRequest',
+        '.google.cloud.compute.v1.SetIamPolicyResourcePolicyRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'SetIamPolicyResourcePolicyRequest',
+        '.google.cloud.compute.v1.SetIamPolicyResourcePolicyRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'SetIamPolicyResourcePolicyRequest',
+        '.google.cloud.compute.v1.SetIamPolicyResourcePolicyRequest',
         ['resource']
       );
       request.resource = defaultValue3;
@@ -907,17 +939,17 @@ describe('v1.ResourcePoliciesClient', () => {
         new protos.google.cloud.compute.v1.SetIamPolicyResourcePolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SetIamPolicyResourcePolicyRequest',
+        '.google.cloud.compute.v1.SetIamPolicyResourcePolicyRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'SetIamPolicyResourcePolicyRequest',
+        '.google.cloud.compute.v1.SetIamPolicyResourcePolicyRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'SetIamPolicyResourcePolicyRequest',
+        '.google.cloud.compute.v1.SetIamPolicyResourcePolicyRequest',
         ['resource']
       );
       request.resource = defaultValue3;
@@ -964,17 +996,17 @@ describe('v1.ResourcePoliciesClient', () => {
         new protos.google.cloud.compute.v1.SetIamPolicyResourcePolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SetIamPolicyResourcePolicyRequest',
+        '.google.cloud.compute.v1.SetIamPolicyResourcePolicyRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'SetIamPolicyResourcePolicyRequest',
+        '.google.cloud.compute.v1.SetIamPolicyResourcePolicyRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'SetIamPolicyResourcePolicyRequest',
+        '.google.cloud.compute.v1.SetIamPolicyResourcePolicyRequest',
         ['resource']
       );
       request.resource = defaultValue3;
@@ -1005,17 +1037,17 @@ describe('v1.ResourcePoliciesClient', () => {
         new protos.google.cloud.compute.v1.SetIamPolicyResourcePolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SetIamPolicyResourcePolicyRequest',
+        '.google.cloud.compute.v1.SetIamPolicyResourcePolicyRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'SetIamPolicyResourcePolicyRequest',
+        '.google.cloud.compute.v1.SetIamPolicyResourcePolicyRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'SetIamPolicyResourcePolicyRequest',
+        '.google.cloud.compute.v1.SetIamPolicyResourcePolicyRequest',
         ['resource']
       );
       request.resource = defaultValue3;
@@ -1036,17 +1068,17 @@ describe('v1.ResourcePoliciesClient', () => {
         new protos.google.cloud.compute.v1.TestIamPermissionsResourcePolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'TestIamPermissionsResourcePolicyRequest',
+        '.google.cloud.compute.v1.TestIamPermissionsResourcePolicyRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'TestIamPermissionsResourcePolicyRequest',
+        '.google.cloud.compute.v1.TestIamPermissionsResourcePolicyRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'TestIamPermissionsResourcePolicyRequest',
+        '.google.cloud.compute.v1.TestIamPermissionsResourcePolicyRequest',
         ['resource']
       );
       request.resource = defaultValue3;
@@ -1078,17 +1110,17 @@ describe('v1.ResourcePoliciesClient', () => {
         new protos.google.cloud.compute.v1.TestIamPermissionsResourcePolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'TestIamPermissionsResourcePolicyRequest',
+        '.google.cloud.compute.v1.TestIamPermissionsResourcePolicyRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'TestIamPermissionsResourcePolicyRequest',
+        '.google.cloud.compute.v1.TestIamPermissionsResourcePolicyRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'TestIamPermissionsResourcePolicyRequest',
+        '.google.cloud.compute.v1.TestIamPermissionsResourcePolicyRequest',
         ['resource']
       );
       request.resource = defaultValue3;
@@ -1135,17 +1167,17 @@ describe('v1.ResourcePoliciesClient', () => {
         new protos.google.cloud.compute.v1.TestIamPermissionsResourcePolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'TestIamPermissionsResourcePolicyRequest',
+        '.google.cloud.compute.v1.TestIamPermissionsResourcePolicyRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'TestIamPermissionsResourcePolicyRequest',
+        '.google.cloud.compute.v1.TestIamPermissionsResourcePolicyRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'TestIamPermissionsResourcePolicyRequest',
+        '.google.cloud.compute.v1.TestIamPermissionsResourcePolicyRequest',
         ['resource']
       );
       request.resource = defaultValue3;
@@ -1176,17 +1208,17 @@ describe('v1.ResourcePoliciesClient', () => {
         new protos.google.cloud.compute.v1.TestIamPermissionsResourcePolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'TestIamPermissionsResourcePolicyRequest',
+        '.google.cloud.compute.v1.TestIamPermissionsResourcePolicyRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'TestIamPermissionsResourcePolicyRequest',
+        '.google.cloud.compute.v1.TestIamPermissionsResourcePolicyRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'TestIamPermissionsResourcePolicyRequest',
+        '.google.cloud.compute.v1.TestIamPermissionsResourcePolicyRequest',
         ['resource']
       );
       request.resource = defaultValue3;
@@ -1207,7 +1239,7 @@ describe('v1.ResourcePoliciesClient', () => {
         new protos.google.cloud.compute.v1.AggregatedListResourcePoliciesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'AggregatedListResourcePoliciesRequest',
+        '.google.cloud.compute.v1.AggregatedListResourcePoliciesRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -1267,7 +1299,7 @@ describe('v1.ResourcePoliciesClient', () => {
         new protos.google.cloud.compute.v1.AggregatedListResourcePoliciesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'AggregatedListResourcePoliciesRequest',
+        '.google.cloud.compute.v1.AggregatedListResourcePoliciesRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -1310,13 +1342,15 @@ describe('v1.ResourcePoliciesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListResourcePoliciesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListResourcePoliciesRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListResourcePoliciesRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ListResourcePoliciesRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListResourcePoliciesRequest',
+        ['region']
+      );
       request.region = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}`;
       const expectedResponse = [
@@ -1351,13 +1385,15 @@ describe('v1.ResourcePoliciesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListResourcePoliciesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListResourcePoliciesRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListResourcePoliciesRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ListResourcePoliciesRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListResourcePoliciesRequest',
+        ['region']
+      );
       request.region = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}`;
       const expectedResponse = [
@@ -1407,13 +1443,15 @@ describe('v1.ResourcePoliciesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListResourcePoliciesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListResourcePoliciesRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListResourcePoliciesRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ListResourcePoliciesRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListResourcePoliciesRequest',
+        ['region']
+      );
       request.region = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}`;
       const expectedError = new Error('expected');
@@ -1437,13 +1475,15 @@ describe('v1.ResourcePoliciesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListResourcePoliciesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListResourcePoliciesRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListResourcePoliciesRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ListResourcePoliciesRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListResourcePoliciesRequest',
+        ['region']
+      );
       request.region = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}`;
       const expectedResponse = [
@@ -1500,13 +1540,15 @@ describe('v1.ResourcePoliciesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListResourcePoliciesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListResourcePoliciesRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListResourcePoliciesRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ListResourcePoliciesRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListResourcePoliciesRequest',
+        ['region']
+      );
       request.region = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}`;
       const expectedError = new Error('expected');
@@ -1554,13 +1596,15 @@ describe('v1.ResourcePoliciesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListResourcePoliciesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListResourcePoliciesRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListResourcePoliciesRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ListResourcePoliciesRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListResourcePoliciesRequest',
+        ['region']
+      );
       request.region = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}`;
       const expectedResponse = [
@@ -1605,13 +1649,15 @@ describe('v1.ResourcePoliciesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListResourcePoliciesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListResourcePoliciesRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListResourcePoliciesRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ListResourcePoliciesRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListResourcePoliciesRequest',
+        ['region']
+      );
       request.region = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}`;
       const expectedError = new Error('expected');

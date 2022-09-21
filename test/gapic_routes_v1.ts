@@ -248,13 +248,15 @@ describe('v1.RoutesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteRouteRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteRouteRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteRouteRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('DeleteRouteRequest', [
-        'route',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteRouteRequest',
+        ['route']
+      );
       request.route = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&route=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
@@ -282,13 +284,15 @@ describe('v1.RoutesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteRouteRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteRouteRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteRouteRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('DeleteRouteRequest', [
-        'route',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteRouteRequest',
+        ['route']
+      );
       request.route = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&route=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
@@ -332,13 +336,15 @@ describe('v1.RoutesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteRouteRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteRouteRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteRouteRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('DeleteRouteRequest', [
-        'route',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteRouteRequest',
+        ['route']
+      );
       request.route = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&route=${defaultValue2}`;
       const expectedError = new Error('expected');
@@ -363,13 +369,15 @@ describe('v1.RoutesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteRouteRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteRouteRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteRouteRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('DeleteRouteRequest', [
-        'route',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteRouteRequest',
+        ['route']
+      );
       request.route = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -387,9 +395,15 @@ describe('v1.RoutesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetRouteRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetRouteRequest', ['project']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetRouteRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetRouteRequest', ['route']);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetRouteRequest',
+        ['route']
+      );
       request.route = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&route=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
@@ -416,9 +430,15 @@ describe('v1.RoutesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetRouteRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetRouteRequest', ['project']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetRouteRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetRouteRequest', ['route']);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetRouteRequest',
+        ['route']
+      );
       request.route = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&route=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
@@ -460,9 +480,15 @@ describe('v1.RoutesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetRouteRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetRouteRequest', ['project']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetRouteRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetRouteRequest', ['route']);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetRouteRequest',
+        ['route']
+      );
       request.route = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&route=${defaultValue2}`;
       const expectedError = new Error('expected');
@@ -486,9 +512,15 @@ describe('v1.RoutesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetRouteRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetRouteRequest', ['project']);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetRouteRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetRouteRequest', ['route']);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetRouteRequest',
+        ['route']
+      );
       request.route = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -506,9 +538,10 @@ describe('v1.RoutesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertRouteRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('InsertRouteRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.InsertRouteRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -536,9 +569,10 @@ describe('v1.RoutesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertRouteRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('InsertRouteRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.InsertRouteRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -582,9 +616,10 @@ describe('v1.RoutesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertRouteRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('InsertRouteRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.InsertRouteRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -609,9 +644,10 @@ describe('v1.RoutesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertRouteRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('InsertRouteRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.InsertRouteRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -629,9 +665,10 @@ describe('v1.RoutesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListRoutesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListRoutesRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListRoutesRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedResponse = [
@@ -660,9 +697,10 @@ describe('v1.RoutesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListRoutesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListRoutesRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListRoutesRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedResponse = [
@@ -706,9 +744,10 @@ describe('v1.RoutesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListRoutesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListRoutesRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListRoutesRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -732,9 +771,10 @@ describe('v1.RoutesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListRoutesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListRoutesRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListRoutesRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedResponse = [
@@ -782,9 +822,10 @@ describe('v1.RoutesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListRoutesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListRoutesRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListRoutesRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -829,9 +870,10 @@ describe('v1.RoutesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListRoutesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListRoutesRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListRoutesRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedResponse = [
@@ -870,9 +912,10 @@ describe('v1.RoutesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListRoutesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListRoutesRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListRoutesRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedError = new Error('expected');

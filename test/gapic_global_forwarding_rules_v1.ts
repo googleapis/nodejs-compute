@@ -260,12 +260,12 @@ describe('v1.GlobalForwardingRulesClient', () => {
         new protos.google.cloud.compute.v1.DeleteGlobalForwardingRuleRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteGlobalForwardingRuleRequest',
+        '.google.cloud.compute.v1.DeleteGlobalForwardingRuleRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'DeleteGlobalForwardingRuleRequest',
+        '.google.cloud.compute.v1.DeleteGlobalForwardingRuleRequest',
         ['forwardingRule']
       );
       request.forwardingRule = defaultValue2;
@@ -297,12 +297,12 @@ describe('v1.GlobalForwardingRulesClient', () => {
         new protos.google.cloud.compute.v1.DeleteGlobalForwardingRuleRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteGlobalForwardingRuleRequest',
+        '.google.cloud.compute.v1.DeleteGlobalForwardingRuleRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'DeleteGlobalForwardingRuleRequest',
+        '.google.cloud.compute.v1.DeleteGlobalForwardingRuleRequest',
         ['forwardingRule']
       );
       request.forwardingRule = defaultValue2;
@@ -350,12 +350,12 @@ describe('v1.GlobalForwardingRulesClient', () => {
         new protos.google.cloud.compute.v1.DeleteGlobalForwardingRuleRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteGlobalForwardingRuleRequest',
+        '.google.cloud.compute.v1.DeleteGlobalForwardingRuleRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'DeleteGlobalForwardingRuleRequest',
+        '.google.cloud.compute.v1.DeleteGlobalForwardingRuleRequest',
         ['forwardingRule']
       );
       request.forwardingRule = defaultValue2;
@@ -384,12 +384,12 @@ describe('v1.GlobalForwardingRulesClient', () => {
         new protos.google.cloud.compute.v1.DeleteGlobalForwardingRuleRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteGlobalForwardingRuleRequest',
+        '.google.cloud.compute.v1.DeleteGlobalForwardingRuleRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'DeleteGlobalForwardingRuleRequest',
+        '.google.cloud.compute.v1.DeleteGlobalForwardingRuleRequest',
         ['forwardingRule']
       );
       request.forwardingRule = defaultValue2;
@@ -411,12 +411,12 @@ describe('v1.GlobalForwardingRulesClient', () => {
         new protos.google.cloud.compute.v1.GetGlobalForwardingRuleRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetGlobalForwardingRuleRequest',
+        '.google.cloud.compute.v1.GetGlobalForwardingRuleRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'GetGlobalForwardingRuleRequest',
+        '.google.cloud.compute.v1.GetGlobalForwardingRuleRequest',
         ['forwardingRule']
       );
       request.forwardingRule = defaultValue2;
@@ -447,12 +447,12 @@ describe('v1.GlobalForwardingRulesClient', () => {
         new protos.google.cloud.compute.v1.GetGlobalForwardingRuleRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetGlobalForwardingRuleRequest',
+        '.google.cloud.compute.v1.GetGlobalForwardingRuleRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'GetGlobalForwardingRuleRequest',
+        '.google.cloud.compute.v1.GetGlobalForwardingRuleRequest',
         ['forwardingRule']
       );
       request.forwardingRule = defaultValue2;
@@ -498,12 +498,12 @@ describe('v1.GlobalForwardingRulesClient', () => {
         new protos.google.cloud.compute.v1.GetGlobalForwardingRuleRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetGlobalForwardingRuleRequest',
+        '.google.cloud.compute.v1.GetGlobalForwardingRuleRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'GetGlobalForwardingRuleRequest',
+        '.google.cloud.compute.v1.GetGlobalForwardingRuleRequest',
         ['forwardingRule']
       );
       request.forwardingRule = defaultValue2;
@@ -531,12 +531,12 @@ describe('v1.GlobalForwardingRulesClient', () => {
         new protos.google.cloud.compute.v1.GetGlobalForwardingRuleRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetGlobalForwardingRuleRequest',
+        '.google.cloud.compute.v1.GetGlobalForwardingRuleRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'GetGlobalForwardingRuleRequest',
+        '.google.cloud.compute.v1.GetGlobalForwardingRuleRequest',
         ['forwardingRule']
       );
       request.forwardingRule = defaultValue2;
@@ -558,7 +558,7 @@ describe('v1.GlobalForwardingRulesClient', () => {
         new protos.google.cloud.compute.v1.InsertGlobalForwardingRuleRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'InsertGlobalForwardingRuleRequest',
+        '.google.cloud.compute.v1.InsertGlobalForwardingRuleRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -590,7 +590,7 @@ describe('v1.GlobalForwardingRulesClient', () => {
         new protos.google.cloud.compute.v1.InsertGlobalForwardingRuleRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'InsertGlobalForwardingRuleRequest',
+        '.google.cloud.compute.v1.InsertGlobalForwardingRuleRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -638,7 +638,7 @@ describe('v1.GlobalForwardingRulesClient', () => {
         new protos.google.cloud.compute.v1.InsertGlobalForwardingRuleRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'InsertGlobalForwardingRuleRequest',
+        '.google.cloud.compute.v1.InsertGlobalForwardingRuleRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -667,7 +667,7 @@ describe('v1.GlobalForwardingRulesClient', () => {
         new protos.google.cloud.compute.v1.InsertGlobalForwardingRuleRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'InsertGlobalForwardingRuleRequest',
+        '.google.cloud.compute.v1.InsertGlobalForwardingRuleRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -689,12 +689,12 @@ describe('v1.GlobalForwardingRulesClient', () => {
         new protos.google.cloud.compute.v1.PatchGlobalForwardingRuleRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'PatchGlobalForwardingRuleRequest',
+        '.google.cloud.compute.v1.PatchGlobalForwardingRuleRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'PatchGlobalForwardingRuleRequest',
+        '.google.cloud.compute.v1.PatchGlobalForwardingRuleRequest',
         ['forwardingRule']
       );
       request.forwardingRule = defaultValue2;
@@ -725,12 +725,12 @@ describe('v1.GlobalForwardingRulesClient', () => {
         new protos.google.cloud.compute.v1.PatchGlobalForwardingRuleRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'PatchGlobalForwardingRuleRequest',
+        '.google.cloud.compute.v1.PatchGlobalForwardingRuleRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'PatchGlobalForwardingRuleRequest',
+        '.google.cloud.compute.v1.PatchGlobalForwardingRuleRequest',
         ['forwardingRule']
       );
       request.forwardingRule = defaultValue2;
@@ -776,12 +776,12 @@ describe('v1.GlobalForwardingRulesClient', () => {
         new protos.google.cloud.compute.v1.PatchGlobalForwardingRuleRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'PatchGlobalForwardingRuleRequest',
+        '.google.cloud.compute.v1.PatchGlobalForwardingRuleRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'PatchGlobalForwardingRuleRequest',
+        '.google.cloud.compute.v1.PatchGlobalForwardingRuleRequest',
         ['forwardingRule']
       );
       request.forwardingRule = defaultValue2;
@@ -809,12 +809,12 @@ describe('v1.GlobalForwardingRulesClient', () => {
         new protos.google.cloud.compute.v1.PatchGlobalForwardingRuleRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'PatchGlobalForwardingRuleRequest',
+        '.google.cloud.compute.v1.PatchGlobalForwardingRuleRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'PatchGlobalForwardingRuleRequest',
+        '.google.cloud.compute.v1.PatchGlobalForwardingRuleRequest',
         ['forwardingRule']
       );
       request.forwardingRule = defaultValue2;
@@ -836,12 +836,12 @@ describe('v1.GlobalForwardingRulesClient', () => {
         new protos.google.cloud.compute.v1.SetLabelsGlobalForwardingRuleRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SetLabelsGlobalForwardingRuleRequest',
+        '.google.cloud.compute.v1.SetLabelsGlobalForwardingRuleRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'SetLabelsGlobalForwardingRuleRequest',
+        '.google.cloud.compute.v1.SetLabelsGlobalForwardingRuleRequest',
         ['resource']
       );
       request.resource = defaultValue2;
@@ -873,12 +873,12 @@ describe('v1.GlobalForwardingRulesClient', () => {
         new protos.google.cloud.compute.v1.SetLabelsGlobalForwardingRuleRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SetLabelsGlobalForwardingRuleRequest',
+        '.google.cloud.compute.v1.SetLabelsGlobalForwardingRuleRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'SetLabelsGlobalForwardingRuleRequest',
+        '.google.cloud.compute.v1.SetLabelsGlobalForwardingRuleRequest',
         ['resource']
       );
       request.resource = defaultValue2;
@@ -926,12 +926,12 @@ describe('v1.GlobalForwardingRulesClient', () => {
         new protos.google.cloud.compute.v1.SetLabelsGlobalForwardingRuleRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SetLabelsGlobalForwardingRuleRequest',
+        '.google.cloud.compute.v1.SetLabelsGlobalForwardingRuleRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'SetLabelsGlobalForwardingRuleRequest',
+        '.google.cloud.compute.v1.SetLabelsGlobalForwardingRuleRequest',
         ['resource']
       );
       request.resource = defaultValue2;
@@ -960,12 +960,12 @@ describe('v1.GlobalForwardingRulesClient', () => {
         new protos.google.cloud.compute.v1.SetLabelsGlobalForwardingRuleRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SetLabelsGlobalForwardingRuleRequest',
+        '.google.cloud.compute.v1.SetLabelsGlobalForwardingRuleRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'SetLabelsGlobalForwardingRuleRequest',
+        '.google.cloud.compute.v1.SetLabelsGlobalForwardingRuleRequest',
         ['resource']
       );
       request.resource = defaultValue2;
@@ -987,12 +987,12 @@ describe('v1.GlobalForwardingRulesClient', () => {
         new protos.google.cloud.compute.v1.SetTargetGlobalForwardingRuleRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SetTargetGlobalForwardingRuleRequest',
+        '.google.cloud.compute.v1.SetTargetGlobalForwardingRuleRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'SetTargetGlobalForwardingRuleRequest',
+        '.google.cloud.compute.v1.SetTargetGlobalForwardingRuleRequest',
         ['forwardingRule']
       );
       request.forwardingRule = defaultValue2;
@@ -1024,12 +1024,12 @@ describe('v1.GlobalForwardingRulesClient', () => {
         new protos.google.cloud.compute.v1.SetTargetGlobalForwardingRuleRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SetTargetGlobalForwardingRuleRequest',
+        '.google.cloud.compute.v1.SetTargetGlobalForwardingRuleRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'SetTargetGlobalForwardingRuleRequest',
+        '.google.cloud.compute.v1.SetTargetGlobalForwardingRuleRequest',
         ['forwardingRule']
       );
       request.forwardingRule = defaultValue2;
@@ -1077,12 +1077,12 @@ describe('v1.GlobalForwardingRulesClient', () => {
         new protos.google.cloud.compute.v1.SetTargetGlobalForwardingRuleRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SetTargetGlobalForwardingRuleRequest',
+        '.google.cloud.compute.v1.SetTargetGlobalForwardingRuleRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'SetTargetGlobalForwardingRuleRequest',
+        '.google.cloud.compute.v1.SetTargetGlobalForwardingRuleRequest',
         ['forwardingRule']
       );
       request.forwardingRule = defaultValue2;
@@ -1111,12 +1111,12 @@ describe('v1.GlobalForwardingRulesClient', () => {
         new protos.google.cloud.compute.v1.SetTargetGlobalForwardingRuleRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SetTargetGlobalForwardingRuleRequest',
+        '.google.cloud.compute.v1.SetTargetGlobalForwardingRuleRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'SetTargetGlobalForwardingRuleRequest',
+        '.google.cloud.compute.v1.SetTargetGlobalForwardingRuleRequest',
         ['forwardingRule']
       );
       request.forwardingRule = defaultValue2;
@@ -1138,7 +1138,7 @@ describe('v1.GlobalForwardingRulesClient', () => {
         new protos.google.cloud.compute.v1.ListGlobalForwardingRulesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListGlobalForwardingRulesRequest',
+        '.google.cloud.compute.v1.ListGlobalForwardingRulesRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -1177,7 +1177,7 @@ describe('v1.GlobalForwardingRulesClient', () => {
         new protos.google.cloud.compute.v1.ListGlobalForwardingRulesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListGlobalForwardingRulesRequest',
+        '.google.cloud.compute.v1.ListGlobalForwardingRulesRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -1231,7 +1231,7 @@ describe('v1.GlobalForwardingRulesClient', () => {
         new protos.google.cloud.compute.v1.ListGlobalForwardingRulesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListGlobalForwardingRulesRequest',
+        '.google.cloud.compute.v1.ListGlobalForwardingRulesRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -1259,7 +1259,7 @@ describe('v1.GlobalForwardingRulesClient', () => {
         new protos.google.cloud.compute.v1.ListGlobalForwardingRulesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListGlobalForwardingRulesRequest',
+        '.google.cloud.compute.v1.ListGlobalForwardingRulesRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -1320,7 +1320,7 @@ describe('v1.GlobalForwardingRulesClient', () => {
         new protos.google.cloud.compute.v1.ListGlobalForwardingRulesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListGlobalForwardingRulesRequest',
+        '.google.cloud.compute.v1.ListGlobalForwardingRulesRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -1372,7 +1372,7 @@ describe('v1.GlobalForwardingRulesClient', () => {
         new protos.google.cloud.compute.v1.ListGlobalForwardingRulesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListGlobalForwardingRulesRequest',
+        '.google.cloud.compute.v1.ListGlobalForwardingRulesRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -1421,7 +1421,7 @@ describe('v1.GlobalForwardingRulesClient', () => {
         new protos.google.cloud.compute.v1.ListGlobalForwardingRulesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListGlobalForwardingRulesRequest',
+        '.google.cloud.compute.v1.ListGlobalForwardingRulesRequest',
         ['project']
       );
       request.project = defaultValue1;

@@ -251,12 +251,12 @@ describe('v1.GlobalOperationsClient', () => {
         new protos.google.cloud.compute.v1.DeleteGlobalOperationRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteGlobalOperationRequest',
+        '.google.cloud.compute.v1.DeleteGlobalOperationRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'DeleteGlobalOperationRequest',
+        '.google.cloud.compute.v1.DeleteGlobalOperationRequest',
         ['operation']
       );
       request.operation = defaultValue2;
@@ -287,12 +287,12 @@ describe('v1.GlobalOperationsClient', () => {
         new protos.google.cloud.compute.v1.DeleteGlobalOperationRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteGlobalOperationRequest',
+        '.google.cloud.compute.v1.DeleteGlobalOperationRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'DeleteGlobalOperationRequest',
+        '.google.cloud.compute.v1.DeleteGlobalOperationRequest',
         ['operation']
       );
       request.operation = defaultValue2;
@@ -339,12 +339,12 @@ describe('v1.GlobalOperationsClient', () => {
         new protos.google.cloud.compute.v1.DeleteGlobalOperationRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteGlobalOperationRequest',
+        '.google.cloud.compute.v1.DeleteGlobalOperationRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'DeleteGlobalOperationRequest',
+        '.google.cloud.compute.v1.DeleteGlobalOperationRequest',
         ['operation']
       );
       request.operation = defaultValue2;
@@ -372,12 +372,12 @@ describe('v1.GlobalOperationsClient', () => {
         new protos.google.cloud.compute.v1.DeleteGlobalOperationRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteGlobalOperationRequest',
+        '.google.cloud.compute.v1.DeleteGlobalOperationRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'DeleteGlobalOperationRequest',
+        '.google.cloud.compute.v1.DeleteGlobalOperationRequest',
         ['operation']
       );
       request.operation = defaultValue2;
@@ -397,13 +397,15 @@ describe('v1.GlobalOperationsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetGlobalOperationRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetGlobalOperationRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetGlobalOperationRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetGlobalOperationRequest', [
-        'operation',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetGlobalOperationRequest',
+        ['operation']
+      );
       request.operation = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&operation=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
@@ -430,13 +432,15 @@ describe('v1.GlobalOperationsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetGlobalOperationRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetGlobalOperationRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetGlobalOperationRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetGlobalOperationRequest', [
-        'operation',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetGlobalOperationRequest',
+        ['operation']
+      );
       request.operation = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&operation=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
@@ -478,13 +482,15 @@ describe('v1.GlobalOperationsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetGlobalOperationRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetGlobalOperationRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetGlobalOperationRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetGlobalOperationRequest', [
-        'operation',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetGlobalOperationRequest',
+        ['operation']
+      );
       request.operation = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&operation=${defaultValue2}`;
       const expectedError = new Error('expected');
@@ -508,13 +514,15 @@ describe('v1.GlobalOperationsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetGlobalOperationRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetGlobalOperationRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetGlobalOperationRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetGlobalOperationRequest', [
-        'operation',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetGlobalOperationRequest',
+        ['operation']
+      );
       request.operation = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -532,13 +540,15 @@ describe('v1.GlobalOperationsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.WaitGlobalOperationRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('WaitGlobalOperationRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.WaitGlobalOperationRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('WaitGlobalOperationRequest', [
-        'operation',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.WaitGlobalOperationRequest',
+        ['operation']
+      );
       request.operation = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&operation=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
@@ -565,13 +575,15 @@ describe('v1.GlobalOperationsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.WaitGlobalOperationRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('WaitGlobalOperationRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.WaitGlobalOperationRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('WaitGlobalOperationRequest', [
-        'operation',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.WaitGlobalOperationRequest',
+        ['operation']
+      );
       request.operation = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&operation=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
@@ -613,13 +625,15 @@ describe('v1.GlobalOperationsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.WaitGlobalOperationRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('WaitGlobalOperationRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.WaitGlobalOperationRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('WaitGlobalOperationRequest', [
-        'operation',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.WaitGlobalOperationRequest',
+        ['operation']
+      );
       request.operation = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&operation=${defaultValue2}`;
       const expectedError = new Error('expected');
@@ -643,13 +657,15 @@ describe('v1.GlobalOperationsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.WaitGlobalOperationRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('WaitGlobalOperationRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.WaitGlobalOperationRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('WaitGlobalOperationRequest', [
-        'operation',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.WaitGlobalOperationRequest',
+        ['operation']
+      );
       request.operation = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -668,7 +684,7 @@ describe('v1.GlobalOperationsClient', () => {
         new protos.google.cloud.compute.v1.AggregatedListGlobalOperationsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'AggregatedListGlobalOperationsRequest',
+        '.google.cloud.compute.v1.AggregatedListGlobalOperationsRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -728,7 +744,7 @@ describe('v1.GlobalOperationsClient', () => {
         new protos.google.cloud.compute.v1.AggregatedListGlobalOperationsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'AggregatedListGlobalOperationsRequest',
+        '.google.cloud.compute.v1.AggregatedListGlobalOperationsRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -771,9 +787,10 @@ describe('v1.GlobalOperationsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListGlobalOperationsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListGlobalOperationsRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListGlobalOperationsRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedResponse = [
@@ -802,9 +819,10 @@ describe('v1.GlobalOperationsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListGlobalOperationsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListGlobalOperationsRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListGlobalOperationsRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedResponse = [
@@ -848,9 +866,10 @@ describe('v1.GlobalOperationsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListGlobalOperationsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListGlobalOperationsRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListGlobalOperationsRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -874,9 +893,10 @@ describe('v1.GlobalOperationsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListGlobalOperationsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListGlobalOperationsRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListGlobalOperationsRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedResponse = [
@@ -927,9 +947,10 @@ describe('v1.GlobalOperationsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListGlobalOperationsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListGlobalOperationsRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListGlobalOperationsRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -977,9 +998,10 @@ describe('v1.GlobalOperationsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListGlobalOperationsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListGlobalOperationsRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListGlobalOperationsRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedResponse = [
@@ -1018,9 +1040,10 @@ describe('v1.GlobalOperationsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListGlobalOperationsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListGlobalOperationsRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListGlobalOperationsRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedError = new Error('expected');

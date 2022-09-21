@@ -251,12 +251,12 @@ describe('v1.SecurityPoliciesClient', () => {
         new protos.google.cloud.compute.v1.AddRuleSecurityPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'AddRuleSecurityPolicyRequest',
+        '.google.cloud.compute.v1.AddRuleSecurityPolicyRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'AddRuleSecurityPolicyRequest',
+        '.google.cloud.compute.v1.AddRuleSecurityPolicyRequest',
         ['securityPolicy']
       );
       request.securityPolicy = defaultValue2;
@@ -287,12 +287,12 @@ describe('v1.SecurityPoliciesClient', () => {
         new protos.google.cloud.compute.v1.AddRuleSecurityPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'AddRuleSecurityPolicyRequest',
+        '.google.cloud.compute.v1.AddRuleSecurityPolicyRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'AddRuleSecurityPolicyRequest',
+        '.google.cloud.compute.v1.AddRuleSecurityPolicyRequest',
         ['securityPolicy']
       );
       request.securityPolicy = defaultValue2;
@@ -339,12 +339,12 @@ describe('v1.SecurityPoliciesClient', () => {
         new protos.google.cloud.compute.v1.AddRuleSecurityPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'AddRuleSecurityPolicyRequest',
+        '.google.cloud.compute.v1.AddRuleSecurityPolicyRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'AddRuleSecurityPolicyRequest',
+        '.google.cloud.compute.v1.AddRuleSecurityPolicyRequest',
         ['securityPolicy']
       );
       request.securityPolicy = defaultValue2;
@@ -372,12 +372,12 @@ describe('v1.SecurityPoliciesClient', () => {
         new protos.google.cloud.compute.v1.AddRuleSecurityPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'AddRuleSecurityPolicyRequest',
+        '.google.cloud.compute.v1.AddRuleSecurityPolicyRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'AddRuleSecurityPolicyRequest',
+        '.google.cloud.compute.v1.AddRuleSecurityPolicyRequest',
         ['securityPolicy']
       );
       request.securityPolicy = defaultValue2;
@@ -397,13 +397,15 @@ describe('v1.SecurityPoliciesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteSecurityPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteSecurityPolicyRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteSecurityPolicyRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('DeleteSecurityPolicyRequest', [
-        'securityPolicy',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteSecurityPolicyRequest',
+        ['securityPolicy']
+      );
       request.securityPolicy = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&security_policy=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
@@ -431,13 +433,15 @@ describe('v1.SecurityPoliciesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteSecurityPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteSecurityPolicyRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteSecurityPolicyRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('DeleteSecurityPolicyRequest', [
-        'securityPolicy',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteSecurityPolicyRequest',
+        ['securityPolicy']
+      );
       request.securityPolicy = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&security_policy=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
@@ -481,13 +485,15 @@ describe('v1.SecurityPoliciesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteSecurityPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteSecurityPolicyRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteSecurityPolicyRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('DeleteSecurityPolicyRequest', [
-        'securityPolicy',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteSecurityPolicyRequest',
+        ['securityPolicy']
+      );
       request.securityPolicy = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&security_policy=${defaultValue2}`;
       const expectedError = new Error('expected');
@@ -512,13 +518,15 @@ describe('v1.SecurityPoliciesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteSecurityPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteSecurityPolicyRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteSecurityPolicyRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('DeleteSecurityPolicyRequest', [
-        'securityPolicy',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteSecurityPolicyRequest',
+        ['securityPolicy']
+      );
       request.securityPolicy = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -536,13 +544,15 @@ describe('v1.SecurityPoliciesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetSecurityPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetSecurityPolicyRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetSecurityPolicyRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetSecurityPolicyRequest', [
-        'securityPolicy',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetSecurityPolicyRequest',
+        ['securityPolicy']
+      );
       request.securityPolicy = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&security_policy=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
@@ -569,13 +579,15 @@ describe('v1.SecurityPoliciesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetSecurityPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetSecurityPolicyRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetSecurityPolicyRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetSecurityPolicyRequest', [
-        'securityPolicy',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetSecurityPolicyRequest',
+        ['securityPolicy']
+      );
       request.securityPolicy = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&security_policy=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
@@ -617,13 +629,15 @@ describe('v1.SecurityPoliciesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetSecurityPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetSecurityPolicyRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetSecurityPolicyRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetSecurityPolicyRequest', [
-        'securityPolicy',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetSecurityPolicyRequest',
+        ['securityPolicy']
+      );
       request.securityPolicy = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&security_policy=${defaultValue2}`;
       const expectedError = new Error('expected');
@@ -647,13 +661,15 @@ describe('v1.SecurityPoliciesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetSecurityPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetSecurityPolicyRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetSecurityPolicyRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetSecurityPolicyRequest', [
-        'securityPolicy',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetSecurityPolicyRequest',
+        ['securityPolicy']
+      );
       request.securityPolicy = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -672,12 +688,12 @@ describe('v1.SecurityPoliciesClient', () => {
         new protos.google.cloud.compute.v1.GetRuleSecurityPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetRuleSecurityPolicyRequest',
+        '.google.cloud.compute.v1.GetRuleSecurityPolicyRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'GetRuleSecurityPolicyRequest',
+        '.google.cloud.compute.v1.GetRuleSecurityPolicyRequest',
         ['securityPolicy']
       );
       request.securityPolicy = defaultValue2;
@@ -708,12 +724,12 @@ describe('v1.SecurityPoliciesClient', () => {
         new protos.google.cloud.compute.v1.GetRuleSecurityPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetRuleSecurityPolicyRequest',
+        '.google.cloud.compute.v1.GetRuleSecurityPolicyRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'GetRuleSecurityPolicyRequest',
+        '.google.cloud.compute.v1.GetRuleSecurityPolicyRequest',
         ['securityPolicy']
       );
       request.securityPolicy = defaultValue2;
@@ -760,12 +776,12 @@ describe('v1.SecurityPoliciesClient', () => {
         new protos.google.cloud.compute.v1.GetRuleSecurityPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetRuleSecurityPolicyRequest',
+        '.google.cloud.compute.v1.GetRuleSecurityPolicyRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'GetRuleSecurityPolicyRequest',
+        '.google.cloud.compute.v1.GetRuleSecurityPolicyRequest',
         ['securityPolicy']
       );
       request.securityPolicy = defaultValue2;
@@ -793,12 +809,12 @@ describe('v1.SecurityPoliciesClient', () => {
         new protos.google.cloud.compute.v1.GetRuleSecurityPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetRuleSecurityPolicyRequest',
+        '.google.cloud.compute.v1.GetRuleSecurityPolicyRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'GetRuleSecurityPolicyRequest',
+        '.google.cloud.compute.v1.GetRuleSecurityPolicyRequest',
         ['securityPolicy']
       );
       request.securityPolicy = defaultValue2;
@@ -818,9 +834,10 @@ describe('v1.SecurityPoliciesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertSecurityPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('InsertSecurityPolicyRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.InsertSecurityPolicyRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -848,9 +865,10 @@ describe('v1.SecurityPoliciesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertSecurityPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('InsertSecurityPolicyRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.InsertSecurityPolicyRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedResponse = generateSampleMessage(
@@ -894,9 +912,10 @@ describe('v1.SecurityPoliciesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertSecurityPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('InsertSecurityPolicyRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.InsertSecurityPolicyRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -921,9 +940,10 @@ describe('v1.SecurityPoliciesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertSecurityPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('InsertSecurityPolicyRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.InsertSecurityPolicyRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -942,7 +962,7 @@ describe('v1.SecurityPoliciesClient', () => {
         new protos.google.cloud.compute.v1.ListPreconfiguredExpressionSetsSecurityPoliciesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListPreconfiguredExpressionSetsSecurityPoliciesRequest',
+        '.google.cloud.compute.v1.ListPreconfiguredExpressionSetsSecurityPoliciesRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -974,7 +994,7 @@ describe('v1.SecurityPoliciesClient', () => {
         new protos.google.cloud.compute.v1.ListPreconfiguredExpressionSetsSecurityPoliciesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListPreconfiguredExpressionSetsSecurityPoliciesRequest',
+        '.google.cloud.compute.v1.ListPreconfiguredExpressionSetsSecurityPoliciesRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -1021,7 +1041,7 @@ describe('v1.SecurityPoliciesClient', () => {
         new protos.google.cloud.compute.v1.ListPreconfiguredExpressionSetsSecurityPoliciesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListPreconfiguredExpressionSetsSecurityPoliciesRequest',
+        '.google.cloud.compute.v1.ListPreconfiguredExpressionSetsSecurityPoliciesRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -1055,7 +1075,7 @@ describe('v1.SecurityPoliciesClient', () => {
         new protos.google.cloud.compute.v1.ListPreconfiguredExpressionSetsSecurityPoliciesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListPreconfiguredExpressionSetsSecurityPoliciesRequest',
+        '.google.cloud.compute.v1.ListPreconfiguredExpressionSetsSecurityPoliciesRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -1078,13 +1098,15 @@ describe('v1.SecurityPoliciesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchSecurityPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('PatchSecurityPolicyRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchSecurityPolicyRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('PatchSecurityPolicyRequest', [
-        'securityPolicy',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchSecurityPolicyRequest',
+        ['securityPolicy']
+      );
       request.securityPolicy = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&security_policy=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
@@ -1111,13 +1133,15 @@ describe('v1.SecurityPoliciesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchSecurityPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('PatchSecurityPolicyRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchSecurityPolicyRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('PatchSecurityPolicyRequest', [
-        'securityPolicy',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchSecurityPolicyRequest',
+        ['securityPolicy']
+      );
       request.securityPolicy = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&security_policy=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
@@ -1159,13 +1183,15 @@ describe('v1.SecurityPoliciesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchSecurityPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('PatchSecurityPolicyRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchSecurityPolicyRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('PatchSecurityPolicyRequest', [
-        'securityPolicy',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchSecurityPolicyRequest',
+        ['securityPolicy']
+      );
       request.securityPolicy = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&security_policy=${defaultValue2}`;
       const expectedError = new Error('expected');
@@ -1189,13 +1215,15 @@ describe('v1.SecurityPoliciesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchSecurityPolicyRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('PatchSecurityPolicyRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchSecurityPolicyRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('PatchSecurityPolicyRequest', [
-        'securityPolicy',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchSecurityPolicyRequest',
+        ['securityPolicy']
+      );
       request.securityPolicy = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1214,12 +1242,12 @@ describe('v1.SecurityPoliciesClient', () => {
         new protos.google.cloud.compute.v1.PatchRuleSecurityPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'PatchRuleSecurityPolicyRequest',
+        '.google.cloud.compute.v1.PatchRuleSecurityPolicyRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'PatchRuleSecurityPolicyRequest',
+        '.google.cloud.compute.v1.PatchRuleSecurityPolicyRequest',
         ['securityPolicy']
       );
       request.securityPolicy = defaultValue2;
@@ -1250,12 +1278,12 @@ describe('v1.SecurityPoliciesClient', () => {
         new protos.google.cloud.compute.v1.PatchRuleSecurityPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'PatchRuleSecurityPolicyRequest',
+        '.google.cloud.compute.v1.PatchRuleSecurityPolicyRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'PatchRuleSecurityPolicyRequest',
+        '.google.cloud.compute.v1.PatchRuleSecurityPolicyRequest',
         ['securityPolicy']
       );
       request.securityPolicy = defaultValue2;
@@ -1302,12 +1330,12 @@ describe('v1.SecurityPoliciesClient', () => {
         new protos.google.cloud.compute.v1.PatchRuleSecurityPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'PatchRuleSecurityPolicyRequest',
+        '.google.cloud.compute.v1.PatchRuleSecurityPolicyRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'PatchRuleSecurityPolicyRequest',
+        '.google.cloud.compute.v1.PatchRuleSecurityPolicyRequest',
         ['securityPolicy']
       );
       request.securityPolicy = defaultValue2;
@@ -1335,12 +1363,12 @@ describe('v1.SecurityPoliciesClient', () => {
         new protos.google.cloud.compute.v1.PatchRuleSecurityPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'PatchRuleSecurityPolicyRequest',
+        '.google.cloud.compute.v1.PatchRuleSecurityPolicyRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'PatchRuleSecurityPolicyRequest',
+        '.google.cloud.compute.v1.PatchRuleSecurityPolicyRequest',
         ['securityPolicy']
       );
       request.securityPolicy = defaultValue2;
@@ -1361,12 +1389,12 @@ describe('v1.SecurityPoliciesClient', () => {
         new protos.google.cloud.compute.v1.RemoveRuleSecurityPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'RemoveRuleSecurityPolicyRequest',
+        '.google.cloud.compute.v1.RemoveRuleSecurityPolicyRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'RemoveRuleSecurityPolicyRequest',
+        '.google.cloud.compute.v1.RemoveRuleSecurityPolicyRequest',
         ['securityPolicy']
       );
       request.securityPolicy = defaultValue2;
@@ -1397,12 +1425,12 @@ describe('v1.SecurityPoliciesClient', () => {
         new protos.google.cloud.compute.v1.RemoveRuleSecurityPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'RemoveRuleSecurityPolicyRequest',
+        '.google.cloud.compute.v1.RemoveRuleSecurityPolicyRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'RemoveRuleSecurityPolicyRequest',
+        '.google.cloud.compute.v1.RemoveRuleSecurityPolicyRequest',
         ['securityPolicy']
       );
       request.securityPolicy = defaultValue2;
@@ -1449,12 +1477,12 @@ describe('v1.SecurityPoliciesClient', () => {
         new protos.google.cloud.compute.v1.RemoveRuleSecurityPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'RemoveRuleSecurityPolicyRequest',
+        '.google.cloud.compute.v1.RemoveRuleSecurityPolicyRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'RemoveRuleSecurityPolicyRequest',
+        '.google.cloud.compute.v1.RemoveRuleSecurityPolicyRequest',
         ['securityPolicy']
       );
       request.securityPolicy = defaultValue2;
@@ -1485,12 +1513,12 @@ describe('v1.SecurityPoliciesClient', () => {
         new protos.google.cloud.compute.v1.RemoveRuleSecurityPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'RemoveRuleSecurityPolicyRequest',
+        '.google.cloud.compute.v1.RemoveRuleSecurityPolicyRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'RemoveRuleSecurityPolicyRequest',
+        '.google.cloud.compute.v1.RemoveRuleSecurityPolicyRequest',
         ['securityPolicy']
       );
       request.securityPolicy = defaultValue2;
@@ -1511,12 +1539,12 @@ describe('v1.SecurityPoliciesClient', () => {
         new protos.google.cloud.compute.v1.SetLabelsSecurityPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SetLabelsSecurityPolicyRequest',
+        '.google.cloud.compute.v1.SetLabelsSecurityPolicyRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'SetLabelsSecurityPolicyRequest',
+        '.google.cloud.compute.v1.SetLabelsSecurityPolicyRequest',
         ['resource']
       );
       request.resource = defaultValue2;
@@ -1547,12 +1575,12 @@ describe('v1.SecurityPoliciesClient', () => {
         new protos.google.cloud.compute.v1.SetLabelsSecurityPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SetLabelsSecurityPolicyRequest',
+        '.google.cloud.compute.v1.SetLabelsSecurityPolicyRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'SetLabelsSecurityPolicyRequest',
+        '.google.cloud.compute.v1.SetLabelsSecurityPolicyRequest',
         ['resource']
       );
       request.resource = defaultValue2;
@@ -1599,12 +1627,12 @@ describe('v1.SecurityPoliciesClient', () => {
         new protos.google.cloud.compute.v1.SetLabelsSecurityPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SetLabelsSecurityPolicyRequest',
+        '.google.cloud.compute.v1.SetLabelsSecurityPolicyRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'SetLabelsSecurityPolicyRequest',
+        '.google.cloud.compute.v1.SetLabelsSecurityPolicyRequest',
         ['resource']
       );
       request.resource = defaultValue2;
@@ -1632,12 +1660,12 @@ describe('v1.SecurityPoliciesClient', () => {
         new protos.google.cloud.compute.v1.SetLabelsSecurityPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SetLabelsSecurityPolicyRequest',
+        '.google.cloud.compute.v1.SetLabelsSecurityPolicyRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'SetLabelsSecurityPolicyRequest',
+        '.google.cloud.compute.v1.SetLabelsSecurityPolicyRequest',
         ['resource']
       );
       request.resource = defaultValue2;
@@ -1658,7 +1686,7 @@ describe('v1.SecurityPoliciesClient', () => {
         new protos.google.cloud.compute.v1.AggregatedListSecurityPoliciesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'AggregatedListSecurityPoliciesRequest',
+        '.google.cloud.compute.v1.AggregatedListSecurityPoliciesRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -1718,7 +1746,7 @@ describe('v1.SecurityPoliciesClient', () => {
         new protos.google.cloud.compute.v1.AggregatedListSecurityPoliciesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'AggregatedListSecurityPoliciesRequest',
+        '.google.cloud.compute.v1.AggregatedListSecurityPoliciesRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -1761,9 +1789,10 @@ describe('v1.SecurityPoliciesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListSecurityPoliciesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListSecurityPoliciesRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListSecurityPoliciesRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedResponse = [
@@ -1798,9 +1827,10 @@ describe('v1.SecurityPoliciesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListSecurityPoliciesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListSecurityPoliciesRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListSecurityPoliciesRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedResponse = [
@@ -1850,9 +1880,10 @@ describe('v1.SecurityPoliciesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListSecurityPoliciesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListSecurityPoliciesRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListSecurityPoliciesRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1876,9 +1907,10 @@ describe('v1.SecurityPoliciesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListSecurityPoliciesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListSecurityPoliciesRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListSecurityPoliciesRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedResponse = [
@@ -1935,9 +1967,10 @@ describe('v1.SecurityPoliciesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListSecurityPoliciesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListSecurityPoliciesRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListSecurityPoliciesRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedError = new Error('expected');
@@ -1985,9 +2018,10 @@ describe('v1.SecurityPoliciesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListSecurityPoliciesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListSecurityPoliciesRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListSecurityPoliciesRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedResponse = [
@@ -2032,9 +2066,10 @@ describe('v1.SecurityPoliciesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListSecurityPoliciesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListSecurityPoliciesRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListSecurityPoliciesRequest',
+        ['project']
+      );
       request.project = defaultValue1;
       const expectedHeaderRequestParams = `project=${defaultValue1}`;
       const expectedError = new Error('expected');

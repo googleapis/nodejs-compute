@@ -250,17 +250,20 @@ describe('v1.NodeTemplatesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteNodeTemplateRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteNodeTemplateRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteNodeTemplateRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('DeleteNodeTemplateRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteNodeTemplateRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('DeleteNodeTemplateRequest', [
-        'nodeTemplate',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteNodeTemplateRequest',
+        ['nodeTemplate']
+      );
       request.nodeTemplate = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&node_template=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -288,17 +291,20 @@ describe('v1.NodeTemplatesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteNodeTemplateRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteNodeTemplateRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteNodeTemplateRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('DeleteNodeTemplateRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteNodeTemplateRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('DeleteNodeTemplateRequest', [
-        'nodeTemplate',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteNodeTemplateRequest',
+        ['nodeTemplate']
+      );
       request.nodeTemplate = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&node_template=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -342,17 +348,20 @@ describe('v1.NodeTemplatesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteNodeTemplateRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteNodeTemplateRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteNodeTemplateRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('DeleteNodeTemplateRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteNodeTemplateRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('DeleteNodeTemplateRequest', [
-        'nodeTemplate',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteNodeTemplateRequest',
+        ['nodeTemplate']
+      );
       request.nodeTemplate = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&node_template=${defaultValue3}`;
       const expectedError = new Error('expected');
@@ -377,17 +386,20 @@ describe('v1.NodeTemplatesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteNodeTemplateRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteNodeTemplateRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteNodeTemplateRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('DeleteNodeTemplateRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteNodeTemplateRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('DeleteNodeTemplateRequest', [
-        'nodeTemplate',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteNodeTemplateRequest',
+        ['nodeTemplate']
+      );
       request.nodeTemplate = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -405,17 +417,20 @@ describe('v1.NodeTemplatesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetNodeTemplateRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetNodeTemplateRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetNodeTemplateRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetNodeTemplateRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetNodeTemplateRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('GetNodeTemplateRequest', [
-        'nodeTemplate',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetNodeTemplateRequest',
+        ['nodeTemplate']
+      );
       request.nodeTemplate = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&node_template=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -442,17 +457,20 @@ describe('v1.NodeTemplatesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetNodeTemplateRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetNodeTemplateRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetNodeTemplateRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetNodeTemplateRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetNodeTemplateRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('GetNodeTemplateRequest', [
-        'nodeTemplate',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetNodeTemplateRequest',
+        ['nodeTemplate']
+      );
       request.nodeTemplate = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&node_template=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -494,17 +512,20 @@ describe('v1.NodeTemplatesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetNodeTemplateRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetNodeTemplateRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetNodeTemplateRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetNodeTemplateRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetNodeTemplateRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('GetNodeTemplateRequest', [
-        'nodeTemplate',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetNodeTemplateRequest',
+        ['nodeTemplate']
+      );
       request.nodeTemplate = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&node_template=${defaultValue3}`;
       const expectedError = new Error('expected');
@@ -528,17 +549,20 @@ describe('v1.NodeTemplatesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetNodeTemplateRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetNodeTemplateRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetNodeTemplateRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetNodeTemplateRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetNodeTemplateRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('GetNodeTemplateRequest', [
-        'nodeTemplate',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetNodeTemplateRequest',
+        ['nodeTemplate']
+      );
       request.nodeTemplate = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -557,17 +581,17 @@ describe('v1.NodeTemplatesClient', () => {
         new protos.google.cloud.compute.v1.GetIamPolicyNodeTemplateRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetIamPolicyNodeTemplateRequest',
+        '.google.cloud.compute.v1.GetIamPolicyNodeTemplateRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'GetIamPolicyNodeTemplateRequest',
+        '.google.cloud.compute.v1.GetIamPolicyNodeTemplateRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'GetIamPolicyNodeTemplateRequest',
+        '.google.cloud.compute.v1.GetIamPolicyNodeTemplateRequest',
         ['resource']
       );
       request.resource = defaultValue3;
@@ -598,17 +622,17 @@ describe('v1.NodeTemplatesClient', () => {
         new protos.google.cloud.compute.v1.GetIamPolicyNodeTemplateRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetIamPolicyNodeTemplateRequest',
+        '.google.cloud.compute.v1.GetIamPolicyNodeTemplateRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'GetIamPolicyNodeTemplateRequest',
+        '.google.cloud.compute.v1.GetIamPolicyNodeTemplateRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'GetIamPolicyNodeTemplateRequest',
+        '.google.cloud.compute.v1.GetIamPolicyNodeTemplateRequest',
         ['resource']
       );
       request.resource = defaultValue3;
@@ -655,17 +679,17 @@ describe('v1.NodeTemplatesClient', () => {
         new protos.google.cloud.compute.v1.GetIamPolicyNodeTemplateRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetIamPolicyNodeTemplateRequest',
+        '.google.cloud.compute.v1.GetIamPolicyNodeTemplateRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'GetIamPolicyNodeTemplateRequest',
+        '.google.cloud.compute.v1.GetIamPolicyNodeTemplateRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'GetIamPolicyNodeTemplateRequest',
+        '.google.cloud.compute.v1.GetIamPolicyNodeTemplateRequest',
         ['resource']
       );
       request.resource = defaultValue3;
@@ -696,17 +720,17 @@ describe('v1.NodeTemplatesClient', () => {
         new protos.google.cloud.compute.v1.GetIamPolicyNodeTemplateRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetIamPolicyNodeTemplateRequest',
+        '.google.cloud.compute.v1.GetIamPolicyNodeTemplateRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'GetIamPolicyNodeTemplateRequest',
+        '.google.cloud.compute.v1.GetIamPolicyNodeTemplateRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'GetIamPolicyNodeTemplateRequest',
+        '.google.cloud.compute.v1.GetIamPolicyNodeTemplateRequest',
         ['resource']
       );
       request.resource = defaultValue3;
@@ -726,13 +750,15 @@ describe('v1.NodeTemplatesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertNodeTemplateRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('InsertNodeTemplateRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.InsertNodeTemplateRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('InsertNodeTemplateRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.InsertNodeTemplateRequest',
+        ['region']
+      );
       request.region = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
@@ -760,13 +786,15 @@ describe('v1.NodeTemplatesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertNodeTemplateRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('InsertNodeTemplateRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.InsertNodeTemplateRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('InsertNodeTemplateRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.InsertNodeTemplateRequest',
+        ['region']
+      );
       request.region = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
@@ -810,13 +838,15 @@ describe('v1.NodeTemplatesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertNodeTemplateRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('InsertNodeTemplateRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.InsertNodeTemplateRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('InsertNodeTemplateRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.InsertNodeTemplateRequest',
+        ['region']
+      );
       request.region = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}`;
       const expectedError = new Error('expected');
@@ -841,13 +871,15 @@ describe('v1.NodeTemplatesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertNodeTemplateRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('InsertNodeTemplateRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.InsertNodeTemplateRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('InsertNodeTemplateRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.InsertNodeTemplateRequest',
+        ['region']
+      );
       request.region = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -866,17 +898,17 @@ describe('v1.NodeTemplatesClient', () => {
         new protos.google.cloud.compute.v1.SetIamPolicyNodeTemplateRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SetIamPolicyNodeTemplateRequest',
+        '.google.cloud.compute.v1.SetIamPolicyNodeTemplateRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'SetIamPolicyNodeTemplateRequest',
+        '.google.cloud.compute.v1.SetIamPolicyNodeTemplateRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'SetIamPolicyNodeTemplateRequest',
+        '.google.cloud.compute.v1.SetIamPolicyNodeTemplateRequest',
         ['resource']
       );
       request.resource = defaultValue3;
@@ -907,17 +939,17 @@ describe('v1.NodeTemplatesClient', () => {
         new protos.google.cloud.compute.v1.SetIamPolicyNodeTemplateRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SetIamPolicyNodeTemplateRequest',
+        '.google.cloud.compute.v1.SetIamPolicyNodeTemplateRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'SetIamPolicyNodeTemplateRequest',
+        '.google.cloud.compute.v1.SetIamPolicyNodeTemplateRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'SetIamPolicyNodeTemplateRequest',
+        '.google.cloud.compute.v1.SetIamPolicyNodeTemplateRequest',
         ['resource']
       );
       request.resource = defaultValue3;
@@ -964,17 +996,17 @@ describe('v1.NodeTemplatesClient', () => {
         new protos.google.cloud.compute.v1.SetIamPolicyNodeTemplateRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SetIamPolicyNodeTemplateRequest',
+        '.google.cloud.compute.v1.SetIamPolicyNodeTemplateRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'SetIamPolicyNodeTemplateRequest',
+        '.google.cloud.compute.v1.SetIamPolicyNodeTemplateRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'SetIamPolicyNodeTemplateRequest',
+        '.google.cloud.compute.v1.SetIamPolicyNodeTemplateRequest',
         ['resource']
       );
       request.resource = defaultValue3;
@@ -1005,17 +1037,17 @@ describe('v1.NodeTemplatesClient', () => {
         new protos.google.cloud.compute.v1.SetIamPolicyNodeTemplateRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SetIamPolicyNodeTemplateRequest',
+        '.google.cloud.compute.v1.SetIamPolicyNodeTemplateRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'SetIamPolicyNodeTemplateRequest',
+        '.google.cloud.compute.v1.SetIamPolicyNodeTemplateRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'SetIamPolicyNodeTemplateRequest',
+        '.google.cloud.compute.v1.SetIamPolicyNodeTemplateRequest',
         ['resource']
       );
       request.resource = defaultValue3;
@@ -1036,17 +1068,17 @@ describe('v1.NodeTemplatesClient', () => {
         new protos.google.cloud.compute.v1.TestIamPermissionsNodeTemplateRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'TestIamPermissionsNodeTemplateRequest',
+        '.google.cloud.compute.v1.TestIamPermissionsNodeTemplateRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'TestIamPermissionsNodeTemplateRequest',
+        '.google.cloud.compute.v1.TestIamPermissionsNodeTemplateRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'TestIamPermissionsNodeTemplateRequest',
+        '.google.cloud.compute.v1.TestIamPermissionsNodeTemplateRequest',
         ['resource']
       );
       request.resource = defaultValue3;
@@ -1078,17 +1110,17 @@ describe('v1.NodeTemplatesClient', () => {
         new protos.google.cloud.compute.v1.TestIamPermissionsNodeTemplateRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'TestIamPermissionsNodeTemplateRequest',
+        '.google.cloud.compute.v1.TestIamPermissionsNodeTemplateRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'TestIamPermissionsNodeTemplateRequest',
+        '.google.cloud.compute.v1.TestIamPermissionsNodeTemplateRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'TestIamPermissionsNodeTemplateRequest',
+        '.google.cloud.compute.v1.TestIamPermissionsNodeTemplateRequest',
         ['resource']
       );
       request.resource = defaultValue3;
@@ -1135,17 +1167,17 @@ describe('v1.NodeTemplatesClient', () => {
         new protos.google.cloud.compute.v1.TestIamPermissionsNodeTemplateRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'TestIamPermissionsNodeTemplateRequest',
+        '.google.cloud.compute.v1.TestIamPermissionsNodeTemplateRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'TestIamPermissionsNodeTemplateRequest',
+        '.google.cloud.compute.v1.TestIamPermissionsNodeTemplateRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'TestIamPermissionsNodeTemplateRequest',
+        '.google.cloud.compute.v1.TestIamPermissionsNodeTemplateRequest',
         ['resource']
       );
       request.resource = defaultValue3;
@@ -1176,17 +1208,17 @@ describe('v1.NodeTemplatesClient', () => {
         new protos.google.cloud.compute.v1.TestIamPermissionsNodeTemplateRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'TestIamPermissionsNodeTemplateRequest',
+        '.google.cloud.compute.v1.TestIamPermissionsNodeTemplateRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'TestIamPermissionsNodeTemplateRequest',
+        '.google.cloud.compute.v1.TestIamPermissionsNodeTemplateRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'TestIamPermissionsNodeTemplateRequest',
+        '.google.cloud.compute.v1.TestIamPermissionsNodeTemplateRequest',
         ['resource']
       );
       request.resource = defaultValue3;
@@ -1207,7 +1239,7 @@ describe('v1.NodeTemplatesClient', () => {
         new protos.google.cloud.compute.v1.AggregatedListNodeTemplatesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'AggregatedListNodeTemplatesRequest',
+        '.google.cloud.compute.v1.AggregatedListNodeTemplatesRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -1267,7 +1299,7 @@ describe('v1.NodeTemplatesClient', () => {
         new protos.google.cloud.compute.v1.AggregatedListNodeTemplatesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'AggregatedListNodeTemplatesRequest',
+        '.google.cloud.compute.v1.AggregatedListNodeTemplatesRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -1310,13 +1342,15 @@ describe('v1.NodeTemplatesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListNodeTemplatesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListNodeTemplatesRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListNodeTemplatesRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ListNodeTemplatesRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListNodeTemplatesRequest',
+        ['region']
+      );
       request.region = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}`;
       const expectedResponse = [
@@ -1351,13 +1385,15 @@ describe('v1.NodeTemplatesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListNodeTemplatesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListNodeTemplatesRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListNodeTemplatesRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ListNodeTemplatesRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListNodeTemplatesRequest',
+        ['region']
+      );
       request.region = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}`;
       const expectedResponse = [
@@ -1407,13 +1443,15 @@ describe('v1.NodeTemplatesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListNodeTemplatesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListNodeTemplatesRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListNodeTemplatesRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ListNodeTemplatesRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListNodeTemplatesRequest',
+        ['region']
+      );
       request.region = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}`;
       const expectedError = new Error('expected');
@@ -1437,13 +1475,15 @@ describe('v1.NodeTemplatesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListNodeTemplatesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListNodeTemplatesRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListNodeTemplatesRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ListNodeTemplatesRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListNodeTemplatesRequest',
+        ['region']
+      );
       request.region = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}`;
       const expectedResponse = [
@@ -1500,13 +1540,15 @@ describe('v1.NodeTemplatesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListNodeTemplatesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListNodeTemplatesRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListNodeTemplatesRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ListNodeTemplatesRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListNodeTemplatesRequest',
+        ['region']
+      );
       request.region = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}`;
       const expectedError = new Error('expected');
@@ -1554,13 +1596,15 @@ describe('v1.NodeTemplatesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListNodeTemplatesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListNodeTemplatesRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListNodeTemplatesRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ListNodeTemplatesRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListNodeTemplatesRequest',
+        ['region']
+      );
       request.region = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}`;
       const expectedResponse = [
@@ -1605,13 +1649,15 @@ describe('v1.NodeTemplatesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListNodeTemplatesRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListNodeTemplatesRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListNodeTemplatesRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ListNodeTemplatesRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListNodeTemplatesRequest',
+        ['region']
+      );
       request.region = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}`;
       const expectedError = new Error('expected');

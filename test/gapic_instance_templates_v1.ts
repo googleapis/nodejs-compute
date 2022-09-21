@@ -251,12 +251,12 @@ describe('v1.InstanceTemplatesClient', () => {
         new protos.google.cloud.compute.v1.DeleteInstanceTemplateRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteInstanceTemplateRequest',
+        '.google.cloud.compute.v1.DeleteInstanceTemplateRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'DeleteInstanceTemplateRequest',
+        '.google.cloud.compute.v1.DeleteInstanceTemplateRequest',
         ['instanceTemplate']
       );
       request.instanceTemplate = defaultValue2;
@@ -287,12 +287,12 @@ describe('v1.InstanceTemplatesClient', () => {
         new protos.google.cloud.compute.v1.DeleteInstanceTemplateRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteInstanceTemplateRequest',
+        '.google.cloud.compute.v1.DeleteInstanceTemplateRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'DeleteInstanceTemplateRequest',
+        '.google.cloud.compute.v1.DeleteInstanceTemplateRequest',
         ['instanceTemplate']
       );
       request.instanceTemplate = defaultValue2;
@@ -339,12 +339,12 @@ describe('v1.InstanceTemplatesClient', () => {
         new protos.google.cloud.compute.v1.DeleteInstanceTemplateRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteInstanceTemplateRequest',
+        '.google.cloud.compute.v1.DeleteInstanceTemplateRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'DeleteInstanceTemplateRequest',
+        '.google.cloud.compute.v1.DeleteInstanceTemplateRequest',
         ['instanceTemplate']
       );
       request.instanceTemplate = defaultValue2;
@@ -372,12 +372,12 @@ describe('v1.InstanceTemplatesClient', () => {
         new protos.google.cloud.compute.v1.DeleteInstanceTemplateRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteInstanceTemplateRequest',
+        '.google.cloud.compute.v1.DeleteInstanceTemplateRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'DeleteInstanceTemplateRequest',
+        '.google.cloud.compute.v1.DeleteInstanceTemplateRequest',
         ['instanceTemplate']
       );
       request.instanceTemplate = defaultValue2;
@@ -397,13 +397,15 @@ describe('v1.InstanceTemplatesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetInstanceTemplateRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetInstanceTemplateRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetInstanceTemplateRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetInstanceTemplateRequest', [
-        'instanceTemplate',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetInstanceTemplateRequest',
+        ['instanceTemplate']
+      );
       request.instanceTemplate = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&instance_template=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
@@ -430,13 +432,15 @@ describe('v1.InstanceTemplatesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetInstanceTemplateRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetInstanceTemplateRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetInstanceTemplateRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetInstanceTemplateRequest', [
-        'instanceTemplate',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetInstanceTemplateRequest',
+        ['instanceTemplate']
+      );
       request.instanceTemplate = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&instance_template=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
@@ -478,13 +482,15 @@ describe('v1.InstanceTemplatesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetInstanceTemplateRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetInstanceTemplateRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetInstanceTemplateRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetInstanceTemplateRequest', [
-        'instanceTemplate',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetInstanceTemplateRequest',
+        ['instanceTemplate']
+      );
       request.instanceTemplate = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&instance_template=${defaultValue2}`;
       const expectedError = new Error('expected');
@@ -508,13 +514,15 @@ describe('v1.InstanceTemplatesClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetInstanceTemplateRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetInstanceTemplateRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetInstanceTemplateRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetInstanceTemplateRequest', [
-        'instanceTemplate',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetInstanceTemplateRequest',
+        ['instanceTemplate']
+      );
       request.instanceTemplate = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -533,12 +541,12 @@ describe('v1.InstanceTemplatesClient', () => {
         new protos.google.cloud.compute.v1.GetIamPolicyInstanceTemplateRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetIamPolicyInstanceTemplateRequest',
+        '.google.cloud.compute.v1.GetIamPolicyInstanceTemplateRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'GetIamPolicyInstanceTemplateRequest',
+        '.google.cloud.compute.v1.GetIamPolicyInstanceTemplateRequest',
         ['resource']
       );
       request.resource = defaultValue2;
@@ -569,12 +577,12 @@ describe('v1.InstanceTemplatesClient', () => {
         new protos.google.cloud.compute.v1.GetIamPolicyInstanceTemplateRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetIamPolicyInstanceTemplateRequest',
+        '.google.cloud.compute.v1.GetIamPolicyInstanceTemplateRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'GetIamPolicyInstanceTemplateRequest',
+        '.google.cloud.compute.v1.GetIamPolicyInstanceTemplateRequest',
         ['resource']
       );
       request.resource = defaultValue2;
@@ -621,12 +629,12 @@ describe('v1.InstanceTemplatesClient', () => {
         new protos.google.cloud.compute.v1.GetIamPolicyInstanceTemplateRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetIamPolicyInstanceTemplateRequest',
+        '.google.cloud.compute.v1.GetIamPolicyInstanceTemplateRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'GetIamPolicyInstanceTemplateRequest',
+        '.google.cloud.compute.v1.GetIamPolicyInstanceTemplateRequest',
         ['resource']
       );
       request.resource = defaultValue2;
@@ -657,12 +665,12 @@ describe('v1.InstanceTemplatesClient', () => {
         new protos.google.cloud.compute.v1.GetIamPolicyInstanceTemplateRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetIamPolicyInstanceTemplateRequest',
+        '.google.cloud.compute.v1.GetIamPolicyInstanceTemplateRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'GetIamPolicyInstanceTemplateRequest',
+        '.google.cloud.compute.v1.GetIamPolicyInstanceTemplateRequest',
         ['resource']
       );
       request.resource = defaultValue2;
@@ -683,7 +691,7 @@ describe('v1.InstanceTemplatesClient', () => {
         new protos.google.cloud.compute.v1.InsertInstanceTemplateRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'InsertInstanceTemplateRequest',
+        '.google.cloud.compute.v1.InsertInstanceTemplateRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -714,7 +722,7 @@ describe('v1.InstanceTemplatesClient', () => {
         new protos.google.cloud.compute.v1.InsertInstanceTemplateRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'InsertInstanceTemplateRequest',
+        '.google.cloud.compute.v1.InsertInstanceTemplateRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -761,7 +769,7 @@ describe('v1.InstanceTemplatesClient', () => {
         new protos.google.cloud.compute.v1.InsertInstanceTemplateRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'InsertInstanceTemplateRequest',
+        '.google.cloud.compute.v1.InsertInstanceTemplateRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -789,7 +797,7 @@ describe('v1.InstanceTemplatesClient', () => {
         new protos.google.cloud.compute.v1.InsertInstanceTemplateRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'InsertInstanceTemplateRequest',
+        '.google.cloud.compute.v1.InsertInstanceTemplateRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -810,12 +818,12 @@ describe('v1.InstanceTemplatesClient', () => {
         new protos.google.cloud.compute.v1.SetIamPolicyInstanceTemplateRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SetIamPolicyInstanceTemplateRequest',
+        '.google.cloud.compute.v1.SetIamPolicyInstanceTemplateRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'SetIamPolicyInstanceTemplateRequest',
+        '.google.cloud.compute.v1.SetIamPolicyInstanceTemplateRequest',
         ['resource']
       );
       request.resource = defaultValue2;
@@ -846,12 +854,12 @@ describe('v1.InstanceTemplatesClient', () => {
         new protos.google.cloud.compute.v1.SetIamPolicyInstanceTemplateRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SetIamPolicyInstanceTemplateRequest',
+        '.google.cloud.compute.v1.SetIamPolicyInstanceTemplateRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'SetIamPolicyInstanceTemplateRequest',
+        '.google.cloud.compute.v1.SetIamPolicyInstanceTemplateRequest',
         ['resource']
       );
       request.resource = defaultValue2;
@@ -898,12 +906,12 @@ describe('v1.InstanceTemplatesClient', () => {
         new protos.google.cloud.compute.v1.SetIamPolicyInstanceTemplateRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SetIamPolicyInstanceTemplateRequest',
+        '.google.cloud.compute.v1.SetIamPolicyInstanceTemplateRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'SetIamPolicyInstanceTemplateRequest',
+        '.google.cloud.compute.v1.SetIamPolicyInstanceTemplateRequest',
         ['resource']
       );
       request.resource = defaultValue2;
@@ -934,12 +942,12 @@ describe('v1.InstanceTemplatesClient', () => {
         new protos.google.cloud.compute.v1.SetIamPolicyInstanceTemplateRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'SetIamPolicyInstanceTemplateRequest',
+        '.google.cloud.compute.v1.SetIamPolicyInstanceTemplateRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'SetIamPolicyInstanceTemplateRequest',
+        '.google.cloud.compute.v1.SetIamPolicyInstanceTemplateRequest',
         ['resource']
       );
       request.resource = defaultValue2;
@@ -960,12 +968,12 @@ describe('v1.InstanceTemplatesClient', () => {
         new protos.google.cloud.compute.v1.TestIamPermissionsInstanceTemplateRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'TestIamPermissionsInstanceTemplateRequest',
+        '.google.cloud.compute.v1.TestIamPermissionsInstanceTemplateRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'TestIamPermissionsInstanceTemplateRequest',
+        '.google.cloud.compute.v1.TestIamPermissionsInstanceTemplateRequest',
         ['resource']
       );
       request.resource = defaultValue2;
@@ -997,12 +1005,12 @@ describe('v1.InstanceTemplatesClient', () => {
         new protos.google.cloud.compute.v1.TestIamPermissionsInstanceTemplateRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'TestIamPermissionsInstanceTemplateRequest',
+        '.google.cloud.compute.v1.TestIamPermissionsInstanceTemplateRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'TestIamPermissionsInstanceTemplateRequest',
+        '.google.cloud.compute.v1.TestIamPermissionsInstanceTemplateRequest',
         ['resource']
       );
       request.resource = defaultValue2;
@@ -1049,12 +1057,12 @@ describe('v1.InstanceTemplatesClient', () => {
         new protos.google.cloud.compute.v1.TestIamPermissionsInstanceTemplateRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'TestIamPermissionsInstanceTemplateRequest',
+        '.google.cloud.compute.v1.TestIamPermissionsInstanceTemplateRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'TestIamPermissionsInstanceTemplateRequest',
+        '.google.cloud.compute.v1.TestIamPermissionsInstanceTemplateRequest',
         ['resource']
       );
       request.resource = defaultValue2;
@@ -1085,12 +1093,12 @@ describe('v1.InstanceTemplatesClient', () => {
         new protos.google.cloud.compute.v1.TestIamPermissionsInstanceTemplateRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'TestIamPermissionsInstanceTemplateRequest',
+        '.google.cloud.compute.v1.TestIamPermissionsInstanceTemplateRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'TestIamPermissionsInstanceTemplateRequest',
+        '.google.cloud.compute.v1.TestIamPermissionsInstanceTemplateRequest',
         ['resource']
       );
       request.resource = defaultValue2;
@@ -1111,7 +1119,7 @@ describe('v1.InstanceTemplatesClient', () => {
         new protos.google.cloud.compute.v1.ListInstanceTemplatesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListInstanceTemplatesRequest',
+        '.google.cloud.compute.v1.ListInstanceTemplatesRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -1149,7 +1157,7 @@ describe('v1.InstanceTemplatesClient', () => {
         new protos.google.cloud.compute.v1.ListInstanceTemplatesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListInstanceTemplatesRequest',
+        '.google.cloud.compute.v1.ListInstanceTemplatesRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -1202,7 +1210,7 @@ describe('v1.InstanceTemplatesClient', () => {
         new protos.google.cloud.compute.v1.ListInstanceTemplatesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListInstanceTemplatesRequest',
+        '.google.cloud.compute.v1.ListInstanceTemplatesRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -1229,7 +1237,7 @@ describe('v1.InstanceTemplatesClient', () => {
         new protos.google.cloud.compute.v1.ListInstanceTemplatesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListInstanceTemplatesRequest',
+        '.google.cloud.compute.v1.ListInstanceTemplatesRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -1289,7 +1297,7 @@ describe('v1.InstanceTemplatesClient', () => {
         new protos.google.cloud.compute.v1.ListInstanceTemplatesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListInstanceTemplatesRequest',
+        '.google.cloud.compute.v1.ListInstanceTemplatesRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -1340,7 +1348,7 @@ describe('v1.InstanceTemplatesClient', () => {
         new protos.google.cloud.compute.v1.ListInstanceTemplatesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListInstanceTemplatesRequest',
+        '.google.cloud.compute.v1.ListInstanceTemplatesRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -1388,7 +1396,7 @@ describe('v1.InstanceTemplatesClient', () => {
         new protos.google.cloud.compute.v1.ListInstanceTemplatesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListInstanceTemplatesRequest',
+        '.google.cloud.compute.v1.ListInstanceTemplatesRequest',
         ['project']
       );
       request.project = defaultValue1;

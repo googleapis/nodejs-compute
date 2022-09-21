@@ -262,17 +262,17 @@ describe('v1.RegionSecurityPoliciesClient', () => {
         new protos.google.cloud.compute.v1.DeleteRegionSecurityPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteRegionSecurityPolicyRequest',
+        '.google.cloud.compute.v1.DeleteRegionSecurityPolicyRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'DeleteRegionSecurityPolicyRequest',
+        '.google.cloud.compute.v1.DeleteRegionSecurityPolicyRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'DeleteRegionSecurityPolicyRequest',
+        '.google.cloud.compute.v1.DeleteRegionSecurityPolicyRequest',
         ['securityPolicy']
       );
       request.securityPolicy = defaultValue3;
@@ -304,17 +304,17 @@ describe('v1.RegionSecurityPoliciesClient', () => {
         new protos.google.cloud.compute.v1.DeleteRegionSecurityPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteRegionSecurityPolicyRequest',
+        '.google.cloud.compute.v1.DeleteRegionSecurityPolicyRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'DeleteRegionSecurityPolicyRequest',
+        '.google.cloud.compute.v1.DeleteRegionSecurityPolicyRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'DeleteRegionSecurityPolicyRequest',
+        '.google.cloud.compute.v1.DeleteRegionSecurityPolicyRequest',
         ['securityPolicy']
       );
       request.securityPolicy = defaultValue3;
@@ -362,17 +362,17 @@ describe('v1.RegionSecurityPoliciesClient', () => {
         new protos.google.cloud.compute.v1.DeleteRegionSecurityPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteRegionSecurityPolicyRequest',
+        '.google.cloud.compute.v1.DeleteRegionSecurityPolicyRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'DeleteRegionSecurityPolicyRequest',
+        '.google.cloud.compute.v1.DeleteRegionSecurityPolicyRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'DeleteRegionSecurityPolicyRequest',
+        '.google.cloud.compute.v1.DeleteRegionSecurityPolicyRequest',
         ['securityPolicy']
       );
       request.securityPolicy = defaultValue3;
@@ -401,17 +401,17 @@ describe('v1.RegionSecurityPoliciesClient', () => {
         new protos.google.cloud.compute.v1.DeleteRegionSecurityPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'DeleteRegionSecurityPolicyRequest',
+        '.google.cloud.compute.v1.DeleteRegionSecurityPolicyRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'DeleteRegionSecurityPolicyRequest',
+        '.google.cloud.compute.v1.DeleteRegionSecurityPolicyRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'DeleteRegionSecurityPolicyRequest',
+        '.google.cloud.compute.v1.DeleteRegionSecurityPolicyRequest',
         ['securityPolicy']
       );
       request.securityPolicy = defaultValue3;
@@ -433,17 +433,17 @@ describe('v1.RegionSecurityPoliciesClient', () => {
         new protos.google.cloud.compute.v1.GetRegionSecurityPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetRegionSecurityPolicyRequest',
+        '.google.cloud.compute.v1.GetRegionSecurityPolicyRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'GetRegionSecurityPolicyRequest',
+        '.google.cloud.compute.v1.GetRegionSecurityPolicyRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'GetRegionSecurityPolicyRequest',
+        '.google.cloud.compute.v1.GetRegionSecurityPolicyRequest',
         ['securityPolicy']
       );
       request.securityPolicy = defaultValue3;
@@ -474,17 +474,17 @@ describe('v1.RegionSecurityPoliciesClient', () => {
         new protos.google.cloud.compute.v1.GetRegionSecurityPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetRegionSecurityPolicyRequest',
+        '.google.cloud.compute.v1.GetRegionSecurityPolicyRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'GetRegionSecurityPolicyRequest',
+        '.google.cloud.compute.v1.GetRegionSecurityPolicyRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'GetRegionSecurityPolicyRequest',
+        '.google.cloud.compute.v1.GetRegionSecurityPolicyRequest',
         ['securityPolicy']
       );
       request.securityPolicy = defaultValue3;
@@ -530,17 +530,17 @@ describe('v1.RegionSecurityPoliciesClient', () => {
         new protos.google.cloud.compute.v1.GetRegionSecurityPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetRegionSecurityPolicyRequest',
+        '.google.cloud.compute.v1.GetRegionSecurityPolicyRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'GetRegionSecurityPolicyRequest',
+        '.google.cloud.compute.v1.GetRegionSecurityPolicyRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'GetRegionSecurityPolicyRequest',
+        '.google.cloud.compute.v1.GetRegionSecurityPolicyRequest',
         ['securityPolicy']
       );
       request.securityPolicy = defaultValue3;
@@ -568,17 +568,17 @@ describe('v1.RegionSecurityPoliciesClient', () => {
         new protos.google.cloud.compute.v1.GetRegionSecurityPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'GetRegionSecurityPolicyRequest',
+        '.google.cloud.compute.v1.GetRegionSecurityPolicyRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'GetRegionSecurityPolicyRequest',
+        '.google.cloud.compute.v1.GetRegionSecurityPolicyRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'GetRegionSecurityPolicyRequest',
+        '.google.cloud.compute.v1.GetRegionSecurityPolicyRequest',
         ['securityPolicy']
       );
       request.securityPolicy = defaultValue3;
@@ -600,12 +600,12 @@ describe('v1.RegionSecurityPoliciesClient', () => {
         new protos.google.cloud.compute.v1.InsertRegionSecurityPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'InsertRegionSecurityPolicyRequest',
+        '.google.cloud.compute.v1.InsertRegionSecurityPolicyRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'InsertRegionSecurityPolicyRequest',
+        '.google.cloud.compute.v1.InsertRegionSecurityPolicyRequest',
         ['region']
       );
       request.region = defaultValue2;
@@ -637,12 +637,12 @@ describe('v1.RegionSecurityPoliciesClient', () => {
         new protos.google.cloud.compute.v1.InsertRegionSecurityPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'InsertRegionSecurityPolicyRequest',
+        '.google.cloud.compute.v1.InsertRegionSecurityPolicyRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'InsertRegionSecurityPolicyRequest',
+        '.google.cloud.compute.v1.InsertRegionSecurityPolicyRequest',
         ['region']
       );
       request.region = defaultValue2;
@@ -690,12 +690,12 @@ describe('v1.RegionSecurityPoliciesClient', () => {
         new protos.google.cloud.compute.v1.InsertRegionSecurityPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'InsertRegionSecurityPolicyRequest',
+        '.google.cloud.compute.v1.InsertRegionSecurityPolicyRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'InsertRegionSecurityPolicyRequest',
+        '.google.cloud.compute.v1.InsertRegionSecurityPolicyRequest',
         ['region']
       );
       request.region = defaultValue2;
@@ -724,12 +724,12 @@ describe('v1.RegionSecurityPoliciesClient', () => {
         new protos.google.cloud.compute.v1.InsertRegionSecurityPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'InsertRegionSecurityPolicyRequest',
+        '.google.cloud.compute.v1.InsertRegionSecurityPolicyRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'InsertRegionSecurityPolicyRequest',
+        '.google.cloud.compute.v1.InsertRegionSecurityPolicyRequest',
         ['region']
       );
       request.region = defaultValue2;
@@ -751,17 +751,17 @@ describe('v1.RegionSecurityPoliciesClient', () => {
         new protos.google.cloud.compute.v1.PatchRegionSecurityPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'PatchRegionSecurityPolicyRequest',
+        '.google.cloud.compute.v1.PatchRegionSecurityPolicyRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'PatchRegionSecurityPolicyRequest',
+        '.google.cloud.compute.v1.PatchRegionSecurityPolicyRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'PatchRegionSecurityPolicyRequest',
+        '.google.cloud.compute.v1.PatchRegionSecurityPolicyRequest',
         ['securityPolicy']
       );
       request.securityPolicy = defaultValue3;
@@ -792,17 +792,17 @@ describe('v1.RegionSecurityPoliciesClient', () => {
         new protos.google.cloud.compute.v1.PatchRegionSecurityPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'PatchRegionSecurityPolicyRequest',
+        '.google.cloud.compute.v1.PatchRegionSecurityPolicyRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'PatchRegionSecurityPolicyRequest',
+        '.google.cloud.compute.v1.PatchRegionSecurityPolicyRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'PatchRegionSecurityPolicyRequest',
+        '.google.cloud.compute.v1.PatchRegionSecurityPolicyRequest',
         ['securityPolicy']
       );
       request.securityPolicy = defaultValue3;
@@ -848,17 +848,17 @@ describe('v1.RegionSecurityPoliciesClient', () => {
         new protos.google.cloud.compute.v1.PatchRegionSecurityPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'PatchRegionSecurityPolicyRequest',
+        '.google.cloud.compute.v1.PatchRegionSecurityPolicyRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'PatchRegionSecurityPolicyRequest',
+        '.google.cloud.compute.v1.PatchRegionSecurityPolicyRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'PatchRegionSecurityPolicyRequest',
+        '.google.cloud.compute.v1.PatchRegionSecurityPolicyRequest',
         ['securityPolicy']
       );
       request.securityPolicy = defaultValue3;
@@ -886,17 +886,17 @@ describe('v1.RegionSecurityPoliciesClient', () => {
         new protos.google.cloud.compute.v1.PatchRegionSecurityPolicyRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'PatchRegionSecurityPolicyRequest',
+        '.google.cloud.compute.v1.PatchRegionSecurityPolicyRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'PatchRegionSecurityPolicyRequest',
+        '.google.cloud.compute.v1.PatchRegionSecurityPolicyRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'PatchRegionSecurityPolicyRequest',
+        '.google.cloud.compute.v1.PatchRegionSecurityPolicyRequest',
         ['securityPolicy']
       );
       request.securityPolicy = defaultValue3;
@@ -918,12 +918,12 @@ describe('v1.RegionSecurityPoliciesClient', () => {
         new protos.google.cloud.compute.v1.ListRegionSecurityPoliciesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListRegionSecurityPoliciesRequest',
+        '.google.cloud.compute.v1.ListRegionSecurityPoliciesRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'ListRegionSecurityPoliciesRequest',
+        '.google.cloud.compute.v1.ListRegionSecurityPoliciesRequest',
         ['region']
       );
       request.region = defaultValue2;
@@ -962,12 +962,12 @@ describe('v1.RegionSecurityPoliciesClient', () => {
         new protos.google.cloud.compute.v1.ListRegionSecurityPoliciesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListRegionSecurityPoliciesRequest',
+        '.google.cloud.compute.v1.ListRegionSecurityPoliciesRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'ListRegionSecurityPoliciesRequest',
+        '.google.cloud.compute.v1.ListRegionSecurityPoliciesRequest',
         ['region']
       );
       request.region = defaultValue2;
@@ -1021,12 +1021,12 @@ describe('v1.RegionSecurityPoliciesClient', () => {
         new protos.google.cloud.compute.v1.ListRegionSecurityPoliciesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListRegionSecurityPoliciesRequest',
+        '.google.cloud.compute.v1.ListRegionSecurityPoliciesRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'ListRegionSecurityPoliciesRequest',
+        '.google.cloud.compute.v1.ListRegionSecurityPoliciesRequest',
         ['region']
       );
       request.region = defaultValue2;
@@ -1054,12 +1054,12 @@ describe('v1.RegionSecurityPoliciesClient', () => {
         new protos.google.cloud.compute.v1.ListRegionSecurityPoliciesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListRegionSecurityPoliciesRequest',
+        '.google.cloud.compute.v1.ListRegionSecurityPoliciesRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'ListRegionSecurityPoliciesRequest',
+        '.google.cloud.compute.v1.ListRegionSecurityPoliciesRequest',
         ['region']
       );
       request.region = defaultValue2;
@@ -1120,12 +1120,12 @@ describe('v1.RegionSecurityPoliciesClient', () => {
         new protos.google.cloud.compute.v1.ListRegionSecurityPoliciesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListRegionSecurityPoliciesRequest',
+        '.google.cloud.compute.v1.ListRegionSecurityPoliciesRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'ListRegionSecurityPoliciesRequest',
+        '.google.cloud.compute.v1.ListRegionSecurityPoliciesRequest',
         ['region']
       );
       request.region = defaultValue2;
@@ -1177,12 +1177,12 @@ describe('v1.RegionSecurityPoliciesClient', () => {
         new protos.google.cloud.compute.v1.ListRegionSecurityPoliciesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListRegionSecurityPoliciesRequest',
+        '.google.cloud.compute.v1.ListRegionSecurityPoliciesRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'ListRegionSecurityPoliciesRequest',
+        '.google.cloud.compute.v1.ListRegionSecurityPoliciesRequest',
         ['region']
       );
       request.region = defaultValue2;
@@ -1231,12 +1231,12 @@ describe('v1.RegionSecurityPoliciesClient', () => {
         new protos.google.cloud.compute.v1.ListRegionSecurityPoliciesRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'ListRegionSecurityPoliciesRequest',
+        '.google.cloud.compute.v1.ListRegionSecurityPoliciesRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'ListRegionSecurityPoliciesRequest',
+        '.google.cloud.compute.v1.ListRegionSecurityPoliciesRequest',
         ['region']
       );
       request.region = defaultValue2;

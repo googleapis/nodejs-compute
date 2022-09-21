@@ -249,17 +249,17 @@ describe('v1.TargetPoolsClient', () => {
         new protos.google.cloud.compute.v1.AddHealthCheckTargetPoolRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'AddHealthCheckTargetPoolRequest',
+        '.google.cloud.compute.v1.AddHealthCheckTargetPoolRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'AddHealthCheckTargetPoolRequest',
+        '.google.cloud.compute.v1.AddHealthCheckTargetPoolRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'AddHealthCheckTargetPoolRequest',
+        '.google.cloud.compute.v1.AddHealthCheckTargetPoolRequest',
         ['targetPool']
       );
       request.targetPool = defaultValue3;
@@ -290,17 +290,17 @@ describe('v1.TargetPoolsClient', () => {
         new protos.google.cloud.compute.v1.AddHealthCheckTargetPoolRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'AddHealthCheckTargetPoolRequest',
+        '.google.cloud.compute.v1.AddHealthCheckTargetPoolRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'AddHealthCheckTargetPoolRequest',
+        '.google.cloud.compute.v1.AddHealthCheckTargetPoolRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'AddHealthCheckTargetPoolRequest',
+        '.google.cloud.compute.v1.AddHealthCheckTargetPoolRequest',
         ['targetPool']
       );
       request.targetPool = defaultValue3;
@@ -347,17 +347,17 @@ describe('v1.TargetPoolsClient', () => {
         new protos.google.cloud.compute.v1.AddHealthCheckTargetPoolRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'AddHealthCheckTargetPoolRequest',
+        '.google.cloud.compute.v1.AddHealthCheckTargetPoolRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'AddHealthCheckTargetPoolRequest',
+        '.google.cloud.compute.v1.AddHealthCheckTargetPoolRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'AddHealthCheckTargetPoolRequest',
+        '.google.cloud.compute.v1.AddHealthCheckTargetPoolRequest',
         ['targetPool']
       );
       request.targetPool = defaultValue3;
@@ -388,17 +388,17 @@ describe('v1.TargetPoolsClient', () => {
         new protos.google.cloud.compute.v1.AddHealthCheckTargetPoolRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'AddHealthCheckTargetPoolRequest',
+        '.google.cloud.compute.v1.AddHealthCheckTargetPoolRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'AddHealthCheckTargetPoolRequest',
+        '.google.cloud.compute.v1.AddHealthCheckTargetPoolRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'AddHealthCheckTargetPoolRequest',
+        '.google.cloud.compute.v1.AddHealthCheckTargetPoolRequest',
         ['targetPool']
       );
       request.targetPool = defaultValue3;
@@ -419,17 +419,17 @@ describe('v1.TargetPoolsClient', () => {
         new protos.google.cloud.compute.v1.AddInstanceTargetPoolRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'AddInstanceTargetPoolRequest',
+        '.google.cloud.compute.v1.AddInstanceTargetPoolRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'AddInstanceTargetPoolRequest',
+        '.google.cloud.compute.v1.AddInstanceTargetPoolRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'AddInstanceTargetPoolRequest',
+        '.google.cloud.compute.v1.AddInstanceTargetPoolRequest',
         ['targetPool']
       );
       request.targetPool = defaultValue3;
@@ -460,17 +460,17 @@ describe('v1.TargetPoolsClient', () => {
         new protos.google.cloud.compute.v1.AddInstanceTargetPoolRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'AddInstanceTargetPoolRequest',
+        '.google.cloud.compute.v1.AddInstanceTargetPoolRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'AddInstanceTargetPoolRequest',
+        '.google.cloud.compute.v1.AddInstanceTargetPoolRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'AddInstanceTargetPoolRequest',
+        '.google.cloud.compute.v1.AddInstanceTargetPoolRequest',
         ['targetPool']
       );
       request.targetPool = defaultValue3;
@@ -517,17 +517,17 @@ describe('v1.TargetPoolsClient', () => {
         new protos.google.cloud.compute.v1.AddInstanceTargetPoolRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'AddInstanceTargetPoolRequest',
+        '.google.cloud.compute.v1.AddInstanceTargetPoolRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'AddInstanceTargetPoolRequest',
+        '.google.cloud.compute.v1.AddInstanceTargetPoolRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'AddInstanceTargetPoolRequest',
+        '.google.cloud.compute.v1.AddInstanceTargetPoolRequest',
         ['targetPool']
       );
       request.targetPool = defaultValue3;
@@ -558,17 +558,17 @@ describe('v1.TargetPoolsClient', () => {
         new protos.google.cloud.compute.v1.AddInstanceTargetPoolRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'AddInstanceTargetPoolRequest',
+        '.google.cloud.compute.v1.AddInstanceTargetPoolRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'AddInstanceTargetPoolRequest',
+        '.google.cloud.compute.v1.AddInstanceTargetPoolRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'AddInstanceTargetPoolRequest',
+        '.google.cloud.compute.v1.AddInstanceTargetPoolRequest',
         ['targetPool']
       );
       request.targetPool = defaultValue3;
@@ -588,17 +588,20 @@ describe('v1.TargetPoolsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteTargetPoolRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteTargetPoolRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteTargetPoolRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('DeleteTargetPoolRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteTargetPoolRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('DeleteTargetPoolRequest', [
-        'targetPool',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteTargetPoolRequest',
+        ['targetPool']
+      );
       request.targetPool = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&target_pool=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -626,17 +629,20 @@ describe('v1.TargetPoolsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteTargetPoolRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteTargetPoolRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteTargetPoolRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('DeleteTargetPoolRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteTargetPoolRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('DeleteTargetPoolRequest', [
-        'targetPool',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteTargetPoolRequest',
+        ['targetPool']
+      );
       request.targetPool = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&target_pool=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -680,17 +686,20 @@ describe('v1.TargetPoolsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteTargetPoolRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteTargetPoolRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteTargetPoolRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('DeleteTargetPoolRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteTargetPoolRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('DeleteTargetPoolRequest', [
-        'targetPool',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteTargetPoolRequest',
+        ['targetPool']
+      );
       request.targetPool = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&target_pool=${defaultValue3}`;
       const expectedError = new Error('expected');
@@ -715,17 +724,20 @@ describe('v1.TargetPoolsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteTargetPoolRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteTargetPoolRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteTargetPoolRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('DeleteTargetPoolRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteTargetPoolRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('DeleteTargetPoolRequest', [
-        'targetPool',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteTargetPoolRequest',
+        ['targetPool']
+      );
       request.targetPool = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -743,17 +755,20 @@ describe('v1.TargetPoolsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetTargetPoolRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetTargetPoolRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetTargetPoolRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetTargetPoolRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetTargetPoolRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('GetTargetPoolRequest', [
-        'targetPool',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetTargetPoolRequest',
+        ['targetPool']
+      );
       request.targetPool = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&target_pool=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -780,17 +795,20 @@ describe('v1.TargetPoolsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetTargetPoolRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetTargetPoolRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetTargetPoolRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetTargetPoolRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetTargetPoolRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('GetTargetPoolRequest', [
-        'targetPool',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetTargetPoolRequest',
+        ['targetPool']
+      );
       request.targetPool = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&target_pool=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -832,17 +850,20 @@ describe('v1.TargetPoolsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetTargetPoolRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetTargetPoolRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetTargetPoolRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetTargetPoolRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetTargetPoolRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('GetTargetPoolRequest', [
-        'targetPool',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetTargetPoolRequest',
+        ['targetPool']
+      );
       request.targetPool = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&target_pool=${defaultValue3}`;
       const expectedError = new Error('expected');
@@ -866,17 +887,20 @@ describe('v1.TargetPoolsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetTargetPoolRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetTargetPoolRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetTargetPoolRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetTargetPoolRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetTargetPoolRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('GetTargetPoolRequest', [
-        'targetPool',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetTargetPoolRequest',
+        ['targetPool']
+      );
       request.targetPool = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -894,17 +918,20 @@ describe('v1.TargetPoolsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetHealthTargetPoolRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetHealthTargetPoolRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetHealthTargetPoolRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetHealthTargetPoolRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetHealthTargetPoolRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('GetHealthTargetPoolRequest', [
-        'targetPool',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetHealthTargetPoolRequest',
+        ['targetPool']
+      );
       request.targetPool = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&target_pool=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -932,17 +959,20 @@ describe('v1.TargetPoolsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetHealthTargetPoolRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetHealthTargetPoolRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetHealthTargetPoolRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetHealthTargetPoolRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetHealthTargetPoolRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('GetHealthTargetPoolRequest', [
-        'targetPool',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetHealthTargetPoolRequest',
+        ['targetPool']
+      );
       request.targetPool = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&target_pool=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -986,17 +1016,20 @@ describe('v1.TargetPoolsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetHealthTargetPoolRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetHealthTargetPoolRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetHealthTargetPoolRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetHealthTargetPoolRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetHealthTargetPoolRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('GetHealthTargetPoolRequest', [
-        'targetPool',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetHealthTargetPoolRequest',
+        ['targetPool']
+      );
       request.targetPool = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&target_pool=${defaultValue3}`;
       const expectedError = new Error('expected');
@@ -1021,17 +1054,20 @@ describe('v1.TargetPoolsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetHealthTargetPoolRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetHealthTargetPoolRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetHealthTargetPoolRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetHealthTargetPoolRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetHealthTargetPoolRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('GetHealthTargetPoolRequest', [
-        'targetPool',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetHealthTargetPoolRequest',
+        ['targetPool']
+      );
       request.targetPool = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1049,13 +1085,15 @@ describe('v1.TargetPoolsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertTargetPoolRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('InsertTargetPoolRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.InsertTargetPoolRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('InsertTargetPoolRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.InsertTargetPoolRequest',
+        ['region']
+      );
       request.region = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
@@ -1083,13 +1121,15 @@ describe('v1.TargetPoolsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertTargetPoolRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('InsertTargetPoolRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.InsertTargetPoolRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('InsertTargetPoolRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.InsertTargetPoolRequest',
+        ['region']
+      );
       request.region = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
@@ -1133,13 +1173,15 @@ describe('v1.TargetPoolsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertTargetPoolRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('InsertTargetPoolRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.InsertTargetPoolRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('InsertTargetPoolRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.InsertTargetPoolRequest',
+        ['region']
+      );
       request.region = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}`;
       const expectedError = new Error('expected');
@@ -1164,13 +1206,15 @@ describe('v1.TargetPoolsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertTargetPoolRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('InsertTargetPoolRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.InsertTargetPoolRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('InsertTargetPoolRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.InsertTargetPoolRequest',
+        ['region']
+      );
       request.region = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1189,17 +1233,17 @@ describe('v1.TargetPoolsClient', () => {
         new protos.google.cloud.compute.v1.RemoveHealthCheckTargetPoolRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'RemoveHealthCheckTargetPoolRequest',
+        '.google.cloud.compute.v1.RemoveHealthCheckTargetPoolRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'RemoveHealthCheckTargetPoolRequest',
+        '.google.cloud.compute.v1.RemoveHealthCheckTargetPoolRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'RemoveHealthCheckTargetPoolRequest',
+        '.google.cloud.compute.v1.RemoveHealthCheckTargetPoolRequest',
         ['targetPool']
       );
       request.targetPool = defaultValue3;
@@ -1230,17 +1274,17 @@ describe('v1.TargetPoolsClient', () => {
         new protos.google.cloud.compute.v1.RemoveHealthCheckTargetPoolRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'RemoveHealthCheckTargetPoolRequest',
+        '.google.cloud.compute.v1.RemoveHealthCheckTargetPoolRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'RemoveHealthCheckTargetPoolRequest',
+        '.google.cloud.compute.v1.RemoveHealthCheckTargetPoolRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'RemoveHealthCheckTargetPoolRequest',
+        '.google.cloud.compute.v1.RemoveHealthCheckTargetPoolRequest',
         ['targetPool']
       );
       request.targetPool = defaultValue3;
@@ -1287,17 +1331,17 @@ describe('v1.TargetPoolsClient', () => {
         new protos.google.cloud.compute.v1.RemoveHealthCheckTargetPoolRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'RemoveHealthCheckTargetPoolRequest',
+        '.google.cloud.compute.v1.RemoveHealthCheckTargetPoolRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'RemoveHealthCheckTargetPoolRequest',
+        '.google.cloud.compute.v1.RemoveHealthCheckTargetPoolRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'RemoveHealthCheckTargetPoolRequest',
+        '.google.cloud.compute.v1.RemoveHealthCheckTargetPoolRequest',
         ['targetPool']
       );
       request.targetPool = defaultValue3;
@@ -1328,17 +1372,17 @@ describe('v1.TargetPoolsClient', () => {
         new protos.google.cloud.compute.v1.RemoveHealthCheckTargetPoolRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'RemoveHealthCheckTargetPoolRequest',
+        '.google.cloud.compute.v1.RemoveHealthCheckTargetPoolRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'RemoveHealthCheckTargetPoolRequest',
+        '.google.cloud.compute.v1.RemoveHealthCheckTargetPoolRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'RemoveHealthCheckTargetPoolRequest',
+        '.google.cloud.compute.v1.RemoveHealthCheckTargetPoolRequest',
         ['targetPool']
       );
       request.targetPool = defaultValue3;
@@ -1359,17 +1403,17 @@ describe('v1.TargetPoolsClient', () => {
         new protos.google.cloud.compute.v1.RemoveInstanceTargetPoolRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'RemoveInstanceTargetPoolRequest',
+        '.google.cloud.compute.v1.RemoveInstanceTargetPoolRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'RemoveInstanceTargetPoolRequest',
+        '.google.cloud.compute.v1.RemoveInstanceTargetPoolRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'RemoveInstanceTargetPoolRequest',
+        '.google.cloud.compute.v1.RemoveInstanceTargetPoolRequest',
         ['targetPool']
       );
       request.targetPool = defaultValue3;
@@ -1400,17 +1444,17 @@ describe('v1.TargetPoolsClient', () => {
         new protos.google.cloud.compute.v1.RemoveInstanceTargetPoolRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'RemoveInstanceTargetPoolRequest',
+        '.google.cloud.compute.v1.RemoveInstanceTargetPoolRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'RemoveInstanceTargetPoolRequest',
+        '.google.cloud.compute.v1.RemoveInstanceTargetPoolRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'RemoveInstanceTargetPoolRequest',
+        '.google.cloud.compute.v1.RemoveInstanceTargetPoolRequest',
         ['targetPool']
       );
       request.targetPool = defaultValue3;
@@ -1457,17 +1501,17 @@ describe('v1.TargetPoolsClient', () => {
         new protos.google.cloud.compute.v1.RemoveInstanceTargetPoolRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'RemoveInstanceTargetPoolRequest',
+        '.google.cloud.compute.v1.RemoveInstanceTargetPoolRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'RemoveInstanceTargetPoolRequest',
+        '.google.cloud.compute.v1.RemoveInstanceTargetPoolRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'RemoveInstanceTargetPoolRequest',
+        '.google.cloud.compute.v1.RemoveInstanceTargetPoolRequest',
         ['targetPool']
       );
       request.targetPool = defaultValue3;
@@ -1498,17 +1542,17 @@ describe('v1.TargetPoolsClient', () => {
         new protos.google.cloud.compute.v1.RemoveInstanceTargetPoolRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'RemoveInstanceTargetPoolRequest',
+        '.google.cloud.compute.v1.RemoveInstanceTargetPoolRequest',
         ['project']
       );
       request.project = defaultValue1;
       const defaultValue2 = getTypeDefaultValue(
-        'RemoveInstanceTargetPoolRequest',
+        '.google.cloud.compute.v1.RemoveInstanceTargetPoolRequest',
         ['region']
       );
       request.region = defaultValue2;
       const defaultValue3 = getTypeDefaultValue(
-        'RemoveInstanceTargetPoolRequest',
+        '.google.cloud.compute.v1.RemoveInstanceTargetPoolRequest',
         ['targetPool']
       );
       request.targetPool = defaultValue3;
@@ -1528,17 +1572,20 @@ describe('v1.TargetPoolsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetBackupTargetPoolRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SetBackupTargetPoolRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetBackupTargetPoolRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('SetBackupTargetPoolRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetBackupTargetPoolRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('SetBackupTargetPoolRequest', [
-        'targetPool',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetBackupTargetPoolRequest',
+        ['targetPool']
+      );
       request.targetPool = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&target_pool=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -1566,17 +1613,20 @@ describe('v1.TargetPoolsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetBackupTargetPoolRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SetBackupTargetPoolRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetBackupTargetPoolRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('SetBackupTargetPoolRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetBackupTargetPoolRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('SetBackupTargetPoolRequest', [
-        'targetPool',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetBackupTargetPoolRequest',
+        ['targetPool']
+      );
       request.targetPool = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&target_pool=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -1620,17 +1670,20 @@ describe('v1.TargetPoolsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetBackupTargetPoolRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SetBackupTargetPoolRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetBackupTargetPoolRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('SetBackupTargetPoolRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetBackupTargetPoolRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('SetBackupTargetPoolRequest', [
-        'targetPool',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetBackupTargetPoolRequest',
+        ['targetPool']
+      );
       request.targetPool = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&target_pool=${defaultValue3}`;
       const expectedError = new Error('expected');
@@ -1655,17 +1708,20 @@ describe('v1.TargetPoolsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.SetBackupTargetPoolRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('SetBackupTargetPoolRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetBackupTargetPoolRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('SetBackupTargetPoolRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetBackupTargetPoolRequest',
+        ['region']
+      );
       request.region = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('SetBackupTargetPoolRequest', [
-        'targetPool',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.SetBackupTargetPoolRequest',
+        ['targetPool']
+      );
       request.targetPool = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -1684,7 +1740,7 @@ describe('v1.TargetPoolsClient', () => {
         new protos.google.cloud.compute.v1.AggregatedListTargetPoolsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'AggregatedListTargetPoolsRequest',
+        '.google.cloud.compute.v1.AggregatedListTargetPoolsRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -1744,7 +1800,7 @@ describe('v1.TargetPoolsClient', () => {
         new protos.google.cloud.compute.v1.AggregatedListTargetPoolsRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'AggregatedListTargetPoolsRequest',
+        '.google.cloud.compute.v1.AggregatedListTargetPoolsRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -1787,13 +1843,15 @@ describe('v1.TargetPoolsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListTargetPoolsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListTargetPoolsRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListTargetPoolsRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ListTargetPoolsRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListTargetPoolsRequest',
+        ['region']
+      );
       request.region = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}`;
       const expectedResponse = [
@@ -1822,13 +1880,15 @@ describe('v1.TargetPoolsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListTargetPoolsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListTargetPoolsRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListTargetPoolsRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ListTargetPoolsRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListTargetPoolsRequest',
+        ['region']
+      );
       request.region = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}`;
       const expectedResponse = [
@@ -1872,13 +1932,15 @@ describe('v1.TargetPoolsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListTargetPoolsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListTargetPoolsRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListTargetPoolsRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ListTargetPoolsRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListTargetPoolsRequest',
+        ['region']
+      );
       request.region = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}`;
       const expectedError = new Error('expected');
@@ -1902,13 +1964,15 @@ describe('v1.TargetPoolsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListTargetPoolsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListTargetPoolsRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListTargetPoolsRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ListTargetPoolsRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListTargetPoolsRequest',
+        ['region']
+      );
       request.region = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}`;
       const expectedResponse = [
@@ -1959,13 +2023,15 @@ describe('v1.TargetPoolsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListTargetPoolsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListTargetPoolsRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListTargetPoolsRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ListTargetPoolsRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListTargetPoolsRequest',
+        ['region']
+      );
       request.region = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}`;
       const expectedError = new Error('expected');
@@ -2013,13 +2079,15 @@ describe('v1.TargetPoolsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListTargetPoolsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListTargetPoolsRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListTargetPoolsRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ListTargetPoolsRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListTargetPoolsRequest',
+        ['region']
+      );
       request.region = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}`;
       const expectedResponse = [
@@ -2058,13 +2126,15 @@ describe('v1.TargetPoolsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListTargetPoolsRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListTargetPoolsRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListTargetPoolsRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ListTargetPoolsRequest', [
-        'region',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListTargetPoolsRequest',
+        ['region']
+      );
       request.region = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}`;
       const expectedError = new Error('expected');

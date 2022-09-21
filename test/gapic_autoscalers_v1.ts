@@ -248,17 +248,20 @@ describe('v1.AutoscalersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteAutoscalerRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteAutoscalerRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteAutoscalerRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('DeleteAutoscalerRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteAutoscalerRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('DeleteAutoscalerRequest', [
-        'autoscaler',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteAutoscalerRequest',
+        ['autoscaler']
+      );
       request.autoscaler = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&autoscaler=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -286,17 +289,20 @@ describe('v1.AutoscalersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteAutoscalerRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteAutoscalerRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteAutoscalerRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('DeleteAutoscalerRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteAutoscalerRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('DeleteAutoscalerRequest', [
-        'autoscaler',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteAutoscalerRequest',
+        ['autoscaler']
+      );
       request.autoscaler = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&autoscaler=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -340,17 +346,20 @@ describe('v1.AutoscalersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteAutoscalerRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteAutoscalerRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteAutoscalerRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('DeleteAutoscalerRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteAutoscalerRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('DeleteAutoscalerRequest', [
-        'autoscaler',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteAutoscalerRequest',
+        ['autoscaler']
+      );
       request.autoscaler = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&autoscaler=${defaultValue3}`;
       const expectedError = new Error('expected');
@@ -375,17 +384,20 @@ describe('v1.AutoscalersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteAutoscalerRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('DeleteAutoscalerRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteAutoscalerRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('DeleteAutoscalerRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteAutoscalerRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('DeleteAutoscalerRequest', [
-        'autoscaler',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteAutoscalerRequest',
+        ['autoscaler']
+      );
       request.autoscaler = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -403,17 +415,20 @@ describe('v1.AutoscalersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetAutoscalerRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetAutoscalerRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetAutoscalerRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetAutoscalerRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetAutoscalerRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('GetAutoscalerRequest', [
-        'autoscaler',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetAutoscalerRequest',
+        ['autoscaler']
+      );
       request.autoscaler = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&autoscaler=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -440,17 +455,20 @@ describe('v1.AutoscalersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetAutoscalerRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetAutoscalerRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetAutoscalerRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetAutoscalerRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetAutoscalerRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('GetAutoscalerRequest', [
-        'autoscaler',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetAutoscalerRequest',
+        ['autoscaler']
+      );
       request.autoscaler = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&autoscaler=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
@@ -492,17 +510,20 @@ describe('v1.AutoscalersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetAutoscalerRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetAutoscalerRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetAutoscalerRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetAutoscalerRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetAutoscalerRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('GetAutoscalerRequest', [
-        'autoscaler',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetAutoscalerRequest',
+        ['autoscaler']
+      );
       request.autoscaler = defaultValue3;
       const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}&autoscaler=${defaultValue3}`;
       const expectedError = new Error('expected');
@@ -526,17 +547,20 @@ describe('v1.AutoscalersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetAutoscalerRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('GetAutoscalerRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetAutoscalerRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('GetAutoscalerRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetAutoscalerRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
-      const defaultValue3 = getTypeDefaultValue('GetAutoscalerRequest', [
-        'autoscaler',
-      ]);
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetAutoscalerRequest',
+        ['autoscaler']
+      );
       request.autoscaler = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -554,13 +578,15 @@ describe('v1.AutoscalersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertAutoscalerRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('InsertAutoscalerRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.InsertAutoscalerRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('InsertAutoscalerRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.InsertAutoscalerRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
@@ -588,13 +614,15 @@ describe('v1.AutoscalersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertAutoscalerRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('InsertAutoscalerRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.InsertAutoscalerRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('InsertAutoscalerRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.InsertAutoscalerRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
@@ -638,13 +666,15 @@ describe('v1.AutoscalersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertAutoscalerRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('InsertAutoscalerRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.InsertAutoscalerRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('InsertAutoscalerRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.InsertAutoscalerRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}`;
       const expectedError = new Error('expected');
@@ -669,13 +699,15 @@ describe('v1.AutoscalersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertAutoscalerRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('InsertAutoscalerRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.InsertAutoscalerRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('InsertAutoscalerRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.InsertAutoscalerRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -693,13 +725,15 @@ describe('v1.AutoscalersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchAutoscalerRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('PatchAutoscalerRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchAutoscalerRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('PatchAutoscalerRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchAutoscalerRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
@@ -726,13 +760,15 @@ describe('v1.AutoscalersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchAutoscalerRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('PatchAutoscalerRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchAutoscalerRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('PatchAutoscalerRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchAutoscalerRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
@@ -774,13 +810,15 @@ describe('v1.AutoscalersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchAutoscalerRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('PatchAutoscalerRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchAutoscalerRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('PatchAutoscalerRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchAutoscalerRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}`;
       const expectedError = new Error('expected');
@@ -804,13 +842,15 @@ describe('v1.AutoscalersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchAutoscalerRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('PatchAutoscalerRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchAutoscalerRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('PatchAutoscalerRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchAutoscalerRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -828,13 +868,15 @@ describe('v1.AutoscalersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.UpdateAutoscalerRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('UpdateAutoscalerRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.UpdateAutoscalerRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('UpdateAutoscalerRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.UpdateAutoscalerRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
@@ -862,13 +904,15 @@ describe('v1.AutoscalersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.UpdateAutoscalerRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('UpdateAutoscalerRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.UpdateAutoscalerRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('UpdateAutoscalerRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.UpdateAutoscalerRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
@@ -912,13 +956,15 @@ describe('v1.AutoscalersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.UpdateAutoscalerRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('UpdateAutoscalerRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.UpdateAutoscalerRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('UpdateAutoscalerRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.UpdateAutoscalerRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}`;
       const expectedError = new Error('expected');
@@ -943,13 +989,15 @@ describe('v1.AutoscalersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.UpdateAutoscalerRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('UpdateAutoscalerRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.UpdateAutoscalerRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('UpdateAutoscalerRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.UpdateAutoscalerRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
       client.close();
@@ -968,7 +1016,7 @@ describe('v1.AutoscalersClient', () => {
         new protos.google.cloud.compute.v1.AggregatedListAutoscalersRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'AggregatedListAutoscalersRequest',
+        '.google.cloud.compute.v1.AggregatedListAutoscalersRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -1028,7 +1076,7 @@ describe('v1.AutoscalersClient', () => {
         new protos.google.cloud.compute.v1.AggregatedListAutoscalersRequest()
       );
       const defaultValue1 = getTypeDefaultValue(
-        'AggregatedListAutoscalersRequest',
+        '.google.cloud.compute.v1.AggregatedListAutoscalersRequest',
         ['project']
       );
       request.project = defaultValue1;
@@ -1071,13 +1119,15 @@ describe('v1.AutoscalersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListAutoscalersRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListAutoscalersRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListAutoscalersRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ListAutoscalersRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListAutoscalersRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}`;
       const expectedResponse = [
@@ -1106,13 +1156,15 @@ describe('v1.AutoscalersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListAutoscalersRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListAutoscalersRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListAutoscalersRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ListAutoscalersRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListAutoscalersRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}`;
       const expectedResponse = [
@@ -1156,13 +1208,15 @@ describe('v1.AutoscalersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListAutoscalersRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListAutoscalersRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListAutoscalersRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ListAutoscalersRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListAutoscalersRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}`;
       const expectedError = new Error('expected');
@@ -1186,13 +1240,15 @@ describe('v1.AutoscalersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListAutoscalersRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListAutoscalersRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListAutoscalersRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ListAutoscalersRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListAutoscalersRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}`;
       const expectedResponse = [
@@ -1243,13 +1299,15 @@ describe('v1.AutoscalersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListAutoscalersRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListAutoscalersRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListAutoscalersRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ListAutoscalersRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListAutoscalersRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}`;
       const expectedError = new Error('expected');
@@ -1297,13 +1355,15 @@ describe('v1.AutoscalersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListAutoscalersRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListAutoscalersRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListAutoscalersRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ListAutoscalersRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListAutoscalersRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}`;
       const expectedResponse = [
@@ -1342,13 +1402,15 @@ describe('v1.AutoscalersClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListAutoscalersRequest()
       );
-      const defaultValue1 = getTypeDefaultValue('ListAutoscalersRequest', [
-        'project',
-      ]);
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListAutoscalersRequest',
+        ['project']
+      );
       request.project = defaultValue1;
-      const defaultValue2 = getTypeDefaultValue('ListAutoscalersRequest', [
-        'zone',
-      ]);
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListAutoscalersRequest',
+        ['zone']
+      );
       request.zone = defaultValue2;
       const expectedHeaderRequestParams = `project=${defaultValue1}&zone=${defaultValue2}`;
       const expectedError = new Error('expected');
