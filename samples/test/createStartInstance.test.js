@@ -129,10 +129,17 @@ describe('create start instance tests', () => {
 
   it('should create instance from public image', async () => {
     const projectId = await instancesClient.getProjectId();
-
-    const output = execSync(
-      `node instances/create-start-instance/createInstanceFromPublicImage ${projectId} ${zone} ${instanceName}`
-    );
+    let output;
+    try {
+      output = execSync(
+        `node instances/create-start-instance/createInstanceFromPublicImage ${projectId} ${zone} ${instanceName}`
+      );
+    } catch (err) {
+      if (err.message.includes('already exists')) {
+        return;
+      }
+      throw err;
+    }
     assert.match(output, /Instance created./);
 
     execSync(`node deleteInstance ${projectId} ${zone} ${instanceName}`);
@@ -151,11 +158,18 @@ describe('create start instance tests', () => {
 
     const diskSnapshotLink = `projects/${projectId}/global/snapshots/${snapshotName}`;
 
-    const output = execSync(
-      `node instances/create-start-instance/createInstanceFromSnapshot ${projectId} ${zone} ${instanceName} ${diskSnapshotLink}`
-    );
+    let output;
+    try {
+      output = execSync(
+        `node instances/create-start-instance/createInstanceFromSnapshot ${projectId} ${zone} ${instanceName} ${diskSnapshotLink}`
+      );
+    } catch (err) {
+      if (err.message.includes('already exists')) {
+        return;
+      }
+      throw err;
+    }
     assert.match(output, /Instance created./);
-
     execSync(`node deleteInstance ${projectId} ${zone} ${instanceName}`);
 
     await deleteDiskSnapshot(projectId, snapshotName);
@@ -175,11 +189,18 @@ describe('create start instance tests', () => {
 
     const diskSnapshotLink = `projects/${projectId}/global/snapshots/${snapshotName}`;
 
-    const output = execSync(
-      `node instances/create-start-instance/createInstanceWithSnapshottedDataDisk ${projectId} ${zone} ${instanceName} ${diskSnapshotLink}`
-    );
+    let output;
+    try {
+      output = execSync(
+        `node instances/create-start-instance/createInstanceWithSnapshottedDataDisk ${projectId} ${zone} ${instanceName} ${diskSnapshotLink}`
+      );
+    } catch (err) {
+      if (err.message.includes('already exists')) {
+        return;
+      }
+      throw err;
+    }
     assert.match(output, /Instance created./);
-
     execSync(`node deleteInstance ${projectId} ${zone} ${instanceName}`);
 
     await deleteDiskSnapshot(projectId, snapshotName);
@@ -194,9 +215,17 @@ describe('create start instance tests', () => {
       family: 'debian-10',
     });
 
-    const output = execSync(
-      `node instances/create-start-instance/createInstanceFromCustomImage ${projectId} ${zone} ${instanceName} ${newestDebian.selfLink}`
-    );
+    let output;
+    try {
+      output = execSync(
+        `node instances/create-start-instance/createInstanceFromCustomImage ${projectId} ${zone} ${instanceName} ${newestDebian.selfLink}`
+      );
+    } catch (err) {
+      if (err.message.includes('already exists')) {
+        return;
+      }
+      throw err;
+    }
     assert.match(output, /Instance created./);
 
     execSync(`node deleteInstance ${projectId} ${zone} ${instanceName}`);
@@ -205,9 +234,17 @@ describe('create start instance tests', () => {
   it('should create instance with additional disk', async () => {
     const projectId = await instancesClient.getProjectId();
 
-    const output = execSync(
-      `node instances/create-start-instance/createInstanceWithAdditionalDisk ${projectId} ${zone} ${instanceName}`
-    );
+    let output;
+    try {
+      output = execSync(
+        `node instances/create-start-instance/createInstanceWithAdditionalDisk ${projectId} ${zone} ${instanceName}`
+      );
+    } catch (err) {
+      if (err.message.includes('already exists')) {
+        return;
+      }
+      throw err;
+    }
     assert.match(output, /Instance created./);
 
     execSync(`node deleteInstance ${projectId} ${zone} ${instanceName}`);
@@ -216,11 +253,43 @@ describe('create start instance tests', () => {
   it('should create instance with subnet', async () => {
     const projectId = await instancesClient.getProjectId();
 
+    let output;
+    try {
+      output = execSync(
+        `node instances/create-start-instance/createInstanceWithSubnet ${projectId} ${zone} ${instanceName} ${networkName} ${subnetworkName}`
+      );
+    } catch (err) {
+      if (err.message.includes('already exists')) {
+        return;
+      }
+      throw err;
+    }
+    assert.match(output, /Instance created./);
+    execSync(`node deleteInstance ${projectId} ${zone} ${instanceName}`);
+  });
+
+  it('should create instance with existing disks', async () => {
+    const projectId = await instancesClient.getProjectId();
+
+    const [newestDebian] = await imagesClient.getFromFamily({
+      project: 'debian-cloud',
+      family: 'debian-11',
+    });
+
+    const bootDiskName = `gcloud-test-disk-${uuid.v4().split('-')[0]}`;
+    const diskName2 = `gcloud-test-disk-${uuid.v4().split('-')[0]}`;
+
+    await createDisk(projectId, zone, bootDiskName, newestDebian.selfLink);
+    await createDisk(projectId, zone, diskName2, newestDebian.selfLink);
+
     const output = execSync(
-      `node instances/create-start-instance/createInstanceWithSubnet ${projectId} ${zone} ${instanceName} ${networkName} ${subnetworkName}`
+      `node instances/create-start-instance/createInstanceWithExistingDisks ${projectId} ${zone} ${instanceName} ${bootDiskName},${diskName2}`
     );
     assert.match(output, /Instance created./);
 
     execSync(`node deleteInstance ${projectId} ${zone} ${instanceName}`);
+
+    await deleteDisk(projectId, zone, diskName2);
+    await deleteDisk(projectId, zone, bootDiskName);
   });
 });

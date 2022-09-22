@@ -27,6 +27,21 @@ import {PassThrough} from 'stream';
 
 import {GoogleAuth, protobuf} from 'google-gax';
 
+// Dynamically loaded proto JSON is needed to get the type information
+// to fill in default values for request objects
+const root = protobuf.Root.fromJSON(
+  require('../protos/protos.json')
+).resolveAll();
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function getTypeDefaultValue(typeName: string, fields: string[]) {
+  let type = root.lookupType(typeName) as protobuf.Type;
+  for (const field of fields.slice(0, -1)) {
+    type = type.fields[field]?.resolvedType as protobuf.Type;
+  }
+  return type.fields[fields[fields.length - 1]]?.defaultValue;
+}
+
 function generateSampleMessage<T extends object>(instance: T) {
   const filledObject = (
     instance.constructor as typeof protobuf.Message
@@ -126,99 +141,103 @@ describe('v1.RegionUrlMapsClient', () => {
   afterEach(() => {
     sinon.restore();
   });
-  it('has servicePath', () => {
-    const servicePath = regionurlmapsModule.v1.RegionUrlMapsClient.servicePath;
-    assert(servicePath);
-  });
-
-  it('has apiEndpoint', () => {
-    const apiEndpoint = regionurlmapsModule.v1.RegionUrlMapsClient.apiEndpoint;
-    assert(apiEndpoint);
-  });
-
-  it('has port', () => {
-    const port = regionurlmapsModule.v1.RegionUrlMapsClient.port;
-    assert(port);
-    assert(typeof port === 'number');
-  });
-
-  it('should create a client with no option', () => {
-    const client = new regionurlmapsModule.v1.RegionUrlMapsClient();
-    assert(client);
-  });
-
-  it('should create a client with gRPC fallback', () => {
-    const client = new regionurlmapsModule.v1.RegionUrlMapsClient({
-      fallback: true,
+  describe('Common methods', () => {
+    it('has servicePath', () => {
+      const servicePath =
+        regionurlmapsModule.v1.RegionUrlMapsClient.servicePath;
+      assert(servicePath);
     });
-    assert(client);
-  });
 
-  it('has initialize method and supports deferred initialization', async () => {
-    const client = new regionurlmapsModule.v1.RegionUrlMapsClient({
-      auth: googleAuth,
-      projectId: 'bogus',
+    it('has apiEndpoint', () => {
+      const apiEndpoint =
+        regionurlmapsModule.v1.RegionUrlMapsClient.apiEndpoint;
+      assert(apiEndpoint);
     });
-    assert.strictEqual(client.regionUrlMapsStub, undefined);
-    await client.initialize();
-    assert(client.regionUrlMapsStub);
-  });
 
-  it('has close method for the initialized client', done => {
-    const client = new regionurlmapsModule.v1.RegionUrlMapsClient({
-      auth: googleAuth,
-      projectId: 'bogus',
+    it('has port', () => {
+      const port = regionurlmapsModule.v1.RegionUrlMapsClient.port;
+      assert(port);
+      assert(typeof port === 'number');
     });
-    client.initialize();
-    assert(client.regionUrlMapsStub);
-    client.close().then(() => {
-      done();
-    });
-  });
 
-  it('has close method for the non-initialized client', done => {
-    const client = new regionurlmapsModule.v1.RegionUrlMapsClient({
-      auth: googleAuth,
-      projectId: 'bogus',
+    it('should create a client with no option', () => {
+      const client = new regionurlmapsModule.v1.RegionUrlMapsClient();
+      assert(client);
     });
-    assert.strictEqual(client.regionUrlMapsStub, undefined);
-    client.close().then(() => {
-      done();
-    });
-  });
 
-  it('has getProjectId method', async () => {
-    const fakeProjectId = 'fake-project-id';
-    const client = new regionurlmapsModule.v1.RegionUrlMapsClient({
-      auth: googleAuth,
-      projectId: 'bogus',
+    it('should create a client with gRPC fallback', () => {
+      const client = new regionurlmapsModule.v1.RegionUrlMapsClient({
+        fallback: true,
+      });
+      assert(client);
     });
-    client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
-    const result = await client.getProjectId();
-    assert.strictEqual(result, fakeProjectId);
-    assert((client.auth.getProjectId as SinonStub).calledWithExactly());
-  });
 
-  it('has getProjectId method with callback', async () => {
-    const fakeProjectId = 'fake-project-id';
-    const client = new regionurlmapsModule.v1.RegionUrlMapsClient({
-      auth: googleAuth,
-      projectId: 'bogus',
+    it('has initialize method and supports deferred initialization', async () => {
+      const client = new regionurlmapsModule.v1.RegionUrlMapsClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      assert.strictEqual(client.regionUrlMapsStub, undefined);
+      await client.initialize();
+      assert(client.regionUrlMapsStub);
     });
-    client.auth.getProjectId = sinon
-      .stub()
-      .callsArgWith(0, null, fakeProjectId);
-    const promise = new Promise((resolve, reject) => {
-      client.getProjectId((err?: Error | null, projectId?: string | null) => {
-        if (err) {
-          reject(err);
-        } else {
-          resolve(projectId);
-        }
+
+    it('has close method for the initialized client', done => {
+      const client = new regionurlmapsModule.v1.RegionUrlMapsClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      client.initialize();
+      assert(client.regionUrlMapsStub);
+      client.close().then(() => {
+        done();
       });
     });
-    const result = await promise;
-    assert.strictEqual(result, fakeProjectId);
+
+    it('has close method for the non-initialized client', done => {
+      const client = new regionurlmapsModule.v1.RegionUrlMapsClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      assert.strictEqual(client.regionUrlMapsStub, undefined);
+      client.close().then(() => {
+        done();
+      });
+    });
+
+    it('has getProjectId method', async () => {
+      const fakeProjectId = 'fake-project-id';
+      const client = new regionurlmapsModule.v1.RegionUrlMapsClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      client.auth.getProjectId = sinon.stub().resolves(fakeProjectId);
+      const result = await client.getProjectId();
+      assert.strictEqual(result, fakeProjectId);
+      assert((client.auth.getProjectId as SinonStub).calledWithExactly());
+    });
+
+    it('has getProjectId method with callback', async () => {
+      const fakeProjectId = 'fake-project-id';
+      const client = new regionurlmapsModule.v1.RegionUrlMapsClient({
+        auth: googleAuth,
+        projectId: 'bogus',
+      });
+      client.auth.getProjectId = sinon
+        .stub()
+        .callsArgWith(0, null, fakeProjectId);
+      const promise = new Promise((resolve, reject) => {
+        client.getProjectId((err?: Error | null, projectId?: string | null) => {
+          if (err) {
+            reject(err);
+          } else {
+            resolve(projectId);
+          }
+        });
+      });
+      const result = await promise;
+      assert.strictEqual(result, fakeProjectId);
+    });
   });
 
   describe('delete', () => {
@@ -231,28 +250,36 @@ describe('v1.RegionUrlMapsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteRegionUrlMapRequest()
       );
-      request.project = '';
-      request.region = '';
-      request.urlMap = '';
-      const expectedHeaderRequestParams = 'project=&region=&url_map=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteRegionUrlMapRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteRegionUrlMapRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteRegionUrlMapRequest',
+        ['urlMap']
+      );
+      request.urlMap = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&url_map=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
       client.innerApiCalls.delete = stubSimpleCall(expectedResponse);
       const [response] = await client.delete(request);
       assert.deepStrictEqual(response.latestResponse, expectedResponse);
-      assert(
-        (client.innerApiCalls.delete as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (client.innerApiCalls.delete as SinonStub).getCall(
+        0
+      ).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.delete as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes delete without error using callback', async () => {
@@ -264,17 +291,22 @@ describe('v1.RegionUrlMapsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteRegionUrlMapRequest()
       );
-      request.project = '';
-      request.region = '';
-      request.urlMap = '';
-      const expectedHeaderRequestParams = 'project=&region=&url_map=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteRegionUrlMapRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteRegionUrlMapRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteRegionUrlMapRequest',
+        ['urlMap']
+      );
+      request.urlMap = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&url_map=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -297,11 +329,14 @@ describe('v1.RegionUrlMapsClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.delete as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (client.innerApiCalls.delete as SinonStub).getCall(
+        0
+      ).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.delete as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes delete with error', async () => {
@@ -313,25 +348,33 @@ describe('v1.RegionUrlMapsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteRegionUrlMapRequest()
       );
-      request.project = '';
-      request.region = '';
-      request.urlMap = '';
-      const expectedHeaderRequestParams = 'project=&region=&url_map=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteRegionUrlMapRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteRegionUrlMapRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteRegionUrlMapRequest',
+        ['urlMap']
+      );
+      request.urlMap = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&url_map=${defaultValue3}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.delete = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.delete(request), expectedError);
-      assert(
-        (client.innerApiCalls.delete as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (client.innerApiCalls.delete as SinonStub).getCall(
+        0
+      ).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.delete as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes delete with closed client', async () => {
@@ -343,9 +386,21 @@ describe('v1.RegionUrlMapsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.DeleteRegionUrlMapRequest()
       );
-      request.project = '';
-      request.region = '';
-      request.urlMap = '';
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteRegionUrlMapRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteRegionUrlMapRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.DeleteRegionUrlMapRequest',
+        ['urlMap']
+      );
+      request.urlMap = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.delete(request), expectedError);
@@ -362,28 +417,35 @@ describe('v1.RegionUrlMapsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetRegionUrlMapRequest()
       );
-      request.project = '';
-      request.region = '';
-      request.urlMap = '';
-      const expectedHeaderRequestParams = 'project=&region=&url_map=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetRegionUrlMapRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetRegionUrlMapRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetRegionUrlMapRequest',
+        ['urlMap']
+      );
+      request.urlMap = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&url_map=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.UrlMap()
       );
       client.innerApiCalls.get = stubSimpleCall(expectedResponse);
       const [response] = await client.get(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.get as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (client.innerApiCalls.get as SinonStub).getCall(0)
+        .args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.get as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes get without error using callback', async () => {
@@ -395,17 +457,22 @@ describe('v1.RegionUrlMapsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetRegionUrlMapRequest()
       );
-      request.project = '';
-      request.region = '';
-      request.urlMap = '';
-      const expectedHeaderRequestParams = 'project=&region=&url_map=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetRegionUrlMapRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetRegionUrlMapRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetRegionUrlMapRequest',
+        ['urlMap']
+      );
+      request.urlMap = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&url_map=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.UrlMap()
       );
@@ -427,11 +494,13 @@ describe('v1.RegionUrlMapsClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.get as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (client.innerApiCalls.get as SinonStub).getCall(0)
+        .args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.get as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes get with error', async () => {
@@ -443,25 +512,32 @@ describe('v1.RegionUrlMapsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetRegionUrlMapRequest()
       );
-      request.project = '';
-      request.region = '';
-      request.urlMap = '';
-      const expectedHeaderRequestParams = 'project=&region=&url_map=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetRegionUrlMapRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetRegionUrlMapRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetRegionUrlMapRequest',
+        ['urlMap']
+      );
+      request.urlMap = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&url_map=${defaultValue3}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.get = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.get(request), expectedError);
-      assert(
-        (client.innerApiCalls.get as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (client.innerApiCalls.get as SinonStub).getCall(0)
+        .args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.get as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes get with closed client', async () => {
@@ -473,9 +549,21 @@ describe('v1.RegionUrlMapsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.GetRegionUrlMapRequest()
       );
-      request.project = '';
-      request.region = '';
-      request.urlMap = '';
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetRegionUrlMapRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetRegionUrlMapRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.GetRegionUrlMapRequest',
+        ['urlMap']
+      );
+      request.urlMap = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.get(request), expectedError);
@@ -492,27 +580,31 @@ describe('v1.RegionUrlMapsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertRegionUrlMapRequest()
       );
-      request.project = '';
-      request.region = '';
-      const expectedHeaderRequestParams = 'project=&region=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.InsertRegionUrlMapRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.InsertRegionUrlMapRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
       client.innerApiCalls.insert = stubSimpleCall(expectedResponse);
       const [response] = await client.insert(request);
       assert.deepStrictEqual(response.latestResponse, expectedResponse);
-      assert(
-        (client.innerApiCalls.insert as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (client.innerApiCalls.insert as SinonStub).getCall(
+        0
+      ).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.insert as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes insert without error using callback', async () => {
@@ -524,16 +616,17 @@ describe('v1.RegionUrlMapsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertRegionUrlMapRequest()
       );
-      request.project = '';
-      request.region = '';
-      const expectedHeaderRequestParams = 'project=&region=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.InsertRegionUrlMapRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.InsertRegionUrlMapRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -556,11 +649,14 @@ describe('v1.RegionUrlMapsClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.insert as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (client.innerApiCalls.insert as SinonStub).getCall(
+        0
+      ).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.insert as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes insert with error', async () => {
@@ -572,24 +668,28 @@ describe('v1.RegionUrlMapsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertRegionUrlMapRequest()
       );
-      request.project = '';
-      request.region = '';
-      const expectedHeaderRequestParams = 'project=&region=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.InsertRegionUrlMapRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.InsertRegionUrlMapRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.insert = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.insert(request), expectedError);
-      assert(
-        (client.innerApiCalls.insert as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (client.innerApiCalls.insert as SinonStub).getCall(
+        0
+      ).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.insert as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes insert with closed client', async () => {
@@ -601,8 +701,16 @@ describe('v1.RegionUrlMapsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.InsertRegionUrlMapRequest()
       );
-      request.project = '';
-      request.region = '';
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.InsertRegionUrlMapRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.InsertRegionUrlMapRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.insert(request), expectedError);
@@ -619,28 +727,35 @@ describe('v1.RegionUrlMapsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchRegionUrlMapRequest()
       );
-      request.project = '';
-      request.region = '';
-      request.urlMap = '';
-      const expectedHeaderRequestParams = 'project=&region=&url_map=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchRegionUrlMapRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchRegionUrlMapRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchRegionUrlMapRequest',
+        ['urlMap']
+      );
+      request.urlMap = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&url_map=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
       client.innerApiCalls.patch = stubSimpleCall(expectedResponse);
       const [response] = await client.patch(request);
       assert.deepStrictEqual(response.latestResponse, expectedResponse);
-      assert(
-        (client.innerApiCalls.patch as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (client.innerApiCalls.patch as SinonStub).getCall(0)
+        .args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.patch as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes patch without error using callback', async () => {
@@ -652,17 +767,22 @@ describe('v1.RegionUrlMapsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchRegionUrlMapRequest()
       );
-      request.project = '';
-      request.region = '';
-      request.urlMap = '';
-      const expectedHeaderRequestParams = 'project=&region=&url_map=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchRegionUrlMapRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchRegionUrlMapRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchRegionUrlMapRequest',
+        ['urlMap']
+      );
+      request.urlMap = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&url_map=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -684,11 +804,13 @@ describe('v1.RegionUrlMapsClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.patch as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (client.innerApiCalls.patch as SinonStub).getCall(0)
+        .args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.patch as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes patch with error', async () => {
@@ -700,25 +822,32 @@ describe('v1.RegionUrlMapsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchRegionUrlMapRequest()
       );
-      request.project = '';
-      request.region = '';
-      request.urlMap = '';
-      const expectedHeaderRequestParams = 'project=&region=&url_map=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchRegionUrlMapRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchRegionUrlMapRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchRegionUrlMapRequest',
+        ['urlMap']
+      );
+      request.urlMap = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&url_map=${defaultValue3}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.patch = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.patch(request), expectedError);
-      assert(
-        (client.innerApiCalls.patch as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (client.innerApiCalls.patch as SinonStub).getCall(0)
+        .args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.patch as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes patch with closed client', async () => {
@@ -730,9 +859,21 @@ describe('v1.RegionUrlMapsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.PatchRegionUrlMapRequest()
       );
-      request.project = '';
-      request.region = '';
-      request.urlMap = '';
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchRegionUrlMapRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchRegionUrlMapRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.PatchRegionUrlMapRequest',
+        ['urlMap']
+      );
+      request.urlMap = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.patch(request), expectedError);
@@ -749,28 +890,36 @@ describe('v1.RegionUrlMapsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.UpdateRegionUrlMapRequest()
       );
-      request.project = '';
-      request.region = '';
-      request.urlMap = '';
-      const expectedHeaderRequestParams = 'project=&region=&url_map=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.UpdateRegionUrlMapRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.UpdateRegionUrlMapRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.UpdateRegionUrlMapRequest',
+        ['urlMap']
+      );
+      request.urlMap = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&url_map=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
       client.innerApiCalls.update = stubSimpleCall(expectedResponse);
       const [response] = await client.update(request);
       assert.deepStrictEqual(response.latestResponse, expectedResponse);
-      assert(
-        (client.innerApiCalls.update as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (client.innerApiCalls.update as SinonStub).getCall(
+        0
+      ).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.update as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes update without error using callback', async () => {
@@ -782,17 +931,22 @@ describe('v1.RegionUrlMapsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.UpdateRegionUrlMapRequest()
       );
-      request.project = '';
-      request.region = '';
-      request.urlMap = '';
-      const expectedHeaderRequestParams = 'project=&region=&url_map=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.UpdateRegionUrlMapRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.UpdateRegionUrlMapRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.UpdateRegionUrlMapRequest',
+        ['urlMap']
+      );
+      request.urlMap = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&url_map=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.Operation()
       );
@@ -815,11 +969,14 @@ describe('v1.RegionUrlMapsClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.update as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (client.innerApiCalls.update as SinonStub).getCall(
+        0
+      ).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.update as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes update with error', async () => {
@@ -831,25 +988,33 @@ describe('v1.RegionUrlMapsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.UpdateRegionUrlMapRequest()
       );
-      request.project = '';
-      request.region = '';
-      request.urlMap = '';
-      const expectedHeaderRequestParams = 'project=&region=&url_map=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.UpdateRegionUrlMapRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.UpdateRegionUrlMapRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.UpdateRegionUrlMapRequest',
+        ['urlMap']
+      );
+      request.urlMap = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&url_map=${defaultValue3}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.update = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.update(request), expectedError);
-      assert(
-        (client.innerApiCalls.update as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (client.innerApiCalls.update as SinonStub).getCall(
+        0
+      ).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.update as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes update with closed client', async () => {
@@ -861,9 +1026,21 @@ describe('v1.RegionUrlMapsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.UpdateRegionUrlMapRequest()
       );
-      request.project = '';
-      request.region = '';
-      request.urlMap = '';
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.UpdateRegionUrlMapRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.UpdateRegionUrlMapRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.UpdateRegionUrlMapRequest',
+        ['urlMap']
+      );
+      request.urlMap = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.update(request), expectedError);
@@ -880,28 +1057,36 @@ describe('v1.RegionUrlMapsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ValidateRegionUrlMapRequest()
       );
-      request.project = '';
-      request.region = '';
-      request.urlMap = '';
-      const expectedHeaderRequestParams = 'project=&region=&url_map=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ValidateRegionUrlMapRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ValidateRegionUrlMapRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ValidateRegionUrlMapRequest',
+        ['urlMap']
+      );
+      request.urlMap = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&url_map=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.UrlMapsValidateResponse()
       );
       client.innerApiCalls.validate = stubSimpleCall(expectedResponse);
       const [response] = await client.validate(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.validate as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.validate as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.validate as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes validate without error using callback', async () => {
@@ -913,17 +1098,22 @@ describe('v1.RegionUrlMapsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ValidateRegionUrlMapRequest()
       );
-      request.project = '';
-      request.region = '';
-      request.urlMap = '';
-      const expectedHeaderRequestParams = 'project=&region=&url_map=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ValidateRegionUrlMapRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ValidateRegionUrlMapRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ValidateRegionUrlMapRequest',
+        ['urlMap']
+      );
+      request.urlMap = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&url_map=${defaultValue3}`;
       const expectedResponse = generateSampleMessage(
         new protos.google.cloud.compute.v1.UrlMapsValidateResponse()
       );
@@ -946,11 +1136,14 @@ describe('v1.RegionUrlMapsClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.validate as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (
+        client.innerApiCalls.validate as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.validate as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes validate with error', async () => {
@@ -962,25 +1155,33 @@ describe('v1.RegionUrlMapsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ValidateRegionUrlMapRequest()
       );
-      request.project = '';
-      request.region = '';
-      request.urlMap = '';
-      const expectedHeaderRequestParams = 'project=&region=&url_map=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ValidateRegionUrlMapRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ValidateRegionUrlMapRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ValidateRegionUrlMapRequest',
+        ['urlMap']
+      );
+      request.urlMap = defaultValue3;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}&url_map=${defaultValue3}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.validate = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.validate(request), expectedError);
-      assert(
-        (client.innerApiCalls.validate as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (
+        client.innerApiCalls.validate as SinonStub
+      ).getCall(0).args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.validate as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes validate with closed client', async () => {
@@ -992,9 +1193,21 @@ describe('v1.RegionUrlMapsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ValidateRegionUrlMapRequest()
       );
-      request.project = '';
-      request.region = '';
-      request.urlMap = '';
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ValidateRegionUrlMapRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ValidateRegionUrlMapRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const defaultValue3 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ValidateRegionUrlMapRequest',
+        ['urlMap']
+      );
+      request.urlMap = defaultValue3;
       const expectedError = new Error('The client has already been closed.');
       client.close();
       await assert.rejects(client.validate(request), expectedError);
@@ -1011,16 +1224,17 @@ describe('v1.RegionUrlMapsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListRegionUrlMapsRequest()
       );
-      request.project = '';
-      request.region = '';
-      const expectedHeaderRequestParams = 'project=&region=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListRegionUrlMapsRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListRegionUrlMapsRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.compute.v1.UrlMap()),
         generateSampleMessage(new protos.google.cloud.compute.v1.UrlMap()),
@@ -1029,11 +1243,13 @@ describe('v1.RegionUrlMapsClient', () => {
       client.innerApiCalls.list = stubSimpleCall(expectedResponse);
       const [response] = await client.list(request);
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.list as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (client.innerApiCalls.list as SinonStub).getCall(0)
+        .args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.list as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes list without error using callback', async () => {
@@ -1045,16 +1261,17 @@ describe('v1.RegionUrlMapsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListRegionUrlMapsRequest()
       );
-      request.project = '';
-      request.region = '';
-      const expectedHeaderRequestParams = 'project=&region=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListRegionUrlMapsRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListRegionUrlMapsRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.compute.v1.UrlMap()),
         generateSampleMessage(new protos.google.cloud.compute.v1.UrlMap()),
@@ -1078,11 +1295,13 @@ describe('v1.RegionUrlMapsClient', () => {
       });
       const response = await promise;
       assert.deepStrictEqual(response, expectedResponse);
-      assert(
-        (client.innerApiCalls.list as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions /*, callback defined above */)
-      );
+      const actualRequest = (client.innerApiCalls.list as SinonStub).getCall(0)
+        .args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.list as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes list with error', async () => {
@@ -1094,24 +1313,27 @@ describe('v1.RegionUrlMapsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListRegionUrlMapsRequest()
       );
-      request.project = '';
-      request.region = '';
-      const expectedHeaderRequestParams = 'project=&region=';
-      const expectedOptions = {
-        otherArgs: {
-          headers: {
-            'x-goog-request-params': expectedHeaderRequestParams,
-          },
-        },
-      };
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListRegionUrlMapsRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListRegionUrlMapsRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}`;
       const expectedError = new Error('expected');
       client.innerApiCalls.list = stubSimpleCall(undefined, expectedError);
       await assert.rejects(client.list(request), expectedError);
-      assert(
-        (client.innerApiCalls.list as SinonStub)
-          .getCall(0)
-          .calledWith(request, expectedOptions, undefined)
-      );
+      const actualRequest = (client.innerApiCalls.list as SinonStub).getCall(0)
+        .args[0];
+      assert.deepStrictEqual(actualRequest, request);
+      const actualHeaderRequestParams = (
+        client.innerApiCalls.list as SinonStub
+      ).getCall(0).args[1].otherArgs.headers['x-goog-request-params'];
+      assert(actualHeaderRequestParams.includes(expectedHeaderRequestParams));
     });
 
     it('invokes listStream without error', async () => {
@@ -1123,9 +1345,17 @@ describe('v1.RegionUrlMapsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListRegionUrlMapsRequest()
       );
-      request.project = '';
-      request.region = '';
-      const expectedHeaderRequestParams = 'project=&region=';
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListRegionUrlMapsRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListRegionUrlMapsRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.compute.v1.UrlMap()),
         generateSampleMessage(new protos.google.cloud.compute.v1.UrlMap()),
@@ -1153,10 +1383,12 @@ describe('v1.RegionUrlMapsClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.list, request)
       );
-      assert.strictEqual(
-        (client.descriptors.page.list.createStream as SinonStub).getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.list.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -1169,9 +1401,17 @@ describe('v1.RegionUrlMapsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListRegionUrlMapsRequest()
       );
-      request.project = '';
-      request.region = '';
-      const expectedHeaderRequestParams = 'project=&region=';
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListRegionUrlMapsRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListRegionUrlMapsRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}`;
       const expectedError = new Error('expected');
       client.descriptors.page.list.createStream = stubPageStreamingCall(
         undefined,
@@ -1196,10 +1436,12 @@ describe('v1.RegionUrlMapsClient', () => {
           .getCall(0)
           .calledWith(client.innerApiCalls.list, request)
       );
-      assert.strictEqual(
-        (client.descriptors.page.list.createStream as SinonStub).getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.list.createStream as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -1212,9 +1454,17 @@ describe('v1.RegionUrlMapsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListRegionUrlMapsRequest()
       );
-      request.project = '';
-      request.region = '';
-      const expectedHeaderRequestParams = 'project=&region=';
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListRegionUrlMapsRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListRegionUrlMapsRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}`;
       const expectedResponse = [
         generateSampleMessage(new protos.google.cloud.compute.v1.UrlMap()),
         generateSampleMessage(new protos.google.cloud.compute.v1.UrlMap()),
@@ -1233,10 +1483,12 @@ describe('v1.RegionUrlMapsClient', () => {
           .args[1],
         request
       );
-      assert.strictEqual(
-        (client.descriptors.page.list.asyncIterate as SinonStub).getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.list.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
 
@@ -1249,9 +1501,17 @@ describe('v1.RegionUrlMapsClient', () => {
       const request = generateSampleMessage(
         new protos.google.cloud.compute.v1.ListRegionUrlMapsRequest()
       );
-      request.project = '';
-      request.region = '';
-      const expectedHeaderRequestParams = 'project=&region=';
+      const defaultValue1 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListRegionUrlMapsRequest',
+        ['project']
+      );
+      request.project = defaultValue1;
+      const defaultValue2 = getTypeDefaultValue(
+        '.google.cloud.compute.v1.ListRegionUrlMapsRequest',
+        ['region']
+      );
+      request.region = defaultValue2;
+      const expectedHeaderRequestParams = `project=${defaultValue1}&region=${defaultValue2}`;
       const expectedError = new Error('expected');
       client.descriptors.page.list.asyncIterate = stubAsyncIterationCall(
         undefined,
@@ -1269,10 +1529,12 @@ describe('v1.RegionUrlMapsClient', () => {
           .args[1],
         request
       );
-      assert.strictEqual(
-        (client.descriptors.page.list.asyncIterate as SinonStub).getCall(0)
-          .args[2].otherArgs.headers['x-goog-request-params'],
-        expectedHeaderRequestParams
+      assert(
+        (client.descriptors.page.list.asyncIterate as SinonStub)
+          .getCall(0)
+          .args[2].otherArgs.headers['x-goog-request-params'].includes(
+            expectedHeaderRequestParams
+          )
       );
     });
   });
