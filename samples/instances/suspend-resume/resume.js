@@ -16,7 +16,7 @@
  * Resumes a suspended Google Compute Engine instance (with unencrypted disks).
  *
  * @param {string} projectId - Project ID or project number of the Cloud project you want to use.
- * @param {string} zone - Name of the zone where the instance belongs to. For example: "us-west3-b"
+ * @param {string} zone - Name of the zone where the instance belongs. For example: "us-west3-b"
  * @param {string} instanceName - Name of the virtual machine (VM) instance that you want to resume.
  */
 function main(projectId, zone, instanceName) {
